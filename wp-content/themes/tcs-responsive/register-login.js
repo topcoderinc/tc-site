@@ -53,7 +53,7 @@ $(function(){
                                     + "|(\\.net)|(\\.org)|(\\.info)|(\\.edu)|(\\.mil)|(\\.gov)|(\\.biz)|(\\.ws)|(\\.us)|(\\.tv)|(\\.cc)"
                                     + "|(\\.aero)|(\\.arpa)|(\\.coop)|(\\.int)|(\\.jobs)|(\\.museum)|(\\.name)|(\\.pro)|(\\.travel)|(\\.nato)"
                                     + "|(\\..{2,3})|(\\.([A-Za-z0-9-])+\\..{2,3}))$)\\b");
-	    return emailPattern.test(emailAddress);
+		return emailPattern.test(emailAddress);
 	};
 	
 
