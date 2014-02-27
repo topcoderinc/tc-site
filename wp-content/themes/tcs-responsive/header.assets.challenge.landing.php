@@ -8,7 +8,7 @@
 
 <!-- Main CSS -->
 <!--<link href="http://fonts.googleapis.com/css?family=Lato:400,300,700,i,300i" rel="stylesheet" type="text/css" /> -->
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:700,400' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/base.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style-profile.css" />
