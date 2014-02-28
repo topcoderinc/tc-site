@@ -168,8 +168,13 @@ img {
 		font-size: 15px;
 	}
 	.pageContent strong{
-		font-weight: normal;
+		font-weight: bold;
 	}
+	
+	.pageContent em{
+		font-style: italic !important;
+	}
+	
 	.pageContent ul{
 		padding: 6px 0 2px 34px;
 	}
@@ -279,10 +284,8 @@ img {
         }
 		.sideFindRelatedContent .relatedContentList li a.contentLink:hover {
 			color: #FFB800;
+			text-shadow:none;
         }
-			.sideFindRelatedContent .relatedContentList li a:hover .contentThumb{
-				box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-			}
 		.sideFindRelatedContent .relatedContentList li .contentBrief {
 			display: block;
 			line-height: 15px;

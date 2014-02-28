@@ -35,6 +35,9 @@
         text-align: center;
         width: auto;
 }
+			#banner .slider li .con{
+				padding-right: 0px;
+			}
     #banner .slider .welcome .btnMore{
         position: relative;
         left: auto;

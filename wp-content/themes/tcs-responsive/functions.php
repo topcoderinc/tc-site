@@ -1,4 +1,4 @@
-<?php 
+<?php
 define('WP_DEBUG_DISPLAY', true);
 @ini_set('display_errors',1);
 #include 'auth0/vendor/autoload.php';
@@ -23,9 +23,9 @@ if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 55, 55 ); // default Post Thumbnail dimensions
 }
-if ( function_exists( 'add_image_size' ) ) { 
+if ( function_exists( 'add_image_size' ) ) {
 	add_image_size( 'blog-thumb', 158, 154,true );
-	add_image_size( 'blog-thumb-mobile', 300, 165); 
+	add_image_size( 'blog-thumb-mobile', 300, 165);
 }
 
 // enables tags on pages
@@ -59,7 +59,7 @@ require_once (TEMPLATEPATH . '/rewrite-config.php');
 $currUrl = curPageURL();
 if( strpos($currUrl,ACTIVE_CONTESTS_PERMALINK) !== false ||
 	strpos($currUrl,PAST_CONTESTS_PERMALINK) !== false ||
-	strpos($currUrl,REVIEW_OPPORTUNITIES_PERMALINK) !== false ) 
+	strpos($currUrl,REVIEW_OPPORTUNITIES_PERMALINK) !== false )
 {
 	if( strpos($currUrl,"%20") !== false ) {
 		$redirectUrl = str_replace("%20", "_", $currUrl);
@@ -103,7 +103,7 @@ function curPageURL() {
 	$pageURL .= "://";
 	if ($_SERVER["SERVER_PORT"] != "80") {
 		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-	} else {	
+	} else {
 		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 	}
 	return $pageURL;
@@ -135,7 +135,7 @@ function wpb_track_post_views ($post_id) {
     if ( !is_single() ) return;
     if ( empty ( $post_id) ) {
         global $post;
-        $post_id = $post->ID;    
+        $post_id = $post->ID;
     }
     wpb_set_post_views($post_id);
 }
@@ -160,7 +160,7 @@ function tcapi_query_vars($query_vars) {
 }
 add_filter ( 'query_vars', 'tcapi_query_vars' );
 
- 
+
 // Active Contest
 add_rewrite_rule ( '^'.ACTIVE_CONTESTS_PERMALINK.'/([^/]*)/?$', 'index.php?pagename=challenges&contest_type=$matches[1]', 'top' );
 add_rewrite_rule ( '^'.ACTIVE_CONTESTS_PERMALINK.'/([^/]*)/([0-9]*)/?$', 'index.php?pagename=active-contests&contest_type=$matches[1]&pages=$matches[2]', 'top' );
@@ -247,7 +247,7 @@ function custom_excerpt($new_length = 20, $new_more = '...') {
 	echo $output;
 }
 
-function custom_content($new_length = 55) {	
+function custom_content($new_length = 55) {
 	$output = get_the_content();
 	$output = apply_filters('wptexturize', $output);
 	$output = substr($output, 0 , $new_length).'...';
@@ -306,7 +306,7 @@ function promo_register() {
 			'exclude_from_search' => false,
 			'show_in_nav_menus' => true,
 			'taxonomies' => array (
-					'category' 
+					'category'
 			),
 			'supports' => array (
 					'title',
@@ -355,12 +355,12 @@ function promo_register() {
 					'custom-fields',
 					'tags',
 					'comments'
-					
+
 			)
 	);
 
 	register_post_type ( BLOG, $args );
-	add_post_type_support( BLOG, 'author' ); 
+	add_post_type_support( BLOG, 'author' );
 }
 
 /* Case studies Module Post Type */
@@ -402,12 +402,12 @@ function case_studies_register() {
 					'custom-fields',
 					'tags',
 					'comments'
-					
+
 			)
 	);
 
 	register_post_type ( 'case-studies', $args );
-	
+
 	flush_rewrite_rules ( false );
 
 }
@@ -416,37 +416,37 @@ add_action ( 'wp_ajax_get_blog_ajax', 'get_blog_ajax' );
 add_action ( 'wp_ajax_nopriv_get_blog_ajax', 'get_blog_ajax' );
 function get_blog_ajax() {
 	$postPerPage = get_option("posts_per_page") == "" ? 5 : get_option("posts_per_page");
-	
+
 	$catId = $_GET["catId"];
 	$page = $_GET["page"];
 	$searchKey = $_GET["searchKey"];
 	$authorId = $_GET["authorId"];
-	
+
 	wp_reset_query();
 	$args = "post_type=".BLOG;
 	$args .= "&order=DESC";
 	$args .= "&posts_per_page=".$postPerPage;
 	$args .= "&paged=$page";
-	
+
 	if($catId!="") {
 		$args .= "&cat=$catId";
 	}
 	else if($searchKey!="") {
 		$args .= "&s=$searchKey";
 	}
-	
+
 	$arrPost = query_posts($args);
 	if ( $arrPost!= null ) :
-		foreach ( $arrPost as $post ) : 
+		foreach ( $arrPost as $post ) :
 
 			$postId = $post->ID;
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), 'single-post-thumbnail' );
 			if($image!=null) $imageUrl = $image[0];
 			else $imageUrl = get_bloginfo('stylesheet_directory')."/i/story-side-pic.png";
-			
+
 			$dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $post->post_date);
 			$dateStr = $dateObj->format('M j, Y');
-			
+
 			$twitterText = urlencode(wrap_content_strip_html(wpautop($post->post_content), 130, true,'\n\r',''));
 			$title = htmlspecialchars($post->post_title);
 			$subject = htmlspecialchars(get_bloginfo('name')).' : '.$title;
@@ -455,28 +455,28 @@ function get_blog_ajax() {
 			$twitterShare = "http://twitter.com/home?status=".$twitterText;
 			$fbShare = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=".get_permalink()."&p[images][0]=".$imageUrl."&p[title]=".get_the_title()."&p[summary]=".$twitterText;
 			$gplusShare = "https://plus.google.com/share?url=".get_permalink();
-			
+
 			$authorObj = get_user_by("id",$post->post_author);
 			$authorName = $authorObj->display_name;
 			$authorLink = get_bloginfo("wpurl")."/author/".$authorObj->user_nicename;
-	?>		
+	?>
 		<!-- Blog Item -->
 		<div class="blogItem">
-			<?php if($searchKey=="") : ?>	
+			<?php if($searchKey=="") : ?>
 				<!-- Thumb place holder -->
 				<div class="mobiThumbPlaceholder">
 					<a href="<?php the_permalink();?>"><img src="<?php echo $imageUrl;?>" width="300" height="160" /></a>
 				</div>
 				<!-- Thumb place holder end -->
 			<?php endif ;?>
-			
+
 			<a href="<?php the_permalink();?>" class="blogTitle blueLink"><?php echo $post->post_title;?><a>
-			
+
 			<!-- Blog Desc -->
 			<div class="blogDescBox">
 				<div class="postDate"><?php echo $dateStr;?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; By:&nbsp;&nbsp;</div>
 				<div class="postAuthor"><a href="<?php echo $authorLink;?>" class="author blueLink"><?php echo $authorName;?></a></div>
-				<div class="postCategory">In : 
+				<div class="postCategory">In :
 				<?php
 					$categories = get_the_category($postId);
 					$separator = ', ';
@@ -488,15 +488,15 @@ function get_blog_ajax() {
 						}
 					}
 					echo trim($output, $separator);
-				?>									
+				?>
 				</div>
 			</div>
 			<!-- Blog Desc End -->
-			
-		<?php if($searchKey!="") : ?>	
+
+		<?php if($searchKey!="") : ?>
 			<!-- content wrapper -->
 			<div class="contentWrapper">
-				<?php 
+				<?php
 					$excerpt = wrap_content_strip_html(wpautop($post->post_content), 400, true,'\n\r','');
 					echo $excerpt;
 				?>
@@ -511,11 +511,11 @@ function get_blog_ajax() {
 					<a href="<?php the_permalink();?>"><img src="<?php echo $imageUrl;?>" width="158" height="158" /></a>
 				</div>
 				<!-- Imageplacehoder End -->
-				
+
 				<!-- Content Right -->
 				<div class="contentRight">
 					<div class="excerpt">
-						<?php 
+						<?php
 							$excerpt = wrap_content_strip_html(wpautop($post->post_content), 400, true,'\n\r','');
 							echo $excerpt;
 						?>
@@ -530,14 +530,14 @@ function get_blog_ajax() {
 					<a href="<?php the_permalink();?>" class="continueReading">Continue Reading</a>
 				</div>
 				<!-- Content Right End -->
-				
+
 			</div>
 			<!-- Blog Right Section End -->
 		<?php endif;?>
-			
+
 		</div>
 		<!-- Blog Item End -->
-		<?php 
+		<?php
 			endforeach;
 		endif;
 	die();
@@ -548,18 +548,18 @@ add_action ( 'wp_ajax_nopriv_get_popular_ajax', 'get_popular_ajax' );
 function get_popular_ajax() {
 	$page = $_GET["page"];
 	$postPerPage = $_GET["posts_per_page"] == "" ? 4 : $_GET["posts_per_page"];
-	
+
 	wp_reset_query();
 	$args = array(  'post_type'=>'blog',
-					'paged' => $page, 
-					'posts_per_page' => $postPerPage, 
-					'meta_key' => 'wpb_post_views_count', 
-					'orderby' => 'meta_value_num', 
+					'paged' => $page,
+					'posts_per_page' => $postPerPage,
+					'meta_key' => 'wpb_post_views_count',
+					'orderby' => 'meta_value_num',
 					'order' => 'DESC'  );
-	
+
 	$arrPost = query_posts($args);
 	if ( $arrPost!= null ) :
-		foreach ( $arrPost as $post ) : 
+		foreach ( $arrPost as $post ) :
 			$postId = $post->ID;
 			?>
 			<li>
@@ -588,7 +588,7 @@ function fixIERoundedCorder() {
 		.btn, a.btn, .blogCategoryMenu a,.searchBox input, .subscribeBox input {
 			behavior: url("<?php echo $pieHtcLocation;?>");
 		}
-	</style>	
+	</style>
 <?php
 }
 
@@ -650,10 +650,10 @@ function get_ID_by_slug($page_slug) {
 
 /* function convert category slug to category id  */
 function getCategoryId($slug) {
-  $idObj = get_category_by_slug($slug); 
+  $idObj = get_category_by_slug($slug);
   $id = $idObj->term_id;
   return $id;
-} 
+}
 
 /**
  * Start of Theme Options Support
@@ -748,7 +748,7 @@ function themeoptions_page() {
 			</tr>
 		</table>
 		<br />
-		
+
 		<h3>Challenge Pages Configuration</h3>
 		<table width="100%">
 			<tr>
@@ -762,7 +762,26 @@ function themeoptions_page() {
 				<td><input type="text" id="<?php echo $field; ?>" name="<?php echo $field; ?>" size="100" value="<?php echo get_option($field); ?>" /></td>
 			</tr>
 		</table>
-		<br />	
+		<br />
+
+		<h3>JS/CSS versioning</h3>
+		<table width="100%">
+			<tr>
+				<?php $field = 'jsCssVersioning'; ?>
+				<td width="150"><label for="<?php echo $field; ?>">JS/CSS Versioning:</label></td>
+				<td>
+					<input type="radio" name="<?php echo $field; ?>" value="1" <?php if (get_option($field) == 1): ?>checked="checked"<?php endif; ?> /> Yes
+					<input type="radio" name="<?php echo $field; ?>" value="0" <?php if (get_option($field) != 1): ?>checked="checked"<?php endif; ?> /> No
+				</td>
+			</tr>
+			<tr>
+				<?php $field = 'jsCssCurrentVersion'; ?>
+				<td><label for="<?php echo $field; ?>">Current Version:</label></td>
+				<td><input type="text" id="<?php echo $field; ?>" name="<?php echo $field; ?>" size="100" value="<?php echo (strlen(trim(get_option($field))) == 0) ? date('Ymd') : get_option($field); ?>" /></td>
+			</tr>
+		</table>
+
+		<br />
 		<p>
 			<input type="submit" name="submit" value="Update Options" class="button button-primary" />
 		</p>
@@ -776,14 +795,14 @@ function themeoptions_page() {
 if (is_admin () && isset ( $_GET ['activated'] ) && $pagenow == 'themes.php') {
 
 	// Other Options
-	update_option ( 'forumPostPerPage', '3' );	
-	
+	update_option ( 'forumPostPerPage', '3' );
+
 	// Social Media
 	update_option ( 'facebookURL', 'http://www.facebook.com/topcoderinc' );
 	update_option ( 'twitterURL', 'http://www.twitter.com/topcoder' );
 	update_option ( 'linkedInURL', 'http://www.youtube.com/topcoderinc' );
 	update_option ( 'gPlusURL', 'https://plus.google.com/u/0/b/104268008777050019973/104268008777050019973/posts' );
-	
+
 	update_option ( 'tcoTooltipTitle', 'TCO-14' );
 	update_option ( 'tcoTooltipMessage', 'Eligible for TCO14' );
 }
@@ -793,8 +812,8 @@ function themeoptions_update() {
 	// Other Options
 	update_option ( 'case_studies_per_page', $_POST ['case_studies_per_page'] );
 	update_option ( 'forumPostPerPage', $_POST ['forumPostPerPage'] );
-	
-	// blog 
+
+	// blog
 	update_option ( 'blog_page_title', $_POST ['blog_page_title'] );
 
 	// Social Media
@@ -802,16 +821,20 @@ function themeoptions_update() {
 	update_option ( 'twitterURL', $_POST ['twitterURL'] );
 	update_option ( 'linkedInURL', $_POST ['linkedInURL'] );
 	update_option ( 'gPlusURL', $_POST ['gPlusURL'] );
-	
+
 	// Twitter OAuth Tokens
 	update_option ( 'twConsumerKey', $_POST ['twConsumerKey'] );
 	update_option ( 'twConsumerSecret', $_POST ['twConsumerSecret'] );
 	update_option ( 'twAccessToken', $_POST ['twAccessToken'] );
 	update_option ( 'twAccessTokenSecret', $_POST ['twAccessTokenSecret'] );
-	
+
 	// Challenges Page
 	update_option ( 'tcoTooltipTitle', $_POST ['tcoTooltipTitle'] );
 	update_option ( 'tcoTooltipMessage', $_POST ['tcoTooltipMessage'] );
+
+	// JS/CSS versioning - BUGR-10904
+	update_option ( 'jsCssVersioning', $_POST['jsCssVersioning'] );
+	update_option ( 'jsCssCurrentVersion', $_POST['jsCssCurrentVersion'] );
 
 }
 // END OF THEME OPTIONS SUPPORT
@@ -830,7 +853,7 @@ if (function_exists ( 'register_sidebar' )) {
 			'before_widget' => '',
 			'after_widget' => ''
 	) );
-	
+
 	register_sidebar ( array (
 	'name' => 'BottomBar Community',
 	'id' => 'community_bottombar',
@@ -838,7 +861,7 @@ if (function_exists ( 'register_sidebar' )) {
 	'before_widget' => '',
 	'after_widget' => ''
 			) );
-	
+
 	// overview template sidebar
 	register_sidebar ( array (
 	'name' => 'Case studies sidebar',
@@ -847,7 +870,7 @@ if (function_exists ( 'register_sidebar' )) {
 	'before_widget' => '',
 	'after_widget' => ''
 			) );
-	
+
 	// blog sidebar
 	register_sidebar ( array (
 		'name' => 'Blog Sidebar',
@@ -860,7 +883,7 @@ if (function_exists ( 'register_sidebar' )) {
 
 // header menu walker
 class nav_menu_walker extends Walker_Nav_Menu {
-	
+
 	// add classes to ul sub-menus
 	function start_lvl( &$output, $depth ) {
 		// depth dependent classes
@@ -868,30 +891,30 @@ class nav_menu_walker extends Walker_Nav_Menu {
 		$display_depth = ( $depth + 1); // because it counts the first submenu as 0
 		$classes = array('child');
 		$class_names = implode( ' ', $classes );
-	
+
 		// build html
 		$output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
 	}
-	
+
 	// add main/sub classes to li's and links
 	function start_el( &$output, $item, $depth, $args ) {
 		global $wp_query;
 		$indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
-	
+
 		// passed classes
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 		$class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
-	
+
 		// build html
 		$output .= $indent . '<li id="nav-menu-item-'. $item->ID . '">';
-	
+
 		// link attributes
 		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
 		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 		$attributes .= ' class="' . (! empty ( $item->post_name ) ? esc_attr($item->post_name) : '') . '"';
-	
+
 		$item_output = sprintf( '%1$s<a%2$s><i></i>%3$s%4$s%5$s</a>%6$s',
 				$args->before,
 				$attributes,
@@ -900,7 +923,7 @@ class nav_menu_walker extends Walker_Nav_Menu {
 				$args->link_after,
 				$args->after
 		);
-	
+
 		// build html
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
@@ -936,8 +959,8 @@ class footer_menu_walker extends Walker_Nav_Menu {
 			$deptClass = "rootNode";
 		}
 		$output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="'.$deptClass.'">';
-		
-		
+
+
 
 		// link attributes
 		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
@@ -989,7 +1012,7 @@ function mytheme_comment($comment, $args, $depth) {
 			</a>
 			<span class="commentTime"> <?php printf( __('%1$s '), get_comment_date('F j, Y'))?>
 			</span>
-			<?php	
+			<?php
 			if ($comment->comment_parent) {
 				$parent_comment = get_comment ( $comment->comment_parent );
 				echo 'to <a href="' . get_comment_author_url () . '" >' . $parent_comment->comment_author . '</a>';

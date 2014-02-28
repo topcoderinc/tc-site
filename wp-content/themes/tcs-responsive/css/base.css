@@ -675,3 +675,50 @@ em{
 			.headerTopRightMenu .separator.beforeSearch{
 				margin-right: 0px;
 			}
+
+/*! Qtip2 style */
+
+.qtip {
+	margin-top: 12px;
+}
+
+.qtip .qtip-titlebar{
+	color: #FFFFFF !IMPORTANT;
+	padding: 5px 10px 5px 10px !IMPORTANT;
+}
+
+.qtip .qtip-title, .qtip .qtip-content{
+	text-align: center !IMPORTANT;
+}
+
+.qtip .qtip-content{
+	font-size: 14px;
+	padding: 8px;	
+}
+
+.qtip .qtip-close .qtip-icon{
+	background-position: -42px 0 !IMPORTANT;
+}
+
+/*! Design tooltip style */
+.qtip-design{
+	background-color: #FFFFFF !IMPORTANT;
+	border-color: #FFFFFF !IMPORTANT;
+	color: #000000 !IMPORTANT;
+}
+
+.qtip-design .qtip-titlebar{
+	background-color: #0096FF !IMPORTANT;
+}
+
+/*! Development tooltip style */
+.qtip-develop {
+	background-color: #FFFFFF !IMPORTANT;
+	border-color: #FFFFFF !IMPORTANT;
+	color: #000000 !IMPORTANT;
+}
+
+.qtip-develop .qtip-titlebar{
+	background-color: #47A911 !IMPORTANT;
+}
+

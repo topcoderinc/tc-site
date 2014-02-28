@@ -981,12 +981,14 @@
         width: 30px;        
         margin: 0 auto;
         background-image: url(../i/ico-con.png);
-        background-color: #00add0;
         background-repeat: no-repeat;    
         margin-bottom: 9px;
 }
     .contestGrid .trackSD .genInfo > p i{        
         background-color: #00add0;
+    }
+    .contestGrid .type-develop .genInfo > p i{        
+        background-color: #47a911;
     }
     .contestGrid .trackUX .genInfo > p i{        
         background-color: #7ab800;
