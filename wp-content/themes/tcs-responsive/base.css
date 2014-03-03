@@ -14,9 +14,10 @@ div, article, aside, details, figcaption, figure, footer, header, hgroup, menu, 
 body {
     line-height: 1.2em;
     /* set default font details */
-    font-family: lato, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: #666;
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #333;
+	font-weight:normal;
     -webkit-text-size-adjust:none;
     text-size-adjust:none;
 }
@@ -64,7 +65,7 @@ table {
 }
 input, textarea {
     color: #333;
-    font-size: 14px;
+    font-size: 15px;
     font-family: lato, Arial, Helvetica, sans-serif;
     outline: none;
     vertical-align: baseline;
@@ -172,18 +173,29 @@ em{
   height: 100%;
   overflow: hidden;
 }
-.loading{
+.loading,.errorLoading{
     position: fixed;
     z-index: 2000;
     left: 50%;
     height: 36px;
     line-height: 34px;
-    padding: 0 10px 0 50px;
+    padding: 5px 10px 5px 50px;
     color: #fff;
     background: #ff8a00 url(../i/loading.gif) 10px 50% no-repeat;
     font-size: 16px;
     top: 0;
     margin-left: -65px;
+}
+.errorLoading{
+	background: #ff8a00;
+	left: 38%;
+	width:55%;
+	max-width:400px;
+	line-height:16px;
+	font-size:0.9em;
+	height:auto;
+	text-align:center;
+	padding:5px;
 }
 #wrapper{
     position: relative;
@@ -203,7 +215,7 @@ em{
     line-height: 34px;
     width: 130px;
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 6px;
     behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
     position: relative;
@@ -249,7 +261,7 @@ em{
     position: absolute;
     left: 0;
     top: 27px;
-    width: 211px;
+    width: 330px;
     height: 58px;
     background: url(../i/logo.png) 0 0 no-repeat;
 }
@@ -272,30 +284,33 @@ em{
         margin-left: 8px;
         float: left;        
     
+        position: relative;
 }
-     #mainNav .root > li:hover{
-         background: #FF8A00;
-     }
      #mainNav .root > li > .child{
      
         display: none;
 }
-     #mainNav .root > li:hover > .child{
+     /*#mainNav .root > li:hover > .child{
        display: block;
 }
     #mainNav .root > li.hover > .child{
        margin-top: 0;  
-}
+}*/
      #mainNav .root .child{
          display: block;  
-         transition: .3s;
-          margin-top: -10px;  
+         background: #FF8A00;
+         min-width: 80px;
+         position: absolute;
+         min-width: 100%;
+         left: 15px;
 }
      
         #mainNav .root > li a{
-            padding: 0 10px 0 15px;
+            padding: 0 10px 12px 15px;
             color: #666;
-            -moz-transition-duration: .3s; -webkit-transition-duration: .3s; transition-duration: .3s;
+            -moz-transition-duration: .3s; 
+            -webkit-transition-duration: .3s; 
+            transition-duration: .3s;
             height: 32px;
             line-height: 32px;        
             display: block;
@@ -304,35 +319,28 @@ em{
 }
         #mainNav .root .child > li{
             padding: 0 10px;
-        
-            border-top: 1px solid #FF7A00;
-            -moz-transition-duration: .3s; -webkit-transition-duration: .3s; transition-duration: .3s;
+        			width: 175px;
+            border-top: 1px solid #FF7A00;  
 }
         #mainNav .root .child a{            
         
-            padding: 0;
+            padding: 0 6px 0 0;
             margin: 0 -10px;
             text-indent: 15px;
             display: block;
             font-size: 12px;
             min-width: 0;
             font-weight: normal;
+            color: #fff;
+            white-space: nowrap;
 }
         #mainNav .root .child li:hover{
     background: #F00;
         }
-        #mainNav .root > li:hover a{
-            color: #fff;        
+        #mainNav .root > li:hover a{      
             text-decoration: none;
 }
-        
-        #mainNav .root > li a:hover{
-            background: #F00;
-}
-        #mainNav .root > li > a:hover{
-                background: #FF8A00;
-    }
-
+    
 #navigation .btnRegister{
     position: absolute;
     right: 0;
@@ -360,18 +368,6 @@ em{
     .btnMyAcc.isActive i{
         background-position: 0 -12px;              
     }
-#navigation .noReg{
-    display: none;
-}
-#navigation.newUser .onReg{
-    display: none;
-}
-#navigation.newUser .noReg{
-    display: block;
-}
-#navigation.newUser .noReg.hide{
-    display: none;
-}
 /* Page Title
 ---------------------------*/
 .pageTitleWrapper {
@@ -428,13 +424,15 @@ em{
 #footer .container{
     overflow: visible;
     padding-top: 26px;
-    min-height: 175px;
+    min-height: 100px;
 }
 #footer .updates{    
     margin-bottom: 25px;
 }
     #footer .connected h4{
         padding-bottom: 16px;
+        float: left;
+        margin-right: 20px;
     }
 #footer nav,
 #footer .rootNode{
@@ -443,9 +441,8 @@ em{
 }    
     #footer nav li,
     #footer .rootNode li{
-        height: 24px;
-        line-height: 24px;
-    
+        min-height: 24px;
+        line-height: 24px;    
         font-size: 12px;
 }
     #footer nav a,
@@ -461,25 +458,41 @@ em{
     #footer .rootNode > a{
         line-height: 24px;
         padding-bottom: 6px;
-        font-size: 18px;
+        font-size: 20px;
         color: #D8D8D8;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
     
         display: block;
 }
+
+#footer .updates .email{
+  	width: 223px;
+}
+#footer .copyright{
+    float: left;
+    font-size: 15px;
+    margin-top: 15px;
+}
+	#footer .copyright a{
+    color: #a1a1a1;
+    text-decoration: underline;
+    font-weight: normal;
+	}
 #footer .connected{
     float: right;
 }
     #footer .social ul{
         overflow: hidden;
-    
+    			margin-top: 2px;
         display: block;
+        float: left;
 } 
         #footer .social ul li{
             float: left;
-            margin-left: 28px;
-        
-            height: 35px;  width: 35px;
+								margin-left: 0px;
+								height: 35px;
+								width: 26px;
+								margin-right: 2px;
 }
         #footer .social ul li:first-child{
             margin-left: 0;
@@ -489,53 +502,223 @@ em{
             text-align: left;
             text-indent: -100px;
             overflow: hidden;
-            height: 35px;
-            width: 35px;
+            height: 27px;
+								width: 27px;
             background: url(../i/ico-social.png) no-repeat;
             background-position: 0 0;            
             -moz-transition-duration: 0s; -webkit-transition-duration: 0s; transition-duration: 0s;
         }
         #footer .social ul li a:hover{
-            background-position: 0 -36px;
+            background-position: -45px 0px;
         }
         #footer .social ul li .tw{
-            background-position: 0 -100px;
-        }
-        #footer .social ul li .gp{
-            background-position: 0 -200px;
-        }
-        #footer .social ul li .in{
-            background-position: 0 -300px;
+            background-position: 0 -29px;
         }
         #footer .social ul li .tw:hover{
-            background-position: 0 -136px;
+            background-position: -45px -29px;
+        }
+        #footer .social ul li .gp{
+            background-position: 0 -57px;
         }
         #footer .social ul li .gp:hover{
-            background-position: 0 -236px;
+            background-position: -45px -57px;
+        }
+        #footer .social ul li .in{
+            background-position: 0 -86px;
         }
         #footer .social ul li .in:hover{
-            background-position: 0 -336px;
+            background-position: -45px -86px;
         }
-        #footer .updates .row{
-            overflow: hidden;
-        
-            width: 310px;
-}
         #footer .updates .email{
             float: left;
-        
             border-radius: 4px 0 0 4px;
-            width: 193px;
+            width: 233px;
             vertical-align: top;
             color: #a1a1a1;
+            font-size: 15px;
             behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
+            box-shadow: none;
 }
         #footer .updates .btn{
             float: left;
             border-radius: 0 4px 4px 0;
-            height: 28px;
-        
+            height: 32px;
+								border-top:0px;
+								border-left:0px;
+								border-right:0px;
             line-height: 30px;
             width: 104px;
             vertical-align: top;
 }
+
+#footer .footerContentSection{
+		width: 289px;
+		margin-right: 58px;
+		float: left;
+}
+	#footer .footerContentSection.aboutTopCoder{
+			margin-right: 0px;
+	}
+	#footer .title{
+			font-size: 18px;
+			color: #fff;
+	}
+	#footer .twFollowIcon{
+			height: 13px;
+			width: 24px;
+	   background: url(../i/footer-twitter-icon.png) no-repeat;
+	   background-position: 0 0;
+	   display: inline-block;
+	}
+	#footer .twFollowBtnText{
+	   display: inline-block;   
+	}
+	
+#footer a.btn.btnFooter{
+	width: 85px;
+	height: 26px;
+	line-height: 28px;
+	border-radius: 4px;
+	font-size: 15px;
+}
+#footer .footerContent{
+	margin-top: 27px;
+	margin-bottom: 20px;	
+}
+#footer .footerTwEntry{
+	margin-bottom: 20px;	
+}
+#footer .footerBlogEntry{
+	margin-bottom: 20px;	
+}
+#footer .privacyStmtLink{
+	padding-right: 5px;
+}
+#footer .legalDisclaimerLink{
+	padding-left: 5px;
+}
+#footer .btnSubmitFooter{
+	font-size: 15px;
+}
+
+.headerTopRightMenu{
+	float: right;
+}
+	.headerTopRightMenu .headerTopRightMenuLink{
+		float: left;
+		padding-left: 8px;
+		height: 23px;
+		padding-right: 10px;
+		padding-top: 10px;
+	}
+		.headerTopRightMenu .headerTopRightMenuLink.last{
+			border-right: none;
+			padding-right: 0px;
+		}
+		.headerTopRightMenu .headerTopRightMenuLink.search{
+			padding-right: 12px;
+		}
+		.headerTopRightMenu .headerTopRightMenuLink.search.active{
+			background-color: #00aeff;
+		}
+		.headerTopRightMenu .headerTopRightMenuLink.search.active .text a{
+			color: #fff;
+		}
+		.headerTopRightMenu .headerTopRightMenuLink .text{
+			color: #666;
+			font-size: 12px;
+			font-weight: bold;
+		}
+			.headerTopRightMenu .headerTopRightMenuLink .text a{
+				color: #666;
+			}
+			.headerTopRightMenu .headerTopRightMenuLink.logIn .text a{
+				color: #00aeff;
+			}
+			.headerTopRightMenu .headerTopRightMenuLink .text{
+				color: #666;
+				font-size: 13px;
+				font-weight: bold;
+				float: left;
+			}
+			.headerTopRightMenu .headerTopRightMenuLink.logIn .icon{
+				height: 13px;
+				margin-top: 7px;
+				width: 8px;
+//				background: url(../i/login-arrow.png) no-repeat;
+				background-position: 0 0;
+				float: left;
+				margin-left: 4px;
+			}
+			.headerTopRightMenu .headerTopRightMenuLink.search .icon{
+				height: 12px;
+				width: 11px;
+		   background: url(../i/search-icon.png) no-repeat;
+		   background-position: 0 0;
+		   float: left;
+		   margin-top: 3px;
+		   margin-right: 4px;
+		   margin-left: 3px;
+			}
+			.headerTopRightMenu .headerTopRightMenuLink.search.active .icon{
+		   background: url(../i/search-icon-active.png) no-repeat;
+			}
+			.headerTopRightMenu .separator{
+				height: 17px;
+				width: 1px;
+		   background-color: #eee;
+		   float: left;
+		   margin-left: 1px;
+		   margin-right: 1px;
+		   margin-top: 10px;
+			}
+			.headerTopRightMenu .separator.beforeSearch{
+				margin-right: 0px;
+			}
+
+/*! Qtip2 style */
+
+.qtip {
+	margin-top: 12px;
+}
+
+.qtip .qtip-titlebar{
+	color: #FFFFFF !IMPORTANT;
+	padding: 5px 10px 5px 10px !IMPORTANT;
+}
+
+.qtip .qtip-title, .qtip .qtip-content{
+	text-align: center !IMPORTANT;
+}
+
+.qtip .qtip-content{
+	font-size: 14px;
+	padding: 8px;	
+}
+
+.qtip .qtip-close .qtip-icon{
+	background-position: -42px 0 !IMPORTANT;
+}
+
+/*! Design tooltip style */
+.qtip-design{
+	background-color: #FFFFFF !IMPORTANT;
+	border-color: #FFFFFF !IMPORTANT;
+	color: #000000 !IMPORTANT;
+}
+
+.qtip-design .qtip-titlebar{
+	background-color: #0096FF !IMPORTANT;
+}
+
+/*! Development tooltip style */
+.qtip-develop {
+	background-color: #FFFFFF !IMPORTANT;
+	border-color: #FFFFFF !IMPORTANT;
+	color: #000000 !IMPORTANT;
+}
+
+.qtip-develop .qtip-titlebar{
+	background-color: #47A911 !IMPORTANT;
+}
+

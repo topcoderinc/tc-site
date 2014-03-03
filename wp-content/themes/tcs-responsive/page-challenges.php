@@ -16,7 +16,7 @@ $postId = $post->ID;
 	// get contest details
 	$contest_type = "";
 	$listType = "AllActive";
-	$postPerPage = get_option("challenges_per_page") == "" ? 100 : get_option("challenges_per_page");
+	$postPerPage = get_option("challenges_per_page") == "" ? 10 : get_option("challenges_per_page");
 ?>
 
 <script type="text/javascript" >
@@ -126,19 +126,24 @@ $postId = $post->ID;
 					<!-- /.contestGrid -->
 				</div>
 				<!-- /#gridView -->
-				<div class="dataChanges">
-					<div class="lt">
-						<!--<a href="javascript:;" class="viewAll">View All</a>-->
-					</div>
-					<div id="challengeNav" class="rt">
-						<a href="javascript:;" class="prevLink">
-							<i></i> Prev
-						</a>
-						<a href="javascript:;" class="nextLink">
-							Next <i></i>
-						</a>
-					</div>
-				</div>
+                                <div class="dataChanges">
+                                        <div class="lt">
+                                                <a href="javascript:;" class="viewAll">View All</a>
+                                        </div>
+                                        <div id="challengeNav" class="rt">
+                                                <a href="javascript:;" class="prevLink">
+                                                        <i></i> Prev
+                                                </a>
+                                                <a href="javascript:;" class="nextLink">
+                                                        Next <i></i>
+                                                </a>
+                                        </div>
+                                        <div class="mid onMobi">
+                                                <a href="#" class="viewPastCh">
+                                                        View Past Challenges<i></i>
+                                                </a>
+                                        </div>
+                                </div>
 				<!-- /.dataChanges -->
 			</div>
 		</article>
