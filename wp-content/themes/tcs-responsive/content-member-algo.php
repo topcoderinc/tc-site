@@ -489,12 +489,12 @@ $srmClnge->series [] = array (
 		<!-- /.ratingViews -->
 	</div>
 	<!-- /.ratingInfo -->
-	<aside class="badges">
+<!-- 	<aside class="badges">
 		<header class="head">
 			<h4>Badges</h4>
 		</header>
 		<?php get_template_part('content', 'badges');?>		
 	</aside>
-	<!-- /.badges -->
+ -->	<!-- /.badges -->
 </div>
 <!-- /.algoLayout -->
