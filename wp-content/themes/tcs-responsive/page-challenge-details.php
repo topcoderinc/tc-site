@@ -184,30 +184,20 @@ if ($contest_type !== 'design') {
 <div class="container">
 
 <div class="leftColumn">
-  <?php
-  if ($contestType != 'design'):
-    ?>
-    <a class="btn btnAction" target="_blank"
-       href="http://community.topcoder.com/tc?module=ViewRegistration&pj=<?php echo $contestID; ?>"><span>1</span>
-      <strong>Register For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
-       href="https://software.topcoder.com/review/actions/UploadContestSubmission.do?method=uploadContestSubmission&pid=<?php echo $contestID; ?>"><span>2</span>
-      <strong>Submit Your Entries</strong></a>
-  <?php
-  else:
-    ?>
-    <a class="btn btnAction" target="_blank"
-       href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>1</span> <strong>Register
-        For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
-       href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
-        Your Entries</strong></a>
-    <a class="btn btnAction" target="_blank"
-       href="http://studio.topcoder.com/?module=ViewSubmission&ct=<?php echo $contestID; ?>"><span>3</span> <strong>View
-        Your Submission</strong></a>
-  <?php
-  endif;
-  ?>
+<?php 
+								if ( $contestType != 'design' ):
+								?>								
+									<a id="registrationButton" class="btn btnAction disabled" target="_blank" href="http://community.topcoder.com/tc?module=ViewRegistration&pj=<?php echo $contestID;?>"><span>1</span> <strong>Register For This Challenge</strong></a>
+									<a id="submissionButton" class="btn btnAction disabled" target="_blank" href="https://software.topcoder.com/review/actions/UploadContestSubmission.do?method=uploadContestSubmission&pid=<?php echo $contestID ;?>"><span>2</span> <strong>Submit Your Entries</strong></a> 
+								<?php
+								else:
+								?>
+									<a id="registrationButton" class="btn btnAction disabled" target="_blank" href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID  ;?>"><span>1</span> <strong>Register For This Challenge</strong></a>
+									<a id="submissionButton" class="btn btnAction disabled" target="_blank" href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID  ;?>"><span>2</span> <strong>Submit Your Entries</strong></a>
+									<a class="btn btnAction" target="_blank" href="http://studio.topcoder.com/?module=ViewSubmission&ct=<?php echo $contestID  ;?>"><span>3</span> <strong>View Your Submission</strong></a>
+								<?php
+								endif;
+								?>
 </div>
 <?php
 if ($contestType != 'design'):
@@ -1590,4 +1580,32 @@ endif;
   </div>
   <div class="shadow"></div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	setTimeout(function(){
+                var tcsso = getCookie('tcsso');
+                if(tcsso){
+			var tcssoValues = tcsso.split("|");
+			var now = new Date();
+			var registrationUntil = new Date(<?php echo strtotime("$contest->registrationEndDate");?>*1000);
+			var submissionUntil = new Date(<?php echo strtotime("$contest->submissionEndDate");?>*1000);
+                        var uid = tcssoValues[0];
+			var registrants = ["anonymous"
+<?php
+  for ($i = 0; $i < count($registrants); $i++) :
+    $registrant = $registrants[$i];
+    echo ',"'.$registrant->handle.'"';
+  endfor;
+?>
+];
+			if (now.getTime() < registrationUntil.getTime()) {
+				$('#registrationButton').removeClass('disabled');
+			}			
+			if (now.getTime() < submissionUntil.getTime() && registrants.indexOf(uid) > -1) {
+				$('#submissionButton').removeClass('disabled');
+			}			
+		}
+	}, 50);
+});
+</script>
 <?php get_footer('challenge-detail-tooltipx'); ?>
