@@ -576,6 +576,12 @@
         background: #46b314!important;
 }
 
+.challenge-detail .btnAction.disabled {
+    pointer-events: none;
+    background: #cccccc !important;
+    border-bottom: 4px solid #cccccc !important;
+}
+
 .challenge-detail .btnAction span{
 	float:left;
 	width: 21px;
