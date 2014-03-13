@@ -642,27 +642,27 @@ $(function() {
   $('.signin-google').on('click', function() {
     auth0Login.login({
 		connection: 'google-oauth2',
-        state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+        state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
 	});
  
   $('.signin-facebook').on('click', function() {
     auth0Login.login({connection: 'facebook', 
-    state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+    state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
  
   $('.signin-twitter').on('click', function() {
     auth0Login.login({connection: 'twitter', 
-    state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+    state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
  
   $('.signin-github').on('click', function() {
     auth0Login.login({connection: 'github',
-    state:      'http://www.topcoder.com/'});  // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+    state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig'});  // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
  
   $('.signin-etc').on('click', function() {
     auth0Login.login({connection: 'connection-name', 
-    state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+    state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
  
   $('.signin-db').on('click', function() {
@@ -680,7 +680,7 @@ $(function() {
     if (empty) return;
     auth0Login.login({
       connection: 'LDAP', 
-      state:      'http://www.topcoder.com/', // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
+      state:      'http://talk.topcoder.com/session/sso_login?sso=payload&sig=sig', // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
       username: document.getElementById('username').value, 
       password: document.getElementById('password').value
     },
