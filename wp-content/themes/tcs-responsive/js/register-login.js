@@ -64,10 +64,7 @@ $(function () {
   /* validation */
 
   function isValidEmailAddress(emailAddress) {
-    var pattern = new RegExp("(^[\\+_A-Za-z0-9-]+(\\.[\\+_A-Za-z0-9-]+)*@([A-Za-z0-9-])+((\\.com)"
-    + "|(\\.net)|(\\.org)|(\\.info)|(\\.edu)|(\\.mil)|(\\.gov)|(\\.biz)|(\\.ws)|(\\.us)|(\\.tv)|(\\.cc)"
-    + "|(\\.aero)|(\\.arpa)|(\\.coop)|(\\.int)|(\\.jobs)|(\\.museum)|(\\.name)|(\\.pro)|(\\.travel)|(\\.nato)"
-    + "|(\\..{2,3})|(\\.([A-Za-z0-9-])+\\..{2,3}))$)");
+    var pattern = new RegExp("(^[\\+_A-Za-z0-9-]+(\\.[\\+_A-Za-z0-9-]+)*@.+(\\.[A-Za-z]{2,}$))");
     return pattern.test(emailAddress);
   };
 
