@@ -139,34 +139,6 @@ $contest_type = $contestType;
 $contest_type = str_replace("_", " ", $contest_type);
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
-//  setup ratings info
-if ($contest_type !== 'design') {
-
-  foreach ($registrants as &$registrant) {
-    $registrant_details = get_raw_coder($registrant->handle);
-    $registrant_ratings = $registrant_details->ratingSummary;
-    $registrant->ratings_color = $registrant_ratings[0]->colorStyle;
-
-    $registrant->max_rating = 'Not Rated';
-
-    if (count($registrant_ratings) > 0) {
-      foreach ($registrant_ratings as $registrant_rating) {
-        $cur_rating = $registrant_rating->rating;
-
-        if ($registrant->max_rating == 'Not Rated' || $registrant->max_rating < $cur_rating) {
-          $registrant->max_rating = $cur_rating;
-          $registrant->ratings_color = $registrant_rating->colorStyle;
-        }
-      }
-    }
-
-    if ($registrant_details->isPM) {
-      $registrant->ratings_color = "color: #FF9900";
-    }
-  }
-}
-
-
 ?>
 
 <div class="content challenge-detail <?php if ($contestType != 'design') {
@@ -1165,8 +1137,8 @@ endif;
         echo '</td>';
         if ($contestType != 'design') {
           echo '<td class="ratingColumn">';
-          echo '<span style="' . $value->ratings_color . '">';
-          echo $value->max_rating;
+          echo '<span style="' . $value->colorStyle . '">';
+          echo isset($value->rating) ? $value->rating : 0;
           echo '</span>';
           echo '</td>';
 
