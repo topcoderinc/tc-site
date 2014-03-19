@@ -997,7 +997,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1048,7 +1048,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "NA"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1103,7 +1103,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1156,7 +1156,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1207,7 +1207,7 @@ var app = {
                     if (rec.purse == null || rec.purse == "") {
                         rec.purse = "1500"; //dummy data
                     }
-                    console.log(rec);
+
                     $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
                     if (rec.registrants == null || rec.registrants == "") {
@@ -1284,7 +1284,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "--"; //dummy data
                 }
-                console.log(rec);
+
                 $('.cgPur', con).html('<i></i> $' + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1423,7 +1423,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.cgPur', con).html('<i></i> $' + numberWithCommas(rec.prize.sum()));
 
                 if (rec.registrants == null || rec.registrants == "") {
@@ -1488,7 +1488,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
 
@@ -1521,7 +1521,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "NA"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
 
             } else if (rec && ajax.data["contest_type"] == "design") {
@@ -1558,7 +1558,7 @@ var app = {
                 if (rec.purse == null || rec.purse == "") {
                     rec.purse = "1500"; //dummy data
                 }
-                console.log(rec);
+
                 $('.colPur', row).html("$" + numberWithCommas((rec && rec.prize) ? rec.prize.sum() : rec.purse));
 
 
@@ -1597,7 +1597,7 @@ var app = {
                     if (rec.purse == null || rec.purse == "") {
                         rec.purse = "1500"; //dummy data
                     }
-                    console.log(rec);
+
                     $('.colPur', row).html("$" + numberWithCommas(rec.prize.sum()));
                 }
 
