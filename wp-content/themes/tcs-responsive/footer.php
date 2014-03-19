@@ -168,6 +168,7 @@ $blog_posts = get_posts( $blog_posts_args );
 					<span class="err4">Handle cannot consist solely of punctuation</span>
 					<span class="err5">Handle contains invalid characters</span>
 					<span class="err6">Handle cannot start with "admin"</span>
+					<span class="err7">Handle must be between 2 and 15 characters long</span>
 					<span class="valid"></span>
 				</p>
 				<p class="row">
