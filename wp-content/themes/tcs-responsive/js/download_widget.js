@@ -1,5 +1,5 @@
-$(document).ready(function () {
-
-  $('.downloadWidget').bigtext();
+$(document).ready(function() {
+	
+	$('.downloadWidget').bigtext();
 
 });

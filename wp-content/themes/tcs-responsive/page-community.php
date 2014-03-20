@@ -19,13 +19,21 @@ $contest_type = get_query_var ( 'contest_type' );
 $contest_type = str_replace ( "_", " ", $contest_type );
 $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "contest_per_page" );
 ?>
-
+<script type="text/javascript">
+	var siteurl = "<?php bloginfo('siteurl');?>";
+	var activePastContest = "active";
+	$(document).ready(function() {
+		app.buildRequestData("activeContest","<?php echo $contest_type;?>","");
+		app.community.init();
+		//listActiveContest("activeContest","activeContest","<?php // echo $contest_type;?>");
+	});
+</script>
 <style>
 .bx-controls{display:none}
 </style>
 <div class="content">
 	<div id="main">
-
+	
 	<?php if(have_posts()) : the_post();?>
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
@@ -60,7 +68,7 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 						<!-- /#tableView -->
 						<div class="dataChanges">
 							<div class="rt">
-								<a href="/challenges" class="viewAll">View All</a>
+								<a href="javascript:;" class="viewAll">View All</a>
 							</div>
 						</div>
 						<!-- /.dataChanges -->
@@ -69,7 +77,7 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 					<aside class="sideStream  grid-1-3">
 						<div class="diagnostics">
 							<div class="activeMembers">
-								<p class="val"><?php
+								<p class="val"><?php 
 								$summary = get_activity_summary();
 								echo number_format($summary->member_count); ?></p>
 								<label class="lbl">ACTIVE MEMBERS</label>
@@ -89,13 +97,13 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 							<div class="shadow"></div>
 						</div>
 						<!-- /.diagnostics -->
-								<?php dynamic_sidebar('Sidebar Community');?>
+								<?php dynamic_sidebar('Sidebar Community');?>								
 							</aside>
 					<!-- /.sideStream -->
 					<div class="clear"></div>
 				</div>
 				<!-- /.rightSplit -->
-						<?php dynamic_sidebar('BottomBar Community');?>
+						<?php dynamic_sidebar('BottomBar Community');?>	
 					</div>
 		</article>
 		<!-- /#mainContent -->
@@ -111,16 +119,16 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 								$args = array (
 										'post_type' => 'blog',
 										'posts_per_page' => '1',
-										'category_name' => 'news-blog'
+										'category_name' => 'news-blog' 
 								);
 								$news = new WP_Query ( $args );
-
+								
 								if ($news->have_posts ()) :
 									while ( $news->have_posts () ) :
 										$news->the_post ();
 										$thumbId = get_post_thumbnail_id ( $news->ID );
 										$iurl = wp_get_attachment_url ( $thumbId );
-										?>
+										?>	
 										<li class="slide">
 										<div class="slideCon">
 											<?php if($iurl != null):?>
@@ -134,12 +142,12 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 												<a href="<?php bloginfo('wpurl');?>/member-profile/<?php the_author();?>" class="coderTextOrange"><?php the_author();?></a>
 													on <?php the_time('F jS, Y');?>
 												</p>
-											-->
+											-->	
 											<div class="excerpt">
 													<?php echo the_excerpt();?>
 												</div>
 										</div>
-									</li>
+									</li>										
 								<?php endwhile; endif; wp_reset_query();?>
 									</ul>
 							</div>
@@ -155,16 +163,16 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 										$args = array (
 												'post_type' => 'blog',
 												'posts_per_page' => '1',
-												'category_name' => 'events'
+												'category_name' => 'events' 
 										);
 										$news = new WP_Query ( $args );
-
+										
 										if ($news->have_posts ()) :
 											while ( $news->have_posts () ) :
 												$news->the_post ();
 												$thumbId = get_post_thumbnail_id ( $news->ID );
 												$iurl = wp_get_attachment_url ( $thumbId );
-												?>
+												?>	
 										<li class="slide">
 										<div class="slideCon">
 											<?php if($iurl != null):?>
@@ -178,12 +186,12 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 												<a href="<?php bloginfo('wpurl');?>/member-profile/<?php the_author();?>" class="coderTextOrange"><?php the_author();?></a>
 													on <?php the_time('F jS, Y');?>
 												</p>
-											-->
+											-->	
 											<div class="excerpt">
 													<?php echo the_excerpt();?>
 												</div>
 										</div>
-									</li>
+									</li>										
 								<?php endwhile; endif; wp_reset_query();?>
 									</ul>
 							</div>
@@ -199,16 +207,16 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 								$args = array (
 										'post_type' => 'blog',
 										'posts_per_page' => '1',
-										'category_name' => 'community-highlights'
+										'category_name' => 'community-highlights' 
 								);
 								$news = new WP_Query ( $args );
-
+								
 								if ($news->have_posts ()) :
 									while ( $news->have_posts () ) :
 										$news->the_post ();
 										$thumbId = get_post_thumbnail_id ( $news->ID );
 										$iurl = wp_get_attachment_url ( $thumbId );
-										?>
+										?>	
 										<li class="slide">
 										<div class="slideCon">
 											<?php if($iurl != null):?>
@@ -222,12 +230,12 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 												<a href="<?php bloginfo('wpurl');?>/member-profile/<?php the_author();?>" class="coderTextOrange"><?php the_author();?></a>
 													on <?php the_time('F jS, Y');?>
 												</p>
-											-->
+											-->	
 											<div class="excerpt">
 													<?php echo the_excerpt();?>
 												</div>
 										</div>
-									</li>
+									</li>										
 								<?php endwhile; endif; wp_reset_query();?>
 							</ul>
 							</div>
@@ -240,13 +248,3 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 		<!-- /#whatsHappening -->
 
 <?php get_footer(); ?>
-
-<script type="text/javascript">
-  var siteurl = "<?php bloginfo('siteurl');?>";
-  var activePastContest = "active";
-  $(document).ready(function() {
-    app.buildRequestData("activeContest","<?php echo $contest_type;?>","");
-    app.community.init();
-    //listActiveContest("activeContest","activeContest","<?php // echo $contest_type;?>");
-  });
-</script>

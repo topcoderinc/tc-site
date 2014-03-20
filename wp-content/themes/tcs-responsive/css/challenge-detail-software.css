@@ -33,7 +33,7 @@
 }
 
 #stepBox .leftColumn a{
-	margin-bottom:10px;
+	margin-bottom: 11px;
 }
 
 #stepBox .middleColumn {
@@ -51,7 +51,7 @@
 #stepBox .middleColumn table td{
 	border: 1px solid #e7e7e7;
 	text-align: center;
-	padding:9px 10px 10px;
+	padding: 10px 10px 10px;
 }
 
 #stepBox .middleColumn table h2{
@@ -74,8 +74,6 @@
 #stepBox .middleColumn table p{ 
 	font-size: 14px;
 	font-weight: bold;  
-	padding-bottom: 2px;
-	padding-top: 2px;
 }
 
 #stepBox .middleColumn table .realibilityPara span{ 
@@ -126,8 +124,8 @@
     border-color: #46b314;
 }
 #stepBox .rightColumn .nextBox .allDeadlineNextBoxContent {
-   padding: 6px; 
-	height: 90px;
+   padding: 10px 6px 10px 6px; 
+	height: 82px;
 }
 #stepBox .rightColumn .nextBox .allDeadlineNextBoxContent p {
     color: #FFFFFE;
@@ -139,7 +137,7 @@
     float: left;
     font-weight: bold;
     text-align: left;
-    width: 155px;
+    width: 115px;
 }  
 #stepBox .rightColumn .nextBox .nextDTitle {
     color: #0081a3;
@@ -355,7 +353,11 @@
 .challenge-detail .columnSideBar .inner{
 	padding: 10px 10px 0 10px;
 }
-
+.challenge-detail .attachedDocs li{
+	margin-bottom: 6px;
+	font-size: 14px;
+	line-height: 16px;
+}
 .challenge-detail .columnSideBar h3{
         color: #00aeff;
 		font-size:16px; 
@@ -392,7 +394,7 @@
     width: 12px;
     text-align: center; 
     border-radius: 3px;
-    behavior: url(./css/PIE.htc);
+    behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
     position: relative;
 }
     .reviewStyle p a.tooltip:hover{
@@ -491,9 +493,6 @@
 	background: url("../i/bullet-orange.png") no-repeat 0 7px;
 }
 
-.columnSideBar {
-	font-size: 13px;
-}
 .forumFeed .inner{
 	padding-bottom: 10px!important;
 }
@@ -576,12 +575,6 @@
         background: #46b314!important;
 }
 
-.challenge-detail .btnAction.disabled {
-    pointer-events: none;
-    background: #cccccc !important;
-    border-bottom: 4px solid #cccccc !important;
-}
-
 .challenge-detail .btnAction span{
 	float:left;
 	width: 21px;
@@ -600,7 +593,7 @@
 	color: #64c51c;
 }
 
-.challenge-detail .btnAction strong{
+.challenge-detail.develop .btnAction strong{
 	float:left;
 	height:100%;
 	width:77%;
@@ -644,11 +637,13 @@
 	height: 90px;
 }
 #stepBox .rightColumn .nextBox .allDeadlineNextBoxContent.studio label{
-	width: 155px;
+	width: 113px;
+	line-height: 14px;
 }
 .challenge-detail .tabNav span.inactive{
 	color: #aaa;
 	cursor: default;
+	font-size: 16px;
 	margin: 0 10px;
 }
 .morePayments{
@@ -661,8 +656,6 @@
 }
 #stepBox .middleColumn.studio table p{
 	font-size: 12px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 }
 #stepBox .middleColumn table .noPrize h2, #stepBox .middleColumn table .noPrize h3{
 	color: #d1d1d1;	
@@ -743,44 +736,6 @@
 	width: 275px;
 }
 
-/* addthis.com styles */
-.addthis_32x32_style .addthis_button_print .at300bs,
-.addthis_32x32_style .addthis_button_facebook .at300bs,
-.addthis_32x32_style .addthis_button_twitter .at300bs,
-.addthis_32x32_style .addthis_button_email .at300bs,
-.addthis_32x32_style .addthis_button_google .at300bs,
-#toolbox .addthis_32x32_style .at15nc.at300bs.at15t_print,
-#toolbox .addthis_32x32_style .at15nc.at300bs.at15t_facebook,
-#toolbox .addthis_32x32_style .at15nc.at300bs.at15t_twitter,
-#toolbox .addthis_32x32_style .at15nc.at300bs.at15t_email,
-#toolbox .addthis_32x32_style .at15nc.at300bs.at15t_google {
-	background: url("../i/share-buttons.png") no-repeat left;
-}
-.addthis_32x32_style .at15t_print,
-#main .addthis_32x32_style .at15t_print{
-	background-position: 0 -122px!important;
-}
-.addthis_32x32_style .at15t_facebook,
-#main .addthis_32x32_style .at15t_facebook{
-	background-position: 0 0!important;
-}
-.addthis_32x32_style .at15t_twitter,
-#main .addthis_32x32_style .at15t_twitter{
-	background-position: 0 -80px!important;
-}
-.addthis_32x32_style .at15t_email,
-#main .addthis_32x32_style .at15t_email{
-	background-position: 0 -40px!important;
-}
-.addthis_32x32_style .at15t_google,
-#main .addthis_32x32_style .at15t_google{
-	background-position: 0 -122px!important;
-}
-.addthis_counter{
-	-webkit-transition: none;
-	transition: none;
-}
-
 @media (max-width: 1019px) {
 	.challenge-detail .pageHeading h1{
 		font-size:18px;
@@ -805,13 +760,16 @@
 	.challenge-detail .grid-3-3{
 		width:100%;
 	}
-	
+	.challenge-detail .topRightTitle{
+		text-align: center;
+	}
 	.challenge-detail .topRightTitle a{
 		float:none;
-		display:block;
+		display: inline-block;
 		margin: 0 auto;
-		width:180px;
-	}
+		width: auto;
+	
+}
 	#stepBox .rightColumn{
 		float:right;
 	}
@@ -853,12 +811,12 @@
 		background: url("../i/ico-time-develop-phone.png") no-repeat 0 10px;
 	}
 	#stepBox .rightColumn .nextBox .nextDTitle {  
-		font-size: 16px;
+		font-size: 12px;
 		margin-bottom: 0px;
 	}
 	
 	#stepBox .rightColumn .nextBox .CEDate { 
-		font-size: 14px;
+		font-size: 9px;
 		margin-bottom: 5px;
 	}
 	
@@ -993,10 +951,5 @@
 	.challenge-detail #viewRegistrant.tableWrap{
 		padding-right: 0px;	
 	}
-	#stepBox .rightColumn .nextBox .nextBoxContent, #stepBox .rightColumn .nextBox .allDeadlineNextBoxContent {
-		padding-left: 5px;
-		padding-right: 5px;
-		padding-top: 22px;
-		padding-bottom: 22px;
-	}
+	
 }

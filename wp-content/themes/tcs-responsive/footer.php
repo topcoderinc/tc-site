@@ -21,7 +21,7 @@ $blog_posts_args = array(
 	'order'            => 'DESC',
 	'post_type'        => 'blog',
 	'suppress_filters' => true );
-
+	
 $blog_posts = get_posts( $blog_posts_args );
 ?>
 <footer id="footer">
@@ -29,11 +29,11 @@ $blog_posts = get_posts( $blog_posts_args );
 		<div class="footerContentSection twitter">
 			<div class="title">Twitter</div>
 			<div class="footerContent">
-				<?php
+				<?php 
 				foreach ($tweets as $tweet) :
 				?>
 				<div class="footerTwEntry">
-					<?php
+					<?php 
 					if ($tweet->retweeted_status):
 					?>
 					<a href="http://www.twitter.com/<?php echo $tweet->retweeted_status->user->screen_name; ?>" >
@@ -48,12 +48,12 @@ $blog_posts = get_posts( $blog_posts_args );
 				</div>
 				<?php endforeach;	?>
 				<a class="btn btnFooter" href="<?php echo get_option('twitterURL'); ?>"><span class="twFollowIcon"></span><span class="twFollowBtnText">Follow</span></a>
-			</div>
+			</div>		
 		</div>
 		<div class="footerContentSection recentBlogPosts">
 			<div class="title">Recent Blog Posts</div>
 			<div class="footerContent">
-				<?php
+				<?php 
 				foreach ($blog_posts as $post) :
 					setup_postdata( $post );
 				?>
@@ -88,15 +88,15 @@ $blog_posts = get_posts( $blog_posts_args );
 			</section>
 			<section class="updates">
 				<div class="row">
-					<form id="emailForm" onsubmit="return newsletter_check(this)" name="FeedBlitz_9feab01d431311e39e69002590771423" style="display:block" method="POST" action="http://www.feedblitz.com/f/f.fbz?AddNewUserDirect">
+					<form id="emailForm" method="post" action="http://www.topcoder.com/newsletter/" onsubmit="return newsletter_check(this)" name="FeedBlitz_9feab01d431311e39e69002590771423" style="display:block" method="POST" action="http://www.feedblitz.com/f/f.fbz?AddNewUserDirect">
 						<input type="email" class="email" name="EMAIL" placeholder="Your email address" maxlength="64" />
-						<input name="FEEDID" type="hidden" value="926643" />
+						<input name="FEEDID" type="hidden" value="926643" /> 
 						<input name="PUBLISHER" type="hidden" value="34610190" />
 						<!-- <a onclick="FeedBlitz_9feab01d431311e39e69002590771423s(this.form);" class="btn">Submit</a> -->
 						<input onclick="FeedBlitz_9feab01d431311e39e69002590771423s(this.form);" type="button" class="btn btnSubmitFooter" value="Submit"/>
 						<input type="hidden" name="na" value="s"/>
 						<input type="hidden" name="nr" value="widget"/>
-					</form>
+					</form> 
 					<script language="Javascript">function FeedBlitz_9feab01d431311e39e69002590771423i(){var x=document.getElementsByName('FeedBlitz_9feab01d431311e39e69002590771423');for(i=0;i<x.length;i++){x[i].EMAIL.style.display='block'; x[i].action='http://www.feedblitz.com/f/f.fbz?AddNewUserDirect';}} function FeedBlitz_9feab01d431311e39e69002590771423s(v){v.submit();}FeedBlitz_9feab01d431311e39e69002590771423i();</script>
 
 				</div>
@@ -117,7 +117,8 @@ $blog_posts = get_posts( $blog_posts_args );
 </div>
 	<!-- /.content -->
 	</div>
-	<!-- /#wrapper -->
+	<!-- /#wrapper -->		
+<?php wp_footer(); ?>
 
 
 <div id="bgModal"></div><!-- background modal -->
@@ -127,7 +128,7 @@ $blog_posts = get_posts( $blog_posts_args );
 			<h2>Thanks for joining!</h2>
 			<p>We have sent you an email with activation instructions.<br />If you do not receive that email within 1 hour, please email <a href="mailto:support@topcoder.com">support@topcoder.com</a></p>
 			<div>
-				<a href="/" class="btn closeModal">Close</a>
+				<a href="javascript:;" class="btn closeModal">Close</a>
 			</div>
 		</div>
 	</div><!-- END #thanks -->
@@ -136,10 +137,10 @@ $blog_posts = get_posts( $blog_posts_args );
 		<div class="content">
 			<h2>Register Using An Existing Account</h2>
 			<div id="socials">
-				<a class="register-facebook" href="javascript:;"><span class="animeButton shareFacebook"><span class="shareFacebookHover animeButtonHover"></span></span></a>
-				<a class="register-google" href="javascript:;"><span class="animeButton shareGoogle"><span class="shareGoogleHover animeButtonHover"></span></span></a>
-				<a class="register-twitter" href="javascript:;"><span class="animeButton shareTwitter"><span class="shareTwitterHover animeButtonHover"></span></span></a>
-				<a class="register-github" href="javascript:;"><span class="animeButton shareGithub"><span class="shareGithubHover animeButtonHover"></span></span></a>
+				<a class="signin-facebook" href="#"><span class="animeButton shareFacebook"><span class="shareFacebookHover animeButtonHover"></span></span></a>
+				<a class="signin-google" href="#"><span class="animeButton shareGoogle"><span class="shareGoogleHover animeButtonHover"></span></span></a>
+				<a class="signin-twitter" href="#"><span class="animeButton shareTwitter"><span class="shareTwitterHover animeButtonHover"></span></span></a>
+				<a class="signin-github" href="#"><span class="animeButton shareGithub"><span class="shareGithubHover animeButtonHover"></span></span></a>
 				<p>Using an existing account is quick and easy.<br />Select the account you would like to use and we'll do the rest for you</p>
 				<div class="clear"></div>
 			</div><!-- END .socials -->
@@ -149,25 +150,19 @@ $blog_posts = get_posts( $blog_posts_args );
 					<label>First Name</label>
 					<input type="text" class="name firstName" placeholder="First Name"/>
 					<span class="err1">Required field</span>
-					<span class="err2">Maximum length is 64 characters</span>
 					<span class="valid"></span>
 				</p>
 				<p class="row">
 					<label>Last Name</label>
 					<input type="text" class="name lastName" placeholder="Last Name"/>
 					<span class="err1">Required field</span>
-					<span class="err2">Maximum length is 64 characters</span>
 					<span class="valid"></span>
 				</p>
 				<p class="row">
 					<label>Handle</label>
 					<input type="text" class="handle name" placeholder="Handle"/>
 					<span class="err1">Required field</span>
-					<span class="err2">Handle already exists or is invalid</span>
-					<span class="err3">Handle cannot contain a space</span>
-					<span class="err4">Handle cannot consist solely of punctuation</span>
-					<span class="err5">Handle contains invalid characters</span>
-					<span class="err6">Handle cannot start with "admin"</span>
+					<span class="err2">Handle already exists</span>
 					<span class="valid"></span>
 				</p>
 				<p class="row">
@@ -437,7 +432,6 @@ $blog_posts = get_posts( $blog_posts_args );
 					<input type="password" class="pwd" placeholder="Password"/>
 					<span class="err1">Required field</span>
 					<span class="err2">Password strength is weak</span>
-					<span class="err4">Password must be between 7 and 30 characters</span>
 					<span class="valid">Strong</span>
 				</p>
 				<p class="row info lSpace">
@@ -446,8 +440,10 @@ $blog_posts = get_posts( $blog_posts_args );
 						<span class="field"></span>
 						<span class="field"></span>
 						<span class="field"></span>
+						<span class="field"></span>
+						<span class="field"></span>
 					</span>
-					7 characters with letters, numbers, &amp; symbols
+					8 characters with letters &amp; numbers
 				</p>
 				<p class="row">
 					<label>Password Confirmation</label>
@@ -456,14 +452,43 @@ $blog_posts = get_posts( $blog_posts_args );
 					<span class="err2">Password confirmation different from above field</span>
 					<span class="valid"></span>
 				</p>
-
+				
 				<p class="row lSpace">
-					<label><input type="checkbox">I agree to the <a target="_blank" href="/community/how-it-works/terms/">terms of service</a> and <a target="_blank" href="/community/how-it-works/privacy-policy/">privacy policy</a></label>
+					<label><input type="checkbox">I agree to the <a target="_blank" href="/customers/how-it-works/terms/">terms of service</a> and <a target="_blank" href="/customers/how-it-works/privacy-policy/">privacy policy</a>*</label>
 					<span class="err1">You must agree to the terms</span>
 					<span class="err2">You must agree to the terms</span>
 				</p>
-
+				
 			</form><!-- END .form register -->
+			<h3>Planning to compete?</h3>
+			<div class="options">
+				<div class="person blue">
+					<label>
+						<span class="checkBox"><input type="checkbox" />I'm a designer</span>
+						<span class="animeMan manBlue"><span class="manBlueHover animeManHover"></span></span>
+						
+					</label>
+				</div><!-- END .person -->
+				<div class="person green">
+					<label>
+						<span class="checkBox"><input type="checkbox" />I'm a developer</span>
+						<span class="animeMan manGreen"><span class="manGreenHover animeManHover"></span></span>					
+					</label>
+				</div><!-- END .person -->
+				<div class="person yellow">
+					<label>
+						<span class="checkBox"><input type="checkbox" />I'm a algorithmist</span>
+						<span class="animeMan manYellow"><span class="manYellowHover animeManHover"></span></span>
+					</label>
+				</div><!-- END .person -->
+				<div class="person grey">
+					<label>
+						<span class="checkBox"><input type="checkbox" />I'm a not sure yet</span>
+						<span class="animeMan manGrey"><span class="manGreyHover animeManHover"></span></span>
+					</label>
+				</div><!-- END .person -->
+				<div class="clear"></div>
+			</div>
 			<div class="clear"></div>
 			<p class="submitBtn">
 				<a href="javascript:;" class="btn btnSubmit">Sign Up</a>
@@ -475,10 +500,10 @@ $blog_posts = get_posts( $blog_posts_args );
 		<div class="content">
 			<h2>Login Using An Existing Account</h2>
 			<div id="socials">
-				<a class="signin-facebook" href="javascript:;"><span class="animeButton shareFacebook"><span class="shareFacebookHover animeButtonHover"></span></span></a>
-				<a class="signin-google" href="javascript:;"><span class="animeButton shareGoogle"><span class="shareGoogleHover animeButtonHover"></span></span></a>
-				<a class="signin-twitter" href="javascript:;"><span class="animeButton shareTwitter"><span class="shareTwitterHover animeButtonHover"></span></span></a>
-				<a class="signin-github" href="javascript:;"><span class="animeButton shareGithub"><span class="shareGithubHover animeButtonHover"></span></span></a>
+				<a class="signin-facebook" href="#"><span class="animeButton shareFacebook"><span class="shareFacebookHover animeButtonHover"></span></span></a>
+				<a class="signin-google" href="#"><span class="animeButton shareGoogle"><span class="shareGoogleHover animeButtonHover"></span></span></a>
+				<a class="signin-twitter" href="#"><span class="animeButton shareTwitter"><span class="shareTwitterHover animeButtonHover"></span></span></a>
+				<a class="signin-github" href="#"><span class="animeButton shareGithub"><span class="shareGithubHover animeButtonHover"></span></span></a>
 				<p>Using an existing account is quick and easy.<br />Select the account you would like to use and we'll do the rest for you</p>
 				<div class="clear"></div>
 			</div><!-- END .socials -->
@@ -488,14 +513,13 @@ $blog_posts = get_posts( $blog_posts_args );
 					<label>Username</label>
 					<input id="username" type="text" class="name" placeholder="Username" />
 					<span class="err1">Your username or password are incorrect</span>
-					<span class="err3">Please input your username</span>
+					<span class="err2">Please input your password</span>
 				</p>
 				<p class="row">
 					<label>Password</label>
 					<input id="password" type="password" class="pwd" placeholder="Password"/>
-					<span class="err4">Please input your password</span>
 				</p>
-
+				
 				<p class="row lSpace">
 					<label><input type="checkbox" />Remember me</label>
 				</p>
@@ -508,192 +532,69 @@ $blog_posts = get_posts( $blog_posts_args );
 		</div>
 	</div><!-- END #login -->
 
-	<div id="typeTooltip" class="tooltip hide"><div class="inner">
-		<header></header>
-		<div class="data">
-			<p class="contestTy"></p>
-		</div>
-		<div class="arrow"></div>
-	</div>
-	</div><!-- /.tooltip -->
-	<div id="winnerTooltip" class="tooltip hide"><div class="inner">
-		<header></header>
-		<div class="data">
-			<div class="winnerInfo"></div>
-		</div>
-		<div class="arrow alt"></div>
-	</div>
-	</div><!-- /.tooltip -->
 
-<?php
 
-  wp_footer();
-
-?>
 <script>
-var socialProviderId = "", socialUserName = "", socialEmail = "",socialProvider = "";
-$(function() {
-  var googleProvider = "google-oauth2";
-  var facebookProvider = "facebook";
-  var twitterProvider = "twitter";
-  var githubProvider = "github";
-  <?php
-  $urlFromDiscourse = urldecode( $_GET["url"] );
-  $stateLogin = "http://www.topcoder.com/";
-  if ( preg_match('/sso=(.*)&sig=(.*)$/', $urlFromDiscourse, $matches) ){
-	$sso = $matches[1];
-	$sig = $matches[2];
-	$stateLogin = "http://talk.topcoder.com/session/sso_login?sso=$sso&sig=$sig";
-  }
-
-  ?>
-  var auth0Login = new Auth0({
+  var auth0 = new Auth0({
     domain:         'topcoder.auth0.com',
     clientID:       '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P',
     callbackURL:    'https://www.topcoder.com/reg2/callback.action',
-    state:			'<?php echo $stateLogin;?>',
-    redirect_uri:   'http://www.topcoder.com/'
-  });
-
-  var auth0Register = new Auth0({
-    domain:         'topcoder.auth0.com',
-    clientID:       '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P',
-    callbackURL:    'http://www.topcoder.com/?action=callback',
     state:			'http://www.topcoder.com/',
     redirect_uri:   'http://www.topcoder.com/'
   });
-
-	auth0Register.parseHash(window.location.hash, function (profile, id_token, access_token, state) {
-			socialProvider = profile.identities[0].connection;
-			var firstName = "" , lastName = "", handle = "", email = "";
-			if(socialProvider === googleProvider) {
-				firstName = profile.given_name;
-				lastName = profile.family_name;
-				handle = profile.nickname;
-				email = profile.email;
-				socialProviderId = 2;
-      } else if (socialProvider === facebookProvider) {
-				firstName = profile.given_name;
-				lastName = profile.family_name;
-				handle = firstName + '.' + lastName;
-				email = profile.email;
-        socialProviderId = 1;
-      } else if (socialProvider === twitterProvider){
-				var splitName = profile.name.split(" ");
-				firstName = splitName[0];
-				if(splitName.length > 1){
-					lastName = splitName[1];
-				}
-				handle = profile.screen_name;
-				socialProviderId = 3;
-			} else if(socialProvider === githubProvider){
-        firstName = lastName = '';
-				handle = profile.nickname;
-				email = profile.email;
-				socialProviderId = 4;
-			}
-			socialUserName = handle;
-			socialUserId = profile.user_id.split('|')[1];
-			socialEmail = profile.email;
-     $("#registerForm .firstName").val(firstName);
-     $("#registerForm .lastName").val(lastName);
-     $("#registerForm .handle").val(handle);
-     $("#registerForm .email").val(email);
-
-     // trigger validation
-     $('input.pwd:password').trigger('keyup');
-     $('#register form.register input.email:text').trigger('keyup');
-     $('#register form.register input.name:text').trigger('keyup');
-     $('#register form.register input.handle:text').trigger('keyup');
-     $('#register form.register input.handle:text').trigger('blur');
-     $('#register form.register input:checkbox').trigger('change');
-     $('#register input:password').on('keyup');
-     $('select').on('change');
-
-  });
-
-  $('.register-google').on('click', function() {
-    auth0Register.login({
-		connection: googleProvider,
-        state:      'http://www.topcoder.com/',
-        response_type: 'token'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
-	});
-
-  $('.register-facebook').on('click', function() {
-    auth0Register.login({connection: facebookProvider,
-    state:      'http://www.topcoder.com/',
-    response_type: 'token'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
-  });
-
-  $('.register-twitter').on('click', function() {
-    auth0Register.login({connection: twitterProvider,
-    state:      'http://www.topcoder.com/',
-    response_type: 'token'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
-  });
-
-  $('.register-github').on('click', function() {
-    auth0Register.login({connection: githubProvider,
-    state:      'http://www.topcoder.com/',
-    response_type: 'token'});  // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
-  });
-
+ 
   $('.signin-google').on('click', function() {
-    auth0Login.login({
+    auth0.login({
 		connection: 'google-oauth2',
         state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
 	});
-
+ 
   $('.signin-facebook').on('click', function() {
-    auth0Login.login({connection: 'facebook',
+    auth0.login({connection: 'facebook', 
     state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
-
+ 
   $('.signin-twitter').on('click', function() {
-    auth0Login.login({connection: 'twitter',
+    auth0.login({connection: 'twitter', 
     state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
-
+ 
   $('.signin-github').on('click', function() {
-    auth0Login.login({connection: 'github',
+    auth0.login({connection: 'github',
     state:      'http://www.topcoder.com/'});  // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
-
+ 
   $('.signin-etc').on('click', function() {
-    auth0Login.login({connection: 'connection-name',
+    auth0.login({connection: 'connection-name', 
     state:      'http://www.topcoder.com/'}); // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
   });
-
+ 
   $('.signin-db').on('click', function() {
-    var empty = false;
-    if ($('#username').val().trim()=='') {
-      empty = true;
-      $('#loginForm span.err3').show();
-      $('#username').addClass('invalid');
-    }
-    if ($('#password').val().trim()=='') {
-      empty = true;
-      $('#loginForm span.err4').show();
-      $('#password').addClass('invalid');
-    }
-    if (empty) return;
-    auth0Login.login({
-      connection: 'LDAP',
+    auth0.login({
+      connection: 'LDAP', 
       state:      'http://www.topcoder.com/', // this tells Auth0 to send the user back to the main site after login. Please replace the var for current page URL.
-      username: document.getElementById('username').value,
+      username: document.getElementById('username').value, 
       password: document.getElementById('password').value
     },
     function (err) {
       // invalid user/password
-      //alert(err);
-      $('#loginForm .btnSubmit').html('Login');
-      $('#loginForm .err1').show().html('Incorrect Username or Password')
-        .addClass('invalid');
+	 //alert(err);	 
+	 $('#loginForm .btnSubmit').html('Login'); 
+	 $('#loginForm .err1').show().html('Incorrect Username or Password');
     });
   });
-});
 </script>
 
-</div>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 

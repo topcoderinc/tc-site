@@ -41,14 +41,9 @@ function get_activity_summary($key=''){
 	return $TCHOOK_plugin-> tcapi_get_activitySummary('',$key);
 }
 
-function get_member_statistics($handle, $track){
+function get_member_statistics($handle, $track, $returnString=false){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin->tcapi_get_member_stats($handle, $track);
-}
-
-function get_member_chart_statistics($handle, $track, $contestType){
-	global $TCHOOK_plugin;
-	return $TCHOOK_plugin->tcapi_get_member_chart_stats($handle, $track, $contestType);
+	return $TCHOOK_plugin->tcapi_get_member_stats($handle, $track, $returnString);
 }
 
 function get_member_achievements($handle){

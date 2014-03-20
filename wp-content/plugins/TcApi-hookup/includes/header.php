@@ -26,10 +26,15 @@ $token = $auth0->getAccessToken();
 <meta name="description" content="">
 <meta name="author" content="">
 
-	<?php wp_head(); ?>
+	<?php wp_head(); ?>	
 	<script type="text/javascript">
-		var ajaxUrl = "<?php  bloginfo('wpurl')?>/wp-admin/admin-ajax.php";
+		var ajaxUrl = "<?php  bloginfo('wpurl')?>/wp-admin/admin-ajax.php";		
 	</script>
+	
+	<script src="https://d19p4zemcycm7a.cloudfront.net/w2/auth0-1.2.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery.js"></script>
+
+<?php get_template_part('header.assets'); ?>
   </head>
 
 <body>
@@ -38,10 +43,10 @@ $token = $auth0->getAccessToken();
 $nav = array (
 		'menu' => 'Main Navigation',
 		'menu_class' => '',
-		'container'       => '',
+		'container'       => '',		
 		'menu_class'      => 'root',
 		'items_wrap'      => '%3$s',
-		'walker' => new nav_menu_walker ()
+		'walker' => new nav_menu_walker () 
 );
 
 // Print a cookie
@@ -59,7 +64,7 @@ $tc_token = $cookie_parts[1];
 		$response = get_json_from_url ( $url );
 		#print_r($response);
 	//	print_r( json_decode ( $response )->data[0]->handle );
-
+	
 //		if (is_wp_error ( $response ) || ! isset ( $response ['data'] )) {
 //			return "Error in processing";
 //		}
@@ -109,7 +114,7 @@ $photoLink = 'http://community.topcoder.com/i/m/nophoto_login.gif';
 						<p class="country"><?php echo $coder->country; ?></p>
 						<a href="#" class="link">My Profile</a>
 						<a href="#" class="link">My Dashboard </a>
-						<a href="https://topcoder.auth0.com/logout?returnTo=http://beta.topcoder.com" class="link actionLogout">Log Out </a>
+						<a href="https://topcoder.auth0.com/logout?returnTo=http://beta.topcoder.com" class="link actionLogout">Log Out </a>	
 					</div>
 				</div>
 			</li>
@@ -122,7 +127,7 @@ $photoLink = 'http://community.topcoder.com/i/m/nophoto_login.gif';
 					<a href="<?php bloginfo('wpurl');?>" title="<?php bloginfo('name'); ?>"></a>
 				</h1>
 				<nav id="mainNav" class="mainNav">
-
+					
 					<ul class="root">
 						<?php wp_nav_menu ( $nav );	?>
 						<li class="noReg"><a href="https://topcoder.auth0.com/logout?returnTo=http://somewhere" class="actionLogout">Log Out</a></li>
@@ -131,7 +136,7 @@ $photoLink = 'http://community.topcoder.com/i/m/nophoto_login.gif';
 				</nav>
 				<a href="javascript:;" class="onMobi noReg linkLogout actionLogout">Log Out</a>
 				<a href="javascript:;" class="onMobi onReg linkLogin actionLogin">Log In</a>
-				<span class="btnRegWrap onReg"><a href="javascript:;" class="btn btnRegister">Register</a> </span>
+				<span class="btnRegWrap onReg"><a href="javascript:;" class="btn btnRegister">Register</a> </span> 
 				<span class="btnAccWrap noReg"><a href="javascript:;" class="btn btnAlt btnMyAcc">
 						My Account<i></i>
 					</a></span>
@@ -155,7 +160,7 @@ $photoLink = 'http://community.topcoder.com/i/m/nophoto_login.gif';
 						<a href="https://topcoder.auth0.com/logout?returnTo=http://somewhere" class="linkAlt actionLogout">Log Out</a>
 					</div>
 				</div>
-				<!-- /.userWidget -->
+				<!-- /.userWidget -->	
 			</div>
 		</header>
 		<!-- /#header -->

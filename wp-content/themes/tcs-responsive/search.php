@@ -192,8 +192,8 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							if($postCount > $postPerPage) :
 						?>
 							<div class="pagingWrapper">
-								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Post</a><?php endif;?>
-								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Post</a><?php endif; ?>
+								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Older Post</a><?php endif; ?>
+								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Newer Post</a><?php endif;?>
 							</div>
 						<?php endif; ?>	
 							

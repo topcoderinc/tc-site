@@ -441,30 +441,24 @@
 /* hero area */
 #hero{
     min-height: 162px;
-    background: #eee; 
+    background: #f7f7f7; 
+}
+    #hero .trackList{
+        margin: 0 -12px;
+    
 }
     #hero .track{
         text-align: center;
         font-size: 18px;
         color: #01a8e9;
     
-        margin-top: 0px;
+        margin-top: 18px;
         line-height: 20px;
 }
-    #hero .track a{
-        color: #01a8e9;        
-    
-        display: block;  height: 142px;  padding-top: 18px;
-}
-    #hero .track a:hover{
-        text-decoration: underline;     
-    
-        background: #f9f9f9;
-}
-    #hero .trackSD a{
+    #hero .trackSD{
         color: #228400;
     }
-    #hero .trackAn a{
+    #hero .trackAn{
         color: #ff7400;
     }
     #hero .track i{
@@ -472,7 +466,6 @@
         height: 89px;
         width: 89px;
         margin: 0 auto 18px;
-		cursor: pointer;
 }
     #hero .trackUX i{
         background: url(../i/ico-ux.png) 50% 0 no-repeat;
@@ -485,8 +478,8 @@
     }
 
 #hero .tracksInfo{
-	margin: 0 -12px;
     padding: 22px 0 5px;
+    margin: 0 -12px;
 }
     #hero .trackInfo{
        height: 120px; 
@@ -530,7 +523,7 @@
     .layChallenges  header{
         border-bottom: 1px solid #e7e7e7;
     
-        padding-bottom: 12px;
+        padding-bottom: 17px;
         position: relative;
         font-size: 16px;
 }
@@ -611,7 +604,7 @@
     }
     .layChallenges .challengeType{
     
-        width: 300px;
+        width: 296px;
         margin: 0 auto;
 }
     .layChallenges .challengeType ul{
@@ -761,15 +754,77 @@
         width: 308px;
     }
 	
+	.layChallenges .dataTable .colType{
+        width: 30px;
+    }
+	
 	
     .dataTable tbody .alt td{
         background: #f7f7f7;
     }
 	
+	.dataTable .colType .ico {
+		display: inline-block;
+		height: 18px;
+		width: 20px;
+	}
+	
+	.dataTable .colType .ico, 
+	.contestGrid .contest .trackType{
+        background: url(../i/contest-type.png) no-repeat;
+        background-position: 0 0;
+    }
+	
+	.dataTable .track-p .colType .ico,
+    .contestGrid .track-p .trackType{
+        background-position: 0 -210px;
+    }
+	
+	.dataTable .track-as .colType .ico,
+    .contestGrid .track-as .trackType{
+        background-position: 0 -180px;
+    }
+    .dataTable .track-wi .colType .ico,
+    .contestGrid .track-wi .trackType{
+        background-position: 0 -60px;
+    }
+    .dataTable .track-wf .colType .ico,
+    .contestGrid .track-wf .trackType{
+        background-position: 0 -90px;
+    }
+    .dataTable .track-ig .colType .ico,
+    .contestGrid .track-ig .trackType{
+        background-position: 0 -120px;
+    }
+    .dataTable .track-o .colType .ico,
+    .contestGrid .track-o .trackType{
+        background-position: 0 -240px;
+    } 
+	.dataTable .track-cc .colType .ico,
+    .contestGrid .track-cc .trackType{
+		background-position: 0 -840px;
+	}
+	.dataTable .track-bi .colType .ico,
+    .contestGrid .track-bi .trackType{
+		background-position: 0 -300px;
+	}
+	.dataTable .track-pr .colType .ico,
+    .contestGrid .track-pr .trackType{
+		background-position: 0 -330px;
+	}
+	.dataTable .track-ap .colType .ico,
+    .contestGrid .track-ap .trackType{
+		background-position: 0 -270px;
+	} 
+	.dataTable .track-l .colType .ico,
+    .contestGrid .track-l .trackType{
+		background-position: 0 -150px;
+	}
+	
    .dataTable th.colCh{
         text-align: left;
         text-indent: 56px;
-        width: 308px
+        width: 308px;
     }
         .dataTable .colCh div{
             margin-right: 15px;
@@ -777,7 +832,7 @@
         .dataTable .colCh a{
             color: #666;
             line-height: 22px;
-			padding-left: 35px;
+            padding-left: 35px;
             display: inline-block;
         
             cursor: pointer;
@@ -871,9 +926,6 @@
     margin: 0 -29px 0 -25px;
     padding-top: 16px;
 }
-.contestGrid.alt{
-    margin: 0 -12px -18px -12px;
-}
     .contestGrid .contest{
         display: inline-block;
         border: 1px solid #e7e7e7;
@@ -884,17 +936,13 @@
         margin: 14px 27px;
         float: left;
 }
-    .contestGrid.alt .contest{
-        width: 318px;
-        margin: 15px 12px 16px 13px;
-    } 
     .contestGrid .cgCh{
         margin: 18px 0 14px;
     }
     .contestGrid .cgCh a{
         color: #666;
         position: relative;
-        padding: 0 0 0 54px;  
+        padding: 0 0 0 30px;    
         display: block;
         height: 36px;
         max-width: 234px;
@@ -915,15 +963,18 @@
         height: 36px;        
         -moz-transition-duration: .3s; -webkit-transition-duration: .3s; transition-duration: .3s;    
     }
-    .contestGrid .trackSD .cgCh a i{
+    .contestGrid .trackSD .cgCh a i,
+    .contestGrid .track-develop .cgCh a i{
         background-position: 0 -50px;
-        background-color: #00add0;
+        background-color: #7AB800;
     }
-    .contestGrid .trackUX .cgCh a i{
+    .contestGrid .trackUX .cgCh a i,
+    .contestGrid .track-design .cgCh a i{
         background-position: 0 0px;
-        background-color: #7ab800;
+        background-color: #00ADD0;
     }
-    .contestGrid .trackAn .cgCh a i{
+    .contestGrid .trackAn .cgCh a i,
+    .contestGrid .track-data .cgCh a i{
         background-position: 0 -100px;
         background-color: #ffae00;
     }
@@ -941,9 +992,6 @@
         .contestGrid .cgTime .val{
             margin-left: 92px; 
         }
-        .contestGrid.alt .cgTime .val{
-            margin-left: 104px; 
-        }		
     .contestGrid .genInfo{
         background: #f7f7f7;
             
@@ -960,16 +1008,19 @@
         width: 24.8%;
         text-align: center;
         font-size: 18px;
-        color: #00add0; 
+        color: #7AB800;    
         padding-top: 8px;
 }
-    contestGrid .trackSD .genInfo > p{        
-        color: #00add0;
+    contestGrid .trackSD .genInfo > p,
+    contestGrid .track-develop .genInfo > p{        
+        color: #7AB800;
     }
-    .contestGrid .trackUX .genInfo > p{        
-        color: #7ab800;
+    .contestGrid .trackUX .genInfo > p,
+    .contestGrid .track-design .genInfo > p{        
+        color: #00ADD0;
     }
-    .contestGrid .trackAn .genInfo > p{        
+    .contestGrid .trackAn .genInfo > p,
+    .contestGrid .track-data .genInfo > p{        
         color: #ffae00;
     }
     .contestGrid .genInfo > p.imp{
@@ -981,19 +1032,20 @@
         width: 30px;        
         margin: 0 auto;
         background-image: url(../i/ico-con.png);
+        background-color: #00add0;
         background-repeat: no-repeat;    
         margin-bottom: 9px;
 }
-    .contestGrid .trackSD .genInfo > p i{        
-        background-color: #00add0;
+    .contestGrid .trackSD .genInfo > p i,
+    .contestGrid .track-develop .genInfo > p i{        
+        background-color: #7AB800;
     }
-    .contestGrid .type-develop .genInfo > p i{        
-        background-color: #47a911;
+    .contestGrid .trackUX .genInfo > p i,
+    .contestGrid .track-design .genInfo > p i{        
+        background-color: #00ADD0;
     }
-    .contestGrid .trackUX .genInfo > p i{        
-        background-color: #7ab800;
-    }
-    .contestGrid .trackAn .genInfo > p i{         
+    .contestGrid .trackAn .genInfo > p i,
+    .contestGrid .track-data .genInfo > p i{        
         background-color: #ffae00;
     }
     .contestGrid1 .contest .genInfo > p.imp i{        

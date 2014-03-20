@@ -407,6 +407,16 @@ em{
         #navigation #mainNav .root{
             display: none;
         }
+        
+    #navigation .noReg{
+        display: none;
+    }
+    #navigation.newUser .onReg{
+        display: none;
+    }
+    #navigation.newUser .noReg{
+        display: block;
+    }
     
     .userWidget{
         top: 36px;
@@ -495,7 +505,7 @@ em{
     }
     
     #footer .updates .email{
-        width: 180px;
+        width: 193px;
 			}
     
 #footer h4,

@@ -1,4 +1,4 @@
-<?php
+<?php 
 $achievements = array(
 	"First Forum Post" => false,
 	"One Hundred Forum Posts" => false,
@@ -74,7 +74,6 @@ $achievements = array(
 	"One Hundred SRM Room Wins (Any Division)" => false
 );
 $coder_achievements = get_member_achievements ($handle)->Achievements;
-$coder_achievements = is_array($coder_achievements) ? $coder_achievements : array();
 foreach($coder_achievements as $achievement){
 	$achievements[$achievement->description] = true;
 }

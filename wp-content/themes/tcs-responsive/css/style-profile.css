@@ -1,3 +1,18 @@
+a{
+    cursor: pointer;
+}
+.nocontestStatus{
+    height: 550px;
+    line-height: 300px;
+    text-align: center;
+    color: #FF8A00;    
+}
+.ratingChart.distributionType{
+    display: none;
+}
+#algoChart1{
+    height: 200px;
+}
 /* coderProfile */
 .coderProfile #hero{
     background: #4b536b url(../i/profile-sprite.png) repeat-x;
@@ -6,7 +21,7 @@
         min-height: 235px;        
     }
     .coderProfile .inner{
-        background: url(../i/bg-profile.png) 50% 0 no-repeat;
+        background: url(../i/bg-profile.jpg) 50% 0 no-repeat;
     }
 /* aboutCoder */
 .aboutCoder{
@@ -21,7 +36,8 @@
         height: auto;
         width: 200px;
         max-width: 200px;
-		min-height: 210px;
+    
+        min-height: 209px;
 }
     .aboutCoder .coderPicWrap{
         float: left;
@@ -83,40 +99,28 @@
         margin-left: 10px;
     }
     .aboutCoder .social a{
-        height: 54px;
-					 width: 45px;
+        height: 35px;
+        width: 35px;
         background: url(../i/ico-social-alt.png) no-repeat;
         background-position: 0 0;
         display: inline-block;
+        border-radius: 18px;
         behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
     }
-    .aboutCoder .social a{
-    			-webkit-transition: none;
-					transition: none;
+    .aboutCoder .social a:hover{        
+        box-shadow: 0 0 10px #fff;
     }
     .aboutCoder .social .fb{
-        background-position: 0 0px;
-    }
-    .aboutCoder .social .fb:hover{
-        background-position: -68px 0px;
+        background-position: 0 -120px;
     }
     .aboutCoder .social .mail{
-        background-position: 0 -125px;
-    }
-    .aboutCoder .social .mail:hover{
-        background-position: -68px -125px;
+        background-position: 0 -40px;
     }
     .aboutCoder .social .tw{
-        background-position: 0 -63px;
-    }
-    .aboutCoder .social .tw:hover{
-        background-position: -68px -63px;
+        background-position: 0 -80px;
     }
     .aboutCoder .social .gp{
-        background-position: 0 -188px;
-    }
-    .aboutCoder .social .gp:hover{
-        background-position: -68px -188px;
+        background-position: 0 0;
     }
 /* switchBtns */
 .switchBtns{
@@ -156,7 +160,7 @@
         margin-left: 0;
         position: relative;
         border-radius: 4px 0 0 4px;
-        behavior: url(../../wp-content/themes/tcs-responsive/css/PIE.htc);  
+        behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);  
     }
     .trackdesign .switchBtns .first a{
         border: 1px solid #00aeff;
@@ -164,9 +168,10 @@
     .switchBtns .last a{
         position: relative;
         border-radius: 0 4px 4px 0;
-        behavior: url(../../wp-content/themes/tcs-responsive/css/PIE.htc);        
+        behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);        
     
-    }
+    
+}
     .viewSwitch a{
         min-width: 57px;
         background: url(../i/view-switch.png) no-repeat;
@@ -224,8 +229,10 @@
         margin-bottom: 5px;
 }
     .algoLayout .head{
+        border: 1px solid #e7e7e7;
+    
         border-right: none;
-					border-bottom: 1px solid #e7e7e7;
+        border-top: none;
 }
     .algoLayout .badges{
         position: absolute;
@@ -235,7 +242,9 @@
         top: 0;
         bottom: 0;    
         border: 1px solid #e7e7e7;
-    }
+    
+        overflow: auto;
+}
     .algoLayout h4{
         color: #333;
         line-height: 32px;
@@ -250,12 +259,13 @@
     }
     .algoLayout .trackNRating h4{
         padding-top: 8px;
-    }
+    
+        white-space: nowrap;
+}
     .algoLayout .trackNRating .rating{
         font-weight: bold;
         font-size: 60px;
         line-height: 68px;
-        color: #ffae00;
     }
     .algoLayout .detailedRating{
         margin-left: 258px;
@@ -265,10 +275,12 @@
     }
     .algoLayout .detailedRating .row {
         line-height: 22px;
-        min-width: 240px;
+        width: 240px;
         float: left;
     
         overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 }
     .algoLayout .row label{
         font-weight: bold;
@@ -277,11 +289,14 @@
 }
     .algoLayout .row .val{
         display: inline-block;
-        margin-left: 5px;
+        margin-left: 4px;
     
         float: left;
-        max-width: 140px;
+        max-width: 96px;
         height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 }
     .algoLayout .badges .head{
         text-align: center;
@@ -304,54 +319,124 @@
     .algoLayout .ratingViews{
         border: 1px solid #E7E7E7;
         border-top: none;
-        min-height: 543px;
+        min-height: 492px;
     
         position: relative;
     }
     .algoLayout .ratingViews .chartWrap{
-        padding-top: 60px;
-        height: 400px;
+        padding-top: 30px;
+        height: 402px;
+    }
+    .algoLayout .ratingViews .chartWrap.loadingChart{    
+        background: #ff8a00 url(../i/loading.gif) 50% 50% no-repeat;
+                
+    
+}
+    .algoLayout .ratingViews .chartWrap.loadingChart > .chart,
+    .algoLayout .ratingViews .chartWrap.loadingChart > .ratingChart{
+        visibility: hidden;        
+        opacity: 0;
+        filter: Alpha(opacity=0%);    
+}
+    .chartTypeSwitcher{
+        margin-left: 30px;
+    
+        margin-bottom: 20px;
+}
+    .chartTypeSwitcher .btn.isActive{
+        background: #FF7A00;
+        text-decoration: none;
+        color: #FFF;
+    }
+    .chartWrap.loadingChart .chartTypeSwitcher{
+        display: none;        
     }
     .algoLayout .ratingViews .chart{
-        height: 400px;
+        height: 350px;
+        
     }
-    .highcharts-container, .highcharts-container svg, .algoLayout .ratingViews .chart, .chartWrap{
-				padding-bottom: 10px;    	
-    	}
-    	.highcharts-container svg{
-				height: 410px!important;	
-    	}
     .algoLayout .ratingViews .subTrackTab{
         min-height: 493px;
     }
-    .algoLayout .tabNav ul{
-        overflow: hidden;
+    /* tabNav */
+    .algoLayout .subTrackTabs .tabNav{
+        background-color: #D2D2D2;
+            
+        text-align: center;
+        height: 54px;
     }
+    .algoLayout .subTrackTabs .tabNav h3{
+        line-height: 46px;
+    }
+    .algoLayout .subTrackTabs .tabNav > table{
+        width: 100%;
+    }
+    .algoLayout .tabNav ul{
+        overflow: hidden;    
+        width: auto;
+        background-color: #D2D2D2;
+        display: inline-block;
+    }
+    .algoLayout .tabNav .tabNavHead th{
+        text-align: center;
+        vertical-align: middle;
+        height: 54px;    
+        border-left: 1px solid #fff;
+    }
+    .algoLayout .tabNav .tabNavHead tr th:first-child{
+        border-left: none;
+    }
+    .algoLayout .tabNav .tabNavHead th a{
+        display: block;
+        height: 54px;
+        line-height: 54px;
+        text-align: center;    
+        background-image: url(../i/tabNav-arrow.png);  background-repeat: no-repeat;
+        background-position: 50% 120%;
+    
+        color: #fff;
+}
+    .algoLayout .tabNav .tabNavHead th a:hover{
+        background-color: #FFAE00;
+    }
+    .algoLayout .tabNav .tabNavHead th .isActive{
+        background-color: #FFAE00;
+            
+        color: #fff;
+        background-position: 50% 100%;
+    }
+    
     .algoLayout .tabNav li{
         float: left;
-        width: 153px;
+        width: auto;
         text-align: center;
         background: #d2d2d2;
-    }
+    
+        border-left: 1px solid #FFF;
+}
     .algoLayout .tabNav li:first-child{
-        width: 156px;
-    }
-    #algorithm.algoLayout .tabNav li{
-        width: 384px;
-    }
+        width: auto;
+    
+        border-left: none;
+}
     .algoLayout .tabNav li a{
-        height: 50px;
-        line-height: 50px;
+        height: 54px;
+        line-height: 54px;
         color: #fff;
-        border-right: 1px solid #fff;
         display: block;
         background-image: url(../i/tabNav-arrow.png);
         background-repeat: no-repeat;
         background-color: #d2d2d2;
-        background-position: 50% -10px;
-        -moz-transition: none; -webkit-transition: none; transition: none;
-        font-size: 15px;
-    }    
+        background-position: 50% 180%;
+    
+        padding: 0 13px 0;
+}    
+    .algoLayout .tabNav li.alt a{
+        padding: 13px 13px 0;
+        height: 41px;
+    
+        line-height: 16px;
+}
     .algoLayout .tabNav li a:hover{
         background-color: #ffae00;
     }
@@ -360,59 +445,6 @@
         background-color: #ffae00;
         background-position: 50% 100%;
     }
-    .algoLayout .tabNav li.conceptualization{
-    		width: 76px;
-    	}
-    	.algoLayout .tabNav li.specification{
-    		width: 52px;
-    	}
-    	.algoLayout .tabNav li.design{
-    		width: 81px;
-    	}
-    	.algoLayout .tabNav li.design a{
-    		line-height: 17px;
-      padding-top: 9px;
-      height: 41px;
-    	}
-    	.algoLayout .tabNav li.development{
-    		width: 47px;
-    	}
-    	.algoLayout .tabNav li.assembly-competition{
-    		width: 84px;
-    	}
-    	.algoLayout .tabNav li.test-suites{
-    		width: 59px;
-    	}
-    	.algoLayout .tabNav li.test-suites a{
-    		line-height: 17px;
-      padding-top: 9px;
-      height: 41px;
-    	}
-    	.algoLayout .tabNav li.test-scenarios{
-    		width: 83px;
-    	}
-    	.algoLayout .tabNav li.test-scenarios a{
-    		line-height: 17px;
-      padding-top: 9px;
-      height: 41px;
-    	}
-    	.algoLayout .tabNav li.ui-prototype-competition{
-    		width: 78px;
-    	}
-    	.algoLayout .tabNav li.ui-prototype-competition a{
-    		line-height: 17px;
-      padding-top: 9px;
-      height: 41px;
-    	}
-    	.algoLayout .tabNav li.ria-build{
-    		width: 54px;
-    	}
-    	.algoLayout .tabNav li.content-creation{
-    		width: 72px;
-    	}
-    	.algoLayout .tabNav li.reporting{
-    		width: 83px;
-    	}
     
 /* forumPosts */
 .forumPosts{
@@ -825,4 +857,17 @@
      .submissionCarousel{
          border-top: 1px solid #e7e7e7;
          overflow: hidden;
+    }
+
+/* noParticipation */
+.noParticipation{
+    border: 1px solid #E7E7E7;
+    height: 500px;
+    padding: 50px;
 }
+    .noParticipation h2{
+        color: #FF8A00;
+        font-size: 24px;
+        text-align: center;
+        line-height: 30px;
+    }

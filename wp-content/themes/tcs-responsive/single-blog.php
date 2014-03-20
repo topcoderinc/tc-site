@@ -40,7 +40,6 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 		$subject = htmlspecialchars(get_bloginfo('name')).' : '.$title;
 		$body = htmlspecialchars($post->post_content);
 		$email_article = 'mailto:?subject='.rawurlencode($subject).'&body='.rawurlencode($body);
-		$twitterText = urlencode(wrap_content_strip_html(wpautop($subject."\nUrl: ".$post->guid), 130, true,'\n\r',''));
 		$twitterShare = "http://twitter.com/home?status=".$twitterText;
 		$fbShare = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=".get_permalink()."&p[images][0]=".$imageUrl."&p[title]=".get_the_title()."&p[summary]=".$twitterText;
 		$gplusShare = "https://plus.google.com/share?url=".get_permalink();
@@ -143,10 +142,10 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							<!-- share via -->
 							<div class="shareVia">
 								<span>Share via : </span>
-								<a href="<?php echo $email_article;?>" class="shareButton shareMail"></a>
-								<a href="<?php echo $fbShare;?>" class="shareButton shareFb"></a>
-								<a href="<?php echo $twitterShare;?>" class="shareButton shareTw"></a>
-								<a href="<?php echo $gplusShare;?>" class="shareButton shareGPlus"></a>
+								<a href="<?php echo $email_article;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/share-mail.png" width="39" height="39" /></a>
+								<a href="<?php echo $fbShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/share-fb.png" width="39" height="39" /></a>
+								<a href="<?php echo $twitterShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/share-twitter.png" width="39" height="39" /></a>
+								<a href="<?php echo $gplusShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/share-gplus.png" width="39" height="39" /></a>
 							</div>
 							<!-- share via End -->
 						</section>

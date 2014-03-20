@@ -61,6 +61,10 @@ function tcapi_display_settings() {
 	$html = '<h2>TopCoder API settings</h2>
 						<form method="POST" action="">							
 						<h3>General Option</h3>
+							<p>
+	                <label for="api_user_key"><strong>API user key :</strong>  <i>(Enter TopCoder API user key)</i></label><br />
+	                <input type="text" name="api_user_key" id="api_user_key" size="80" value="' . get_option ( 'api_user_key' ) . '"/>   
+	            </p>
 	            <p>
 	                <label for="contest_per_page"><strong>Contest per page :</strong>  </label><br />
 	                <input type="text" name="contest_per_page" id="contest_per_page" size="80" value="' . get_option ( 'contest_per_page' ) . '"/>   
@@ -88,6 +92,7 @@ function tcapi_display_settings() {
 
 // Update settings
 function tcapi_settings_update() {
+	update_option ( 'api_user_key', $_POST ['api_user_key'] );
 	update_option ( 'contest_per_page', $_POST ['contest_per_page'] );
 	update_option ( 'request_timeout', $_POST ['request_timeout'] );
 	update_option ( 'httpversion', $_POST ['httpversion'] );
