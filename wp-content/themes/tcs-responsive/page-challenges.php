@@ -1,149 +1,297 @@
 <?php
 /**
  * Template Name: Challenge Page
- * Author : evilkyro1965
  */
-get_header('challenge-landing');
+?>
+<?php get_header(); 
 
 
 $values = get_post_custom ( $post->ID );
 
+$userkey = get_option ( 'api_user_key' );
 $siteURL = site_url ();
-$postId = $post->ID;
 ?>
 
 <?php
-	// get contest details
-	$contest_type = "";
-	$listType = "AllActive";
-	$postPerPage = get_option("challenges_per_page") == "" ? 10 : get_option("challenges_per_page");
+// get contest details
+	$contest_type = get_query_var ( 'contest_type' );
+	$contest_type = str_replace("_", " ", $contest_type);
+	$postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 ?>
-
 <script type="text/javascript" >
 	var siteurl = "<?php bloginfo('siteurl');?>";
-
-	var reviewType = "contest";
-	var isBugRace = false;
-	var ajaxAction = "get_challenges";
-	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
-	var currentPage = 1;
-	var postPerPage = <?php echo $postPerPage;?>;
-	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
+	var activePastContest = "active";
+	var challengeDetailsUrl =  "<?php echo get_page_link_by_slug('challenge-details'); ?>";
+	$(document).ready(function() {
+		app.buildRequestData("activeContest", "<?php echo $contest_type;?>");
+		app.challenges.init();
+		//listActiveContest("activeContest","activeContest","<?php // echo $contest_type;?>");
+	});
 </script>
 <div class="content">
 	<div id="main">
-
+	
 	<?php if(have_posts()) : the_post();?>
-		<?php //the_content();?>
+		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
 
-		<div id="hero">
-			<?php
-				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
-				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
-			?>
-			<div class="container grid grid-float">
-				<div class="grid-3-1 track trackUX<?php if($contest_type=="design") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDesignChallengesLink;?>"><i></i>Graphic Design Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Development Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDataChallengesLink;?>">
-						<i></i>Data Science Challenges
-					</a><span class="arrow"></span>
-				</div>
-			</div>
-		</div>
-		<!-- /#hero -->
 
-		<article id="mainContent" class="layChallenges landingChallenges">
-			<div class="container">
 
-				<header>
-					<h1>Open Challenges</h1>
-					<aside class="rt">
-						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
-						</span>
-					</aside>
-				</header>
-				<div class="actions">
-					<div class="mid challengeType">
-						<?php
-							$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-						?>
-						<ul>
-							<li><a href="<?php echo get_bloginfo('siteurl')."/challenges"; ?>" class="active link">All</a></li>
-							<li><a href="<?php echo $activeDesignChallengesLink;?>" class="link design">Design</a></li>
-                            <li><a href="<?php echo $activeDevlopChallengesLink;?>" class="link develop">Develop</a></li>
-                            <li><a href="<?php echo $activeDataChallengesLink;?>" class="link data">Data Science</a></li>
-						</ul>
-					</div>
-					<div class="rt">
-						<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-							<?php
-							//$contest_type="";
-							$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=all";
-							?>
-							<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
+		<article id="mainContent" class="layChallenges">
+			<input type="hidden" class="contestType" value="activeContest"/>
+			<input type="hidden" class="postPerPage" value="<?php echo $postPerPage;?>"/>
+					<div  id="activeContest" class="container">
+						<header>
+							<h1>Open Challenges</h1>
+							<aside class="rt">
+								<!-- <a href="javascript:;" class="link viewPastCh">View Past Challenges</a> -->
+								<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
+								</span>
+							</aside>
+						</header>
+						<div class="actions">
+							<div class="mid challengeType">
+								<ul>
+									<li><a href="all" class="active link">All</a></li>
+									<li><a href="design" class="link design">Design</a></li>
+									<li><a href="develop" class="link develop">Develop </a></li>
+									<li><a href="data" class="link data">Data Science</a></li>
+								</ul>
+
+							</div>
+							<div class="lt">
+								<!-- <span>Sort by</span>
+								<div class="ddWrap">
+								<a href="javascript:;" class="upDown val">
+									End Date <i></i>
+								</a>
+								<ul class="list">
+									<li class="active">End date</li>
+									<li>Challenge title</li>
+									<li>Prize</li>
+								</ul>
+								</div>
+								-->
+							</div>
+							<div class="rt">
+							<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
+								<?php
+								//$contest_type="";
+								$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=".$contest_type;
+								?>
+								<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
+							</div>
+								<!-- 
+								<a href="javascript:;" class="searchLink">
+									<i></i>Advanced Search
+								</a>
+								-->
+							</div>
 						</div>
+						<!-- /.actions -->
+						<div id="tableView" class=" viewTab">
+							<div class="tableWrap">
+								<table class="dataTable">
+									<thead>
+										<tr class="head">
+											<th class="colCh asc" char="contestName" >Challenges</th>
+											<th class="colType" char="contestType" >Type</th>
+											<th class="colTime" char="startDate" >Timeline</th>
+											<th class="colTLeft" char="">Time Left</th>
+											<th class="colPur" char="purse" >Prizes</th>
+											<th class="colReg" char="registrants">Registrants</th>
+											<th class="colSub" char="submissions">Submissions</th>
+											<th>&nbsp;</th>
+										</tr>
+										
+									</thead>
+									<tbody>
+										<!-- demo records will be automatically deleted while loading data using AJAX -->
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- /#tableView -->
+						<div id="gridView" class="viewTab hide">
+							<div class="contestGrid">
+								<div class="contest trackSD">
+									<div class="cgCh">
+										<a href="#" class="contestName">
+											<i></i>Cornell - Responsive Storyboard Economics Department Site Redesign Contest
+										</a>
+									</div>
+									<div class="cgTime">
+										<div>
+											<div class="row">
+												<label class="lbl">Start Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">Round End</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">End Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+										</div>
+									</div>
+									<div class="genInfo">
+										<p class="cgTLeft">
+											<i></i>3d
+										</p>
+										<p class="cgPur">
+											<i></i>$1500
+										</p>
+										<p class="cgReg">
+											<i></i>10
+										</p>
+										<p class="cgSub">
+											<i></i>10
+										</p>
+									</div>
+								</div>
+								<!-- /.contest -->
+								<div class="contest trackUX">
+									<div class="cgCh">
+										<a href="#" class="contestName">
+											<i></i>Cornell - Responsive Storyboard Economics Department Site Redesign Contest
+										</a>
+									</div>
+									<div class="cgTime">
+										<div>
+											<div class="row">
+												<label class="lbl">Start Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">Round End</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">End Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+										</div>
+									</div>
+									<div class="genInfo">
+										<p class="cgTLeft">
+											<i></i>3d
+										</p>
+										<p class="cgPur">
+											<i></i>$1500
+										</p>
+										<p class="cgReg">
+											<i></i>10
+										</p>
+										<p class="cgSub">
+											<i></i>10
+										</p>
+									</div>
+								</div>
+								<!-- /.contest -->
+								<div class="contest trackAn">
+									<div class="cgCh">
+										<a href="#" class="contestName">
+											<i></i>Cornell - Responsive Storyboard Economics Department Site Redesign Contest
+										</a>
+									</div>
+									<div class="cgTime">
+										<div>
+											<div class="row">
+												<label class="lbl">Start Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">Round End</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">End Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+										</div>
+									</div>
+									<div class="genInfo">
+										<p class="cgTLeft">
+											<i></i>3d
+										</p>
+										<p class="cgPur">
+											<i></i>$1500
+										</p>
+										<p class="cgReg">
+											<i></i>10
+										</p>
+										<p class="cgSub">
+											<i></i>10
+										</p>
+									</div>
+								</div>
+								<!-- /.contest -->
+								<div class="contest trackSD">
+									<div class="cgCh">
+										<a href="#">
+											<i></i>Cornell - Responsive Storyboard Economics Department Site Redesign Contest
+										</a>
+									</div>
+									<div class="cgTime">
+										<div>
+											<div class="row">
+												<label class="lbl">Start Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">Round End</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+											<div class="row">
+												<label class="lbl">End Date</label>
+												<div class="val">10/25/2013 &nbsp;12:00 EST</div>
+											</div>
+										</div>
+									</div>
+									<div class="genInfo">
+										<p class="cgTLeft">
+											<i></i>3d
+										</p>
+										<p class="cgPur">
+											<i></i>$1500
+										</p>
+										<p class="cgReg">
+											<i></i>10
+										</p>
+										<p class="cgSub">
+											<i></i>10
+										</p>
+									</div>
+								</div>
+								<!-- /.contest -->
+							</div>
+							<!-- /.contestGrid -->
+						</div>
+						<!-- /#gridView -->
+						<div class="pagingWrapper"></div><!-- /.pagingWrapper -->
+						<div class="dataChanges">
+							<div class="lt">
+								<a href="javascript:;" class="viewAll">View All</a>
+							</div>
+							<div class="rt">
+								<a href="#0" class="prevLink hide">
+									<i></i> Prev
+								</a>
+								<a href="#2" class="nextLink">
+									Next <i></i>
+								</a>
+							</div>
+							<div class="mid onMobi">
+								<a href="#" class="viewPastCh">
+									View Past Challenges<i></i>
+								</a>
+							</div>
+						</div>
+						<!-- /.dataChanges -->
 					</div>
-				</div>
-				<!-- /.actions -->
-
-				<div id="tableView" class="viewTab">
-					<div class="tableWrap tcoTableWrap">
-						<table id="tcoTableAllContest" class="dataTable tcoTable">
-							<thead>
-								<tr>
-									<th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>
-									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
-									<th class="colTime" data-placeholder="submissionEndDate">Timeline<i></i></th>
-									<th class="colTLeft noSort" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">Prize<i></i></th>
-									<th class="colReg noSort" data-placeholder="numRegistrants">Registrants<i></i></th>
-									<th class="colSub noSort" data-placeholder="numSubmissions">Submissions<i></i></th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- /#tableView -->
-				<div id="gridView" class="contestAll viewTab hide">
-					<div id="gridAll" class="contestGrid alt">
-
-					</div>
-					<!-- /.contestGrid -->
-				</div>
-				<!-- /#gridView -->
-                                <div class="dataChanges">
-                                        <div class="lt">
-                                                <a href="javascript:;" class="viewAll">View All</a>
-                                        </div>
-                                        <div id="challengeNav" class="rt">
-                                                <a href="javascript:;" class="prevLink">
-                                                        <i></i> Prev
-                                                </a>
-                                                <a href="javascript:;" class="nextLink">
-                                                        Next <i></i>
-                                                </a>
-                                        </div>
-                                        <div class="mid onMobi">
-                                                <a href="#" class="viewPastCh">
-                                                        View Past Challenges<i></i>
-                                                </a>
-                                        </div>
-                                </div>
-				<!-- /.dataChanges -->
-			</div>
-		</article>
+				</article>		
 		<!-- /#mainContent -->
 <?php get_footer(); ?>

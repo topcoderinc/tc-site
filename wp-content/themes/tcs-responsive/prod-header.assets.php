@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/favicon.ico" />
 
 <!-- Main CSS -->
-<link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/style-responsive.css" />
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/coder.css" />

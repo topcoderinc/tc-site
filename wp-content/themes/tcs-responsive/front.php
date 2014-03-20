@@ -20,16 +20,6 @@ elseif ( strpos($_SERVER["REQUEST_URI"],'search') !== false ):
 else:
 ?>
 <?php get_header(); ?>
-
-<?php
- if(preg_match("/.*?action=callback.*$/", $_SERVER["REQUEST_URI"])){
- 		echo '<script type="text/javascript">$(window).load(function(){$(".btnRegister").click();$(".pwd, .confirm, .strength").parents(".row").hide();$("#register a.btnSubmit").addClass("socialRegister");});</script>';
- }
- if(preg_match("/.*?action=showlogin.*$/", $_SERVER["REQUEST_URI"])){
- 		echo '<script type="text/javascript">$(window).load(function(){$(".actionLogin").click();});</script>';
- }
-?>
-
 <?php 
 global $activity;
 //$activity = get_activity_summary();

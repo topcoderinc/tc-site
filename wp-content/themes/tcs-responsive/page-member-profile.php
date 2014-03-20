@@ -1,34 +1,29 @@
 <?php get_header(); ?>
 <?php
 
-
-
 global $activity;
 $activity = get_activity_summary ();
 
 $handle = get_query_var ( 'handle' );
 
 $tab = get_query_var ( 'tab' );
-$track= "data/srm";
+$track = "data/srm";
 
 if ($tab == "algo") {
-
 	$track = "data/srm";
-
-}else if ($tab == "develop") {
+} else if ($tab == "develop") {
 	$track = "develop";
-}else if ($tab == "design") {
+} else if ($tab == "design") {
 	$track = "design";
 }
-
-$coder = get_member_profile ($handle);
-
-# if handle not found redirect to 404 - member not found (Dan.V - I-104783)
-if (!isset($coder->handle) ) {
-	wp_redirect(site_url('404.php'));
-	exit;
+$ct = get_query_var ( 'ct' );
+if ($ct == 'marathon') {
+	$track = "data/marathon";
 }
-#print_r($coder);
+
+$coder = get_raw_coder ( $handle );
+$userkey = get_option ( 'api_user_key' );
+// rint_r($coder);
 
 ?>
 <script type="text/javascript">
@@ -42,12 +37,12 @@ if (!isset($coder->handle) ) {
 
 <?php
 
-if ( $coder->photoLink != '')
-$photoLink = 'http://community.topcoder.com'.$coder->photoLink;
+if ($coder->photoLink != '')
+	$photoLink = 'http://community.topcoder.com' . $coder->photoLink;
 else
-$photoLink = 'http://www.topcoder.com/wp-content/uploads/2014/02/no-photo1.png';
+	$photoLink = 'http://local.topcoder.com/reviewer/tc-cs/wp-content/themes/tcs-responsive/i/no-photo.png';
 
-$quote = ($coder->quote == '' ) ? "Member of the world's largest global competitive community. ": $coder->quote;
+$quote = ($coder->quote == '') ? "Member of the world's largest global competitive community. " : $coder->quote;
 
 ?>
 <div class="content">
@@ -67,19 +62,18 @@ $quote = ($coder->quote == '' ) ? "Member of the world's largest global competit
 								<div class="country"><?php echo $coder->country; ?></div>
 								<div class="memberSince">
 									<label>Member Since:</label>
-									<div class="val"><?php 
-									$memSince = $coder->memberSince; 
-									#$memSince = str_replace(".","/",$memSince);
-									echo date("M d, Y", strtotime($memSince)) ;
-									?>
-								  </div>
+									<div class="val"><?php
+									$memSince = $coder->memberSince;
+									echo date ( "M d, Y", strtotime ( $memSince ) );
+									?></div>
 								</div>
-								<?php if (isset($coder->overallEarning)) { ?>
-									<div class="memberSince">
-										<label>Total Earnings :</label>
-										<div class="val"><?php echo '$'.$coder->overallEarning;?></div>
-									</div>
-								<?php } ?>								
+								<?php if($coder->overallEarning!=null) :?>
+								<div class="memberSince">
+									<label>Total Earnings :</label>
+									<div class="val"><?php echo '$'.$coder->overallEarning;?></div>
+								</div>
+								<?php endif;?>
+							</div>
 						</div>
 						<blockquote class="coderQuote">“<?php echo $quote;?>”</blockquote>
 						<ul class="social">
@@ -87,7 +81,7 @@ $quote = ($coder->quote == '' ) ? "Member of the world's largest global competit
 							<li><a class="mail" href="<?php echo get_option('linkedInURL'); ?>"></a></li>
 							<li><a class="tw" href="<?php echo get_option('twitterURL'); ?>"></a></li>
 							<li><a class="fb" href="<?php echo get_option('facebookURL'); ?>"></a></li>
-							
+
 						</ul>
 					</article>
 					<!-- /.aboutCoder -->
@@ -95,19 +89,20 @@ $quote = ($coder->quote == '' ) ? "Member of the world's largest global competit
 			</div>
 		</div>
 		<!-- /#hero -->
-<?php 
-//$coder = get_member_statistics ( $handle, $track );
+<?php
+// $coder = get_member_statistics ( $handle, $track );
 ?>
 
 <article>
-	<div class="container" align="center">
-		</br>
-		<p><b>Coming Soon!  Rating history, achievements, forum history, and more. Below is a preview of what is coming.
-		</br>Features will be added <font color="red">as they complete</font>. 
-		</br></br>Check out the <a href="/challenges">active challenges</a> to get involved in the effort!</b></p>
-		</br>
-	</div>
-</article>
+			<div class="container" align="center">
+				<br />
+				<p>
+					<b>Coming Soon! Rating history, achievements, forum history, and more. Below is a preview of what is coming. <br />Features will be added <font color="red">as they complete</font>. <br />Check out the <a href="/challenges">active challenges</a> to get involved in the effort!
+					</b>
+				</p>
+				<br />
+			</div>
+		</article>
 
 
 		<article id="mainContent" class="noShadow">
@@ -117,7 +112,7 @@ $quote = ($coder->quote == '' ) ? "Member of the world's largest global competit
 						<ul class="trackSwitch switchBtns">
 							<li class="first"><a href="./?tab=design" class="<?php if($tab == "design"){ echo "isActive";}?>">Design</a></li>
 							<li><a href="./?tab=develop" class="<?php if($tab == "develop"){ echo "isActive";}?>">Develop</a></li>
-							<li class="last"><a href="./?tab=algo" class="<?php if($tab == "algo" || $tab == null || $tab == ""){ echo "isActive";}?>">Data Science</a></li>
+							<li class="last"><a href="./?tab=algo" class="<?php if($tab == "algo" || $tab == "marathon" || $tab == null || $tab == ""){ echo "isActive";}?>">Data Science</a></li>
 						</ul>
 						<!-- /.trackSwitch -->
 						<ul class="viewSwitch switchBtns">
@@ -127,21 +122,23 @@ $quote = ($coder->quote == '' ) ? "Member of the world's largest global competit
 					</div>
 					<!-- /.actions -->
 					<div class="dataTabs">
-						<?php 
-						if($tab=="design"){
-							get_template_part('content', 'member-design');
-						}else if($tab=="develop"){
-							get_template_part('content', 'member-develop');
-						}else{
-							get_template_part('content', 'member-algo');
-						}						
+						<?php
+						if ($tab == "design") {
+							get_template_part ( 'content', 'member-design' );
+						} else if ($tab == "develop") {
+							get_template_part ( 'content', 'member-develop' );
+						} else if ($ct == "marathon") {
+							get_template_part ( 'content', 'member-marathon' );
+						} else {
+							get_template_part ( 'content', 'member-algo' );
+						}
 						?>						
 					</div>
 					<!-- /.dataTabs -->
 				</div>
 				<div class="clear"></div>
-				<div class="forumWrap">
-						<?php get_template_part('content', 'forum');?>
+				<div class="forumWrap hide">
+						<?php // get_template_part('content', 'forum');?>
 				</div>
 				<!-- /.forumWrap -->
 			</article>

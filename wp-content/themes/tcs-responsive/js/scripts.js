@@ -11,23 +11,6 @@ var ajax = {
 
 var xhr= "";
 
-var bannerSlider;
-var bannerSliderClone;
-
-function createBannerSlider(){
-	bannerSliderClone = $('#banner .slider').clone();
-	bannerSlider = $('#banner .slider').bxSlider({
-      minSlides: 1,
-      maxSlides: 1,
-      controls: false,
-      auto: true,
-      pause: 5000,
-      infiniteLoop: true,
-      useCSS:false
-  
-  });
-}
-
 
 // application functions
 var app = {
@@ -36,17 +19,20 @@ var app = {
             $('body').addClass('ie7');
             ie7 = true;
         }
-        
-        createBannerSlider();
-        
-        $(window).resize(function () {
-        	if(bannerSlider.destroySlider){
-							bannerSlider.destroySlider();
-       		}
-        	$('#banner .slider').replaceWith(bannerSliderClone);
-        	createBannerSlider();
-        });
 
+        // init slider
+        var bannerSlider = $('#banner .slider').bxSlider({
+            minSlides: 1,
+            maxSlides: 1,
+            controls: false,
+            auto: true,
+            pause: 5000,
+            onSlideAfter: function() {
+                bannerSlider.startAuto()
+            }
+        
+        });
+        
         $('.dataTable.challenges tbody, .layChallenges .dataTable tbody').html(null);
         $('#gridView .contestGrid').html(null);
         // challenges list init
@@ -275,61 +261,6 @@ var app = {
 					});
 				});
 			});
-		}
-    
-    },
-	/*
-	 * community design,development,data-marathon page functions
-	 * --------------------------------------------------------------
-	 */
-    communityLanding: {
-        init: function() { 
-            // list partial challenges table data
-				app.communityLanding.getAllPartialContests(ajax.postPerPage);            
-			
-            $('.dataChanges .viewAll').on(ev, function() {
-                ajax.data["pageIndex"] = 1;
-                app.communityLanding.getAllPartialContests(100);   
-               
-                $('.rt', $(this).closest('.dataChanges')).hide();
-                $(this).parent().hide();
-                app.ie7Fix2();
-            });
-			
-			/* table short */
-			$('.dataTable.challenges thead th').click(function(){
-				if($(this).hasClass('disabled')){ return false;}
-				var shortCol = $(this).text().toLowerCase();
-				shortCol = shortCol.replace(' ','');
-				if(shortCol==""){return false;}
-				
-				ajax.data["sortColumn"] = shortCol;
-				if($(this).hasClass('asc')){
-					ajax.data["sortOrder"] = 'desc';
-					$(this).removeClass('asc');
-				}else{
-					ajax.data["sortOrder"] = 'asc';
-					$(this).addClass('asc');
-				}
-				/* build url and requtest data using ajax */
-				//if(conType==null || conType==""){
-					app.communityLanding.getAllPartialContests(5);       
-				
-			});
-        },			
-		
-		getAllPartialContests: function(nRecords){
-			/*
-			* get all contests data
-			*/	
-			if(contest_track=="algorithm") {
-				app.getPartialContests(ajaxUrl,$('.challenges'), nRecords, 'data-marathon',false, function(){
-					app.getPartialContests(ajaxUrl,$('.challenges'), nRecords, 'data-srm',false);
-				});
-			}
-			else {
-				app.getPartialContests(ajaxUrl,$('.challenges'), nRecords, contest_track,false, function(){});
-			}
 		}
     
     },
@@ -563,9 +494,7 @@ var app = {
 				});	
 				callback();
 			});
-		},
-	
-		
+		}
     },
 	getTrackSymbol: function(type){
 		 var trackName = "o";
@@ -602,9 +531,6 @@ var app = {
 					break;
 				case "Conceptualization":
 					trackName = "c";
-					break;		
-				case "Marathon":
-					trackName = "mm";
 					break;		
 				
             }
@@ -699,7 +625,7 @@ var app = {
 						"position": "static"
 					});
 				}
-				caseItem.hide(0, function(){
+				caseItem.slideUp(500, function(){
 					caseItem.hide()
 					$(".jsShowCaseDetails").removeClass("isShow");
 					$(".caseDetailItem").hide();
@@ -711,8 +637,6 @@ var app = {
 							"visibility": ""
 						});
 					}
-					var scrollTopValue = $("html").data("scrollTop");
-					$('html, body').animate({scrollTop: scrollTopValue+"px"});
 				});
 			});
 			
@@ -723,8 +647,6 @@ var app = {
             });
 			
 			$(".jsShowCaseDetails").click(function(){
-				var linkCase = $(this);
-				var sameParent = $(this).parents(".group").find(".isShow").length > 0;
 				if ($(this).hasClass("isShow")){
 					$(".jsCloseCaseDetails:visible").trigger("click");
 				}else{
@@ -747,51 +669,16 @@ var app = {
 							"position": "relative"
 						});
 					}
-					if(detailsWrapper.is(":visible")){
-						if(sameParent){
-							detailItem.stop().fadeIn(800, function(){
-								closeCaseItem(detailItem, linkCase);
-							});
-						} else {
-							detailItem.stop().slideDown(800, function(){
-								closeCaseItem(detailItem, linkCase);
-							});
-						}		
-					}else{
-						if(sameParent){
-							$(".caseDetailItem", gridItem).eq(0).stop().fadeIn(800, function(){
-								scrollCaseItem(linkCase);
-							});
-						} else {
-							$(".caseDetailItem", gridItem).eq(0).stop().slideDown(800, function(){
-								scrollCaseItem(linkCase);
+					detailItem.stop().slideDown(800, function(){
+						if (ie7) {
+							$('.btn', detailItem).css({
+								"visibility": ""
 							});
 						}
-					}
+					});		
+					$(".caseDetailItem", gridItem).eq(0).stop().slideDown(800);	
 				}
 			});
-			
-			function closeCaseItem(detailItem, linkCase){
-				if (ie7) {
-					$('.btn', detailItem).css({
-						"visibility": ""
-					});
-				}
-				var offset = linkCase.offset();
-				var scrollTopValue = $(document).scrollTop();
-				$("html").data("scrollTop", scrollTopValue);
-				var totalScrollTopValue = offset.top+linkCase.outerHeight()+14;
-				//alert(totalScrollTopValue)
-				$('html, body').animate({scrollTop: totalScrollTopValue+"px"}, 500);
-			}
-			
-			function scrollCaseItem(linkCase){
-				var offset = linkCase.offset();
-				var scrollTopValue = $(document).scrollTop();
-				$("html").data("scrollTop", scrollTopValue);
-				var totalScrollTopValue = offset.top+linkCase.outerHeight();
-				$('html, body').animate({scrollTop: totalScrollTopValue+"px"}, 500);
-			}
 			
 
 			
@@ -963,15 +850,11 @@ var app = {
 				$('.colSub', row).html(rec.submissions);
 
 			}else if(ajax.data["contest_type"]=="data-marathon"){
+
 				/*
 				* generate table row for contest type Marathon
 				*/			
-//            	$('.contestName', row).html('<i></i>' + rec.fullName);
-            	
-            	$('.contestName', row).html('<i></i>' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
-				
-				$trackName = 'mm';
-				row.addClass('track-' + trackName);            	
+            	$('.contestName', row).html('<i></i>' + rec.fullName);
 				
 				if (rec.startDate == null || rec.startDate == "") {
                 rec.startDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -981,10 +864,7 @@ var app = {
 				if (rec.round1EndDate == null || rec.round1EndDate == "") {
                 rec.round1EndDate = "10.31.2013 10:10 EDT"; //dummy data
 				}
-//				$('.vEndRound', row).html(app.formatDate2(rec.round1EndDate));
-				$('.lEndRound', row).html("");
-				$('.vEndRound', row).html("");
-
+				$('.vEndRound', row).html(app.formatDate2(rec.round1EndDate));
 				
 				if (rec.endDate == null || rec.endDate == "") {
                 rec.endDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -992,25 +872,24 @@ var app = {
 				$('.vEndDate', row).html(app.formatDate2(rec.endDate));
 				
 				if (rec.timeLeft == null || rec.timeLeft == "") {
-					rec.timeLeft = "NA"; //dummy data
+					rec.timeLeft = "3 days"; //dummy data
 				}
-				$('.colTLeft', row).html(secondsToString(rec.timeRemaining));
-
+				$('.colTLeft', row).html(rec.timeLeft);
 				
 				if (rec.purse == null || rec.purse == "") {
-					rec.purse = "NA"; //dummy data
+					rec.purse = "1500"; //dummy data
 				}
 				$('.colPur', row).html("$" + numberWithCommas(rec.purse));
 				
 				if (rec.registrants == null || rec.registrants == "") {
-					rec.registrants = "NA"; //dummy data
+					rec.registrants = "10"; //dummy data
 				}
-				$('.colReg', row).html(rec.numberOfRegistrants);
+				$('.colReg', row).html(rec.registrants);
 				
 				if (rec.submissions == null || rec.submissions == "") {
-					rec.submissions = "NA"; //dummy data
+					rec.submissions = "10"; //dummy data
 				}
-				$('.colSub', row).html(rec.numberOfSubmissions);
+				$('.colSub', row).html(rec.submissions);
 
 			}else if(ajax.data["contest_type"]=="design"){
 				
@@ -1194,8 +1073,6 @@ var app = {
             var con = $(blueprints.challengeGridBlock).clone();
 			var trackName = ajax.data["contest_type"].split('-')[0];
 			con.addClass('track-'+trackName);
-			
-			
 		if(ajax.data["contest_type"]=="data-srm" ){	
 
 			/*
@@ -1244,8 +1121,8 @@ var app = {
 			/*
 			* generate table row for contest type Marathon
 			*/	
-            //$('.contestName', con).html('<i></i>' + rec.fullName);
-            $('.contestName', con).html('<i></i>' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
+
+            $('.contestName', con).html('<i></i>' + rec.fullName);
 				
 			if (rec.startDate == null || rec.startDate == "") {
                 rec.startDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -1256,7 +1133,6 @@ var app = {
                 rec.round1EndDate = "10.31.2013 10:10 EDT"; //dummy data
 				}
 			$('.vEndRound', con).html(app.formatDate2(new Date(rec.endDate)));
-			$('.vEndRound', con).html("");  //Hide his for now
 			
 			if (con.endDate == null || con.endDate == "") {
                 con.endDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -1264,27 +1140,27 @@ var app = {
 			$('.vEndDate', con).html(app.formatDate2(new Date(rec.endDate)));
 			
 			if (rec.timeLeft == null || rec.timeLeft == "") {
-					rec.timeLeft = "NA"; //dummy data
+					rec.timeLeft = "3 days"; //dummy data
 				}
-            $('.cgTLeft', con).html('<i></i>' + ((new Number(rec.timeRemaining)) / 60 / 60 / 24).toPrecision(1).toString() + 'd');
+            $('.cgTLeft', con).html('<i></i>' + rec.timeLeft.replace(/ days/g, 'd').replace(/ Hours/g, 'hr').replace(/ Minutes/g, 'min'));
             if (rec.isEnding === "true") {
                 $('.cgTLeft', con).addClass('imp');
             }
-            			
+			
 			if (rec.purse == null || rec.purse == "") {
-					rec.purse = "NA"; //dummy data
+					rec.purse = "1500"; //dummy data
 				}
-            $('.cgPur', con).html('<i></i> $' + numberWithCommas(0));
+            $('.cgPur', con).html('<i></i> $' + numberWithCommas(rec.prize.sum()));
 			
-			if (rec.numRegistrants == null || rec.numRegistrants == "") {
-					rec.numRegistrants = "NA"; //dummy data
+			if (rec.registrants == null || rec.registrants == "") {
+					rec.registrants = "10"; //dummy data
 				}
-            $('.cgReg', con).html('<i></i>' + rec.numberOfRegistrants);
+            $('.cgReg', con).html('<i></i>' + rec.numRegistrants);
 			
-			if (rec.numSubmissions == null || rec.numSubmissions == "") {
-					rec.numSubmissions = "NA"; //dummy data
+			if (rec.submissions == null || rec.submissions == "") {
+					rec.submissions = "10"; //dummy data
 				}
-            $('.cgSub', con).html('<i></i>' + rec.numberOfSubmissions);
+            $('.cgSub', con).html('<i></i>' + rec.numSubmissions);
             		
 		}else if(ajax.data["contest_type"]=="design"){	
             
@@ -1439,7 +1315,7 @@ var app = {
 				/*
 				* generate table row for contest type Marathon
 				*/			
-            	$('.contestName', row).html('<i></i>' + '<a href=http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '>' + rec.fullName + '</a>');
+            	$('.contestName', row).html('<i></i>' + rec.fullName);
 				
 				if (rec.startDate == null || rec.startDate == "") {
                 rec.startDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -1449,7 +1325,7 @@ var app = {
 				if (rec.round1EndDate == null || rec.round1EndDate == "") {
                 rec.round1EndDate = "10.31.2013 10:10 EDT"; //dummy data
 				}
-				$('.vEndRound', row).html('--');
+				$('.vEndRound', row).html(app.formatDate2(new Date(rec.round1EndDate)));
 				
 				if (rec.endDate == null || rec.endDate == "") {
                 rec.endDate = "10.31.2013 10:10 EDT"; //dummy data
@@ -1457,12 +1333,12 @@ var app = {
 				$('.vEndDate', row).html(app.formatDate2(new Date(rec.endDate)));
 				
 				if (rec.timeLeft == null || rec.timeLeft == "") {
-					rec.timeLeft = "NA days"; //dummy data
+					rec.timeLeft = "3 days"; //dummy data
 				}
-				$('.colTLeft', row).html(((new Number(rec.timeRemaining)) / 60 / 60 / 24).toPrecision(1).toString() + ' Days');
+				$('.colTLeft', row).html(rec.timeLeft);
 				
 				if (rec.purse == null || rec.purse == "") {
-					rec.purse = "NA"; //dummy data
+					rec.purse = "1500"; //dummy data
 				}
 				$('.colPur', row).html("$" + numberWithCommas(rec.purse));
 				
@@ -1578,7 +1454,7 @@ var app = {
 var blueprints = {
     challengeRow: '<tr> \
 						<td class="colCh"><div>\
-								<a href="javascript:;" class="contestName"></a>\
+								<a href="#" class="contestName"></a>\
 							</div></td>\
 							<td class="colType"><i class="ico"></i></td>\
 						<td class="colTime"><div>\
@@ -1603,7 +1479,7 @@ var blueprints = {
 					</tr>',
     partialChallengeRow: '<tr> \
 						<td class="colCh"><div>\
-								<a href="javascript:;" class="contestName"></a>\
+								<a href="#" class="contestName"></a>\
 							</div></td>\
 						<td class="colTime"><div>\
 								<div class="row">\
@@ -1622,7 +1498,7 @@ var blueprints = {
 						<td class="colPur"></td>\
 					</tr>',
     challengeGridBlock: '<div class="contest">\
-									<div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
+									<div class="cgCh"><a href="#" class="contestName"></a></div>\
 									<div class="cgTime">\
 										<div>\
 											<div class="row">\

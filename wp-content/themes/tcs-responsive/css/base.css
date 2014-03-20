@@ -368,6 +368,18 @@ em{
     .btnMyAcc.isActive i{
         background-position: 0 -12px;              
     }
+#navigation .noReg{
+    display: none;
+}
+#navigation.newUser .onReg{
+    display: none;
+}
+#navigation.newUser .noReg{
+    display: block;
+}
+#navigation.newUser .noReg.hide{
+    display: none;
+}
 /* Page Title
 ---------------------------*/
 .pageTitleWrapper {
@@ -492,7 +504,6 @@ em{
 								margin-left: 0px;
 								height: 35px;
 								width: 26px;
-								margin-right: 2px;
 }
         #footer .social ul li:first-child{
             margin-left: 0;
@@ -502,32 +513,32 @@ em{
             text-align: left;
             text-indent: -100px;
             overflow: hidden;
-            height: 27px;
-								width: 27px;
+            height: 20px;
+            width: 20px;
             background: url(../i/ico-social.png) no-repeat;
             background-position: 0 0;            
             -moz-transition-duration: 0s; -webkit-transition-duration: 0s; transition-duration: 0s;
         }
         #footer .social ul li a:hover{
-            background-position: -45px 0px;
+            background-position: 0 -20px;
         }
         #footer .social ul li .tw{
-            background-position: 0 -29px;
-        }
-        #footer .social ul li .tw:hover{
-            background-position: -45px -29px;
+            background-position: 0 -40px;
         }
         #footer .social ul li .gp{
-            background-position: 0 -57px;
-        }
-        #footer .social ul li .gp:hover{
-            background-position: -45px -57px;
+            background-position: 0 -80px;
         }
         #footer .social ul li .in{
-            background-position: 0 -86px;
+            background-position: 0 -120px;
+        }
+        #footer .social ul li .tw:hover{
+            background-position: 0 -60px;
+        }
+        #footer .social ul li .gp:hover{
+            background-position: 0 -100px;
         }
         #footer .social ul li .in:hover{
-            background-position: -45px -86px;
+            background-position: 0 -140px;
         }
         #footer .updates .email{
             float: left;
@@ -645,7 +656,7 @@ em{
 				height: 13px;
 				margin-top: 7px;
 				width: 8px;
-//				background: url(../i/login-arrow.png) no-repeat;
+				background: url(../i/login-arrow.png) no-repeat;
 				background-position: 0 0;
 				float: left;
 				margin-left: 4px;
@@ -675,50 +686,3 @@ em{
 			.headerTopRightMenu .separator.beforeSearch{
 				margin-right: 0px;
 			}
-
-/*! Qtip2 style */
-
-.qtip {
-	margin-top: 12px;
-}
-
-.qtip .qtip-titlebar{
-	color: #FFFFFF !IMPORTANT;
-	padding: 5px 10px 5px 10px !IMPORTANT;
-}
-
-.qtip .qtip-title, .qtip .qtip-content{
-	text-align: center !IMPORTANT;
-}
-
-.qtip .qtip-content{
-	font-size: 14px;
-	padding: 8px;	
-}
-
-.qtip .qtip-close .qtip-icon{
-	background-position: -42px 0 !IMPORTANT;
-}
-
-/*! Design tooltip style */
-.qtip-design{
-	background-color: #FFFFFF !IMPORTANT;
-	border-color: #FFFFFF !IMPORTANT;
-	color: #000000 !IMPORTANT;
-}
-
-.qtip-design .qtip-titlebar{
-	background-color: #0096FF !IMPORTANT;
-}
-
-/*! Development tooltip style */
-.qtip-develop {
-	background-color: #FFFFFF !IMPORTANT;
-	border-color: #FFFFFF !IMPORTANT;
-	color: #000000 !IMPORTANT;
-}
-
-.qtip-develop .qtip-titlebar{
-	background-color: #47A911 !IMPORTANT;
-}
-

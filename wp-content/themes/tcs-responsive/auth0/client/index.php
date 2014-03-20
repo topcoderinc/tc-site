@@ -39,7 +39,7 @@ $token = $auth0->getAccessToken();
 
 
 <script src="https://d19p4zemcycm7a.cloudfront.net/w2/auth0-1.2.2.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
 <a href="javascript:;" lass="actionLogin">login</a>
 <?php else: ?>
     <?php var_dump($auth0->getUserInfo()) ?>

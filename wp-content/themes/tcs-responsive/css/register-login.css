@@ -40,74 +40,50 @@ hover style icons
 	background-position: -192px bottom;
 }
 
-.animeMan {
-	width: 40px;
-	height: 44px;
+.animeMan, .animeManHover {
+	width: 146px;
+	height: 99px;
 	display: block;
-	float: left;
 	margin: 0 auto;
 	background: url(../i/menButtons.png) no-repeat;
 	cursor: pointer;
-	margin-top: -3px;
 }
 
 .animeMan{
 	border-top: 1px solid #fff;
 }
-.row.planToCompete{
-	margin-top: 15px;
-	margin-bottom: 15px;	
+.manBlue {
+	
 }
-.row.planToCompete label{
-	display: block;
-	float: left;	
-}
-.options{
-	display: inline-block;
-}
-.options .checkBox{
-	float: left;
-	margin-top: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-.manBlue:hover {
-	background-position: 0 -44px;
+
+.manBlueHover {
+	background-position: 0 -100px;
 }
 
 .manGreen {
-	background-position: -40px 0;
+	background-position: -146px 0;
 }
 
-.manGreen:hover {
-	background-position: -40px -44px;
+.manGreenHover {
+	background-position: -146px bottom;
 }
 
 .manYellow {
-	background-position: -80px 0;
+	background-position: -292px 0;
 }
 
-.manYellow:hover {
-	background-position: -80px -44px;
+.manYellowHover {
+	background-position: -292px bottom;
 }
 
 .manGrey {
-	background-position: -120px 0;
+	background-position: -438px 0;
 }
 
-.manGrey:hover {
-	background-position: -120px -44px;
+.manGreyHover {
+	background-position: -438px bottom;
 }
 
-
-#register input[type="email"], 
-#register input[type="number"], 
-#register input[type="password"], 
-#register input[type="tel"], 
-#register input[type="url"], 
-#register input[type="text"]{
-padding:2px 6px;
-}
 /*
 backgorund modal
 */
@@ -274,8 +250,8 @@ Register modal
 				width: 336px;
 				background: #fafafa;
 				border: 1px solid #e1e1e1;
-				height: 22px;
-				line-height: 16px;
+				height: 14px;
+				line-height: 14px;
 			}
 			#register form p.row input[type="text"].invalid,
 			#register form p.row input[type="password"].invalid,
@@ -287,12 +263,6 @@ Register modal
 			
 			#register form p.row span.err1,
 			#register form p.row span.err2,
-			#register form p.row span.err3,
-			#register form p.row span.err4,
-			#register form p.row span.err5,
-			#register form p.row span.err6,
-			#loginForm span.err4,
-			#loginForm span.err3,
 			#login form p.row span.err1,
 			#login form p.row span.err2 {
 				margin-left: 14px;
@@ -337,10 +307,6 @@ Register modal
 		margin: 2px auto;
 		text-align: center;
 	}	
-
-  p.submitBtn .pleaseWait:hover {
-    cursor: default;
-  }
 	
 	#register .person {
 		text-align: center;
@@ -348,6 +314,10 @@ Register modal
 		float: left;
 	}
 
+
+		#register .options {
+			background: url(../i/optionsBg.png) no-repeat top center;
+		}
 		#register .person .checkBox{
 			background: url(../i/checkBoxBg.png) repeat-x;
 			color: #fff;

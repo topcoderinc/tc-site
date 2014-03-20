@@ -110,7 +110,7 @@ img {
 			background-position: 0 0;
 			color: #666666;
 			font-size: 30px;
-			font-family: ""Source Sans Pro"";
+			font-family: "Source Sans Pro";
 		}
 		.pageTitleWrapper .pageTitle h2.overviewPageTitle{
 			background-position: 0 0;
@@ -168,13 +168,8 @@ img {
 		font-size: 15px;
 	}
 	.pageContent strong{
-		font-weight: bold;
+		font-weight: normal;
 	}
-	
-	.pageContent em{
-		font-style: italic !important;
-	}
-	
 	.pageContent ul{
 		padding: 6px 0 2px 34px;
 	}
@@ -296,75 +291,6 @@ img {
 			color: #828282;
 			font-weight: 300;
         }
-        
-/*Right side: External Links*/	
-.sideExternalLinks{
-	margin-bottom: 20px;	
-}
-.sideExternalLinks h3{
-	padding: 0 15px;
-	line-height: 55px;
-	background-color: #474747;
-	font-size: 20px;
-	color: #ffffff;
-}
-.sideExternalLinks .searchRelatedBox {
-	padding: 10px 14px;
-	border-left: 1px solid #e1e3e3;
-	border-right: 1px solid #e1e3e3;
-	border-bottom: 1px solid #f0f1f1;
-}
-		.sideExternalLinks .searchRelatedBox .text {
-			border-radius: 4px 0 0 4px;
-			border: 1px solid #e1e3e3;
-			border-right-width: 0;
-			background: #ffffff;
-			background-image: url(../i/ios-input-bg-fix.gif);
-			box-shadow: none;
-			color: #A1A1A1;
-			float: left;
-			vertical-align: top;
-			width: 210px;
-			height: 18px;
-		}
-.sideExternalLinks .externalLinkList{
-	border-left: 1px solid #e1e3e3;
-	border-right: 1px solid #e1e3e3;
-	border-bottom: 1px solid #e1e3e3;
-	padding: 15px;
-}
-	.sideExternalLinks .externalLinkList li{
-		margin-top: 20px;
-		padding: 0;
-		position: relative;
-		min-height: 20px;
-	}
-	.sideExternalLinks .externalLinkList li:first-child{
-		margin-top: 0;
-	}
-		.sideExternalLinks .externalLinkList li a.contentLink {
-			-moz-transition-duration: .3s; -webkit-transition-duration: .3s; transition-duration: .3s;
-			display: block;
-			line-height: 18px;
-			font-size: 15px;
-			color: #0071bc;
-        }
-		.sideExternalLinks .externalLinkList li a.contentLink:hover {
-			color: #FFB800;
-        }
-			.sideExternalLinks .externalLinkList li a:hover .contentThumb{
-				box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-			}
-		.sideExternalLinks .externalLinkList li .contentBrief {
-			display: block;
-			line-height: 15px;
-			padding: 4px 0 3px 0;
-			font-size: 14px;
-			color: #828282;
-			font-weight: 300;
-        }
-        
-
 /*Right side: sideQuote*/	
 .sideQuote{
 	margin-bottom: 20px;

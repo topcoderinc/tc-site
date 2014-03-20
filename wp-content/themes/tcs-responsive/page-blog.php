@@ -107,7 +107,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 									$title = htmlspecialchars($post->post_title);
 									$subject = htmlspecialchars(get_bloginfo('name')).' : '.$title;
 									$body = htmlspecialchars($post->post_content);
-									$email_article = 'mailto:?subject='.rawurlencode($subject).'&body='.get_permalink();
+									$email_article = 'mailto:?subject='.rawurlencode($subject).'&body='.rawurlencode($body);
 									$twitterShare = "http://twitter.com/home?status=".$twitterText;
 									$fbShare = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=".get_permalink()."&p[images][0]=".$imageUrl."&p[title]=".get_the_title()."&p[summary]=".$twitterText;
 									$gplusShare = "https://plus.google.com/share?url=".get_permalink();
@@ -163,10 +163,10 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 										</div>
 										<div class="shareVia">
 											<span>Share via : </span>
-											<a href="<?php echo $email_article;?>" class="shareButton shareMail small"></a>
-											<a href="<?php echo $fbShare;?>" class="shareButton shareFb small"></a>
-											<a href="<?php echo $twitterShare;?>" class="shareButton shareTw small"></a>
-											<a href="<?php echo $gplusShare;?>" class="shareButton shareGPlus small"></a>
+											<a href="<?php echo $email_article;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-mail.png" width="21" height="21" /></a>
+											<a href="<?php echo $fbShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-fb.png" width="21" height="21" /></a>
+											<a href="<?php echo $twitterShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-twitter.png" width="21" height="21" /></a>
+											<a href="<?php echo $gplusShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-gplus.png" width="21" height="21" /></a>
 										</div>
 										<a href="<?php the_permalink();?>" class="continueReading">Continue Reading</a>
 									</div>
@@ -195,8 +195,8 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							if($postCount > $postPerPage) :
 						?>
 							<div class="pagingWrapper">
-								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Post</a><?php endif;?>
-								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Post</a><?php endif; ?>
+								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Older Post</a><?php endif; ?>
+								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Newer Post</a><?php endif;?>
 							</div>
 						<?php endif; ?>	
 						
