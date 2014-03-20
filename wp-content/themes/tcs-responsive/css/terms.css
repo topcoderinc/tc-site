@@ -1,0 +1,147 @@
+.registerForChallenge #mainContent{
+    padding-top: 40px;
+}
+    .registerForChallenge #mainContent .pageTitle{
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #e7e7e7;
+        font-size: 24px;
+    }
+    .registerForChallenge #mainContent .formContent{
+        padding-top: 10px;
+    }
+        .registerForChallenge #mainContent .formContent p.terms{
+            line-height: 15px;
+            padding: 17px 0 12px;
+            font-size: 15px;
+        }
+        .registerForChallenge #mainContent .formContent p.termsText{
+            line-height: 15px;
+            font-size: 15px;
+            padding: 0 0 12px;
+        }
+        .registerForChallenge #mainContent .formContent a.learnMore{
+            line-height: 15px;
+            font-size: 18px;
+            padding: 0 0 12px;
+            display: inline-block;
+            color: #ff9900;
+        }
+
+        .registerForChallenge #mainContent .formContent table.termTable{
+            border-left: 1px solid #e7e7e7;
+            border-top: 1px solid #e7e7e7;
+            border-right: 1px solid #e7e7e7;
+            width: 100%;
+        }
+            .registerForChallenge #mainContent .formContent table.termTable th{
+                border-bottom: 1px solid #e7e7e7;
+                height: 42px;
+                vertical-align: middle;
+                padding: 0 17px;
+                background: #f1f1f1;
+                color: #ff8a00;
+                text-align: left;
+                font-size: 15px;
+                font-weight: normal;
+            }
+            .registerForChallenge #mainContent .formContent table.termTable th:first-child{
+                width: 84%;
+            }
+            .registerForChallenge #mainContent .formContent table.termTable td{
+                border-bottom: 1px solid #e7e7e7;
+                height: 32px;
+                vertical-align: middle;
+                padding: 10px 17px;
+                font-size: 14px;
+                color: #666;
+            }
+                .registerForChallenge #mainContent .formContent table.termTable td a{
+                    color: #ffae00;
+                }
+            .registerForChallenge #mainContent .formContent table.termTable tr.alt td{
+                background: #f7f7f7;
+            }
+                .registerForChallenge #mainContent .formContent table.termTable td span.status{
+                    display: inline-block;
+                    height: 16px;
+                    padding-left: 22px;
+                    background: url("../i/term-status-icons.png") no-repeat;
+                }
+                .registerForChallenge #mainContent .formContent table.termTable td span.status.complete{
+                    background-position: 0 0;
+                }
+                .registerForChallenge #mainContent .formContent table.termTable td span.status.required{
+                    background-position: 0 -16px;
+                }
+
+        /*captcha*/
+        .registerForChallenge #mainContent .formContent .captcha{
+            padding-top: 40px;
+        }
+        .registerForChallenge #mainContent .formContent .captcha.group{
+            padding-top: 90px;
+        }
+            .registerForChallenge #mainContent .formContent .captchaImgCnt{
+                width: 300px;
+                float: left;
+                margin-right: 18px;
+                overflow: hidden;
+            }
+                .registerForChallenge #mainContent .formContent .captchaImgCnt .refresh{
+                    font-size: 12px;
+                    color: #333;
+                    line-height: 23px;
+                    display: inline-block;
+                    padding: 11px 0;
+                    padding-left: 28px;
+                    position: relative;
+                }
+                    .registerForChallenge #mainContent .formContent .captchaImgCnt .refresh a{
+                        background: url("../i/captcha-refresh.png") no-repeat;
+                        width: 23px;
+                        height: 23px;
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 11px;
+                    }
+                    .registerForChallenge #mainContent .formContent .captchaImgCnt .refresh a:hover{
+                        opacity: .6;
+                    }
+            .registerForChallenge #mainContent .formContent .captchaInput{
+                padding: 10px 0;
+                float: left;
+            }
+                .registerForChallenge #mainContent .formContent .captchaInput label{
+                    display: block;
+                    line-height: 34px;
+                    font-size: 14px;
+                    color: #333;
+                }
+                .registerForChallenge #mainContent .formContent .captchaInput input{
+                    background: #fafafa;
+                    border: 1px solid #e1e1e1;
+                    box-shadow: none;
+                    -webkit-appearance: none;
+                }
+                input, textarea{
+                    box-shadow: none !important;
+                    -webkit-appearance: none !important;
+                }
+
+        .registerForChallenge #mainContent .formContent .BtnWrapper{
+            border-top: 1px solid #e1e1e1;
+            margin-top: 10px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .registerForChallenge #mainContent .formContent.reminder .BtnWrapper{
+            margin-top: 45px;
+        }
+.termsBtnRegister{
+	text-align: center;
+	margin-top: 60px;
+	border-top: 1px solid #e7e7e7;
+	padding-top: 15px;
+}
