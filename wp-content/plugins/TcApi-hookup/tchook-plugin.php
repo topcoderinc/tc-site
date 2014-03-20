@@ -18,6 +18,11 @@ require_once( TCHOOK_PLUGIN_INC . '/ajax_func.php' );
 require_once( TCHOOK_PLUGIN_INC . '/shortcode.php' );
 require_once( TCHOOK_PLUGIN_INC . '/widget.php' );
 
+/* includes */
+require_once ( TCHOOK_PLUGIN_INC .'/shotcodes/tc_ratings_chart_ds.php');
+require_once ( TCHOOK_PLUGIN_INC .'/shotcodes/tc_ratings_chart_dev.php');
+require_once ( TCHOOK_PLUGIN_INC .'/shotcodes/tc_rating_color.php');
+
 $TCHOOK_class = 'TCHOOK_';
 
 if ( is_admin() ) {
