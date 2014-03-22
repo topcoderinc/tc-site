@@ -1,4 +1,4 @@
-<?php
+<?php 
 $achievements = array(
 	"First Forum Post" => false,
 	"One Hundred Forum Posts" => false,

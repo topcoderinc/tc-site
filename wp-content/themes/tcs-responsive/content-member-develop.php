@@ -1,241 +1,175 @@
 <?php
 // coder info
-
-$track= "data/srm";
-if ($tab == "algo") {
-	$track = "data/srm";
-}else if ($tab == "develop") {
-	$track = "develop";
-}else if ($tab == "design") {
-	$track = "design";
-}
-
-$statsContestTypeMappings = array(
-	"ui-prototype-competition" => "UI Prototype Competition",
-	"assembly-competition" => "Assembly Competition",
-	"development" => "Development",
-	"specification" => "Specification",
-	"conceptualization" => "Conceptualization",
-	"design" => "Design",
-	"test-suites" => "Test Suites",
-	"test-scenarios" => "Test Scenarios",
-	"ria-build" => "RIA Build Competition",
-	"reporting" => "Reporting",
-	"content-creation" => "Content Creation"
-);
-
-$chartContestTypeMappings = array(
-	"ui-prototype-competition" => "ui_prototypes",
-	"assembly-competition" => "assembly",
-	"development" => "development",
-	"specification" => "specification",
-	"conceptualization" => "conceptualization",
-	"design" => "design",
-	"test-suites" => "test_suites",
-	"test-scenarios" => "test_scenarios",
-	"ria-build" => "ria_build",
-	"reporting" => "reporting",
-	"content-creation" => "content_creation"
-);
-
+// stats url: v2/develop/statistics/{handle}/{challengeType}
+$activeTrack = 'Development';
+global $track;
 global $coder;
+global $dev;
+global $ct;
 $coder = get_member_statistics ( $handle, $track );
-$contestType = get_query_var ( 'ct' );
-if(!$contestType){
-	$contestType = "development";
-}
-$apiContestType = $statsContestTypeMappings[$contestType];
-$dev =$coder->Tracks->$apiContestType;
 
-$chartRawData = get_member_chart_statistics( $handle, $track, $chartContestTypeMappings[$contestType] );
+echo "<script>
+		var coderData=".json_encode($coder).";
+		</script>";
+
+$tracks = $coder->Tracks;
+if ($track == "develop") {
+	$activeTrack = 'Development';
+	$currentChallengetype = 'Development'; 
+}
+if(!empty($ct)){
+	$currentChallengeId = $ct;
+}
 
 // chart
 include_once TEMPLATEPATH . '/chart/Highchart.php';
 
-
 // line chart
 $chart = new Highchart ();
-$chart->chart = array (
-		'renderTo' => 'algoChart',
-		'type' => 'line',
-		'marginRight' => 20,
-		'marginBottom' => 10,  
-);
+$chart->printScripts ();
+$challengetypes = array ();
+$challengetypes = get_all_contest ();
 
-$chart->credits = array (
-		'enabled' => false 
-);
-
-$chart->title = array (
-		'text' => null 
-);
-
-$chart->yAxis = array (
-		'title' => array (
-				'text' => null 
-		),
-		'plotLines' => array (
-				array (
-						'value' => 0,
-						'width' => 1,
-						'color' => '#808080' 
-				) 
-		),
-		tickInterval => 100
-);
-$chart->xAxis = array (
-		type => 'datetime',
-		dateTimeLabelFormats => array (
-       year => '%Y'
-  ),
-  tickInterval => 24 * 3600 * 1000 * 356 // one year interval
-);
-$chart->legend = array (
-		'enabled' => false 
-);
-
-$chart->yAxis->plotBands[] = array(
- 'from' => 0,
- 'to' => 899,
- 'color' => "rgba(153, 153, 153, 0.2)"
-);
-$chart->yAxis->plotBands[] = array(
- 'from' => 900,
- 'to' => 1199,
- 'color' => "rgba(0, 169, 0, 0.2)"
-);
-$chart->yAxis->plotBands[] = array(
- 'from' => 1200,
- 'to' => 1499,
- 'color' => "rgba(102, 102, 255, 0.2)"
-);
-$chart->yAxis->plotBands[] = array(
- 'from' => 1500,
- 'to' => 2199,
- 'color' => "rgba(221, 204, 0, 0.2)"
-);
-$chart->yAxis->plotBands[] = array(
- 'from' => 2200,
- 'to' => 10000,
- 'color' => "rgba(238, 0, 0, 0.2)"
-);
-
-$chartData = array();
-for ($index=0; $index<=count($chartRawData->history); $index++)
-{
-	$rating = $chartRawData->history[$index]->rating;
-	$pointColor = "#999999";
-	if($rating >= 900 && $rating <= 1199){
-		$pointColor = "#00A900";
-	} else if($rating >= 1200 && $rating <= 1499){
-		$pointColor = "#6666FF";
-	} else if($rating >= 1500 && $rating <= 2199){
-		$pointColor = "#DDCC00";
-	} else if($rating >= 2200 && $rating <= 10000){
-		$pointColor = "#EE0000";
-	}
-	list($year, $month, $day) = split('[/.-]', $chartRawData->history[$index]->date);
-	if($month && $day && $year){
-		$chartData[$index] = array(name => $chartRawData->history[$index]->challengeName, x => new HighchartJsExpr("Date.UTC(" . $year . ", " . $month .", " . $day . ")"), y => $rating, marker => array(fillColor => $pointColor));
-	}
-}
-
-$chart->series [] = array (
-		'data' => $chartData,
-		'color' => '#888888',
-		lineWidth => 1
-);
-$chart->tooltip->formatter = new HighchartJsExpr ( "function() { return '<b>'+ this.point.name +'</b><br/>'+ Highcharts.dateFormat('%m / %d / %Y', this.x) + '</b><br/>' + 'Rating: '+ this.y ;}" );
-
+array_push ( $challengetypes, 'Design' );
+array_push ( $challengetypes, 'Assembly Competition' );
+array_push ( $challengetypes, 'Development' );
+array_push ( $challengetypes, 'Specification' );
+array_push ( $challengetypes, 'Bug Hunt' );
+array_push ( $challengetypes, 'UI Prototype Competition' );
 ?>
 
-
-
 <div id="develop" class="tab algoLayout">
-	<nav class="tabNav">
-		<ul>
-		
-			<li class="conceptualization"><a href="?tab=<?php echo $tab;?>&ct=conceptualization" class="<?php if($contestType=='conceptualization'){ echo 'isActive';}?>">Concept</a></li>
-			<li class="specification"><a href="?tab=<?php echo $tab;?>&ct=specification" class="<?php if($contestType=='specification'){ echo 'isActive';}?>">Spec</a></li>			
-			<li class="design"><a href="?tab=<?php echo $tab;?>&ct=design" class="<?php if($contestType=='design'){ echo 'isActive';}?>">Software Design</a></li>			
-			<li class="development"><a href="?tab=<?php echo $tab;?>&ct=development" class="<?php if(!$contestType || $contestType=='development'){ echo 'isActive';}?>">Dev</a></li>
-			<li class="assembly-competition"><a href="?tab=<?php echo $tab;?>&ct=assembly-competition" class="<?php if($contestType=='assembly-competition'){ echo 'isActive';}?>">Assembly</a></li>
-			<li class="test-suites"><a href="?tab=<?php echo $tab;?>&ct=test-suites" class="<?php if($contestType=='test-suites'){ echo 'isActive';}?>">Test Suites</a></li>
-			<li class="test-scenarios"><a href="?tab=<?php echo $tab;?>&ct=test-scenarios" class="<?php if($contestType=='test-scenarios'){ echo 'isActive';}?>">Test Scenarios</a></li>
-			<li class="ui-prototype-competition"><a href="?tab=<?php echo $tab;?>&ct=ui-prototype-competition" class="<?php if($contestType=='ui-prototype-competition'){ echo 'isActive';}?>">UI Prototype</a></li>
-			<li class="ria-build"><a href="?tab=<?php echo $tab;?>&ct=ria-build" class="<?php if($contestType=='ria-build'){ echo 'isActive';}?>">RIA Build</a></li>
-			<li class="content-creation"><a href="?tab=<?php echo $tab;?>&ct=content-creation" class="<?php if($contestType=='content-creation'){ echo 'isActive';}?>">Content</a></li>
-			<li class="reporting"><a href="?tab=<?php echo $tab;?>&ct=reporting" class="<?php if($contestType=='reporting'){ echo 'isActive';}?>">Reporting</a></li>
-		</ul>
-	</nav>
 	<div class="ratingInfo">
-		<header class="head">
-			<div class="trackNRating">
-				<h4 class="trackName">Development Competitions</h4>
-				<div class="rating"><?php echo $dev->rating;?></div>
-				<div class="lbl">Rating</div>
-			</div>
-			<div class="detailedRating">
-				<div class="row">
-					<label>Percentile:</label>
-					<div class="val"><?php echo $dev->activePercentile;?></div>
+
+		<div class="subTrackTabs">
+			<nav class="tabNav">
+				<table>
+					<thead class="tabNavHead">
+						<tr>
+						<?php
+						foreach ( $challengetypes as &$challengetype ) {
+							if (! empty ( $tracks->{$challengetype} ) && ! empty ( $tracks->{$challengetype}->rating )) {
+								$challengeName = $challengetype;
+								$challengeID = str_replace ( ' ', '_', $challengetype );
+								$challengeID = strtolower ( $challengeID );
+								
+								if ($challengeID == 'ui_prototype_competition') {
+									$challengeID = 'ui_prototypes';
+									$currentChallengetype = $challengeID;
+								}
+								
+								if($currentChallengeId == $challengeID){
+									$currentChallengetype = $challengetype;
+								}
+								
+								$class = ($challengeID == $currentChallengeId) ? 'isActive' : '';
+								echo '<th><a class="' . $class . '" href="' . $challengeID . '">' . $challengetype . '</a></th>';
+							}
+						}
+						if (! empty ( $tracks->{$currentChallengetype} )) {
+							$dev = $tracks->{$currentChallengetype};
+						} else {
+							echo "<h3>Develop</h3>";
+						}
+						?>
+						</tr>
+					</thead>
+				</table>
+			</nav>
+			<?php  if(empty($tracks->{$currentChallengetype})):?>
+			<header class="head">
+				<h3 class="nocontestStatus text">Member rating unavailable or member didn't participated in any Develop contest.</h3>
+			</header>
+			<?php else:?>
+			
+			<header class="head">
+				<div class="trackNRating">
+					<h4 class="trackName"><?php echo $currentChallengetype;?></h4>
+					<div class="rating <?php echo do_shortcode("[tc_rating_color score='".$dev->rating."' ]") ?>"><?php echo $dev->rating;?></div>
+					<div class="lbl">Rating</div>
 				</div>
-				<div class="row">
-					<label>Rank:</label>
-					<div class="val"><?php echo $dev->activeRank;?></div>
+
+
+
+				<div class="detailedRating">
+					<div class="row fieldPercentile">
+						<label>Percentile:</label>
+						<div class="val"><?php echo $dev->overallPercentile;?></div>
+						<input type="hidden" class="fieldId" value="overallPercentile">
+					</div>
+					<div class="row fieldVolatility">
+						<label>Volatility:</label>
+						<div class="val"><?php echo $dev->volatility;?></div>
+						<input type="hidden" class="fieldId" value="volatility">
+					</div>
+					<div class="row fieldRank">
+						<label>Rank:</label>
+						<div class="val"><?php echo $dev->activeRank;?></div>
+						<input type="hidden" class="fieldId" value="activeRank">
+					</div>
+					<div class="row fieldCtryRank">
+						<label>Country Rank:</label>
+						<div class="val"><?php echo $dev->overallCountryRank;?></div>
+						<input type="hidden" class="fieldId" value="overallCountryRank">
+					</div>
+					<div class="row fieldScRank">
+						<label>School Rank:</label>
+						<div class="val"><?php echo $dev->activeSchoolRank;?></div>
+						<input type="hidden" class="fieldId" value="activeSchoolRank">
+					</div>
+					<div class="row fieldCompetitions">
+						<label>Competitions:</label>
+						<div class="val">
+							<a href="#"><?php echo $dev->competitions;?></a>
+						</div>
+						<input type="hidden" class="fieldId" value="competitions">
+					</div>
+					<div class="row fieldMaxRating">
+						<label>Maximum Rating: </label>
+						<div class="val"><?php echo $dev->maximumRating;?></div>
+						<input type="hidden" class="fieldId" value="maximumRating">
+					</div>
+					<div class="row fieldMinRating">
+						<label>Minimum Rating: </label>
+						<div class="val"><?php echo $dev->minimumRating;?></div>
+						<input type="hidden" class="fieldId" value="minimumRating">
+					</div>
+					<div class="row fieldRevRating">
+						<label>Reviewer Rating: </label>
+						<div class="val">
+							<a href="#"><?php if( !empty($dev->reviewerRating)){echo number_format( $dev->reviewerRating, 2, '.', '');}else{echo "N/A";}?></a>
+						</div>
+						<input type="hidden" class="fieldId" value="reviewerRating">
+					</div>
+					<div class="row fieldRevRating">
+						<label>Reliability: </label>
+						<div class="val">
+							<a href="#"><?php echo $dev->reliability;?></a>
+						</div>
+						<input type="hidden" class="fieldId" value="reliability">
+					</div>
+					<div class="clear"></div>
 				</div>
-				<div class="row">
-					<label>Country Rank:</label>
-					<div class="val"><?php echo $dev->overallCountryRank;?></div>
-				</div>
-				<div class="row">
-					<label>School Rank:</label>
-					<div class="val"><?php echo $dev->activeSchoolRank;?></div>
-				</div>
-				<div class="row">
-					<label>Maximum Rating: </label>
-					<div class="val"><?php echo $dev->maximumRating;?></div>
-				</div>
-				<div class="row">
-					<label>Minimum Rating: </label>
-					<div class="val"><?php echo $dev->minimumRating;?></div>
-				</div>
-				<div class="row">
-					<label>Volatility:</label>
-					<div class="val"><?php echo $dev->volatility;?></div>
-				</div>
-				<div class="row">
-					<label>Competitions:</label>
-					<div class="val"><a href="#"><?php echo $dev->competitions;?></a></div>
-				</div>
-				<div class="row">
-					<label>Reviewer Rating: </label>
-					<div class="val"><a href="#"><?php echo $dev->reviewerRating;?></a></div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</header>
-		<div class="ratingViews">
-			<div id="graphView" class="hide">
-				<div class="subTrackTabs">
-					<div class="srm subTrackTab">
-						<div class="chartWrap">
-							<div id="algoChart" class="chart"></div>
-						<?php $chart->printScripts(); ?>   
-						<script type="text/javascript">						
-							<?php echo $chart->render("algoChart"); ?>
-							algoChart.reflow();
-						</script>
+			</header>
+			<div class="ratingViews">
+				<div id="graphView" class="hide">
+					<div class="subTrackTabs">
+						<div class="srm subTrackTab">
+							<div class="chartWrap">
+								<div class="chartTypeSwitcher">
+									<a class="btn btnHistory isActive">Rating History</a> <a class="btn btnDist">Rating Distribution</a>
+								</div>
+							<?php echo apply_filters('the_content','[tc_ratings_chart_dev handle="'.$handle.'"  challengetype="'.$currentChallengetype.'"]');?>
+							
+						</div>
 						</div>
 					</div>
+					<!-- /.subTrackTabs -->
 				</div>
-				<!-- /.subTrackTabs -->
-			</div>
-			<!-- /#graphView -->
-			<div id="tabularView" >
-				<div class="subTrackTabs">
+				<!-- /#graphView -->
+				<div id="tabularView">
 					<div class="srm subTrackTab">
-						<div class="tableView">							
+						<div class="tableView">
 							<article class="mainTabStream">
 								<div class="tableWrap">
 									<table class="ratingTable">
@@ -249,64 +183,80 @@ $chart->tooltip->formatter = new HighchartJsExpr ( "function() { return '<b>'+ t
 										<tbody>
 											<tr>
 												<td class="colDetails">Inquiries</td>
-												<td class="colTotal"><?php echo $dev->inquiries; ?></td>
+												<td class="colTotal"><span><?php echo $dev->inquiries; ?></span>
+													<input type="hidden" class="valId" value="inquiries" />
+												</td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Submissions</td>
-												<td class="colTotal"><?php echo $dev->submissions; ?></td>
+												<td class="colTotal"><span><?php echo $dev->submissions; ?></span>
+													<input type="hidden" class="valId" value="submissions" /></td>
 											</tr>
-											
+
 											<tr>
 												<td class="colDetails">Submission Rate</td>
-												<td class="colTotal"><?php echo $dev->submissionRate; ?></td>
+												<td class="colTotal"><span><?php echo $dev->submissionRate; ?></span>
+													<input type="hidden" class="valId" value="submissionRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Passed Screening</td>
-												<td class="colTotal"><?php echo $dev->passedScreening; ?></td>
+												<td class="colTotal"><span><?php echo $dev->passedScreening; ?></span>
+													<input type="hidden" class="valId" value="passedScreening" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Screening Success Rate</td>
-												<td class="colTotal"><?php echo $dev->screeningSuccessRate; ?></td>
+												<td class="colTotal"><span><?php echo $dev->screeningSuccessRate; ?></span>
+													<input type="hidden" class="valId" value="screeningSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Passed Review</td>
-												<td class="colTotal"><?php echo $dev->passedReview; ?></td>
+												<td class="colTotal"><span><?php echo $dev->passedReview; ?></span>
+													<input type="hidden" class="valId" value="passedReview" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Review Success Rate</td>
-												<td class="colTotal"><?php echo $dev->reviewSuccessRate; ?></td>
+												<td class="colTotal"><span><?php echo $dev->reviewSuccessRate; ?></span>
+													<input type="hidden" class="valId" value="reviewSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Maximum Score</td>
-												<td class="colTotal"><?php echo $dev->maximumScore; ?></td>
+												<td class="colTotal"><span><?php echo $dev->maximumScore; ?></span>
+													<input type="hidden" class="valId" value="maximumScore" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Minimum Score</td>
-												<td class="colTotal"><?php echo $dev->minimumScore; ?></td>
-											</tr>											
+												<td class="colTotal"><span><?php echo $dev->minimumScore; ?></span>
+													<input type="hidden" class="valId" value="minimumScore" /></td>
+											</tr>
 											<tr class="alt">
 												<td class="colDetails">Appeals</td>
-												<td class="colTotal"><?php echo $dev->appeals; ?></td>
+												<td class="colTotal"><span><?php echo $dev->appeals; ?></span>
+													<input type="hidden" class="valId" value="appeals" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Appeal Success Rate</td>
-												<td class="colTotal"><?php echo $dev->appealSuccessRate; ?></td>
+												<td class="colTotal"><span><?php echo $dev->appealSuccessRate; ?></span>
+													<input type="hidden" class="valId" value="appealSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Average Score</td>
-												<td class="colTotal"><?php echo $dev->averageScore; ?></td>
+												<td class="colTotal"><span><?php echo $dev->averageScore; ?></span>
+													<input type="hidden" class="valId" value="averageScore" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Average Placement</td>
-												<td class="colTotal"><?php echo $dev->averagePlacement; ?></td>
+												<td class="colTotal"><span><?php echo $dev->averagePlacement; ?></span>
+													<input type="hidden" class="valId" value="averagePlacement" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Wins</td>
-												<td class="colTotal"><?php echo $dev->wins; ?></td>
+												<td class="colTotal"><span><?php echo $dev->wins; ?></span>
+													<input type="hidden" class="valId" value="wins" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Win Percentage</td>
-												<td class="colTotal"><?php echo $dev->winPercentage; ?></td>
+												<td class="colTotal"><span><?php echo $dev->winPercentage; ?></span>
+													<input type="hidden" class="valId" value="winPercentage" /></td>
 											</tr>
 
 										</tbody>
@@ -321,6 +271,8 @@ $chart->tooltip->formatter = new HighchartJsExpr ( "function() { return '<b>'+ t
 				<!-- /.subTrackTabs -->
 			</div>
 			<!-- /#tabularView -->
+			<?php endif;?>
+		
 		</div>
 		<!-- /.ratingViews -->
 	</div>
