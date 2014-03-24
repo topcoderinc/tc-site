@@ -176,6 +176,10 @@ common
 /*
 Register modal
 */
+.row .socialLoginErrorMessage {
+  display: none;
+  color: #c00;
+}
 #register .content,
 #login .content{
     padding: 10px 20px;
