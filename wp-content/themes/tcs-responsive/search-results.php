@@ -34,17 +34,18 @@ get_header ();
 						<section id="searchPageContent" class="pageContent">
 							<div id="searchBlogsWrapper">
 							<?php 
-								wp_reset_query();
+								//wp_reset_query();
 								$args = array(
 										'post_type' => array ( 'blog', 'page','post'),
 										'posts_per_page' => 10,
 										'paged' => $pageNumber,
 										's' => $searchKey
 								);							
-								query_posts($args);
-								if ( have_posts() ) :
-									while ( have_posts() ) : 
-										the_post();
+								//query_posts($args);
+								$postQuery = new WP_Query($args);
+								if ( $postQuery->have_posts() ) :
+									while ( $postQuery->have_posts() ) : 
+										$postQuery->the_post();
 							?>		
 								<!-- Blog Item -->
 								<div class="searchResultItem">
@@ -82,6 +83,7 @@ get_header ();
 						<div class="noResult">No matches found</div>
 					<?php
 							endif;
+							wp_reset_postdata();
 						?>
 				</div>
 				<!-- /.rightSplit -->

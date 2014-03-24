@@ -252,12 +252,13 @@ class Tops_Rank_Widget extends WP_Widget {
 		$query = array (
 				'post_type' => 'stars-of-month' 
 		);
-		query_posts ( $query );
+		//query_posts ( $query );
 		global $post;
+		$postQuery = new WP_Query($query);
 		$i=0;
-		if (have_posts ()) :
-			while ( have_posts () ) :
-				the_post ();
+		if ($postQuery->have_posts ()) :
+			while ( $postQuery->have_posts () ) :
+				$postQuery->the_post ();
 				$postId = $post->ID;
 				$handle = get_post_meta ( $postId, "Handle", true );
 				$ratingColor = "";				
@@ -310,7 +311,9 @@ class Tops_Rank_Widget extends WP_Widget {
 					</div>
 				</section>
 			</div>
-			<?php endwhile; endif;?>
+			<?php endwhile; endif;
+				wp_reset_postdata();
+			?>
 		</div>
 		<!-- /.starProfiles -->
 	</div>

@@ -400,7 +400,7 @@ function get_blog_ajax() {
   $searchKey = $_GET["searchKey"];
   $authorId = $_GET["authorId"];
 
-  wp_reset_query();
+  //wp_reset_query();
   $args = "post_type=" . BLOG;
   $args .= "&order=DESC";
   $args .= "&posts_per_page=" . $postPerPage;
@@ -415,7 +415,9 @@ function get_blog_ajax() {
     }
   }
 
-  $arrPost = query_posts($args);
+  //$arrPost = query_posts($args);
+  $postQuery = new WP_Query($args);
+  $arrPost = $postQuery->get_posts();
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
 
@@ -542,7 +544,7 @@ function get_popular_ajax() {
   $page = $_GET["page"];
   $postPerPage = $_GET["posts_per_page"] == "" ? 4 : $_GET["posts_per_page"];
 
-  wp_reset_query();
+  //wp_reset_query();
   $args = array(
     'post_type' => 'blog',
     'paged' => $page,
@@ -552,7 +554,9 @@ function get_popular_ajax() {
     'order' => 'DESC'
   );
 
-  $arrPost = query_posts($args);
+  //$arrPost = query_posts($args);
+  $postQuery = new WP_Query($args);
+  $arrPost = $postQuery->get_posts();
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
       $postId = $post->ID;
@@ -575,6 +579,7 @@ function get_popular_ajax() {
     endforeach;
   endif;
   die();
+  /*
   $arrPost = query_posts($args);
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
@@ -599,6 +604,7 @@ function get_popular_ajax() {
     endforeach;
   endif;
   die();
+  */
 }
 
 add_action('wp_ajax_subscribe_ajax', 'subscribe_ajax');

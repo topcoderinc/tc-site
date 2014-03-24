@@ -7,7 +7,8 @@
 <?php 
 $pid = $post->ID;
 get_header('');
-query_posts(array(
+//query_posts(array(
+$postQuery = new WP_Query(array(
 		'post_type' => 'page',
 		'post__in' => array($pid),
 		'posts_per_page' => 1
@@ -15,7 +16,7 @@ query_posts(array(
 
 ?>
 <?php
-if (have_posts()) : while (have_posts()) : the_post();
+if ($postQuery->have_posts()) : while ($postQuery->have_posts()) : $postQuery->the_post();
 $priceSigle = get_post_meta( $pid, "Price Pro. Single", true  );
 $priceMulti = get_post_meta( $pid, "Price Pro. Multi", true  );
 $priceEnt = get_post_meta( $pid, "Price Enterprise", true  );
@@ -125,7 +126,8 @@ $content_post = $post->post_content;
 	<!-- /.comparePlans -->
 	<?php 
 	endwhile; endif;
-	wp_reset_query();
+	//wp_reset_query();
+	wp_reset_postdata();
 	?>
 </div>
 <?php get_footer(''); ?>
