@@ -621,13 +621,16 @@ $blog_posts = get_posts($blog_posts_args);
     var twitterProvider = "twitter";
     var githubProvider = "github";
     <?php
-      $urlFromDiscourse = urldecode( $_GET["url"] );
-
-      if ( preg_match('/sso=(.*)&sig=(.*)$/', $urlFromDiscourse, $matches) ){
-        $sso = $matches[1];
-        $sig = $matches[2];
-        $stateLogin = "http://talk.topcoder.com/session/sso_login?sso=$sso&sig=$sig";
-      }
+    $urlFromDiscourse = $_REQUEST["url"];
+	$stateLogin = "http://www.topcoder.com/";
+	if ($_REQUEST['sso'] != ''  and $_REQUEST['sig'] != '' ) {
+		// if ( preg_match('/sso=(.*)&sig=(.*)/', $urlFromDiscourse, $matches) ){  
+		//$sso = str_replace("=","%3D%0A",$matches[1]);
+		//$sig = $matches[2];
+		$sso = urlencode($_REQUEST['sso']);
+		$sig = $_REQUEST['sig'];	
+		$stateLogin = "http://talk.topcoder.com/session/sso_login?sso=$sso&sig=$sig";
+	}
 
     ?>
     var auth0Login = new Auth0({
