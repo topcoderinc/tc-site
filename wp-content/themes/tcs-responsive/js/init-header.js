@@ -71,6 +71,7 @@ $(document).ready(function() {
 
         // Clear local tcsso cookie on logout
         $('.logoutLink, .actionLogout').click(function() {
+          console.log('YO!');
           document.cookie = 'tcsso=; path=/; domain=.topcoder.com; expires=' + new Date(0).toUTCString();
           document.cookie = 'tcjwt=; path=/; domain=.topcoder.com; expires=' + new Date(0).toUTCString();
           // check if we have the weird facebook hash
@@ -78,7 +79,7 @@ $(document).ready(function() {
           if (window.location.hash == '#_=_') {
             location.href = '';
           } else {
-            location.href = location.href;
+            location.reload();
           }
         });
       } else if (!tcsso && $('.actionLogout').length > 1) {
