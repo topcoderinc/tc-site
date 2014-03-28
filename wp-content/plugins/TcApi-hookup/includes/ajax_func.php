@@ -219,8 +219,8 @@ add_action('wp_ajax_nopriv_agree_challenge_terms', 'agree_challenge_terms_ajax_c
 /* register to challenge */
 function register_to_challenge_ajax_controller() {
 
-  $challengeId = $_GET ["challengeId"];
-  $jwtToken = $_GET ["jwtToken"];
+  $challengeId = filter_input(INPUT_GET, "challengeId", FILTER_SANITIZE_NUMBER_INT);
+  $jwtToken = filter_input(INPUT_GET, "jwtToken", FILTER_SANITIZE_STRING);
 
   $challengeReg = register_to_challenge($challengeId, $jwtToken);
   if (isset($challengeReg)) {
@@ -237,10 +237,10 @@ add_action('wp_ajax_nopriv_register_to_challenge', 'register_to_challenge_ajax_c
 /* submit to development challenge */
 function submit_to_dev_challenge_ajax_controller() {
 
-  $challengeId = $_POST ["challengeId"];
-  $fileName = $_POST ["fileName"];
-  $fileData = $_POST ["fileData"];
-  $jwtToken = $_POST ["jwtToken"];
+  $challengeId = filter_input(INPUT_POST, "challengeId", FILTER_SANITIZE_NUMBER_INT);
+  $fileName = filter_input(INPUT_POST, "fileName", FILTER_SANITIZE_STRING);
+  $fileData = filter_input(INPUT_POST, "fileData", FILTER_UNSAFE_RAW);
+  $jwtToken = filter_input(INPUT_POST, "jwtToken", FILTER_SANITIZE_STRING);
 
   $submitToDevChallengeResponse = submit_to_dev_challenge($challengeId, $fileName, $fileData, $jwtToken);
   if (isset($submitToDevChallengeResponse)) {

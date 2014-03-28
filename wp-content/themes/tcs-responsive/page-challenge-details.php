@@ -183,7 +183,7 @@ get_header('challenge-landing');
     <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
     <a class="btn btnAction" target="_blank"
-       href="<?php echo get_bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
+       href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>

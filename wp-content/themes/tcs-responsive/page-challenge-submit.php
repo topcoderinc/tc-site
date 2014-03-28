@@ -2,6 +2,7 @@
 /**
  * Template Name: Challenge Submit Template
  */
+// Hard-coded at the moment. Should be passed in the url. 
 $challengeType = 'develop';
 get_header('challenge-submit');
 $contest = get_contest_detail('', get_query_var('contestID'), $challengeType);
@@ -12,7 +13,7 @@ $contest = get_contest_detail('', get_query_var('contestID'), $challengeType);
         <div class="container submitContainer">
             <span class="competitionType develop"></span>
             <!-- /#end competition type-->
-            <a href='<?php echo get_bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/?type=develop' class="back">Back to Active Challenge</a>
+            <a href='<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/?type=develop' class="back">Back to Active Challenge</a>
             <h2 class="pageTitle"><?php echo $contest->challengeName; ?></h2>
             <!-- /#end page title-->
             <form action="http://studio.topcoder.com/" method="POST" name="submitForm" enctype="multipart/form-data" id="submitForm" autocomplete="off">
@@ -65,7 +66,7 @@ $contest = get_contest_detail('', get_query_var('contestID'), $challengeType);
         <div class="container successContainer hide">
             <span class="competitionType develop"></span>
             <!-- /#end competition type-->
-            <a href='<?php echo get_bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/?type=develop' class="back">Back to Active Challenge</a>
+            <a href='<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/?type=develop' class="back">Back to Active Challenge</a>
             <h2 class="pageTitle"><?php echo $contest->challengeName; ?></h2>
             <!-- /#end page title-->
             <!-- /#end success content-->
