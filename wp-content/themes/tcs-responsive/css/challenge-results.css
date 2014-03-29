@@ -1,0 +1,593 @@
+/*result styles*/
+#winner .winnerRow{
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #e7e7e7;
+}
+#winner .winnerRow.hide{
+    display: none;
+}
+    #winner .winnerRow > div{
+        float: left;
+        display: block;
+    }
+    #winner .winnerRow > div.clear{
+        float: none;
+        height: 0;
+    }
+    #winner .winnerRow .place{
+        width: 75px;
+        height: 60px;
+        background: url("../i/place-badge.png") no-repeat;
+        margin-bottom: 32px;
+        font-size: 40px;
+        font-weight: 600;
+        color: #fff;
+        text-align: center;
+        padding-top: 20px;
+        line-height: 26px;
+    }
+    #winner .winnerRow .place.client{
+        font-size: 18px;
+        padding-top: 15px;
+        height: 65px;
+    }
+        #winner .winnerRow .place span{
+            font-size: 16px;
+            position: relative;
+            text-transform: uppercase;
+            top: -15px;
+        }
+        #winner .winnerRow .place.client span{
+            font-size: 11px;
+            display: inline-block;
+        }
+    #winner .winnerRow .place.first{
+        background-position: 0 0;
+    }
+    #winner .winnerRow .place.second{
+        background-position: 0 -100px;
+    }
+    #winner .winnerRow .place.third{
+        background-position: 0 -200px;
+    }
+    #winner .winnerRow .place.other{
+        background-position: 0 -300px;
+    }
+    #winner .winnerRow .image{
+        margin: 25px 33px 25px 50px;
+        width: 200px;
+    }
+    .TC #winner .winnerRow .image{
+        margin: 25px 5px;
+    }
+    #winner .winnerRow .details{
+        width: 460px;
+        margin: 25px 0;
+        text-align: left;
+    }
+    .TC #winner .winnerRow .details{
+        width: 310px;
+        overflow: hidden;
+    }
+    .develop #winner .winnerRow .details{
+        width: 460px;
+        margin: 0 0 0 33px;
+        text-align: left;
+    }
+    .TC .develop #winner .winnerRow .details{
+        width: 200px;
+    }
+    .develop #winner .winnerRow .price,
+    .develop #winner .winnerRow .point{
+        width: 160px;
+        text-align: left;
+    }
+    .TC .develop #winner .winnerRow .price,
+    .TC .develop #winner .winnerRow .point{
+        width: 135px;
+    }
+    .develop #winner .winnerRow .point{
+        width: 155px;
+    }
+        #winner .winnerRow .details a{
+            display: block;
+            font-size: 30px;
+            line-height: 65px;
+            padding-top: 5px;
+        }
+        .develop #winner .winnerRow .price span.price{
+            display: block;
+            font-size: 30px;
+            line-height: 50px;
+            padding-top: 10px;
+            color: #228400;
+            font-weight: 600;
+        }
+        .develop #winner .winnerRow .point span.point{
+            display: block;
+            font-size: 30px;
+            line-height: 50px;
+            padding-top: 10px;
+            color: #a1a1a1;
+            font-weight: 600;
+        }
+        #winner .winnerRow .details div{
+            width: 50%;
+            float: left;
+        }
+            #winner .winnerRow .details div h3{
+                font-size: 30px;
+                font-weight: 600;
+                color: #00aeff;
+                display: block;
+                line-height: 38px;
+            }
+            #winner .winnerRow .details div span{
+                font-size: 14px;
+                line-height: 22px;
+                display: block;
+                text-align: left;
+                padding: 0;
+                margin: 0;
+            }
+            #winner .winnerRow .details div span span.break{
+                display: inline;
+            }
+            #winner .winnerRow .details div span.title,
+            #winner .winnerRow .details div span.time{
+                color: #666;
+            }
+            #winner .winnerRow .details div span.title{
+                padding-bottom: 20px;
+                text-transform: uppercase;
+            }
+            #winner .winnerRow .details div span.date{
+                color: #999;
+            }
+
+    #winner .winnerRow .actions{
+        padding: 98px 0 0 60px;
+        width: 130px;
+    }
+    .TC #winner .winnerRow .actions{
+        padding: 98px 0 0;
+        width: 105px;
+    }
+    .view-challenge-result.develop #winner .winnerRow .actions,
+    .TC .develop #winner .winnerRow .actions{
+        width: 115px;
+        padding: 40px 0 0 0;
+    }
+        #winner .winnerRow .actions a{
+            background: url("../i/winner-actions.png") no-repeat;
+            height: 23px;
+            padding-left: 33px;
+            line-height: 23px;
+            font-size: 16px;
+            display: block;
+            text-align: left;
+            margin-bottom: 18px;
+        }
+        #winner .winnerRow .actions a:hover{
+            opacity: .6;
+            color: #FF8A00;
+        }
+        #winner .winnerRow .actions a.view{
+            background-position: 0 0;
+        }
+        #winner .winnerRow .actions a.download{
+            background-position: 0 -100px;
+        }
+
+        /*showMore*/
+        .showMore{
+            border-bottom: 1px solid #e7e7e7;
+            text-align: center;
+            padding: 20px 0;
+        }
+            .showMore a{
+                display: inline-block;
+                font-size: 20px;
+                padding-bottom: 20px;
+                line-height: 20px;
+                background: url("../i/arrows-ud.png") no-repeat 50% 28px;
+            }
+
+#winner .competitionDetails{
+    padding: 20px 0 30px;
+    border-bottom: 1px solid #e7e7e7;
+}
+    #winner .competitionDetails > div{
+        float: left;
+        display: block;
+        text-align: center;
+        border-left: 1px solid #e7e7e7;
+        height: 110px;
+        font-size: 0;
+    }
+    #winner .competitionDetails > div.hide{
+      display: none;  
+    }
+    #winner .competitionDetails > div:first-child{
+        border-left: none;
+    }
+    #winner .competitionDetails > div.clear{
+        float: none;
+        height: 0;
+        border-left: none;
+    }
+        #winner .competitionDetails > div h2{
+            font-size: 14px;
+            color: #00aeff;
+            text-transform: uppercase;
+            line-height: 26px;
+            margin: 0;
+        }
+        .develop #winner .competitionDetails > div h2{
+            color: #228400;
+        }
+        #winner .competitionDetails > div div.values{
+            display: inline-block;
+            padding: 15px 20px 0;
+            height: 67px;
+        }
+        .TC #winner .competitionDetails > div div.values{
+            padding: 15px 10px 0;
+        }
+        .develop #winner .competitionDetails > div.average div.values{
+            padding: 15px 10px 0;
+        }
+        .TC .develop #winner .competitionDetails > div div.values{
+            padding: 15px 2px 0;
+        }
+            #winner .competitionDetails > div div.values span.count{
+                font-size: 30px;
+                color: #333;
+                display: block;
+                line-height: 24px;
+            }
+                #winner .competitionDetails > div div.values span.count .sup{
+                    font-size: 12px;
+                    position: relative;
+                    top: -10px;
+                    color: #666;
+                }
+            #winner .competitionDetails > div div.values span.type{
+                font-size: 11px;
+                color: #666;
+                display: block;
+            }
+    #winner .competitionDetails div.registrant{
+        width: 170px;
+    }
+    .TC #winner .competitionDetails div.registrant{
+        width: 100px;
+    }
+    .develop #winner .competitionDetails div.registrant{
+        width: 114px;
+    }
+    .TC .develop #winner .competitionDetails div.registrant{
+        width: 90px;
+    }
+    #winner .competitionDetails div.round{
+        width: 415px;
+    }
+    .TC #winner .competitionDetails div.round{
+        width: 300px;
+    }
+    .develop #winner .competitionDetails div.round{
+        width: 344px;
+    }
+    .TC .develop #winner .competitionDetails div.round{
+        width: 230px;
+    }
+    .develop #winner .competitionDetails div.average{
+        width: 200px;
+    }
+    .TC .develop #winner .competitionDetails div.average{
+        width: 155px;
+    }
+    #winner div.note{
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 20px 0;
+    }
+    .view-challenge-result.challenge-detail .topRightTitle{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+    }
+    /*registrantsTable*/
+table.registrantsTable{
+    width: 100%;
+    display: table;
+}
+    table.registrantsTable th{
+        height: 42px;
+        vertical-align: middle;
+        background: #f1f1f1;
+        border-bottom: 1px solid #E7E7E7;
+    }
+    table.registrantsTable th.leftAlign{
+        text-align: left;
+        padding-left: 20px;
+    }
+    .TC table.registrantsTable th.leftAlign{
+        padding-left: 10px;
+    }
+        table.registrantsTable th a{
+            color: #666;
+            font-size: 12px;
+            padding-bottom: 10px;
+            background: url("../i/sort-arrows.png") no-repeat 50% 15px;
+        }
+    table.registrantsTable td{
+        height: 42px;
+        vertical-align: middle;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #666;
+        border-bottom: 1px solid #e7e7e7;
+        text-align: center;
+    }
+    .TC table.registrantsTable td{
+        padding-left: 10px;
+    }
+    #winner table.registrantsTable td{
+        height: 50px;
+    }
+    table.registrantsTable .alt td{
+        background: #f7f7f7;
+    }
+    table.registrantsTable td.leftAlign{
+        text-align: left;
+    }
+        table.registrantsTable td span.pass{
+            color: #228400;
+        }
+        table.registrantsTable td span.fail{
+            color: #b40101;
+        }
+    
+ @media (max-width: 1019px) {     
+    
+    /*results styles*/
+    .hideOnMobi{
+        display: none !important;
+    }
+    .view-challenge-result.challenge-detail .topRightTitle{
+        position: relative;
+        text-align: center;
+        height: 42px;
+        line-height: 42px;
+        border-bottom: 1px solid #e7e7e7;
+        border-top: 1px solid #e7e7e7;
+    }
+    .view-challenge-result.challenge-detail .topRightTitle a{
+        width: auto;
+        display: inline-block;
+    }
+    .view-challenge-result.challenge-detail .tabNav{
+        padding-top: 10px;
+        border-top: 1px solid #e7e7e7;
+        border-bottom: none;
+    }
+    .challenge-detail .tabNav ul{
+        text-align: center;
+        width: auto;
+    }
+    .challenge-detail .tabNav ul li{
+        display: inline-block;
+        float: none;
+    }
+    .challenge-detail .tabNav .link,
+    .challenge-detail .tabNav .link.active{
+        font-size: 18px;
+        margin: 0 4px;
+    }
+    #winner .winnerRow > div{
+        float: none;
+        display: inline-block;
+    }
+    #winner .winnerRow .image{
+        margin: 0;
+        display: block;
+        text-align: center;
+    }
+    #winner .winnerRow .details{
+        margin-top: 13px;
+        margin-bottom: 5px;
+    }
+    #winner .winnerRow .details,
+    .develop #winner .winnerRow .details{
+        width: auto;
+        min-width: 300px;
+        text-align: center;
+        margin-left: 0;
+    }
+    .TC #winner .winnerRow .details,
+    .TC .develop #winner .winnerRow .details{
+        width: auto;
+        min-width: 300px;
+        text-align: center;
+        margin-left: 0;
+    }
+    #winner .winnerRow .details a{
+        padding-bottom: 6px;
+    }
+    .develop #winner .winnerRow .details{
+        display: block;
+    }
+    #winner .winnerRow .details div span.title{
+        padding-bottom: 6px;
+    }
+    .develop #winner .winnerRow .price,
+    .develop #winner .winnerRow .point,
+    .view-challenge-result.develop #winner .winnerRow .actions{
+        display: inline-block;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .develop #winner .winnerRow .price{
+        width: 110px;
+    }
+    .develop #winner .winnerRow .point{
+        width: 90px;
+    }
+    .view-challenge-result.develop #winner .winnerRow .actions{
+        width: 90px;
+        padding-top: 0;
+    }
+        .view-challenge-result.develop #winner .winnerRow .actions a{
+            display: block;
+            width: auto;
+            float: none;
+            padding-top: 30px;
+        }
+    #winner .winnerRow .details a{
+        font-size: 24px;
+        line-height: 24px;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+    .develop #winner .winnerRow .details a{
+        padding-bottom: 0;
+    }
+    #winner .winnerRow .details div span{
+        text-align: center;
+        line-height: 19px;
+    }
+    #winner .winnerRow .details div span span.break{
+        display: block;
+    }
+    #winner .winnerRow .actions,
+    .TC #winner .winnerRow .actions,
+    .TC .develop #winner .winnerRow .actions{
+        padding: 5px 0;
+        font-size: 0;
+        text-align: center;
+        display: block;
+        width: auto;
+    }
+    #winner .winnerRow .place,
+    .TC #winner .winnerRow .place{
+        background-size: 62px 318px;
+        padding-top: 15px;
+        height: 51px;
+        width: 62px;
+        margin-bottom: 15px;
+        font-size: 34px;
+    }
+    #winner .winnerRow .place span{
+        font-size: 15px;
+    }
+    #winner .winnerRow .place.first{
+        background-position: 0 0;
+    }
+    #winner .winnerRow .place.second{
+        background-position: 0 -84px;
+    }
+    #winner .winnerRow .place.third{
+        background-position: 0 -168px;
+    }
+    #winner .winnerRow .place.fourth{
+        background-position: 0 -252px;
+    }
+    #winner .winnerRow .place.other{
+        background-position: 0 -252px;
+    }
+    #winner .winnerRow .actions a{
+        display: inline-block;
+        width: 49%;
+        padding-top: 25px;
+        padding-left: 0;
+        text-align: center;
+        margin: 0;
+        max-width: 150px;
+    }
+    #winner .winnerRow .actions a.view{
+        background-position: 50% 0;
+    }
+    #winner .winnerRow .actions a.download{
+        background-position: 50% -100px;
+    }
+
+    /*competition details*/
+    #winner .competitionDetails > div{
+        float: none;
+        display: block;
+        text-align: center;
+        border-left: none;
+        height: auto;
+        font-size: 0;
+        padding-bottom: 10px;
+        border-top: 1px solid #e7e7e7;
+        padding-top: 20px;
+    }
+    #winner .competitionDetails > div:first-child,
+    #winner .competitionDetails > div.clear{
+        border-top: none;
+        padding-top: 0;
+    }
+    #winner .competitionDetails > div.clear{
+        padding: 0;
+    }
+    #winner .competitionDetails div.registrant,
+    #winner .competitionDetails div.round,
+    .develop #winner .competitionDetails div.registrant,
+    .develop #winner .competitionDetails div.round,
+    .develop #winner .competitionDetails div.average,
+    .TC #winner .competitionDetails div.registrant,
+    .TC #winner .competitionDetails div.round,
+    .TC .develop #winner .competitionDetails div.registrant,
+    .TC .develop #winner .competitionDetails div.round,
+    .TC .develop #winner .competitionDetails div.average{
+        width: auto;
+    }
+    #winner .competitionDetails > div div.values{
+        padding: 15px 12px 0;
+        height: auto;
+    }
+    .develop #winner .competitionDetails > div.average div.values{
+        padding: 15px 0 0;
+        height: auto;
+        width: 45%;
+    }
+    #winner .competitionDetails{
+        padding-bottom: 0;
+        margin-bottom: 30px;
+    }
+    .develop #winner .competitionDetails{
+        padding-top: 0;
+    }
+    .develop .registrantsTable{
+        display: block;
+        text-align: center;
+    }
+    .registrantSection {
+        padding: 15px 10px;
+        border: 1px solid #e7e7e7;
+        display: inline-block;
+        margin: 10px auto 20px;
+        text-align: left;
+        width: 300px;
+    }
+    .develop .registrantSection .registrantLabel,
+    .develop .registrantSection .registrantField{
+        font-size: 14px;
+    }
+    .develop .registrantSection .registrantField span.pass{
+        color: #228400;
+    }
+    .develop .registrantSection .registrantField span.fail{
+        color: #b40101;
+    }
+    .develop .registrantSection .registrantHandle a.coder{
+        font-size: 16px;
+        font-weight: normal;
+    }
+}

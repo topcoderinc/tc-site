@@ -26,6 +26,11 @@ function get_contest_detail($userKey = '', $contestID = '',$contestType='', $noc
 	return $TCHOOK_plugin-> get_contest_detail($userKey, $contestID, $contestType, $nocache);
 }
 
+function get_contest_checkpoint_detail($contestID = '', $contestType=''){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin-> get_contest_checkpoint_detail($contestID,$contestType);
+}
+
 function get_raw_coder($handle){
 	global $TCHOOK_plugin;
 	return $TCHOOK_plugin->tcapi_get_raw_coder($handle);
