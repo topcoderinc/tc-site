@@ -18,11 +18,14 @@
         "contact-about.js",
         "init-header.js",
         "challenge-detail-software.js",
+        "challenge-result.js",
         "jquery.jscrollpane.min.js",
         "jquery.column-1.0.js",
         "moment.min.js",
         "moment-timezone.min.js",
-        "moment-data.js"
+        "moment-data.js",
+        "jquery.jqtransform.js",
+        "challenge-submit.js"
       ],
       "css": [
         "blog.css",
@@ -38,7 +41,10 @@
         "register-login.css",
         "blog-base.css",
         "community-landing.css",
-        "challenge-detail-software.css"
+        "challenge-detail-software.css",
+        "challenge-results.css",
+        "jqtransform.css",
+        "challenge-submit.css"
       ]
     },
     "challengelanding": {
@@ -127,6 +133,7 @@
         "register-login.js",
         "init-header.js",
         "jquery.qtip.min.js",
+        "jquery.jqtransform.js",
         "terms.js"
       ],
       "css": [

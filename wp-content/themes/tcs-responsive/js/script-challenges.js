@@ -1247,12 +1247,8 @@ appChallenges = {
 
                 $('.colPhase', row).html(rec.currentStatus);
 
-                /* tmp solution */
-                if (app.isDesignContest(rec.challengeType)) {
-                    $('.winBages', row).html('<a href="http://studio.topcoder.com/?module=ViewContestResults&ct=' + rec.challengeId + '">View Winners</a>');
-                } else {
-                    $('.winBages', row).html('<a href="http://community.topcoder.com/tc?module=ProjectDetail&pj=' + rec.challengeId + '">View Winners</a>');
-                }
+                $('.winBages', row).html('<a href="' + siteurl+ '/challenge-details/' +rec.challengeId+'?type='+ rec.challengeCommunity +'#winner">View Winners</a>');
+
                 $('.moreWin', row).hide();
 
                 $('.colReg', row).html('<a href="' + contestLinkUrl + '#viewRegistrant">' + rec.numRegistrants + '</a>');

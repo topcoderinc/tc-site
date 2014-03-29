@@ -1232,12 +1232,10 @@ endif;
 
 
 </div>
-<div id="winner" class="tableWrap hide tab">
+<div id="winner" class="hide tab">
 
 
-  <article>
-    Coming Soon...
-  </article>
+  <?php include(locate_template('page-challenge-result.php'));?>	
 
 </div>
 <div id="checkpoints" class="tableWrap hide tab">
