@@ -36,7 +36,7 @@ global $activity;
 
 ?>
 <div class="content">
-	<div id="promo-banners">
+	<div id="banner">
 		<div class="container">
 			<ul class="slider">
 				<?php 
