@@ -803,7 +803,7 @@ appChallenges = {
                     var startDate = app.formatDate2(rec.postingDate);
                     var checkPointDate;
                     if (rec.checkpointSubmissionEndDate) {
-                      checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                        checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                     }
 
                     var endDate = app.formatDate2(rec.submissionEndDate);
@@ -820,7 +820,7 @@ appChallenges = {
                         tcoFlag = "tco-flag-develop.png";
                         row = $(challengesBP.tabAllDev).clone();
                         if (rec.registrationEndDate) {
-                          checkPointDate = app.formatDate2(rec.registrationEndDate);
+                            checkPointDate = app.formatDate2(rec.registrationEndDate);
                         }
 
                         contestType = "develop";
@@ -840,9 +840,9 @@ appChallenges = {
                     $('.vStartDate', row).html(startDate);
 
                     if (checkPointDate) {
-                      $('.vEndRound', row).html(checkPointDate);
+                        $('.vEndRound', row).html(checkPointDate);
                     } else {
-                      $('.vEndRound', row).parent().empty();
+                        $('.vEndRound', row).parent().empty();
                     }
 
 
@@ -927,7 +927,7 @@ appChallenges = {
                         con = $(challengesBP.grDevOpen).clone();
 
                         if (rec.submissionEndDate) {
-                          checkPointDate = app.formatDate2(rec.submissionEndDate);
+                            checkPointDate = app.formatDate2(rec.submissionEndDate);
                         }
                         contestType = "develop";
                     }
@@ -947,9 +947,9 @@ appChallenges = {
                     $('.tipC', con).html(rec.challengeType);
                     $('.vStartDate', con).html(startDate);
                     if (checkPointDate) {
-                      $('.vEndRound', con).html(checkPointDate);
+                        $('.vEndRound', con).html(checkPointDate);
                     } else {
-                      $('.vEndRound', con).parent().empty();
+                        $('.vEndRound', con).parent().empty();
                     }
 
                     $('.vEndDate', con).html(endDate);
@@ -1042,7 +1042,7 @@ appChallenges = {
                 var startDate = app.formatDate2(rec.postingDate);
                 var checkPointDate;
                 if (rec.checkpointSubmissionEndDate) {
-                  checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                 }
 
                 var endDate = app.formatDate2(rec.submissionEndDate);
@@ -1056,7 +1056,7 @@ appChallenges = {
                 if (contest_type == "develop") {
                     row = $(challengesBP.gdDevOpen).clone();
                     if (rec.registrationEndDate) {
-                      checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
                     }
                 }
 
@@ -1079,9 +1079,9 @@ appChallenges = {
                 $('.vStartDate', row).html(startDate);
 
                 if (checkPointDate) {
-                  $('.vEndRound', row).html(checkPointDate);
+                    $('.vEndRound', row).html(checkPointDate);
                 } else {
-                  $('.vEndRound', row).parent().empty();
+                    $('.vEndRound', row).parent().empty();
                 }
 
                 $('.vEndDate', row).html(endDate);
@@ -1125,7 +1125,7 @@ appChallenges = {
                 var startDate = app.formatDate2(rec.postingDate);
                 var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                 if (rec.checkpointSubmissionEndDate) {
-                  checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                 }
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
@@ -1138,7 +1138,7 @@ appChallenges = {
                 if (contest_type == "develop") {
                     con = $(challengesBP.grDevOpen).clone();
                     if (rec.registrationEndDate) {
-                      checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
                     }
                 }
 
@@ -1161,9 +1161,9 @@ appChallenges = {
                 $('.vStartDate', con).html(startDate);
 
                 if (checkPointDate) {
-                  $('.vEndRound', con).html(checkPointDate);
+                    $('.vEndRound', con).html(checkPointDate);
                 } else {
-                  $('.vEndRound', con).parent().empty();
+                    $('.vEndRound', con).parent().empty();
                 }
 
                 $('.vEndDate', con).html(endDate);
@@ -1370,8 +1370,11 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
-        var timezone = " EST";
-        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm") + timezone;
+        if (date) {
+            var timezone = " EST";
+            return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm") + timezone;
+        }
+        return "";
         // var d = new Date(date);
         // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
