@@ -233,12 +233,13 @@ var coder = {
 									var aIdx = this.defs.slide;
 									$('.ratingInfo .slider-pager .isActive').removeClass('isActive');
 									$('.ratingInfo .slider-pager li:eq('+aIdx+') a').addClass('isActive');
-									$('.submissonInfo .submissionThumb img').attr('src',$('img',this.defs.currentSlide).attr('src')+'?sbt=full');
+									$('.submissonInfo .submissionThumb img').attr('src',$('img',this.defs.currentSlide).attr('src').replace('small', 'full'));
 									
 									var desc = $('.comptetionData',this.defs.currentSlide);
 									$('.winInfo .contestTitle').html('<i></i>'+$('.name',desc).val());
+									$('.winInfo #badgeImg').attr('class','').addClass('badgeImg rank'+$('.rank',desc).val());
 									$('.winInfo .prizeAmount .val').html('<i></i>'+$('.prize',desc).val());
-									$('.winInfo .submittedOn .time').html($('.submiissionDate',desc).val());
+									$('.winInfo .submittedOn .time').html($('.submissionDate',desc).val());
 								}
 			});
 			window.setTimeout(function(){

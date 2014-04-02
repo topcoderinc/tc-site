@@ -65,5 +65,10 @@ function get_json_from_url( $url ){
 	global $TCHOOK_plugin;
 	return $TCHOOK_plugin->get_json_from_url( $url );
 }
+function get_stat_design_recentwins ( $url ){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->tcapi_get_stat_design_recentwins( $url );
+}
+
 
 ?>
