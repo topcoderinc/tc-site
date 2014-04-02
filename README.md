@@ -1,5 +1,4 @@
 # Topcoder.com Wordpress site #
-=======
 
 ## File Organization ##
 
