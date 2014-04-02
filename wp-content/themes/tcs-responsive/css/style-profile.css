@@ -727,27 +727,14 @@ a{
     }
     .designLayout .winInfo .badgeImg{
         margin-top: 22px;
-        height: 156px;
+        height: 168px;
         background: url(../i/win-badge-big.png) no-repeat;
         background-position: 50% 0;
     }
-	
-	.designLayout .winInfo .badgeImg.rank2{
-		background-position:130px -155px;
-	}
-	
-	.designLayout .winInfo .badgeImg.rank3{
-		background-position:130px -310px;
-	}
-	
-	.designLayout .winInfo .badgeImg.rankM{
-		background-position:130px -465px;
-	}
-	
     .designLayout .winInfo .prizeAmount{
         text-align: center;    
         margin-top: 12px;
-        height: 48px;
+        height: 36px;
 }
     .designLayout .winInfo .prizeAmount .val{
         position: relative;
