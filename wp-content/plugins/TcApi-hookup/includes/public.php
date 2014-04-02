@@ -157,6 +157,48 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		}
 		return "Error in processing request";
 	}
+	
+	 // contest results
+ public function get_contest_results($contestID = '', $contestType = '') {
+
+		if ($contestType == "design") {
+			$url = "https://api.topcoder.com/v2/design/challenges/result/$contestID";
+		} else {
+			$url = "https://api.topcoder.com/v2/develop/challenges/result/$contestID";
+		}
+
+		$args = array (
+				'httpversion' => get_option ( 'httpversion' ),
+				'timeout' => get_option ( 'request_timeout' )
+		);
+		$response = wp_remote_get ( $url, $args );
+		if (is_wp_error ( $response ) || ! isset ( $response ['body'] )) {
+			return "Error in processing request";
+		}
+		$search_result = json_decode ( $response ['body'] );
+		return $search_result;
+	}
+	
+ // contest checkpoint detail
+ public function get_contest_checkpoint_detail($contestID = '', $contestType = '') {
+
+		if ($contestType == "design") {
+			$url = "https://api.topcoder.com/v2/design/challenges/checkpoint/$contestID";
+		} else {
+			$url = "https://api.topcoder.com/v2/develop/challenges/checkpoint/$contestID";
+		}
+
+		$args = array (
+				'httpversion' => get_option ( 'httpversion' ),
+				'timeout' => get_option ( 'request_timeout' )
+		);
+		$response = wp_remote_get ( $url, $args );
+		if (is_wp_error ( $response ) || ! isset ( $response ['body'] )) {
+			return "Error in processing request";
+		}
+		$search_result = json_decode ( $response ['body'] );
+		return $search_result;
+	}
 
 	// tcapi shortcodes active_contests
 	public function tcapi_active_contests($atts) {
