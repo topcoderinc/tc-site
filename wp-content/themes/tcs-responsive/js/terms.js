@@ -49,7 +49,7 @@ appChallengeTerms = {
               "termId": termsOfUseID,
               "jwtToken": tcjwt.replace(/["]/g, "")
             }, function (data) {
-              window.location = siteURL + "/challenge-details/terms/" + challengeId;
+              window.location = siteURL + "/challenge-details/terms/" + challengeId + "?challenge-type=" + challengeType;
               $('.loading').hide();
             });
           }
@@ -90,7 +90,7 @@ appChallengeTerms = {
               allAgreed = false;
             }
             var $tr = $("<tr>", {class: i % 2 == 1 ? "alt" : ""});
-            var $td1 = $("<td>").text(terms[i]["title"]).append(" (").append($("<a>", {target: "_blank", href: siteURL + "/challenge-details/terms/detail/" + terms[i]["termsOfUseId"] + "?contestID=" + challengeId }).text(agreed ? "view" : "view and agree")).append(")");
+            var $td1 = $("<td>").text(terms[i]["title"]).append(" (").append($("<a>", {target: "_blank", href: siteURL + "/challenge-details/terms/detail/" + terms[i]["termsOfUseId"] + "?contestID=" + challengeId + "&challenge-type=" + challengeType}).text(agreed ? "view" : "view and agree")).append(")");
             var $td2 = $("<td>").append($("<span>", {class: "status " + (agreed === true ? "complete" : "required")}).text(agreed === true ? "Completed" : "Required"));
             $tr.append($td1).append($td2);
             $(".termTable tbody").append($tr);

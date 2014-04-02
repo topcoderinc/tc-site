@@ -71,18 +71,14 @@ $postId = $post->ID;
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
-					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?></h1>
+					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?>
+                      <?php get_template_part("content", "rss-icon"); ?>
+                    </h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
 						</span>
 					</aside>
 				</header>
-				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-					<?php
-					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=".$contest_type;
-					?>
-					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
-				</div>
 				<div class="actions">
 					<div class="lt challengeType">
 						<?php

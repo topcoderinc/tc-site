@@ -154,7 +154,12 @@ function createDevelopSubmissionMap($contest) {
   return $submission_map;
 }
 
-$documents = $contest->Documents;
+if (!empty($_COOKIE["tcsso"])) {
+  $documents = $contest->Documents;
+} else {
+  $documents = array();
+}
+
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
 get_header('challenge-landing');
@@ -180,14 +185,14 @@ get_header('challenge-landing');
   <?php
   if ($contestType != 'design'):
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
+    <a class="btn btnAction challengeRegisterBtn" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
     <a class="btn btnAction" target="_blank"
        href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID ;?>"><span>1</span> <strong>Register
+    <a class="btn btnAction challengeRegisterBtn" href="javascript:;"><span>1</span> <strong>Register
         For This Challenge</strong></a>
     <a class="btn btnAction" target="_blank"
        href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
@@ -228,7 +233,7 @@ endif;
     <td class="fifty">
       <h2>2nd PLACE</h2>
       <h3>
-        <small>$</small><?php 
+        <small>$</small><?php
           echo number_format(isset($contest->prize[1])? $contest->prize[1] : "0"); ?>
       </h3>
     </td>
@@ -1288,22 +1293,8 @@ endif;
 <?php
 if ($contestType != 'design'):
   ?>
-  <h3>Downloads:</h3>
-  <div class="inner">
-    <?php
-    echo '<ul>';
-    if (!empty($contest->Documents)) {
-      foreach ($contest->Documents as $value) {
-        $document = $value;
-        echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';
-      }
-    }
-    else {
-      echo '<li><strong>None</li></strong>';
-    }
-    echo '</ul>';
-    ?>
-
+  <div class="slideBox">
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </div>
   <li class="slide">
 
@@ -1421,18 +1412,7 @@ if ($contestType != 'design'):
 else:
   ?>
   <li class="slide">
-    <div class="slideBox">
-      <h3>Downloads:</h3>
-
-      <div class="inner">
-        <?php
-        for ($i = 0; $i < count($documents); $i++) :
-          $document = $documents[$i];
-          ?>
-          <p><a href="<?php echo $document->url; ?>"><?php echo $document->documentName; ?></a></p>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </li>
   <li class="slide">
     <div class="slideBox">

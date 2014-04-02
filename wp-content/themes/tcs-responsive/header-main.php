@@ -65,6 +65,7 @@ if (isset($_GET['auth']) && $_GET['auth'] == 'logout') {
     var stylesheet_dir = '<?php echo THEME_URL . '/css'; ?>';
     var autoRegister = '<?php echo get_query_var('autoRegister'); ?>';
     var timezone_string = "<?php echo get_option('timezone_string');?>";
+    var challengeType;
   </script>
 
 <?php

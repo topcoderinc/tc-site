@@ -186,6 +186,7 @@ function tcapi_query_vars($query_vars) {
   $query_vars [] = 'autoRegister';
   $query_vars [] = 'type';
   $query_vars [] = 'nocache';
+  $query_vars [] = 'challenge-type';
   return $query_vars;
 }
 
