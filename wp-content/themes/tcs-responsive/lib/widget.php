@@ -390,7 +390,7 @@ class Popular_post_widget extends WP_Widget {
     /* Before widget (defined by themes). */
     echo $before_widget;
 
-    wp_reset_query();
+    //wp_reset_query();
     $title = $title == "" ? "Popular Posts" : $title;
     $postPerPage = $postPerPage == "" ? 4 : $postPerPage;
     $args = array(
@@ -400,8 +400,9 @@ class Popular_post_widget extends WP_Widget {
       'orderby' => 'meta_value_num',
       'order' => 'DESC'
     );
-    query_posts($args);
-    if (have_posts()) :
+    //query_posts($args);
+    $postQuery = new WP_Query($args);
+    if ($postQuery->have_posts()) :
       ?>
       <div class="sideFindRelatedContent sideFindRelatedContentNoBorder">
         <input class="popularPostPage" type="hidden" value="<?php echo $postPerPage; ?>"/>
@@ -410,7 +411,8 @@ class Popular_post_widget extends WP_Widget {
         <h3 class="popularPostTitle"><?php echo $title; ?></h3>
         <ul class="relatedContentList">
           <?php
-          while (have_posts()) : the_post();
+          while ($postQuery->have_posts()) : 
+            $postQuery->the_post(); // advance to next record and set global $post var
             $post;
             ?>
             <li>
@@ -437,7 +439,9 @@ class Popular_post_widget extends WP_Widget {
         </div>
       </div>
       <!-- /.popular post-->
-    <?php endif; ?>
+    <?php endif; 
+          wp_reset_postdata();
+    ?>
 
     <?php
     /* After widget (defined by themes). */

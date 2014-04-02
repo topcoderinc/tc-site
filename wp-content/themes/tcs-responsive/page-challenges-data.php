@@ -3,8 +3,7 @@
  * Template Name: Challenges Data Page
  * Author : evilkyro1965
  */
-get_header('challenge-landing'); 
-
+get_header('challenge-landing');
 
 $values = get_post_custom ( $post->ID );
 
@@ -16,12 +15,12 @@ $postId = $post->ID;
 	// get contest details
 	$contest_type = "data";
 	$postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
-	
+
 ?>
 
 <script type="text/javascript" >
 	var siteurl = "<?php bloginfo('siteurl');?>";
-	
+
 	var reviewType = "data";
 	var ajaxAction = "get_active_data_challenges";
 	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
@@ -32,13 +31,13 @@ $postId = $post->ID;
 </script>
 <div class="content">
 	<div id="main">
-	
+
 	<?php if(have_posts()) : the_post();?>
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
 
 		<div id="hero">
-			<?php 
+			<?php
 				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
 				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
 				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
@@ -60,7 +59,7 @@ $postId = $post->ID;
 			</div>
 		</div>
 		<!-- /#hero -->
-				
+
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
@@ -73,7 +72,7 @@ $postId = $post->ID;
 					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to data challenges </a>
 				</div>
 				<div id="tableView" class=" viewTab">
-					<div class="tableWrap tcoTableWrap">						
+					<div class="tableWrap tcoTableWrap">
 						<table class="dataTable tcoTable centeredTable reviewTable">
 							<thead>
 								<tr>
@@ -85,16 +84,16 @@ $postId = $post->ID;
 							</thead>
 							<tbody>
 								<!-- demo records will be automatically deleted while loading data using AJAX -->
-								
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<!-- /#tableView -->
-				
+
 				<div class="dataChanges">
 					<div class="lt">
-						
+
 					</div>
 					<div id="challengeNav" class="rt">
 						<a href="javascript:;" class="prevLink">
@@ -106,7 +105,7 @@ $postId = $post->ID;
 					</div>
 				</div>
 				<!-- /.dataChanges -->
-				
+
 			</div>
 		</article>
 		<!-- /#mainContent -->

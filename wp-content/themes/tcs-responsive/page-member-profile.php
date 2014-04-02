@@ -40,7 +40,7 @@ $userkey = get_option ( 'api_user_key' );
 if ($coder->photoLink != '')
 	$photoLink = 'http://community.topcoder.com' . $coder->photoLink;
 else
-	$photoLink = 'http://local.topcoder.com/reviewer/tc-cs/wp-content/themes/tcs-responsive/i/no-photo.png';
+	$photoLink = 'http://local.topcoder.com/reviewer/tc-cs/wp-content/themes/tcs-responsive/i/no-photo.png'; //@TODO This is terrible and needs to be changed
 
 $quote = ($coder->quote == '') ? "Member of the world's largest global competitive community. " : $coder->quote;
 
@@ -113,7 +113,7 @@ $quote = ($coder->quote == '') ? "Member of the world's largest global competiti
 						} else {
 							get_template_part ( 'content', 'member-algo' );
 						}
-						?>						
+						?>
 					</div>
 					<!-- /.dataTabs -->
 				</div>

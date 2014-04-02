@@ -47,6 +47,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							if($items!=null)
 							foreach($items as $menu) :
 								$active = $catId == $menu->object_id ? "active" : "";
+                if ($catId=="" && $menu->object_id=="13554") $active = "active";
 						?>
 							<a href="<?php echo $menu->url;?>" class="<?php echo $active;?>"><?php echo $menu->title;?></a>
 						<?php endforeach; ?>
@@ -87,10 +88,11 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 								$args .= "&paged=$currPage";
 							}
 
-							query_posts($args);
-							if ( have_posts() ) :
-								while ( have_posts() ) :
-									the_post();
+							//query_posts($args);
+							$postQuery = new WP_Query($args);
+							if ( $postQuery->have_posts() ) :
+								while ( $postQuery->have_posts() ) :
+									$postQuery->the_post();
 									$postId = $post->ID;
 									$image = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), 'blog-thumb' );
 									if($image!=null) $imageUrl = $image[0];
@@ -183,11 +185,15 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 						?>
 						</div>
 						<?php
-							wp_reset_query();
+							//wp_reset_query();
+							wp_reset_postdata();
 							$args = "post_type=".BLOG;
 							$args .= "&posts_per_page=-1";
-							$wpQueryAll = query_posts($args);
-							$postCount = count($wpQueryAll);
+							//$wpQueryAll = query_posts($args);
+							$allPostsQuery = new WP_Query($args);
+							$allPostsQuery->get_posts();
+							$postCount = $allPostsQuery->found_posts;
+							//$postCount = count($wpQueryAll);
 
 							$prevLink = add_query_arg("pageNo",($currPage-1),$currentUrl);
 							$nextLink = add_query_arg("pageNo",($currPage+1),$currentUrl);
@@ -195,19 +201,22 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							if($postCount > $postPerPage) :
 						?>
 							<div class="pagingWrapper">
-								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Post</a><?php endif;?>
-								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Post</a><?php endif; ?>
+								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Posts</a><?php endif;?>
+								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Posts</a><?php endif; ?>
 							</div>
 						<?php endif; ?>
 
 							<div class="showMoreWrapper showMoreWrapperMobile">
 								<a id="showMoreBlogPost" href="javascript:;" class="btn">Show More</a>
 								<span class="morePostLoading">&nbsp;</span>
-								<span class="noMorePostExist">No more post exist!</span>
+								<span class="noMorePostExist">No more posts exist!</span>
 							</div>
 
 						</section>
-					<?php endif; wp_reset_query();?>
+					<?php endif; 
+						// shouldn't have to reset global post here b/c we never updated it
+						//wp_reset_postdata(); 
+						?>
 					<!-- /.pageContent -->
 					</div>
 

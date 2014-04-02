@@ -40,7 +40,8 @@ module.exports = function(grunt) {
         files: {
           '<%= build.themeDist %>/tc.default.concat.css': addBaseFilePath(pkg_config.packages.default.css, themeCSS),
           '<%= build.themeDist %>/tc.challengelanding.concat.css': addBaseFilePath(pkg_config.packages.challengelanding.css, themeCSS),
-          '<%= build.themeDist %>/tc.challenges.concat.css': addBaseFilePath(pkg_config.packages.challenges.css, themeCSS)
+          '<%= build.themeDist %>/tc.challenges.concat.css': addBaseFilePath(pkg_config.packages.challenges.css, themeCSS),
+          '<%= build.themeDist %>/tc.challengeterms.concat.css': addBaseFilePath(pkg_config.packages.challengeterms.css, themeCSS)
         }
       }
     },
@@ -51,7 +52,8 @@ module.exports = function(grunt) {
         files: {
           '<%= build.themeDist %>/css/default.min.css': ['<%= build.themeDist %>/tc.default.concat.css'],
           '<%= build.themeDist %>/css/challengelanding.min.css': ['<%= build.themeDist %>/tc.challengelanding.concat.css'],
-          '<%= build.themeDist %>/css/challenges.min.css': ['<%= build.themeDist %>/tc.challenges.concat.css']
+          '<%= build.themeDist %>/css/challenges.min.css': ['<%= build.themeDist %>/tc.challenges.concat.css'],
+          '<%= build.themeDist %>/css/challengeterms.min.css': ['<%= build.themeDist %>/tc.challengeterms.concat.css']
         }
       }
     },
@@ -63,7 +65,8 @@ module.exports = function(grunt) {
         files: {
           '<%= build.themeDist %>/js/default.min.js': addBaseFilePath(pkg_config.packages.default.js, themeJS),
           '<%= build.themeDist %>/js/challengelanding.min.js': addBaseFilePath(pkg_config.packages.challengelanding.js, themeJS),
-          '<%= build.themeDist %>/js/challenges.min.js': addBaseFilePath(pkg_config.packages.challenges.js, themeJS)
+          '<%= build.themeDist %>/js/challenges.min.js': addBaseFilePath(pkg_config.packages.challenges.js, themeJS),
+          '<%= build.themeDist %>/js/challengeterms.min.js': addBaseFilePath(pkg_config.packages.challengeterms.js, themeJS)
         }
       }
     },

@@ -47,7 +47,8 @@ function tags_support_all() {
 
 add_action('init', 'tags_support_all');
 
-locate_template("lib/rss.php", TRUE);
+//locate_template("lib/rss.php", TRUE);
+date_default_timezone_set(get_option('timezone_string'));
 
 function get_rel_url($url, $force = FALSE) {
   if (!strstr($url, $_SERVER['HTTP_HOST']) && !$force) {
@@ -183,6 +184,9 @@ function tcapi_query_vars($query_vars) {
   $query_vars [] = 'role';
   $query_vars [] = 'termsOfUseID';
   $query_vars [] = 'autoRegister';
+  $query_vars [] = 'type';
+  $query_vars [] = 'nocache';
+  $query_vars [] = 'challenge-type';
   return $query_vars;
 }
 
@@ -295,7 +299,7 @@ function promo_register() {
   );
 
   register_post_type('promo', $args);
-  flush_rewrite_rules(FALSE);
+
   $strPostName = 'Blog';
   $strPostName = 'Blog';
 
@@ -386,7 +390,7 @@ function case_studies_register() {
 
   register_post_type('case-studies', $args);
 
-  flush_rewrite_rules(FALSE);
+
 
 }
 
@@ -400,7 +404,7 @@ function get_blog_ajax() {
   $searchKey = $_GET["searchKey"];
   $authorId = $_GET["authorId"];
 
-  wp_reset_query();
+  //wp_reset_query();
   $args = "post_type=" . BLOG;
   $args .= "&order=DESC";
   $args .= "&posts_per_page=" . $postPerPage;
@@ -415,7 +419,9 @@ function get_blog_ajax() {
     }
   }
 
-  $arrPost = query_posts($args);
+  //$arrPost = query_posts($args);
+  $postQuery = new WP_Query($args);
+  $arrPost = $postQuery->get_posts();
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
 
@@ -542,7 +548,7 @@ function get_popular_ajax() {
   $page = $_GET["page"];
   $postPerPage = $_GET["posts_per_page"] == "" ? 4 : $_GET["posts_per_page"];
 
-  wp_reset_query();
+  //wp_reset_query();
   $args = array(
     'post_type' => 'blog',
     'paged' => $page,
@@ -552,7 +558,9 @@ function get_popular_ajax() {
     'order' => 'DESC'
   );
 
-  $arrPost = query_posts($args);
+  //$arrPost = query_posts($args);
+  $postQuery = new WP_Query($args);
+  $arrPost = $postQuery->get_posts();
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
       $postId = $post->ID;
@@ -575,6 +583,7 @@ function get_popular_ajax() {
     endforeach;
   endif;
   die();
+  /*
   $arrPost = query_posts($args);
   if ($arrPost != NULL) :
     foreach ($arrPost as $post) :
@@ -599,6 +608,7 @@ function get_popular_ajax() {
     endforeach;
   endif;
   die();
+  */
 }
 
 add_action('wp_ajax_subscribe_ajax', 'subscribe_ajax');

@@ -4,6 +4,7 @@ $(function () {
     centerModal();
   });
 
+
   $('#username').keyup(function() {
     $('#loginForm span.err3').hide();
     $('#loginForm span.err1').hide();
@@ -91,11 +92,13 @@ $(function () {
       $(this).closest('.row').find('input:text').removeClass('invalid');
       $(this).closest('.row').find('span.err1').hide();
       $(this).closest('.row').find('span.err2').hide();
+      $(this).closest('.row').find('span.err3').hide();
       $(this).parents(".row").find("span.valid").hide();
     } else {
       $(this).closest('.row').find('input:text').addClass('invalid');
       $(this).closest('.row').find('span.err1').hide();
       $(this).closest('.row').find('span.err2').hide();
+      $(this).closest('.row').find('span.err3').hide();
       $(this).parents(".row").find("span.valid").hide();
       if (email.length==0)
         $(this).closest('.row').find('span.err1').show();
@@ -203,7 +206,7 @@ $(function () {
         $(this).parents(".row").find("span.valid").hide();
       }
     }
-    if (pwd.val() == confirm.val()) {
+    if (pwd.val() == confirm.val() && pwd.val() != '') {
       confirm.parents(".row").find("span.valid").css("display", "inline-block");
       confirm.parents(".row").find('input:text').removeClass('invalid');
       confirm.parents(".row").find('span.err1').hide();
@@ -232,6 +235,7 @@ $(function () {
     if (!isValidEmailAddress($('#register form.register input.email:text').val())) return;
     emailValidationAttempted = true;
     var email = $('#register form.register input.email:text').val();
+    email = email.replace('+', '%2B');
     $.ajax({
       type: 'GET',
       data: {
@@ -244,9 +248,9 @@ $(function () {
         if (data.error || !data.available) {
           emailIsFree = false;
           var node = $('#register form.register input.email:text');
-          $('input.email').closest('.row').find('.err3').show();
-          $('input.email').closest('.row').find('input:text').addClass('invalid');
-          $('input.email').closest('.row').find('span.valid').hide();
+          $('input.email').closest('p.row').find('.err3').show();
+          $('input.email').closest('p.row').find('input:text').addClass('invalid');
+          $('input.email').closest('p.row').find('span.valid').hide();
           emailDeferred.resolve();
         } else {
           emailIsFree = true;
@@ -317,12 +321,12 @@ $(function () {
 
   $('#register a.btnSubmit').on('click', function () {
     var isValid = true;
-    if (!handleValidationAttempted && !$('input.handle').closest('.row').find('.err3,.err4,.err5,.err6').is(':visible')) validateHandle();
+    if ($('#register form.register input.name.handle:text').val() != '' && !handleValidationAttempted && !$('input.handle').closest('.row').find('.err3,.err4,.err5,.err6').is(':visible')) validateHandle();
     if (!emailValidationAttempted) validateEmail();
 
     var frm = $('#register form.register');
-    var handleInvalid = $('input.handle').closest('.row').find('.invalid');
-    $('.invalid', frm).not(handleInvalid).removeClass('invalid');
+    var invalidExceptions = $('input.handle,input.email').closest('.row').find('.invalid');
+    $('.invalid', frm).not(invalidExceptions).removeClass('invalid');
     var handleErr = $('input.handle').closest('.row').find('.err2,.err3,.err4,.err5,.err6,.err7');
     $('.err1,.err2', frm).not(handleErr).hide();
     $('input:text', frm).each(function () {

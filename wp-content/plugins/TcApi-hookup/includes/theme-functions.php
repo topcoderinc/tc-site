@@ -3,7 +3,7 @@
 
 function get_contest_type($userKey = ''){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin-> get_contest_type( $userKey );	
+	return $TCHOOK_plugin-> get_contest_type( $userKey );
 }
 
 function get_active_contests($userKey = '', $contestType = '', $page = 1, $post_per_page = 30){
@@ -21,9 +21,9 @@ function search_contest($userKey = '', $keyword = ''){
 	return $TCHOOK_plugin-> search_contest($userKey, $keyword);
 }
 
-function get_contest_detail($userKey = '', $contestID = '',$contestType=''){
+function get_contest_detail($userKey = '', $contestID = '',$contestType='', $nocache = false){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin-> get_contest_detail($userKey, $contestID,$contestType);
+	return $TCHOOK_plugin-> get_contest_detail($userKey, $contestID, $contestType, $nocache);
 }
 
 function get_raw_coder($handle){

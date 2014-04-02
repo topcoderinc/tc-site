@@ -19,13 +19,15 @@
                     'post_type' => 'blog',
                     'paged' => $current_page
                 );
-                query_posts($query);
+                //query_posts($query);
+                $postQuery = new WP_Query($query);
+                $postQuery->get_posts();
                 
-                $total_pages = $wp_query->max_num_pages;
-                $total_posts = $wp_query->found_posts;
-                $displaying_posts = $wp_query->post_count;
+                $total_pages = $postQuery->max_num_pages;
+                $total_posts = $postQuery->found_posts;
+                $displaying_posts = $postQuery->post_count;
                 
-                if (have_posts() ): while (have_posts()): the_post();
+                if ($postQuery->have_posts() ): while ($postQuery->have_posts()): $postQuery->the_post();
                     $blog_values = get_post_custom($post->ID);
                 ?>
                 <section>
@@ -41,7 +43,8 @@
                 </section>
                 <?php
                 endwhile; endif;
-                wp_reset_query();
+                //wp_reset_query();
+                wp_reset_postdata();
                 ?>
                 
 				<?php if(function_exists('wp_paginate')) {

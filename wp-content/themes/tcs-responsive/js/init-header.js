@@ -6,6 +6,7 @@ $(document).ready(function() {
     modal.show();
     centerModal();
   };
+
   function centerModal(selector) {
     var modal = $('.modal:visible');
     if ($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8'))
@@ -14,6 +15,35 @@ $(document).ready(function() {
       modal.css('margin', '0');
     }
   }
+
+  function loadCountries() {
+    $.ajax({
+      type: 'GET',
+      data: {
+        action: 'get_countries'
+      },
+      dataType: 'json',
+      url: ajaxUrl,
+      success: function(data) {
+        if (data.error) {
+          alert(data.error);
+        } else {
+          data = data.map(function(x) {return x.countryName});
+          data.sort();
+          for (var i = 0; i < data.length; i++) {
+            var name = data[i];
+            var node = $('<option value="'+name+'">'+name+'</option>')
+            $('#selCountry').append(node);
+          }
+        }
+      }
+    }).fail(function() {
+      alert('Could not load all data. Please reload the page or contact support@topcoder.com');
+    });
+  }
+
+
+  
   // Initialize member details
   $(window).bind('pageshow', function(event) {
 
@@ -55,10 +85,10 @@ $(document).ready(function() {
             }
             $('.userDetails .coder').attr('style', 'color: ' + color);
             var userPofileUrl = wpUrl + '/member-profile/' + handle;
-            $('.userDetails').prepend('<a class="tc_coder coder" href="'+userPofileUrl+'" style="color:'+color+'">'+handle+'</a>');
+            $('.userDetails').prepend('<a class="tc_coder coder" href="' + userPofileUrl + '" style="color:' + color + '">' + handle + '</a>');
             $('.myProfileLink, .profileLink').attr('href', userPofileUrl);
             $('.userDetails .country').text(data['country']);
-            $('.userDetails .memberSince').text(data['memberSince'].split(" ")[0].split(".")[2]);
+            $('.userDetails .memberSince').text(dateformat(data['memberSince'].substring(0, 10)));
 
             if (data['overallEarning'])
               $('.userDetails .memberEarning').text("$" + data['overallEarning']);
@@ -77,13 +107,14 @@ $(document).ready(function() {
           if (window.location.hash == '#_=_') {
             location.href = '';
           } else {
-            location.href = location.href;
+            location.reload();
           }
         });
       } else if (!tcsso && $('.actionLogout').length > 1) {
+        loadCountries();
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log In").removeClass("actionLogout").addClass("actionLogin");
-        $('.actionLogin').on('click', function () {
+        $('.actionLogin').on('click', function() {
           document.getElementById("loginForm").reset();
           $('#loginForm .btnSubmit').html('Login');
           $(".pwd, .confirm, .strength").parents(".row").show();
@@ -93,8 +124,14 @@ $(document).ready(function() {
         $('.loginLink, .linkLogin, .btnRegister').addClass('show').show();
         $('.logoutLink, .linkLogout, .userDetailsWrapper').removeClass('show').hide();
 
+      } else {
+        loadCountries();
+        $('.headerTopRightMenu .actionLogin').show();
       }
 
+    } else {
+      loadCountries();
+      $('.headerTopRightMenu .actionLogin').show();
     }
   });
   $('#login input').keyup(function(e) {

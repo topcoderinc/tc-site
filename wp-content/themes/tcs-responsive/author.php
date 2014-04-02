@@ -86,7 +86,7 @@ $authorObj = get_user_by("id",$authorId);
 							<input type="hidden" class="pageNo" value="<?php echo $currPage; ?>" />
 							<input type="hidden" class="catId" value="<?php echo $catId; ?>" />
 						<?php 
-							wp_reset_query();
+							//wp_reset_query();
 							$args = "post_type=".BLOG;
 							$args .= "&author=$authorId&orderby=menu_order&order=ASC";
 							if($showAll=="") {
@@ -94,10 +94,11 @@ $authorObj = get_user_by("id",$authorId);
 								$args .= "&paged=$currPage";
 							}
 							
-							query_posts($args);
-							if ( have_posts() ) :
-								while ( have_posts() ) : 
-									the_post();
+							//query_posts($args);
+							$postQuery = new WP_Query($args);
+							if ( $postQuery->have_posts() ) :
+								while ( $postQuery->have_posts() ) : 
+									$postQuery->the_post(); // iterate and set global $post var
 									$postId = $post->ID;
 									$image = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), 'blog-thumb' );
 									if($image!=null) $imageUrl = $image[0];
@@ -201,11 +202,15 @@ $authorObj = get_user_by("id",$authorId);
 							endif;
 						?>
 						<?php
-							wp_reset_query();
+							//wp_reset_query();
+							wp_reset_postdata(); // reset post global var since it was updated above
 							$args = "post_type=".BLOG;
 							$args .= "&posts_per_page=-1&author=$authorId";
-							$wpQueryAll = query_posts($args);
-							$postCount = count($wpQueryAll);
+							//$wpQueryAll = query_posts($args);
+							$allPostsQuery = new WP_Query($args);
+							$allPostsQuery->get_posts();
+							$postCount = $allPostsQuery->found_posts;
+							//$postCount = count($wpQueryAll);
 							
 							$prevLink = add_query_arg("page",($currPage-1),$currentUrl);
 							$nextLink = add_query_arg("page",($currPage+1),$currentUrl);
@@ -213,8 +218,8 @@ $authorObj = get_user_by("id",$authorId);
 							if($postCount > $postPerPage) :
 						?>
 							<div class="pagingWrapper">
-								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Post</a><?php endif; ?>
-								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Post</a><?php endif;?>
+								<?php if($currPage>1) :?><a class="prev" href="<?php echo $prevLink;?>">Newer Posts</a><?php endif; ?>
+								<?php if( $postCount > ($currPage * $postPerPage)) : ?><a class="next" href="<?php echo $nextLink;?>">Older Posts</a><?php endif;?>
 							</div>
 						<?php endif; ?>	
 							

@@ -219,8 +219,8 @@ add_action('wp_ajax_nopriv_agree_challenge_terms', 'agree_challenge_terms_ajax_c
 /* register to challenge */
 function register_to_challenge_ajax_controller() {
 
-  $challengeId = $_GET ["challengeId"];
-  $jwtToken = $_GET ["jwtToken"];
+  $challengeId = filter_input(INPUT_GET, "challengeId", FILTER_SANITIZE_NUMBER_INT);
+  $jwtToken = filter_input(INPUT_GET, "jwtToken", FILTER_SANITIZE_STRING);
 
   $challengeReg = register_to_challenge($challengeId, $jwtToken);
   if (isset($challengeReg)) {
@@ -233,6 +233,26 @@ function register_to_challenge_ajax_controller() {
 
 add_action('wp_ajax_register_to_challenge', 'register_to_challenge_ajax_controller');
 add_action('wp_ajax_nopriv_register_to_challenge', 'register_to_challenge_ajax_controller');
+
+/* submit to development challenge */
+function submit_to_dev_challenge_ajax_controller() {
+
+  $challengeId = filter_input(INPUT_POST, "challengeId", FILTER_SANITIZE_NUMBER_INT);
+  $fileName = filter_input(INPUT_POST, "fileName", FILTER_SANITIZE_STRING);
+  $fileData = filter_input(INPUT_POST, "fileData", FILTER_UNSAFE_RAW);
+  $jwtToken = filter_input(INPUT_POST, "jwtToken", FILTER_SANITIZE_STRING);
+
+  $submitToDevChallengeResponse = submit_to_dev_challenge($challengeId, $fileName, $fileData, $jwtToken);
+  if (isset($submitToDevChallengeResponse)) {
+    wp_send_json($submitToDevChallengeResponse);
+  }
+  else {
+    wp_send_json_error();
+  }
+}
+
+add_action('wp_ajax_submit_to_dev_challenge', 'submit_to_dev_challenge_ajax_controller');
+add_action('wp_ajax_nopriv_submit_to_dev_challenge', 'submit_to_dev_challenge_ajax_controller');
 
 /**
  * End of ajax controller
@@ -451,6 +471,29 @@ function register_to_challenge($challengeId, $jwtToken) {
     ),
     'httpversion' => get_option('httpversion'),
     'timeout' => 20
+  );
+  $response = wp_remote_post($url, $args);
+
+  if (is_wp_error($response) || !isset ($response ['body'])) {
+    return "Error in processing request";
+  }
+  return json_decode($response ['body']);
+}
+
+/* submit to development challenge */
+function submit_to_dev_challenge($challengeId, $fileName, $fileData, $jwtToken) {
+  $url = "https://api.topcoder.com/v2/develop/challenges/$challengeId/submit";
+  $body = array(
+    'fileName' => $fileName,
+    'fileData' => $fileData
+  );
+  $args = array(
+    'body' => $body,
+    'headers' => array(
+      'Authorization' => 'Bearer ' . $jwtToken
+    ),
+    'httpversion' => get_option('httpversion'),
+    'timeout' => 600
   );
   $response = wp_remote_post($url, $args);
 
@@ -854,4 +897,93 @@ function get_email_validity_ajax(
     return $email_validity;
 }
 
+/*
+ * Check social availability and validity
+ */
+add_action('wp_ajax_get_social_validity', 'get_social_validity_controller');
+add_action('wp_ajax_nopriv_get_social_validity', 'get_social_validity_controller');
+
+function get_social_validity_controller()
+{
+    $userkey = get_option('api_user_key');
+    $provider = $_GET ['provider'];
+    $user = $_GET ['user'];
+
+    $social_validity = get_social_validity_ajax($provider, $user);
+
+    if (isset($social_validity->available) || isset($social_validity->error)) {
+        wp_send_json( $social_validity );
+    } else {
+        wp_send_json_error();
+    }
+}
+
+function get_social_validity_ajax(
+  $provider = '',
+  $user = ''
+) {
+
+    $url = "http://api.topcoder.com/v2/users/validateSocial?socialProviderId=" . $provider . "&socialUserId=" . $user;
+
+    $args = array(
+        'httpversion' => get_option('httpversion'),
+        'timeout' => get_option('request_timeout')
+    );
+    $response = wp_remote_get($url, $args);
+
+    if (is_wp_error($response) || !isset ($response ['body'])) {
+        $social_validity = json_decode($response['body']);
+        return $social_validity;
+    }
+    if ($response ['response'] ['code'] == 200) {
+
+//print $response ['body'];
+        $social_validity = json_decode($response['body']);
+        return $social_validity;
+    }
+
+    $social_validity = json_decode($response['body']);
+    return $social_validity;
+}
+
+/*
+ * Get countries for country dropdown
+ */
+add_action('wp_ajax_get_countries', 'get_countries_controller');
+add_action('wp_ajax_nopriv_get_countries', 'get_countries_controller');
+
+function get_countries_controller()
+{
+    $userkey = get_option('api_user_key');
+
+    $countries = get_countries_ajax();
+
+    wp_send_json( $countries );
+}
+
+function get_countries_ajax(
+) {
+
+  $url = 'http://api.topcoder.com/v2/data/countries';
+
+    $args = array(
+        'httpversion' => get_option('httpversion'),
+        'timeout' => get_option('request_timeout')
+    );
+    $response = wp_remote_get($url, $args);
+
+    if (is_wp_error($response) || !isset ($response ['body'])) {
+        $countries = json_decode($response['body']);
+        return $countries;
+    }
+    if ($response ['response'] ['code'] == 200) {
+
+//print $response ['body'];
+        $countries = json_decode($response['body']);
+        return $countries;
+    }
+
+    $countries = json_decode($response['body']);
+    return $countries;
+}
 

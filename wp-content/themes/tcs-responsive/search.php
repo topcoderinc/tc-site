@@ -85,11 +85,14 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 						<section id="blogPageContent" class="pageContent">
 						<div class="subscribeTopWrapper">
 							<?php
-								wp_reset_query();
+								//wp_reset_query();
 								$args = "post_type=".BLOG;
 								$args .= "&post_status=publish&s=$searchKey&posts_per_page=-1";
-								$wpQueryAll = query_posts($args);
-								$postCount = count($wpQueryAll);
+								//$wpQueryAll = query_posts($args);
+								$postQuery = new WP_Query($args);
+								$postQuery->get_posts();
+								$postCount = $postQuery->found_count;
+								//$postCount = count($wpQueryAll);
 							?>
 							<a class="currentCatLink searchFoundTitle"><?php echo $postCount?> results for '<?php echo $searchKey;?>'</a>
 						</div>
@@ -98,7 +101,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							<input type="hidden" class="catId" value="<?php echo $catId; ?>" />
 							<input type="hidden" class="searchKey" value="<?php echo $searchKey; ?>" />
 						<?php 
-							wp_reset_query();
+							//wp_reset_query();
 							$args = "post_type=".BLOG;
 							$args .= "&s=$searchKey&order=DESC";
 							if($showAll=="") {
@@ -106,10 +109,11 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 								$args .= "&paged=$currPage";
 							}
 							
-							query_posts($args);
-							if ( have_posts() ) :
-								while ( have_posts() ) : 
-									the_post();
+							//query_posts($args);
+							$postQuery = new WP_Query($args);
+							if ( $postQuery->have_posts() ) :
+								while ( $postQuery->have_posts() ) : 
+									$postQuery->the_post(); // iterate and set global post var
 									$postId = $post->ID;
 									$image = wp_get_attachment_image_src( get_post_thumbnail_id( $postId ), 'single-post-thumbnail' );
 									if($image!=null) $imageUrl = $image[0];
@@ -182,6 +186,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							<div class="noResult">No matches found</div>
 						<?php
 							endif;
+							wp_reset_postdata(); // reset global post var
 						?>
 						<?php
 							$arrPrev = array("page"=>($currPage-1));

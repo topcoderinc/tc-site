@@ -129,7 +129,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 	}
 
 	// detail contest
-	public function get_contest_detail($userKey = '', $contestID = '', $contestType = '') {
+	public function get_contest_detail($userKey = '', $contestID = '', $contestType = '', $resetCache = false) {
 
 		// This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
 		#echo "	contest type ".$contestType;
@@ -138,6 +138,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		} else {
 			$url = "https://api.topcoder.com/v2/develop/challenges/$contestID";
 		}
+
+        if ($resetCache) {
+          $url .= "?refresh=t";
+        }
 
 		$args = array (
 				'httpversion' => get_option ( 'httpversion' ),
@@ -309,8 +313,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
 	// Activity Summary
 	function tcapi_get_activitySummary($atts, $key="") {
-		$url = "http://tcapi.apiary.io/v2/platform/activitySummary";
-		$url = "http://community.topcoder.com/tc?module=BasicData&c=tc_direct_facts&dsid=28&json=true";
+		#$url = "http://tcapi.apiary.io/v2/platform/activitySummary";
+		#$url = "http://community.topcoder.com/tc?module=BasicData&c=tc_direct_facts&dsid=28&json=true";
+		#leaving old urls commented - just in case...
+		$url = "http://api.topcoder.com/v2/platform/statistics";
 		$args = array (
 				'httpversion' => get_option ( 'httpversion' ),
 				'timeout' => get_option ( 'request_timeout' )
@@ -322,21 +328,20 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		}
 		if ($response ['response'] ['code'] == 200) {
 			$activity = json_decode ( $response ['body']);
-			#print_r($activity);
 			$key = clean_pre($key);
 			if($key != null && $key != ""){
-				return number_format($activity->data[0]->$key);
+				return number_format($activity->$key);
 			}
-			return $activity->data[0];
+			return $activity;
 		}
 		return "Error in processing request";
 	}
 
 
 	// Test Member Count
-	function tcapi_get_member_count ($atts, $key="") {
+	function tcapi_get_memberCount ($atts, $key="") {
 
-		return get_activity_summary("member_count");
+		return get_activity_summary("memberCount");
 	}
 
 	/* member stastics  */
@@ -428,7 +433,7 @@ add_shortcode ( 'activitySummary', array (
 
 add_shortcode ( 'membercount', array (
 	'TCHOOK_Public',
-	'tcapi_get_member_count'
+	'tcapi_get_memberCount'
 ) );
 
 /**

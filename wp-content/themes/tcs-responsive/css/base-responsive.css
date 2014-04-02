@@ -520,4 +520,12 @@ em{
 			.headerTopRightMenu{
 				display: none;	
 			}
+			
+/**
+ * Start of New Home Page additional styles 
+ */
+.lead {
+	font-size: 18px;
+}
+			
 }

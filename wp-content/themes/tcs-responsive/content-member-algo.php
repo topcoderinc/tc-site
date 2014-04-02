@@ -7,25 +7,25 @@ $coder = get_member_statistics ( $handle, $track );
 $rating = $coder->rating;
 
 if ($rating > 0) {
-	
+
 	$div1 = $coder->Divisions->{'Division I'};
 	$div2 = $coder->Divisions->{'Division II'};
 	$divCh = $coder->Challenges->Levels;
 	$srmD1 = ( float ) ($div1->{"Level Total"}->{'success%'});
 	$srmD2 = ( float ) ($div2->{"Level Total"}->{'success%'});
 	$srmClngeVal = ( float ) ($divCh->Total->{'success%'});
-	
+
 	// chart
 	include_once TEMPLATEPATH . '/chart/Highchart.php';
-	
+
 	// add chart script chart
 	$chart = new Highchart ();
 	$chart->printScripts ();
-	
+
 	// donut chart
 	$srmD1Chart = new Highchart ();
 	$srmD1Chart->credits = array (
-			'enabled' => false 
+			'enabled' => false
 	);
 	$srmD1Chart->chart = array (
 			'renderTo' => 'srmD1Chart',
@@ -34,8 +34,8 @@ if ($rating > 0) {
 			'marginRight' => 0,
 			'borderWidth' => 0,
 			'marginBottom' => 0,
-			width => 236,
-			height => 164 
+			'width' => 236,
+			'height' => 164
 	);
 	$srmD1Chart->plotOptions->pie->dataLabels->enabled = false;
 	$srmD1Chart->plotOptions->pie->borderWidth = 0;
@@ -52,20 +52,20 @@ if ($rating > 0) {
 					array (
 							'name' => "Division 1",
 							'color' => "#81bc01",
-							'y' => $srmD1 
+							'y' => $srmD1
 					),
 					array (
 							'name' => "null",
 							'color' => "#eeeeee",
-							'y' => (100 - $srmD1) 
-					) 
-			) 
+							'y' => (100 - $srmD1)
+					)
+			)
 	);
-	
+
 	// donut chart
 	$srmD2Chart = new Highchart ();
 	$srmD2Chart->credits = array (
-			'enabled' => false 
+			'enabled' => false
 	);
 	$srmD2Chart->chart = array (
 			'renderTo' => 'srmD2Chart',
@@ -73,8 +73,8 @@ if ($rating > 0) {
 			'margin' => 0,
 			'marginRight' => 0,
 			'marginBottom' => 0,
-			width => 236,
-			height => 164 
+			'width' => 236,
+			'height' => 164
 	);
 	$srmD2Chart->plotOptions->pie->dataLabels->enabled = false;
 	$srmD2Chart->plotOptions->pie->borderWidth = 0;
@@ -91,20 +91,20 @@ if ($rating > 0) {
 					array (
 							'name' => "Division 2",
 							'color' => "#81bc01",
-							'y' => $srmD2 
+							'y' => $srmD2
 					),
 					array (
 							'name' => "null",
 							'color' => "#eeeeee",
-							'y' => (100 - $srmD2) 
-					) 
-			) 
+							'y' => (100 - $srmD2)
+					)
+			)
 	);
-	
+
 	// donut chart
 	$srmClnge = new Highchart ();
 	$srmClnge->credits = array (
-			'enabled' => false 
+			'enabled' => false
 	);
 	$srmClnge->chart = array (
 			'renderTo' => 'srmChallenge',
@@ -112,8 +112,8 @@ if ($rating > 0) {
 			'margin' => 0,
 			'marginRight' => 0,
 			'marginBottom' => 0,
-			width => 236,
-			height => 164 
+			'width' => 236,
+			'height' => 164
 	);
 	$srmClnge->plotOptions->pie->dataLabels->enabled = false;
 	$srmClnge->plotOptions->pie->borderWidth = 0;
@@ -130,14 +130,14 @@ if ($rating > 0) {
 					array (
 							'name' => "Challenge",
 							'color' => "#ffae00",
-							'y' => $srmClngeVal 
+							'y' => $srmClngeVal
 					),
 					array (
 							'name' => "null",
 							'color' => "#eeeeee",
-							'y' => (100 - $srmClngeVal) 
-					) 
-			) 
+							'y' => (100 - $srmClngeVal)
+					)
+			)
 	);
 }
 
@@ -155,7 +155,7 @@ if ($rating > 0) {
 				</ul>
 			</nav>
 		</div>
-		
+
 		<?php if ($rating > 0):?>
 		<header class="head">
 			<div class="trackNRating">
@@ -212,10 +212,10 @@ if ($rating > 0) {
 						<div class="chartWrap">
 							<div class="chartTypeSwitcher">
 								<a class="btn btnHistory isActive">Rating History</a> <a class="btn btnDist">Rating Distribution</a>
-							</div>						
+							</div>
 						<?php echo apply_filters('the_content','[tc_ratings_chart_ds contest="'.$track.'" handle="'.$handle.'"]');?>
-						
-						
+
+
 						</div>
 					</div>
 				</div>
@@ -407,7 +407,7 @@ if ($rating > 0) {
 		<header class="head">
 			<h4>Badges</h4>
 		</header>
-		<?php get_template_part('content', 'badges');?>		
+		<?php get_template_part('content', 'badges');?>
 	</aside>
 	<!-- /.badges -->
 </div>

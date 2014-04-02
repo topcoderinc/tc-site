@@ -259,7 +259,7 @@ $(function () {
 
   $(".challengeRegisterBtn").click(function () {
     var tcjwt = getCookie('tcjwt');
-    if(tcjwt){
+    if (tcjwt) {
       if ($('.loading').length <= 0) {
         $('body').append('<div class="loading">Loading...</div>');
       } else {
@@ -269,13 +269,13 @@ $(function () {
         "action": "register_to_challenge",
         "challengeId": challengeId,
         "jwtToken": tcjwt.replace(/["]/g, "")
-      }, function(data) {
+      }, function (data) {
         $('.loading').hide();
-        if(data["message"] === "ok"){
+        if (data["message"] === "ok") {
           showModal("#registerSuccess");
-        } else if(data["error"]["details"] === "You should agree with all terms of use.") {
-          window.location = siteURL + "/terms/" + challengeId;
-        } else if(data["error"]["details"]){
+        } else if (data["error"]["details"] === "You should agree with all terms of use.") {
+          window.location = siteURL + "/challenge-details/terms/" + challengeId + "?challenge-type=" + challengeType;
+        } else if (data["error"]["details"]) {
           $("#registerFailed .failedMessage").text(data["error"]["details"]);
           showModal("#registerFailed");
         }
@@ -285,18 +285,18 @@ $(function () {
     }
   });
 
-  if(autoRegister){
+  if (autoRegister) {
     $(".challengeRegisterBtn").click();
   }
 
-  $("#registerSuccess .closeModal").click(function() {
+  $("#registerSuccess .closeModal").click(function () {
     closeModal();
-    window.location.reload(true);
+    window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
   });
 
   // S-194724
   var tcsso = getCookie('tcsso');
-  if(tcsso){
+  if (tcsso) {
     var tcssoValues = tcsso.split("|");
     var now = new Date();
 

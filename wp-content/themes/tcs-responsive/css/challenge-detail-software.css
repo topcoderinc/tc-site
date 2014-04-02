@@ -298,6 +298,7 @@
     padding: 0;
 	margin-bottom:20px;
     width: auto;
+	color:#797979;
 }
 
 .challenge-detail .tableWrap ul li{
@@ -309,6 +310,7 @@
 	height: auto;
 	padding-left:12px;
 	background: url("../i/bullet.png") no-repeat 0 7px;
+	color:#797979;
 }
 
 .challenge-detail .tableWrap p a{

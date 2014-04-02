@@ -8,3 +8,4 @@ define("BLOG_PERMALINK","blog");
 define("DESIGN_CONTESTS_PERMALINK","design");
 define("DEVELOP_CONTESTS_PERMALINK","develop");
 define("DATA_CONTESTS_PERMALINK","data");
+define("CHALLENGE_TERMS_SLUG", "terms");

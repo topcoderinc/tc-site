@@ -3,8 +3,8 @@
  * Template Name: Challenges Bug Race List Page
  * Author : evilkyro1965
  */
-get_header('challenge-landing');
 
+date_default_timezone_set($tzstring);
 
 $values = get_post_custom ( $post->ID );
 

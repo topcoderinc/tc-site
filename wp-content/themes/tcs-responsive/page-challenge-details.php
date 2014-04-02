@@ -1,4 +1,5 @@
 <?php
+
 add_action ( 'wp_head', 'tc_challenge_details_js' );
 function tc_challenge_details_js(){
   global $contest, $contestType, $contestID, $registrants;
@@ -72,7 +73,8 @@ $siteURL = site_url();
 $contestID = get_query_var('contestID');
 //$contestType = get_query_var ( 'type' );
 $contestType = $_GET['type'];
-$contest = get_contest_detail('', $contestID, $contestType);
+$noCache = get_query_var('nocache');
+$contest = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants = empty($contest->registrants) ? array() : $contest->registrants;
 
 
@@ -152,7 +154,12 @@ function createDevelopSubmissionMap($contest) {
   return $submission_map;
 }
 
-$documents = $contest->Documents;
+if (!empty($_COOKIE["tcsso"])) {
+  $documents = $contest->Documents;
+} else {
+  $documents = array();
+}
+
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
 get_header('challenge-landing');
@@ -178,15 +185,14 @@ get_header('challenge-landing');
   <?php
   if ($contestType != 'design'):
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
+    <a class="btn btnAction challengeRegisterBtn" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
     <a class="btn btnAction" target="_blank"
-       href="https://software.topcoder.com/review/actions/UploadContestSubmission.do?method=uploadContestSubmission&pid=<?php echo $contestID; ?>"><span>2</span>
-      <strong>Submit Your Entries</strong></a>
+       href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span> <strong>Register
+    <a class="btn btnAction challengeRegisterBtn" href="javascript:;"><span>1</span> <strong>Register
         For This Challenge</strong></a>
     <a class="btn btnAction" target="_blank"
        href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
@@ -211,6 +217,7 @@ endif;
 ?>
 <table class="prizeTable">
 <tbody>
+
 <tr>
   <?php
   if ($contestType != 'design' && $contest->challengeType != "Code"):
@@ -219,23 +226,22 @@ endif;
       <h2>1st PLACE</h2>
 
       <h3>
-        <small>$</small><?php if ($contest->prize[0] !== NULL) {
+        <small>$</small><?php if (isset($contest->prize[0])) {
           echo number_format($contest->prize[0]);
         } ?></h3>
     </td>
     <td class="fifty">
       <h2>2nd PLACE</h2>
-
       <h3>
-        <small>$</small><?php if ($contest->prize[1] !== NULL) {
-          echo number_format($contest->prize[1]);
-        } ?></h3>
+        <small>$</small><?php
+          echo number_format(isset($contest->prize[1])? $contest->prize[1] : "0"); ?>
+      </h3>
     </td>
   <?php
   else:
     ?>
     <?php
-    if ($contest->prize[0] !== NULL && $contest->prize[0] !== 0):
+    if (isset($contest->prize[0])):
       ?>
       <td class="twenty">
         <h2>1st PLACE</h2>
@@ -256,7 +262,7 @@ endif;
     endif;
     ?>
     <?php
-    if ($contest->prize[1] !== NULL && $contest->prize[1] !== 0):
+    if (isset($contest->prize[1])):
       ?>
       <td class="twenty">
         <h2>2nd PLACE</h2>
@@ -277,7 +283,7 @@ endif;
     endif;
     ?>
     <?php
-    if ($contest->prize[2] !== NULL && $contest->prize[2] !== 0):
+    if (isset($contest->prize[2])):
       ?>
       <td class="twenty">
         <h2>3rd PLACE</h2>
@@ -298,7 +304,7 @@ endif;
     endif;
     ?>
     <?php
-    if ($contest->prize[3] !== NULL && $contest->prize[3] !== 0):
+    if (isset($contest->prize[3])):
       ?>
       <td class="twenty">
         <h2>4th PLACE</h2>
@@ -319,10 +325,10 @@ endif;
     endif;
     ?>
     <?php
-    if ($contest->prize[4] !== NULL && $contest->prize[4] !== 0):
+    if (isset($contest->prize[4])):
       ?>
       <td class="twenty">
-        <h2>4th PLACE</h2>
+        <h2>5th PLACE</h2>
 
         <h3>
           <small>$</small><?php echo number_format($contest->prize[4]); ?></h3>
@@ -443,11 +449,11 @@ if (sizeof($contest->prize) > 5) {
         <?php
         if (empty($contest->reliabilityBonus)):
           ?>
-          <span>$<?php echo "0" ?></span>
+          <span><?php echo "N/A" ?></span>
         <?php
         else:
           ?>
-          <span>$<?php echo $contest->reliabilityBonus; ?></span>
+          <span>$<?php echo number_format($contest->reliabilityBonus); ?></span>
         <?php
         endif;
         ?>
@@ -462,14 +468,14 @@ if (sizeof($contest->prize) > 5) {
       ?>
       >
 
-      <p class="drPointsPara">DR Points <span><?php echo $contest->digitalRunPoints; ?></span></p>
+      <p class="drPointsPara">DR Points <span><?php echo isset($contest->digitalRunPoints) ? $contest->digitalRunPoints : "N/A" ; ?></span></p>
     </td>
   <?php
   else:
     ?>
     <td colspan="2">
       <?php
-      if ($contest->digitalRunPoints != NULL && $contest->digitalRunPoints != 0):
+      if (isset($contest->digitalRunPoints)):
         ?>
         <p class="scPoints"><span><?php echo $contest->digitalRunPoints; ?></span> STUDIO CUP POINTS</p>
       <?php
@@ -498,7 +504,7 @@ if (sizeof($contest->prize) > 5) {
         <tbody>
         <tr>
           <?php
-          if ($contest->prize[0] !== NULL && $contest->prize[0] !== 0):
+          if (isset($contest->prize[0])):
             ?>
             <td class="twenty">
               <h2>1st PLACE</h2>
@@ -519,7 +525,7 @@ if (sizeof($contest->prize) > 5) {
           endif;
           ?>
           <?php
-          if ($contest->prize[1] !== NULL && $contest->prize[1] !== 0):
+          if (isset($contest->prize[1])):
             ?>
             <td class="twenty">
               <h2>2nd PLACE</h2>
@@ -540,7 +546,7 @@ if (sizeof($contest->prize) > 5) {
           endif;
           ?>
           <?php
-          if ($contest->prize[2] !== NULL && $contest->prize[2] !== 0):
+          if (isset($contest->prize[2])):
             ?>
             <td class="twenty">
               <h2>3rd PLACE</h2>
@@ -623,7 +629,7 @@ if (sizeof($contest->prize) > 5) {
       <tr>
         <td>
           <?php
-          if ($contest->digitalRunPoints != NULL && $contest->digitalRunPoints != 0):
+          if (isset($contest->digitalRunPoints)):
             ?>
             <p class="scPoints"><span><?php echo $contest->digitalRunPoints; ?></span> STUDIO CUP POINTS</p>
           <?php
@@ -1287,22 +1293,8 @@ endif;
 <?php
 if ($contestType != 'design'):
   ?>
-  <h3>Downloads:</h3>
-  <div class="inner">
-    <?php
-    echo '<ul>';
-    if (!empty($contest->Documents)) {
-      foreach ($contest->Documents as $value) {
-        $document = $value;
-        echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';
-      }
-    }
-    else {
-      echo '<li><strong>None</li></strong>';
-    }
-    echo '</ul>';
-    ?>
-
+  <div class="slideBox">
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </div>
   <li class="slide">
 
@@ -1420,18 +1412,7 @@ if ($contestType != 'design'):
 else:
   ?>
   <li class="slide">
-    <div class="slideBox">
-      <h3>Downloads:</h3>
-
-      <div class="inner">
-        <?php
-        for ($i = 0; $i < count($documents); $i++) :
-          $document = $documents[$i];
-          ?>
-          <p><a href="<?php echo $document->url; ?>"><?php echo $document->documentName; ?></a></p>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </li>
   <li class="slide">
     <div class="slideBox">
