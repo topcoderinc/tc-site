@@ -4,6 +4,7 @@ $(function () {
     centerModal();
   });
 
+
   $('#username').keyup(function() {
     $('#loginForm span.err3').hide();
     $('#loginForm span.err1').hide();

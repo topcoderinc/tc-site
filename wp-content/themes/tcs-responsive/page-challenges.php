@@ -66,35 +66,18 @@ $postId = $post->ID;
 			<div class="container">
 
 				<header>
-					<h1>Open Challenges</h1>
+					<h1><?php the_title(); ?>
+                      <?php $FeedURL = get_bloginfo('wpurl') . "/challenges/feed?list=active&contestType=all"; ?>
+
+                      <span class="subscribeTopWrapper">
+                        <a class="feedBtn" href="<?php echo $FeedURL;?>"></a>
+                      </span>
+                    </h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
 						</span>
 					</aside>
 				</header>
-				<div class="actions">
-					<div class="mid challengeType">
-						<?php
-							$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-						?>
-						<ul>
-							<li><a href="<?php echo get_bloginfo('siteurl')."/challenges"; ?>" class="active link">All</a></li>
-							<li><a href="<?php echo $activeDesignChallengesLink;?>" class="link design">Design</a></li>
-                            <li><a href="<?php echo $activeDevlopChallengesLink;?>" class="link develop">Develop</a></li>
-                            <li><a href="<?php echo $activeDataChallengesLink;?>" class="link data">Data Science</a></li>
-						</ul>
-					</div>
-					<div class="rt">
-						<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-							<?php
-							//$contest_type="";
-							$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=all";
-							?>
-							<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
-						</div>
-					</div>
-				</div>
-				<!-- /.actions -->
 
 				<div id="tableView" class="viewTab">
 					<div class="tableWrap tcoTableWrap">

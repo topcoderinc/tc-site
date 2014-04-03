@@ -76,6 +76,22 @@ $noCache = get_query_var('nocache');
 $contest = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants = empty($contest->registrants) ? array() : $contest->registrants;
 
+$curDate = new DateTime();
+$registerDisable = true;
+if ($contest->registrationEndDate) {
+  $regDate = new DateTime($contest->registrationEndDate);
+  if ($regDate > $curDate) {
+    $registerDisable = false;
+  }
+}
+
+$submitDisabled = true;
+if ($contest->submissionEndDate) {
+  $submitDate = new DateTime($contest->submissionEndDate);
+  if ($submitDate > $curDate) {
+    $submitDisabled = false;
+  }
+}
 
 // Ad submission dates to registrants
 // @TODO move this to a class
@@ -153,7 +169,12 @@ function createDevelopSubmissionMap($contest) {
   return $submission_map;
 }
 
-$documents = $contest->Documents;
+if (!empty($_COOKIE["tcsso"])) {
+  $documents = $contest->Documents;
+} else {
+  $documents = array();
+}
+
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
 get_header('challenge-landing');
@@ -179,16 +200,16 @@ get_header('challenge-landing');
   <?php
   if ($contestType != 'design'):
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
        href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span> <strong>Register
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span> <strong>Register
         For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
        href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
         Your Entries</strong></a>
     <a class="btn btnAction" target="_blank"
@@ -1299,22 +1320,8 @@ endif;
 <?php
 if ($contestType != 'design'):
   ?>
-  <h3>Downloads:</h3>
-  <div class="inner">
-    <?php
-    echo '<ul>';
-    if (!empty($contest->Documents)) {
-      foreach ($contest->Documents as $value) {
-        $document = $value;
-        echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';
-      }
-    }
-    else {
-      echo '<li><strong>None</li></strong>';
-    }
-    echo '</ul>';
-    ?>
-
+  <div class="slideBox">
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </div>
   <li class="slide">
 
@@ -1336,6 +1343,7 @@ if ($contestType != 'design'):
     <!-- End review style section -->
 
   </li>
+  <?php  if (isset($contest->screeningScorecardId) && isset($contest->reviewScorecardId)) : ?>
   <li class="slide">
 
     <div class="contestLinks slideBox">
@@ -1354,6 +1362,7 @@ if ($contestType != 'design'):
     </div>
 
   </li>
+  <?php endif; ?>
 
   <li class="slide">
     <div class="forumFeed slideBox">&nbsp;<br/>
@@ -1432,18 +1441,7 @@ if ($contestType != 'design'):
 else:
   ?>
   <li class="slide">
-    <div class="slideBox">
-      <h3>Downloads:</h3>
-
-      <div class="inner">
-        <?php
-        for ($i = 0; $i < count($documents); $i++) :
-          $document = $documents[$i];
-          ?>
-          <p><a href="<?php echo $document->url; ?>"><?php echo $document->documentName; ?></a></p>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </li>
   <li class="slide">
     <div class="slideBox">

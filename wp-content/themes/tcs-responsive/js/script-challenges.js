@@ -801,7 +801,11 @@ appChallenges = {
 
                     var trackName = app.getTrackSymbol(rec.challengeType);
                     var startDate = app.formatDate2(rec.postingDate);
-                    var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    var checkPointDate;
+                    if (rec.checkpointSubmissionEndDate) {
+                        checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    }
+
                     var endDate = app.formatDate2(rec.submissionEndDate);
                     var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
                     var purse = 0;
@@ -815,7 +819,10 @@ appChallenges = {
                         icoTrack = "ico-track-develop.png";
                         tcoFlag = "tco-flag-develop.png";
                         row = $(challengesBP.tabAllDev).clone();
-                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        if (rec.registrationEndDate) {
+                            checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        }
+
                         contestType = "develop";
                     }
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
@@ -826,13 +833,17 @@ appChallenges = {
                      */
                     $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                     $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                    $('.colCh a', row).attr("href", contestLinkUrl);
+                    $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                     $('.tipC', row).html(rec.challengeType);
 
                     $('.vStartDate', row).html(startDate);
 
-                    $('.vEndRound', row).html(checkPointDate);
+                    if (checkPointDate) {
+                        $('.vEndRound', row).html(checkPointDate);
+                    } else {
+                        $('.vEndRound', row).parent().empty();
+                    }
 
                     $('.vEndDate', row).html(endDate);
 
@@ -856,7 +867,7 @@ appChallenges = {
     },
 
     addEmptyResult: function(table) {
-        $(table).html("<div><h3>There are no active challenges under this category. Please check back later</h3></div>");
+        $(table).html('<table><tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr></table>');
     },
 
     // getGridview Blocks
@@ -894,7 +905,11 @@ appChallenges = {
                     trackName += " trackSD";
 
                     var startDate = app.formatDate2(rec.postingDate);
-                    var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    var checkPointDate
+                    if (rec.checkpointSubmissionEndDate) {
+                        checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    }
+
                     var endDate = app.formatDate2(rec.submissionEndDate);
                     var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
                     var purse = 0;
@@ -910,7 +925,9 @@ appChallenges = {
                         tcoFlag = "tco-flag-develop.png";
                         con = $(challengesBP.grDevOpen).clone();
 
-                        checkPointDate = app.formatDate2(rec.submissionEndDate);
+                        if (rec.submissionEndDate) {
+                            checkPointDate = app.formatDate2(rec.submissionEndDate);
+                        }
                         contestType = "develop";
                     }
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
@@ -928,7 +945,12 @@ appChallenges = {
                     $('.type', con).html(rec.challengeType);
                     $('.tipC', con).html(rec.challengeType);
                     $('.vStartDate', con).html(startDate);
-                    $('.vEndRound', con).html(checkPointDate);
+                    if (checkPointDate) {
+                        $('.vEndRound', con).html(checkPointDate);
+                    } else {
+                        $('.vEndRound', con).parent().empty();
+                    }
+
                     $('.vEndDate', con).html(endDate);
                     $('.vPhase', con).html(rec.currentPhaseName);
 
@@ -1017,7 +1039,11 @@ appChallenges = {
 
                 var trackName = app.getTrackSymbol(rec.challengeType);
                 var startDate = app.formatDate2(rec.postingDate);
-                var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                var checkPointDate;
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
+
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
@@ -1028,7 +1054,9 @@ appChallenges = {
 
                 if (contest_type == "develop") {
                     row = $(challengesBP.gdDevOpen).clone();
-                    checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
                 }
 
                 row.addClass('track-' + trackName);
@@ -1043,13 +1071,17 @@ appChallenges = {
                 }
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', row).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                 $('.tipC', row).html(rec.challengeType);
 
                 $('.vStartDate', row).html(startDate);
 
-                $('.vEndRound', row).html(checkPointDate);
+                if (checkPointDate) {
+                    $('.vEndRound', row).html(checkPointDate);
+                } else {
+                    $('.vEndRound', row).parent().empty();
+                }
 
                 $('.vEndDate', row).html(endDate);
 
@@ -1091,6 +1123,9 @@ appChallenges = {
 
                 var startDate = app.formatDate2(rec.postingDate);
                 var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
@@ -1101,7 +1136,9 @@ appChallenges = {
                 /* for develop type contest */
                 if (contest_type == "develop") {
                     con = $(challengesBP.grDevOpen).clone();
-                    checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
                 }
 
 
@@ -1117,11 +1154,17 @@ appChallenges = {
 
                 $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', con).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
                 $('.tipC', con).html(rec.challengeType);
                 $('.vStartDate', con).html(startDate);
-                $('.vEndRound', con).html(checkPointDate);
+
+                if (checkPointDate) {
+                    $('.vEndRound', con).html(checkPointDate);
+                } else {
+                    $('.vEndRound', con).parent().empty();
+                }
+
                 $('.vEndDate', con).html(endDate);
                 $('.vPhase', con).html(rec.currentPhaseName);
 
@@ -1234,7 +1277,7 @@ appChallenges = {
                 }
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', row).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
                 $('.colType .tipC', row).html(rec.challengeType);
 
                 $('.vStartDate', row).html(startDate);

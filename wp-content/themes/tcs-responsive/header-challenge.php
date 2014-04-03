@@ -30,7 +30,13 @@ else
 }
 
 global $coder;
-$coder = get_member_profile($handle);
+if (isset($handle)) {
+    // only get profile if we have a valid handle
+    $coder = get_member_profile($handle);
+} else {
+    // no user - just create an empty object
+    $coder = new stdClass();
+}
 $memberSince = explode(" ",$coder->memberSince);
 $memberSince = explode(".",$memberSince[0]);
 $memberEarning = '$'.$coder->overallEarning;
