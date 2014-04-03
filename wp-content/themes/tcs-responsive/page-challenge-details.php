@@ -675,24 +675,27 @@ if (sizeof($contest->prize) > 5) {
     if ($contestType != 'design'):
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent hide">
-        <p><label>Posted On:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Posted On:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
 
 
         <p><label>Register By:</label>
          <span><?php echo date(
-               "M d, Y H:i",
-               strtotime("$contest->registrationEndDate")
-             ) . " EST"; ?>
+               "M d, Y H:i T",
+               strtotime("$contest->registrationEndDate"));?>
          </span>
         </p>
 
-        <p class="last"><label>Submit By:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Submit By:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
       </div>
       <!--End nextBoxContent-->
@@ -700,25 +703,33 @@ if (sizeof($contest->prize) > 5) {
     else:
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent studio hide">
-        <p><label>Start Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Start Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
 
-        <p><label>Checkpoint:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->checkpointSubmissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Checkpoint:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->checkpointSubmissionEndDate"));?>
+          </span>
+        </p>
 
-        <p><label>End Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p><label>End Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
-        <p class="last"><label>Winners Announced:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->appealsEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Winners Announced:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->appealsEndDate"));?>
+          </span>
+        </p>
       </div>
       <!--End nextBoxContent-->
     <?php
@@ -1170,11 +1181,11 @@ endif;
         }
 
         echo '<td class="regDateColumn">';
-        echo date("M d, Y H:i", strtotime($value->registrationDate)) . " EST";
+        echo date("M d, Y H:i T", strtotime($value->registrationDate));
         echo '</td>';
         echo '<td class="subDateColumn">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";
@@ -1211,16 +1222,16 @@ endif;
         echo '<div class="registrantLabel">Registration Date:</div>';
         echo '<div class="registrantField">';
         echo date(
-            "M d, Y H:i",
+            "M d, Y H:i T",
             strtotime($value->registrationDate)
-          ) . '" EST" </div>';
+          ) . '</div>';
         echo '<div class="clear"></div>';
         echo '</div>';
         echo '<div class="registrantSectionRow">';
         echo '<div class="registrantLabel">Submission Date:</div>';
         echo '<div class="registrantField">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";

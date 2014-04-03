@@ -74,12 +74,14 @@ $contest = get_contest_detail('', get_query_var('contestID'), $challengeType);
                 <h2>Submission successfully uploaded</h2>
             </section>
             <!-- /#end view submission-->
+            <!--
             <section class="submissionTable">
                 <div class="submissions">
                     <a href="javascript:" class="file"></a>
                     <a href="javascript:" class="delete">.</a>
                 </div>
             </section>
+            -->
             <!-- /#end submission table-->
 
         </div>
