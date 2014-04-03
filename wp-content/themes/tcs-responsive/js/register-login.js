@@ -171,6 +171,9 @@ $(function () {
       // can't start with 'admin'
       $(this).closest('.row').find('span.err6').show();
       invalid = true;
+    } else if (text.length == 0) {
+      $(this).closest('.row').find('span.err1').show();
+      invalid = true;
     } else if (text.length == 1 || text.length > 15) {
       // must be between 2 and 15 chars long
       $(this).closest('.row').find('span.err7').show();

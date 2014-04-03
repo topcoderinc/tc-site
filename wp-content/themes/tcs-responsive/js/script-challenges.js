@@ -575,7 +575,7 @@ appChallenges = {
                 var row = $(challengesBP.tabReivew).clone();
 
                 var trackName = app.getTrackSymbol(rec.challengeType);
-
+                var round1ScheduledStartDate = app.formatDate2(rec.round1ScheduledStartDate);
                 var round2ScheduledStartDate = app.formatDate2(rec.round2ScheduledStartDate);
                 var contestLinkUrl = siteurl + "/review-opportunity/design/" + "30036202";
 
@@ -844,7 +844,6 @@ appChallenges = {
                     } else {
                         $('.vEndRound', row).parent().empty();
                     }
-
 
                     $('.vEndDate', row).html(endDate);
 
@@ -1370,11 +1369,7 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
-        if (date) {
-            var timezone = " EST";
-            return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm") + timezone;
-        }
-        return "";
+        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
         // var d = new Date(date);
         // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
