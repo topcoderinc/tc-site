@@ -25,7 +25,8 @@
         "moment-timezone.min.js",
         "moment-data.js",
         "jquery.qtip.min.js",
-        "jquery.jqtransform.js"
+        "jquery.jqtransform.js",
+        "script-member.js"
       ],
       "css": [
         "blog.css",

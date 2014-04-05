@@ -127,3 +127,15 @@ $quote = ($coder->quote == '') ? "Member of the world's largest global competiti
 		</article>
 		<!-- /#mainContent -->
 <?php get_footer(); ?>
+		<div id="badgeTooltip" class="tooltip hide">
+    <div class="inner">
+      <header></header>
+      <div class="data">
+        <p class="eranedOn"></p>
+      </div>
+      <div class="data">
+        <p class="currentlyEearned">Currently @ <span></span></p>
+      </div>
+      <div class="arrow"></div>
+    </div>
+  </div><!-- /.tooltip -->
