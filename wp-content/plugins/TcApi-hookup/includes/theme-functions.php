@@ -86,4 +86,22 @@ function search_users($handle){
 	return $TCHOOK_plugin->tcapi_search_users($handle);
 }
 
-?>
+/**
+ * Is a user registred for a challenge
+ *
+ * @param $handle
+ * @param $challenge
+ *
+ * @return bool
+ */
+function is_user_register_for_challenge($handle, $challenge) {
+  if ($handle && isset($challenge->registrants)) {
+    foreach ($challenge->registrants as $registrant) {
+      if ($handle == $registrant->handle) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
