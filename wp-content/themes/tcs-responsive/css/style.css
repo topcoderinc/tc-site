@@ -2097,6 +2097,12 @@
 	margin-top: 32px;
 	padding-bottom: 20px;
 }
+	#featuredContent.home .container {
+		clear: both;
+		height: 100%;
+		overflow: hidden;
+	}
+	
 	#featuredContent.home h3 {
 		font-size: 27px !important;
 		line-height: normal !important;
@@ -2121,9 +2127,6 @@
 		width: 50%;
 	}
 	
-mark {
-	background-color: #f7f9d8;
-}
 .lead {
 	font-size: 24px;
 	line-height: 1.5;
@@ -2206,5 +2209,6 @@ hr.light {
 	}
 
 .smaller { font-size: smaller; }
+.larger { font-size: larger; }
 .text-center { text-align: center; }
 /* End of New Home Page styles */
