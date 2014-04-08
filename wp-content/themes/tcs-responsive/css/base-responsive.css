@@ -244,16 +244,6 @@ em{
         display: block;
     }
     
-#banner{
-    height: 355px;
-    background: #fff  url(../i/bg-banner-sprite-m.png) repeat-x;
-    overflow: hidden; 
-}
-#banner .inner{    
-   height: 355px;
-   background: url(../i/bg-banner-m.png) 50% 0 repeat-x;
-}
-    
 
     /* header
     ---------------------------*/
@@ -527,5 +517,19 @@ em{
 .lead {
 	font-size: 18px;
 }
-			
+.grid-row {
+	margin: 0;
+}
+	.grid-row section.grid-3-1 {
+		text-align: center;
+		width: 100%;
+	}
+
+#featuredContent.home .toChallenge {
+	float: none;
+	width: 100%;	
+}
+	#featuredContent.home h3 {
+		padding: 130px 0 9px !important;		
+	}
 }
