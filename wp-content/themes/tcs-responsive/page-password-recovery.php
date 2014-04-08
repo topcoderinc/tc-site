@@ -28,7 +28,7 @@ if($tokenObj!=null) {
 	}
 	else if(property_exists($tokenObj, 'token')) {
 		
-		$changePasswordLink = $changePasswordPage."?unlock_code=".$tokenObj->token;
+		$changePasswordLink = $changePasswordPage; //."?unlock_code=".$tokenObj->token;
 		
 		/*		
 		$emailMessage = str_replace("varHandle", $handle, $emailMessage);
