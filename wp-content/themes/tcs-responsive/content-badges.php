@@ -1,8 +1,3 @@
-<script type="text/javascript">
-$(document).ready(function(){
-   coder.initMemberBadges();
-});
-</script>
 <?php
 $achievements_map = array(
 	"First Forum Post" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-1"),
@@ -107,7 +102,6 @@ foreach($coder_achievements as $achievement){
     <span data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} else {echo 'Not Earned Yet';} ?>" data-title="<?php echo $key; ?>" class="subBadge <?php echo $achievement['specificClass']; if($active){echo ' selected';} ?>"></span>
  <?php $index++; endforeach; ?>
 </div>
-
 
 <div class="footer-badges">
   <?php

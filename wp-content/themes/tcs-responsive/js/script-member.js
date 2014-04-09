@@ -25,6 +25,11 @@ tc_rating_dev_chart.drawChart = function(challengetype){
 	});
 }
 
+$(document).ready(function () {
+  if($(".badgeGroups").length > 0){
+    coder.initMemberBadges();
+  }
+});
  
 var coder = {
 	// binding member module events
