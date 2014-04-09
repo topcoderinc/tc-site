@@ -125,6 +125,10 @@ var app = {
     // tab navs
     $('.tabNav a').on(ev, function () {
       var id = $(this).attr('href');
+	  var tabIdx = id.lastIndexOf('tab=');
+	  if(tabIdx>0){
+		  "#"+id = id.substr(tabIdx+4);
+	  }
       $('.tab', $(this).closest('.tabsWrap')).hide();
       $(id).fadeIn();
       $('.active', $(this).closest('nav')).removeClass('active');

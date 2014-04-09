@@ -66,4 +66,9 @@ function get_json_from_url( $url ){
 	return $TCHOOK_plugin->get_json_from_url( $url );
 }
 
+function get_checkpoint_details( $contestId, $challengeType ){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->get_checkpoint_details_fn( $contestId, $challengeType );
+}
+
 ?>

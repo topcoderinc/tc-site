@@ -24,7 +24,24 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		return "Error in processing request";
 	}
 
-
+	// returns checkpoint data
+	public function get_checkpoint_details_fn($contestId = '',$challengeType='') {
+		
+		$url =  'http://api.topcoder.com/v2/design/challenges/checkpoint/' . $contestId ;
+		if(strtolower($challengeType)=='develop'){
+			$url ='http://api.topcoder.com/v2/develop/challenges/checkpoint/' . $contestId ;
+		}
+		$response = wp_remote_get ($url);
+	
+		if (is_wp_error ( $response ) || ! isset ( $response ['body'] )) {
+			return "Error in processing request";
+		}
+		if ($response ['response'] ['code'] == 200) {
+			return json_decode ( $response ['body'] );
+		}
+		return "Error in processing request";
+	}
+	
 	// returns contest type
 	public function get_contest_type($userKey = '') {
 		$response = wp_remote_get ( 'https://api.topcoder.com/rest/contestTypes?user_key=' . $userKey );
@@ -134,9 +151,11 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		// This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
 		#echo "	contest type ".$contestType;
 		if ($contestType == "design") {
-			$url = "https://api.topcoder.com/v2/design/challenges/$contestID";
+			//$url = "https://api.topcoder.com/v2/design/challenges/$contestID";
+			$url = "http://api.topcoder.com/v2/design/challenges/$contestID";
 		} else {
-			$url = "https://api.topcoder.com/v2/develop/challenges/$contestID";
+			//$url = "https://api.topcoder.com/v2/develop/challenges/$contestID";
+			$url = "http://api.topcoder.com/v2/develop/challenges/$contestID";
 		}
 
         if ($resetCache) {
