@@ -15,7 +15,8 @@ var app = {
       responsive: !ie7,
       auto: true,
       pause: 5000,
-      slideMargin: 2
+      slideMargin: 2,
+	  adaptiveHeight: true
     });
 
 
