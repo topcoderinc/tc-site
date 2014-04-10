@@ -1595,14 +1595,14 @@
 		.casesView .caseGrid a.jsShowCaseDetails:hover > img{
 			-webkit-transform: rotate(10deg) scale(1.1,1.1);     /* for Chrome || Safari */  
             -moz-transform: rotate(10deg) scale(1.1,1.1);        /* for Firefox */  
-            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE 缩放0.5 */  
+            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE ç¼©æ”¾0.5 */  
             -o-transform:  rotate(10deg) scale(1.1,1.1);          /* for Opera */  
 			transform: rotate(10deg) scale(1.1,1.1);
 		}
 		.casesView .caseGrid a.isShow:hover > img{
 			-webkit-transform: none;									/* for Chrome || Safari */  
             -moz-transform: none;										/* for Firefox */  
-            -ms-transform: none;										/* for IE 缩放0.5 */  
+            -ms-transform: none;										/* for IE ç¼©æ”¾0.5 */  
             -o-transform: none;											/* for Opera */  
 		}
 		.casesView .caseGrid a.jsShowCaseDetails > i{
@@ -2440,3 +2440,124 @@ hr.light {
 .smaller { font-size: smaller; }
 .text-center { text-align: center; }
 /* End of New Home Page styles */
+
+
+
+/*404 error page*/
+.notFoundError{
+    background: #6cc1e6 url(../i/decorateB.png) repeat-x center bottom;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-width: 1024px;
+    overflow: hidden;
+}
+.notFoundErrorInner{
+    width: 1304px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.genericNotFoundError2{
+    background-image:url(../i/decorateBSnow.png);
+}
+.clound{
+    position: absolute;
+    width: 1304px;
+    height: 318px;
+    top: 0;
+    left: 50%;
+    margin-left: -654px;
+    background: url(../i/decorateCloud.png) no-repeat 0 0;
+}
+.ball{
+    position: absolute;
+    width: 1195px;
+    height: 236px;
+    top: 346px;
+    left: 50%;
+    margin-left: -588px;
+    background: url(../i/decorateBall.png) no-repeat 0 0;
+
+}
+.snow{
+    position: absolute;
+    width: 1180px;
+    height: 467px;
+    top: 115px;
+    left: 50%;
+    margin-left: -590px;
+    background: url(../i/decorateSnow.png) no-repeat 0 0;
+
+}
+.decrorat{
+    position: absolute;
+    width: 423px;
+    height: 187px;
+    bottom: 0;
+    left: 162px;
+    background: url(../i/decorate1.png) no-repeat 0 0;
+}
+.genericNotFoundError2 .decrorat{
+    position: absolute;
+    width: 350px;
+    height: 275px;
+    bottom: 0;
+    left: 162px;
+    background: url(../i/decorate2.png) no-repeat 0 0;
+}
+
+.back{
+    position: absolute;
+    width: 167px;
+    height: 156px;
+    bottom: 18px;
+    right: 222px;
+    background: url(../i/back.png) no-repeat 0 0;
+}
+    .back a,
+    .back a:visited{
+        position: absolute;
+        width: 124px;
+        height: 37px;
+        top: 14px;
+        left: 20px;
+        background: url(../i/backText.png) no-repeat 0 0;
+    }
+    .back a:hover{
+        background-position: 0 -37px;
+    }
+.genericNotFoundError2 .back{
+    background-image: url(../i/backSnow.png);
+}
+.notFoundError .content{
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 135px;
+    z-index: 1;
+    color: #fffffe;
+    top: 145px;
+    width: 340px;
+}
+    .notFoundError .content h1{
+            padding-top: 20px;
+            font-weight: normal;
+            font-size: 60px;
+        }
+        .notFoundError .content p{
+            font-size: 30px;
+            line-height: 32px;
+            padding-top: 10px;
+            padding-bottom:20px;
+        }
+        .notFoundError .content .contact{
+            font-size: 18px;
+            line-height: 20px;
+        }
+        .notFoundError .content .contact a,
+        .notFoundError .content .contact a:visited{
+            color: #0973ba;
+            text-decoration: none;
+        }
+        .notFoundError .content .contact a:hover{
+            text-decoration: underline;
+        }
