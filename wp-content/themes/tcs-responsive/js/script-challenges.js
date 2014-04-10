@@ -471,8 +471,8 @@ appChallenges = {
         }
         var count = 0;
 
-        if (data.data.length > 0) {
-            $.each(data.data, function(key, rec) {
+        if (data.data.data.length > 0) {
+            $.each(data.data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabData).clone();
 
@@ -485,7 +485,7 @@ appChallenges = {
                     $('.colR1start', row).html(app.formatDate2(rec.startDate));
                     $('.colReg', row).html('<a href="javascript:;">' + rec.totalCompetitors + '</a>');
                 } else {
-                    //$('.contestName', row).html(rec.fullName);
+                    $('.contestName', row).html(rec.fullName);
                     $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("Marathon");
                     $('.colR1start', row).html(app.formatDate2(rec.startDate));
@@ -1365,15 +1365,15 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
-        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
-        // var d = new Date(date);
-        // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
+      //  return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
+         var d = new Date(date);
+         var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
         // // obtain local UTC offset and convert to msec
-        // localOffset = d.getTimezoneOffset() * 60000;
-        // var newdate = new Date(utcd + localOffset);
+         localOffset = d.getTimezoneOffset() * 60000;
+         var newdate = new Date(utcd + localOffset);
 
-        // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
+         return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
     },
 
     //format date review
