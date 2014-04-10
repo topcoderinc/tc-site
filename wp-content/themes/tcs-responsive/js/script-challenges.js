@@ -476,7 +476,6 @@ appChallenges = {
 
                 var row = $(challengesBP.tabData).clone();
 
-                /*
                  * generate table row for design past contest type
                  */
                 if (typeof(rec.totalCompetitors) != "undefined") {
@@ -742,8 +741,7 @@ appChallenges = {
         param.action = "get_active_data_challenges";
         param.pageIndex = 1;
         param.pageSize = 2;
-
-        $.ajax({
+		$.ajax({
             url: ajaxUrl,
             data: param,
             type: "GET",
