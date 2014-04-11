@@ -854,4 +854,55 @@ function get_email_validity_ajax(
     return $email_validity;
 }
 
+// Forgot Password
+function generateResetToken($handle = '') {
+
+    $url = "http://api.topcoder.com/v2/users/resetToken/";
+	
+	if(filter_var($handle, FILTER_VALIDATE_EMAIL)) {
+		//input handle is email
+		$url .= "?email=".$handle;
+	}
+	else {
+		//input handle is handle
+		$url .= "?handle=".$handle;
+	}
+    $args = array(
+        'httpversion' => get_option('httpversion'),
+        'timeout' => get_option('request_timeout')
+    );
+    $response = wp_remote_get($url, $args);
+
+    if (is_wp_error($response) || !isset ($response ['body'])) {
+		return "error";
+    }
+    if ($response ['response']['code'] == 200) {
+		$returnObj = json_decode($response['body']);
+		return $returnObj;
+	}
+
+}
+
+
+function changePassword($password = '' , $unlockCode = '') {
+	
+    $url = "http://api.topcoder.com/v2/users/resetPassword/";
+	
+	$arrParam = array( 'password' => $password, 'token' => $unlockCode );
+    $args = array(
+        'httpversion' => get_option('httpversion'),
+        'timeout' => get_option('request_timeout'),
+		'body'=>$arrParam
+    );
+    $response = wp_remote_post($url, $args);
+
+    if (is_wp_error($response) || !isset ($response ['body'])) {
+		return "error";
+    }
+    if ($response ['response']['code'] == 200) {
+		$returnObj = json_decode($response['body']);
+	}
+	return $returnObj;
+}
+
 

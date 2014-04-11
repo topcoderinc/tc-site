@@ -13,13 +13,14 @@
         "jquery.inputhints.js",
         "scripts.js",
         "script-member.js",
-        "register-login.js",
+        "register-login.js",		
         "blog.js",
         "contact-about.js",
         "init-header.js",
         "challenge-detail-software.js",
         "jquery.jscrollpane.min.js",
-        "jquery.column-1.0.js"
+        "jquery.column-1.0.js",
+		"reset-password.js"
       ],
       "css": [
         "blog.css",
@@ -35,7 +36,8 @@
         "register-login.css",
         "blog-base.css",
         "community-landing.css",
-        "challenge-detail-software.css"
+        "challenge-detail-software.css",
+		"password-recovery.css"
       ]
     },
     "challengelanding": {
