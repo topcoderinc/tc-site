@@ -3,7 +3,7 @@
 
 function get_contest_type($userKey = ''){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin-> get_contest_type( $userKey );	
+	return $TCHOOK_plugin-> get_contest_type( $userKey );
 }
 
 function get_active_contests($userKey = '', $contestType = '', $page = 1, $post_per_page = 30){
@@ -21,14 +21,24 @@ function search_contest($userKey = '', $keyword = ''){
 	return $TCHOOK_plugin-> search_contest($userKey, $keyword);
 }
 
-function get_contest_detail($userKey = '', $contestID = '',$contestType=''){
+function get_contest_detail($userKey = '', $contestID = '',$contestType='', $nocache = false){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin-> get_contest_detail($userKey, $contestID,$contestType);
+	return $TCHOOK_plugin-> get_contest_detail($userKey, $contestID, $contestType, $nocache);
 }
 
-function get_raw_coder($handle){
+function get_contest_results($contestID = '', $contestType=''){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin->tcapi_get_raw_coder($handle);
+	return $TCHOOK_plugin-> get_contest_results($contestID, $contestType);
+}
+
+function get_contest_checkpoint_detail($contestID = '', $contestType=''){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin-> get_contest_checkpoint_detail($contestID, $contestType);
+}
+
+function get_raw_coder($handle, $data){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->tcapi_get_raw_coder($handle, $data);
 }
 
 function get_handle($handle = ''){
@@ -66,4 +76,32 @@ function get_json_from_url( $url ){
 	return $TCHOOK_plugin->get_json_from_url( $url );
 }
 
-?>
+function get_member_achievements_current($userId, $badgeId){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->tcapi_get_member_achievements_current($userId, $badgeId);
+}
+
+function search_users($handle){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->tcapi_search_users($handle);
+}
+
+/**
+ * Is a user registred for a challenge
+ *
+ * @param $handle
+ * @param $challenge
+ *
+ * @return bool
+ */
+function is_user_register_for_challenge($handle, $challenge) {
+  if ($handle && isset($challenge->registrants)) {
+    foreach ($challenge->registrants as $registrant) {
+      if ($handle == $registrant->handle) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}

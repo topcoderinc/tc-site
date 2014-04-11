@@ -234,6 +234,14 @@ em{
         background: #0096ff;
     
 }
+.btnGreen, a.btnGreen{
+    background: #64c51c;
+    border-bottom: 4px solid #46b314;
+}
+    .btnGreen:hover{
+        background: #46b314;
+
+}
 #navigation, #main{
     background: #fffffe;
 }
@@ -599,6 +607,13 @@ em{
 }
 #footer .btnSubmitFooter{
 	font-size: 15px;
+}
+
+/* header / log-in area */
+
+.headerTopRightMenu .actionLogin,
+.headerTopRightMenu .actionLogin {
+  display: none
 }
 
 .headerTopRightMenu{

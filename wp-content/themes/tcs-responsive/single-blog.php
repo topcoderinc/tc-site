@@ -45,6 +45,9 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 		$fbShare = "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=".get_permalink($postId)."&p[images][0]=".$imageUrl."&p[title]=".get_the_title()."&p[summary]=".$twitterText;
 		$gplusShare = "https://plus.google.com/share?url=".get_permalink($postId);
 
+		$authorObj = get_user_by("id",$post->post_author);
+		$authorLink = get_bloginfo("wpurl")."/author/".$authorObj->user_nicename;
+
 		$categories = get_the_category();
 		$arrCategoriesId;
 		if($categories!=null){
@@ -116,7 +119,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 							<!-- Blog Desc -->
 							<div class="blogDescBox">
 								<div class="postDate"><?php echo $dateStr;?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; By:&nbsp;&nbsp;</div>
-								<div class="postAuthor"><a href="javascript:;" class="author blueLink"><?php the_author();?></a></div>
+								<div class="postAuthor"><a href="<?php echo $authorLink; ?>" class="author blueLink"><?php the_author();?></a></div>
 								<div class="postCategory">In :
 									<?php
 										$categories = get_the_category();
@@ -200,7 +203,6 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 
 
 						<!-- /.pageContent -->
-						<?php comments_template(); ?>
 					</div>
 					<!-- /.mainStream -->
 					<aside class="sideStream  grid-1-3">

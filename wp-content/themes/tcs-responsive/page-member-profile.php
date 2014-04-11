@@ -1,5 +1,4 @@
-<?php get_header(); ?>
-<?php
+<?php get_header();
 
 global $activity;
 $activity = get_activity_summary ();
@@ -21,7 +20,7 @@ if ($ct == 'marathon') {
 	$track = "data/marathon";
 }
 
-$coder = get_raw_coder ( $handle );
+$coder = get_raw_coder ( $handle, '' );
 $userkey = get_option ( 'api_user_key' );
 // rint_r($coder);
 
@@ -30,7 +29,7 @@ $userkey = get_option ( 'api_user_key' );
 <!--
  $(document).ready(function(){
 	coder.initMemberEvents();
-})
+});
 //-->
 </script>
 

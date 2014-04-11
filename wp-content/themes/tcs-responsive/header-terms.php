@@ -9,6 +9,7 @@ function tc_header_terms_js() {
     var role = "<?php echo get_query_var('role');?>";
     var termType = "<?php echo $termType; ?>";
     var termsOfUseID = "<?php echo get_query_var('termsOfUseID');?>";
+    var challengeType = "<?php echo get_query_var('challenge-type'); ?>";
   </script>
 <?php
 }

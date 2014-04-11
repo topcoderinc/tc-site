@@ -1,36 +1,20 @@
 <?php
 /**
  * Template Name: Challenge Page
- * Author : evilkyro1965
  */
-get_header('challenge-landing');
-
-
 $values = get_post_custom ( $post->ID );
 
 $siteURL = site_url ();
 $postId = $post->ID;
+
+// get contest details
+$contest_type = "";
+$listType = "AllActive";
+$postPerPage = get_option("challenges_per_page") == "" ? 10 : get_option("challenges_per_page");
+
+get_header('challenge-landing');
 ?>
 
-<?php
-	// get contest details
-	$contest_type = "";
-	$listType = "AllActive";
-	$postPerPage = get_option("challenges_per_page") == "" ? 10 : get_option("challenges_per_page");
-?>
-
-<script type="text/javascript" >
-	var siteurl = "<?php bloginfo('siteurl');?>";
-
-	var reviewType = "contest";
-	var isBugRace = false;
-	var ajaxAction = "get_challenges";
-	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
-	var currentPage = 1;
-	var postPerPage = <?php echo $postPerPage;?>;
-	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
-</script>
 <div class="content">
 	<div id="main">
 
@@ -50,7 +34,7 @@ $postId = $post->ID;
 					</a><span class="arrow"></span>
 				</div>
 				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Development Challenges
+					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Software Development Challenges
 					</a><span class="arrow"></span>
 				</div>
 				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
@@ -66,35 +50,17 @@ $postId = $post->ID;
 			<div class="container">
 
 				<header>
-					<h1>Open Challenges</h1>
+					<h1>
+                      <?php
+                        the_title();
+                        get_template_part("content", "rss-icon");
+                      ?>
+                    </h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
 						</span>
 					</aside>
 				</header>
-				<div class="actions">
-					<div class="mid challengeType">
-						<?php
-							$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-						?>
-						<ul>
-							<li><a href="<?php echo get_bloginfo('siteurl')."/challenges"; ?>" class="active link">All</a></li>
-							<li><a href="<?php echo $activeDesignChallengesLink;?>" class="link design">Design</a></li>
-                            <li><a href="<?php echo $activeDevlopChallengesLink;?>" class="link develop">Develop</a></li>
-                            <li><a href="<?php echo $activeDataChallengesLink;?>" class="link data">Data Science</a></li>
-						</ul>
-					</div>
-					<div class="rt">
-						<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-							<?php
-							//$contest_type="";
-							$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=all";
-							?>
-							<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
-						</div>
-					</div>
-				</div>
-				<!-- /.actions -->
 
 				<div id="tableView" class="viewTab">
 					<div class="tableWrap tcoTableWrap">

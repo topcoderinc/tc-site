@@ -314,6 +314,8 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 	function tcapi_get_activitySummary($atts, $key="") {
 		$url = "http://tcapi.apiary.io/v2/platform/activitySummary";
 		$url = "http://community.topcoder.com/tc?module=BasicData&c=tc_direct_facts&dsid=28&json=true";
+		$url = "http://api.topcoder.com/v2/platform/statistics";
+
 		$args = array (
 				'httpversion' => get_option ( 'httpversion' ),
 				'timeout' => get_option ( 'request_timeout' )
@@ -337,9 +339,9 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 	
 	
 	// Test Member Count
-	function tcapi_get_member_count ($atts, $key="") {
+	function tcapi_get_memberCount ($atts, $key="") {
 		
-		return get_activity_summary("member_count");
+		return get_activity_summary("memberCount");
 	}
 	
 	/* member stastics  */
@@ -413,7 +415,7 @@ add_shortcode ( 'activitySummary', array (
 
 add_shortcode ( 'membercount', array (
 	'TCHOOK_Public',
-	'tcapi_get_member_count'
+	'tcapi_get_memberCount'
 ) );
 
 /**

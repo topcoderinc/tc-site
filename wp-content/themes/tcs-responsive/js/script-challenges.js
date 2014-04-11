@@ -21,7 +21,7 @@ appChallenges = {
         });
         $('.userWidget').on(ev, function(e) {
             e.stopPropagation();
-        })
+        });
 
         if ($('.tooltip').length > 0) {
             app.tooltip();
@@ -430,6 +430,10 @@ appChallenges = {
         param.action = ajaxAction;
         param.pageIndex = pageIndex;
         param.pageSize = postPerPage;
+        if (sortColumn == '') {
+          param.sortColumn = 'registrationOpen';
+          param.sortOrder = 'desc';
+        }
         $.ajax({
             url: ajaxUrl,
             data: param,
@@ -516,6 +520,9 @@ appChallenges = {
         if (sortColumn != "") {
             param.sortColumn = sortColumn;
             param.sortOrder = sortOrder;
+        } else {
+            param.sortColumn = 'registrationOpen';
+            param.sortOrder = 'desc';
         }
 
         $.ajax({
@@ -652,6 +659,9 @@ appChallenges = {
         if (sortColumn != "") {
             param.sortColumn = sortColumn;
             param.sortOrder = sortOrder;
+        } else {
+            param.sortColumn = 'registrationOpen';
+            param.sortOrder = 'desc';
         }
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
@@ -801,7 +811,11 @@ appChallenges = {
 
                     var trackName = app.getTrackSymbol(rec.challengeType);
                     var startDate = app.formatDate2(rec.postingDate);
-                    var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    var checkPointDate;
+                    if (rec.checkpointSubmissionEndDate) {
+                        checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    }
+
                     var endDate = app.formatDate2(rec.submissionEndDate);
                     var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
                     var purse = 0;
@@ -815,7 +829,10 @@ appChallenges = {
                         icoTrack = "ico-track-develop.png";
                         tcoFlag = "tco-flag-develop.png";
                         row = $(challengesBP.tabAllDev).clone();
-                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        if (rec.registrationEndDate) {
+                            checkPointDate = app.formatDate2(rec.registrationEndDate);
+                        }
+
                         contestType = "develop";
                     }
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
@@ -826,13 +843,17 @@ appChallenges = {
                      */
                     $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                     $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                    $('.colCh a', row).attr("href", contestLinkUrl);
+                    $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                     $('.tipC', row).html(rec.challengeType);
 
                     $('.vStartDate', row).html(startDate);
 
-                    $('.vEndRound', row).html(checkPointDate);
+                    if (checkPointDate) {
+                        $('.vEndRound', row).html(checkPointDate);
+                    } else {
+                        $('.vEndRound', row).parent().empty();
+                    }
 
                     $('.vEndDate', row).html(endDate);
 
@@ -856,7 +877,7 @@ appChallenges = {
     },
 
     addEmptyResult: function(table) {
-        $(table).html("<div><h3>There are no active challenges under this category. Please check back later</h3></div>");
+        $(table).html('<table><tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr></table>');
     },
 
     // getGridview Blocks
@@ -894,7 +915,11 @@ appChallenges = {
                     trackName += " trackSD";
 
                     var startDate = app.formatDate2(rec.postingDate);
-                    var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    var checkPointDate
+                    if (rec.checkpointSubmissionEndDate) {
+                        checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                    }
+
                     var endDate = app.formatDate2(rec.submissionEndDate);
                     var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
                     var purse = 0;
@@ -910,7 +935,9 @@ appChallenges = {
                         tcoFlag = "tco-flag-develop.png";
                         con = $(challengesBP.grDevOpen).clone();
 
-                        checkPointDate = app.formatDate2(rec.submissionEndDate);
+                        if (rec.submissionEndDate) {
+                            checkPointDate = app.formatDate2(rec.submissionEndDate);
+                        }
                         contestType = "develop";
                     }
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
@@ -928,7 +955,12 @@ appChallenges = {
                     $('.type', con).html(rec.challengeType);
                     $('.tipC', con).html(rec.challengeType);
                     $('.vStartDate', con).html(startDate);
-                    $('.vEndRound', con).html(checkPointDate);
+                    if (checkPointDate) {
+                        $('.vEndRound', con).html(checkPointDate);
+                    } else {
+                        $('.vEndRound', con).parent().empty();
+                    }
+
                     $('.vEndDate', con).html(endDate);
                     $('.vPhase', con).html(rec.currentPhaseName);
 
@@ -1010,14 +1042,18 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data.length > 0) {
+        if (data.data && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.gdOpen).clone();
 
                 var trackName = app.getTrackSymbol(rec.challengeType);
                 var startDate = app.formatDate2(rec.postingDate);
-                var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                var checkPointDate;
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
+
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
@@ -1028,7 +1064,9 @@ appChallenges = {
 
                 if (contest_type == "develop") {
                     row = $(challengesBP.gdDevOpen).clone();
-                    checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
                 }
 
                 row.addClass('track-' + trackName);
@@ -1043,13 +1081,17 @@ appChallenges = {
                 }
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', row).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                 $('.tipC', row).html(rec.challengeType);
 
                 $('.vStartDate', row).html(startDate);
 
-                $('.vEndRound', row).html(checkPointDate);
+                if (checkPointDate) {
+                    $('.vEndRound', row).html(checkPointDate);
+                } else {
+                    $('.vEndRound', row).parent().empty();
+                }
 
                 $('.vEndDate', row).html(endDate);
 
@@ -1061,7 +1103,7 @@ appChallenges = {
 
                 $('.colPur', row).html("$" + app.formatCur(purse));
 
-                $('.colPhase', row).html(rec.currentPhaseName);
+                $('.colPhase', row).html(rec.registrationOpen == 'Yes' ? 'Open to All' : 'Open to Challenge Registrants');
 
                 $('.colReg', row).html('<a href="' + contestLinkUrl + '#viewRegistrant">' + rec.numRegistrants + '</a>');
 
@@ -1081,7 +1123,7 @@ appChallenges = {
         gridEl.html(null);
 
         var count = 0;
-        if (data.data.length > 0) {
+        if (data.data && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var con = $(challengesBP.grDOpen).clone();
@@ -1091,6 +1133,9 @@ appChallenges = {
 
                 var startDate = app.formatDate2(rec.postingDate);
                 var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
@@ -1101,7 +1146,9 @@ appChallenges = {
                 /* for develop type contest */
                 if (contest_type == "develop") {
                     con = $(challengesBP.grDevOpen).clone();
-                    checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
                 }
 
 
@@ -1117,11 +1164,17 @@ appChallenges = {
 
                 $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', con).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
                 $('.tipC', con).html(rec.challengeType);
                 $('.vStartDate', con).html(startDate);
-                $('.vEndRound', con).html(checkPointDate);
+
+                if (checkPointDate) {
+                    $('.vEndRound', con).html(checkPointDate);
+                } else {
+                    $('.vEndRound', con).parent().empty();
+                }
+
                 $('.vEndDate', con).html(endDate);
                 $('.vPhase', con).html(rec.currentPhaseName);
 
@@ -1234,7 +1287,7 @@ appChallenges = {
                 }
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a', row).attr("href", contestLinkUrl);
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
                 $('.colType .tipC', row).html(rec.challengeType);
 
                 $('.vStartDate', row).html(startDate);
@@ -1245,14 +1298,10 @@ appChallenges = {
 
                 $('.colPur', row).html("$" + purse);
 
-                $('.colPhase', row).html(rec.currentStatus);
+                $('.colPhase', row).html(rec.registrationOpen == 'Yes' ? 'Open to All' : 'Open to Challenge Registrants');
 
-                /* tmp solution */
-                if (app.isDesignContest(rec.challengeType)) {
-                    $('.winBages', row).html('<a href="http://studio.topcoder.com/?module=ViewContestResults&ct=' + rec.challengeId + '">View Winners</a>');
-                } else {
-                    $('.winBages', row).html('<a href="http://community.topcoder.com/tc?module=ProjectDetail&pj=' + rec.challengeId + '">View Winners</a>');
-                }
+                $('.winBages', row).html('<a href="' + siteurl+ '/challenge-details/' +rec.challengeId+'?type='+ rec.challengeCommunity +'#winner">View Winners</a>');
+                
                 $('.moreWin', row).hide();
 
                 $('.colReg', row).html('<a href="' + contestLinkUrl + '#viewRegistrant">' + rec.numRegistrants + '</a>');
@@ -1326,16 +1375,15 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
+        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
+        // var d = new Date(date);
+        // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
-        var d = new Date(date);
-        var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
+        // // obtain local UTC offset and convert to msec
+        // localOffset = d.getTimezoneOffset() * 60000;
+        // var newdate = new Date(utcd + localOffset);
 
-        // obtain local UTC offset and convert to msec
-        localOffset = d.getTimezoneOffset() * 60000;
-        var newdate = new Date(utcd + localOffset);
-
-        return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
-
+        // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
     },
 
     //format date review
@@ -1368,6 +1416,10 @@ appChallenges = {
     //format time left
     formatTimeLeft: function(seconds, grid) {
         var sep = (grid) ? '' : ' ';
+        if (seconds < 0) {
+          return '<span style="font-size:14px;">0' + sep + '<span style="font-size:10px;">Days</span> 0' + sep + '<span style="font-size:10px;">Hrs</span>';
+        }
+
         var numdays = Math.floor(seconds / 86400);
         var numhours = Math.floor((seconds % 86400) / 3600);
         var numminutes = Math.floor(((seconds % 86400) % 3600) / 60);
@@ -1387,7 +1439,7 @@ appChallenges = {
     getContestLinkUrl: function(projectId, contestType) {
         return siteurl + "/challenge-details/" + projectId + "/?type=" + contestType;
     }
-}
+};
 
 /**
  */

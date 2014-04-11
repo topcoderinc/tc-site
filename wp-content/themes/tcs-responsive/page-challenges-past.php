@@ -5,7 +5,6 @@
  */
 get_header('challenge-landing');
 
-
 $values = get_post_custom ( $post->ID );
 
 $siteURL = site_url ();

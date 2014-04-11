@@ -294,6 +294,39 @@ var coder = {
         		$('.loading').hide();
             });
         }
+    },
+    initMemberBadges: function() {
+      $(".subBadge, .singleBadge").on('mouseenter', function(){
+        var tt = $('#badgeTooltip');
+        $(this).addClass("activeBadge");
+        tt.addClass('isShowing');
+        $('header', tt).html($(this).data("title"));
+        var date = $(this).data("date");
+        if(date === "Not Earned Yet"){
+          $('.eranedOn', tt).html(date);
+        } else {
+          $('.eranedOn', tt).html("Earned on " + date);
+        }
+        $('.currentlyEearned span', tt).html($(this).data("current"));
+        
+        tt.css('z-index', '-1').stop().fadeIn();
+                
+        window.setTimeout(function() {
+            var ttNew = $('.tooltip.isShowing');
+            var ht = tt.height();
+            var wt = tt.width() - $('.activeBadge').width();
+            var activeLinkTop = $('.activeBadge').offset().top;
+            var top = activeLinkTop - ht - 10;
+            var lt = $('.activeBadge').offset().left - wt / 2;
+            ttNew.css('left', lt).css('top', top);
+            ttNew.css('z-index', '2000').css('opacity', '1');
+            $('.isShowing').removeClass('isShowing');
+            $('.activeBadge').removeClass('activeBadge');
+        }, 10);
+      });
+      $('.groupBadge, .footer-badges').on('mouseleave', function() {
+          $('#badgeTooltip').css('top', -20000);
+      });
     }
 };
 
