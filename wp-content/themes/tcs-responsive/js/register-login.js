@@ -101,6 +101,19 @@ $(function () {
     }
   });
 
+  $('#registerForm input.confirm:password').on('keyup', function () {
+    var input = $(this);
+    input.removeClass('invalid');
+    input.closest('.row').find('.err1,.err2').hide();
+    if (input.val() == "") {
+      input.closest('.row').find('.err1').show();
+      input.closest('.row').find('input:password').addClass('invalid');
+    } else if (input.val() != $('#registerForm input.pwd:password').val()) {
+      input.closest('.row').find('.err2').show();
+      input.addClass('invalid');
+    }
+  });
+
   $('#register form.register input.email:text').on('keyup', function () {
     var email;
     if (isValidEmailAddress(email=$(this).val())) {
@@ -218,7 +231,7 @@ $(function () {
     var confirm = $('#register form.register input.confirm:password');
     if (pwd.val() == confirm.val() && pwd.val() != '') {
       confirm.parents(".row").find("span.valid").css("display", "inline-block");
-      confirm.parents(".row").find('input:text').removeClass('invalid');
+      confirm.removeClass('invalid');
       confirm.parents(".row").find('span.err1').hide();
       confirm.parents(".row").find('span.err2').hide();
     } else {
