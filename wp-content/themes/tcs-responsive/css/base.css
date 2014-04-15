@@ -234,6 +234,14 @@ em{
         background: #0096ff;
     
 }
+.btnGreen, a.btnGreen{
+    background: #64c51c;
+    border-bottom: 4px solid #46b314;
+}
+    .btnGreen:hover{
+        background: #46b314;
+
+}
 #navigation, #main{
     background: #fffffe;
 }

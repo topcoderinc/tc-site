@@ -4,6 +4,7 @@ $(function () {
     centerModal();
   });
 
+
   $('#username').keyup(function() {
     $('#loginForm span.err3').hide();
     $('#loginForm span.err1').hide();
@@ -50,6 +51,7 @@ $(function () {
     if (pwd.trim()=='') return 0;
     if (pwd.length < 7) return -2;
     if (pwd.length > 30) return -3;
+    if (pwd.match("'")) return -4;
 
     if (pwd.match(/[a-z]/)) result++;
     if (pwd.match(/[A-Z]/)) result++;
@@ -60,7 +62,12 @@ $(function () {
 
   }
 
-  $('input.pwd:password').on('keyup', function () {
+  $('#registerForm input.pwd:password').on('keyup', function () {
+    var input = $(this);
+
+    $(this).closest('.row').find('.err1,.err2,.err3,.err4').hide();
+    $(this).removeClass('invalid');
+
     var strength = pwdStrength($(this).val());
 
     $(".strength .field").removeClass("red").removeClass("green");
@@ -70,9 +77,6 @@ $(function () {
     if (strength >= 3) {
       classname = "green";
       $(this).parents(".row").find("span.valid").css("display", "inline-block");
-      $(this).closest('.row').find('input:text').removeClass('invalid');
-      $(this).closest('.row').find('span.err1').hide();
-      $(this).closest('.row').find('span.err2').hide();
     } else {
       $(this).parents(".row").find("span.valid").hide();
     }
@@ -82,6 +86,19 @@ $(function () {
         $(e).addClass(classname);
       }
     });
+    if (input.val() == "") {
+      input.closest('.row').find('.err1').show();
+      input.closest('.row').find('input:password').addClass('invalid');
+    } else if (strength >= 0 && strength < 3) {
+      input.closest('.row').find('.err2').show();
+      input.addClass('invalid');
+    } else if (strength == -4) {
+      input.closest('.row').find('.err3').show();
+      input.addClass('invalid');
+    } else if (strength < -1) {
+      input.closest('.row').find('.err4').show();
+      input.addClass('invalid');
+    }
   });
 
   $('#register form.register input.email:text').on('keyup', function () {
@@ -170,6 +187,9 @@ $(function () {
       // can't start with 'admin'
       $(this).closest('.row').find('span.err6').show();
       invalid = true;
+    } else if (text.length == 0) {
+      $(this).closest('.row').find('span.err1').show();
+      invalid = true;
     } else if (text.length == 1 || text.length > 15) {
       // must be between 2 and 15 chars long
       $(this).closest('.row').find('span.err7').show();
@@ -196,15 +216,6 @@ $(function () {
   $('#register input:password').on('keyup', function () {
     var pwd = $('#register form.register input.pwd:password');
     var confirm = $('#register form.register input.confirm:password');
-    if ($(this).hasClass('pwd')) {
-      if ($(this).val() != "") {
-        $(this).closest('.row').find('span.err1').hide();
-        $(this).closest('.row').find('span.err2').hide();
-        $(this).closest('.row').find('input:password').removeClass('invalid');
-      } else {
-        $(this).parents(".row").find("span.valid").hide();
-      }
-    }
     if (pwd.val() == confirm.val() && pwd.val() != '') {
       confirm.parents(".row").find("span.valid").css("display", "inline-block");
       confirm.parents(".row").find('input:text').removeClass('invalid');
@@ -371,6 +382,7 @@ $(function () {
 
     });
     if (!$(this).hasClass("socialRegister")) {
+      $(this).closest('.row').find('.err1,.err2,.err3,.err4').hide();
       $('input.pwd:password', frm).each(function () {
         if ($(this).val() == "") {
           $(this).closest('.row').find('.err1').show();
@@ -379,6 +391,11 @@ $(function () {
         } else if ($(".strength .field.red", frm).length > 0) {
           frm.find(".err2.red").show();
           $(this).closest('.row').find('.err2').show();
+          $(this).closest('.row').find('input:password').addClass('invalid');
+          isValid = false;
+        } else if (pwdStrength($('input.pwd:password').val()) == -4) {
+          frm.find(".err4.red").show();
+          $(this).closest('.row').find('.err3').show();
           $(this).closest('.row').find('input:password').addClass('invalid');
           isValid = false;
         } else if (pwdStrength($('input.pwd:password').val()) < -1) {
@@ -444,7 +461,10 @@ $(function () {
             lastName: $('#registerForm input.lastName').val(),
             handle: $('#registerForm input.handle').val(),
             country: $('#registerForm select#selCountry').val(),
-            email: $('#registerForm input.email').val()
+            email: $('#registerForm input.email').val(),
+            utmSource: utmSource,
+            utmMedium: utmMedium,
+            utmCampaign: utmCampaign
           }
           if ((typeof socialProviderId != 'undefined') && socialProviderId !== "") {
             fields.socialProviderId = socialProviderId;
@@ -582,14 +602,24 @@ function centerModal(selector) {
 
 function closeModal() {
   $('.modal,#bgModal').hide();
+  resetRegisterFields();
+  if (window.location.hash != '') {
+    window.history.pushState({}, 'Home', '/');
+  }
+  $('#registerForm span.socialUnavailableErrorMessage').hide();
 }
 
 // Resets the registration popup fields
 function resetRegisterFields() {
   $("#registerForm input[type='text'], #registerForm input[type='password']").val("");
   $("#registerForm select").val($("#registerForm select option:first").val());
+  $('#registerForm input.handle').trigger('keyup');
   $("#registerForm .customSelectInner").text($("#registerForm select option:first").text());
   $("#registerForm input[type='checkbox']").attr('checked', false);
   $(".pwd, .confirm, .strength").parents(".row").show();
-  $("#register a.btnSubmit").removeClass("socialRegister");
+  $("#registerForm a.btnSubmit").removeClass("socialRegister");
+  $('#registerForm .invalid').removeClass('invalid');
+  $('#registerForm .err1,.err2,.err3,.err4,.err4,.err6,.err7,.err8').hide();
+  $('#registerForm span.strength span.field').removeClass('red').removeClass('green');
+  $('#registerForm span.valid').hide();
 }

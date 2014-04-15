@@ -1,5 +1,4 @@
-<?php get_header(); ?>
-<?php
+<?php get_header();
 
 global $activity;
 $activity = get_activity_summary ();
@@ -21,7 +20,7 @@ if ($ct == 'marathon') {
 	$track = "data/marathon";
 }
 
-$coder = get_raw_coder ( $handle );
+$coder = get_raw_coder ( $handle, '' );
 $userkey = get_option ( 'api_user_key' );
 // rint_r($coder);
 
@@ -30,7 +29,7 @@ $userkey = get_option ( 'api_user_key' );
 <!--
  $(document).ready(function(){
 	coder.initMemberEvents();
-})
+});
 //-->
 </script>
 
@@ -40,7 +39,7 @@ $userkey = get_option ( 'api_user_key' );
 if ($coder->photoLink != '')
 	$photoLink = 'http://community.topcoder.com' . $coder->photoLink;
 else
-	$photoLink = 'http://local.topcoder.com/reviewer/tc-cs/wp-content/themes/tcs-responsive/i/no-photo.png'; //@TODO This is terrible and needs to be changed
+	$photoLink = THEME_URL . '/i/default-photo.png';
 
 $quote = ($coder->quote == '') ? "Member of the world's largest global competitive community. " : $coder->quote;
 

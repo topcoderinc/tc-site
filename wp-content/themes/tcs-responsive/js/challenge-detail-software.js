@@ -294,20 +294,4 @@ $(function () {
     window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
   });
 
-  // S-194724
-  var tcsso = getCookie('tcsso');
-  if (tcsso) {
-    var tcssoValues = tcsso.split("|");
-    var now = new Date();
-
-    if (typeof registrationUntil !== "undefined") {
-      if (now.getTime() < registrationUntil.getTime()) {
-        $('#registrationButton').removeClass('disabled');
-      }
-      if (now.getTime() < submissionUntil.getTime() && registrants.indexOf(tcssoValues[0]) > -1) {
-        $('#submissionButton').removeClass('disabled');
-      }
-    }
-  }
-
 });

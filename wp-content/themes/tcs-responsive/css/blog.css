@@ -729,7 +729,6 @@ h3.popularPostTitle {
 }
 
 .subscribeTopWrapper .feedBtn {
-    float: right;
     margin-top: 12px;
     color: #01a8e9;
     background: url(../i/rss.png) no-repeat center left;
