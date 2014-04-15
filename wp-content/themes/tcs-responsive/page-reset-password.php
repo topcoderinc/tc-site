@@ -12,19 +12,16 @@ $updatePassword = $_POST["updatePassword"];
 
 $msg = null;
 if( $updatePassword=="true" ) {
-	$handle = $_POST["handle"];
+	//$handle = $_POST["handle"];
 	$unlockCode = $_POST["unlock_code"];
 	$password = $_POST["password"];
-	$changeObj = changePassword($password,$unlockCode);
-	if($changeObj!=null) {
-		if(property_exists($changeObj, 'description')) {
-			if($changeObj->description!="") {
-				$msg = $changeObj->description;
-			}
-			else {
-				$msg = "Can't change your password";
-			}
-		}
+	$response = changePassword($password,$unlockCode);
+	
+	if( $response['response']['code']==200 && $response['response']['message']=='OK' ) {
+		$msg = "Password successfully changed";
+	}
+	else {
+		$msg = "Can't change your password";
 	}
 }
 ?>
