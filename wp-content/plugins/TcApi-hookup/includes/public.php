@@ -24,7 +24,24 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 		return "Error in processing request";
 	}
 
-
+	// returns checkpoint data
+	public function get_checkpoint_details_fn($contestId = '',$challengeType='') {
+		
+		$url =  'http://api.topcoder.com/v2/design/challenges/checkpoint/' . $contestId ;
+		if(strtolower($challengeType)=='develop'){
+			$url ='http://api.topcoder.com/v2/develop/challenges/checkpoint/' . $contestId ;
+		}
+		$response = wp_remote_get ($url);
+	
+		if (is_wp_error ( $response ) || ! isset ( $response ['body'] )) {
+			return "Error in processing request";
+		}
+		if ($response ['response'] ['code'] == 200) {
+			return json_decode ( $response ['body'] );
+		}
+		return "Error in processing request";
+	}
+	
 	// returns contest type
 	public function get_contest_type($userKey = '') {
 		$response = wp_remote_get ( 'https://api.topcoder.com/rest/contestTypes?user_key=' . $userKey );
