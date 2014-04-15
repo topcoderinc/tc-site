@@ -876,10 +876,8 @@ function generateResetToken($handle = '') {
     if (is_wp_error($response) || !isset ($response ['body'])) {
 		return "error";
     }
-    if ($response ['response']['code'] == 200) {
-		$returnObj = json_decode($response['body']);
-		return $returnObj;
-	}
+
+	return $response;
 
 }
 

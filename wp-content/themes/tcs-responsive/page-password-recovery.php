@@ -8,10 +8,6 @@ $values 	= get_post_custom ( $post->ID );
 $userkey 	= get_option ( 'api_user_key' );
 
 $changePasswordPage = get_page_link_by_slug("reset-password");
-/*
-$emailSubject 		= get_option("tcPasswordRecoverySubject")==null ? "Topcoder Password Recovery" : get_option("tcPasswordRecoverySubject"); 
-$emailMessage 		= get_option("tcPasswordRecoveryContent")==null ? $recoveryPasswordMessage : get_option("tcPasswordRecoveryContent");
-*/
 $redirectDelay 		= get_option("tcPasswordRecoveryRedirectDelay")==null ? 3000 : get_option("tcPasswordRecoveryRedirectDelay");
 
 $handle 	= $_POST["handle"];
@@ -19,65 +15,26 @@ $msg 		= null;
 $redirect 	= false;
 $tokenObj 	= null;
 if(trim($handle)!='') {
-	$tokenObj = generateResetToken($handle);
+	$response = generateResetToken($handle);
+	
+	$obj = json_decode($response['body']);
+    if ($response['response']['code']== 200) {
+		$tokenObj = $obj;
+	} else {
+		$msg = $obj->error->details;
+	}
+	
 }
 
 if($tokenObj!=null) {
-	if(property_exists($tokenObj, 'socialProvider')) {
+	if ( $tokenObj->successful ) {
+		$changePasswordLink = $changePasswordPage;
+		$msg = "Sit tight we have emailed you a confirmation code";
+		$redirect = true;		
+	} elseif( isset($tokenObj->socialProvider) ) {
 		$msg = "You have registered using social login. Please login using ".$takenObj->socialProvider." service";
 	}
-	else if(property_exists($tokenObj, 'token')) {
-		
-		$changePasswordLink = $changePasswordPage; //."?unlock_code=".$tokenObj->token;
-		
-		/*		
-		$emailMessage = str_replace("varHandle", $handle, $emailMessage);
-		$emailMessage = str_replace("varCode", $tokenObj->token, $emailMessage);
-		$emailMessage = str_replace("varChangePasswordPage", $changePasswordPage, $emailMessage);
-		$emailMessage = str_replace("varChangePasswordLink", $changePasswordLink, $emailMessage);
-		$emailMessage = str_replace("varThemeUrl", THEME_URL, $emailMessage);
-		
-		$body = $emailMessage;
-
-		$mail = getMailObject();
-		$username = get_option("tcEmailUsername")==null ? "topcoderprojectmailtest@gmail.com" : get_option("tcEmailUsername");
-		$emailForm = get_option("tcEmailForm")==null ? "Topcoder" : get_option("tcEmailForm");
-		
-		$mail->SetFrom($username,$emailForm);
-		$mail->Subject = $emailSubject;
-		$body = str_replace("\\", "", $body);
-		$mail->Body = $body;
-		if(filter_var($handle, FILTER_VALIDATE_EMAIL)) {
-			$toAddress = $handle;
-		}
-		else {
-			$userEmail = getUserEmail($handle);
-			$toAddress = $userEmail;
-		}
-
-		$arrToAddress = explode(",", $toAddress);
-		if($arrToAddress!=null) 
-		foreach($arrToAddress as $value) {
-			$mail->AddAddress(trim($value));
-		}
-		
-		try {
-			if($mail->Send()) {
-				$msg = "Sit tight we have emailed you a confirmation code";
-				$redirect = true;
-			}
-		}catch(Exception $e) {
-			print_r($e);
-		}
-		*/
-		
-		
-		$msg = "Sit tight we have emailed you a confirmation code";
-		$redirect = true;
-		
-	}
 }
-
 /**
  * Redirect to reset password page 
  */ 
