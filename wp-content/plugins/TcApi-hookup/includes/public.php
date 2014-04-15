@@ -27,9 +27,9 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 	// returns checkpoint data
 	public function get_checkpoint_details_fn($contestId = '',$challengeType='') {
 		
-		$url =  'http://api.topcoder.com/v2/design/challenges/checkpoint/' . $contestId ;
+		$url =  'https://api.topcoder.com/v2/design/challenges/checkpoint/' . $contestId ;
 		if(strtolower($challengeType)=='develop'){
-			$url ='http://api.topcoder.com/v2/develop/challenges/checkpoint/' . $contestId ;
+			$url ='https://api.topcoder.com/v2/develop/challenges/checkpoint/' . $contestId ;
 		}
 		$response = wp_remote_get ($url);
 	
