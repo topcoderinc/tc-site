@@ -15,7 +15,7 @@ if( $updatePassword=="true" ) {
 	$handle = $_POST["handle"];
 	$unlockCode = $_POST["unlock_code"];
 	$password = $_POST["password"];
-	$changeObj = changePassword($handle,$password,$unlockCode);
+	$changeObj = changePassword($password,$unlockCode);
 	if($changeObj!=null) {
 		if(property_exists($changeObj, 'description')) {
 			if($changeObj->description!="") {
