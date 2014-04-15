@@ -7,12 +7,8 @@ function tc_challenge_details_js(){
   global $contest, $contestType, $contestID, $registrants;
   ?>
   <script type="text/javascript">
-  <?php	$regEnd =  strtotime("$contest->registrationEndDate") || 1;
-	$submissionEnd = strtotime("$contest->submissionEndDate") || 1; ?>
-	
-  	
-    var registrationUntil = new Date(<?php echo $regEnd?>*1000);
-    var submissionUntil = new Date(<?php echo $submissionEnd?>*1000);
+    var registrationUntil = new Date(<?php echo strtotime("$contest->registrationEndDate");?>*1000);
+    var submissionUntil = new Date(<?php echo strtotime("$contest->submissionEndDate");?>*1000);
     var challengeId = "<?php echo $contestID;?>";
     var challengeType = "<?php echo $contestType;?>";
     var autoRegister = "<?php echo get_query_var('autoRegister');?>";
@@ -34,41 +30,6 @@ function tc_challenge_details_js(){
  * Template Name: Challenge details
  */
 
-/*
-added by @pemula 2014-01-17
-source : http://stackoverflow.com/questions/8273804/convert-seconds-into-days-hours-minutes-and-seconds
-*/
-function secondsToTime($inputSeconds) {
-
-  $secondsInAMinute = 60;
-  $secondsInAnHour = 60 * $secondsInAMinute;
-  $secondsInADay = 24 * $secondsInAnHour;
-
-  // extract days
-  $days = floor($inputSeconds / $secondsInADay);
-
-  // extract hours
-  $hourSeconds = $inputSeconds % $secondsInADay;
-  $hours = floor($hourSeconds / $secondsInAnHour);
-
-  // extract minutes
-  $minuteSeconds = $hourSeconds % $secondsInAnHour;
-  $minutes = floor($minuteSeconds / $secondsInAMinute);
-
-  // extract the remaining seconds
-  $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-  $seconds = ceil($remainingSeconds);
-
-  // return the final array
-  $obj = array(
-    'd' => (int) $days,
-    'h' => (int) $hours,
-    'm' => (int) $minutes,
-    's' => (int) $seconds,
-  );
-  return $obj;
-}
-
 $isChallengeDetails = TRUE;
 
 $values = get_post_custom($post->ID);
@@ -85,9 +46,92 @@ $noCache = get_query_var('nocache');
 $contest = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants = empty($contest->registrants) ? array() : $contest->registrants;
 
+$registerDisable = false;
+$submitDisabled = false;
+/*
+$curDate = new DateTime();
+$registerDisable = true;
+if ($contest->registrationEndDate) {
+  $regDate = new DateTime($contest->registrationEndDate);
+  if ($regDate > $curDate) {
+    $registerDisable = false;
+  }
+}
+
+$submitDisabled = true;
+if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
+  $submitDate = new DateTime($contest->submissionEndDate);
+  if ($submitDate > $curDate) {
+    $submitDisabled = false;
+  }
+}*/
+
+// @TODO need to fix loading of hanlde before these will work
+//$registerDisable = challenge_register_disabled($contest);
+//$submitDisabled = challenge_submit_disabled($contest);
+
+/**
+ * Should the registration button active
+ *
+ * Registration button should be disabled:
+ *  - When the date is after the registration end date
+ *  - If the user is already registered
+ *
+ * @param $contest
+ *
+ * @return bool
+ */
+function challenge_register_disabled($contest) {
+  global $handle;
+
+  $registerDisable = true;
+
+  if ($contest->registrationEndDate) {
+    $curDate = new DateTime();
+    $regDate = new DateTime($contest->registrationEndDate);
+    if ($regDate > $curDate) {
+      $registerDisable = false;
+    }
+  }
+
+   if (is_user_register_for_challenge($handle, $contest)) {
+      $registerDisable = true;
+   }
+
+  return $registerDisable;
+}
 
 
-$checkpointData = get_checkpoint_details($contestID, $contestType);
+
+/**
+ * Should the submit button be active
+ *
+ * Submit button should be disabled:
+ *  - If submission date is not passed and challenge is not complete
+ *  - If there is a user and the user is registered
+ *
+ * @param $contest
+ *
+ * @return bool
+ */
+function challenge_submit_disabled($contest) {
+  global $handle;
+  $submitDisabled = true;
+
+  if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
+    $curDate = new DateTime();
+    $submitDate = new DateTime($contest->submissionEndDate);
+    if ($submitDate > $curDate) {
+      $submitDisabled = false;
+    }
+  }
+
+  if (!is_user_register_for_challenge($handle, $contest)) {
+    $submitDisabled = true;
+  }
+
+  return $submitDisabled;
+}
 
 // Ad submission dates to registrants
 // @TODO move this to a class
@@ -750,22 +794,8 @@ endif;
 <?php
 if ($contestType != 'design'):
   ?>
-  <h3>Downloads:</h3>
-  <div class="inner">
-    <?php
-    echo '<ul>';
-    if (!empty($contest->Documents)) {
-      foreach ($contest->Documents as $value) {
-        $document = $value;
-        echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';
-      }
-    }
-    else {
-      echo '<li><strong>None</li></strong>';
-    }
-    echo '</ul>';
-    ?>
-
+  <div class="slideBox">
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </div>
   <li class="slide">
 
@@ -787,6 +817,7 @@ if ($contestType != 'design'):
     <!-- End review style section -->
 
   </li>
+  <?php  if (isset($contest->screeningScorecardId) && isset($contest->reviewScorecardId)) : ?>
   <li class="slide">
 
     <div class="contestLinks slideBox">
@@ -883,18 +914,7 @@ if ($contestType != 'design'):
 else:
   ?>
   <li class="slide">
-    <div class="slideBox">
-      <h3>Downloads:</h3>
-
-      <div class="inner">
-        <?php
-        for ($i = 0; $i < count($documents); $i++) :
-          $document = $documents[$i];
-          ?>
-          <p><a href="<?php echo $document->url; ?>"><?php echo $document->documentName; ?></a></p>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </li>
   <li class="slide">
     <div class="slideBox">
