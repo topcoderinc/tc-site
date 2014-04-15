@@ -1376,15 +1376,15 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
-        //return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
-         var d = new Date(date);
-         var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
+        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
+        // var d = new Date(date);
+        // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
-         // obtain local UTC offset and convert to msec
-         localOffset = d.getTimezoneOffset() * 60000;
-         var newdate = new Date(utcd + localOffset);
+        // // obtain local UTC offset and convert to msec
+        // localOffset = d.getTimezoneOffset() * 60000;
+        // var newdate = new Date(utcd + localOffset);
 
-         return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
+        // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
     },
 
     //format date review
