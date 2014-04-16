@@ -1,10 +1,46 @@
+<?php
+/*
+added by @pemula 2014-01-17
+source : http://stackoverflow.com/questions/8273804/convert-seconds-into-days-hours-minutes-and-seconds
+*/
+function secondsToTime($inputSeconds) {
+
+  $secondsInAMinute = 60;
+  $secondsInAnHour = 60 * $secondsInAMinute;
+  $secondsInADay = 24 * $secondsInAnHour;
+
+  // extract days
+  $days = floor($inputSeconds / $secondsInADay);
+
+  // extract hours
+  $hourSeconds = $inputSeconds % $secondsInADay;
+  $hours = floor($hourSeconds / $secondsInAnHour);
+
+  // extract minutes
+  $minuteSeconds = $hourSeconds % $secondsInAnHour;
+  $minutes = floor($minuteSeconds / $secondsInAMinute);
+
+  // extract the remaining seconds
+  $remainingSeconds = $minuteSeconds % $secondsInAMinute;
+  $seconds = ceil($remainingSeconds);
+
+  // return the final array
+  $obj = array(
+    'd' => (int) $days,
+    'h' => (int) $hours,
+    'm' => (int) $minutes,
+    's' => (int) $seconds,
+  );
+  return $obj;
+}
+
+?>
 <div class="container">
 <header class="pageHeading aboutPage">
   <h1><?php echo $contest->challengeName; ?></h1>
 
   <h2>CHALLENGE TYPE: <span><?php echo $contest->challengeType; ?></span></h2>
 </header>
-
 
 <div id="stepBox">
 <div class="container">
@@ -13,17 +49,16 @@
   <?php
   if ($contestType != 'design'):
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
-       href="https://software.topcoder.com/review/actions/UploadContestSubmission.do?method=uploadContestSubmission&pid=<?php echo $contestID; ?>"><span>2</span>
-      <strong>Submit Your Entries</strong></a>
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
+       href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span> <strong>Register
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span> <strong>Register
         For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
        href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
         Your Entries</strong></a>
     <a class="btn btnAction" target="_blank"
@@ -494,8 +529,11 @@ if (sizeof($contest->prize) > 5) {
       </div>
       <span class="timeLeft">
       <?php
-      $remaining = secondsToTime($contest->currentPhaseRemainingTime);
-      echo ($contest->currentStatus == 'Completed' || $contest->currentStatus == 'Deleted') ? "" : $remaining['d'] . " <small>Days</small> " . $remaining['h'] . " <small>Hours</small> " . $remaining['m'] . " <small>Mins</small>";
+      if ($contest->currentStatus !== 'Completed' && $contest->currentStatus !== 'Deleted' && $contest->currentPhaseRemainingTime > 0) {
+          $dtF = new DateTime("@0");
+          $dtT = new DateTime("@{$contest->currentPhaseRemainingTime}");
+          echo $dtF->diff($dtT)->format('%a <small>Days</small> %h <small>Hours</small> %i <small>Mins</small>');
+      }
       ?>
       </span>
     </div>
@@ -504,24 +542,27 @@ if (sizeof($contest->prize) > 5) {
     if ($contestType != 'design'):
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent hide">
-        <p><label>Posted On:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Posted On:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
 
 
         <p><label>Register By:</label>
          <span><?php echo date(
-               "M d, Y H:i",
-               strtotime("$contest->registrationEndDate")
-             ) . " EST"; ?>
+               "M d, Y H:i T",
+               strtotime("$contest->registrationEndDate"));?>
          </span>
         </p>
 
-        <p class="last"><label>Submit By:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Submit By:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
       </div>
       <!--End nextBoxContent-->
@@ -529,25 +570,34 @@ if (sizeof($contest->prize) > 5) {
     else:
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent studio hide">
-        <p><label>Start Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Start Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
+        <?php if ($contest->checkpointSubmissionEndDate != "") : ?>
+        <p><label>Checkpoint:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->checkpointSubmissionEndDate"));?>
+          </span>
+        </p>
+        <?php endif; ?>
 
-        <p><label>Checkpoint:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->checkpointSubmissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p><label>End Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
-        <p><label>End Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
-
-        <p class="last"><label>Winners Announced:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->appealsEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Winners Announced:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->appealsEndDate"));?>
+          </span>
+        </p>
       </div>
       <!--End nextBoxContent-->
     <?php
@@ -576,4 +626,3 @@ if (sizeof($contest->prize) > 5) {
 
 </div>
 <!-- /.pageHeading -->
-</div>
