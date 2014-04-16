@@ -1,16 +1,14 @@
 <?php
-
 $activeTab = $tab;
-echo '<script type="text/javascript"> var activeTab = "'.$activeTab.'";</script>';
 add_action ( 'wp_head', 'tc_challenge_details_js' );
 function tc_challenge_details_js(){
-  global $contest, $contestType, $contestID, $registrants;
+  global $contest,$activeTab, $contestType, $contestID, $registrants;
   ?>
   <script type="text/javascript">
   <?php	$regEnd =  strtotime("$contest->registrationEndDate") || 1;
 	$submissionEnd = strtotime("$contest->submissionEndDate") || 1; ?>
 	
-  	
+  	var activeTab = "<?php echo $activeTab;?>" ;
     var registrationUntil = new Date(<?php echo $regEnd?>*1000);
     var submissionUntil = new Date(<?php echo $submissionEnd?>*1000);
     var challengeId = "<?php echo $contestID;?>";
