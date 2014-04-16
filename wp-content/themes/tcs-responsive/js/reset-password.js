@@ -40,13 +40,11 @@ $(document).ready(function () {
 			$("#formChangePassword .confirm").parent().find('.err2').show();
 			isValid = false;
         }
-		
-		/*
+				
 		if ($("#formChangePassword .handle").val() == "") {
 			$("#formChangePassword .handle").parent().find('.err1').show();
 			isValid = false;
-        } 
-		*/
+        } 		
 		
 		//validate unlock code 
 		if ($("#formChangePassword .unlockCode").val() == "") {

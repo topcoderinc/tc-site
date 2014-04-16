@@ -882,11 +882,11 @@ function generateResetToken($handle = '') {
 }
 
 
-function changePassword($password = '' , $unlockCode = '') {
+function changePassword($handle = '', $password = '' , $unlockCode = '') {
 	
-    $url = "http://api.topcoder.com/v2/users/resetPassword/";
+    $url = "http://api.topcoder.com/v2/users/resetPassword/" . $handle;
 	
-	$arrParam = array( 'password' => $password, 'token' => $unlockCode );
+	$arrParam = array('handle' => $handle, 'password' => $password, 'token' => $unlockCode );
     $args = array(
         'httpversion' => get_option('httpversion'),
         'timeout' => get_option('request_timeout'),

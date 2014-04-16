@@ -11,17 +11,24 @@ $unlockCode = $_GET["unlock_code"];
 $updatePassword = $_POST["updatePassword"];
 
 $msg = null;
+$error = null;
 if( $updatePassword=="true" ) {
-	//$handle = $_POST["handle"];
-	$unlockCode = $_POST["unlock_code"];
+	$handle = $_POST["handle"];
+	$unlockCode = $_POST["unlockCode"];
 	$password = $_POST["password"];
-	$response = changePassword($password,$unlockCode);
 	
-	if( $response['response']['code']==200 && $response['response']['message']=='OK' ) {
-		$msg = "Password successfully changed";
+	$response = changePassword($handle,$password,$unlockCode);
+
+	$obj = json_decode($response['body']);
+	if( $response['response']['code']==200 ) {		
+		if ( isset($obj->error) ) {
+			$error = $obj->error;
+		} else {
+			$msg = $obj->description;		
+		}
 	}
 	else {
-		$msg = "Can't change your password";
+		$error = $obj->error->details;
 	}
 }
 ?>
@@ -55,8 +62,16 @@ if( $updatePassword=="true" ) {
 							<?php 
 								if($msg==null) :
 							?>
+								<?php if ($error!=null) : ?>
+								<p class="row info lSpace"><strong><?php echo $error;?></strong></p>
+								<?php endif; ?>
+								
 								<form id="formChangePassword" name="formResetPassword" action="" method="POST">
 									<input type="hidden" class="updatePassword" name="updatePassword" value="true" />
+									<div class="row">
+										<input class="handle" type="text" maxlength="40" name="handle" placeholder="Handle:" size="50" />
+										<span class="err1 error" style="display: none;">Required field</span>
+									</div>
 									<div class="row">
 										<input class="password" type="password" maxlength="40" name="password" placeholder="New Password:" size="50" />
 										<span class="err1 error" style="display: none;">Required field</span>
