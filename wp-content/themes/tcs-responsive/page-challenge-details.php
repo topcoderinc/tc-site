@@ -1,9 +1,11 @@
 <?php
+
 $activeTab = $tab;
 add_action ( 'wp_head', 'tc_challenge_details_js' );
 function tc_challenge_details_js(){
   global $contest,$activeTab, $contestType, $contestID, $registrants;
-  ?>
+
+?>
   <script type="text/javascript">
   <?php	$regEnd =  strtotime("$contest->registrationEndDate") || 1;
 	$submissionEnd = strtotime("$contest->submissionEndDate") || 1; ?>
