@@ -80,6 +80,12 @@ function get_stat_design_recentwins ( $url ){
 	return $TCHOOK_plugin->tcapi_get_stat_design_recentwins( $url );
 }
 
+function get_checkpoint_details( $contestId, $challengeType ){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->get_checkpoint_details_fn( $contestId, $challengeType );
+}
+
+
 
 function get_member_achievements_current($userId, $badgeId){
 	global $TCHOOK_plugin;
