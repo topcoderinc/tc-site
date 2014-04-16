@@ -239,7 +239,7 @@ function custom_excerpt($new_length = 20, $new_more = '...') {
 function custom_content($new_length = 55) {
   $output = get_the_content();
   $output = apply_filters('wptexturize', $output);
-  $output = substr($output, 0, $new_length);
+  $output = substr($output, 0, $new_length) . '...';
   return $output;
 }
 
