@@ -1,7 +1,4 @@
 <?php
-
-$activeTab = $tab;
-echo '<script type="text/javascript"> var activeTab = "'.$activeTab.'";</script>';
 add_action ( 'wp_head', 'tc_challenge_details_js' );
 function tc_challenge_details_js(){
   global $contest, $contestType, $contestID, $registrants;
@@ -25,7 +22,6 @@ function tc_challenge_details_js(){
 <?php
 }
 
-
 /**
  * Template Name: Challenge details
  */
@@ -41,7 +37,6 @@ $siteURL = site_url();
 $contestID = get_query_var('contestID');
 //$contestType = get_query_var ( 'type' );
 $contestType = $_GET['type'];
-$contestType = empty($contestType)?"develop":$contestType;
 $noCache = get_query_var('nocache');
 $contest = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants = empty($contest->registrants) ? array() : $contest->registrants;
@@ -209,59 +204,634 @@ function createDevelopSubmissionMap($contest) {
   return $submission_map;
 }
 
-$documents = $contest->Documents;
+if (!empty($_COOKIE["tcsso"])) {
+  $documents = $contest->Documents;
+} else {
+  $documents = array();
+}
+
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
 get_header('challenge-landing');
 
 ?>
-<div class="content challenge-detail view-challenge-result <?php if ($contestType != 'design') {
+
+<div class="content challenge-detail <?php if ($contestType != 'design') {
   echo 'develop';
 } ?>">
 <div id="main">
 
-<?php include(locate_template('content-basic-challenge-details.php')); ?>
+<div class="container">
+<header class="pageHeading aboutPage">
+  <h1><?php echo $contest->challengeName; ?></h1>
+
+  <h2>CHALLENGE TYPE: <span><?php echo $contest->challengeType; ?></span></h2>
+</header>
+
+<div id="stepBox">
+<div class="container">
+
+<div class="leftColumn">
+  <?php
+  if ($contestType != 'design'):
+    ?>
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span>
+      <strong>Register For This Challenge</strong></a>
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
+       href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
+  <?php
+  else:
+    ?>
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span> <strong>Register
+        For This Challenge</strong></a>
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
+       href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
+        Your Entries</strong></a>
+    <a class="btn btnAction" target="_blank"
+       href="http://studio.topcoder.com/?module=ViewSubmission&ct=<?php echo $contestID; ?>"><span>3</span> <strong>View
+        Your Submission</strong></a>
+  <?php
+  endif;
+  ?>
+</div>
+<?php
+if ($contestType != 'design'):
+?>
+<div class="middleColumn">
+<?php
+else:
+?>
+<div class="middleColumn studio">
+<?php
+endif;
+?>
+<table class="prizeTable">
+<tbody>
+
+<tr>
+  <?php
+  if ($contestType != 'design' && $contest->challengeType != "Code"):
+    ?>
+    <td class="fifty">
+      <h2>1st PLACE</h2>
+
+      <h3>
+        <small>$</small><?php if (isset($contest->prize[0])) {
+          echo number_format($contest->prize[0]);
+        } ?></h3>
+    </td>
+    <td class="fifty">
+      <h2>2nd PLACE</h2>
+      <h3>
+        <small>$</small><?php
+          echo number_format(isset($contest->prize[1])? $contest->prize[1] : "0"); ?>
+      </h3>
+    </td>
+  <?php
+  else:
+    ?>
+    <?php
+    if (isset($contest->prize[0])):
+      ?>
+      <td class="twenty">
+        <h2>1st PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format($contest->prize[0]); ?></h3>
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="twenty noPrize">
+        <h2>1st PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format(0) ?></h3>
+      </td>
+    <?php
+    endif;
+    ?>
+    <?php
+    if (isset($contest->prize[1])):
+      ?>
+      <td class="twenty">
+        <h2>2nd PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format($contest->prize[1]); ?></h3>
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="twenty noPrize">
+        <h2>2nd PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format(0) ?></h3>
+      </td>
+    <?php
+    endif;
+    ?>
+    <?php
+    if (isset($contest->prize[2])):
+      ?>
+      <td class="twenty">
+        <h2>3rd PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format($contest->prize[2]); ?></h3>
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="twenty noPrize">
+        <h2>3rd PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format(0) ?></h3>
+      </td>
+    <?php
+    endif;
+    ?>
+    <?php
+    if (isset($contest->prize[3])):
+      ?>
+      <td class="twenty">
+        <h2>4th PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format($contest->prize[3]); ?></h3>
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="twenty noPrize">
+        <h2>4th PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format(0) ?></h3>
+      </td>
+    <?php
+    endif;
+    ?>
+    <?php
+    if (isset($contest->prize[4])):
+      ?>
+      <td class="twenty">
+        <h2>5th PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format($contest->prize[4]); ?></h3>
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="twenty noPrize">
+        <h2>5th PLACE</h2>
+
+        <h3>
+          <small>$</small><?php echo number_format(0) ?></h3>
+      </td>
+    <?php
+    endif;
+    ?>
+    <?php
+    if (sizeof($contest->prize) > 5):
+      ?>
+      <td class="morePayments active closed" rowspan="<?php echo 2 + (int) ((sizeof($contest->prize) - 5) / 5) ?>">
+      </td>
+    <?php
+    else:
+      ?>
+      <td class="morePayments inactive" rowspan="<?php echo 2 + (int) ((sizeof($contest->prize) - 5) / 5) ?>">
+      </td>
+    <?php
+    endif;
+    ?>
+  <?php
+  endif;
+  ?>
+</tr>
+<?php
+if (sizeof($contest->prize) > 5) {
+  for ($i = 0; $i < (sizeof($contest->prize) - 5) / 5; $i++) :
+    ?>
+    <tr class="additionalPrizes hide">
+      <?php
+      if (sizeof($contest->prize) > 5 + $i * 5):
+        ?>
+        <td class="twenty">
+          <h2><?php echo 5 + $i * 5 + 1; ?>th PLACE</h2>
+
+          <h3>
+            <small>$</small><?php echo number_format($contest->prize[5 + $i * 5]); ?></h3>
+        </td>
+      <?php
+      endif;
+      ?>
+      <?php
+      if (sizeof($contest->prize) > 5 + $i * 5 + 1):
+        ?>
+        <td class="twenty">
+          <h2><?php echo 5 + $i * 5 + 2; ?>th PLACE</h2>
+
+          <h3>
+            <small>$</small><?php echo number_format($contest->prize[5 + $i * 5 + 1]); ?></h3>
+        </td>
+      <?php
+      endif;
+      ?>
+      <?php
+      if (sizeof($contest->prize) > 5 + $i * 5 + 2):
+        ?>
+        <td class="twenty">
+          <h2><?php echo 5 + $i * 5 + 3; ?>th PLACE</h2>
+
+          <h3>
+            <small>$</small><?php echo number_format($contest->prize[5 + $i * 5 + 2]); ?></h3>
+        </td>
+      <?php
+      endif;
+      ?>
+      <?php
+      if (sizeof($contest->prize) > 5 + $i * 5 + 3):
+        ?>
+        <td class="twenty">
+          <h2><?php echo 5 + $i * 5 + 4; ?>th PLACE</h2>
+
+          <h3>
+            <small>$</small><?php echo number_format($contest->prize[5 + $i * 5 + 3]); ?></h3>
+        </td>
+      <?php
+      endif;
+      ?>
+      <?php
+      if (sizeof($contest->prize) > 5 + $i * 5 + 4):
+        ?>
+        <td class="twenty">
+          <h2><?php echo 5 + $i * 5 + 5; ?>th PLACE</h2>
+
+          <h3>
+            <small>$</small><?php echo number_format($contest->prize[5 + $i * 5 + 4]); ?></h3>
+        </td>
+      <?php
+      endif;
+      ?>
+    </tr>
+  <?php
+  endfor;
+}
+?>
+<tr>
+  <?php
+  if ($contestType != 'design'):
+    ?>
+    <td
+      <?php
+      //Adjust the colspan for CODE challenge type since the 5 prizes add more columns
+      if ($contest->challengeType == "Code") {
+        echo 'colspan="2"';
+      }
+      ?>
+      >
+      <p class="realibilityPara">Reliability Bonus
+
+        <?php
+        if (empty($contest->reliabilityBonus)):
+          ?>
+          <span><?php echo "N/A" ?></span>
+        <?php
+        else:
+          ?>
+          <span>$<?php echo number_format($contest->reliabilityBonus); ?></span>
+        <?php
+        endif;
+        ?>
+      </p>
+    </td>
+    <td
+      <?php
+      //Adjust the colspan for CODE challenge type since the 5 prizes add more columns
+      if ($contest->challengeType == "Code") {
+        echo 'colspan="3"';
+      }
+      ?>
+      >
+
+      <p class="drPointsPara">DR Points <span><?php echo isset($contest->digitalRunPoints) ? $contest->digitalRunPoints : "N/A" ; ?></span></p>
+    </td>
+  <?php
+  else:
+    ?>
+    <td colspan="2">
+      <?php
+      if (isset($contest->digitalRunPoints)):
+        ?>
+        <p class="scPoints"><span><?php echo $contest->digitalRunPoints; ?></span> STUDIO CUP POINTS</p>
+      <?php
+      else:
+        ?>
+        <p class="scPoints">NO STUDIO CUP POINTS</p>
+      <?php
+      endif;
+      ?>
+    </td>
+    <td colspan="3">
+      <p class="scPoints"><span><?php echo $contest->numberOfCheckpointsPrizes; ?></span> CHECKPOINT AWARDS WORTH <span>$<?php echo $contest->topCheckPointPrize; ?></span>
+        EACH</p>
+    </td>
+  <?php
+  endif;
+  ?>
+</tr>
+</tbody>
+</table>
+
+<div class="prizeSlider hide">
+  <ul>
+    <li class="slide">
+      <table>
+        <tbody>
+        <tr>
+          <?php
+          if (isset($contest->prize[0])):
+            ?>
+            <td class="twenty">
+              <h2>1st PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format($contest->prize[0]); ?></h3>
+            </td>
+          <?php
+          else:
+            ?>
+            <td class="twenty noPrize">
+              <h2>1st PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format(0) ?></h3>
+            </td>
+          <?php
+          endif;
+          ?>
+          <?php
+          if (isset($contest->prize[1])):
+            ?>
+            <td class="twenty">
+              <h2>2nd PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format($contest->prize[1]); ?></h3>
+            </td>
+          <?php
+          else:
+            ?>
+            <td class="twenty noPrize">
+              <h2>2nd PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format(0) ?></h3>
+            </td>
+          <?php
+          endif;
+          ?>
+          <?php
+          if (isset($contest->prize[2])):
+            ?>
+            <td class="twenty">
+              <h2>3rd PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format($contest->prize[2]); ?></h3>
+            </td>
+          <?php
+          else:
+            ?>
+            <td class="twenty noPrize">
+              <h2>3rd PLACE</h2>
+
+              <h3>
+                <small>$</small><?php echo number_format(0) ?></h3>
+            </td>
+          <?php
+          endif;
+          ?>
+        </tr>
+        </tbody>
+      </table>
+    </li>
+    <?php
+    if (sizeof($contest->prize) > 3) {
+      for ($i = 0; $i < (sizeof($contest->prize) - 3) / 3; $i++) :
+        ?>
+        <li>
+          <table>
+            <tbody>
+            <tr>
+              <?php
+              if (sizeof($contest->prize) > 3 + $i * 3):
+                ?>
+                <td class="twenty">
+                  <h2><?php echo 3 + $i * 3 + 1; ?>th PLACE</h2>
+
+                  <h3>
+                    <small>$</small><?php echo number_format($contest->prize[3 + $i * 3]); ?></h3>
+                </td>
+              <?php
+              endif;
+              ?>
+              <?php
+              if (sizeof($contest->prize) > 3 + $i * 3 + 1):
+                ?>
+                <td class="twenty">
+                  <h2><?php echo 3 + $i * 3 + 2; ?>th PLACE</h2>
+
+                  <h3>
+                    <small>$</small><?php echo number_format($contest->prize[3 + $i * 3 + 1]); ?></h3>
+                </td>
+              <?php
+              endif;
+              ?>
+              <?php
+              if (sizeof($contest->prize) > 3 + $i * 3 + 2):
+                ?>
+                <td class="twenty">
+                  <h2><?php echo 3 + $i * 3 + 3; ?>th PLACE</h2>
+
+                  <h3>
+                    <small>$</small><?php echo number_format($contest->prize[3 + $i * 3 + 2]); ?></h3>
+                </td>
+              <?php
+              endif;
+              ?>
+            </tr>
+            </tbody>
+          </table>
+        </li>
+      <?php
+      endfor;
+    }
+    ?>
+  </ul>
+  <div>
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <?php
+          if (isset($contest->digitalRunPoints)):
+            ?>
+            <p class="scPoints"><span><?php echo $contest->digitalRunPoints; ?></span> STUDIO CUP POINTS</p>
+          <?php
+          else:
+            ?>
+            <p class="scPoints">NO STUDIO CUP POINTS</p>
+          <?php
+          endif;
+          ?>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="scPoints"><span><?php echo $contest->numberOfCheckpointsPrizes; ?></span> CHECKPOINT AWARDS WORTH
+            <span>$100</span> EACH</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="rightColumn">
+
+  <div class="nextBox ">
+
+    <div class="nextBoxContent nextDeadlineNextBoxContent">
+      <div class="icoTime">
+        <span class="nextDTitle">Current Phase</span>
+        <span
+          class="CEDate"><?php echo ($contest->currentStatus == 'Completed') ? "Completed" : $contest->currentPhaseName; ?></span>
+      </div>
+      <span class="timeLeft">
+      <?php
+      if ($contest->currentStatus !== 'Completed' && $contest->currentStatus !== 'Deleted' && $contest->currentPhaseRemainingTime > 0) {
+          $dtF = new DateTime("@0");
+          $dtT = new DateTime("@{$contest->currentPhaseRemainingTime}");
+          echo $dtF->diff($dtT)->format('%a <small>Days</small> %h <small>Hours</small> %i <small>Mins</small>');
+      }
+      ?>
+      </span>
+    </div>
+    <!--End nextBoxContent-->
+    <?php
+    if ($contestType != 'design'):
+      ?>
+      <div class="nextBoxContent allDeadlineNextBoxContent hide">
+        <p><label>Posted On:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
 
 
-<article id="mainContent" class="splitLayout <?php if(!empty($activeTab)){echo 'currentTab-'.$activeTab;} ?>">
+        <p><label>Register By:</label>
+         <span><?php echo date(
+               "M d, Y H:i T",
+               strtotime("$contest->registrationEndDate"));?>
+         </span>
+        </p>
+
+        <p class="last"><label>Submit By:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
+
+      </div>
+      <!--End nextBoxContent-->
+    <?php
+    else:
+      ?>
+      <div class="nextBoxContent allDeadlineNextBoxContent studio hide">
+        <p><label>Start Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
+        <?php if ($contest->checkpointSubmissionEndDate != "") : ?>
+        <p><label>Checkpoint:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->checkpointSubmissionEndDate"));?>
+          </span>
+        </p>
+        <?php endif; ?>
+
+        <p><label>End Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
+
+        <p class="last"><label>Winners Announced:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->appealsEndDate"));?>
+          </span>
+        </p>
+      </div>
+      <!--End nextBoxContent-->
+    <?php
+    endif;
+    ?>
+  </div>
+
+  <!--End nextBox-->
+  <div class="deadlineBox">
+
+    <div class="deadlineBoxContent nextDeadlinedeadlineBoxContent ">
+      <a class="viewAllDeadLineBtn" href="javascript:">View all deadlines +</a>
+    </div>
+    <!--End deadlineBoxContent-->
+    <div class="deadlineBoxContent allDeadlinedeadlineBoxContent hide">
+      <a class="viewNextDeadLineBtn" href="javascript:">View next deadline +</a>
+    </div>
+    <!--End deadlineBoxContent-->
+  </div>
+  <!--End deadlineBox-->
+</div>
+
+</div>
+</div>
+<!-- /#hero -->
+
+</div>
+<!-- /.pageHeading -->
+
+
+<article id="mainContent" class="splitLayout ">
 <div class="container">
 <div class="rightSplit  grid-3-3">
 <div class="mainStream partialList">
 
 <section class="tabsWrap">
 <nav class="tabNav">
-<div class="topRightTitle topRightTitleAlt">
-    <?php
-  if ($contestType != 'design'):
-    ?>
-    <a href="http://apps.topcoder.com/forums/?module=Category&categoryID=<?php echo $contest->forumId; ?>"
-       class="contestForumIcon" target="_blank">Challenge Forum</a>
-  <?php
-  else:
-    ?>
-    <a href="http://studio.topcoder.com/forums?module=ThreadList&forumID=<?php echo $contest->forumId; ?>"
-       class="contestForumIcon" target="_blank">Challenge Forum</a>
-  <?php
-  endif;
-  ?>
-</div>
   <ul>
     <?php
-    $Path=$_SERVER['REQUEST_URI'];    
-    
     if ($contestType != 'design'):
       ?>
-      <li><a href="#contest-overview" class="<?php if ($tab!=="checkpoints"){ echo "active";} ?> link">Details</a></li>
+      <li><a href="#contest-overview" class="active link">Details</a></li>
       <li><a href="#viewRegistrant" class="link">Registrants</a></li>
-      <?php if((!empty($checkpointData) && $checkpointData != "Error in processing request")||($tab==="checkpoints")):?>
-        <li><a href="<?php echo $Path;?>&tab=checkpoints" class="link <?php if ($tab==="checkpoints"){ echo "active";} ?>">Checkpoints</a></li>
-       <?php endif;?>   
-      <li><a href="#winner" class="link">Results</a></li> 
-       
+      <li><a href="#winner" class="link">Results</a></li>
     <?php
     else:
       ?>
-      <li><a href="#contest-overview" class="<?php if ($tab!=="checkpoints"){ echo "active";} ?> link">Details</a></li>
+      <li><a href="#contest-overview" class="active link">Details</a></li>
       <li><a href="#viewRegistrant" class="link">Registrants</a></li>
       <?php
       if (strpos($contest->currentPhaseName, 'Submission') !== FALSE):
@@ -270,10 +840,7 @@ get_header('challenge-landing');
       <?php
       else:
         ?>
-        <?php if(!empty($checkpointData) && $checkpointData != "Error in processing request"):?>
-        <li><a href="<?php echo $Path;?>&tab=checkpoints" class="link <?php if ($tab==="checkpoints"){ echo "active";} ?>">Checkpoints</a></li>
-        <?php endif;?>        
-        
+        <li><a href="#checkpoints" class="link">Checkpoints</a></li>
       <?php
       endif;
       ?>
@@ -318,14 +885,13 @@ get_header('challenge-landing');
   <ul>
     <?php
     if (strpos($contest->currentPhaseName, 'Submission') !== FALSE):
-      ?>      
-       <li><span class="inactive">Checkpoints</span></li>
+      ?>
+      <li><span class="inactive">Checkpoints</span></li>
     <?php
     else:
     ?>
-    	<?php if(!empty($checkpointData) && empty($checkpointData->error)):?>
-	        <li><a href="<?php echo $Path;?>&tab=checkpoints" class="link">Checkpoints</a></li>
-	      <?php endif;?> 
+    <li><a href="#checkpoints" class="link">Checkpoints</a></li>
+    <li>
       <?php
       endif;
       ?>
@@ -359,8 +925,7 @@ get_header('challenge-landing');
     </li>
   </ul>
 </nav>
-
-<div id="contest-overview" class="tableWrap <?php echo ($activeTab=='checkpoints')?'hide':'';?> tab">
+<div id="contest-overview" class="tableWrap tab">
   <?php
   if ($contestType != 'design'):
   ?>
@@ -459,7 +1024,6 @@ get_header('challenge-landing');
 <?php
 else:
 ?>
-
 <article id="contestOverview">
 
   <article id="contestSummary">
@@ -671,11 +1235,11 @@ endif;
         }
 
         echo '<td class="regDateColumn">';
-        echo date("M d, Y H:i", strtotime($value->registrationDate)) . " EST";
+        echo date("M d, Y H:i T", strtotime($value->registrationDate));
         echo '</td>';
         echo '<td class="subDateColumn">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";
@@ -712,16 +1276,16 @@ endif;
         echo '<div class="registrantLabel">Registration Date:</div>';
         echo '<div class="registrantField">';
         echo date(
-            "M d, Y H:i",
+            "M d, Y H:i T",
             strtotime($value->registrationDate)
-          ) . '" EST" </div>';
+          ) . '</div>';
         echo '<div class="clear"></div>';
         echo '</div>';
         echo '<div class="registrantSectionRow">';
         echo '<div class="registrantLabel">Submission Date:</div>';
         echo '<div class="registrantField">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";
@@ -737,19 +1301,16 @@ endif;
 
 
 </div>
-<div id="winner" class="tableWrap hide tab">
+<div id="winner" class="hide tab">
+
+<?php include(locate_template('page-challenge-result.php'));?>	
+
+</div>
+<div id="checkpoints" class="tableWrap hide tab">
 
 
   <article>
     Coming Soon...
-  </article>
-
-</div>
-<div id="checkpoints" class="tableWrap <?php echo ($activeTab=='checkpoints')?'':'hide';?> tab">
-
-
-  <article>
-    <?php include(locate_template('content-checkpoint.php'));?>
   </article>
 
 </div>
@@ -775,12 +1336,12 @@ endif;
   if ($contestType != 'design'):
     ?>
     <a href="http://apps.topcoder.com/forums/?module=Category&categoryID=<?php echo $contest->forumId; ?>"
-       class="contestForumIcon" target="_blank">Challenge Forum</a>
+       class="contestForumIcon" target="_blank">Challenge Discussion</a>
   <?php
   else:
     ?>
     <a href="http://studio.topcoder.com/forums?module=ThreadList&forumID=<?php echo $contest->forumId; ?>"
-       class="contestForumIcon" target="_blank">Challenge Forum</a>
+       class="contestForumIcon" target="_blank">Challenge Discussion</a>
   <?php
   endif;
   ?>
@@ -836,6 +1397,7 @@ if ($contestType != 'design'):
     </div>
 
   </li>
+  <?php endif; ?>
 
   <li class="slide">
     <div class="forumFeed slideBox">&nbsp;<br/>
