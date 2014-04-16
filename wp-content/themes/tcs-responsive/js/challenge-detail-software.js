@@ -498,7 +498,7 @@ app.tabNavinit = function(){
       $(this).addClass('active');
 	  
 	  id = id.replace('#','');
-	  $('#mainContent').attr('class','').addClass('splitlayout').addClass('currentTab-'+id);
+	  $('#mainContent').attr('class','').addClass('splitLayout').addClass('currentTab-'+id);
       return false;
     });
 	
