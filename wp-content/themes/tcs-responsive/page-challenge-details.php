@@ -257,8 +257,8 @@ get_header('challenge-landing');
 </div>
   <ul>
     <?php
-    $Path=$_SERVER['REQUEST_URI'];    
-    
+    global $wp;
+	$Path = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
     if ($contestType != 'design'):
       ?>
       <li><a href="#contest-overview" class="<?php if ($tab!=="checkpoints"){ echo "active";} ?> link">Details</a></li>
