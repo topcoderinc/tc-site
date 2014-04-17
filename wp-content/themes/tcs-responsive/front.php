@@ -67,7 +67,7 @@ global $activity;
 		<div id="stats">
 			<div class="container">
 				<p>
-					<em class="members"><?php echo get_activity_summary("member_count"); ?></em> of the world's best minds competing
+					<em class="members"><?php echo get_activity_summary("memberCount"); ?></em> of the world's best minds competing
 
 				</p>
 				<a class="btn btnAlt" href="<?php bloginfo('wpurl') ?>/challenges">View Challenges</a>

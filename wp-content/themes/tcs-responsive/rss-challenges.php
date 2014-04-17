@@ -4,7 +4,10 @@
  */
 header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
 echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
-echo '<?xml-stylesheet type="text/xsl" media="screen" href="' . get_stylesheet_directory_uri() . '/css/rss2full.xsl"?>'
+echo '<?xml-stylesheet type="text/xsl" media="screen" href="' . get_stylesheet_directory_uri() . '/css/rss2full.xsl"?>';
+        $userkey = get_option('api_user_key');
+        $listType = strtolower(get_query_var('list'));
+        $contestType = get_query_var('contestType');
 ?>
 <rss version="2.0"
      xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -15,7 +18,7 @@ echo '<?xml-stylesheet type="text/xsl" media="screen" href="' . get_stylesheet_d
      xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
     <?php do_action('rss2_ns'); ?>>
     <channel>
-        <title><?php bloginfo_rss('name'); ?> - All Challenges</title>
+        <title><?php bloginfo_rss('name'); ?> - <?php echo $contestType; ?> challenges (<?php echo $listType; ?>)</title>
         <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml"/>
         <link><?php bloginfo_rss('url') ?></link>
         <description><?php bloginfo_rss('description') ?></description>
@@ -23,11 +26,14 @@ echo '<?xml-stylesheet type="text/xsl" media="screen" href="' . get_stylesheet_d
         <sy:updateFrequency><?php echo apply_filters('rss_update_frequency', '1'); ?></sy:updateFrequency>
         <?php do_action('rss2_head'); ?>
         <?php
-        $userkey = get_option('api_user_key');
-        $listType = get_query_var('list');
-        $contestType = get_query_var('contestType');
         $contests = array();
-        if ($listType == 'active') {
+        if ($listType == 'upcoming') {
+                //api request stalls out above 50 items, need better api server
+		$upcomingContests = get_upcoming_contests_ajax($userkey, $contestType, 1, 50);
+		if (is_array($upcomingContests->data)) {
+                    $contests = array_merge($contests, $upcomingContests->data);
+                }
+        } elseif ($listType == 'active') {
             if ($contestType == 'data') {
                 $marathonContests = get_active_contests_ajax($userkey, 'data-marathon', 1, 1000);
                 if (is_array($marathonContests->data)) {

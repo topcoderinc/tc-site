@@ -59,12 +59,13 @@ if (isset($_GET['auth']) && $_GET['auth'] == 'logout') {
   <![endif]-->
   <script type="text/javascript">
     var wpUrl = "<?php bloginfo('wpurl')?>";
-    var ajaxUrl = wpUrl.replace('http://', 'https://') + "/wp-admin/admin-ajax.php";
+    var ajaxUrl = "<?php bloginfo('wpurl')?>" + "/wp-admin/admin-ajax.php";
     var siteURL = '<?php bloginfo('siteurl');?>';
     var base_url = '<?php bloginfo( 'stylesheet_directory' ); ?>';
     var stylesheet_dir = '<?php echo THEME_URL . '/css'; ?>';
     var autoRegister = '<?php echo get_query_var('autoRegister'); ?>';
     var timezone_string = "<?php echo get_option('timezone_string');?>";
+    var challengeType;
   </script>
 
 <?php

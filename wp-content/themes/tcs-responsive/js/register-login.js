@@ -4,6 +4,7 @@ $(function () {
     centerModal();
   });
 
+
   $('#username').keyup(function() {
     $('#loginForm span.err3').hide();
     $('#loginForm span.err1').hide();
@@ -169,6 +170,9 @@ $(function () {
     } else if (text.toLowerCase().match(/^admin/)) {
       // can't start with 'admin'
       $(this).closest('.row').find('span.err6').show();
+      invalid = true;
+    } else if (text.length == 0) {
+      $(this).closest('.row').find('span.err1').show();
       invalid = true;
     } else if (text.length == 1 || text.length > 15) {
       // must be between 2 and 15 chars long
@@ -582,14 +586,23 @@ function centerModal(selector) {
 
 function closeModal() {
   $('.modal,#bgModal').hide();
+  resetRegisterFields();
+  if (window.location.hash != '') {
+    window.history.pushState({}, 'Home', '/');
+  }
+  $('#registerForm span.socialUnavailableErrorMessage').hide();
 }
 
 // Resets the registration popup fields
 function resetRegisterFields() {
   $("#registerForm input[type='text'], #registerForm input[type='password']").val("");
   $("#registerForm select").val($("#registerForm select option:first").val());
+  $('#registerForm input.handle').trigger('keyup');
   $("#registerForm .customSelectInner").text($("#registerForm select option:first").text());
   $("#registerForm input[type='checkbox']").attr('checked', false);
   $(".pwd, .confirm, .strength").parents(".row").show();
-  $("#register a.btnSubmit").removeClass("socialRegister");
+  $("#registerForm a.btnSubmit").removeClass("socialRegister");
+  $('#registerForm input').removeClass('invalid');
+  $('#registerForm .err1,.err2,.err3,.err4,.err4,.err6,.err7,.err8').hide();
+  $('#registerForm span.strength span.field').removeClass('red').removeClass('green');
 }

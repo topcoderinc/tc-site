@@ -105,10 +105,13 @@ function tc_add_custom_rewrite_rules() {
     'top'
   );
 
+  // submit to challenge
+  add_rewrite_rule( '^challenge-details/([^/]*)/submit/?$', 'index.php?pagename=challenge-submit&contestID=$matches[1]', 'top');
+
+
   // Blog search
   //add_rewrite_rule('^'.BLOG_PERMALINK.'/?$', 'index.php?', 'top');
   // Active Challenges
-  add_rewrite_rule('^active-challenges/data/?$', 'index.php?pagename=data&contest_type=$matches[1]', 'top');
   add_rewrite_rule(
     '^active-challenges/([^/]*)/?$',
     'index.php?pagename=active-challenges&contest_type=$matches[1]',
@@ -118,6 +121,9 @@ function tc_add_custom_rewrite_rules() {
   // Past Challenges
   add_rewrite_rule('^past-challenges/([^/]*)/?$', 'index.php?pagename=past-challenges&contest_type=$matches[1]', 'top');
 
+  // Upcoming Challenges
+  add_rewrite_rule('^upcoming-challenges/([^/]*)/?$', 'index.php?pagename=upcoming-challenges&contest_type=$matches[1]', 'top');
+  
   // Review Challenges
   add_rewrite_rule(
     '^review-opportunities/([^/]*)/?$',

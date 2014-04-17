@@ -30,12 +30,31 @@ else
 }
 
 global $coder;
-$coder = get_member_profile($handle);
+if (isset($handle)) {
+    // only get profile if we have a valid handle
+    $coder = get_member_profile($handle);
+} else {
+    // no user - just create an empty object
+    $coder = new stdClass();
+}
 $memberSince = explode(" ",$coder->memberSince);
 $memberSince = explode(".",$memberSince[0]);
 $memberEarning = '$'.$coder->overallEarning;
 $photoLink = 'http://community.topcoder.com'.$coder->photoLink;
 
+
+function tc_header_challenge_submit_js() {
+  global $challengeType;
+  ?>
+  <script type="text/javascript">
+    var challengeId = "<?php echo get_query_var('contestID');?>";
+    var challengeType = "<?php echo $challengeType; ?>";
+  </script>
+<?php
+}
+
+add_action("wp_head", "tc_header_challenge_submit_js");
+get_header();
 ?>
 
 <div id="wrapper" class="challenge-detail">

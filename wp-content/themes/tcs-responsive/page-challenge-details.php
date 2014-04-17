@@ -1,5 +1,4 @@
 <?php
-
 add_action ( 'wp_head', 'tc_challenge_details_js' );
 function tc_challenge_details_js(){
   global $contest, $contestType, $contestID, $registrants;
@@ -27,41 +26,6 @@ function tc_challenge_details_js(){
  * Template Name: Challenge details
  */
 
-/*
-added by @pemula 2014-01-17
-source : http://stackoverflow.com/questions/8273804/convert-seconds-into-days-hours-minutes-and-seconds
-*/
-function secondsToTime($inputSeconds) {
-
-  $secondsInAMinute = 60;
-  $secondsInAnHour = 60 * $secondsInAMinute;
-  $secondsInADay = 24 * $secondsInAnHour;
-
-  // extract days
-  $days = floor($inputSeconds / $secondsInADay);
-
-  // extract hours
-  $hourSeconds = $inputSeconds % $secondsInADay;
-  $hours = floor($hourSeconds / $secondsInAnHour);
-
-  // extract minutes
-  $minuteSeconds = $hourSeconds % $secondsInAnHour;
-  $minutes = floor($minuteSeconds / $secondsInAMinute);
-
-  // extract the remaining seconds
-  $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-  $seconds = ceil($remainingSeconds);
-
-  // return the final array
-  $obj = array(
-    'd' => (int) $days,
-    'h' => (int) $hours,
-    'm' => (int) $minutes,
-    's' => (int) $seconds,
-  );
-  return $obj;
-}
-
 $isChallengeDetails = TRUE;
 
 $values = get_post_custom($post->ID);
@@ -77,6 +41,22 @@ $noCache = get_query_var('nocache');
 $contest = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants = empty($contest->registrants) ? array() : $contest->registrants;
 
+$curDate = new DateTime();
+$registerDisable = true;
+if ($contest->registrationEndDate) {
+  $regDate = new DateTime($contest->registrationEndDate);
+  if ($regDate > $curDate) {
+    $registerDisable = false;
+  }
+}
+
+$submitDisabled = true;
+if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
+  $submitDate = new DateTime($contest->submissionEndDate);
+  if ($submitDate > $curDate) {
+    $submitDisabled = false;
+  }
+}
 
 // Ad submission dates to registrants
 // @TODO move this to a class
@@ -154,7 +134,12 @@ function createDevelopSubmissionMap($contest) {
   return $submission_map;
 }
 
-$documents = $contest->Documents;
+if (!empty($_COOKIE["tcsso"])) {
+  $documents = $contest->Documents;
+} else {
+  $documents = array();
+}
+
 $postPerPage = get_option("contest_per_page") == "" ? 30 : get_option("contest_per_page");
 
 get_header('challenge-landing');
@@ -180,17 +165,16 @@ get_header('challenge-landing');
   <?php
   if ($contestType != 'design'):
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span>
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span>
       <strong>Register For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
-       href="https://software.topcoder.com/review/actions/UploadContestSubmission.do?method=uploadContestSubmission&pid=<?php echo $contestID; ?>"><span>2</span>
-      <strong>Submit Your Entries</strong></a>
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
+       href="<?php bloginfo("siteurl"); ?>/challenge-details/<?php echo $contestID; ?>/submit"><span>2</span>      <strong>Submit Your Entries</strong></a>
   <?php
   else:
     ?>
-    <a class="btn btnAction challengeRegisterBtn" target="_blank" href="javascript:;"><span>1</span> <strong>Register
+    <a class="btn btnAction challengeRegisterBtn <?php if ($registerDisable) echo 'disabled'; ?>" href="javascript:;"><span>1</span> <strong>Register
         For This Challenge</strong></a>
-    <a class="btn btnAction" target="_blank"
+    <a class="btn btnAction <?php if ($submitDisabled) echo 'disabled'; ?>" target="_blank"
        href="http://studio.topcoder.com/?module=ViewRegistration&ct=<?php echo $contestID; ?>"><span>2</span> <strong>Submit
         Your Entries</strong></a>
     <a class="btn btnAction" target="_blank"
@@ -661,8 +645,11 @@ if (sizeof($contest->prize) > 5) {
       </div>
       <span class="timeLeft">
       <?php
-      $remaining = secondsToTime($contest->currentPhaseRemainingTime);
-      echo ($contest->currentStatus == 'Completed' || $contest->currentStatus == 'Deleted') ? "" : $remaining['d'] . " <small>Days</small> " . $remaining['h'] . " <small>Hours</small> " . $remaining['m'] . " <small>Mins</small>";
+      if ($contest->currentStatus !== 'Completed' && $contest->currentStatus !== 'Deleted' && $contest->currentPhaseRemainingTime > 0) {
+          $dtF = new DateTime("@0");
+          $dtT = new DateTime("@{$contest->currentPhaseRemainingTime}");
+          echo $dtF->diff($dtT)->format('%a <small>Days</small> %h <small>Hours</small> %i <small>Mins</small>');
+      }
       ?>
       </span>
     </div>
@@ -671,24 +658,27 @@ if (sizeof($contest->prize) > 5) {
     if ($contestType != 'design'):
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent hide">
-        <p><label>Posted On:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Posted On:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
 
 
         <p><label>Register By:</label>
          <span><?php echo date(
-               "M d, Y H:i",
-               strtotime("$contest->registrationEndDate")
-             ) . " EST"; ?>
+               "M d, Y H:i T",
+               strtotime("$contest->registrationEndDate"));?>
          </span>
         </p>
 
-        <p class="last"><label>Submit By:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Submit By:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
       </div>
       <!--End nextBoxContent-->
@@ -696,25 +686,34 @@ if (sizeof($contest->prize) > 5) {
     else:
       ?>
       <div class="nextBoxContent allDeadlineNextBoxContent studio hide">
-        <p><label>Start Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->postingDate")
-              ) . " EST"; ?></span></p>
+        <p><label>Start Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->postingDate"));?>
+          </span>
+        </p>
+        <?php if ($contest->checkpointSubmissionEndDate != "") : ?>
+        <p><label>Checkpoint:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->checkpointSubmissionEndDate"));?>
+          </span>
+        </p>
+        <?php endif; ?>
 
-        <p><label>Checkpoint:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->checkpointSubmissionEndDate")
-              ) . " EST"; ?></span></p>
+        <p><label>End Date:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->submissionEndDate"));?>
+          </span>
+        </p>
 
-        <p><label>End Date:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->submissionEndDate")
-              ) . " EST"; ?></span></p>
-
-        <p class="last"><label>Winners Announced:</label><span><?php echo date(
-                "M d, Y H:i",
-                strtotime("$contest->appealsEndDate")
-              ) . " EST"; ?></span></p>
+        <p class="last"><label>Winners Announced:</label>
+          <span><?php echo date(
+                "M d, Y H:i T",
+                strtotime("$contest->appealsEndDate"));?>
+          </span>
+        </p>
       </div>
       <!--End nextBoxContent-->
     <?php
@@ -1166,11 +1165,11 @@ endif;
         }
 
         echo '<td class="regDateColumn">';
-        echo date("M d, Y H:i", strtotime($value->registrationDate)) . " EST";
+        echo date("M d, Y H:i T", strtotime($value->registrationDate));
         echo '</td>';
         echo '<td class="subDateColumn">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";
@@ -1207,16 +1206,16 @@ endif;
         echo '<div class="registrantLabel">Registration Date:</div>';
         echo '<div class="registrantField">';
         echo date(
-            "M d, Y H:i",
+            "M d, Y H:i T",
             strtotime($value->registrationDate)
-          ) . '" EST" </div>';
+          ) . '</div>';
         echo '<div class="clear"></div>';
         echo '</div>';
         echo '<div class="registrantSectionRow">';
         echo '<div class="registrantLabel">Submission Date:</div>';
         echo '<div class="registrantField">';
         if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i", strtotime($value->lastSubmissionDate)) . " EST";
+          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
         }
         else {
           echo "--";
@@ -1232,12 +1231,9 @@ endif;
 
 
 </div>
-<div id="winner" class="tableWrap hide tab">
+<div id="winner" class="hide tab">
 
-
-  <article>
-    Coming Soon...
-  </article>
+<?php include(locate_template('page-challenge-result.php'));?>	
 
 </div>
 <div id="checkpoints" class="tableWrap hide tab">
@@ -1289,22 +1285,8 @@ endif;
 <?php
 if ($contestType != 'design'):
   ?>
-  <h3>Downloads:</h3>
-  <div class="inner">
-    <?php
-    echo '<ul>';
-    if (!empty($contest->Documents)) {
-      foreach ($contest->Documents as $value) {
-        $document = $value;
-        echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';
-      }
-    }
-    else {
-      echo '<li><strong>None</li></strong>';
-    }
-    echo '</ul>';
-    ?>
-
+  <div class="slideBox">
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </div>
   <li class="slide">
 
@@ -1326,6 +1308,7 @@ if ($contestType != 'design'):
     <!-- End review style section -->
 
   </li>
+  <?php  if (isset($contest->screeningScorecardId) && isset($contest->reviewScorecardId)) : ?>
   <li class="slide">
 
     <div class="contestLinks slideBox">
@@ -1344,6 +1327,7 @@ if ($contestType != 'design'):
     </div>
 
   </li>
+  <?php endif; ?>
 
   <li class="slide">
     <div class="forumFeed slideBox">&nbsp;<br/>
@@ -1422,18 +1406,7 @@ if ($contestType != 'design'):
 else:
   ?>
   <li class="slide">
-    <div class="slideBox">
-      <h3>Downloads:</h3>
-
-      <div class="inner">
-        <?php
-        for ($i = 0; $i < count($documents); $i++) :
-          $document = $documents[$i];
-          ?>
-          <p><a href="<?php echo $document->url; ?>"><?php echo $document->documentName; ?></a></p>
-        <?php endfor; ?>
-      </div>
-    </div>
+    <?php include locate_template('content-challenge-downloads.php'); ?>
   </li>
   <li class="slide">
     <div class="slideBox">

@@ -1,22 +1,3 @@
-<?php
-/**
- * Template Name: Challenges Data Page
- * Author : evilkyro1965
- */
-get_header('challenge-landing');
-
-$values = get_post_custom ( $post->ID );
-
-$siteURL = site_url ();
-$postId = $post->ID;
-?>
-
-<?php
-	// get contest details
-	$contest_type = "data";
-	$postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
-
-?>
 
 <script type="text/javascript" >
 	var siteurl = "<?php bloginfo('siteurl');?>";
@@ -36,29 +17,7 @@ $postId = $post->ID;
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
 
-		<div id="hero">
-			<?php
-				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
-				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
-			?>
-			<div class="container grid grid-float">
-				<div class="grid-3-1 track trackUX<?php if($contest_type=="design") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDesignChallengesLink;?>"><i></i>Graphic Design Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Software Development Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDataChallengesLink;?>">
-						<i></i>Data Science Challenges
-					</a><span class="arrow"></span>
-				</div>
-			</div>
-		</div>
-		<!-- /#hero -->
+		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
@@ -67,18 +26,42 @@ $postId = $post->ID;
 				</header>
 				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
 					<?php
-					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=data";
+					//mock upcoming as active cause upcoming data api does not work yet
+					if (strtolower($listType) === "upcoming") {
+						$list = "active";
+					} else {
+						$list = $listType;
+					}
+					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=" . $list . "&contestType=data";
 					?>
-					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to data challenges </a>
+					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to data-science challenges </a>
 				</div>
+				<div class="actions">
+					<?php include(locate_template('nav-challenges-list-type.php'));?>
+					<div class="rt">
+                        <a href="javascript:;" class="searchLink advSearch">
+                            <i></i>Advanced Search
+                        </a>
+                    </div>
+                </div>
+                <!-- /.actions -->
+
+                <?php get_template_part("contest-advanced-search"); ?>
 				<div id="tableView" class=" viewTab">
 					<div class="tableWrap tcoTableWrap">
 						<table class="dataTable tcoTable centeredTable reviewTable">
+						<?php
+						if (strtolower($listType) === "upcoming") {
+						?>
+						<caption>All upcoming challenges may change</caption>
+						<?php
+						}
+						?>
 							<thead>
 								<tr>
-									<th class="colCh  noSort" data-placeholder="">Challenges<i></i></th>
+									<th class="colCh  noSort" data-placeholder="">Contest Name<i></i></th>
 									<th class="colRstart noSort" data-placeholder="">Type<i></i></th>
-									<th class="colRstart noSort" data-placeholder="">Timeline<i></i></th>
+									<th class="colRstart noSort" data-placeholder="">Start<i></i></th>
 									<th class="colSub noSort" data-placeholder="">Registrants<i></i></th>
 								</tr>
 							</thead>
@@ -109,4 +92,3 @@ $postId = $post->ID;
 			</div>
 		</article>
 		<!-- /#mainContent -->
-<?php get_footer(); ?>

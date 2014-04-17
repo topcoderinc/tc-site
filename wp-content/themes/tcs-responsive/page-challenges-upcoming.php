@@ -1,7 +1,6 @@
 <?php
 /**
- * Template Name: Challenges Active Contest List Page
- * Author : evilkyro1965
+ * Template Name: Challenges Upcoming Contest List Page
  */
 get_header('challenge-landing');
 
@@ -17,7 +16,7 @@ $postId = $post->ID;
 
 	// get contest details
 	$contest_type = get_query_var("contest_type") == "" ? "design" : get_query_var("contest_type");
-	$listType = get_post_meta($postId,"List Type",true) =="" ? "Active" : get_post_meta($postId,"List Type",true);
+	$listType = "Upcoming";
 	$postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
 	if ($contest_type === "data") {
 		include(locate_template('page-challenges-data.php'));
@@ -34,7 +33,14 @@ $postId = $post->ID;
 	var currentPage = 1;
 	var postPerPage = <?php echo $postPerPage;?>;
 	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
+	var listType = "<?php 
+	//need to use "active" API for data for now, API does not work yet
+		if ($contest_type != "design" && $contest_type != "develop") {
+			echo "Active";
+		} else {
+			echo $listType;
+		}
+		?>";
 	<?php
 		if($tcoTooltipTitle) echo "var tcoTooltipTitle= '$tcoTooltipTitle';";
 		if($tcoTooltipMessage) echo "var tcoTooltipMessage= '$tcoTooltipMessage';";
@@ -46,14 +52,13 @@ $postId = $post->ID;
 	<?php if(have_posts()) : the_post();?>
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
-		
+
 		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
-					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?>
-                    </h1>
+					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?></h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
 						</span>
@@ -61,9 +66,12 @@ $postId = $post->ID;
 				</header>
 				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
 					<?php
-					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=active&contestType=".$contest_type;
+					//mock rss feel url as active for non-working upcoming APIs
+						$list = "active";
+					
+					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=" . $list . "&contestType=".$contest_type;
 					?>
-					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php 
+					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php
 						echo $contest_type; 
 					?> challenges </a>
 				</div>
@@ -82,16 +90,16 @@ $postId = $post->ID;
 				<div id="tableView" class=" viewTab">
 					<div class="tableWrap tcoTableWrap">
 						<table class="dataTable tcoTable">
+						<caption>All upcoming challenges may change</caption>
 							<thead>
 								<tr>
-									<th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>
+									<th class="colCh" data-placeholder="challengeName">Contest Name<i></i></th>
 									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
 									<th class="colTime desc" data-placeholder="postingDate">Timeline<i></i></th>
-									<th class="colTLeft noSort" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">Prizes<i></i></th>
-									<th class="colPhase noSort" data-placeholder="currentPhase">Current Phase<i></i></th>
-									<th class="colReg noSort" data-placeholder="numRegistrants">Registrants<i></i></th>
-									<th class="colSub noSort" data-placeholder="numSubmissions">Submissions<i></i></th>
+									<th class="colDur noSort" data-placeholder="contestDuration">Duration (days)<i></i></th>
+									<th class="colPur noSort" data-placeholder="prize">First Prize<i></i></th>
+									<th class="colTech noSort" data-placeholder="technologies">Technologies<i></i></th>
+									<th class="colStat noSort" data-placeholder="status">Status<i></i></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,11 +128,11 @@ $postId = $post->ID;
 						</a>
 					</div>
 					<div class="mid onMobi">
+						<a href="#" class="viewActiveCh">
+							View Active Challenges<i></i>
+						</a>
 						<a href="#" class="viewPastCh">
 							View Past Challenges<i></i>
-						</a>
-						<a href="#" class="viewUpcomingCh">
-							View Upcoming Challenges<i></i>
 						</a>
 					</div>
 				</div>
@@ -132,6 +140,7 @@ $postId = $post->ID;
 			</div>
 		</article>
 		<!-- /#mainContent -->
-<?php 
+<?php
 }
-get_footer(); ?>
+get_footer();
+?>

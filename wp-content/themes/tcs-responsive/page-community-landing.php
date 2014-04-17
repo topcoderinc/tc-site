@@ -83,7 +83,7 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 		<div id="stats">
 			<div id="communityLandingStats" class="container">
 				<p>
-					<em class="members"><?php echo get_activity_summary("member_count"); ?></em> of the world's best minds competing
+					<em class="members"><?php echo get_activity_summary("memberCount"); ?></em> of the world's best minds competing
 
 				</p>
 				<a class="btn btnAlt" href="<?php echo $topcoderLink;?>">Join topcoder</a>
@@ -135,19 +135,19 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 							<div class="activeMembers">
 								<p class="val"><?php 
 								$summary = get_activity_summary();
-								echo number_format($summary->member_count); ?></p>
+								echo number_format($summary->memberCount); ?></p>
 								<label class="lbl">ACTIVE MEMBERS</label>
 							</div>
 							<div class="competingToday">
-								<p class="val"><?php echo number_format($summary->active_members_count); ?></p>
+								<p class="val"><?php echo number_format($summary->activeMembersCount); ?></p>
 								<label class="lbl">COMPETING TODAY</label>
 							</div>
 							<div class="availPrize">
-								<p class="val"><?php echo '$' . number_format($summary->prize_purse); ?></p>
+								<p class="val"><?php echo '$' . number_format($summary->prizePurse); ?></p>
 								<label class="lbl">AVAILABLE PRIZE</label>
 							</div>
 							<div class="activeChallenges">
-								<p class="val"><?php echo number_format($summary->active_contests_count); ?></p>
+								<p class="val"><?php echo number_format($summary->activeContestsCount); ?></p>
 								<label class="lbl">ACTIVE CHALLENGES</label>
 							</div>
 							<div class="shadow"></div>

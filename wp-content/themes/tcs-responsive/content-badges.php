@@ -1,132 +1,127 @@
-<?php 
-$achievements = array(
-	"First Forum Post" => false,
-	"One Hundred Forum Posts" => false,
-	"Five Hundred Forum Posts" => false,
-	"One Thousand Forum Posts" => false,
-	"Five Thousand Forum Posts" => false,
-	"First Rated Algorithm Competition" => false,
-	"Five Rated Algorithm Competitions" => false,
-	"Twenty Five Rated Algorithm Competitions" => false,
-	"One Hundred Rated Algorithm Competitions" => false,
-	"Three Hundred Rated Algorithm Competitions" => false,
-	"First SRM Room Win (Any Division)" => false,
-	"Five SRM Room Wins (Any Division)" => false,
-	"Twenty SRM Room Wins (Any Division)" => false,
-	"Fifty SRM Room Wins (Any Division)" => false,
-	"One Hundred SRM Room Wins (Any Division)" => false,
-	"First Solved Algorithm Problem" => false,
-	"Ten Solved Algorithm Problems" => false,
-	"Fifty Solved Algorithm Problems" => false,
-	"Two Hundred Solved Algorithm Problems" => false,
-	"Five Hundred Solved Algorithm Problems" => false,
-	"First Successful Challenge" => false,
-	"Five Successful Challenges" => false,
-	"Twenty Five Successful Challenges" => false,
-	"One Hundred Successful Challenges" => false,
-	"Two Hundred Successful Challenges" => false,
-	"First Marathon Competition" => false,
-	"Three Marathon Competitions" => false,
-	"Ten Marathon Competitions" => false,
-	"Twenty Marathon Competitions" => false,
-	"Fifty Marathon Competitions" => false,
-	"First Marathon Top-5 Placement" => false,
-	"Two Marathon Top-5 Placements" => false,
-	"Four Marathon Top-5 Placements" => false,
-	"Eight Marathon Top-5 Placements" => false,
-	"Sixteen Marathon Top-5 Placements" => false,
-	"First Passing Submission" => false,
-	"Fifty Passing Submissions" => false,
-	"One Hundred Passing Submissions" => false,
-	"Two Hundred And Fifty Passing Submissions" => false,
-	"Five Hundred Passing Submissions" => false,
-	"First Milestone Prize" => false,
-	"Fifty Milestone Prizes" => false,
-	"One Hundred Milestone Prizes" => false,
-	"Two Hundred And Fifty Milestone Prizes" => false,
-	"Five Hundred Milestone Prizes" => false,
-	"First Placement" => false,
-	"Twenty Five Placements" => false,
-	"Fifty Placements" => false,
-	"One hundred Placements" => false,
-	"Two Hundred And Fifty Placements" => false,
-	"First Win" => false,
-	"Twenty Five First Placement Win" => false,
-	"Fifty First Placement Win" => false,
-	"One Hundred First Placement Win" => false,
-	"Two Hundred And Fifty First Placement Win" => false,
-	"CoECI Client Badge" => false,
-	"Solved Hard Div2 Problem in SRM" => false,
-	"Solved Hard Div1 Problem in SRM" => false,
-	"Marathon Match Winner" => false,
-	"Algorithm Target" => false,
-	"SRM Winner Div 1" => false,
-	"SRM Winner Div 2" => false,
-	"Solved Hard Div2 Problem in SRM" => false,
-	"Solved Hard Div1 Problem in SRM" => false,
-	"Digital Run Winner" => false,
-	"Digital Run Top Five" => false,
-	"Two Hundred Successful Challenges" => false,
-	"First SRM Room Win (Any Division)" => false,
-	"Five SRM Room Wins (Any Division)" => false,
-	"Twenty SRM Room Wins (Any Division)" => false,
-	"Fifty SRM Room Wins (Any Division)" => false,
-	"One Hundred SRM Room Wins (Any Division)" => false
+<script type="text/javascript">
+$(document).ready(function(){
+   coder.initMemberBadges();
+});
+</script>
+<?php
+$achievements_map = array(
+	"First Forum Post" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-1"),
+	"One Hundred Forum Posts" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-100"),
+	"Five Hundred Forum Posts" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-500"),
+	"One Thousand Forum Posts" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-1000"),
+	"Five Thousand Forum Posts" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-5000"),
+	"First Rated Algorithm Competition" => array(id => 89, active => false, groupClass => "Rated-SRMs", specificClass => "Rated-SRMs-1"),
+	"Five Rated Algorithm Competitions" => array(id => 89, active => false, groupClass => "Rated-SRMs", specificClass => "Rated-SRMs-5"),
+	"Twenty Five Rated Algorithm Competitions" => array(id => 89, active => false, groupClass => "Rated-SRMs", specificClass => "Rated-SRMs-25"),
+	"One Hundred Rated Algorithm Competitions" => array(id => 89, active => false, groupClass => "Rated-SRMs", specificClass => "Rated-SRMs-100"),
+	"Three Hundred Rated Algorithm Competitions" => array(id => 89, active => false, groupClass => "Rated-SRMs", specificClass => "Rated-SRMs-300"),
+	"First SRM Room Win (Any Division)" => array(id => 94, active => false, groupClass => "SRM-Room-Wins", specificClass => "SRM-Room-Wins-1"),
+	"Five SRM Room Wins (Any Division)" => array(id => 94, active => false, groupClass => "SRM-Room-Wins", specificClass => "SRM-Room-Wins-5"),
+	"Twenty SRM Room Wins (Any Division)" => array(id => 94, active => false, groupClass => "SRM-Room-Wins", specificClass => "SRM-Room-Wins-20"),
+	"Fifty SRM Room Wins (Any Division)" => array(id => 94, active => false, groupClass => "SRM-Room-Wins", specificClass => "SRM-Room-Wins-50"),
+	"One Hundred SRM Room Wins (Any Division)" => array(id => 94, active => false, groupClass => "SRM-Room-Wins", specificClass => "SRM-Room-Wins-100"),
+	"First Solved Algorithm Problem" => array(id => 99, active => false, groupClass => "Solved-SRM-Problems", specificClass => "Solved-SRM-Problems-1"),
+	"Ten Solved Algorithm Problems" => array(id => 99, active => false, groupClass => "Solved-SRM-Problems", specificClass => "Solved-SRM-Problems-10"),
+	"Fifty Solved Algorithm Problems" => array(id => 99, active => false, groupClass => "Solved-SRM-Problems", specificClass => "Solved-SRM-Problems-50"),
+	"Two Hundred Solved Algorithm Problems" => array(id => 99, active => false, groupClass => "Solved-SRM-Problems", specificClass => "Solved-SRM-Problems-200"),
+	"Five Hundred Solved Algorithm Problems" => array(id => 99, active => false, groupClass => "Solved-SRM-Problems", specificClass => "Solved-SRM-Problems-500"),
+	"First Successful Challenge" => array(id => 104, active => false, groupClass => "Successful-Challenges", specificClass => "Successful-Challenges-1"),
+	"Five Successful Challenges" => array(id => 104, active => false, groupClass => "Successful-Challenges", specificClass => "Successful-Challenges-5"),
+	"Twenty Five Successful Challenges" => array(id => 104, active => false, groupClass => "Successful-Challenges", specificClass => "Successful-Challenges-25"),
+	"One Hundred Successful Challenges" => array(id => 104, active => false, groupClass => "Successful-Challenges", specificClass => "Successful-Challenges-100"),
+	"Two Hundred Successful Challenges" => array(id => 104, active => false, groupClass => "Successful-Challenges", specificClass => "Successful-Challenges-250"),
+	"First Marathon Competition" => array(id => 113, active => false, groupClass => "Marathon-Matches", specificClass => "Marathon-Matches-1"),
+	"Three Marathon Competitions" => array(id => 113, active => false, groupClass => "Marathon-Matches", specificClass => "Marathon-Matches-3"),
+	"Ten Marathon Competitions" => array(id => 113, active => false, groupClass => "Marathon-Matches", specificClass => "Marathon-Matches-10"),
+	"Twenty Marathon Competitions" => array(id => 113, active => false, groupClass => "Marathon-Matches", specificClass => "Marathon-Matches-20"),
+	"Fifty Marathon Competitions" => array(id => 113, active => false, groupClass => "Marathon-Matches", specificClass => "Marathon-Matches-50"),
+	"First Marathon Top-5 Placement" => array(id => 117, active => false, groupClass => "Marathon-Top-5-Placements", specificClass => "Marathon-Top-5-Placements-1"),
+	"Two Marathon Top-5 Placements" => array(id => 117, active => false, groupClass => "Marathon-Top-5-Placements", specificClass => "Marathon-Top-5-Placements-2"),
+	"Four Marathon Top-5 Placements" => array(id => 117, active => false, groupClass => "Marathon-Top-5-Placements", specificClass => "Marathon-Top-5-Placements-4"),
+	"Eight Marathon Top-5 Placements" => array(id => 117, active => false, groupClass => "Marathon-Top-5-Placements", specificClass => "Marathon-Top-5-Placements-8"),
+	"Sixteen Marathon Top-5 Placements" => array(id => 117, active => false, groupClass => "Marathon-Top-5-Placements", specificClass => "Marathon-Top-5-Placements-16"),
+	"First Passing Submission" => array(id => 6, active => false, groupClass => "Passing-Submissions", specificClass => "Passing-Submissions-1"),
+	"Fifty Passing Submissions" => array(id => 6, active => false, groupClass => "Passing-Submissions", specificClass => "Passing-Submissions-50"),
+	"One Hundred Passing Submissions" => array(id => 6, active => false, groupClass => "Passing-Submissions", specificClass => "Passing-Submissions-100"),
+	"Two Hundred And Fifty Passing Submissions" => array(id => 6, active => false, groupClass => "Passing-Submissions", specificClass => "Passing-Submissions-250"),
+	"Five Hundred Passing Submissions" => array(id => 6, active => false, groupClass => "Passing-Submissions", specificClass => "Passing-Submissions-500"),
+	"First Milestone Prize" => array(id => 11, active => false, groupClass => "Checkpoint-Prizes", specificClass => "Checkpoint-Prizes-1"),
+	"Fifty Milestone Prizes" => array(id => 11, active => false, groupClass => "Checkpoint-Prizes", specificClass => "Checkpoint-Prizes-50"),
+	"One Hundred Milestone Prizes" => array(id => 11, active => false, groupClass => "Checkpoint-Prizes", specificClass => "Checkpoint-Prizes-100"),
+	"Two Hundred And Fifty Milestone Prizes" => array(id => 11, active => false, groupClass => "Checkpoint-Prizes", specificClass => "Checkpoint-Prizes-250"),
+	"Five Hundred Milestone Prizes" => array(id => 11, active => false, groupClass => "Checkpoint-Prizes", specificClass => "Checkpoint-Prizes-500"),
+	"First Placement" => array(id => 16, active => false, groupClass => "Winning-Placements", specificClass => "Winning-Placements-1"),
+	"Twenty Five Placements" => array(id => 16, active => false, groupClass => "Winning-Placements", specificClass => "Winning-Placements-25"),
+	"Fifty Placements" => array(id => 16, active => false, groupClass => "Winning-Placements", specificClass => "Winning-Placements-50"),
+	"One hundred Placements" => array(id => 16, active => false, groupClass => "Winning-Placements", specificClass => "Winning-Placements-100"),
+	"Two Hundred And Fifty Placements" => array(id => 16, active => false, groupClass => "Winning-Placements", specificClass => "Winning-Placements-250"),
+	"First Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-1"),
+	"Twenty Five First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-25"),
+	"Fifty First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-50"),
+	"One Hundred First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-100"),
+	"Two Hundred And Fifty First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-250")
+);
+$single_achievements_map = array(
+	"Marathon Match Winner" => array(id => 121, active => false, groupClass => "Marathon-Match-Winner"),
+	"Algorithm Target" => array(id => 122, active => false, groupClass => "Algorithm-Target"),
+	"SRM Winner Div 1" => array(id => 119, active => false, groupClass => "SRM-Winner-Div-1"),
+	"SRM Winner Div 2" => array(id => 120, active => false, groupClass => "SRM-Winner-Div-2"),
+	"Solved Hard Div2 Problem in SRM" => array(id => 127, active => false, groupClass => "Solved-Hard-Div2-Problem-in-SRM"),
+	"Solved Hard Div1 Problem in SRM" => array(id => 126, active => false, groupClass => "Solved-Hard-Div1-Problem-in-SRM"),
+	"Digital Run Winner" => array(id => 51, active => false, groupClass => "Digital-Run-Winner"),
+	"Digital Run Top Five" => array(id => 52, active => false, groupClass => "Digital-Run-Top-5"),
+	"Two Hundred Successful Challenges" => array(id => 1, active => false, groupClass => "Successful-Challenges-200"),
+	"CoECI Client Badge" => array(id => 129, active => false, groupClass => "CoECI-Client-Badge")
 );
 $coder_achievements = get_member_achievements ($handle)->Achievements;
 $coder_achievements = is_array($coder_achievements) ? $coder_achievements : array();
+$searchResult = search_users($handle);
 foreach($coder_achievements as $achievement){
-	$achievements[$achievement->description] = true;
+  if(isset($achievements_map[$achievement->description])){
+    $achievements_map[$achievement->description]["active"] = true;
+    $achievements_map[$achievement->description]["date"] = date("M d, Y H:i", strtotime("$achievement->date")) . " EST";
+  } else if(isset($single_achievements_map[$achievement->description])){
+    $single_achievements_map[$achievement->description]["active"] = true;
+    $single_achievements_map[$achievement->description]["date"] = date("M d, Y H:i", strtotime("$achievement->date")) . " EST";
+  }
 }
 ?>
 <div class="badgeGroups">
-	<div class="groupBadge Forum-Posts <?php if($achievements['First Forum Post']==false){echo 'hide';} ?>">
-		<span class="subBadge Forum-Posts-1 <?php if($achievements['First Forum Post']){echo 'selected';} ?>"></span><span class="subBadge Forum-Posts-100 <?php if($achievements['One Hundred Forum Posts']){echo 'selected';} ?>"></span><span class="subBadge Forum-Posts-500 <?php if($achievements['Five Hundred Forum Posts']){echo 'selected';} ?>"></span><span class="subBadge Forum-Posts-1000 <?php if($achievements['One Thousand Forum Posts']){echo 'selected';} ?>"></span><span class="subBadge Forum-Posts-5000 <?php if($achievements['Five Thousand Forum Posts']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Rated-SRMs <?php if($achievements['First Rated Algorithm Competition']==false){echo 'hide';} ?>">
-		<span class="subBadge Rated-SRMs-1 <?php if($achievements['First Rated Algorithm Competition']){echo 'selected';} ?>"></span><span class="subBadge Rated-SRMs-5 <?php if($achievements['Five Rated Algorithm Competitions']){echo 'selected';} ?>"></span><span class="subBadge Rated-SRMs-25 <?php if($achievements['Twenty Five Rated Algorithm Competitions']){echo 'selected';} ?>"></span><span class="subBadge Rated-SRMs-100 <?php if($achievements['One Hundred Rated Algorithm Competitions']){echo 'selected';} ?>"></span><span class="subBadge Rated-SRMs-300 <?php if($achievements['Three Hundred Rated Algorithm Competitions']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge SRM-Room-Wins" <?php if($achievements['First SRM Room Win (Any Division)']==false){echo 'hide';} ?>>
-		<span class="subBadge SRM-Room-Wins-1 <?php if($achievements['First SRM Room Win (Any Division)']){echo 'selected';} ?>"></span><span class="subBadge SRM-Room-Wins-5 <?php if($achievements['Five SRM Room Wins (Any Division)']){echo 'selected';} ?>"></span><span class="subBadge SRM-Room-Wins-20 <?php if($achievements['Twenty SRM Room Wins (Any Division)']){echo 'selected';} ?>"></span><span class="subBadge SRM-Room-Wins-50 <?php if($achievements['Fifty SRM Room Wins (Any Division)']){echo 'selected';} ?>"></span><span class="subBadge SRM-Room-Wins-100 <?php if($achievements['One Hundred SRM Room Wins (Any Division)']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Solved-SRM-Problems <?php if($achievements['First Solved Algorithm Problem']==false){echo 'hide';} ?>">
-		<span class="subBadge Solved-SRM-Problems-1 <?php if($achievements['First Solved Algorithm Problem']){echo 'selected';} ?>"></span><span class="subBadge Solved-SRM-Problems-10 <?php if($achievements['Ten Solved Algorithm Problems']){echo 'selected';} ?>"></span><span class="subBadge Solved-SRM-Problems-50 <?php if($achievements['Fifty Solved Algorithm Problems']){echo 'selected';} ?>"></span><span class="subBadge Solved-SRM-Problems-200 <?php if($achievements['Two Hundred Solved Algorithm Problems']){echo 'selected';} ?>"></span><span class="subBadge Solved-SRM-Problems-500 <?php if($achievements['Five Hundred Solved Algorithm Problems']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Successful-Challenges <?php if($achievements['First Successful Challenge']==false){echo 'hide';} ?>">
-		<span class="subBadge Successful-Challenges-1 <?php if($achievements['First Successful Challenge']){echo 'selected';} ?>"></span><span class="subBadge Successful-Challenges-5 <?php if($achievements['Five Successful Challenges']){echo 'selected';} ?>"></span><span class="subBadge Successful-Challenges-25 <?php if($achievements['Twenty Five Successful Challenges']){echo 'selected';} ?>"></span><span class="subBadge Successful-Challenges-100 <?php if($achievements['One Hundred Successful Challenges']){echo 'selected';} ?>"></span><span class="subBadge Successful-Challenges-250 <?php if($achievements['Two Hundred Successful Challenges']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Marathon-Matches <?php if($achievements['First Marathon Competition']==false){echo 'hide';} ?>">
-		<span class="subBadge Marathon-Matches-1 <?php if($achievements['First Marathon Competition']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Matches-3 <?php if($achievements['Three Marathon Competitions']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Matches-10 <?php if($achievements['Ten Marathon Competitions']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Matches-20 <?php if($achievements['Twenty Marathon Competitions']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Matches-50 <?php if($achievements['Fifty Marathon Competitions']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Marathon-Top-5-Placements <?php if($achievements['First Marathon Top-5 Placement']==false){echo 'hide';} ?>">
-		<span class="subBadge Marathon-Top-5-Placements-1 <?php if($achievements['First Marathon Competition']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Top-5-Placements-2 <?php if($achievements['Two Marathon Top-5 Placements']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Top-5-Placements-4 <?php if($achievements['Four Marathon Top-5 Placements']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Top-5-Placements-8 <?php if($achievements['Eight Marathon Top-5 Placements']){echo 'selected';} ?>"></span><span class="subBadge Marathon-Top-5-Placements-16 <?php if($achievements['Sixteen Marathon Top-5 Placements']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Passing-Submissions <?php if($achievements['First Passing Submission']==false){echo 'hide';} ?>">
-		<span class="subBadge Passing-Submissions-1 <?php if($achievements['First Passing Submission']){echo 'selected';} ?>"></span><span class="subBadge Passing-Submissions-50 <?php if($achievements['Fifty Passing Submissions']){echo 'selected';} ?>"></span><span class="subBadge Passing-Submissions-100 <?php if($achievements['One Hundred Passing Submissions']){echo 'selected';} ?>"></span><span class="subBadge Passing-Submissions-250 <?php if($achievements['Two Hundred And Fifty Passing Submissions']){echo 'selected';} ?>"></span><span class="subBadge Passing-Submissions-500 <?php if($achievements['Five Hundred Passing Submissions']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Checkpoint-Prizes <?php if($achievements['First Milestone Prize']==false){echo 'hide';} ?>">
-		<span class="subBadge Checkpoint-Prizes-1 <?php if($achievements['First Milestone Prize']){echo 'selected';} ?>"></span><span class="subBadge Checkpoint-Prizes-50 <?php if($achievements['Fifty Milestone Prizes']){echo 'selected';} ?>"></span><span class="subBadge Checkpoint-Prizes-100 <?php if($achievements['One Hundred Milestone Prizes']){echo 'selected';} ?>"></span><span class="subBadge Checkpoint-Prizes-250 <?php if($achievements['Two Hundred And Fifty Milestone Prizes']){echo 'selected';} ?>"></span><span class="subBadge Checkpoint-Prizes-500 <?php if($achievements['Five Hundred Milestone Prizes']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge Winning-Placements <?php if($achievements['First Placement']==false){echo 'hide';} ?>">
-		<span class="subBadge Winning-Placements-1 <?php if($achievements['First Placement']){echo 'selected';} ?>"></span><span class="subBadge Winning-Placements-25 <?php if($achievements['Twenty Five Placements']){echo 'selected';} ?>"></span><span class="subBadge Winning-Placements-50 <?php if($achievements['Fifty Placements']){echo 'selected';} ?>"></span><span class="subBadge Winning-Placements-100 <?php if($achievements['One hundred Placements']){echo 'selected';} ?>"></span><span class="subBadge Winning-Placements-250 <?php if($achievements['Two Hundred And Fifty Placements']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="groupBadge First-Place-Wins <?php if($achievements['First Win']==false){echo 'hide';} ?>">
-		<span class="subBadge First-Place-Wins-1 <?php if($achievements['First Win']){echo 'selected';} ?>"></span><span class="subBadge First-Place-Wins-25 <?php if($achievements['Twenty Five First Placement Win']){echo 'selected';} ?>"></span><span class="subBadge First-Place-Wins-50 <?php if($achievements['Fifty First Placement Win']){echo 'selected';} ?>"></span><span class="subBadge First-Place-Wins-100 <?php if($achievements['One Hundred First Placement Win']){echo 'selected';} ?>"></span><span class="subBadge First-Place-Wins-250 <?php if($achievements['Two Hundred And Fifty First Placement Win']){echo 'selected';} ?>"></span>
-	</div>
-	<div class="clear-float"></div>
+ <?php
+    $index = 0;
+    foreach($achievements_map as $key => $achievement):
+      $active = $achievement['active'];
+      $active = $achievement['active'];
+      $achievements_current;
+      if(isset($searchResult->users)){
+        $achievements_current = get_member_achievements_current($searchResult->users[0]->userId, $achievement["id"]);
+      }
+      $achievement["currentlyEarned"] = isset($achievements_current->count) ? $achievements_current->count : "(retrieving...)" ;
+ ?>
+   <?php if($index % 5 == 0): ?>
+      <?php if($index != 0): ?>
+        </div>
+      <?php endif; ?>
+      <div class="groupBadge <?php echo $achievement['groupClass']; ?> <?php if($active==false){echo 'hide';} ?>">
+   <?php endif; ?>
+    <span data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} else {echo 'Not Earned Yet';} ?>" data-title="<?php echo $key; ?>" class="subBadge <?php echo $achievement['specificClass']; if($active){echo ' selected';} ?>"></span>
+ <?php $index++; endforeach; ?>
 </div>
-<!-- /.badgeGroups -->
+
 
 <div class="footer-badges">
-	<div class="singleBadge Successful-Challenges-200 <?php if($achievements['Two Hundred Successful Challenges']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Solved-Hard-Div2-Problem-in-SRM <?php if($achievements['Solved Hard Div2 Problem in SRM']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Solved-Hard-Div1-Problem-in-SRM <?php if($achievements['Solved Hard Div1 Problem in SRM']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge SRM-Winner-Div-2 <?php if($achievements['SRM Winner Div 2']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge SRM-Winner-Div-1 <?php if($achievements['SRM Winner Div 1']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Algorithm-Target <?php if($achievements['Algorithm Target']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Marathon-Match-Winner <?php if($achievements['Marathon Match Winner']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Digital-Run-Winner <?php if($achievements['Digital Run Winner']==false){echo 'hide';} ?>"></div>
-	<div class="singleBadge Digital-Run-Top-5 <?php if($achievements['Digital Run Top Five']==false){echo 'hide';} ?>"></div>
-	<div class="clear-float"></div>
+  <?php
+    $index = 0;
+    foreach($single_achievements_map as $key => $achievement):
+      $active = $achievement['active'];
+      $achievements_current;
+      if(isset($searchResult->users)){
+        $achievements_current = get_member_achievements_current($searchResult->users[0]->userId, $achievement["id"]);
+      }
+      $achievement["currentlyEarned"] = isset($achievements_current->count) ? $achievements_current->count : "(retrieving...)" ;
+  ?>
+    <div data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} ?>" data-title="<?php echo $key; ?>" class="singleBadge <?php echo $achievement['groupClass']; if($active){echo ' selected';} else {echo ' hide';} ?>"></div>
+  <?php endforeach; ?>
+  <div class="clear-float"></div>
 </div>
 <!-- /.footer-badges -->

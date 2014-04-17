@@ -28,6 +28,10 @@ locate_template('lib/comments.php', TRUE);
 locate_template('lib/meta.php', TRUE);
 locate_template('lib/share.php', TRUE);
 
+if (!isset($skipAdminSSL)) {
+    define('FORCE_SSL_ADMIN', true);
+}
+
 
 // add featured image
 add_theme_support ( 'post-thumbnails' );
@@ -47,7 +51,7 @@ function tags_support_all() {
 
 add_action('init', 'tags_support_all');
 
-//locate_template("lib/rss.php", TRUE);
+locate_template("lib/rss.php", TRUE);
 date_default_timezone_set(get_option('timezone_string'));
 
 function get_rel_url($url, $force = FALSE) {
@@ -232,7 +236,7 @@ function custom_excerpt($new_length = 20, $new_more = '...') {
 function custom_content($new_length = 55) {
   $output = get_the_content();
   $output = apply_filters('wptexturize', $output);
-  $output = substr($output, 0, $new_length) . '...';
+  $output = substr($output, 0, $new_length);
   return $output;
 }
 
