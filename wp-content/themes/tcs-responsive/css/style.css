@@ -877,9 +877,8 @@
     .contestGrid .contest{
         display: inline-block;
         border: 1px solid #e7e7e7;
-    
         width: 298px;
-        height: 228px;
+        height: 268px;
         position: relative;
         margin: 14px 27px;
         float: left;
@@ -1595,14 +1594,14 @@
 		.casesView .caseGrid a.jsShowCaseDetails:hover > img{
 			-webkit-transform: rotate(10deg) scale(1.1,1.1);     /* for Chrome || Safari */  
             -moz-transform: rotate(10deg) scale(1.1,1.1);        /* for Firefox */  
-            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE ç¼©æ”¾0.5 */  
+            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE 缩放0.5 */  
             -o-transform:  rotate(10deg) scale(1.1,1.1);          /* for Opera */  
 			transform: rotate(10deg) scale(1.1,1.1);
 		}
 		.casesView .caseGrid a.isShow:hover > img{
 			-webkit-transform: none;									/* for Chrome || Safari */  
             -moz-transform: none;										/* for Firefox */  
-            -ms-transform: none;										/* for IE ç¼©æ”¾0.5 */  
+            -ms-transform: none;										/* for IE 缩放0.5 */  
             -o-transform: none;											/* for Opera */  
 		}
 		.casesView .caseGrid a.jsShowCaseDetails > i{
