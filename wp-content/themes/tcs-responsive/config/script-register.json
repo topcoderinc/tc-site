@@ -183,9 +183,12 @@
   "templates": {
     "page-challenges.php": "challenges",
     "page-challenges-active.php": "challengelanding",
+    "page-challenges-bugrace.php": "challengelanding",
+    "page-challenges-data.php": "challengelanding",
     "page-challenges-review-details.php": "challengelanding",
     "page-challenges-review.php": "challengelanding",
     "page-challenges-past.php": "challengelanding",
+    "page-challenges-upcoming.php": "challengelanding",
     "page-terms-list.php": "challengeterms",
     "page-terms-details.php": "challengeterms",
     "page-challenge-submit.php": "challengesubmit",

@@ -96,28 +96,47 @@ function get_active_contest_ajax_controller()
         wp_send_json_error();
     }
 }
+add_action('wp_ajax_get_upcoming_contest', 'get_upcoming_contest_ajax_controller');
+add_action('wp_ajax_nopriv_get_upcoming_contest', 'get_upcoming_contest_ajax_controller');
+function get_upcoming_contest_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $contest_type = $_GET ['contest_type'];
+  $page = get_query_var('pages');
+  $post_per_page = $_GET['pageSize'];
+  $page = $_GET ['pageIndex'];
+  $sortColumn = $_GET ['sortColumn'];
+  $sortOrder = $_GET ['sortOrder'];
 
-add_action( 'wp_ajax_get_active_contest', 'get_active_contest_ajax_controller' );
-add_action( 'wp_ajax_nopriv_get_active_contest', 'get_active_contest_ajax_controller' );
-function get_past_contest_ajax_controller()
-{
-    $userkey       = get_option( 'api_user_key' );
-    $contest_type  = $_GET ['contest_type'];
-    $page          = get_query_var( 'pages' );
-    $post_per_page = $_GET ['pageSize'];
-    $sortColumn    = $_GET ['sortColumn'];
-    $sortOrder     = $_GET ['sortOrder'];
-
-    $contest_list = get_past_contests_ajax( $userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder );
-    if (isset( $contest_list->data )) {
-        wp_send_json( $contest_list->data );
-    } else {
-        wp_send_json_error();
-    }
+  $contest_list = get_upcoming_contests_ajax($userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder);
+  if (isset($contest_list->data)) {
+    wp_send_json($contest_list->data);
+  }
+  else {
+    wp_send_json_error();
+  }
 }
 
-add_action( 'wp_ajax_get_past_contest', 'get_past_contest_ajax_controller' );
-add_action( 'wp_ajax_nopriv_get_past_contest', 'get_past_contest_ajax_controller' );
+add_action('wp_ajax_get_active_contest', 'get_active_contest_ajax_controller');
+add_action('wp_ajax_nopriv_get_active_contest', 'get_active_contest_ajax_controller');
+function get_past_contest_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $contest_type = $_GET ['contest_type'];
+  $page = get_query_var('pages');
+  $post_per_page = $_GET ['pageSize'];
+  $sortColumn = $_GET ['sortColumn'];
+  $sortOrder = $_GET ['sortOrder'];
+
+  $contest_list = get_past_contests_ajax($userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder);
+  if (isset($contest_list->data)) {
+    wp_send_json($contest_list->data);
+  }
+  else {
+    wp_send_json_error();
+  }
+}
+
+add_action('wp_ajax_get_past_contest', 'get_past_contest_ajax_controller');
+add_action('wp_ajax_nopriv_get_past_contest', 'get_past_contest_ajax_controller');
 
 function get_member_profile_ajax_controller()
 {
@@ -304,9 +323,50 @@ function get_active_contests_ajax(
         return $active_contest_list;
     }
 
-    return "Error in processing request";
+  return "Error in processing request";
+}
+// returns upcoming contest list
+function get_upcoming_contests_ajax(
+  $userKey = '',
+  $contestType = 'design',
+  $page = 1,
+  $post_per_page = 30,
+  $sortColumn = 'submissionEndDate',
+  $sortOrder = ''
+) {
+  $contestType = str_replace(" ", "+", $contestType);
+  $contestType = str_replace("-", "/", $contestType);
+  //mock listtype as active for non-functional APIs
+  $listType = ($contestType == 'data') ? "active" : "upcoming";
+  if ($contestType == 'data') {
+	$url = "https://tcapi.apiary-mock.com/v2/data/srm/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+} elseif ($contestType == '') {
+  $url = "https://api.topcoder.com/v2/design/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+} else {
+    $url = "https://api.topcoder.com/v2/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
 }
 
+  if ($sortOrder) {
+    $url .= "&sortOrder=$sortOrder";
+  }
+  if ($sortColumn) {
+    $url .= "&sortColumn=$sortColumn";
+  }
+  $args = array(
+    'httpversion' => get_option('httpversion'),
+    'timeout' => get_option('request_timeout')
+  );
+  $response = wp_remote_get($url, $args);
+  if (is_wp_error($response) || !isset ($response ['body'])) {
+    return "Error in processing request";
+  }
+  if ($response ['response'] ['code'] == 200) {
+    $upcoming_contest_list = json_decode(str_replace('"items":', '"data":', $response ['body']));
+    return $upcoming_contest_list;
+  }
+
+  return "Error in processing request";
+}
 // returns past contest list
 function get_past_contests_ajax(
     $userKey = '',
@@ -576,7 +636,7 @@ function get_challenges_ajax_controller() {
   $page = $_GET['pageIndex'];
   $listType = $_GET['listType'];
   $post_per_page = $_GET ['pageSize'];
-  $sortColumn = $_GET ['sortColumn'];
+  $sortColumn = ($_GET ['sortColumn']);
   $sortOrder = $_GET ['sortOrder'];
   $challengeType = urlencode($_GET ['challengeType']);
   $startDate = $_GET ['submissionEndFrom'];
@@ -606,8 +666,8 @@ function get_challenges_ajax(
   $contestType = 'design',
   $page = 1,
   $post_per_page = 30,
-  $sortColumn = "",
-  $sortOrder = '',
+  $sortColumn = "submissionEndDate",
+  $sortOrder = 'desc',
   $challengeType = '',
   $startDate = '',
   $endDate = ''
@@ -615,16 +675,15 @@ function get_challenges_ajax(
 
     $url = "http://api.topcoder.com/v2/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
 
-    if ($contestType == "") {
-        $url = "http://api.topcoder.com/v2/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
-    }
+  if ($contestType == "") {
+	$contestType = 'design';
+    $url = "https://api.topcoder.com/v2/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+  }
 
 // set default value since failed using params;
-  // @TODO update to be a little better
-  if ($contestType !== 'data/marathon') {
-    $sortColumn = ($sortColumn == '') ? "submissionEndDate" : $sortColumn;
-    $sortOrder = ($sortOrder == '') ? "desc" : $sortOrder;
-  }
+  $sortColumn = ($sortColumn == '') ? "submissionEndDate" : $sortColumn;
+  $sortOrder = ($sortOrder == '') ? "desc" : $sortOrder;
+
 
   if ($sortOrder) {
     $url .= "&sortOrder=$sortOrder";
@@ -665,11 +724,11 @@ function get_challenges_ajax(
  * Review opportunities changes from "TopCoder Website - Challenges Pages - Wordpress Theme Build" Contest
  */
 
-add_action( 'wp_ajax_get_review_opportunities', 'get_review_opportunities_ajax_controller' );
-add_action( 'wp_ajax_nopriv_get_review_opportunities', 'get_review_opportunities_ajax_controller' );
-function get_review_opportunities_ajax_controller()
-{
-    $userkey       = get_option( 'api_user_key' );
+add_action('wp_ajax_get_review_opportunities', 'get_review_opportunities_ajax_controller');
+add_action('wp_ajax_nopriv_get_review_opportunities', 'get_review_opportunities_ajax_controller');
+function get_review_opportunities_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $contest_type = $_GET ['contest_type'];
     $contest_type  = $_GET ['contest_type'];
     $page          = $_GET['pageIndex'];
     $listType      = $_GET['listType'];
@@ -735,70 +794,188 @@ function get_review_opportunities_ajax(
     return $active_contest_list;
   }
 
+  return "Error in processing request";
+}
+
+/**
+ * Get Active Challenges Data List
+ */
+
+add_action('wp_ajax_get_active_data_challenges', 'get_active_data_ajax_controller');
+add_action('wp_ajax_nopriv_get_active_data_challenges', 'get_active_data_ajax_controller');
+function get_active_data_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $page = $_GET['pageIndex'];
+  $post_per_page = $_GET ['pageSize'];
+  $sortColumn = $_GET ['sortColumn'];
+  $sortOrder = $_GET ['sortOrder'];
+
+  $contest_list = get_data_challenges_ajax($page, $post_per_page, $sortColumn, $sortOrder);
+  if (isset($contest_list->data)) {
+    wp_send_json($contest_list);
+  }
+  else {
+    wp_send_json_error();
+  }
+}
+
+function get_data_challenges_ajax($listType = 'Active',
+  $contestType = 'design',
+  $page = 1,
+  $post_per_page = 30,
+  $sortColumn = "submissionEndDate",
+  $sortOrder = 'desc',
+  $challengeType = '',
+  $startDate = '',
+  $endDate = '') {
+//no data in API, so we use mock for now
+//  $urlSrm = "https://api.topcoder.com/v2/data/srm/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+$urlSrm = "https://tcapi.apiary-mock.com/v2/data/srm/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+  // set default value since failed using params;
+  $sortColumn = ($sortColumn == '') ? "submissionEndDate" : $sortColumn;
+  $sortOrder = ($sortOrder == '') ? "desc" : $sortOrder;
+
+
+  if ($sortOrder) {
+    $urlSrm .= "&sortOrder=$sortOrder";
+  }
+  if ($sortColumn) {
+    $urlSrm .= "&sortColumn=$sortColumn";
+  }
+  if ($challengeType) {
+    $urlSrm .= "&challengeType=$challengeType";
+  }
+  if ($startDate) {
+    $urlSrm .= "&submissionEndFrom=$startDate";
+  }
+  if ($endDate) {
+    $urlSrm .= "&submissionEndTo=$endDate";
+  }
+  
+  $args = array(
+    'httpversion' => get_option('httpversion'),
+    'timeout' => get_option('request_timeout')
+  );
+  $responseSrm = wp_remote_get($urlSrm, $args);
+
+  if (is_wp_error($responseSrm) || !isset ($responseSrm ['body'])) {
     return "Error in processing request";
+  }
+  
+//No data in API, using Mock for now
+  //$urlMarathon = "https://api.topcoder.com/v2/data/marathon/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+  $urlMarathon = "https://tcapi.apiary-mock.com/v2/data/marathon/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+
+  if ($sortOrder) {
+    $urlMarathon .= "&sortOrder=$sortOrder";
+  }
+  if ($sortColumn) {
+    $urlMarathon .= "&sortColumn=$sortColumn";
+  }
+  if ($challengeType) {
+    $urlMarathon .= "&challengeType=$challengeType";
+  }
+  if ($startDate) {
+    $urlMarathon .= "&submissionEndFrom=$startDate";
+  }
+  if ($endDate) {
+    $urlMarathon .= "&submissionEndTo=$endDate";
+  }
+  
+  $args = array(
+    'httpversion' => get_option('httpversion'),
+    'timeout' => get_option('request_timeout')
+  );
+  $responseMarathon = wp_remote_get($urlMarathon, $args);
+
+  /* merge the srm and marathon */
+  if ($responseMarathon ['response'] ['code'] == 200) {
+
+    $srmData = json_decode($responseSrm['body']);
+    if ($srmData->data != null) {
+      $marathonData = json_decode($responseMarathon['body']);
+
+      if ($marathonData->data != null) {
+        $srmData->total += $marathonData->total;
+        foreach ($marathonData->data as $row) {
+          $srmData->data[count($srmData) + 1] = array(
+            "name" => $row->fullName,
+            "startDate" => $row->startDate
+          );
+        }
+      }
+    }
+  }
+
+  if ($responseSrm ['response'] ['code'] == 200) {
+
+    return $srmData;
+  }
+
+  return "Error in processing request";
 }
 
 /*
  * Check handle availability and validity
  */
-add_action( 'wp_ajax_get_handle_validity', 'get_handle_validity_controller' );
-add_action( 'wp_ajax_nopriv_get_handle_validity', 'get_handle_validity_controller' );
+add_action('wp_ajax_get_handle_validity', 'get_handle_validity_controller');
+add_action('wp_ajax_nopriv_get_handle_validity', 'get_handle_validity_controller');
 
-function get_handle_validity_controller()
-{
-    $userkey = get_option( 'api_user_key' );
-    $handle  = $_GET ['handle'];
+function get_handle_validity_controller() {
+  $userkey = get_option('api_user_key');
+  $handle = $_GET ['handle'];
 
-    $handle_validity = get_handle_validity_ajax( $handle );
+  $handle_validity = get_handle_validity_ajax($handle);
 
-    if (isset( $handle_validity->valid ) || isset( $handle_validity->error )) {
-        wp_send_json( $handle_validity );
-    } else {
-        wp_send_json_error();
-    }
+  if (isset($handle_validity->valid) || isset($handle_validity->error)) {
+    wp_send_json($handle_validity);
+  }
+  else {
+    wp_send_json_error();
+  }
 }
 
 function get_handle_validity_ajax(
-    $handle = ''
+  $handle = ''
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/validate/" . $handle;
+  $url = "https://api.topcoder.com/v2/users/validate/" . $handle;
 
-    $args     = array(
-        'httpversion' => get_option( 'httpversion' ),
-        'timeout'     => get_option( 'request_timeout' )
-    );
-    $response = wp_remote_get( $url, $args );
+  $args = array(
+    'httpversion' => get_option('httpversion'),
+    'timeout' => get_option('request_timeout')
+  );
+  $response = wp_remote_get($url, $args);
 
-    if (is_wp_error( $response ) || ! isset ( $response ['body'] )) {
-        $handle_validity = json_decode( $response['body'] );
-        return $handle_validity;
-    }
-    if ($response ['response'] ['code'] == 200) {
+  if (is_wp_error($response) || !isset ($response ['body'])) {
+    $handle_validity = json_decode($response['body']);
+    return $handle_validity;
+  }
+  if ($response ['response'] ['code'] == 200) {
 
 //print $response ['body'];
-        $handle_validity = json_decode( $response['body'] );
-        return $handle_validity;
-    }
-
-    $handle_validity = json_decode( $response['body'] );
+    $handle_validity = json_decode($response['body']);
     return $handle_validity;
+  }
+
+  $handle_validity = json_decode($response['body']);
+  return $handle_validity;
 }
 
 /*
  * Check email availability and validity
  */
-add_action( 'wp_ajax_get_email_validity', 'get_email_validity_controller' );
-add_action( 'wp_ajax_nopriv_get_email_validity', 'get_email_validity_controller' );
+add_action('wp_ajax_get_email_validity', 'get_email_validity_controller');
+add_action('wp_ajax_nopriv_get_email_validity', 'get_email_validity_controller');
 
 function get_email_validity_controller()
 {
-    $userkey = get_option( 'api_user_key' );
-    $email   = $_GET ['email'];
+    $userkey = get_option('api_user_key');
+    $email = $_GET ['email'];
 
-    $email_validity = get_email_validity_ajax( $email );
+    $email_validity = get_email_validity_ajax($email);
 
-    if (isset( $email_validity->available ) || isset( $email_validity->error )) {
+    if (isset($email_validity->available) || isset($email_validity->error)) {
         wp_send_json( $email_validity );
     } else {
         wp_send_json_error();
@@ -809,34 +986,34 @@ function get_email_validity_ajax(
     $email = ''
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/validateEmail?email=" . $email;
+    $url = "https://api.topcoder.com/v2/users/validateEmail?email=" . $email;
 
-    $args     = array(
-        'httpversion' => get_option( 'httpversion' ),
-        'timeout'     => get_option( 'request_timeout' )
+    $args = array(
+        'httpversion' => get_option('httpversion'),
+        'timeout' => get_option('request_timeout')
     );
-    $response = wp_remote_get( $url, $args );
+    $response = wp_remote_get($url, $args);
 
-    if (is_wp_error( $response ) || ! isset ( $response ['body'] )) {
-        $email_validity = json_decode( $response['body'] );
+    if (is_wp_error($response) || !isset ($response ['body'])) {
+        $email_validity = json_decode($response['body']);
         return $email_validity;
     }
     if ($response ['response'] ['code'] == 200) {
 
 //print $response ['body'];
-        $email_validity = json_decode( $response['body'] );
+        $email_validity = json_decode($response['body']);
         return $email_validity;
     }
 
-    $email_validity = json_decode( $response['body'] );
+    $email_validity = json_decode($response['body']);
     return $email_validity;
 }
 
 /*
  * Check social availability and validity
  */
-add_action( 'wp_ajax_get_social_validity', 'get_social_validity_controller' );
-add_action( 'wp_ajax_nopriv_get_social_validity', 'get_social_validity_controller' );
+add_action('wp_ajax_get_social_validity', 'get_social_validity_controller');
+add_action('wp_ajax_nopriv_get_social_validity', 'get_social_validity_controller');
 
 function get_social_validity_controller()
 {
@@ -844,9 +1021,9 @@ function get_social_validity_controller()
     $provider = $_GET ['provider'];
     $user     = $_GET ['user'];
 
-    $social_validity = get_social_validity_ajax( $provider, $user );
+    $social_validity = get_social_validity_ajax($provider, $user);
 
-    if (isset( $social_validity->available ) || isset( $social_validity->error )) {
+    if (isset($social_validity->available) || isset($social_validity->error)) {
         wp_send_json( $social_validity );
     } else {
         wp_send_json_error();
