@@ -1,48 +1,14 @@
 <?php
 /**
  * Template Name: Challenges Past Contest List Page
- * Author : evilkyro1965
  */
-get_header('challenge-landing');
 
-$values = get_post_custom ( $post->ID );
+$listType = "Past";
 
-$siteURL = site_url ();
-$postId = $post->ID;
+include locate_template('header-challenge-landing.php');
+
 ?>
 
-<?php
-	$tcoTooltipTitle = get_option("tcoTooltipTitle");
-	$tcoTooltipMessage = get_option("tcoTooltipMessage");
-
-	// get contest details
-	$contest_type = get_query_var("contest_type") == "" ? "design" : get_query_var("contest_type");
-	$listType = "Past";
-	$postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
-	if ($contest_type === "data") {
-		include(locate_template('page-challenges-data.php'));
-	} else {
-?>
-
-<script type="text/javascript" >
-	var siteurl = "<?php bloginfo('siteurl');?>";
-
-	var reviewType = "contest";
-	var isBugRace = false;
-	var ajaxAction = "get_challenges";
-	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
-	var currentPage = 1;
-	var postPerPage = <?php echo $postPerPage;?>;
-	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
-	<?php
-		if($tcoTooltipTitle) echo "var tcoTooltipTitle= '$tcoTooltipTitle';";
-		if($tcoTooltipMessage) echo "var tcoTooltipMessage= '$tcoTooltipMessage';";
-	?>
-</script>
-<script type="text/javascript">
-	var dataUrl = ajaxUrl+"?action=get_challenges&contest_type="+contest_type+"&listType="+listType+"&pageIndex="+currentPage+"&pageSize="+postPerPage;
-</script>
 <div class="content">
 	<div id="main">
 
@@ -50,24 +16,49 @@ $postId = $post->ID;
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
 
-		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
+		<div id="hero">
+			<?php
+				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
+				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
+				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
+			?>
+			<div class="container grid grid-float">
+				<div class="grid-3-1 track trackUX<?php if($contest_type=="design") echo " isActive"; ?>" >
+					<a href="<?php echo $activeDesignChallengesLink;?>"><i></i>Graphic Design Challenges
+					</a><span class="arrow"></span>
+				</div>
+				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
+					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Software Development Challenges
+					</a><span class="arrow"></span>
+				</div>
+				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
+					<a href="<?php echo $activeDataChallengesLink;?>">
+						<i></i>Data Science Challenges
+					</a><span class="arrow"></span>
+				</div>
+			</div>
+		</div>
+		<!-- /#hero -->
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
-					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?></h1>
+                  <h1>
+                    <?php echo $page_title; ?>
+                    <?php get_template_part("content", "rss-icon"); ?>
+                  </h1>
 
 				</header>
-				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-					<?php
-					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=past&contestType=".$contest_type;
-					?>
-					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php
-						echo $contest_type; 
-					?> challenges </a>
-				</div>
 				<div class="actions alt">
-					<?php include(locate_template('nav-challenges-list-type.php'));?>
+					<div class="lt challengeType">
+						<?php
+							$activeChallenges = get_bloginfo('siteurl')."/active-challenges/".$contest_type."/";
+						?>
+						<ul>
+							<li><a href="<?php echo $activeChallenges;?>" class="link">Open Challenges</a></li>
+							<li><a href="javascript:;" class="active link">Past Challenges</a></li>
+						</ul>
+					</div>
 					<div class="rt">
                       <span class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
 
@@ -117,11 +108,8 @@ $postId = $post->ID;
 						</a>
 					</div>
 					<div class="mid onMobi">
-						<a href="#" class="viewActiveCh">
-							View Active Challenges<i></i>
-						</a>
 						<a href="#" class="viewPastCh">
-							View Upcoming Challenges<i></i>
+							View Past Challenges<i></i>
 						</a>
 					</div>
 				</div>
@@ -129,8 +117,4 @@ $postId = $post->ID;
 			</div>
 		</article>
 		<!-- /#mainContent -->
-<?php 
-}
-get_footer();
-
-?>
+<?php get_footer(); ?>

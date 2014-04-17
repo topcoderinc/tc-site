@@ -1,7 +1,7 @@
 var pageSize = 8;
 var sortColumn = "";
 var sortOrder = "";
-var ApiData = {};
+
 /**
  * Challenges function
 challenge
@@ -37,15 +37,17 @@ appChallenges = {
             pageSize = 10000;
         }
 
-        if (typeof reviewType !== "undefined") {
+        if (typeof(reviewType) != "undefined") {
             if (reviewType == "contest") {
-                app.getDesignContests($('.tcoTable'), currentPage);
+                if (contest_type == 'data') {
+                    app.getDataChallenges($('.tcoTable'), currentPage);
+                } else {
+                    app.getDesignContests($('.tcoTable'), currentPage);
+                }
             } else if (reviewType == "review") {
                 if (contest_type == "design" || contest_type == "develop") {
                     app.getReview($('.tcoTable'), currentPage);
                 }
-            } else if (reviewType == "data") {
-                app.getDataChallenges($('.tcoTable'), currentPage);
             }
         }
     },
@@ -200,12 +202,7 @@ appChallenges = {
                 sortOrder = getSortOrder;
                 if (reviewType == "contest") {
                     if (contest_type == "design" || contest_type == "develop") {
-                        if (postPerPage >= apiData.total) {
-                            apiData = app.apiDataSort(apiData, sortColumn, sortOrder);
-                            app.apiDataView(apiData, $('.tcoTable'), app.callbackAfterSort($(this)));
-                        } else {
-                            app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
-                        }
+                        app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
                     } else if (listType == "AllActive") {
                         app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
                     }
@@ -216,88 +213,6 @@ appChallenges = {
             }
 
         });
-    },
-    //sort data from previous api call so we dont have to make a new one, useful for 'view all' datasets
-    apiDataSort: function(data, sortColumn, sortOrder) {
-        switch(sortColumn) {
-            case 'challengeType':
-            case 'challengeName':
-            case 'currentStatus':
-                data.data.sort(function(a, b) {
-                    if (sortOrder === 'asc') {
-                        if (a[sortColumn] > b[sortColumn]) {
-                            return 1;
-                        }
-                        if (a[sortColumn] < b[sortColumn]) {
-                            return -1;
-                        }
-                        // a must be equal to b
-                        return 0;
-                    }
-                    if (a[sortColumn] < b[sortColumn]) {
-                        return 1;
-                    }
-                    if (a[sortColumn] > b[sortColumn]) {
-                        return -1;
-                    }
-                    // a must be equal to b
-                    return 0;
-                });
-                break;
-            case 'postingDate':
-                data.data.sort(function(a, b) {
-                    a = new Date(a[sortColumn]);
-                    b = new Date(b[sortColumn]);
-                    if (sortOrder === 'asc') {
-                        return a<b ? -1 : a>b ? 1 : 0;
-                    }
-                    return a>b ? -1 : a<b ? 1 : 0;
-                });
-                break;
-            case 'challengeId':
-            case 'projectId':
-            case 'forumId':
-            case 'numSubmissions':
-            case 'numRegistrants':
-            case 'numberOfCheckpointsPrizes':
-            case 'digitalRunPoints':
-                if (sortOrder === 'asc') {
-                    data.data.sort(function(a, b) {
-                        return (a[sortColumn] - b[sortColumn]);
-                    });
-                }
-                data.data.sort(function(a, b) {
-                    return (b[sortColumn] - a[sortColumn]);
-                });
-                break;
-            default:
-                break;
-        }
-        return data;
-    },
-    apiDataView: function(data, table, callback) {
-         // If contest type
-        if (!isBugRace) {
-            if (typeof listType !== "undefined" && listType == "Past") {
-                app.getDesignPastContestTable(table, data, null);
-            } else if (typeof listType !== "undefined" && listType == "AllActive") {
-                app.getAllContestTable(table, data, null);
-                app.getAllContestGrid($('#gridView .contestGrid'), data, (null + 1));
-                app.getDataLandingContests($('.tcoTable'), 1);
-            } else if (typeof listType !== "undefined" && listType == "Upcoming") {
-                app.getDesignUpcomingContestTable(table, data, null);
-                app.getDesignUpcomingContestGrid($('#gridView .contestGrid'), data, (null + 1));
-            } else {
-                app.getDesignContestTable(table, data, null);
-                app.getDesignContestGrid($('#gridView .contestGrid'), data, (null + 1));
-            }
-        } else { // If bug race type
-            app.getBugraceTable(table, data, null);
-        }
-        /* call back */
-        if (callback != null && callback != "") {
-            callback();
-        }
     },
     callbackAfterSort: function(ev) {
         var getSortColumn = ev.attr("data-placeholder");
@@ -318,8 +233,8 @@ appChallenges = {
             $('.contestTy', tt).html($('.tipC', $(this)).html());
 
             if ($(this).hasClass('itco')) {
-                var tempTcoTooltipTitle = typeof tcoTooltipTitle !== "undefined" ? tcoTooltipTitle : "TCO-14";
-                var tempTcoTooltipMessage = typeof tcoTooltipMessage !== "undefined" ? tcoTooltipMessage : "Egalible for TCO14";
+                var tempTcoTooltipTitle = typeof(tcoTooltipTitle) != "undefined" ? tcoTooltipTitle : "TCO-14";
+                var tempTcoTooltipMessage = typeof(tcoTooltipMessage) != "undefined" ? tcoTooltipMessage : "Egalible for TCO14";
                 $('header', tt).html(tempTcoTooltipTitle);
                 $('.contestTy', tt).html(tempTcoTooltipMessage);
             }
@@ -419,7 +334,7 @@ appChallenges = {
             buttonImageOnly: true,
             dateFormat: 'yy-mm-dd',
             onSelect: function(selectedDate) {
-                datePickerFrom.datepicker("option", "minDate", selectedDate);
+                $('.datepicker.to').datepicker("option", "minDate", selectedDate);
             }
         });
         datePickerFrom.closest('.row').addClass('isDisabled');
@@ -517,6 +432,8 @@ appChallenges = {
         param.action = ajaxAction;
         param.pageIndex = pageIndex;
         param.pageSize = postPerPage;
+        param.contest_type = "data/marathon";
+        param.listType = listType;
         $.ajax({
             url: ajaxUrl,
             data: param,
@@ -524,6 +441,7 @@ appChallenges = {
             dataType: "json",
             success: function(data) {
                 currentPage = pageIndex;
+
                 var latestRecords = currentPage * postPerPage; // Latest record read by user
 
                 $("#challengeNav a").hide();
@@ -556,26 +474,11 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+
+        if (data.data && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabData).clone();
-                /*
-                 * generate table row for design past contest type
-                 */
-                if (typeof rec.totalCompetitors !== "undefined") {
-		    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
-                    $('.colType', row).html("SRM");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
-                    $('.colReg', row).html('<a href="javascript:;">' + rec.totalCompetitors + '</a>');
-                } else {
-                    //$('.contestName', row).html(rec.fullName);
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
-                    $('.colType', row).html("Marathon");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
-                    $('.colReg', row).html(rec.numberOfRegistrants);
-                }
 
                 var startDate = app.formatDate2(rec.startDate);
                 var remainingTime = app.formatTimeLeft(rec.timeRemaining);
@@ -598,7 +501,7 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table, 'active');
+            app.addEmptyResult(table);
         }
 
         $('.loading').hide();
@@ -674,8 +577,7 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabReivew).clone();
@@ -713,8 +615,7 @@ appChallenges = {
         }
 
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabDevReivew).clone();
@@ -760,7 +661,7 @@ appChallenges = {
             param.sortColumn = sortColumn;
             param.sortOrder = sortOrder;
         } else {
-            param.sortColumn = 'registrationOpen';
+            param.sortColumn = 'submissionEndDate';
             param.sortOrder = 'desc';
         }
         var startDate = $("#startDate").val();
@@ -797,7 +698,6 @@ appChallenges = {
             success: function(data) {
                 /* show hide navigation */
                 currentPage = pageIndex;
-                apiData = data;
                 if (postPerPage != -1) {
                     var latestRecords = currentPage * postPerPage; // Latest record read by user
 
@@ -808,8 +708,8 @@ appChallenges = {
                     if (currentPage > 1) {
                         $("#challengeNav .prevLink").show();
                     }
-        
-                    if (typeof data.total === 'undefined' || data.total <= postPerPage) {
+
+                    if (data.total <= postPerPage) {
                         $(".viewAll").hide();
                     } else {
                         $(".viewAll").show();
@@ -820,16 +720,13 @@ appChallenges = {
 
                 // If contest type
                 if (!isBugRace) {
-                    if (typeof listType !== "undefined" && listType == "Past") {
+                    if (typeof(listType) != "undefined" && listType == "Past") {
                         app.getDesignPastContestTable(table, data, null);
-                    } else if (typeof listType !== "undefined" && listType == "AllActive") {
+                    } else if (typeof(listType) != "undefined" && listType == "AllActive") {
                         app.getAllContestTable(table, data, null);
                         app.getAllContestGrid($('#gridView .contestGrid'), data, (null + 1));
                         app.getDataLandingContests($('.tcoTable'), 1);
-                    } else if (typeof listType !== "undefined" && listType == "Upcoming") {
-			app.getDesignUpcomingContestTable(table, data, null);
-			app.getDesignUpcomingContestGrid($('#gridView .contestGrid'), data, (null + 1));
-		    } else {
+                    } else {
                         app.getDesignContestTable(table, data, null);
                         app.getDesignContestGrid($('#gridView .contestGrid'), data, (null + 1));
                     }
@@ -881,15 +778,14 @@ appChallenges = {
 
     /* table draw function */
     getAllContestTable: function(table, data, records2Disp, isAppend, isDataScience) {
-        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
-        isDataScience = typeof isDataScience === 'undefined' ? false : isDataScience;
+        isAppend = typeof isAppend == 'undefined' ? false : isAppend;
+        isDataScience = typeof isDataScience == 'undefined' ? false : isDataScience;
 
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length > 0) {
             $.each(data.data, function(key, rec) {
                 if (isDataScience) {
                     var row = $(challengesBP.tabAllData).clone();
@@ -981,23 +877,21 @@ appChallenges = {
         }
     },
 
-    addEmptyResult: function(table, category) {
-        
-        $(table).html('<table><tr><td style="font-size:20px;">There are no ' + category + ' challenges under this category. Please check back later</td></tr></table>');
+    addEmptyResult: function(table) {
+        $(table).html('<table><tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr></table>');
     },
 
     // getGridview Blocks
     getAllContestGrid: function(gridEl, data, records2Disp, isAppend, isDataScience) {
-        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
-        isDataScience = typeof isDataScience === 'undefined' ? false : isDataScience;
+        isAppend = typeof isAppend == 'undefined' ? false : isAppend;
+        isDataScience = typeof isDataScience == 'undefined' ? false : isDataScience;
 
         if (isAppend != true) {
             gridEl.html(null);
         }
 
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length > 0) {
             $.each(data.data, function(key, rec) {
                 if (isDataScience) {
                     var con = $(challengesBP.grDataAll).clone();
@@ -1149,8 +1043,7 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-	//JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.gdOpen).clone();
@@ -1162,8 +1055,12 @@ appChallenges = {
                     checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                 }
 
-                var endDate = app.formatDate2(rec.submissionEndDate);
-                var remainingTime = app.formatTimeLeft(rec.submissionEndDate);
+                var endDate;
+                if (rec.submissionEndDate) {
+                  endDate = app.formatDate2(rec.submissionEndDate);
+                }
+
+                var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
 
                 var purse = 0;
@@ -1201,7 +1098,11 @@ appChallenges = {
                     $('.vEndRound', row).parent().empty();
                 }
 
-                $('.vEndDate', row).html(endDate);
+                if (endDate) {
+                    $('.vEndDate', row).html(endDate);
+                } else {
+                    $('.vEndDate', row).parent().empty();
+                }
 
                 $('.colTLeft', row).html(remainingTime);
 
@@ -1221,7 +1122,7 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table, 'active');
+            app.addEmptyResult(table);
             $('.loading').hide();
         }
     },
@@ -1231,8 +1132,7 @@ appChallenges = {
         gridEl.html(null);
 
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var con = $(challengesBP.grDOpen).clone();
@@ -1270,11 +1170,8 @@ appChallenges = {
                     icoTrack = "ico-track-develop.png";
                     tcoFlag = "tco-flag-develop.png";
                 }
-                if (rec.challengeName.length < 61) {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
-                } else {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
-                }
+
+                $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
@@ -1360,7 +1257,7 @@ appChallenges = {
                 }, 5);
             });
         } else {
-            app.addEmptyResult(gridEl, 'active');
+            app.addEmptyResult(gridEl);
         }
     },
 
@@ -1370,17 +1267,22 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabPC).clone();
 
                 var trackName = app.getTrackSymbol(rec.challengeType);
                 var startDate = app.formatDate2(rec.postingDate);
-                var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
-                var endDate = app.formatDate2(rec.submissionEndDate);
-                var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
+                var checkPointDate;
+                if (rec.checkpointSubmissionEndDate) {
+                  checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
+                var endDate;
+                if (rec.submissionEndDate) {
+                   endDate = app.formatDate2(rec.submissionEndDate);
+                }
+
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
                 var purse = 0;
                 for (var i = 0; i < rec.prize.length; i++)
@@ -1405,13 +1307,21 @@ appChallenges = {
 
                 $('.vStartDate', row).html(startDate);
 
-                $('.vEndRound', row).html(checkPointDate);
+                if (checkPointDate) {
+                  $('.vEndRound', row).html(checkPointDate);
+                } else {
+                  $('.vEndRound', row).parent().empty();
+                }
 
-                $('.vEndDate', row).html(endDate);
+                if (endDate) {
+                  $('.vEndDate', row).html(endDate);
+                } else {
+                  $('.vEndDate', row).parent().empty();
+                }
 
                 $('.colPur', row).html("$" + purse);
 
-                $('.colPhase', row).html(rec.currentStatus);
+                $('.colPhase', row).html('Completed');
 
                 $('.winBages', row).html('<a href="' + siteurl+ '/challenge-details/' +rec.challengeId+'?type='+ rec.challengeCommunity +'#winner">View Winners</a>');
                 
@@ -1433,209 +1343,12 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table, 'past');
+            app.addEmptyResult(table);
         }
 
         $('.loading').hide();
     },
-	getDesignUpcomingContestTable: function(table, data, records2Disp, isAppend) {
-        if (isAppend != true) {
-            $('tbody', table).html(null);
-        }
-        var count = 0;
-	//JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
-            $.each(data.data, function(key, rec) {
 
-                var row = $(challengesBP.gdUpcoming).clone();
-
-                var trackName = app.getTrackSymbol(rec.challengeType);
-                var startDate = app.formatDate2(rec.postingDate);
-                var checkPointDate;
-                if (rec.checkpointSubmissionEndDate) {
-                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
-                }
-
-                var endDate = app.formatDate2(rec.submissionEndDate);
-                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
-                var contestTechnologies = rec.technologies.join(', ');
-                if (!contestTechnologies) {
-                    contestTechnologies = "N/A";
-                }
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
-
-                var purse = 0;
-                for (var i = 0; i < rec.prize.length; i++)
-                    purse += rec.prize[i];
-
-                if (contest_type == "develop") {
-                    row = $(challengesBP.gdDevUpcoming).clone();
-                    if (rec.registrationEndDate) {
-                        checkPointDate = app.formatDate2(rec.registrationEndDate);
-                    }
-                }
-
-                row.addClass('track-' + trackName);
-                /*
-                 * generate table row for design contest type
-                 */
-                var icoTrack = "ico-track-design.png";
-                var tcoFlag = "tco-flag-design.png";
-                if (!app.isDesignContest(rec.challengeType)) {
-                    icoTrack = "ico-track-develop.png";
-                    tcoFlag = "tco-flag-develop.png";
-                }
-                $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
-                $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
-
-                $('.tipC', row).html(rec.challengeType);
-
-                $('.vStartDate', row).html(startDate);
-
-                if (checkPointDate) {
-                    $('.vEndRound', row).html(checkPointDate);
-                } else {
-                    $('.vEndRound', row).parent().empty();
-                }
-
-                $('.vEndDate', row).html(endDate);
-
-                $('.colDur', row).html(contestDuration);
-                
-                $('.colTech', row).html(contestTechnologies);
-
-                if (rec.isEnding === "true") {
-                    $('.colTLeft', row).addClass('imp');
-                }
-
-                $('.colPur', row).html("$" + app.formatCur(purse));
-
-                $('.colStat', row).html(rec.currentStatus);
-
-
-                $('tbody', table).append(row);
-            });
-            app.initZebra(table);
-        } else {
-            app.addEmptyResult(table, 'upcoming');
-            $('.loading').hide();
-        }
-    },
-    getDesignUpcomingContestGrid: function(gridEl, data, records2Disp) {
-        gridEl.html(null);
-
-        var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
-            $.each(data.data, function(key, rec) {
-
-                var con = $(challengesBP.grDUpcoming).clone();
-
-                var trackName = app.getTrackSymbol(rec.challengeType);
-                trackName += " trackSD";
-
-                var startDate = app.formatDate2(rec.postingDate);
-                var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
-                if (rec.checkpointSubmissionEndDate) {
-                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
-                }
-                var endDate = app.formatDate2(rec.submissionEndDate);
-                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
-                var contestTechnologies = rec.technologies.join(', ');
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
-                var purse = 0;
-                for (var i = 0; i < rec.prize.length; i++)
-                    purse += rec.prize[i];
-
-                /* for develop type contest */
-                if (contest_type == "develop") {
-                    con = $(challengesBP.grDevUpcoming).clone();
-                    if (rec.registrationEndDate) {
-                        checkPointDate = app.formatDate2(rec.registrationEndDate);
-                    }
-                }
-
-
-
-                con.addClass('track-' + trackName);
-                con.addClass('type-' + contest_type);
-                var icoTrack = "ico-track-design.png";
-                var tcoFlag = "tco-flag-design.png";
-                if (!app.isDesignContest(rec.challengeType)) {
-                    icoTrack = "ico-track-develop.png";
-                    tcoFlag = "tco-flag-develop.png";
-                }
-                if (rec.challengeName.length < 61) {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
-                } else {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
-                }
-                $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
-                $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
-
-                $('.tipC', con).html(rec.challengeType);
-                $('.vStartDate', con).html(startDate);
-
-                if (checkPointDate) {
-                    $('.vEndRound', con).html(checkPointDate);
-                } else {
-                    $('.vEndRound', con).parent().empty();
-                }
-
-                $('.vEndDate', con).html(endDate);
-                $('.vStatus', con).html(rec.currentStatus);
-                var contestTechnologies = rec.technologies.join(', ');
-                if (!contestTechnologies) {
-                    contestTechnologies = "N/A";
-                }
-                $('.vTech', con).html(contestTechnologies);
-
-                $('.cgTLeft', con).html('<i></i>' + contestDuration);
-                if (rec.isEnding === "true") {
-                    $('.cgTLeft', con).addClass('imp');
-                }
-                $('.cgPur', con).html('<i></i> $' + purse);
-
-                $('.cgTLeft', con).qtip({
-                    content: {
-                        text: contestDuration + " days",
-                        title: 'Duration'
-                    },
-                    style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
-                    },
-                    position: {
-                        my: 'bottom center',
-                        at: 'top center '
-                    }
-                });
-                $('.cgPur', con).qtip({
-                    content: {
-                        text: '$' + purse,
-                        title: 'Prize Purse'
-                    },
-                    style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
-                    },
-                    position: {
-                        my: 'bottom center',
-                        at: 'top center '
-                    }
-                });
-
-
-                gridEl.append(con);
-                window.setTimeout(function() {
-                    window.setTimeout(function() {
-                        $('.loading').hide();
-                    }, 2000);
-                }, 5);
-            });
-        } else {
-            app.addEmptyResult(gridEl, 'upcoming');
-        }
-    },
     /* table draw function */
     getBugraceTable: function(table, data, records2Disp, isAppend) {
 
@@ -1643,8 +1356,7 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        //JS uncaught typeError when no data available, so adding defined check
-        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+        if (data.data.length) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabF2F).clone();
@@ -1669,7 +1381,7 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table, 'active');
+            app.addEmptyResult(table);
         }
 
         $('.loading').hide();
@@ -1686,7 +1398,7 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
-       return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
+        return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
         // var d = new Date(date);
         // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
 
@@ -1697,13 +1409,6 @@ appChallenges = {
         // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
     },
 
-    getContestDuration: function(dateStart, dateEnd) {
-	var start = moment(dateStart.slice(0, -5));
-	var end = moment(dateEnd.slice(0, -5));
-	var days = end.diff(start, 'days');
-	return days;
-    }, 
-    
     //format date review
     formatDateReview: function(date) {
         if (date == "") return "";
@@ -1824,19 +1529,6 @@ var challengesBP = {
                     </div></td>\
                 <td class="colType">&nbsp;</td>\
                 <td class="colTime">N/A</td>\
-                        <div class="row">\
-                            <label class="lbl"></label>\
-                            <div class="val vStartDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl vEndRoundLabel">Start Date</label>\
-                            <div class="val vEndRound"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl"></label>\
-                            <div class="val vEndDate"></div>\
-                        </div>\
-                    </div></td>\
                 <td class="colTLeft"></td>\
                 <td class="colPur">N/A</td>\
                 <td class="colReg"></td>\
@@ -1900,62 +1592,6 @@ var challengesBP = {
                 <td class="colReg"></td>\
                 <td class="colSub"></td>\
             </tr>',
-     gdUpcoming: '<tr class="inTCO">\
-                <td class="colCh"><div>\
-                        <a href="javascript:;" class="contestName"></a>\
-                    </div></td>\
-                <td class="colType"><i class="ico"> <span class="tooltipData"> \
-                <span class="tipT">Contest Type</span> \
-                <span class="tipC">Web Design</span>\
-                    </span>\
-                </i></td>\
-                <td class="colTime"><div>\
-                        <div class="row">\
-                            <label class="lbl">Start Date</label>\
-                            <div class="val vStartDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl ">Round 1 End</label>\
-                            <div class="val vEndRound"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">End Date</label>\
-                            <div class="val vEndDate"></div>\
-                        </div>\
-                    </div></td>\
-                <td class="colDur"></td>\
-                <td class="colPur"></td>\
-                <td class="colTech"></td>\
-                <td class="colStat"></td>\
-            </tr>',
-    gdDevUpcoming: '<tr class="inTCO">\
-                <td class="colCh"><div>\
-                        <a href="javascript:;" class="contestName"></a>\
-                    </div></td>\
-                <td class="colType"><i class="ico"> <span class="tooltipData"> \
-                <span class="tipT">Contest Type</span> \
-                <span class="tipC">Web Design</span>\
-                    </span>\
-                </i></td>\
-                <td class="colTime"><div>\
-                        <div class="row">\
-                            <label class="lbl">Start Date</label>\
-                            <div class="val vStartDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl ">Register by</label>\
-                            <div class="val vEndRound"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Submit by</label>\
-                            <div class="val vEndDate"></div>\
-                        </div>\
-                    </div></td>\
-                <td class="colDur"></td>\
-                <td class="colPur"></td>\
-                <td class="colTech"></td>\
-                <td class="colStat"></td>\
-            </tr>',
     grDOpen: '<div class="contest">\
                 <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
                 <div class="cgTime">\
@@ -1989,41 +1625,6 @@ var challengesBP = {
                         <i></i>\
                     </p>\
                     <p class="cgSub">\
-                        <i></i>\
-                    </p>\
-                </div>\
-            <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">Web Design</span></span></i></div>',
-    grDUpcoming: '<div class="contest">\
-                <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
-                <div class="cgTime">\
-                    <div>\
-                        <div class="row">\
-                            <label class="lbl">Start Date</label>\
-                            <div class="val vStartDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Round 1 End</label>\
-                            <div class="val vEndRound"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">End Date</label>\
-                            <div class="val vEndDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Current Status</label>\
-                            <div class="val vStatus"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Technologies</label>\
-                            <div class="val vTech"></div>\
-                        </div>\
-                    </div>\
-                </div>\
-                <div class="genInfo gdUpcoming">\
-                    <p class="cgTLeft">\
-                        <i></i>\
-                    </p>\
-                    <p class="cgPur">\
                         <i></i>\
                     </p>\
                 </div>\
@@ -2095,42 +1696,6 @@ var challengesBP = {
                         <i></i>\
                     </p>\
                     <p class="cgSub">\
-                        <i></i>\
-                    </p>\
-                </div>\
-            <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">Web Design</span></span></i></div>',
-    //upcoming challenges grid
-    grDevUpcoming: '<div class="contest">\
-                <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
-                <div class="cgTime">\
-                    <div>\
-                        <div class="row">\
-                            <label class="lbl">Start Date</label>\
-                            <div class="val vStartDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Register by</label>\
-                            <div class="val vEndRound"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Submit by</label>\
-                            <div class="val vEndDate"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Current Status</label>\
-                            <div class="val vStatus"></div>\
-                        </div>\
-                        <div class="row">\
-                            <label class="lbl">Technologies</label>\
-                            <div class="val vTech"></div>\
-                        </div>\
-                    </div>\
-                </div>\
-                <div class="genInfo gdUpcoming">\
-                    <p class="cgTLeft">\
-                        <i></i>\
-                    </p>\
-                    <p class="cgPur">\
                         <i></i>\
                     </p>\
                 </div>\

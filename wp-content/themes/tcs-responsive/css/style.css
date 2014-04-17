@@ -877,8 +877,9 @@
     .contestGrid .contest{
         display: inline-block;
         border: 1px solid #e7e7e7;
+    
         width: 298px;
-        height: 268px;
+        height: 228px;
         position: relative;
         margin: 14px 27px;
         float: left;
@@ -1594,14 +1595,14 @@
 		.casesView .caseGrid a.jsShowCaseDetails:hover > img{
 			-webkit-transform: rotate(10deg) scale(1.1,1.1);     /* for Chrome || Safari */  
             -moz-transform: rotate(10deg) scale(1.1,1.1);        /* for Firefox */  
-            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE 缩放0.5 */  
+            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE ç¼©æ”¾0.5 */  
             -o-transform:  rotate(10deg) scale(1.1,1.1);          /* for Opera */  
 			transform: rotate(10deg) scale(1.1,1.1);
 		}
 		.casesView .caseGrid a.isShow:hover > img{
 			-webkit-transform: none;									/* for Chrome || Safari */  
             -moz-transform: none;										/* for Firefox */  
-            -ms-transform: none;										/* for IE 缩放0.5 */  
+            -ms-transform: none;										/* for IE ç¼©æ”¾0.5 */  
             -o-transform: none;											/* for Opera */  
 		}
 		.casesView .caseGrid a.jsShowCaseDetails > i{
@@ -2319,15 +2320,51 @@
 /**
  * Start of New Home Page additional styles 
  */
-#promo-banners {
+#promo-banner {
 	background: #f1f1f1;
 	box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.25);
 	margin-bottom: 20px;
 }
+	#promo-banner li {
+		text-align: center;
+	}
+	#promo-banner .bx-controls {
+		bottom: 3px;
+		position: absolute;
+		width: 100%;
+	}
+	#promo-banner .bx-pager {
+		text-align: center;
+	}
+		#promo-banner .bx-pager-item {
+			display: inline-block;
+			height: 11px;
+			margin: 0 4px;
+			width: 11px;
+		}
+			#promo-banner .bx-pager-item a {
+				background: url(i/slider-dot.png) no-repeat;
+				display: block;
+				height: 11px;
+				overflow: hidden;
+				text-indent: -100px;
+				width: 11px;
+				-moz-transition-duration: 0s; -webkit-transition-duration: 0s; transition-duration: 0s;
+			}
+			#promo-banner .bx-pager-item a.active {
+				background-position: 0 100%;
+			}
+			
 #featuredContent.home {
 	margin-top: 32px;
 	padding-bottom: 20px;
 }
+	#featuredContent.home .container {
+		clear: both;
+		height: 100%;
+		overflow: hidden;
+	}
+	
 	#featuredContent.home h3 {
 		font-size: 27px !important;
 		line-height: normal !important;
@@ -2352,9 +2389,6 @@
 		width: 50%;
 	}
 	
-mark {
-	background-color: #f7f9d8;
-}
 .lead {
 	font-size: 24px;
 	line-height: 1.5;
@@ -2419,23 +2453,24 @@ hr.light {
 	margin: 20px 0;
 }
 
-.text-design { color: #01a7e9; }
+.text-design { color: #01a7e9 !important; }
 	.text-design.chevron-right {
 		background: url(../i/chevron-right-design.png) 100% 50% no-repeat;
 		padding-right: 18px;
 	}
 	
-.text-development { color: #278904; }
+.text-development { color: #278904 !important; }
 	.text-development.chevron-right {
 		background: url(../i/chevron-right-development.png) 100% 50% no-repeat;
 		padding-right: 18px;
 	}
-.text-data-science { color: #ff7202; }
+.text-data-science { color: #ff7202 !important; }
 	.text-data-science.chevron-right {
 		background: url(../i/chevron-right-data-science.png) 100% 50% no-repeat;
 		padding-right: 18px;
 	}
 
 .smaller { font-size: smaller; }
+.larger { font-size: larger; }
 .text-center { text-align: center; }
 /* End of New Home Page styles */

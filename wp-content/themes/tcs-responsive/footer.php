@@ -384,6 +384,7 @@ $blog_posts = get_posts($blog_posts_args);
 <script>
   var socialProviderId = "", socialUserName = "", socialEmail = "", socialProvider = "";
   var utmSource = '', utmMedium = '', utmCampaign = '';
+  var loginState = '';
   $(function () {
     function getParameterByName(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -415,7 +416,7 @@ $blog_posts = get_posts($blog_posts_args);
 
     ?>
 
-    var loginState = "<?php echo $stateLogin; ?>";
+    loginState = "<?php echo $stateLogin; ?>";
 
     if (loginState == 'none') {
       loginState = window.location.href;

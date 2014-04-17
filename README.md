@@ -126,11 +126,14 @@ to fit your style.
     * If you already have a repository setup, be sure to pull down the latest changes: `git pull origin dev`
 1. Create a new branch: `git checkout -b <branch_name>`
 1. Make your changes, add new files, etc.
+1. Make commits as you go on your branch
 1. If you create new files be sure to add them to git first `git add <file name>`
 
 **Submitting a patch to a challenge**
 
-1. Create a patch:  `git diff > patchn_ame.patch`
+1. Pull down the latest code: `git fetch origin`
+1. Merge in the latest changes from dev branch: `git merge dev`
+1. Create a patch against the dev branch:  `git diff dev > patchn_ame.patch`
 1. Submit the patch to the challenge
 
 **Creating a pull request for for final approval**

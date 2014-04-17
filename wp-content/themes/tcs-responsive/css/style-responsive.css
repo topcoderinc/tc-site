@@ -741,8 +741,9 @@
     .contestGrid .contest{
         display: block;
         border: 1px solid #e7e7e7;
+    
         width: auto;
-        height: 268px;
+        height: 228px;
         position: relative;
         margin: 28px auto 0;
         float: none;

@@ -606,6 +606,7 @@ function closeModal() {
   if (window.location.hash != '') {
     window.history.pushState({}, 'Home', '/');
   }
+  loginState = window.location.href;
   $('#registerForm span.socialUnavailableErrorMessage').hide();
 }
 

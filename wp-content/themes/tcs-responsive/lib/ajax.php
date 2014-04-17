@@ -158,6 +158,7 @@ function get_popular_ajax() {
   $args = array(
     'post_type' => 'blog',
     'paged' => $page,
+	'offset' => ($page - 1) * $postPerPage + 1,
     'posts_per_page' => $postPerPage,
     'meta_key' => 'wpb_post_views_count',
     'orderby' => 'meta_value_num',

@@ -47,6 +47,19 @@ var app = {
       createBannerSlider();
     });
 
+    // new promo module banner slider
+    $('#promo-banner .slider').bxSlider({
+      minSlides: 1,
+      maxSlides: 1,
+      controls: false,
+      responsive: true,
+      auto: true,
+      pause: 5000,
+      slideMargin: 2,
+	    adaptiveHeight: true
+    });
+
+
     $('.dataTable.challenges tbody, .layChallenges .dataTable tbody').html(null);
     $('#gridView .contestGrid').html(null);
     // challenges list init

@@ -3,58 +3,9 @@
 add_action('init', 'tc_add_custom_rewrite_rules');
 
 function tc_add_custom_rewrite_rules() {
-  // Active Contest
-  add_rewrite_rule(
-    '^' . ACTIVE_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=challenges&contest_type=$matches[1]',
-    'top'
-  );
-  add_rewrite_rule(
-    '^' . ACTIVE_CONTESTS_PERMALINK . '/([^/]*)/([0-9]*)/?$',
-    'index.php?pagename=active-contests&contest_type=$matches[1]&pages=$matches[2]',
-    'top'
-  );
 
-
-  add_rewrite_rule(
-    '^' . DESIGN_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=$matches[1]&contest_type=design',
-    'top'
-  );
-  add_rewrite_rule(
-    '^' . DEVELOP_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=$matches[1]&contest_type=develop',
-    'top'
-  );
-  add_rewrite_rule(
-    '^' . DATA_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=$matches[1]&contest_type=data',
-    'top'
-  );
-
-  // Past Contest
-  add_rewrite_rule(
-    '^' . PAST_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=past-contests&contest_type=$matches[1]',
-    'top'
-  );
-  add_rewrite_rule(
-    '^' . PAST_CONTESTS_PERMALINK . '/([^/]*)/([0-9]*)/?$',
-    'index.php?pagename=past-contests&contest_type=$matches[1]&pages=$matches[2]',
-    'top'
-  );
-
-  // Past Contest
-  add_rewrite_rule(
-    '^' . REVIEW_OPPORTUNITIES_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=review-opportunities&contest_type=$matches[1]',
-    'top'
-  );
-  add_rewrite_rule(
-    '^' . REVIEW_OPPORTUNITIES_PERMALINK . '/([^/]*)/([0-9]*)/?$',
-    'index.php?pagename=review-opportunities&contest_type=$matches[1]&pages=$matches[2]',
-    'top'
-  );
+  // rss for challenges
+  add_rewrite_rule('^challenges/feed/?$','index.php?feed=challenges-feed', 'top');
 
   // Contest Details
   add_rewrite_rule(
@@ -71,22 +22,10 @@ function tc_add_custom_rewrite_rules() {
     'top'
   );
 
-  // Blog Category
-  //add_rewrite_rule ( '^'.BLOG_PERMALINK.'/([^/]*)/?$', 'index.php?pagename=blog-page&slug=$matches[1]', 'top' );
-  //add_rewrite_rule ( '^'.BLOG_PERMALINK.'/([^/]*)/page/([0-9]*)/?$', 'index.php?pagename=blog-page&slug=$matches[1]&page=$matches[2]', 'top' );
-  add_rewrite_rule(
-    '^' . ACTIVE_CONTESTS_PERMALINK . '/([^/]*)/?$',
-    'index.php?pagename=challenges&contest_type=$matches[1]',
-    'top'
-  );
-
   // Case studies Category
   //add_rewrite_rule ( '^'.CASE_STUDIES_PERMALINK.'/([^/]*)/?$', 'index.php?pagename=case-studies&slug=$matches[1]', 'top' );
   //add_rewrite_rule ( '^'.CASE_STUDIES_PERMALINK.'/([^/]*)/?$', 'index.php?pagename=case-studies&page=$matches[1]', 'top' );
   //add_rewrite_rule ( '^'.CASE_STUDIES_PERMALINK.'/([^/]*)/page/([0-9]*)/?$', 'index.php?pagename=case-studies&slug=$matches[1]&page=$matches[2]', 'top' );
-
-  // challenges
-  add_rewrite_rule('^challenges/([^/]*)/?$', 'index.php?pagename=challenge-details&contestID=$matches[1]', 'top');
 
   // challenge terms
   add_rewrite_rule(
@@ -121,9 +60,6 @@ function tc_add_custom_rewrite_rules() {
   // Past Challenges
   add_rewrite_rule('^past-challenges/([^/]*)/?$', 'index.php?pagename=past-challenges&contest_type=$matches[1]', 'top');
 
-  // Upcoming Challenges
-  add_rewrite_rule('^upcoming-challenges/([^/]*)/?$', 'index.php?pagename=upcoming-challenges&contest_type=$matches[1]', 'top');
-  
   // Review Challenges
   add_rewrite_rule(
     '^review-opportunities/([^/]*)/?$',
@@ -141,4 +77,5 @@ function tc_add_custom_rewrite_rules() {
 
   // Search results
   add_rewrite_rule('^search/?$', 'index.php?', 'top');
+
 }
