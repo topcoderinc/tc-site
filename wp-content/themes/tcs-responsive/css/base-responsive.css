@@ -247,16 +247,6 @@ em{
         display: block;
     }
     
-#banner{
-    height: 355px;
-    background: #fff  url(../i/bg-banner-sprite-m.png) repeat-x;
-    overflow: hidden; 
-}
-#banner .inner{    
-   height: 355px;
-   background: url(../i/bg-banner-m.png) 50% 0 repeat-x;
-}
-    
 
     /* header
     ---------------------------*/

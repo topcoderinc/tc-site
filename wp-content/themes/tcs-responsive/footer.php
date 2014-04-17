@@ -340,7 +340,11 @@ $blog_posts = get_posts($blog_posts_args);
 
       <p class="row lSpace btns">
         <a href="javascript:;" class="signin-db btn btnSubmit">Login</a>
-        <a href="http://community.topcoder.com/tc?module=FindUser" target="_blank" class="forgotPwd">Forgot
+		<?php
+			$fp_page = get_page_by_path( 'password-recovery' );
+			$fp_link = get_permalink($fp_page->ID);
+		?>
+        <a href="<?php echo $fp_link; //http://community.topcoder.com/tc?module=FindUser ?>" target="_blank" class="forgotPwd">Forgot
           password?</a>
       </p>
 
