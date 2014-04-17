@@ -35,11 +35,7 @@ global $activity;
 //$activity = get_activity_summary();
 ?>
 <div class="content">
-<<<<<<< HEAD
-	<div id="banner">
-=======
 	<div id="promo-banner">
->>>>>>> dev
 		<div class="container">
 			<ul class="slider">
 				<?php 
