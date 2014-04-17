@@ -13,6 +13,9 @@
 -----------------------------*/
 
 @media (max-width: 1019px) {
+	.hideOnMobile {
+		display: none;
+	}
     .onMobi{
         display: inline-block;
     }

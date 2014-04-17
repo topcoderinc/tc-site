@@ -66,6 +66,9 @@ $(document).ready(function () {
     $('.registrantsTable.mobile').addClass('hide');
   }
   $('a[href="' + getAnchor(location.href) + '"]').click();
+
+  // init tab nav
+  app.tabNavinit();
 });
 
 //create/destroy slider based on width
@@ -274,7 +277,7 @@ $(function () {
         if (data["message"] === "ok") {
           showModal("#registerSuccess");
         } else if (data["error"]["details"] === "You should agree with all terms of use.") {
-          window.location = siteURL + "/challenge-details/terms/" + challengeId;
+          window.location = siteURL + "/challenge-details/terms/" + challengeId + "?challenge-type=" + challengeType;
         } else if (data["error"]["details"]) {
           $("#registerFailed .failedMessage").text(data["error"]["details"]);
           showModal("#registerFailed");
@@ -291,23 +294,202 @@ $(function () {
 
   $("#registerSuccess .closeModal").click(function () {
     closeModal();
-    window.location.href = window.location.href;
+    window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
   });
 
-  // S-194724
-  var tcsso = getCookie('tcsso');
-  if (tcsso) {
-    var tcssoValues = tcsso.split("|");
-    var now = new Date();
+});
 
-    if (typeof registrationUntil !== "undefined") {
-      if (now.getTime() < registrationUntil.getTime()) {
-        $('#registrationButton').removeClass('disabled');
-      }
-      if (now.getTime() < submissionUntil.getTime() && registrants.indexOf(tcssoValues[0]) > -1) {
-        $('#submissionButton').removeClass('disabled');
-      }
+/* checkpoint contest css*/
+$(function () {
+  // checkpoint box click
+  $('.winnerList .box').on('click', function () {
+    var idx = $(this).closest('li').index();
+    $('a', $('.expandCollaspeList li').eq(idx)).trigger('click');
+    var top = $('a', $('.expandCollaspeList li').eq(idx)).offset().top - 20;
+    var body = $("html, body");
+    body.animate({scrollTop: top}, '500', 'swing');
+  });
+
+  $('.expandCollaspeList li a').each(function () {
+    var _this = $(this).parents('li')
+    if (!$(this).hasClass('collapseIcon')) {
+      _this.children('.bar').css('border-bottom', '1px solid #e7e7e7');
+    } else {
+      _this.children('.bar').css('border-bottom', 'none');
     }
+  });
+  $('.expandCollaspeList li .bar').on(ev, function () {
+    var _this = $(this).closest('li');
+    if (!$('a', _this).hasClass('collapseIcon')) {
+      $('a', _this).addClass('collapseIcon');
+      _this.children('.feedBackContent').hide();
+      _this.children('.bar').css('border-bottom', 'none');
+    } else {
+      $('a', _this).removeClass('collapseIcon')
+      _this.children('.feedBackContent').show();
+      _this.children('.bar').css('border-bottom', '1px solid #e7e7e7');
+    }
+  });
+
+  $('#submissions .jsViewSubmission').on(ev, function () {
+    $('.submissionAllView').hide();
+    $('.submissionSingleView').show();
+  });
+
+
+  /* view next */
+  $('#submissions .pager').on(ev, '.nextLink', function (e) {
+    $('#submissions .prevLink').show();
+    return false;
+  });
+  $('#submissions .pager').on(ev, '.prevLink', function (e) {
+    $('#submissions .nextLink').show();
+
+    return false;
+  });
+
+  $('.jsSeeMore').on(ev, function () {
+    $(this).hide();
+    $(this).parents('.stockArtInfo').find('.seeMoreInfo').show();
+  });
+  if ($('.scrollPane').length > 0) {
+    $('.scrollPane').jScrollPane({autoReinitialise: true});
+  }
+
+  $('.challenge-detail #submissions .submissionShowcaseList li a').click(function () {
+    $('.submissionBig').hide();
+    $('.submissionBigMock').hide();
+    if (!$(this).hasClass('mock')) {
+      $('.submissionBig').show();
+      $('.submissionBigMock').hide();
+    } else {
+
+      $('.submissionBig').hide();
+      $('.submissionBigMock').show();
+    }
+    $('.challenge-detail #submissions .submissionShowcaseList li a').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  var userAgent = navigator.userAgent.toLowerCase();
+  jQuery.browser = {
+    version: (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
+    safari: /webkit/.test(userAgent),
+    opera: /opera/.test(userAgent),
+    msie: /msie/.test(userAgent) && !/opera/.test(userAgent),
+    mozilla: /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent)
+  };
+  if ($.browser.msie && $.browser.version == 10) {
+    if (window.innerWidth < 1019) {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+    } else {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-6px');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '73px');
+    }
+    $(window).resize(function () {
+      if (window.innerWidth < 1019) {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+      } else {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-6px');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '73px');
+      }
+    });
+  }
+  if ($.browser.mozilla) {
+
+    if (window.innerWidth < 1019) {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+    } else {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-6px');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '75px');
+    }
+
+    $(window).resize(function () {
+      if (window.innerWidth < 1019) {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+      } else {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-6px');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '75px');
+      }
+    });
+  }
+  if ($.browser.safari) {
+    if (window.innerWidth < 1019) {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+    } else {
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '74px');
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-5px');
+    }
+    $(window).resize(function () {
+
+      if (window.innerWidth < 1019) {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+      }
+      if (window.innerWidth > 1019) {
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '74px');
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '-5px');
+      }
+    });
+  }
+
+  var Sys = {};
+  var ua = navigator.userAgent.toLowerCase();
+  if (ua.match(/version\/([\d.]+).*safari/) != null && ua.match(/version\/([\d.]+).*safari/)[1].split('.')[0] > 3) {
+    if (window.innerWidth < 1019) {
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+      //$('.winnerListAlt li .boxName').css('width','50%');
+    } else {
+      $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '74px');
+      $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0px');
+    }
+
+    $(window).resize(function () {
+      if (window.innerWidth < 1019) {
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0');
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', 'auto');
+        //$('.winnerListAlt li .boxName').css('width','50%');
+      } else {
+        $('.challenge-detail #checkpoints .winnerListEndAlt').css('height', '74px');
+        $('.winnerList li .boxName,.winnerListAlt li .boxName').css('top', '0px');
+      }
+    });
+
   }
 
 });
+
+
+app.tabNavinit = function () {
+
+  // tab navs
+  $('.tabNav a').off().on(ev, function () {
+    var id = $(this).attr('href');
+    var tabIdx = id.lastIndexOf('tab=');
+    if (tabIdx > 0) {
+      id = "#" + id.substr(tabIdx + 4);
+    }
+    $('.tab', $(this).closest('.tabsWrap')).hide();
+    $(id).fadeIn();
+    $('.active', $(this).closest('nav')).removeClass('active');
+    $(this).addClass('active');
+
+    id = id.replace('#', '');
+    $('#mainContent').attr('class', '').addClass('splitLayout').addClass('currentTab-' + id);
+    return false;
+  });
+
+  $('.challenge-detail .tabsWrap .tabNav a').each(function () {
+    var value = $.trim($(this).text()).toLocaleLowerCase();
+    if (activeTab === value) {
+      $('.active', $(this).closest('ul')).removeClass('active');
+      $(this).addClass('active');
+    }
+  })
+}

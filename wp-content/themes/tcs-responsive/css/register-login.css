@@ -176,6 +176,10 @@ common
 /*
 Register modal
 */
+.row .socialUnavailableErrorMessage {
+    color: #c00;
+    display: none;
+}
 #register .content,
 #login .content{
     padding: 10px 20px;
@@ -543,7 +547,7 @@ Thanks modal
     background: #fff url(../i/bg-modal-thanks.png) no-repeat right top;
 }
 #thanks p {
-    font-size: 24px;
+    font-size: 14px;
     line-height: 30px;
     padding-top: 20px;
     padding-bottom: 60px;
@@ -564,7 +568,7 @@ Thanks modal
 }
 #registerSuccess .content p.success{
     padding: 32px 30px 32px 80px;
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
     line-height: 24px;
     background: url("../i/success-icon.png") no-repeat 0 34px;
@@ -593,7 +597,7 @@ Thanks modal
 }
 #registerFailed .content p.failedMessage{
     padding: 32px 30px 32px 80px;
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
     line-height: 24px;
 }

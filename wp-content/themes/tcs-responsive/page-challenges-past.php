@@ -1,46 +1,14 @@
 <?php
 /**
  * Template Name: Challenges Past Contest List Page
- * Author : evilkyro1965
  */
-get_header('challenge-landing');
 
+$listType = "Past";
 
-$values = get_post_custom ( $post->ID );
+include locate_template('header-challenge-landing.php');
 
-$siteURL = site_url ();
-$postId = $post->ID;
 ?>
 
-<?php
-	$tcoTooltipTitle = get_option("tcoTooltipTitle");
-	$tcoTooltipMessage = get_option("tcoTooltipMessage");
-
-	// get contest details
-	$contest_type = get_query_var("contest_type") == "" ? "design" : get_query_var("contest_type");
-	$listType = "Past";
-	$postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
-?>
-
-<script type="text/javascript" >
-	var siteurl = "<?php bloginfo('siteurl');?>";
-
-	var reviewType = "contest";
-	var isBugRace = false;
-	var ajaxAction = "get_challenges";
-	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
-	var currentPage = 1;
-	var postPerPage = <?php echo $postPerPage;?>;
-	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
-	<?php
-		if($tcoTooltipTitle) echo "var tcoTooltipTitle= '$tcoTooltipTitle';";
-		if($tcoTooltipMessage) echo "var tcoTooltipMessage= '$tcoTooltipMessage';";
-	?>
-</script>
-<script type="text/javascript">
-	var dataUrl = ajaxUrl+"?action=get_challenges&contest_type="+contest_type+"&listType="+listType+"&pageIndex="+currentPage+"&pageSize="+postPerPage;
-</script>
 <div class="content">
 	<div id="main">
 
@@ -75,15 +43,12 @@ $postId = $post->ID;
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
-					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?></h1>
+                  <h1>
+                    <?php echo $page_title; ?>
+                    <?php get_template_part("content", "rss-icon"); ?>
+                  </h1>
 
 				</header>
-				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
-					<?php
-					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=past&contestType=".$contest_type;
-					?>
-					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php echo $contest_type; ?> challenges </a>
-				</div>
 				<div class="actions alt">
 					<div class="lt challengeType">
 						<?php

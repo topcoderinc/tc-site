@@ -18,9 +18,15 @@
         "contact-about.js",
         "init-header.js",
         "challenge-detail-software.js",
+        "challenge-result.js",
         "jquery.jscrollpane.min.js",
         "jquery.column-1.0.js",
-		"reset-password.js"
+        "moment.min.js",
+        "moment-timezone.min.js",
+        "moment-data.js",
+        "jquery.qtip.min.js",
+        "jquery.jqtransform.js"
+        "reset-password.js"
       ],
       "css": [
         "blog.css",
@@ -37,7 +43,10 @@
         "blog-base.css",
         "community-landing.css",
         "challenge-detail-software.css",
-		"password-recovery.css"
+        "challenge-results.css", 
+        "jqtransform.css",
+        "challenge-submit.css"
+        "password-recovery.css"
       ]
     },
     "challengelanding": {
@@ -58,7 +67,10 @@
         "register-login.js",
         "init-header.js",
         "jquery.jscrollpane.min.js",
-        "jquery.qtip.min.js"
+        "jquery.qtip.min.js",
+        "moment.min.js",
+        "moment-timezone.min.js",
+        "moment-data.js"
       ],
       "css": [
         "base.css",
@@ -90,7 +102,10 @@
         "register-login.js",
         "init-header.js",
         "jquery.jscrollpane.min.js",
-        "jquery.qtip.min.js"
+        "jquery.qtip.min.js",
+        "moment.min.js",
+        "moment-timezone.min.js",
+        "moment-data.js"
       ],
       "css": [
         "base.css",
@@ -120,7 +135,7 @@
         "register-login.js",
         "init-header.js",
         "jquery.qtip.min.js",
-        "jquery.jqtransform.js",
+        "jquery.jqtransform.js", 
         "terms.js"
       ],
       "css": [
@@ -135,18 +150,47 @@
         "jqtransform.css",
         "terms.css"
       ]
+    },
+    "challengesubmit": {
+      "name": "challengesubmit",
+      "js": [
+        "jquery.bxslider.js",
+        "jquery.easing.1.3.js",
+        "jquery.mousewheel.js",
+        "raphael-min.js",
+        "jquery.customSelect.min.js",
+        "swipe.js",
+        "jquery.inputhints.js",
+        "scripts.js",
+        "register-login.js",
+        "init-header.js",
+        "jquery.qtip.min.js",
+        "jquery.jqtransform.js",
+        "challenge-submit.js"
+      ],
+      "css": [
+        "base.css",
+        "style.css",
+        "style-profile.css",
+        "coder.css",
+        "register-login.css",
+        "base-responsive.css",
+        "style-responsive.css",
+        "jquery.qtip.min.css",
+        "jqtransform.css",
+        "challenge-submit.css"
+      ]
     }
   },
   "templates": {
     "page-challenges.php": "challenges",
     "page-challenges-active.php": "challengelanding",
-    "page-challenges-bugrace.php": "challengelanding",
-    "page-challenges-data.php": "challengelanding",
     "page-challenges-review-details.php": "challengelanding",
     "page-challenges-review.php": "challengelanding",
     "page-challenges-past.php": "challengelanding",
     "page-terms-list.php": "challengeterms",
     "page-terms-details.php": "challengeterms",
+    "page-challenge-submit.php": "challengesubmit",
     "default": "default"
   }
 }

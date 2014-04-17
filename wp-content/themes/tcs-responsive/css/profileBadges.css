@@ -65,342 +65,346 @@
 
 /* progress meters-development sub badges */
 .Forum-Posts-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -769px !important; 
 }
 
 .Forum-Posts-100 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -769px !important; 
 }
 .Forum-Posts-500 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -769px !important; 
 }
 .Forum-Posts-1000 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -769px !important; 
 }
 .Forum-Posts-5000 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -769px !important; 
 }
 
 .Rated-SRMs-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1250px !important; 
 }
 .Rated-SRMs-5 { 
-    width: 38px;
+    width: 33px;
     background-position: -48px -1250px !important; 
 }
 .Rated-SRMs-25 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1250px !important; 
 }
 .Rated-SRMs-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1250px !important; 
 }
 .Rated-SRMs-300 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -1250px !important; 
 }
 
 .SRM-Room-Wins-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1298px !important; 
 }
 .SRM-Room-Wins-5 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -1298px !important; 
 }
 .SRM-Room-Wins-20 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1298px !important; 
 }
 .SRM-Room-Wins-50 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1298px !important; 
 }
 .SRM-Room-Wins-100 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -1298px !important; 
 }
 
 .Solved-SRM-Problems-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1346px !important; 
 }
 .Solved-SRM-Problems-10 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -1346px !important; 
 }
 .Solved-SRM-Problems-50 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1346px !important; 
 }
 .Solved-SRM-Problems-200 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1346px !important; 
 }
 .Solved-SRM-Problems-500 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -1346px !important; 
 }
 
 .Successful-Challenges-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1394px !important; 
 }
 .Successful-Challenges-5 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -1394px !important; 
 }
 .Successful-Challenges-25 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1394px !important; 
 }
 .Successful-Challenges-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1394px !important; 
 }
 .Successful-Challenges-200 { 
-    width: 50px;
+    width: 47px;
     background-position: -143px -1392px !important; 
+}
+.Successful-Challenges-250 { 
+    width: 47px;
+    background-position: -150px -1394px !important;
 }
 
 .Marathon-Matches-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1442px !important; 
 }
 .Marathon-Matches-3 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -1442px !important; 
 }
 .Marathon-Matches-10 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1442px !important; 
 }
 .Marathon-Matches-20 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1442px !important; 
 }
 .Marathon-Matches-50 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -1442px !important; 
 }
 
 .Marathon-Top-5-Placements-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -1490px !important; 
 }
 .Marathon-Top-5-Placements-2 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -1490px !important; 
 }
 .Marathon-Top-5-Placements-4 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -1490px !important; 
 }
 .Marathon-Top-5-Placements-8 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -1490px !important; 
 }
 .Marathon-Top-5-Placements-16 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -1490px !important; 
 }
 
 .Passing-Submissions-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -817px !important; 
 }
 .Passing-Submissions-50 { 
-    width: 40px;
+    width: 37px;
     background-position: -48px -817px !important; 
 }
 .Passing-Submissions-100 { 
-    width: 31px;
+    width: 28px;
     background-position: -88px -817px !important; 
 }
 .Passing-Submissions-250 { 
-    width: 31px;
+    width: 28px;
     background-position: -119px -817px !important; 
 }
 .Passing-Submissions-500 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -817px !important; 
 }
 
 .Checkpoint-Prizes-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -865px !important; 
 }
 .Checkpoint-Prizes-50 { 
-    width: 35px;
+    width: 32px;
     background-position: -48px -865px !important; 
 }
 .Checkpoint-Prizes-100 { 
-    width: 32px;
+    width: 29px;
     background-position: -84px -865px !important; 
 }
 .Checkpoint-Prizes-250 { 
-    width: 31px;
+    width: 28px;
     background-position: -116px -865px !important; 
 }
 .Checkpoint-Prizes-500 { 
-    width: 50px;
+    width: 32px;
     background-position: -150px -865px !important; 
 }
 
 .Winning-Placements-1 { 
-    width: 48px;
+    width: 47px;
     background-position: 0px -913px !important; 
 }
 .Winning-Placements-25 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -913px !important; 
 }
 .Winning-Placements-50 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -913px !important; 
 }
 .Winning-Placements-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -913px !important; 
 }
 .Winning-Placements-250 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -913px !important; 
 }
 
 .First-Place-Wins-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -961px !important; 
 }
 .First-Place-Wins-25 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -961px !important; 
 }
 .First-Place-Wins-50 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -961px !important; 
 }
 .First-Place-Wins-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -961px !important; 
 }
 .First-Place-Wins-250 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -961px  !important; 
 }
 
 /* progress meters-studio sub badges */
 .Studio-Forum-Posts-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -769px !important; 
 }
 
 .Studio-Forum-Posts-100 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -769px !important; 
 }
 .Studio-Forum-Posts-500 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -769px !important; 
 }
 .Studio-Forum-Posts-1000 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -769px !important; 
 }
 .Studio-Forum-Posts-5000 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -769px !important; 
 }
 
 
 .Studio-Passing-Submissions-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -817px !important; 
 }
 .Studio-Passing-Submissions-50 { 
-    width: 40px;
+    width: 37px;
     background-position: -48px -817px !important; 
 }
 .Studio-Passing-Submissions-100 { 
-    width: 31px;
+    width: 28px;
     background-position: -88px -817px !important; 
 }
 .Studio-Passing-Submissions-250 { 
-    width: 31px;
+    width: 28px;
     background-position: -119px -817px !important; 
 }
 .Studio-Passing-Submissions-500 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -817px !important; 
 }
 
 .Studio-Checkpoint-Prizes-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -865px !important; 
 }
 .Studio-Checkpoint-Prizes-50 { 
-    width: 40px;
+    width: 37px;
     background-position: -48px -865px !important; 
 }
 .Studio-Checkpoint-Prizes-100 { 
-    width: 31px;
+    width: 28px;
     background-position: -88px -865px !important; 
 }
 .Studio-Checkpoint-Prizes-250 { 
-    width: 31px;
+    width: 28px;
     background-position: -119px -865px !important; 
 }
 .Studio-Checkpoint-Prizes-500 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -865px !important; 
 }
 
 .Studio-Winning-Placements-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -913px !important; 
 }
 .Studio-Winning-Placements-25 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -913px !important; 
 }
 .Studio-Winning-Placements-50 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -913px !important; 
 }
 .Studio-Winning-Placements-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -913px !important; 
 }
 .Studio-Winning-Placements-250 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -913px !important; 
 }
 
 .Studio-First-Place-Wins-1 { 
-    width: 48px;
+    width: 45px;
     background-position: 0px -961px !important; 
 }
 .Studio-First-Place-Wins-25 { 
-    width: 38px;
+    width: 35px;
     background-position: -48px -961px !important; 
 }
 .Studio-First-Place-Wins-50 { 
-    width: 31px;
+    width: 28px;
     background-position: -86px -961px !important; 
 }
 .Studio-First-Place-Wins-100 { 
-    width: 33px;
+    width: 30px;
     background-position: -117px -961px !important; 
 }
 .Studio-First-Place-Wins-250 { 
-    width: 50px;
+    width: 47px;
     background-position: -150px -961px  !important; 
 }
 
@@ -544,3 +548,64 @@ span.subBadge.selected {
 .studio-screener { background-position: -144px -288px; }
 .studio-spirit { background-position: -48px -336px; }
 .studio-mentor { background-position: -96px -336px; }
+
+/* tooltip */
+
+.tooltip {
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2000;
+}
+.tooltip .inner {
+  position: relative;
+  min-width: 92px;
+  padding-top: 17px;
+  min-height: 30px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
+}
+.tooltip .inner>header, .tooltip>header {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #0096ff;
+  height: 17px;
+  line-height: 17px;
+  border-radius: 3px 3px 0 0;
+  text-indent: 7px;
+  border: none;
+  width: 100%;
+  min-width: 82px;
+  behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+.tooltip .eranedOn {
+  font-size: 11px;
+  text-align: center;
+  color: #333;
+  padding: 7px 7px 5px;
+}
+.tooltip .currentlyEearned{
+  font-size: 11px;
+  text-align: center;
+  color: #333;
+  padding: 2px 7px 3px;
+  border-top: 1px solid #eee;  
+}
+.tooltip .arrow {
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  margin-left: -5px;
+  width: 10px;
+  height: 9px;
+  background: url(../i/tt-arrow.png) no-repeat;
+  background-position: 0 0;
+}

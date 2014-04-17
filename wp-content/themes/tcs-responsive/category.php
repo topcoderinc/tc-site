@@ -172,10 +172,10 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the TopCoder-
 										</div>
 										<div class="shareVia">
 											<span>Share via : </span>
-											<a href="<?php echo $email_article;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-mail.png" width="21" height="21" /></a>
-											<a href="<?php echo $fbShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-fb.png" width="21" height="21" /></a>
-											<a href="<?php echo $twitterShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-twitter.png" width="21" height="21" /></a>
-											<a href="<?php echo $gplusShare;?>" class="shareButton"><img src="<?php bloginfo( 'stylesheet_directory' ); ?>/i/shares-gplus.png" width="21" height="21" /></a>
+											<a href="<?php echo $email_article;?>" class="shareButton shareMail small"></a>
+											<a href="<?php echo $fbShare;?>" class="shareButton shareFb small"></a>
+											<a href="<?php echo $twitterShare;?>" class="shareButton shareTw small"></a>
+											<a href="<?php echo $gplusShare;?>" class="shareButton shareGPlus small"></a>
 										</div>
 										<a href="<?php the_permalink();?>" class="continueReading">Continue Reading</a>
 									</div>

@@ -1,165 +1,59 @@
 <?php
 
-get_template_part('header-main');
+$values = get_post_custom ( $post->ID );
 
-?>
-  </head>
+$listType = isset($listType) ? $listType : '';
 
-<body>
+$siteURL = site_url ();
+$postId = $post->ID;
 
+$tcoTooltipTitle = get_option("tcoTooltipTitle");
+$tcoTooltipMessage = get_option("tcoTooltipMessage");
+
+if (empty($contest_type)) {
+  $contest_type = get_query_var("contest_type") == "" ? "design" : get_query_var("contest_type");
+}
+
+if (empty($postPerPage)) {
+  $postPerPage = get_post_meta($postId,"Contest Per Page",true) == "" ? 10 : get_post_meta($postId,"Contest Per Page",true);
+}
+
+$page_title = '';
+
+switch ($contest_type) {
+  case "design":
+    $page_title = "Graphic Design Challenges";
+    break;
+  case "data":
+    $page_title = "Data Science Challenges";
+    break;
+  case "develop":
+  default:
+    $page_title = "Software Development Challenges";
+}
+
+function tc_header_challenge_landing_js() {
+  global $tcoTooltipTitle, $tcoTooltipMessage, $postPerPage, $contest_type, $listType;
+  ?>
+  <script type="text/javascript" >
+    var siteurl = "<?php bloginfo('siteurl');?>";
+
+    var reviewType = "contest";
+    var isBugRace = false;
+    var ajaxAction = "get_challenges";
+    var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
+    var currentPage = 1;
+    var postPerPage = <?php echo $postPerPage;?>;
+    var contest_type = "<?php echo $contest_type;?>";
+    var listType = "<?php echo $listType;?>";
+    <?php
+        if($tcoTooltipTitle) echo "var tcoTooltipTitle= '$tcoTooltipTitle';";
+        if($tcoTooltipMessage) echo "var tcoTooltipMessage= '$tcoTooltipMessage';";
+    ?>
+  </script>
 <?php
-
-$nav = array (
-		'menu' => 'Main Navigation',
-		'container'       => '',
-		'menu_class'      => 'root',
-		'items_wrap'      => '%3$s',
-		'walker' => new nav_menu_walker ()
-);
-
-//Get the TopCoder SSO Cookie
-$cookie = $_COOKIE["tcsso"];
-#$cookie = "22760600|22554c24d30b15fd79289dd053a9a98e5ff385535dd6cc9b45e645fbabb0a4"; // Please  disable (#) this line on prod
-$cookie_parts = explode( "|", $cookie);
-$user_id = $cookie_parts[0];
-$tc_token = $cookie_parts[1];
-
-#$url = "http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=".$user_id."&json=true";
-#$response = get_json_from_url ( $url );
-#$data = json_decode ( $response )->data;
-
-#$handle = $data[0]->handle;
-
-if ( isset($_COOKIE["user"]) )
-{
-	$user = "";
-	$welcome = "hide";
-	$reg = "";
-}
-else
-{
-	$user = "newUser";
-	$welcome = "";
-	$reg = "hide";
 }
 
-global $coder;
-$coder = get_member_profile($handle);
-$memberSince = explode(" ",$coder->memberSince);
-$memberSince = explode(".",$memberSince[0]);
-$memberEarning = '$'.$coder->overallEarning;
-if ( $coder->photoLink != '')
-$photoLink = 'http://community.topcoder.com'.$coder->photoLink;
-else
-$photoLink = 'http://community.topcoder.com/i/m/nophoto_login.gif';
+add_action("wp_head", "tc_header_challenge_landing_js");
 
-?>
-
-<div id="wrapper" class="tcssoUsingJS">
-		<nav class="sidebarNav mainNav onMobi <?php echo $user; ?>">
-		 <ul class="root"><?php wp_nav_menu ( $nav );	?>
-<!--			 <li class="notLogged"><a href="javascript:;" class="actionLogin"><i></i>Log In</a></li> -->
-			 <li class="notLogged"><a href="javascript:;"><i></i>REGISTER</a></li>
-			 <li class="userLi isLogged">
-				<div class="userInfo">
-					<div class="userPic">
-						<img src="<?php echo $photoLink;?>" alt="<?php echo $coder->handle; ?>">
-					</div>
-					<div class="userDetails">
-						<a href="<?php bloginfo('wpurl');?>/member-profile/?ha=<?php echo $coder->handle;?>" style="color:<?php echo $coder->colorStyle->color;?>" class="coder"><?php echo $handle ;?></a>
-						<p class="country"><?php echo $coder->country; ?></p>
-						<a href="<?php bloginfo('wpurl');?>/member-profile/<?php echo $coder->handle;?>" class="link myProfileLink">My Profile</a>
-						<a href="http://community.topcoder.com/tc?module=MyHome" class="link">My TopCoder </a>
-						<a href="http://community.topcoder.com/tc?module=MyHome" class="link">Account Settings </a>
-					</div>
-				</div>
-			</li>
-		 </ul>
-		</nav>
-		<!-- /.sidebarNav -->
-		<header id="navigation" class="<?php echo $user; ?>">
-			<div class="container">
-				<div class="headerTopRightMenu">
-					<div class="headerTopRightMenuLink logIn">
-						<div class="text"><a href="javascript:;" class="<?php if ( $user_id == '' ) { echo 'actionLogin'; } else { echo 'actionLogout'; }?>"><?php if ( $user_id == '' ) { echo 'Log In'; } else { echo 'Log Out'; }?></a></div>
-						<div class="icon"></div>
-						<div class="clear"></div>
-					</div>
-					<div class="separator"></div>
-					<div class="headerTopRightMenuLink contact">
-						<div class="text"><a href="/contact-us">Contact</a></div>
-						<div class="clear"></div>
-					</div>
-					<div class="separator"></div>
-					<div class="headerTopRightMenuLink help">
-						<div class="text"><a href="http://help.topcoder.com">Help Center</a></div>
-						<div class="clear"></div>
-					</div>
-					<div class="separator beforeSearch"></div>
-					<div class="headerTopRightMenuLink search last">
-						<div class="icon"></div>
-						<div class="text"><a href="/search">Search</a></div>
-						<div class="clear"></div>
-					</div>
-					<div class="clear"></div>
-				</div>
-				<div class="clear"></div>
-				<h1 class="logo">
-					<a href="<?php bloginfo('wpurl');?>" title="<?php bloginfo('name'); ?>"></a>
-				</h1>
-				<nav id="mainNav" class="mainNav">
-
-
-					<ul class="root">
-						<?php wp_nav_menu ( $nav );	?>
-<!--
-						<li class="noReg logoutLink 	<?php if ( $user_id == '' ) { echo 'hide';} ?>"><a href="<?php echo $urlLogout;?>" class="actionLogout">Log Out</a></li>
-						<?php if ( $user_id == '' ) : ?>
-						<li class="noReg loginLink"><a href="javascript:;" class="actionLogin">Log In</a></li>
-						<?php endif; ?>
--->
-					</ul>
-				</nav>
-<!--
-				<a href="<?php echo $urlLogout;?>" class="onMobi noReg linkLogout actionLogout <?php if ( $user_id == '' ) { echo 'hide';} ?>">Log Out</a>
-				<?php if ( $user_id == '' ) : ?>
-						<a href="javascript:;" class="onMobi noReg linkLogin actionLogin">Log In</a>
-				<?php endif; ?>
--->
-				<div class="userDetailsWrapper <?php if ( $user_id == '' ) { echo 'hide';} ?>">
-				<span class="btnAccWrap noReg"><a href="javascript:;" class="btn btnAlt btnMyAcc">
-						My Account<i></i>
-					</a></span>
-				<div class="userWidget">
-					<div class="details">
-						<div class="userPic">
-							<img src="">
-						</div>
-						<div class="userDetails">
-							<?php echo get_handle($coder->handle); ?>
-							<p class="country"><?php echo $coder->country; ?></p>
-							<p class="lbl">Member Since:</p>
-							<p class="val memberSince"><?php
-									$memSince = $coder->memberSince;
-									echo date("M d, Y", strtotime($memSince)) ;
-									?></p>
-							<?php if (isset($coder->overallEarning)) { ?>
-								<p class="lbl">Total Earnings :</p>
-								<p class="val memberEarning"><?php echo '$'.$coder->overallEarning;?></p>
-							<?php } ?>
-						</div>
-					</div>
-					<div class="action">
-						<a class="profileLink" href="<?php bloginfo('wpurl');?>/member-profile/<?php echo $coder->handle;?>">My Profile</a>
-						<a href="http://community.topcoder.com/tc?module=MyHome">My TopCoder </a>
-						<a href="http://community.topcoder.com/tc?module=MyHome" class="linkAlt">Account Setting</a>
-					</div>
-				</div>
-				</div>
-				<?php if ( $user_id == '' ) : ?>
-				<span class="btnRegWrap noReg"><a href="javascript:;" class="btn btnRegister">Register</a> </span>
-				<?php endif; ?>
-				<!-- /.userWidget -->
-			</div>
-		</header>
-		<!-- /#header -->
+get_header();

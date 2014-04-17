@@ -1478,14 +1478,14 @@
 		.casesView .caseGrid a.jsShowCaseDetails:hover > img{
 			-webkit-transform: rotate(10deg) scale(1.1,1.1);     /* for Chrome || Safari */  
             -moz-transform: rotate(10deg) scale(1.1,1.1);        /* for Firefox */  
-            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE 缩放0.5 */  
+            -ms-transform: rotate(10deg) scale(1.1,1.1);         /* for IE ç¼©æ”¾0.5 */  
             -o-transform:  rotate(10deg) scale(1.1,1.1);          /* for Opera */  
 			transform: rotate(10deg) scale(1.1,1.1);
 		}
 		.casesView .caseGrid a.isShow:hover > img{
 			-webkit-transform: none;									/* for Chrome || Safari */  
             -moz-transform: none;										/* for Firefox */  
-            -ms-transform: none;										/* for IE 缩放0.5 */  
+            -ms-transform: none;										/* for IE ç¼©æ”¾0.5 */  
             -o-transform: none;											/* for Opera */  
 		}
 		.casesView .caseGrid a.jsShowCaseDetails > i{
@@ -2058,29 +2058,174 @@
 		width: 100px;
 	}
 
+.registerForChallenge #mainContent{
+    padding-top: 40px;
+}
+.registerForChallenge #mainContent .pageTitle{
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e7e7e7;
+    font-size: 24px;
+}
+.registerForChallenge #mainContent .formContent{
+    padding-top: 10px;
+}
+.registerForChallenge #mainContent .formContent p.terms{
+    line-height: 15px;
+    padding: 17px 0 12px;
+    font-size: 15px;
+}
+.registerForChallenge #mainContent .formContent p.termsText{
+    line-height: 15px;
+    font-size: 15px;
+    padding: 0 0 12px;
+}
+.registerForChallenge #mainContent .formContent a.learnMore{
+    line-height: 15px;
+    font-size: 18px;
+    padding: 0 0 12px;
+    display: inline-block;
+    color: #ff9900;
+}
+
+.registerForChallenge #mainContent .formContent table.termTable{
+    border-left: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+    width: 100%;
+}
+.registerForChallenge #mainContent .formContent table.termTable th{
+    border-bottom: 1px solid #e7e7e7;
+    height: 42px;
+    vertical-align: middle;
+    padding: 0 17px;
+    background: #f1f1f1;
+    color: #ff8a00;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+}
+.registerForChallenge #mainContent .formContent table.termTable th:first-child{
+    width: 84%;
+}
+.registerForChallenge #mainContent .formContent table.termTable td{
+    border-bottom: 1px solid #e7e7e7;
+    height: 32px;
+    vertical-align: middle;
+    padding: 10px 17px;
+    font-size: 14px;
+    color: #666;
+}
+.registerForChallenge #mainContent .formContent table.termTable td a{
+    color: #ffae00;
+}
+.registerForChallenge #mainContent .formContent table.termTable tr.alt td{
+    background: #f7f7f7;
+}
+.registerForChallenge #mainContent .formContent table.termTable td span.status{
+    display: inline-block;
+    height: 16px;
+    padding-left: 22px;
+    background: url("../i/term-status-icons.png") no-repeat;
+}
+.registerForChallenge #mainContent .formContent table.termTable td span.status.complete{
+    background-position: 0 0;
+}
+.registerForChallenge #mainContent .formContent table.termTable td span.status.required{
+    background-position: 0 -16px;
+}
+
+/*captcha*/
+.registerForChallenge #mainContent .formContent .captcha{
+    padding-top: 40px;
+}
+.registerForChallenge #mainContent .formContent .captcha.group{
+    padding-top: 90px;
+}
+.registerForChallenge #mainContent .formContent .captchaImgCnt{
+    width: 300px;
+    float: left;
+    margin-right: 18px;
+    overflow: hidden;
+}
+.registerForChallenge #mainContent .formContent .captchaImgCnt .refresh{
+    font-size: 12px;
+    color: #333;
+    line-height: 23px;
+    display: inline-block;
+    padding: 11px 0;
+    padding-left: 28px;
+    position: relative;
+}
+.registerForChallenge #mainContent .formContent .captchaImgCnt .refresh a{
+    background: url("../i/captcha-refresh.png") no-repeat;
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 11px;
+}
+.registerForChallenge #mainContent .formContent .captchaImgCnt .refresh a:hover{
+    opacity: .6;
+}
+.registerForChallenge #mainContent .formContent .captchaInput{
+    padding: 10px 0;
+    float: left;
+}
+.registerForChallenge #mainContent .formContent .captchaInput label{
+    display: block;
+    line-height: 34px;
+    font-size: 14px;
+    color: #333;
+}
+.registerForChallenge #mainContent .formContent .captchaInput input{
+    background: #fafafa;
+    border: 1px solid #e1e1e1;
+    box-shadow: none;
+    -webkit-appearance: none;
+}
+.registerForChallenge input, .registerForChallenge textarea{
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+}
+
+.registerForChallenge #mainContent .formContent .BtnWrapper{
+    border-top: 1px solid #e1e1e1;
+    margin-top: 10px;
+    text-align: center;
+    padding: 20px 0;
+}
+.registerForChallenge #mainContent .formContent.reminder .BtnWrapper{
+    margin-top: 45px;
+}
+
 /**
  * Start of New Home Page additional styles 
  */
-#banner {
+#promo-banner {
 	background: #f1f1f1;
 	box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.25);
 	margin-bottom: 20px;
 }
-	#banner .bx-controls {
+	#promo-banner li {
+		text-align: center;
+	}
+	#promo-banner .bx-controls {
 		bottom: 3px;
 		position: absolute;
 		width: 100%;
 	}
-	#banner .bx-pager {
+	#promo-banner .bx-pager {
 		text-align: center;
 	}
-		#banner .bx-pager-item {
+		#promo-banner .bx-pager-item {
 			display: inline-block;
 			height: 11px;
 			margin: 0 4px;
 			width: 11px;
 		}
-			#banner .bx-pager-item a {
+			#promo-banner .bx-pager-item a {
 				background: url(i/slider-dot.png) no-repeat;
 				display: block;
 				height: 11px;
@@ -2089,7 +2234,7 @@
 				width: 11px;
 				-moz-transition-duration: 0s; -webkit-transition-duration: 0s; transition-duration: 0s;
 			}
-			#banner .bx-pager-item a.active {
+			#promo-banner .bx-pager-item a.active {
 				background-position: 0 100%;
 			}
 			
@@ -2191,18 +2336,18 @@ hr.light {
 	margin: 20px 0;
 }
 
-.text-design { color: #01a7e9; }
+.text-design { color: #01a7e9 !important; }
 	.text-design.chevron-right {
 		background: url(../i/chevron-right-design.png) 100% 50% no-repeat;
 		padding-right: 18px;
 	}
 	
-.text-development { color: #278904; }
+.text-development { color: #278904 !important; }
 	.text-development.chevron-right {
 		background: url(../i/chevron-right-development.png) 100% 50% no-repeat;
 		padding-right: 18px;
 	}
-.text-data-science { color: #ff7202; }
+.text-data-science { color: #ff7202 !important; }
 	.text-data-science.chevron-right {
 		background: url(../i/chevron-right-data-science.png) 100% 50% no-repeat;
 		padding-right: 18px;

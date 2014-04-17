@@ -18,9 +18,6 @@ if ($track == "develop") {
 	$activeTrack = 'Development';
 	$currentChallengetype = 'Development';
 }
-if(!empty($ct)){
-	$currentChallengeId = $ct;
-}
 
 // chart
 include_once TEMPLATEPATH . '/chart/Highchart.php';
@@ -37,6 +34,7 @@ array_push ( $challengetypes, 'Development' );
 array_push ( $challengetypes, 'Specification' );
 array_push ( $challengetypes, 'Bug Hunt' );
 array_push ( $challengetypes, 'UI Prototype Competition' );
+array_push ( $challengetypes, 'UI Prototypes' );
 ?>
 
 <div id="develop" class="tab algoLayout">
@@ -47,22 +45,24 @@ array_push ( $challengetypes, 'UI Prototype Competition' );
 				<ul>
 						<?php
 						foreach ( $challengetypes as &$challengetype ) {
+
+								$underscoredChallengeType = str_replace ( ' ', '_', $challengetype );
+								$underscoredChallengeType = strtolower ( $underscoredChallengeType );
+
 							if (! empty ( $tracks->{$challengetype} ) && ! empty ( $tracks->{$challengetype}->rating )) {
-								$challengeName = $challengetype;
-								$challengeID = str_replace ( ' ', '_', $challengetype );
-								$challengeID = strtolower ( $challengeID );
-								
-								if ($challengeID == 'ui_prototype_competition') {
-									$challengeID = 'ui_prototypes';
-									$currentChallengetype = $challengeID;
+								$currentChallengetype = $challengetype;
+
+								if ($underscoredChallengeType == 'ui_prototype_competition') {
+									$underscoredChallengeType = 'ui_prototypes';
+									$currentChallengetype = $underscoredChallengeType;
 								}
-								
-								if($currentChallengeId == $challengeID){
-									$currentChallengetype = $challengetype;
+								if ($underscoredChallengeType == 'ria_build_competition') {
+									$underscoredChallengeType = 'ria_build';
+									$currentChallengetype = $underscoredChallengeType;
 								}
-								
-								$class = ($challengeID == $currentChallengeId) ? 'isActive' : '';
-								echo '<li><a class="' . $class . '" href="' . $challengeID . '">' . $challengetype . '</a></li>';
+
+								$class = ($underscoredChallengeType == $currentunderscoredChallengeType) ? 'isActive' : '';
+								echo '<li><a class="' . $class . '" href="' . $underscoredChallengeType . '">' . $challengetype . '</a></li>';
 							}
 						}
 						if (! empty ( $tracks->{$currentChallengetype} )) {
@@ -81,9 +81,14 @@ array_push ( $challengetypes, 'UI Prototype Competition' );
 			
 			<header class="head">
 				<div class="trackNRating">
-					<h4 class="trackName"><?php echo $currentChallengetype;?></h4>
+					<h4 class="trackName"><?php echo $currentChallengetype; 
+								$underscoredCurrentChallengeType = str_replace ( ' ', '_', $currentChallengetype );
+								$underscoredCurrentChallengeType = strtolower ( $underscoredCurrentChallengeType );?>
+					</h4>
 					<div class="rating <?php echo do_shortcode("[tc_rating_color score='".$dev->rating."' ]") ?>"><?php echo $dev->rating;?></div>
 					<div class="lbl">Rating</div>
+					<div class="lbl">
+					</div>
 				</div>
 
 
@@ -156,7 +161,7 @@ array_push ( $challengetypes, 'UI Prototype Competition' );
 								<div class="chartTypeSwitcher">
 									<a class="btn btnHistory isActive">Rating History</a> <a class="btn btnDist">Rating Distribution</a>
 								</div>
-							<?php echo apply_filters('the_content','[tc_ratings_chart_dev handle="'.$handle.'"  challengetype="'.$currentChallengetype.'"]');?>
+							<?php echo apply_filters('the_content','[tc_ratings_chart_dev handle="'.$handle.'"  challengetype="'.$underscoredCurrentChallengeType.'"]');?>
 							
 						</div>
 						</div>
@@ -180,79 +185,79 @@ array_push ( $challengetypes, 'UI Prototype Competition' );
 										<tbody>
 											<tr>
 												<td class="colDetails">Inquiries</td>
-												<td class="colTotal"><span><?php echo $dev->inquiries; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->inquiries) ? $dev->inquiries : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="inquiries" />
 												</td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Submissions</td>
-												<td class="colTotal"><span><?php echo $dev->submissions; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->submissions) ? $dev->submissions : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="submissions" /></td>
 											</tr>
 
 											<tr>
 												<td class="colDetails">Submission Rate</td>
-												<td class="colTotal"><span><?php echo $dev->submissionRate; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->submissionRate) ? $dev->submissionRate : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="submissionRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Passed Screening</td>
-												<td class="colTotal"><span><?php echo $dev->passedScreening; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->passedScreening) ? $dev->passedScreening : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="passedScreening" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Screening Success Rate</td>
-												<td class="colTotal"><span><?php echo $dev->screeningSuccessRate; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->screeningSuccessRate) ? $dev->screeningSuccessRate : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="screeningSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Passed Review</td>
-												<td class="colTotal"><span><?php echo $dev->passedReview; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->passedReview) ? $dev->passedReview : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="passedReview" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Review Success Rate</td>
-												<td class="colTotal"><span><?php echo $dev->reviewSuccessRate; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->reviewSuccessRate) ? $dev->reviewSuccessRate : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="reviewSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Maximum Score</td>
-												<td class="colTotal"><span><?php echo $dev->maximumScore; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->maximumScore) ? $dev->maximumScore : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="maximumScore" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Minimum Score</td>
-												<td class="colTotal"><span><?php echo $dev->minimumScore; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->minimumScore) ? $dev->minimumScore : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="minimumScore" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Appeals</td>
-												<td class="colTotal"><span><?php echo $dev->appeals; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->appeals) ? $dev->appeals : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="appeals" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Appeal Success Rate</td>
-												<td class="colTotal"><span><?php echo $dev->appealSuccessRate; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->appealSuccessRate) ? $dev->appealSuccessRate : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="appealSuccessRate" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Average Score</td>
-												<td class="colTotal"><span><?php echo $dev->averageScore; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->averageScore) ? $dev->averageScore : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="averageScore" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Average Placement</td>
-												<td class="colTotal"><span><?php echo $dev->averagePlacement; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->averagePlacement) ? $dev->averagePlacement : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="averagePlacement" /></td>
 											</tr>
 											<tr class="alt">
 												<td class="colDetails">Wins</td>
-												<td class="colTotal"><span><?php echo $dev->wins; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->wins) ? $dev->wins : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="wins" /></td>
 											</tr>
 											<tr>
 												<td class="colDetails">Win Percentage</td>
-												<td class="colTotal"><span><?php echo $dev->winPercentage; ?></span>
+												<td class="colTotal"><span><?php echo ($dev->winPercentage) ? $dev->winPercentage : 'n/a'; ?></span>
 													<input type="hidden" class="valId" value="winPercentage" /></td>
 											</tr>
 

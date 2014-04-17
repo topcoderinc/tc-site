@@ -33,16 +33,21 @@ else:
 <?php 
 global $activity;
 //$activity = get_activity_summary();
-
 ?>
 <div class="content">
+<<<<<<< HEAD
 	<div id="banner">
+=======
+	<div id="promo-banner">
+>>>>>>> dev
 		<div class="container">
 			<ul class="slider">
 				<?php 
 					$args = array (
 						'post_type' 	=> 'promo',
-						'category_name' => 'Promo Banners'
+						'category_name' => 'Promo Banners',
+						'orderby'		=> 'menu_order',
+						'order'			=> 'asc'
 					);
 
 					$promos = new WP_Query ( $args );							
@@ -50,14 +55,13 @@ global $activity;
 						while ( $promos->have_posts () ) :
 							$promos->the_post ();
 							
-							// featured image attributes
-							$attr = array(
-								'alt'	=> trim(strip_tags( $post->post_title )),
-							);
+							// image attributes
+							$alt = trim(strip_tags( $post->post_title ));
 							
 				?>
 				<li class="<?php echo strtolower ($post->post_title);?>">
-					<a href="<?php the_permalink(); ?>"> <?php the_post_thumbnail('full', $attr); ?> </a>
+					<a href="<?php the_permalink(); ?>" class="hideOnMobile"><img src="<?php echo get_post_meta( $post->ID, '_pm_leaderboard', true ); ?>" alt="<?php echo $alt; ?>" /></a>
+					<a href="<?php the_permalink(); ?>" class="onMobi"><img src="<?php echo get_post_meta( $post->ID, '_pm_rectangle', true ); ?>" alt="<?php echo $alt; ?>" /></a>
 				</li>
 				<?php endwhile; endif; wp_reset_query();?>
 			</ul>
