@@ -36,9 +36,9 @@ function get_contest_checkpoint_detail($contestID = '', $contestType=''){
 	return $TCHOOK_plugin-> get_contest_checkpoint_detail($contestID, $contestType);
 }
 
-function get_raw_coder($handle){
+function get_raw_coder($handle, $data){
 	global $TCHOOK_plugin;
-	return $TCHOOK_plugin->tcapi_get_raw_coder($handle);
+	return $TCHOOK_plugin->tcapi_get_raw_coder($handle, $data);
 }
 
 function get_handle($handle = ''){
@@ -75,6 +75,11 @@ function get_json_from_url( $url ){
 	global $TCHOOK_plugin;
 	return $TCHOOK_plugin->get_json_from_url( $url );
 }
+function get_stat_design_recentwins ( $url ){
+	global $TCHOOK_plugin;
+	return $TCHOOK_plugin->tcapi_get_stat_design_recentwins( $url );
+}
+
 
 function get_member_achievements_current($userId, $badgeId){
 	global $TCHOOK_plugin;
@@ -86,4 +91,22 @@ function search_users($handle){
 	return $TCHOOK_plugin->tcapi_search_users($handle);
 }
 
-?>
+/**
+ * Is a user registred for a challenge
+ *
+ * @param $handle
+ * @param $challenge
+ *
+ * @return bool
+ */
+function is_user_register_for_challenge($handle, $challenge) {
+  if ($handle && isset($challenge->registrants)) {
+    foreach ($challenge->registrants as $registrant) {
+      if ($handle == $registrant->handle) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}

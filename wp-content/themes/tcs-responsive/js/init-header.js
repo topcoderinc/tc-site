@@ -59,7 +59,7 @@ $(document).ready(function() {
         $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
           var handle = data['data'][0]['handle'];
           $('.userDetails .coder').text(handle);
-          $.getJSON(ajaxUrl, {
+          $.get(ajaxUrl, {
             "action": "get_member_profile",
             "handle": handle
           }, function(data) {
@@ -94,7 +94,7 @@ $(document).ready(function() {
               $('.userDetails .memberEarning').text("$" + data['overallEarning']);
             else
               $('.userDetails .memberEarning').text("");
-          });
+          }, 'json');
           $('#navigation, .sidebarNav').removeClass('newUser');
         });
 

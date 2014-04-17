@@ -19,18 +19,6 @@ $postId = $post->ID;
 	$postPerPage = get_option("challenges_per_page") == "" ? 10 : get_option("challenges_per_page");
 ?>
 
-<script type="text/javascript" >
-	var siteurl = "<?php bloginfo('siteurl');?>";
-
-	var reviewType = "contest";
-	var isBugRace = false;
-	var ajaxAction = "get_challenges";
-	var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
-	var currentPage = 1;
-	var postPerPage = <?php echo $postPerPage;?>;
-	var contest_type = "<?php echo $contest_type;?>";
-	var listType = "<?php echo $listType;?>";
-</script>
 <div class="content">
 	<div id="main">
 
@@ -66,12 +54,11 @@ $postId = $post->ID;
 			<div class="container">
 
 				<header>
-					<h1><?php the_title(); ?>
-                      <?php $FeedURL = get_bloginfo('wpurl') . "/challenges/feed?list=active&contestType=all"; ?>
-
-                      <span class="subscribeTopWrapper">
-                        <a class="feedBtn" href="<?php echo $FeedURL;?>"></a>
-                      </span>
+					<h1>
+                      <?php
+                        the_title();
+                        get_template_part("content", "rss-icon");
+                      ?>
                     </h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>

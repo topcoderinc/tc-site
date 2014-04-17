@@ -567,7 +567,7 @@ select {
     color: #FFB800;
 }
 
-.tcoTable tbody .colTLeft, .tcoTable tbody .colDur, tbody .colTech, .tcoTable tbody .colPur, .tcoTable tbody .colReg, .tcoTable tbody .colSub {
+.tcoTable tbody .colTLeft, .tcoTable tbody .colPur, .tcoTable tbody .colReg, .tcoTable tbody .colSub {
     font-size: 14px;
 }
 
@@ -579,33 +579,12 @@ select {
     width: 80px;
 }
 
-.tcoTable th.colDur {
-    width: 120px;
-}
-
-.tcoTable th.colTech {
-    width: 130px;
-}
-
 .dataTable .colPur, .dataTable tbody .colPur {
     text-align: center;
     text-indent: 0;
 }
 
 .tcoTable tbody .colPhase {
-    text-align: center;
-}
-
-.tcoTable tbody .colStat {
-    text-align: center;
-    width: auto;
-}
-
-.tcoTable tbody .colDur {
-    text-align: center;
-}
-
-.tcoTable tbody .colTech {
     text-align: center;
 }
 
@@ -617,10 +596,6 @@ select {
     margin-right: 4px;
 }
 
-#tableView > div > table > caption {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 .dataTable .colStandings .tooltipData {
     display: none;
 }
@@ -1266,10 +1241,7 @@ select:disabled {
     background: #e5f6d8 url(../i/ico-info.png) 19px 9px no-repeat;
     padding: 7px 10px 7px 82px;
 }
-#mainContent > div > div.subscribeTopWrapper{
-    padding-top: 10px;
-    padding-bottom: 0;
-}
+
 span.subscribeTopWrapper {
     margin-bottom: 0;
     border-bottom: none;
@@ -1278,8 +1250,4 @@ span.subscribeTopWrapper {
 span.subscribeTopWrapper .feedBtn {
     float: none;
     margin-top: 0;
-}
-
-.contestGrid .gdUpcoming > p{
-    width: 49.8%;
 }

@@ -31,6 +31,7 @@ $contest = get_contest_detail('', get_query_var('contestID'), $challengeType);
                                        class="fileInput">
                             </dd>
                         </dl>
+                        <div><h4>If you experience issues uploading large files, please email your submission to <a href="mailto:support@topcoder.com">support@topcoder.com</a> along with a link to this page. We apologize for this inconvenience and working to resolve the issue.</h4></div>
                     </div>
                     <div class="rightCol col">
                         <p>Please organize and upload files as per the submission requirements for the challenge</p>
