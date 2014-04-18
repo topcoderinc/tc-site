@@ -15,30 +15,8 @@ include locate_template('header-challenge-landing.php');
 	<?php if(have_posts()) : the_post();?>
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
-
-		<div id="hero">
-			<?php
-				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
-				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
-			?>
-			<div class="container grid grid-float">
-				<div class="grid-3-1 track trackUX<?php if($contest_type=="design") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDesignChallengesLink;?>"><i></i>Graphic Design Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Software Development Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDataChallengesLink;?>">
-						<i></i>Data Science Challenges
-					</a><span class="arrow"></span>
-				</div>
-			</div>
-		</div>
-		<!-- /#hero -->
+		
+		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
@@ -53,15 +31,7 @@ include locate_template('header-challenge-landing.php');
 					</aside>
 				</header>
 				<div class="actions">
-					<div class="lt challengeType">
-						<?php
-							$pastChallenges = get_bloginfo('siteurl')."/past-challenges/".$contest_type."/";
-						?>
-						<ul>
-							<li><a href="javascript:;" class="active link">Open Challenges</a></li>
-							<li><a href="<?php echo $pastChallenges;?>" class="link">Past Challenges</a></li>
-						</ul>
-					</div>
+					<?php include(locate_template('nav-challenges-list-type.php'));?>
 					<div class="rt">
                         <a href="javascript:;" class="searchLink advSearch">
                             <i></i>Advanced Search
@@ -115,6 +85,9 @@ include locate_template('header-challenge-landing.php');
 					<div class="mid onMobi">
 						<a href="#" class="viewPastCh">
 							View Past Challenges<i></i>
+						</a>
+						<a href="#" class="viewUpcomingCh">
+							View Upcoming Challenges<i></i>
 						</a>
 					</div>
 				</div>
