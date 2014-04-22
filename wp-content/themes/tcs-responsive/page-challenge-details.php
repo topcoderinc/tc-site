@@ -472,10 +472,17 @@ include locate_template('header-challenge-landing.php');
   <article id="stockPhotography">
     <h1>STOCK PHOTOGRAPHY</h1>
 
-    <p>Stock photography is not allowed in this challenge. All submitted elements must be designed solely by you.<br>
-      <a
-        href="http://help.topcoder.com/design/design-copyright-and-font-policies/policy-for-stock-photos-in-design-submissions/">See
-        this page for more details.</a></p>
+      <?php
+      if ($contest->allowStockArt != "false") {
+          echo '<p> Stock photography is allowed in this challenge.<br>
+                      <a href="http://help.topcoder.com/design/design-copyright-and-font-policies/policy-for-stock-photos-in-design-submissions/">See this page for more details.</a></p>';
+      } else {
+          echo '<p>Stock photography is not allowed in this challenge. All submitted elements must be designed solely by you.<br>
+                      <a href="http://help.topcoder.com/design/design-copyright-and-font-policies/policy-for-stock-photos-in-design-submissions/">See
+                        this page for more details.</a></p>';
+      }
+      ?>
+
   </article>
 
   <article id="howtosubmit">
