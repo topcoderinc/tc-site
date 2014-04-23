@@ -16,29 +16,7 @@ include locate_template('header-challenge-landing.php');
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
 
-		<div id="hero">
-			<?php
-				$activeDesignChallengesLink = get_bloginfo('siteurl')."/active-challenges/design/";
-				$activeDevlopChallengesLink = get_bloginfo('siteurl')."/active-challenges/develop/";
-				$activeDataChallengesLink = get_bloginfo('siteurl')."/active-challenges/data/";
-			?>
-			<div class="container grid grid-float">
-				<div class="grid-3-1 track trackUX<?php if($contest_type=="design") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDesignChallengesLink;?>"><i></i>Graphic Design Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackSD<?php if($contest_type=="develop") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDevlopChallengesLink;?>"><i></i>Software Development Challenges
-					</a><span class="arrow"></span>
-				</div>
-				<div class="grid-3-1 track trackAn<?php if($contest_type=="data") echo " isActive"; ?>" >
-					<a href="<?php echo $activeDataChallengesLink;?>">
-						<i></i>Data Science Challenges
-					</a><span class="arrow"></span>
-				</div>
-			</div>
-		</div>
-		<!-- /#hero -->
+		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
@@ -50,15 +28,7 @@ include locate_template('header-challenge-landing.php');
 
 				</header>
 				<div class="actions alt">
-					<div class="lt challengeType">
-						<?php
-							$activeChallenges = get_bloginfo('siteurl')."/active-challenges/".$contest_type."/";
-						?>
-						<ul>
-							<li><a href="<?php echo $activeChallenges;?>" class="link">Open Challenges</a></li>
-							<li><a href="javascript:;" class="active link">Past Challenges</a></li>
-						</ul>
-					</div>
+					<?php include(locate_template('nav-challenges-list-type.php'));?>
 					<div class="rt">
                       <span class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
 
@@ -108,8 +78,11 @@ include locate_template('header-challenge-landing.php');
 						</a>
 					</div>
 					<div class="mid onMobi">
+						<a href="#" class="viewActiveCh">
+							View Active Challenges<i></i>
+						</a>
 						<a href="#" class="viewPastCh">
-							View Past Challenges<i></i>
+							View Upcoming Challenges<i></i>
 						</a>
 					</div>
 				</div>

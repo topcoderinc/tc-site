@@ -1,9 +1,9 @@
 <?php
 /**
- * Template Name: Challenges Active Contest List Page
+ * Template Name: Challenges Upcoming Contest List Page
  */
 
-$listType = get_post_meta($postId,"List Type",true) =="" ? "Active" : get_post_meta($postId,"List Type",true);
+$listType = get_post_meta($postId,"List Type",true) =="" ? "Upcoming" : get_post_meta($postId,"List Type",true);
 
 include locate_template('header-challenge-landing.php');
 ?>
@@ -15,21 +15,29 @@ include locate_template('header-challenge-landing.php');
 	<?php if(have_posts()) : the_post();?>
 		<?php the_content();?>
 	<?php endif; wp_reset_query();?>
-		
+
 		<?php include(locate_template('nav-challenges-list-tabs.php'));?>
 
 		<article id="mainContent" class="layChallenges">
 			<div class="container">
 				<header>
-					<h1>
-                      <?php echo $page_title; ?>
-                      <?php get_template_part("content", "rss-icon"); ?>
-                    </h1>
+					<h1><?php echo ($contest_type=="design" ? "Graphic Design Challenges" : "Software Development Challenges" ); ?></h1>
 					<aside class="rt">
 						<span class="views"> <a href="#gridView" class="gridView"></a> <a href="#tableView" class="listView isActive"></a>
 						</span>
 					</aside>
 				</header>
+				<div class="subscribeTopWrapper" style="border-bottom:0px;height:30px;margin-bottom:0px">
+					<?php
+					//mock rss feel url as active for non-working upcoming APIs
+						$list = "active";
+					
+					$FeedURL = get_bloginfo('wpurl')."/challenges/feed?list=" . $list . "&contestType=".$contest_type;
+					?>
+					<a class="feedBtn" href="<?php echo $FeedURL;?>">Subscribe to <?php
+						echo $contest_type; 
+					?> challenges </a>
+				</div>
 				<div class="actions">
 					<?php include(locate_template('nav-challenges-list-type.php'));?>
 					<div class="rt">
@@ -45,16 +53,16 @@ include locate_template('header-challenge-landing.php');
 				<div id="tableView" class=" viewTab">
 					<div class="tableWrap tcoTableWrap">
 						<table class="dataTable tcoTable">
+						<caption>All upcoming challenges may change</caption>
 							<thead>
 								<tr>
-									<th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>
+									<th class="colCh" data-placeholder="challengeName">Contest Name<i></i></th>
 									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
 									<th class="colTime desc" data-placeholder="postingDate">Timeline<i></i></th>
-									<th class="colTLeft noSort" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">Prizes<i></i></th>
-									<th class="colPhase noSort" data-placeholder="currentPhase">Current Phase<i></i></th>
-									<th class="colReg noSort" data-placeholder="numRegistrants">Registrants<i></i></th>
-									<th class="colSub noSort" data-placeholder="numSubmissions">Submissions<i></i></th>
+									<th class="colDur noSort" data-placeholder="contestDuration">Duration (days)<i></i></th>
+									<th class="colPur noSort" data-placeholder="prize">First Prize<i></i></th>
+									<th class="colTech noSort" data-placeholder="technologies">Technologies<i></i></th>
+									<th class="colStat noSort" data-placeholder="status">Status<i></i></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -83,11 +91,11 @@ include locate_template('header-challenge-landing.php');
 						</a>
 					</div>
 					<div class="mid onMobi">
+						<a href="#" class="viewActiveCh">
+							View Active Challenges<i></i>
+						</a>
 						<a href="#" class="viewPastCh">
 							View Past Challenges<i></i>
-						</a>
-						<a href="#" class="viewUpcomingCh">
-							View Upcoming Challenges<i></i>
 						</a>
 					</div>
 				</div>
@@ -95,4 +103,6 @@ include locate_template('header-challenge-landing.php');
 			</div>
 		</article>
 		<!-- /#mainContent -->
-<?php get_footer(); ?>
+<?php
+get_footer();
+?>
