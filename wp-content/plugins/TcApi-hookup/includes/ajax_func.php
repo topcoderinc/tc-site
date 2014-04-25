@@ -874,3 +874,42 @@ function changePassword($handle = '', $password = '' , $unlockCode = '') {
     }
     return $response;
 }
+
+// I-104951: get contest detail
+function get_contest_detail_ajax_controller()
+{
+    $contestType = $_GET ['contest_type'];
+    $challengeId = $_GET ['challengeId'];
+    $json = get_contest_detail_ajax($contestType, $challengeId);
+    if (isset( $json )) {
+        wp_send_json( $json );
+    } else {
+        wp_send_json_error();
+    }
+}
+
+add_action( 'wp_ajax_get_contest_detail', 'get_contest_detail_ajax_controller' );
+add_action( 'wp_ajax_nopriv_get_contest_detail', 'get_contest_detail_ajax_controller' );
+function get_contest_detail_ajax(
+  $contestType = 'design',
+  $challengeId = ''
+) 
+{
+    $url = "http://api.topcoder.com/v2/". $contestType . "/challenges/" . $challengeId;
+    $args = array (
+        'httpversion' => get_option ( 'httpversion' ),
+        'timeout' => get_option ( 'request_timeout' )
+    );
+
+    $response = wp_remote_get($url, $args);
+
+    if (is_wp_error ($response ) || ! isset ($response ['body'] )) {
+        return "Error in processing request";
+    }
+
+    if ($response ['response'] ['code'] == 200) {
+        $detail = json_decode ( $response ['body'] );
+        return $detail;
+    }
+    return "Error in processing request";
+}

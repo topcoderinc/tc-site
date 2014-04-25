@@ -41,9 +41,10 @@ $postPerPage = get_option ( "contest_per_page" ) == "" ? 30 : get_option ( "cont
 								<table class="dataTable challenges">
 									<thead>
 										<tr>
-											<th class="colCh">Challenges</th>
-											<th class="colTime">Timeline</th>
-											<th class="colPur">Prizes</th>
+										    <!-- I-106081: add disabled to the class -->
+											<th class="colCh disabled">Challenges</th>
+											<th class="colTime disabled">Timeline</th>
+											<th class="colPur disabled">Prizes</th>
 										</tr>
 									</thead>
 									<tbody>

@@ -19,6 +19,7 @@
         "init-header.js",
         "challenge-detail-software.js",
         "challenge-result.js",
+		"challenge-registrants.js",
         "jquery.jscrollpane.min.js",
         "jquery.column-1.0.js",
         "moment.min.js",
@@ -70,7 +71,8 @@
         "jquery.qtip.min.js",
         "moment.min.js",
         "moment-timezone.min.js",
-        "moment-data.js"
+        "moment-data.js",
+		"jquery.cookie.js"
       ],
       "css": [
         "base.css",
@@ -105,7 +107,8 @@
         "jquery.qtip.min.js",
         "moment.min.js",
         "moment-timezone.min.js",
-        "moment-data.js"
+        "moment-data.js",
+		"jquery.cookie.js"
       ],
       "css": [
         "base.css",

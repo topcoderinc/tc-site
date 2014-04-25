@@ -3,6 +3,9 @@ var sortColumn = "";
 var sortOrder = "";
 var ApiData = {};
 
+// I-104467 I-107029: default view for challenges
+var default_view = "#tableView";
+
 /**
  * Challenges function
 challenge
@@ -32,6 +35,24 @@ appChallenges = {
         app.initAjaxData();
         app.calendar();
         app.bindEvents();
+		
+		// I-104467 I-107029: check if there is already stored view
+        if ($.cookie('viewMode') == null) {
+            // I-104467 I-107029: if not, save the the default view to the cookie
+            $.cookie('viewMode', default_view, { expires: 7, path: '/' });
+        }
+
+        // I-104467 I-107029: update the view mode (grid or table) according to the cookie value
+        var viewHref = $.cookie('viewMode');
+        var switchViewLink = $('.views a[href="' + viewHref + '"]');
+
+        if (typeof(listType) != "undefined" && listType !== "Past" && !switchViewLink.hasClass('isActive')) {
+            $('.viewTab').hide();
+            $(viewHref).fadeIn('fast');
+            $('.isActive', switchViewLink.parent()).removeClass('isActive');
+            switchViewLink.addClass('isActive');
+            app.ie7Fix();
+        }
     },
     initAjaxData: function() {
         if ($('.dataChanges .viewAll').length <= 0 || !$('.dataChanges .viewAll').is(':visible')) {
@@ -74,6 +95,8 @@ appChallenges = {
 
             $('.viewTab').hide();
             id = $(this).attr('href');
+			// I-104467 I-107029: store the view to the cookie
+			$.cookie('viewMode', id, { expires: 7, path: '/' });
             $(id).fadeIn('fast');
             $('.isActive', $(this).parent()).removeClass('isActive');
             $(this).addClass('isActive');
@@ -318,9 +341,20 @@ appChallenges = {
         $('.dataTable, .contestGrid').on('mouseenter', '.colType .ico, .coleSub .subs, .ico.trackType, a .itco', function() {
             var tt = $('#typeTooltip');
             tt.addClass('isShowing');
+
+			// I-107026: Add class devTooltip if the contest is not design contest.
+            var contestType = $('.tipC', $(this)).html();
+            if (!app.isDesignContest(contestType)) {
+                tt.addClass('devTooltip');
+            } else if (tt.hasClass('devTooltip')) {
+                tt.removeClass('devTooltip');
+            }
+
             $(this).addClass('activeLink');
             $('header', tt).html($('.tipT', $(this)).html());
-            $('.contestTy', tt).html($('.tipC', $(this)).html());
+
+			// I-107026: reuse the contestType variable
+            $('.contestTy', tt).html(contestType);
 
             if ($(this).hasClass('itco')) {
                 var tempTcoTooltipTitle = typeof tcoTooltipTitle !== "undefined" ? tcoTooltipTitle : "TCO-14";
@@ -1374,7 +1408,9 @@ appChallenges = {
                   endDate = app.formatDate2(rec.submissionEndDate);
                 }
 
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
+				// I-104951: get the contest type
+				var contestType = app.isDesignContest(rec.challengeType) ? 'design' : 'develop';
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
                 var purse = 0;
                 for (var i = 0; i < rec.prize.length; i++)
                     purse += rec.prize[i];
@@ -1407,9 +1443,11 @@ appChallenges = {
                 } else {
                   $('.vEndDate', row).parent().empty();
                 }
-
+				
                 $('.colPur', row).html("$" + purse);
-
+                // I-104951: get each of total prizes of the past challenge via AJAX and update the table
+				app.updatePastChallengeTotalPrize($('.colPur', row), contestType, rec.challengeId);
+				
                 $('.colPhase', row).html('Completed');
 
                 $('.winBages', row).html('<a href="' + siteurl+ '/challenge-details/' +rec.challengeId+'?type='+ rec.challengeCommunity +'#winner">View Winners</a>');
@@ -1637,6 +1675,30 @@ appChallenges = {
             app.addEmptyResult(gridEl, 'upcoming');
         }
     },
+	
+	/* I-104951: get each of total prizes of the past challenge via AJAX and update the table */
+	updatePastChallengeTotalPrize: function(purseColumn, contestType, challengeId) {
+	    var param = {};
+        param.action = "get_contest_detail";
+        param.contest_type = contestType;
+        param.challengeId = challengeId;
+
+        $.ajax({
+            url: ajaxUrl,
+            data: param,
+            type: "GET",
+            dataType: "json",
+			async: false,
+            success: function(data) {
+                var totalPrize = 0;
+                for (var i = 0; i < data.prize.length; i++) {
+                    totalPrize += data.prize[i];
+                }
+	            purseColumn.html('$' + app.formatCur(totalPrize));
+            }
+        });
+	},
+
     /* table draw function */
     getBugraceTable: function(table, data, records2Disp, isAppend) {
 

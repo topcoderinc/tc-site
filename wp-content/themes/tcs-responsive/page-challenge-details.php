@@ -17,6 +17,11 @@ function tc_challenge_details_js() {
     var challengeType = "<?php echo $contestType;?>";
     var autoRegister = "<?php echo get_query_var('autoRegister');?>";
 
+	// I-111417 pass the whole registrants JSON to the JS file so it can dinamically pull the most recent rating
+	// add challenge name to get the correct rating
+	var registrant_data = <?php echo json_encode($registrants);?>;
+	var challengeName = "<?php echo $contest->challengeType;?>";
+	
     var registrants = ["anonymous"
       <?php
         for ($i = 0; $i < count($registrants); $i++) :
@@ -25,6 +30,7 @@ function tc_challenge_details_js() {
         endfor;
       ?>
     ];
+	
   </script>
 <?php
 }
@@ -593,85 +599,12 @@ include locate_template('header-challenge-landing.php');
       </tr>
       </thead>
       <tbody>
-      <?php foreach ($registrants as $key => $value) {
-        $handleLink = get_bloginfo("siteurl") . "/member-profile/" . $value->handle;
-        echo '<tr >';
-        echo '<td class="handleColumn">';
-        echo '<span>' . '<a href="' . $handleLink . '" style="' . $value->color . '">' . $value->handle . '</a></span>';
-        echo '</td>';
-        if ($contestType != 'design') {
-          echo '<td class="ratingColumn">';
-          echo '<span style="' . $value->colorStyle . '">';
-          echo isset( $value->rating ) ? $value->rating : 0;
-          echo '</span>';
-          echo '</td>';
-
-          echo '<td class="reliabilityColumn">';
-          echo $value->reliability;
-          echo '</td>';
-        }
-
-        echo '<td class="regDateColumn">';
-        echo date("M d, Y H:i T", strtotime($value->registrationDate));
-        echo '</td>';
-        echo '<td class="subDateColumn">';
-        if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
-        }
-        else {
-          echo "--";
-        }
-        echo '</td>';
-        echo '</tr>';
-
-      }  ?>
+      
       </tbody>
     </table>
 
     <div class="registrantsTable mobile hide">
-      <?php foreach ($registrants as $key => $value) {
-        $handleLink = get_bloginfo("siteurl") . "/member-profile/" . $value->handle;
-        echo '<div class="registrantSection">';
-        echo '<div class="registrantSectionRow registrantHandle">' . '<a href="' . $handleLink . '" style="' . $value->color . '">' . $value->handle . '</a></div>';
-        if ($contestType != 'design') {
-          echo '<div class="registrantSectionRow">';
-          echo '<div class="registrantLabel">Rating:</div>';
-          echo '<div class="registrantField">';
-          echo '<span style="' . $value->ratings_color . '">';
-          echo $value->max_rating;
-          echo '</span>';
-          echo '</div>';
-          echo '<div class="clear"></div>';
-          echo '</div>';
-          echo '<div class="registrantSectionRow">';
-          echo '<div class="registrantLabel">Reliability:</div>';
-          echo '<div class="registrantField">' . $value->reliability . '</div>';
-          echo '<div class="clear"></div>';
-          echo '</div>';
-        }
-        echo '<div class="registrantSectionRow">';
-        echo '<div class="registrantLabel">Registration Date:</div>';
-        echo '<div class="registrantField">';
-        echo date(
-               "M d, Y H:i T",
-               strtotime($value->registrationDate)
-             ) . '</div>';
-        echo '<div class="clear"></div>';
-        echo '</div>';
-        echo '<div class="registrantSectionRow">';
-        echo '<div class="registrantLabel">Submission Date:</div>';
-        echo '<div class="registrantField">';
-        if ($value->lastSubmissionDate) {
-          echo date("M d, Y H:i T", strtotime($value->lastSubmissionDate));
-        }
-        else {
-          echo "--";
-        }
-        echo '</div>';
-        echo '<div class="clear"></div>';
-        echo '</div>';
-        echo '</div>';
-      }  ?>
+      
     </div>
 
   </article>

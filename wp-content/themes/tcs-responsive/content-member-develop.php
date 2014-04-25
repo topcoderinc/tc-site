@@ -19,6 +19,8 @@ if ($track == "develop") {
 	$currentChallengetype = 'Development';
 }
 
+$currentunderscoredChallengeType = $_GET['challengeType'];
+
 // chart
 include_once TEMPLATEPATH . '/chart/Highchart.php';
 
@@ -28,13 +30,13 @@ $chart->printScripts ();
 $challengetypes = array ();
 $challengetypes = get_all_contest ();
 
-array_push ( $challengetypes, 'Design' );
-array_push ( $challengetypes, 'Assembly Competition' );
-array_push ( $challengetypes, 'Development' );
-array_push ( $challengetypes, 'Specification' );
-array_push ( $challengetypes, 'Bug Hunt' );
-array_push ( $challengetypes, 'UI Prototype Competition' );
-array_push ( $challengetypes, 'UI Prototypes' );
+$challengetypes[] = 'Design';
+$challengetypes[] = 'Assembly Competition';
+$challengetypes[] = 'Development';
+$challengetypes[] = 'Specification';
+$challengetypes[] = 'Bug Hunt';
+$challengetypes[] = 'UI Prototype Competition';
+$challengetypes[] = 'UI Prototypes';
 ?>
 
 <div id="develop" class="tab algoLayout">
@@ -45,7 +47,6 @@ array_push ( $challengetypes, 'UI Prototypes' );
 				<ul>
 						<?php
 						foreach ( $challengetypes as &$challengetype ) {
-
 								$underscoredChallengeType = str_replace ( ' ', '_', $challengetype );
 								$underscoredChallengeType = strtolower ( $underscoredChallengeType );
 
@@ -60,8 +61,14 @@ array_push ( $challengetypes, 'UI Prototypes' );
 									$underscoredChallengeType = 'ria_build';
 									$currentChallengetype = $underscoredChallengeType;
 								}
+								
+								$matched = strpos($currentunderscoredChallengeType, $underscoredChallengeType);
+								
+								$class = '';
+                                if ($matched !== false) {
+									$currentunderscoredChallengeType = $underscoredChallengeType;
+								}
 
-								$class = ($underscoredChallengeType == $currentunderscoredChallengeType) ? 'isActive' : '';
 								echo '<li><a class="' . $class . '" href="' . $underscoredChallengeType . '">' . $challengetype . '</a></li>';
 							}
 						}
@@ -72,13 +79,19 @@ array_push ( $challengetypes, 'UI Prototypes' );
 						}
 						?>
 				</ul>
-			</nav>
+			</nav>			
 			<?php  if(empty($tracks->{$currentChallengetype})):?>
 			<header class="head">
 				<h3 class="nocontestStatus text">Member rating unavailable or member didn't participated in any Develop contest.</h3>
 			</header>
 			<?php else:?>
-			
+			<script type="text/javascript">
+            <!--
+                $(document).ready(function(){
+	                $('.subTrackTabs .tabNav a[href="<?php echo $currentunderscoredChallengeType; ?>"').trigger('click');
+                });
+            //-->
+            </script>
 			<header class="head">
 				<div class="trackNRating">
 					<h4 class="trackName"><?php echo $currentChallengetype; 
