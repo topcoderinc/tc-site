@@ -472,10 +472,19 @@ include locate_template('header-challenge-landing.php');
   <article id="stockPhotography">
     <h1>STOCK PHOTOGRAPHY</h1>
 
+    <?php if ($contest->allowStockArt === 'true'): ?>
+	<p>Watermarked comp photography from istockphoto.com is allowed in this challenge. You must follow these instructions or your submission will fail screening:
+    <br><br>
+        1) You must declare your stock photos when submitting. <a href="http://topcoder.com/home/studio/the-process/how-to-submit-to-a-contest/" target="_blank">See how here.</a><br>
+        2) Only use photos, and only use them from iStockPhoto.com. Other iStockPhoto artwork (illustrations, icons, etc.) are not allowed.<br>
+        3) Be sure to keep the watermark intact. If the photo is cropped in such a way that the watermark is not visible, please be sure to include the entire watermarked image in your source files so screeners can see that it is a comp image from iStockphoto.com.
+    </p>
+	<?php else: ?>
     <p>Stock photography is not allowed in this challenge. All submitted elements must be designed solely by you.<br>
       <a
         href="http://help.topcoder.com/design/design-copyright-and-font-policies/policy-for-stock-photos-in-design-submissions/">See
         this page for more details.</a></p>
+	<?php endif; ?>
   </article>
 
   <article id="howtosubmit">
