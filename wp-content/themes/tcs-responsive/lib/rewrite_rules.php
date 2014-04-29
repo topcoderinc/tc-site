@@ -60,6 +60,9 @@ function tc_add_custom_rewrite_rules() {
   // Past Challenges
   add_rewrite_rule('^past-challenges/([^/]*)/?$', 'index.php?pagename=past-challenges&contest_type=$matches[1]', 'top');
 
+  // Upcoming Challenges
+  add_rewrite_rule('^upcoming-challenges/([^/]*)/?$', 'index.php?pagename=upcoming-challenges&contest_type=$matches[1]', 'top');
+  
   // Review Challenges
   add_rewrite_rule(
     '^review-opportunities/([^/]*)/?$',
@@ -77,5 +80,4 @@ function tc_add_custom_rewrite_rules() {
 
   // Search results
   add_rewrite_rule('^search/?$', 'index.php?', 'top');
-
 }

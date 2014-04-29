@@ -1,0 +1,585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Joseph Dolson
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP to Twitter\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-to-twitter\n"
+"POT-Creation-Date: 2009-12-13 16:56+0000\n"
+"PO-Revision-Date: 2011-06-29 17:34+0530\n"
+"Last-Translator: Sarvita Kuamri <sarvita@outshinesolutions.com>\n"
+"Language-Team: Lets Be Famous.com <ray.s@letsbefamous.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Irish\n"
+"X-Poedit-Country: IRELAND\n"
+
+#: functions.php:123
+msgid "Twitter Password Saved"
+msgstr "Pasfhocal twitter Sábháilte"
+
+#: functions.php:125
+msgid "Twitter Password Not Saved"
+msgstr "Pasfhocal twitter Sábháilte"
+
+#: functions.php:128
+msgid "Bit.ly API Saved"
+msgstr "Bit.ly Sábháilte API"
+
+#: functions.php:130
+msgid "Bit.ly API Not Saved"
+msgstr "Gan API Sábháilte Bit.ly"
+
+#: functions.php:136
+msgid "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Hide</a>] If you're experiencing trouble, please copy these settings into any request for support."
+msgstr "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Nascondi</a>] Má tá tú ag fulaingt  dtrioblóid, le do thoil cóip na socruithe seo  isteach in aon iarratas  le haghaidh tacaíochta."
+
+#: wp-to-twitter-manager.php:63
+msgid "Set your Twitter login information and URL shortener API information to use this plugin!"
+msgstr "Socraigh do chuid faisnéise  agus URL  Shortener  logáil isteach Twitter API eolas seo a úsáid breiseán!"
+
+#: wp-to-twitter-manager.php:69
+msgid "Please add your Twitter password. "
+msgstr "Cuir do phasfhocal Twitter."
+
+#: wp-to-twitter-manager.php:75
+msgid "WP to Twitter Errors Cleared"
+msgstr "Cuir phasfhocal a dhéanamh Twitter."
+
+#: wp-to-twitter-manager.php:82
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your new blog post. Your tweet has been stored in a custom field attached to the post, so you can Tweet it manually if you wish! "
+msgstr "Tá brón orainn! Ní raibh mé in ann dul i dteagmháil  leis na freastalaithe  Twitter  go hiar  do blog post nua. Tá do tweet bheith stóráilte i  réimse  saincheaptha  ghabhann leis an bpost,  ionas gur féidir leat Tweet de láimh más mian leat!"
+
+#: wp-to-twitter-manager.php:84
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your <strong>new link</strong>! You'll have to post it manually, I'm afraid. "
+msgstr "Tá brón orainn! Ní raibh mé in ann dul i dteagmháil  leis na freastalaithe  Twitter  go hiar  do nasc  nua <strong>  </ strong>!  Feicfidh tú  a phost é de láimh, tá mé eagla."
+
+#: wp-to-twitter-manager.php:149
+msgid "You must add your Bit.ly login and API key in order to shorten URLs with Bit.ly."
+msgstr "Tá Foinse Orainn! Ní raibh mé i dteagmháil ann dul i Leis na freastalaithe Twitter dul hiar dhéanamh NASC Nua <strong>  </ strong>!  Feicfidh  Just a phost é de láimh, Tá Mé eagla."
+
+#: wp-to-twitter-manager.php:158
+msgid "WP to Twitter Options Updated"
+msgstr "WP le Roghanna Twitter Nuashonraithe"
+
+#: wp-to-twitter-manager.php:168
+msgid "Twitter login and password updated. "
+msgstr "Íomhá Réamhamhairc de Twitter WP Roghanna Nuashonraithe"
+
+#: wp-to-twitter-manager.php:170
+msgid "You need to provide your twitter login and password! "
+msgstr "Ní mór duit a chur ar fáil  do twitter logáil isteach  agus do phasfhocal!"
+
+#: wp-to-twitter-manager.php:177
+msgid "Cligs API Key Updated"
+msgstr "Cligs API Key Nuashonraithe"
+
+#: wp-to-twitter-manager.php:180
+msgid "Cli.gs API Key deleted. Cli.gs created by WP to Twitter will no longer be associated with your account. "
+msgstr "Cli.gs API Key scriosadh. Beidh Cli.gs cruthaithe ag  WP le Twitter a thuilleadh  a bheith bainteach le do chuntas."
+
+#: wp-to-twitter-manager.php:182
+msgid "Cli.gs API Key not added - <a href='http://cli.gs/user/api/'>get one here</a>! "
+msgstr "Cli.gs API Key nach gcuirtear isteach<a í - href='http://cli.gs/user/api/'>  ceann a fháil anseo </ a>!"
+
+#: wp-to-twitter-manager.php:188
+msgid "Bit.ly API Key Updated."
+msgstr "API Key Nuashonraithe Bit.ly."
+
+#: wp-to-twitter-manager.php:191
+msgid "Bit.ly API Key deleted. You cannot use the Bit.ly API without an API key. "
+msgstr "API Key Bit.ly scriosadh. Ní féidir leat úsáid a bhaint  ar an API  Bit.ly  gan eochair API."
+
+#: wp-to-twitter-manager.php:193
+msgid "Bit.ly API Key not added - <a href='http://bit.ly/account/'>get one here</a>! An API key is required to use the Bit.ly URL shortening service."
+msgstr "API Key Bit.ly scriosadh. Ní féidir Leat úsáid a bhaint Cruinniú le API gan Bit.ly Eochair API."
+
+#: wp-to-twitter-manager.php:197
+msgid " Bit.ly User Login Updated."
+msgstr "Logáil isteach Úsáideoir Nuashonraithe  Bit.ly."
+
+#: wp-to-twitter-manager.php:200
+msgid "Bit.ly User Login deleted. You cannot use the Bit.ly API without providing your username. "
+msgstr "Logáil isteach Úsáideoir Bit.ly scriosadh. Ní féidir leat úsáid a bhaint  ar an API  Bit.ly  gan foráil a dhéanamh d'ainm úsáideora."
+
+#: wp-to-twitter-manager.php:202
+msgid "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! "
+msgstr "Ní Logáil isteach Bit.ly - <a href='http://bit.ly/account/'> ceann a fháil anseo  </ a>!"
+
+#: wp-to-twitter-manager.php:236
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy, but the URL creation failed.</li>"
+msgstr "<li> teagmháil D'éirigh an API Cli.gs via Snoopy, ach theip ar an cruthú URL. </ li>"
+
+#: wp-to-twitter-manager.php:238
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy, but a Cli.gs server error prevented the URL from being shrotened.</li>"
+msgstr "<li> teagmháil D'éirigh an API Cli.gs via Snoopy, ach earráid freastalaí Cli.gs cosc ar an URL ó bheith shrotened. </ li>"
+
+#: wp-to-twitter-manager.php:240
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy and created a shortened link.</li>"
+msgstr "<li> teagmháil D'Eirigh Cruinniú Cli.gs via API Snoopy, ACH earráid freastalaí Cli.gs Cosc Cruinniú URL Ó bheith shrotened. </ Li>"
+
+#: wp-to-twitter-manager.php:249
+#: wp-to-twitter-manager.php:274
+msgid "<li>Successfully contacted the Bit.ly API via Snoopy.</li>"
+msgstr "<li> teagmháil D'éirigh an API Bit.ly trí Snoopy. </ li>"
+
+#: wp-to-twitter-manager.php:251
+#: wp-to-twitter-manager.php:276
+msgid "<li>Failed to contact the Bit.ly API via Snoopy.</li>"
+msgstr "<li> Theip dul i dteagmháil leis an API Bit.ly trí Snoopy. </ li>"
+
+#: wp-to-twitter-manager.php:254
+msgid "<li>Cannot check the Bit.ly API without a valid API key.</li>"
+msgstr "Ní féidir <li> seiceáil ar an API Bit.ly gan eochair API bailí. </ li>"
+
+#: wp-to-twitter-manager.php:258
+msgid "<li>Successfully contacted the Twitter API via Snoopy.</li>"
+msgstr "<li> teagmháil D'éirigh an API Twitter trí Snoopy. </ li>"
+
+#: wp-to-twitter-manager.php:260
+msgid "<li>Failed to contact the Twitter API via Snoopy.</li>"
+msgstr "<li> teagmháil D'Eirigh a Twitter API Trí Snoopy. </ Li>"
+
+#: wp-to-twitter-manager.php:266
+msgid "<li>Successfully contacted the Twitter API via cURL.</li>"
+msgstr "<li> teagmháil D'éirigh an API Twitter trí curl. </ li>"
+
+#: wp-to-twitter-manager.php:268
+msgid "<li>Failed to contact the Twitter API via cURL.</li>"
+msgstr "<li> Theip dul i dteagmháil leis an API Twitter  trí curl. </ li>"
+
+#: wp-to-twitter-manager.php:280
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy.</li>"
+msgstr "<li> teagmháil D'éirigh an API Cli.gs trí Snoopy. </ li>"
+
+#: wp-to-twitter-manager.php:283
+msgid "<li>Failed to contact the Cli.gs API via Snoopy.</li>"
+msgstr "<li> Theip dul i dteagmháil leis an API Cli.gs trí Snoopy. </ li>"
+
+#: wp-to-twitter-manager.php:288
+msgid "<li><strong>Your server should run WP to Twitter successfully.</strong></li>"
+msgstr "<li> <strong> Ba chóir do fhreastalaí  WP reáchtáil go rathúil le Twitter. </ strong>  </ li>"
+
+#: wp-to-twitter-manager.php:293
+msgid "<li>Your server does not support <code>fputs</code>.</li>"
+msgstr "<li> Níthacaíonn do fhreastalaí tacaíocht fputs <code>  </ cód>. </ li>"
+
+#: wp-to-twitter-manager.php:297
+msgid "<li>Your server does not support <code>file_get_contents</code> or <code>cURL</code> functions.</li>"
+msgstr "<li> Ní thacaíonn do fhreastalaí tacaíocht file_get_contents  <code>  </ cód> nó <code> curl </ cód> feidhmeanna. </ li>"
+
+#: wp-to-twitter-manager.php:301
+msgid "<li>Your server does not support <code>Snoopy</code>.</li>"
+msgstr "<li> Níthacaíonn do fhreastalaí tacaíocht <code>  Snoopy  </ cód>. </ li>"
+
+#: wp-to-twitter-manager.php:304
+msgid "<li><strong>Your server does not appear to support the required PHP functions and classes for WP to Twitter to function.</strong> You can try it anyway - these tests aren't perfect - but no guarantees.</li>"
+msgstr "<li> Ní thacaíonn dhéanamh fhreastalaí  tacaíocht  file_get_contents  <code>  </ COD> aon <code> curl </ COD> feidhmeanna. </ Li>"
+
+#: wp-to-twitter-manager.php:313
+msgid "This plugin may not fully work in your server environment. The plugin failed to contact both a URL shortener API and the Twitter service API."
+msgstr "<li> Ní thacaíonn dhéanamh fhreastalaí  tacaíocht  file_get_contents  <code>  </ COD> AON <code> curl </ COD> feidhmeanna. </ Li>"
+
+#: wp-to-twitter-manager.php:328
+msgid "WP to Twitter Options"
+msgstr "WP le Roghanna Twitter"
+
+#: wp-to-twitter-manager.php:332
+#: wp-to-twitter.php:794
+msgid "Get Support"
+msgstr "Faigh Tacaíocht"
+
+#: wp-to-twitter-manager.php:333
+msgid "Export Settings"
+msgstr "Socruithe Easpórtáil"
+
+#: wp-to-twitter-manager.php:347
+msgid "For any post update field, you can use the codes <code>#title#</code> for the title of your blog post, <code>#blog#</code> for the title of your blog, <code>#post#</code> for a short excerpt of the post content, <code>#category#</code> for the first selected category for the post, <code>#date#</code> for the post date, or <code>#url#</code> for the post URL (shortened or not, depending on your preferences.) You can also create custom shortcodes to access WordPress custom fields. Use doubled square brackets surrounding the name of your custom field to add the value of that custom field to your status update. Example: <code>[[custom_field]]</code>"
+msgstr "I gcás aon réimse a thabhairt cothrom le dáta an bpost, is féidir leat úsáid an <code> cóid # teideal # </ cód> le haghaidh an teideal do blog post, <code> # blog # </ cód> le haghaidh an teideal do bhlag, <code> # iar # </ cód> do sliocht gearr ar ábhar an phoist, <code> # chatagóir # </ cód> don chéad chatagóir roghnaithe don phost, <code> # dáta # </ cód> do dháta an bpost, nó <code> # url # </ cód> don URL phost (ní giorraithe nó, ag brath ar do chuid sainroghanna.) Is féidir leat a chruthú chomh maith shortcodes saincheaptha  chun rochtain a WordPress réimsí saincheaptha. Bain úsáid as lúibíní cearnacha dhó mórthimpeall  an t-ainm  de do  réimse  saincheaptha  le luach na  réimse sin  saincheaptha  a chur le do  stádas  cothrom le dáta. Sampla: <code>  [[custom_field]] </ cód>"
+
+#: wp-to-twitter-manager.php:353
+msgid "<p>One or more of your last posts has failed to send it's status update to Twitter. Your Tweet has been saved in your post custom fields, and you can re-Tweet it at your leisure.</p>"
+msgstr "<p> Tá amháin nó níos mó de  do phoist  seo caite  theip  a sheoladh  stádas  cothrom le dáta é  le Twitter. Tá do Tweet Sábháladh do réimsí saincheaptha  i bpost, agus is féidir leat ath-Tweet sé ar do fóillíochta. </ P>"
+
+#: wp-to-twitter-manager.php:356
+msgid "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+msgstr "<p> an cheist leis an URL Shortener API theip, agus ní do URL raibh shrunk. Bhí ceangailte leis an URL phost iomlán le do Tweet. Seiceáil le do sholáthraí ghiorrú URL a fheiceáil má  tá aon  cheisteanna  ar eolas. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+
+#: wp-to-twitter-manager.php:363
+msgid "Clear 'WP to Twitter' Error Messages"
+msgstr "'WP le Twitter' Clear Teachtaireachtaí Earráid"
+
+#: wp-to-twitter-manager.php:371
+msgid "Set what should be in a Tweet"
+msgstr "Socraigh cad ba cheart  a bheith i  Tweet"
+
+#: wp-to-twitter-manager.php:374
+msgid "Update when a post is published"
+msgstr "Thabhairt cothrom le dáta nuair a bhíonn  post foilsithe"
+
+#: wp-to-twitter-manager.php:374
+msgid "Text for new post updates:"
+msgstr "Téacs sé nuashonruithe phost nua:"
+
+#: wp-to-twitter-manager.php:379
+msgid "Update when a post is edited"
+msgstr "Thabhairt cothrom le dáta nuair a bhíonn  post in eagar"
+
+#: wp-to-twitter-manager.php:379
+msgid "Text for editing updates:"
+msgstr "Téacs sé nuashonruithe eagarthóireacht:"
+
+#: wp-to-twitter-manager.php:383
+msgid "Update Twitter when new Wordpress Pages are published"
+msgstr "Thabhairt cothrom le dáta nuair a Twitter nua Leathanaigh Wordpress Foilsítear"
+
+#: wp-to-twitter-manager.php:383
+msgid "Text for new page updates:"
+msgstr "Téacs sé nuashonruithe Leathanach nua:"
+
+#: wp-to-twitter-manager.php:387
+msgid "Update Twitter when WordPress Pages are edited"
+msgstr "Thabhairt cothrom le dáta nuair a Twitter Leathanaigh  WordPress  atá in eagar"
+
+#: wp-to-twitter-manager.php:387
+msgid "Text for page edit updates:"
+msgstr "Téacs le haghaidh leathanach nuashonruithe  in eagar:"
+
+#: wp-to-twitter-manager.php:391
+msgid "Add tags as hashtags on Tweets"
+msgstr "Clibeanna a chur leis mar hashtags ar Tweets"
+
+#: wp-to-twitter-manager.php:391
+msgid "Spaces replaced with:"
+msgstr "Spásanna in ionad sé le:"
+
+#: wp-to-twitter-manager.php:392
+msgid "Default replacement is an underscore (<code>_</code>)."
+msgstr "Is le béim a athsholáthar Réamhshocrú (<code>_</code>)."
+
+#: wp-to-twitter-manager.php:394
+msgid "Maximum number of tags to include:"
+msgstr "Líon uasta na clibeanna a chur san áireamh:"
+
+#: wp-to-twitter-manager.php:395
+msgid "Maximum length in characters for included tags:"
+msgstr "Fad uasta i gcarachtair  do tags  bhí:"
+
+#: wp-to-twitter-manager.php:396
+msgid "These options allow you to restrict the length and number of WordPress tags sent to Twitter as hashtags. Set to <code>0</code> or leave blank to allow any and all tags."
+msgstr "Tugann na roghanna leat chun srian a chur ar  an fad agus  líon na  clibeanna  WordPress  sheoladh chuig Twitter  mar hashtags. Socraigh do <code>  0 </ cód> nó fág folamh chun deis a  clibeanna  ar bith  agus go léir"
+
+#: wp-to-twitter-manager.php:400
+msgid "Update Twitter when you post a Blogroll link"
+msgstr "Thabhairt cothrom le dáta nuair a Twitter leat an bpost  nasc Blogroll."
+
+#: wp-to-twitter-manager.php:401
+msgid "Text for new link updates:"
+msgstr "Téacs sé nuashonruithe nasc nua:"
+
+#: wp-to-twitter-manager.php:401
+msgid "Available shortcodes: <code>#url#</code>, <code>#title#</code>, and <code>#description#</code>."
+msgstr "Shortcodes ar fáil:: <code>#url#</code>, <code>#title#</code> e <code>#description#</code>."
+
+#: wp-to-twitter-manager.php:404
+msgid "Length of post excerpt (in characters):"
+msgstr "Cruinniú Shortcodes available:"
+
+#: wp-to-twitter-manager.php:404
+msgid "By default, extracted from the post itself. If you use the 'Excerpt' field, that will be used instead."
+msgstr "By default, bhaintear as an bpost é féin. Má úsáideann tú an 'Sliocht' réimse, a bheidh in úsáid ina áit."
+
+#: wp-to-twitter-manager.php:407
+msgid "WP to Twitter Date Formatting:"
+msgstr "WP a Formáidiú Dáta Twitter:"
+
+#: wp-to-twitter-manager.php:407
+msgid "Default is from your general settings. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+msgstr "Réamhshocrú ó do socruithe ginearálta.  <a  href='http://codex.wordpress.org/Formatting_Date_and_Time'>  Doiciméadú  Formáidiú  Dáta </ a>."
+
+#: wp-to-twitter-manager.php:411
+msgid "Custom text before Tweets:"
+msgstr "Téacs an Chustaim roimh Curfá:"
+
+#: wp-to-twitter-manager.php:412
+msgid "Custom text after Tweets:"
+msgstr "Téacs an Chustaim i ndiaidh Curfá:"
+
+#: wp-to-twitter-manager.php:415
+msgid "Custom field for an alternate URL to be shortened and Tweeted:"
+msgstr "Réimse saincheaptha le haghaidh URL malartach a ghiorrú agus Tweeted:"
+
+#: wp-to-twitter-manager.php:416
+msgid "You can use a custom field to send Cli.gs and Twitter an alternate URL from the permalink provided by WordPress. The value is the name of the custom field you're using to add an external URL."
+msgstr "Réimse saincheaptha le haghaidh URL malartach a ghiorrú agus Tweeted:"
+
+#: wp-to-twitter-manager.php:420
+msgid "Special Cases when WordPress should send a Tweet"
+msgstr "Cásanna speisialta nuair a ba chóir a sheoladh Tweet WordPress"
+
+#: wp-to-twitter-manager.php:423
+msgid "Set default Tweet status to 'No.'"
+msgstr "Stádas Tweet réamhshocraithe a shocraítear  le 'Uimh'"
+
+#: wp-to-twitter-manager.php:424
+msgid "Twitter updates can be set on a post by post basis. By default, posts WILL be posted to Twitter. Check this to change the default to NO."
+msgstr "Is féidir le nuashonruithe Twitter a shocrú ar an bpost í bhonn an bpost. By default, BEIDH post a chur sa phost le Twitter. Seo a sheiceáil leis an mainneachtain athrú UIMH."
+
+#: wp-to-twitter-manager.php:428
+msgid "Send Twitter Updates on remote publication (Post by Email or XMLRPC Client)"
+msgstr "Seol Nuashonruithe Twitter ar fhoilseachán  iargúlta  (Post by R-phost nó XMLRPC Cliant)"
+
+#: wp-to-twitter-manager.php:432
+msgid "Update Twitter when a post is published using QuickPress"
+msgstr "Thabhairt cothrom le dáta nuair a bhíonn post Twitter foilsithe ag baint úsáide as QuickPress"
+
+#: wp-to-twitter-manager.php:436
+msgid "Special Fields"
+msgstr "Réimsí speisialta"
+
+#: wp-to-twitter-manager.php:439
+msgid "Use Google Analytics with WP-to-Twitter"
+msgstr "UBain úsáid as Google Analytics  le WP-go-Twitter"
+
+#: wp-to-twitter-manager.php:440
+msgid "Campaign identifier for Google Analytics:"
+msgstr "Feachtas aitheantóir le haghaidh  Google Analytics:"
+
+#: wp-to-twitter-manager.php:441
+msgid "You can track the response from Twitter using Google Analytics by defining a campaign identifier here."
+msgstr "Feachtas aitheantóir le haghaidh Google Analytics:"
+
+#: wp-to-twitter-manager.php:446
+msgid "Authors have individual Twitter accounts"
+msgstr "Údair Tá cuntais Twitter aonair"
+
+#: wp-to-twitter-manager.php:446
+msgid "Each author can set their own Twitter username and password in their user profile. Their posts will be sent to their own Twitter accounts."
+msgstr "Is féidir le gach  údar a gcuid féin  a leagtar  Twitter  ainm úsáideora agus pasfhocal i bpróifíl úsáideora. Beidh a gcuid post a sheoladh chuig  gcuid cuntas  Twitter  féin."
+
+#: wp-to-twitter-manager.php:450
+msgid "Set your preferred URL Shortener"
+msgstr "Socraigh do URL Shortener fearr"
+
+#: wp-to-twitter-manager.php:453
+msgid "Use <strong>Cli.gs</strong> for my URL shortener."
+msgstr "Bain úsáid as Cli.gs <strong>  </ strong> do mo URL Shortener."
+
+#: wp-to-twitter-manager.php:454
+msgid "Use <strong>Bit.ly</strong> for my URL shortener."
+msgstr "Bain úsáid as  <strong>  Bit.ly  </ strong> do mo URL Shortener."
+
+#: wp-to-twitter-manager.php:455
+msgid "Use <strong>WordPress</strong> as a URL shortener."
+msgstr "Bain úsáid as WordPress <strong>  </ strong> mar URL Shortener."
+
+#: wp-to-twitter-manager.php:456
+msgid "Don't shorten URLs."
+msgstr "Ná shorten URLs."
+
+#: wp-to-twitter-manager.php:457
+msgid "Using WordPress as a URL shortener will send URLs to Twitter in the default URL format for WordPress: <code>http://domain.com/subdir/?p=123</code>. Google Analytics is not available when using WordPress shortened URLs."
+msgstr "Beidh úsáid WordPress mar URLanna a sheoladh chuig  URL Shortener Twitter san fhormáid  URL réamhshocraithe  do WordPress: <code> http://domain.com/subdir/?p=123  </ cód>. Níl Google Analytics ar fáil nuair a úsáid WordPress URLanna ghiorrú."
+
+#: wp-to-twitter-manager.php:462
+msgid "Save WP->Twitter Options"
+msgstr "Sábháil WP-> Options Twitter"
+
+#: wp-to-twitter-manager.php:468
+msgid "Your Twitter account details"
+msgstr "Shonraí do chuntais Twitter"
+
+#: wp-to-twitter-manager.php:475
+msgid "Your Twitter username:"
+msgstr "Do Twitter ainm úsáideora:"
+
+#: wp-to-twitter-manager.php:479
+msgid "Your Twitter password:"
+msgstr "Do Twitter fhocal faire:"
+
+#: wp-to-twitter-manager.php:479
+msgid "(<em>Saved</em>)"
+msgstr "(<em>Salvato</em>)"
+
+#: wp-to-twitter-manager.php:483
+msgid "Save Twitter Login Info"
+msgstr "Sábháil Twitter Eolas Logáil isteach"
+
+#: wp-to-twitter-manager.php:483
+msgid "&raquo; <small>Don't have a Twitter account? <a href='http://www.twitter.com'>Get one for free here</a>"
+msgstr "Ná <small> bhfuil cuntas  Twitter? <a href='http://www.twitter.com'>  Faigh ceann  saor in aisce anseo  </ a>"
+
+#: wp-to-twitter-manager.php:487
+msgid "Your Cli.gs account details"
+msgstr "Shonraí do chuntais Cli.gs"
+
+#: wp-to-twitter-manager.php:494
+msgid "Your Cli.gs <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Do Cli.gs cláir  <abbr title='application programming interface'>  API </ abbr> Eochair:"
+
+#: wp-to-twitter-manager.php:500
+msgid "Don't have a Cli.gs account or Cligs API key? <a href='http://cli.gs/user/api/'>Get one free here</a>!<br />You'll need an API key in order to associate the Cligs you create with your Cligs account."
+msgstr "Ná bheith san áireamh Cli.gs nó Cligs eochair API?  <a href='http://cli.gs/user/api/'>  Faigh ceann  saor in aisce anseo </ a>! <br /> Beidh ort eochair API d'fhonn a chomhlachú leis an Cligs a chruthú duit  le do  Cligs  áireamh."
+
+#: wp-to-twitter-manager.php:505
+msgid "Your Bit.ly account details"
+msgstr "Shonraí do chuntais Bit.ly"
+
+#: wp-to-twitter-manager.php:510
+msgid "Your Bit.ly username:"
+msgstr "Do Bit.ly ainm úsáideora:"
+
+#: wp-to-twitter-manager.php:514
+msgid "Your Bit.ly <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Do chláir title='application Bit.ly <abbr interface'>  API </ abbr> Eochair:"
+
+#: wp-to-twitter-manager.php:521
+msgid "Save Bit.ly API Key"
+msgstr "Sábháil Bit.ly API Key"
+
+#: wp-to-twitter-manager.php:521
+msgid "Clear Bit.ly API Key"
+msgstr "Glan Bit.ly API Key"
+
+#: wp-to-twitter-manager.php:521
+msgid "A Bit.ly API key and username is required to shorten URLs via the Bit.ly API and WP to Twitter."
+msgstr "Tá eochair Bit.ly API agus ainm úsáideora  gá URLanna a ghiorrú tríd an API Bit.ly agus WP le Twitter."
+
+#: wp-to-twitter-manager.php:530
+msgid "Check Support"
+msgstr "seiceáil Tacaíocht"
+
+#: wp-to-twitter-manager.php:530
+msgid "Check whether your server supports WP to Twitter's queries to the Twitter and URL shortening APIs."
+msgstr "Seiceáil an bhfuil tacaíocht do fhreastalaí  WP a thabhairt ar cheisteanna Twitter chuig an Twitter agus APIs giorrú URL."
+
+#: wp-to-twitter-manager.php:538
+msgid "Need help?"
+msgstr "Cabhair uait?"
+
+#: wp-to-twitter-manager.php:539
+msgid "Visit the <a href='http://www.joedolson.com/articles/wp-to-twitter/'>WP to Twitter plugin page</a>."
+msgstr "An WP<a href='http://www.joedolson.com/articles/wp-to-twitter/'>  <a  Cuairt ar  Twitter  leathanach  breiseán  </ a>."
+
+#. #-#-#-#-#  plugin.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Plugin Name of an extension
+#: wp-to-twitter.php:748
+msgid "WP to Twitter"
+msgstr "WP le Twitter"
+
+#: wp-to-twitter.php:789
+msgid "Twitter Post"
+msgstr "Iar twitter"
+
+#: wp-to-twitter.php:794
+msgid " characters.<br />Twitter posts are a maximum of 140 characters; if your Cli.gs URL is appended to the end of your document, you have 119 characters available. You can use <code>#url#</code>, <code>#title#</code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code>, or <code>#blog#</code> to insert the shortened URL, post title, the first category selected, the post date, or a post excerpt or blog name into the Tweet."
+msgstr "carachtair <br /> Twitter tá uasmhéid de 140 charachtair;. má tá do Cli.gs URL i gceangal leis an  deireadh  do doiciméad, tá tú 119 carachtair atá ar fáil. Is féidir leat úsáid <code>  # url # </ cód>, <code>  # teideal # </ cód>, <code>  iar # # </ cód>, <code>  # chatagóir # </ cód>, <code>  # dáta # </ cód>, nó <code>  # blag # </ cód> a chur isteach  an URL  a ghiorrú,  teideal  an phoist,  an chéad chatagóir  roghnaithe, an dáta an bpost, nó sliocht bpost í nó ainm bhlag isteach sa Tweet."
+
+#: wp-to-twitter.php:794
+msgid "Make a Donation"
+msgstr "Déan Síntiús"
+
+#: wp-to-twitter.php:797
+msgid "Don't Tweet this post."
+msgstr "Ná Tweet an post seo."
+
+#: wp-to-twitter.php:846
+msgid "WP to Twitter User Settings"
+msgstr "WP le Socruithe Úsáideoir Twitter"
+
+#: wp-to-twitter.php:850
+msgid "Use My Twitter Account"
+msgstr "Úsáid Mo Chuntas Twitter"
+
+#: wp-to-twitter.php:851
+msgid "Select this option if you would like your posts to be Tweeted into your own Twitter account with no @ references."
+msgstr "Roghnaigh an rogha seo más mian leat  do chuid  postálacha  a bheith  Tweeted  isteach i do chuntas Twitter féin gan aon tagairtí @."
+
+#: wp-to-twitter.php:852
+msgid "Tweet my posts into my Twitter account with an @ reference to the site's main Twitter account."
+msgstr "Tweet mo phoist isteach i mo chuntas Twitter le tagairt @ ar an suíomh  ar chuntas  Twitter  is mó."
+
+#: wp-to-twitter.php:853
+msgid "Tweet my posts into the main site Twitter account with an @ reference to my username. (Password not required with this option.)"
+msgstr "Tweet mo post isteach sa chuntas suíomh is mó  Twitter  le tagairt @ le mo ainm úsáideora. (Ní gá Pasfhocal leis an rogha seo.)"
+
+#: wp-to-twitter.php:856
+msgid "Your Twitter Username"
+msgstr "Do Twitter Ainm Úsáideora"
+
+#: wp-to-twitter.php:857
+msgid "Enter your own Twitter username."
+msgstr "Cuir isteach d'ainm úsáideora féin Twitter."
+
+#: wp-to-twitter.php:860
+msgid "Your Twitter Password"
+msgstr "Do Twitter Pasfhocal"
+
+#: wp-to-twitter.php:861
+msgid "Enter your own Twitter password."
+msgstr "Cuir isteach do phasfhocal  Twitter  féin."
+
+#: wp-to-twitter.php:980
+msgid "<p>Couldn't locate the settings page.</p>"
+msgstr "<p>Níorbh fhéidir teacht ar an leathanach  suímh</p>"
+
+#: wp-to-twitter.php:985
+msgid "Settings"
+msgstr "Socruithe"
+
+#. Plugin URI of an extension
+msgid "http://www.joedolson.com/articles/wp-to-twitter/"
+msgstr "http://www.joedolson.com/articles/wp-to-twitter/"
+
+#. Description of an extension
+msgid "Updates Twitter when you create a new blog post or add to your blogroll using Cli.gs. With a Cli.gs API key, creates a clig in your Cli.gs account with the name of your post as the title."
+msgstr "Twitter Nuashonruithe  nuair a  chruthú duit  a blog post  nua nó  a chur le do  blogroll  ag baint úsáide as Cli.gs. Le eochair ar API Cli.gs, cruthaítear clig i do chuntas Cli.gs leis an ainm do phost mar an teideal."
+
+#. Author of an extension
+msgid "Joseph Dolson"
+msgstr "Joseph Dolson"
+
+#. Author URI of an extension
+msgid "http://www.joedolson.com/"
+msgstr "http://www.joedolson.com/"
+
+#~ msgid ""
+#~ "The query to the URL shortener API failed, and your URL was not shrunk. "
+#~ "The full post URL was attached to your Tweet."
+#~ msgstr ""
+#~ "La richiesta API per la creazione dell'URL breve é fallita: il tuo URL "
+#~ "non é stato abbreviato. E' stato allegato l'URL completo al tuo messaggio."
+
+#~ msgid "Add_new_tag"
+#~ msgstr "Add_new_tag"
+
+#~ msgid "This plugin may not work in your server environment."
+#~ msgstr "Questo plugin non può funzionare sul tuo server."
+
+#~ msgid "Wordpress to Twitter Publishing Options"
+#~ msgstr "Opzioni editoriali Wordpress to Twitter"
+
+#~ msgid "Provide link to blog?"
+#~ msgstr "Desideri il link al blog?"
+
+#~ msgid "Use <strong>link title</strong> for Twitter updates"
+#~ msgstr ""
+#~ "Utilizza un <strong>link di testo</strong> per gli aggiornamenti di "
+#~ "Twitter"
+
+#~ msgid "Use <strong>link description</strong> for Twitter updates"
+#~ msgstr ""
+#~ "Utilizza un <strong>link descrittivo</strong> per gli aggiornamenti di "
+#~ "Twitter"
+
+#~ msgid ""
+#~ "Text for new link updates (used if title/description isn't available.):"
+#~ msgstr ""
+#~ "Testo per il link ai nuovi aggiornamenti (se titolo/descrizione non "
+#~ "fossero disponibili):"
+
+#~ msgid "Custom text prepended to Tweets:"
+#~ msgstr "Testo personalizzato davanti al messaggio:"

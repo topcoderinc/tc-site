@@ -1,0 +1,1162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP to Twitter\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-to-twitter\n"
+"POT-Creation-Date: 2011-08-01 22:02:33+00:00\n"
+"PO-Revision-Date: \n"
+"Last-Translator: pnuts <i@pnuts.cc>\n"
+"Language-Team: Racent <pnuts.zhao@racent.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+
+#: functions.php:201
+msgid "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Hide</a>] If you're experiencing trouble, please copy these settings into any request for support."
+msgstr "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>隐藏</a>]如果你在使用中遇到错误，请复制这些设置信息给我们以获得技术支持。"
+
+#: wp-to-twitter.php:48
+msgid "WP to Twitter requires PHP version 5 or above with cURL support. Please upgrade PHP or install cURL to run WP to Twitter."
+msgstr "WP to Twitter需要PHP5或以上版本，并启用了cURL支持。请升级PHP并安装cURL。"
+
+#: wp-to-twitter.php:69
+msgid "WP to Twitter requires WordPress 2.9.2 or a more recent version. <a href=\"http://codex.wordpress.org/Upgrading_WordPress\">Please update your WordPress version!</a>"
+msgstr "WP to Twitter需要Wordpress2.9.2或以上版本。 <a href=\"http://codex.wordpress.org/Upgrading_WordPress\">请更新你的Wordpress版本！</a>"
+
+#: wp-to-twitter.php:83
+msgid "Twitter requires authentication by OAuth. You will need to <a href='%s'>update your settings</a> to complete installation of WP to Twitter."
+msgstr "Twitter需要OAuth验证。若要完成安装，请先<a href='%s'>更新设置</a>。"
+
+#: wp-to-twitter.php:197
+msgid "200 OK: Success!"
+msgstr "200 OK: 成功！"
+
+#: wp-to-twitter.php:201
+msgid "400 Bad Request: The request was invalid. This is the status code returned during rate limiting."
+msgstr "400 无效请求：请求无效。在请求频率限制的范围内返回了400的状态码。"
+
+#: wp-to-twitter.php:205
+msgid "401 Unauthorized: Authentication credentials were missing or incorrect."
+msgstr "401 未授权：授权证书丢失或不正确。"
+
+#: wp-to-twitter.php:209
+msgid "403 Forbidden: The request is understood, but it has been refused. This code is used when requests are understood, but are denied by Twitter. Reasons include exceeding the 140 character limit or the API update limit."
+msgstr "403 禁止访问：请求已被识别，但被服务器拒绝响应。当Twitter拒绝响应用户请求时会返回此错误。原因包括：内容超过140个字或者API变动等。"
+
+#: wp-to-twitter.php:213
+msgid "500 Internal Server Error: Something is broken at Twitter."
+msgstr "500 内部错误：Twitter服务器发生了内部错误。"
+
+#: wp-to-twitter.php:217
+msgid "503 Service Unavailable: The Twitter servers are up, but overloaded with requests Please try again later."
+msgstr "503 服务不可用：Twitter服务器负荷过重，请稍后再试。"
+
+#: wp-to-twitter.php:221
+msgid "502 Bad Gateway: Twitter is down or being upgraded."
+msgstr "502 错误的网关：Twitter服务器宕机或升级中。"
+
+#. #-#-#-#-#  plugin.pot (WP to Twitter 2.3.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: wp-to-twitter.php:803
+msgid "WP to Twitter"
+msgstr "WP to Twitter"
+
+#: wp-to-twitter.php:833
+msgid "Tweet this post."
+msgstr "推这篇博文。"
+
+#: wp-to-twitter.php:836
+msgid "Don't Tweet this post."
+msgstr "不要将这篇日志同步至Twitter"
+
+#: wp-to-twitter.php:877
+msgid "Custom Twitter Post"
+msgstr "定制推文"
+
+#: wp-to-twitter.php:886
+#: wp-to-twitter-manager.php:385
+msgid "Make a Donation"
+msgstr "捐助"
+
+#: wp-to-twitter.php:886
+#: wp-to-twitter-manager.php:385
+msgid "Get Support"
+msgstr "获得支持"
+
+#: wp-to-twitter.php:899
+msgid "This URL is direct and has not been shortened: "
+msgstr "URL没有使用短域名服务："
+
+#: wp-to-twitter.php:961
+msgid "WP to Twitter User Settings"
+msgstr "WP to Twitter 用户设置"
+
+#: wp-to-twitter.php:965
+msgid "Use My Twitter Username"
+msgstr "使用我Twitter的用户名"
+
+#: wp-to-twitter.php:966
+msgid "Tweet my posts with an @ reference to my username."
+msgstr "同步日志到Twitter后，使用@通知我的Twitter账户。"
+
+#: wp-to-twitter.php:967
+msgid "Tweet my posts with an @ reference to both my username and to the main site username."
+msgstr "如果如果同步日志到Twitter后，使用@通知我的Twitter账户以及博客的主Twitter账户。"
+
+#: wp-to-twitter.php:971
+msgid "Your Twitter Username"
+msgstr "你的Twitter用户名"
+
+#: wp-to-twitter.php:972
+msgid "Enter your own Twitter username."
+msgstr "输入你的Twitter用户名。"
+
+#: wp-to-twitter.php:1011
+msgid "Check the categories you want to tweet:"
+msgstr "选择你想要推的分类："
+
+#: wp-to-twitter.php:1028
+msgid "Set Categories"
+msgstr "设定分类"
+
+#: wp-to-twitter.php:1052
+msgid "<p>Couldn't locate the settings page.</p>"
+msgstr "<p>不能确定设置页面的位置。</p>"
+
+#: wp-to-twitter.php:1057
+msgid "Settings"
+msgstr "设置"
+
+#: wp-to-twitter-oauth.php:105
+msgid "There was an error querying Twitter's servers."
+msgstr "查询Twitter服务器的过程中发生了错误。"
+
+#: wp-to-twitter-oauth.php:112
+#: wp-to-twitter-oauth.php:156
+msgid "Connect to Twitter"
+msgstr "连接到Twitter"
+
+#: wp-to-twitter-oauth.php:115
+#: wp-to-twitter-oauth.php:186
+msgid "Your server time:"
+msgstr "你服务器的时间："
+
+#: wp-to-twitter-oauth.php:115
+msgid "If these times are not within 5 minutes of each other, your server will not be able to connect to Twitter."
+msgstr "如果他们之间的时间间隔超过5分钟，你的服务器将无法访问Twitter。"
+
+#: wp-to-twitter-oauth.php:116
+msgid "The process to set up OAuth authentication for your web site is needlessly laborious. However, this is the method available. Note that you will not add your Twitter username or password to WP to Twitter; they are not used in OAuth authentication."
+msgstr "设置OAuth验证的过程虽然复杂，但却是唯一的可用方法。注意：你不需要在WP to Twitter中输入你Twitter账户的用户名和密码，OAuth验证过程不需要这些信息。"
+
+#: wp-to-twitter-oauth.php:119
+msgid "1. Register this site as an application on "
+msgstr "1. 将本站注册为一个应用："
+
+#: wp-to-twitter-oauth.php:119
+msgid "Twitter's application registration page"
+msgstr "Twitter应用的注册页面"
+
+#: wp-to-twitter-oauth.php:121
+msgid "If you're not currently logged in, log-in with the Twitter username and password which you want associated with this site"
+msgstr "如果你没有登陆到Twitter，你先登陆到你想要绑定的Twitter账户。"
+
+#: wp-to-twitter-oauth.php:122
+msgid "Your Application's Name will be what shows up after \"via\" in your twitter stream. Your application name cannot include the word \"Twitter.\" Use the name of your web site."
+msgstr "应用名称会显示在你每条新鲜事的\"via\"后面。应用程序名称不能包含\"Twitter.\"字样。你可能用你网站的名称。"
+
+#: wp-to-twitter-oauth.php:123
+msgid "Your Application Description can be whatever you want."
+msgstr "应用程序的描述可以任意填写。"
+
+#: wp-to-twitter-oauth.php:124
+msgid "The WebSite and Callback URL should be "
+msgstr "WebSite和Callback URL应该是"
+
+#: wp-to-twitter-oauth.php:126
+msgid "Agree to the Developer Rules of the Road and continue."
+msgstr "同意开发者协议，并继续。"
+
+#: wp-to-twitter-oauth.php:127
+msgid "2. Switch to \"Settings\" tab in Twitter apps"
+msgstr "2. 在Twitter Apps页面切换到\"Settings\"标签"
+
+#: wp-to-twitter-oauth.php:129
+msgid "Select \"Read and Write\" for the Application Type"
+msgstr "应用程序类型选择\"Read and Write\""
+
+#: wp-to-twitter-oauth.php:130
+msgid "Update the application settings"
+msgstr "更新程序设置"
+
+#: wp-to-twitter-oauth.php:131
+msgid "Return to Details tab and create your access token. Refresh page to view your access tokens."
+msgstr "返回详细设置标签页，创建你的Access Token。刷新页面后就可以看到你的Access Token了。"
+
+#: wp-to-twitter-oauth.php:133
+msgid "Once you have registered your site as an application, you will be provided with four keys."
+msgstr "应用程序注册成功后，你要输入Twitter所提示的4个Key。"
+
+#: wp-to-twitter-oauth.php:134
+msgid "3. Copy and paste your consumer key and consumer secret into the fields below"
+msgstr "3. 将你的Consumer Key和Consumer Secert复制到下面"
+
+#: wp-to-twitter-oauth.php:137
+msgid "Twitter Consumer Key"
+msgstr "Twitter Consumer Key"
+
+#: wp-to-twitter-oauth.php:141
+msgid "Twitter Consumer Secret"
+msgstr "Twitter Consumer Secret"
+
+#: wp-to-twitter-oauth.php:144
+msgid "4. Copy and paste your Access Token and Access Token Secret into the fields below"
+msgstr "4. 将你的Access Token和Access Token Secret复制至下面"
+
+#: wp-to-twitter-oauth.php:145
+msgid "If the Access level reported for your Access Token is not \"Read and write\", you will need to delete your application from Twitter and start over. Don't blame me, I'm not the _______ who designed this process."
+msgstr "如果系统提示你的Access Token不具有读写权限（\"Read and write\"），你只能删掉你的应用重头再来。别骂我哦~~我可不是那个XXXXXX的设计者。"
+
+#: wp-to-twitter-oauth.php:147
+msgid "Access Token"
+msgstr "Access Token"
+
+#: wp-to-twitter-oauth.php:151
+msgid "Access Token Secret"
+msgstr "Access Token Secret"
+
+#: wp-to-twitter-oauth.php:166
+msgid "Disconnect from Twitter"
+msgstr "已与Twitter断开连接"
+
+#: wp-to-twitter-oauth.php:173
+msgid "Twitter Username "
+msgstr "Twitter的用户名"
+
+#: wp-to-twitter-oauth.php:174
+msgid "Consumer Key "
+msgstr "Consumer Key "
+
+#: wp-to-twitter-oauth.php:175
+msgid "Consumer Secret "
+msgstr "Consumer Secret "
+
+#: wp-to-twitter-oauth.php:176
+msgid "Access Token "
+msgstr "Access Token "
+
+#: wp-to-twitter-oauth.php:177
+msgid "Access Token Secret "
+msgstr "Access Token Secret "
+
+#: wp-to-twitter-oauth.php:180
+msgid "Disconnect Your WordPress and Twitter Account"
+msgstr "断开你的Wordpress与Twitter连接"
+
+#: wp-to-twitter-oauth.php:186
+msgid "Twitter's current server time: "
+msgstr "Twitter服务器的当前时间:"
+
+#: wp-to-twitter-oauth.php:186
+msgid "If these times are not within 5 minutes of each other, your server could lose it's connection with Twitter."
+msgstr "如果他们之间的时间间隔超过5分钟，你将会失去与Twitter服务器的连接。"
+
+#: wp-to-twitter-manager.php:96
+msgid "WP to Twitter is now connected with Twitter."
+msgstr "WP to Twitter已连接到Twitter服务器。"
+
+#: wp-to-twitter-manager.php:106
+msgid "OAuth Authentication Data Cleared."
+msgstr "OAuth验证信息已被清除。"
+
+#: wp-to-twitter-manager.php:113
+msgid "OAuth Authentication Failed. Your server time is not in sync with the Twitter servers. Talk to your hosting service to see what can be done."
+msgstr "OAuth验证失败。你服务器的时间与Twitter的时间不同步。请联系你服务器的管理员。"
+
+#: wp-to-twitter-manager.php:120
+msgid "OAuth Authentication response not understood."
+msgstr "OAuth验证的返回信息无法别解析。"
+
+#: wp-to-twitter-manager.php:129
+msgid "WP to Twitter Errors Cleared"
+msgstr "WP to Twitter 的错误信息已清除"
+
+#: wp-to-twitter-manager.php:136
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your new blog post. Your tweet has been stored in a custom field attached to the post, so you can Tweet it manually if you wish! "
+msgstr "抱歉！ 我不能连接到Twitter服务器，将你的新日志同步至Twitter。你的推已经保存在该日志的自定义域中，如果你想可以手动发送。"
+
+#: wp-to-twitter-manager.php:138
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your <strong>new link</strong>! You'll have to post it manually, I'm afraid. "
+msgstr "抱歉！ 不能连接Twitter服务器来将你的<strong>新链接</strong>同步至Twitter！ 我恐怕你得手动发这个推了。"
+
+#: wp-to-twitter-manager.php:174
+msgid "WP to Twitter Advanced Options Updated"
+msgstr "WP to Twitter高级选项"
+
+#: wp-to-twitter-manager.php:197
+msgid "You must add your Bit.ly login and API key in order to shorten URLs with Bit.ly."
+msgstr "如果你想使用Bit.ly提供的URL缩短功能，就必须添加Bit.ly登录信息和API Key。"
+
+#: wp-to-twitter-manager.php:201
+msgid "You must add your YOURLS remote URL, login, and password in order to shorten URLs with a remote installation of YOURLS."
+msgstr "要使用远程的YOURLS短域名服务，请先添加你的YOURLS的URL，用户名和密码。"
+
+#: wp-to-twitter-manager.php:205
+msgid "You must add your YOURLS server path in order to shorten URLs with a remote installation of YOURLS."
+msgstr "要使用本机的YOURLS短域名服务，请先添加你的YOURLS路径。"
+
+#: wp-to-twitter-manager.php:209
+msgid "WP to Twitter Options Updated"
+msgstr "WP to Twitter 的设置已经更新"
+
+#: wp-to-twitter-manager.php:219
+msgid "Category limits updated."
+msgstr "分类的限制已更新。"
+
+#: wp-to-twitter-manager.php:223
+msgid "Category limits unset."
+msgstr "分类的限制未设定。"
+
+#: wp-to-twitter-manager.php:231
+msgid "YOURLS password updated. "
+msgstr "YOURLS的密码已经更新。"
+
+#: wp-to-twitter-manager.php:234
+msgid "YOURLS password deleted. You will be unable to use your remote YOURLS account to create short URLS."
+msgstr "YOURLS的密码已删除。你将无法使用YOURLS短域名服务来缩短域名。"
+
+#: wp-to-twitter-manager.php:236
+msgid "Failed to save your YOURLS password! "
+msgstr "YOURLS的密码保存失败！"
+
+#: wp-to-twitter-manager.php:240
+msgid "YOURLS username added. "
+msgstr "YOURLS的用户名已添加。"
+
+#: wp-to-twitter-manager.php:244
+msgid "YOURLS API url added. "
+msgstr "YOURLS的API URL已添加。"
+
+#: wp-to-twitter-manager.php:247
+msgid "YOURLS API url removed. "
+msgstr "YOURLS的API URL已移除。"
+
+#: wp-to-twitter-manager.php:252
+msgid "YOURLS local server path added. "
+msgstr "本地YOURLS服务的路径地址已添加。"
+
+#: wp-to-twitter-manager.php:254
+msgid "The path to your YOURLS installation is not correct. "
+msgstr "所输入的YOURLS的路径无效。"
+
+#: wp-to-twitter-manager.php:258
+msgid "YOURLS local server path removed. "
+msgstr "YOURLS的路径地址已删除。"
+
+#: wp-to-twitter-manager.php:262
+msgid "YOURLS will use Post ID for short URL slug."
+msgstr "YOURLS采用博文的ID来缩短域名。"
+
+#: wp-to-twitter-manager.php:265
+msgid "YOURLS will not use Post ID for the short URL slug."
+msgstr "YOURLS不采用博文的ID来缩短域名。"
+
+#: wp-to-twitter-manager.php:273
+msgid "Su.pr API Key and Username Updated"
+msgstr "Su.pr API Key和用户名已更新"
+
+#: wp-to-twitter-manager.php:277
+msgid "Su.pr API Key and username deleted. Su.pr URLs created by WP to Twitter will no longer be associated with your account. "
+msgstr "Su.pr API Key已经被删除。WP to Twitter将不再与Su.pr关联。"
+
+#: wp-to-twitter-manager.php:279
+msgid "Su.pr API Key not added - <a href='http://su.pr/'>get one here</a>! "
+msgstr "Su.pr API Key 还没有添加  - <a href='http://cli.gs/user/api/'>这里</a>来获取一个吧！"
+
+#: wp-to-twitter-manager.php:285
+msgid "Bit.ly API Key Updated."
+msgstr "Bit.ly API Key 已经更新"
+
+#: wp-to-twitter-manager.php:288
+msgid "Bit.ly API Key deleted. You cannot use the Bit.ly API without an API key. "
+msgstr "Bit.ly API Key 已经删除。如果没有 API，将无法使用Bit.ly提供的服务。"
+
+#: wp-to-twitter-manager.php:290
+msgid "Bit.ly API Key not added - <a href='http://bit.ly/account/'>get one here</a>! An API key is required to use the Bit.ly URL shortening service."
+msgstr "Bit.ly的API还没有添加 - <a href='http://bit.ly/account/'>这里</a>获得一个吧！ 如果你想使用URL缩短功能，就必须提供一个Bit.ly的API。"
+
+#: wp-to-twitter-manager.php:294
+msgid " Bit.ly User Login Updated."
+msgstr "Bit.ly登录信息已经更新。"
+
+#: wp-to-twitter-manager.php:297
+msgid "Bit.ly User Login deleted. You cannot use the Bit.ly API without providing your username. "
+msgstr "Bit.ly登录信息已经删除。没有了登录信息，你将不能使用Bit.ly。"
+
+#: wp-to-twitter-manager.php:299
+msgid "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! "
+msgstr "Bit.ly 登录信息没有添加 - <a href='http://bit.ly/account/'>这里</a>来获取一个吧！"
+
+#: wp-to-twitter-manager.php:328
+msgid "No error information is available for your shortener."
+msgstr "短语名服务发生未知错误。"
+
+#: wp-to-twitter-manager.php:330
+msgid "<li class=\"error\"><strong>WP to Twitter was unable to contact your selected URL shortening service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter无法连接到所选的短域名服务。</strong></li>"
+
+#: wp-to-twitter-manager.php:333
+msgid "<li><strong>WP to Twitter successfully contacted your selected URL shortening service.</strong>  The following link should point to your blog homepage:"
+msgstr "<li><strong>WP to Twitter成功的连接到所选的短域名服务。</strong> 下面的链接会指向你的博客首页。"
+
+#: wp-to-twitter-manager.php:342
+msgid "<li><strong>WP to Twitter successfully submitted a status update to Twitter.</strong></li>"
+msgstr "<li><strong>WP to Twitter成功的更新了一条推。</strong></li>"
+
+#: wp-to-twitter-manager.php:345
+msgid "<li class=\"error\"><strong>WP to Twitter failed to submit an update to Twitter.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter更新Twitter失败。</strong></li>"
+
+#: wp-to-twitter-manager.php:349
+msgid "You have not connected WordPress to Twitter."
+msgstr "你还没有建立Wordpress到Twitter的连接。"
+
+#: wp-to-twitter-manager.php:353
+msgid "<li class=\"error\"><strong>Your server does not appear to support the required methods for WP to Twitter to function.</strong> You can try it anyway - these tests aren't perfect.</li>"
+msgstr "<li><strong>你的服务器可能缺少一些WP to Twitter需要的PHP函数。</strong>你可以继续尝试，因为这些测试结果并不保证是正确的。</li>"
+
+#: wp-to-twitter-manager.php:357
+msgid "<li><strong>Your server should run WP to Twitter successfully.</strong></li>"
+msgstr "<li><strong>你的服务器应该可以正常运行WP to Twitter。</strong></li>"
+
+#: wp-to-twitter-manager.php:374
+msgid "WP to Twitter Options"
+msgstr "WP to Twitter 选项"
+
+#: wp-to-twitter-manager.php:384
+msgid "Pledge to new features"
+msgstr "征求新功能"
+
+#: wp-to-twitter-manager.php:385
+msgid "View Settings"
+msgstr "查看设置"
+
+#: wp-to-twitter-manager.php:412
+msgid "Shortcodes available in post update templates:"
+msgstr "推文模板支持的简码："
+
+#: wp-to-twitter-manager.php:414
+msgid "<code>#title#</code>: the title of your blog post"
+msgstr "<code>#title#</code>: 博文的标题"
+
+#: wp-to-twitter-manager.php:415
+msgid "<code>#blog#</code>: the title of your blog"
+msgstr "<code>#blog#</code>: 博客的站名"
+
+#: wp-to-twitter-manager.php:416
+msgid "<code>#post#</code>: a short excerpt of the post content"
+msgstr "<code>#post#</code>: 博文概要"
+
+#: wp-to-twitter-manager.php:417
+msgid "<code>#category#</code>: the first selected category for the post"
+msgstr "<code>#category#</code>: 博文的第一个分类"
+
+#: wp-to-twitter-manager.php:418
+msgid "<code>#date#</code>: the post date"
+msgstr "<code>#date#</code>: 发布日期"
+
+#: wp-to-twitter-manager.php:419
+msgid "<code>#url#</code>: the post URL"
+msgstr "<code>#url#</code>: 博文地址"
+
+#: wp-to-twitter-manager.php:420
+msgid "<code>#author#</code>: the post author"
+msgstr "<code>#author#</code>: 博文作者"
+
+#: wp-to-twitter-manager.php:421
+msgid "<code>#account#</code>: the twitter @reference for the account (or the author, if author settings are enabled and set.)"
+msgstr "<code>#account#</code>: 用@通知当前用户的twitter账户（如果启用了作者选项，则是作者）"
+
+#: wp-to-twitter-manager.php:423
+msgid "You can also create custom shortcodes to access WordPress custom fields. Use doubled square brackets surrounding the name of your custom field to add the value of that custom field to your status update. Example: <code>[[custom_field]]</code></p>"
+msgstr "你可以自定义短码，以便于引用那些自定义的字段。要在推文中加入自定义字段，请用两个方括号将自己字段的名字括起来。如： <code>[[custom_field]]</code></p>"
+
+#: wp-to-twitter-manager.php:428
+msgid "<p>One or more of your last posts has failed to send it's status update to Twitter. Your Tweet has been saved in your post custom fields, and you can re-Tweet it at your leisure.</p>"
+msgstr "<p>在同步一个或多个日志到Twitter时出现错误。你的推已经保存在日志的自定义域中，你可以在空闲时间重新发送他们。</p>"
+
+#: wp-to-twitter-manager.php:432
+msgid "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://www.stumbleupon.com/help/how-to-use-supr/\">Su.pr Help</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+msgstr "<p>在请求URL缩短服务的API时出错，你的URL并没有被缩短。一个完整的URL已经包含在你的推中。检查你的URL缩短功能提供商看那里是不是有一些已知的错误。[<a href=\"http://blog.cli.gs\">Su.pr Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+
+#: wp-to-twitter-manager.php:439
+msgid "Clear 'WP to Twitter' Error Messages"
+msgstr "清除WP to Twitter的错误信息"
+
+#: wp-to-twitter-manager.php:452
+msgid "Basic Settings"
+msgstr "基本设置"
+
+#: wp-to-twitter-manager.php:486
+msgid "Settings for Comments"
+msgstr "评论设置"
+
+#: wp-to-twitter-manager.php:489
+msgid "Update Twitter when new comments are posted"
+msgstr "当添加评论时同步至Twitter"
+
+#: wp-to-twitter-manager.php:490
+msgid "Text for new comments:"
+msgstr "发表新评论时，推的内容："
+
+#: wp-to-twitter-manager.php:494
+msgid "Settings for Links"
+msgstr "链接设置"
+
+#: wp-to-twitter-manager.php:497
+msgid "Update Twitter when you post a Blogroll link"
+msgstr "当Blogroll链接更新时同步至Twitter"
+
+#: wp-to-twitter-manager.php:498
+msgid "Text for new link updates:"
+msgstr "添加新链接时，推的内容："
+
+#: wp-to-twitter-manager.php:498
+msgid "Available shortcodes: <code>#url#</code>, <code>#title#</code>, and <code>#description#</code>."
+msgstr "支持的简码：<code>#url#</code>，<code>#title#</code>，<code>#description#</code>。"
+
+#: wp-to-twitter-manager.php:502
+msgid "Choose your short URL service (account settings below)"
+msgstr "选择你的短域名服务（账户设置在下面）"
+
+#: wp-to-twitter-manager.php:505
+msgid "Don't shorten URLs."
+msgstr "不要缩短URL。"
+
+#: wp-to-twitter-manager.php:506
+msgid "Use Su.pr for my URL shortener."
+msgstr "使用<strong>Su.pr</strong>来为我缩短URL。"
+
+#: wp-to-twitter-manager.php:507
+msgid "Use Bit.ly for my URL shortener."
+msgstr "使用<strong>Bit.ly</strong>短域名服务。"
+
+#: wp-to-twitter-manager.php:508
+msgid "YOURLS (installed on this server)"
+msgstr "YOURLS （安装在这台服务器上）"
+
+#: wp-to-twitter-manager.php:509
+msgid "YOURLS (installed on a remote server)"
+msgstr "YOURLS（安装在远程的服务器上）"
+
+#: wp-to-twitter-manager.php:510
+msgid "Use WordPress as a URL shortener."
+msgstr "使用<strong>Wordpress</strong>短域名服务。"
+
+#: wp-to-twitter-manager.php:512
+msgid "Using WordPress as a URL shortener will send URLs to Twitter in the default URL format for WordPress: <code>http://domain.com/wpdir/?p=123</code>. Google Analytics is not available when using WordPress shortened URLs."
+msgstr "使用Wordpress短域名服务，地址将会自动被格式化为<code>http://domain.com/subdir/?p=123</code>。同时，无法使用Google Analytics来跟踪。"
+
+#: wp-to-twitter-manager.php:518
+msgid "Save WP->Twitter Options"
+msgstr "保存 WP to Twitter 选项"
+
+#: wp-to-twitter-manager.php:527
+msgid "<abbr title=\"Uniform Resource Locator\">URL</abbr> Shortener Account Settings"
+msgstr "<abbr title=\"统一资源定位符\">URL</abbr>短域名账户设置"
+
+#: wp-to-twitter-manager.php:531
+msgid "Your Su.pr account details"
+msgstr "你的Su.pr账户信息："
+
+#: wp-to-twitter-manager.php:536
+msgid "Your Su.pr Username:"
+msgstr "你的Su.pr用户名："
+
+#: wp-to-twitter-manager.php:540
+msgid "Your Su.pr <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "你的Su.pr<abbr title='应用程序接口'>API</abbr> Key："
+
+#: wp-to-twitter-manager.php:546
+msgid "Don't have a Su.pr account or API key? <a href='http://su.pr/'>Get one here</a>!<br />You'll need an API key in order to associate the URLs you create with your Su.pr account."
+msgstr "你还没有Su.pr账户或者Su.pr的API Key么？ 那快来<a href='http://cli.gs/user/api/'>这里</a>免费获取一个吧！<br />如果你需要关联你的Su.pr账户，你还需要一个API Key。"
+
+#: wp-to-twitter-manager.php:552
+msgid "Your Bit.ly account details"
+msgstr "你的Bit.ly账户信息"
+
+#: wp-to-twitter-manager.php:557
+msgid "Your Bit.ly username:"
+msgstr "你的Bit.ly用户名："
+
+#: wp-to-twitter-manager.php:561
+msgid "Your Bit.ly <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "你Bit.ly<abbr title='应用程序接口'>API</abbr> Key："
+
+#: wp-to-twitter-manager.php:568
+msgid "Save Bit.ly API Key"
+msgstr "保存Bit.ly API Key"
+
+#: wp-to-twitter-manager.php:568
+msgid "Clear Bit.ly API Key"
+msgstr "清除Bit.ly API Key"
+
+#: wp-to-twitter-manager.php:568
+msgid "A Bit.ly API key and username is required to shorten URLs via the Bit.ly API and WP to Twitter."
+msgstr "当通过Bit.ly API缩短URL时，需要Bit.ly的API Key和用户名。"
+
+#: wp-to-twitter-manager.php:573
+msgid "Your YOURLS account details"
+msgstr "你的YOURLS账户信息："
+
+#: wp-to-twitter-manager.php:577
+msgid "Path to your YOURLS config file (Local installations)"
+msgstr "本地YOURLS的配置文件（本地安装）"
+
+#: wp-to-twitter-manager.php:578
+#: wp-to-twitter-manager.php:582
+msgid "Example:"
+msgstr "如："
+
+#: wp-to-twitter-manager.php:581
+msgid "URI to the YOURLS API (Remote installations)"
+msgstr "YOURLS API的URI地址（远程安装）"
+
+#: wp-to-twitter-manager.php:585
+msgid "Your YOURLS username:"
+msgstr "你的YOURLS用户名："
+
+#: wp-to-twitter-manager.php:589
+msgid "Your YOURLS password:"
+msgstr "你的YOURLS的密码："
+
+#: wp-to-twitter-manager.php:589
+msgid "<em>Saved</em>"
+msgstr "<em>已保存</em>"
+
+#: wp-to-twitter-manager.php:593
+msgid "Use Post ID for YOURLS url slug."
+msgstr "YOURLS采用博文的ID缩短域名。"
+
+#: wp-to-twitter-manager.php:598
+msgid "Save YOURLS Account Info"
+msgstr "保存YOURLS账户信息"
+
+#: wp-to-twitter-manager.php:598
+msgid "Clear YOURLS password"
+msgstr "清除YOURLS的密码"
+
+#: wp-to-twitter-manager.php:598
+msgid "A YOURLS password and username is required to shorten URLs via the remote YOURLS API and WP to Twitter."
+msgstr "当通过YOURLS API缩短URL时，需要YOURLS的用户名和密码。"
+
+#: wp-to-twitter-manager.php:610
+msgid "Advanced Settings"
+msgstr "高级设置"
+
+#: wp-to-twitter-manager.php:617
+msgid "Advanced Tweet settings"
+msgstr "高级推文设置"
+
+#: wp-to-twitter-manager.php:619
+msgid "Add tags as hashtags on Tweets"
+msgstr "在推中将Tag添加为hashTags（#）"
+
+#: wp-to-twitter-manager.php:619
+msgid "Strip nonalphanumeric characters"
+msgstr "跳过非阿拉伯字符"
+
+#: wp-to-twitter-manager.php:620
+msgid "Spaces replaced with:"
+msgstr "空格被替换为："
+
+#: wp-to-twitter-manager.php:622
+msgid "Default replacement is an underscore (<code>_</code>). Use <code>[ ]</code> to remove spaces entirely."
+msgstr "默认替换为下划线（<code>_</code>）。使用<code>[ ]</code>来删除日志中的空格。"
+
+#: wp-to-twitter-manager.php:625
+msgid "Maximum number of tags to include:"
+msgstr "包含Tag的最大数量："
+
+#: wp-to-twitter-manager.php:626
+msgid "Maximum length in characters for included tags:"
+msgstr "包含Tag的最大长度："
+
+#: wp-to-twitter-manager.php:627
+msgid "These options allow you to restrict the length and number of WordPress tags sent to Twitter as hashtags. Set to <code>0</code> or leave blank to allow any and all tags."
+msgstr "这些选项可以让你限制WP日志中，Tag的数量和长度。设置<code>0</code>或者留空来显示所有的标签。"
+
+#: wp-to-twitter-manager.php:630
+msgid "Length of post excerpt (in characters):"
+msgstr "日志摘要的长度（以字符计算）："
+
+#: wp-to-twitter-manager.php:630
+msgid "By default, extracted from the post itself. If you use the 'Excerpt' field, that will be used instead."
+msgstr "默认的，将会从日志内提取，如果你使用了‘摘要’这个自定义域，将会自动替换为你自定义的内容。"
+
+#: wp-to-twitter-manager.php:633
+msgid "WP to Twitter Date Formatting:"
+msgstr "WP to Twitter 日期格式："
+
+#: wp-to-twitter-manager.php:634
+msgid "Default is from your general settings. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+msgstr "默认将会使用通用设置。请参考<a href='http://codex.wordpress.org/Formatting_Date_and_Time'>时间格式文档</a>。"
+
+#: wp-to-twitter-manager.php:638
+msgid "Custom text before all Tweets:"
+msgstr "每条推前的自定义文字："
+
+#: wp-to-twitter-manager.php:639
+msgid "Custom text after all Tweets:"
+msgstr "每条推后的自定义文字："
+
+#: wp-to-twitter-manager.php:642
+msgid "Custom field for an alternate URL to be shortened and Tweeted:"
+msgstr "会替换为短URL并且同步至至Twitter的域的名称："
+
+#: wp-to-twitter-manager.php:643
+msgid "You can use a custom field to send an alternate URL for your post. The value is the name of a custom field containing your external URL."
+msgstr "你可以用自定义字段同步一些其实的链接。这里的值就是那个字段的名称。"
+
+#: wp-to-twitter-manager.php:647
+msgid "Special Cases when WordPress should send a Tweet"
+msgstr "Wordpress同步博文的条件"
+
+#: wp-to-twitter-manager.php:650
+msgid "Do not post status updates by default"
+msgstr "默认不发表状态更新"
+
+#: wp-to-twitter-manager.php:651
+msgid "By default, all posts meeting other requirements will be posted to Twitter. Check this to change your setting."
+msgstr "默认情况下，所有的博文满足其他需求的，会被发表到Twitter。点击这里更改设置。"
+
+#: wp-to-twitter-manager.php:655
+msgid "Allow status updates from Quick Edit"
+msgstr "允许在快速编辑中更新状态"
+
+#: wp-to-twitter-manager.php:656
+msgid "If checked, all posts edited individually or in bulk through the Quick Edit feature will be tweeted."
+msgstr "如果被选中，所有的博文，无论是单独编辑的，还是通过快速编辑功能批量编辑的，都会被发表到Twitter上。"
+
+#: wp-to-twitter-manager.php:661
+msgid "Send Twitter Updates on remote publication (Post by Email or XMLRPC Client)"
+msgstr "当远程发布日志的时候（通过EMail或者XMLRPC客户端），同步至Twitter"
+
+#: wp-to-twitter-manager.php:665
+msgid "Google Analytics Settings"
+msgstr "Google Analytics设置"
+
+#: wp-to-twitter-manager.php:666
+msgid "You can track the response from Twitter using Google Analytics by defining a campaign identifier here. You can either define a static identifier or a dynamic identifier. Static identifiers don't change from post to post; dynamic identifiers are derived from information relevant to the specific post. Dynamic identifiers will allow you to break down your statistics by an additional variable."
+msgstr "通过定义一个标识，你可以用Google Analytics跟踪Twitter的反响。标识包含静态和动态的两种：静态标识这所有博文公用的，不会改变。动态标识依据博文不同而不同。动态标识可以帮助你更细的拆分统计结果。"
+
+#: wp-to-twitter-manager.php:670
+msgid "Use a Static Identifier with WP-to-Twitter"
+msgstr "WP to Twitter使用静态标识"
+
+#: wp-to-twitter-manager.php:671
+msgid "Static Campaign identifier for Google Analytics:"
+msgstr "Google Analytics的静态标识符"
+
+#: wp-to-twitter-manager.php:675
+msgid "Use a dynamic identifier with Google Analytics and WP-to-Twitter"
+msgstr "WP to Twitter为Google Analysis使用动态标识"
+
+#: wp-to-twitter-manager.php:676
+msgid "What dynamic identifier would you like to use?"
+msgstr "你想选择什么样的动态标识？"
+
+#: wp-to-twitter-manager.php:678
+msgid "Category"
+msgstr "分类"
+
+#: wp-to-twitter-manager.php:679
+msgid "Post ID"
+msgstr "博文ID"
+
+#: wp-to-twitter-manager.php:680
+msgid "Post Title"
+msgstr "博文标题"
+
+#: wp-to-twitter-manager.php:681
+#: wp-to-twitter-manager.php:695
+msgid "Author"
+msgstr "作者"
+
+#: wp-to-twitter-manager.php:686
+msgid "Individual Authors"
+msgstr "独立的作者"
+
+#: wp-to-twitter-manager.php:689
+msgid "Authors have individual Twitter accounts"
+msgstr "作者有独立的Twitter账户"
+
+#: wp-to-twitter-manager.php:689
+msgid "Authors can set their username in their user profile. As of version 2.2.0, this feature no longer allows authors to post to their own Twitter accounts. It can only add an @reference to the author. This @reference is placed using the <code>#account#</code> shortcode. (It will pick up the main account if user accounts are not enabled.)"
+msgstr "作者可以在个人设置中设定他们的用户名。但在2.2.0版本中，已不再允许作者们发布到各自的Twitter上。要添加一个作者，你只能通过添加一个@通知。通过<code>#account#</code>短码指定@所要放置的位置。（如果没有指定，会自动选择用户的主账户。）"
+
+#: wp-to-twitter-manager.php:692
+msgid "Choose the lowest user group that can add their Twitter information"
+msgstr "选择具有添加Twitter账户权限的最低用户组"
+
+#: wp-to-twitter-manager.php:693
+msgid "Subscriber"
+msgstr "订阅者"
+
+#: wp-to-twitter-manager.php:694
+msgid "Contributor"
+msgstr "投稿者"
+
+#: wp-to-twitter-manager.php:696
+msgid "Editor"
+msgstr "编辑"
+
+#: wp-to-twitter-manager.php:697
+msgid "Administrator"
+msgstr "管理员"
+
+#: wp-to-twitter-manager.php:702
+msgid "Disable Error Messages"
+msgstr "禁用错误信息"
+
+#: wp-to-twitter-manager.php:705
+msgid "Disable global URL shortener error messages."
+msgstr "全局禁用短域名服务的错误信息。"
+
+#: wp-to-twitter-manager.php:709
+msgid "Disable global Twitter API error messages."
+msgstr "全局禁用Twitter API的错误信息。"
+
+#: wp-to-twitter-manager.php:713
+msgid "Disable notification to implement OAuth"
+msgstr "禁用OAuth请求的通知"
+
+#: wp-to-twitter-manager.php:717
+msgid "Get Debugging Data for OAuth Connection"
+msgstr "OAuth连接的调试信息"
+
+#: wp-to-twitter-manager.php:721
+msgid "I made a donation, so stop showing me ads, please. <a href='http://pluginsponsors.com/privacy.html'>PluginSponsors.com Privacy Policy</a>"
+msgstr "我已经捐赠过，所以请不要再显示广告。<a href='http://pluginsponsors.com/privacy.html'>PluginSponsors.com隐私协议</a>"
+
+#: wp-to-twitter-manager.php:727
+msgid "Save Advanced WP->Twitter Options"
+msgstr "保存WP To Twitter的高级选项"
+
+#: wp-to-twitter-manager.php:737
+msgid "Limit Updating Categories"
+msgstr "限制更新分类"
+
+#: wp-to-twitter-manager.php:741
+msgid "Select which blog categories will be Tweeted. Uncheck all categories to disable category limits."
+msgstr "选择要同步到Twitter的分类"
+
+#: wp-to-twitter-manager.php:744
+msgid "<em>Category limits are disabled.</em>"
+msgstr "<em>分类限制已被禁用。</em>"
+
+#: wp-to-twitter-manager.php:758
+msgid "Check Support"
+msgstr "查看支持"
+
+#: wp-to-twitter-manager.php:758
+msgid "Check whether your server supports <a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter's</a> queries to the Twitter and URL shortening APIs. This test will send a status update to Twitter and shorten a URL using your selected methods."
+msgstr "测试你的服务器是否支持<a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter</a>的Twitter同步功能和短域名服务。这项测试会在你的Twitter账户中发一条带短域名的推。"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.joedolson.com/articles/wp-to-twitter/"
+msgstr "http://www.joedolson.com/articles/wp-to-twitter/"
+
+#. Description of the plugin/theme
+msgid "Posts a Twitter status update when you update your WordPress blog or post to your blogroll, using your chosen URL shortening service. Rich in features for customizing and promoting your Tweets."
+msgstr "当你发布或更新Wordpress的博文或链接时，自动发送一条推到你的Twitter账户，支持多种短域名服务。同时还包含了丰富的功能、设置选项。"
+
+#. Author of the plugin/theme
+msgid "Joseph Dolson"
+msgstr "Joseph Dolson"
+
+#. Author URI of the plugin/theme
+msgid "http://www.joedolson.com/"
+msgstr "http://www.joedolson.com/"
+
+#~ msgid "Twitter Password Saved"
+#~ msgstr "Twitter密码已保存"
+
+#~ msgid "Twitter Password Not Saved"
+#~ msgstr "Twitter密码未保存"
+
+#~ msgid "Bit.ly API Saved"
+#~ msgstr "Bit.ly API Key 已保存"
+
+#~ msgid "Bit.ly API Not Saved"
+#~ msgstr "Bit.ly API Key 未保存"
+
+#~ msgid ""
+#~ "Set your Twitter login information and URL shortener API information to "
+#~ "use this plugin!"
+#~ msgstr "设置你Twitter的登录信息还有短URL服务商的API，来使用此插件！"
+
+#~ msgid "Please add your Twitter password. "
+#~ msgstr "请填写你Twitter的密码。"
+
+#~ msgid "You need to provide your twitter login and password! "
+#~ msgstr "你必须提供你的Twitter登录信息"
+
+#~ msgid "Cligs API Key Updated"
+#~ msgstr "Cli.gs API Key 已经更新"
+
+#~ msgid ""
+#~ "<li>Successfully contacted the Cli.gs API via Snoopy, but the URL "
+#~ "creation failed.</li>"
+#~ msgstr "<li>通过Snoopy连接Cli.gs API成功，但是URL创建失败。</li>"
+
+#~ msgid ""
+#~ "<li>Successfully contacted the Cli.gs API via Snoopy, but a Cli.gs server "
+#~ "error prevented the URL from being shrotened.</li>"
+#~ msgstr ""
+#~ "<li>通过Snoopy连接Cli.gs API成功，但是远程服务器发生错误致使URL没有被缩"
+#~ "短。</li>"
+
+#~ msgid ""
+#~ "<li>Successfully contacted the Cli.gs API via Snoopy and created a "
+#~ "shortened link.</li>"
+#~ msgstr "<li>成功的通过Snoopy连接到Cli.gs的API，并且创建了短URL。</li>"
+
+#~ msgid "<li>Successfully contacted the Bit.ly API via Snoopy.</li>"
+#~ msgstr "<li>成功的通过Snoopy连接到Bit.ly的API。</li>"
+
+#~ msgid "<li>Failed to contact the Bit.ly API via Snoopy.</li>"
+#~ msgstr "<li>通过Snoopy连接Bit.ly的API失败。</li>"
+
+#~ msgid "<li>Cannot check the Bit.ly API without a valid API key.</li>"
+#~ msgstr "<li>没有一个有效的API Key，不能访问Bit.ly的API。</li>"
+
+#~ msgid "<li>Successfully contacted the Twitter API via Snoopy.</li>"
+#~ msgstr "<li>通过Snoopy连接到Twitter API成功。</li>"
+
+#~ msgid "<li>Failed to contact the Twitter API via Snoopy.</li>"
+#~ msgstr "<li>通过Snoopy连接到Twitter API失败。</li>"
+
+#~ msgid "<li>Successfully contacted the Twitter API via cURL.</li>"
+#~ msgstr "<li>通过cURL连接到Twitter API成功。</li>"
+
+#~ msgid "<li>Failed to contact the Twitter API via cURL.</li>"
+#~ msgstr "<li>通过cURL连接到Twitter API失败。</li>"
+
+#~ msgid "<li>Successfully contacted the Cli.gs API via Snoopy.</li>"
+#~ msgstr "<li>通过Snoopy连接Cli.gs API成功。</li>"
+
+#~ msgid "<li>Failed to contact the Cli.gs API via Snoopy.</li>"
+#~ msgstr "<li>通过Snoopy连接CLi.gs API失败。</li>"
+
+#~ msgid "<li>Your server does not support <code>fputs</code>.</li>"
+#~ msgstr "<li>你的服务器不支持<code>fputs</code>函数。</li>"
+
+#~ msgid ""
+#~ "<li>Your server does not support <code>file_get_contents</code> or "
+#~ "<code>cURL</code> functions.</li>"
+#~ msgstr ""
+#~ "<li>你的服务器不支持<code>file_get_contents</code>或者<code>cURL</code>函"
+#~ "数。</li>"
+
+#~ msgid "<li>Your server does not support <code>Snoopy</code>.</li>"
+#~ msgstr "<li>你的服务器不支持<code>Snoopy</code>函数。</li>"
+
+#~ msgid ""
+#~ "This plugin may not fully work in your server environment. The plugin "
+#~ "failed to contact both a URL shortener API and the Twitter service API."
+#~ msgstr ""
+#~ "此插件或许在当前服务器环境下正常工作。当访问URL缩短功能和Twitter的API时发"
+#~ "生了错误。"
+
+#~ msgid "Export Settings"
+#~ msgstr "导出设置"
+
+#~ msgid ""
+#~ "For any post update field, you can use the codes <code>#title#</code> for "
+#~ "the title of your blog post, <code>#blog#</code> for the title of your "
+#~ "blog, <code>#post#</code> for a short excerpt of the post content, "
+#~ "<code>#category#</code> for the first selected category for the post, "
+#~ "<code>#date#</code> for the post date, or <code>#url#</code> for the post "
+#~ "URL (shortened or not, depending on your preferences.) You can also "
+#~ "create custom shortcodes to access WordPress custom fields. Use doubled "
+#~ "square brackets surrounding the name of your custom field to add the "
+#~ "value of that custom field to your status update. Example: <code>"
+#~ "[[custom_field]]</code>"
+#~ msgstr ""
+#~ "在任何一个日志的更新区域，你可以使用<code>#title#</code>来代替日志标题，"
+#~ "<code>#blog#</code>代替博客标题，<code>#post#</code>代替日志内容的一个摘"
+#~ "要，<code>#category#</code>来代替第一个被选中的分类，<code>#date#</code>代"
+#~ "替日志发布的日期，<code>#url#</code>代替日志发布的URL（将会根据你的设置显"
+#~ "示长、短链接）。你也可以使用自定义的快捷代码来显示日志中自定义与的内容。例"
+#~ "如：<code>[[custom_field]]</code>这样。"
+
+#~ msgid "Set what should be in a Tweet"
+#~ msgstr "设置推中应该有什么"
+
+#~ msgid "Update when a post is published"
+#~ msgstr "当日志发布的时候同步至Twitter"
+
+#~ msgid "Update when a post is edited"
+#~ msgstr "当日志修改的时候同步Twitter"
+
+#~ msgid "Text for editing updates:"
+#~ msgstr "修改日志时，推的内容："
+
+#~ msgid "Text for new page updates:"
+#~ msgstr "添加新页面时，推的内容："
+
+#~ msgid "Update Twitter when WordPress Pages are edited"
+#~ msgstr "当修改静态页面是同步至Twitter"
+
+#~ msgid "Text for page edit updates:"
+#~ msgstr "修改页面时，推的内容："
+
+#~ msgid "Set default Tweet status to 'No.'"
+#~ msgstr "设置默认的推状态为'否'。"
+
+#~ msgid ""
+#~ "Twitter updates can be set on a post by post basis. By default, posts "
+#~ "WILL be posted to Twitter. Check this to change the default to NO."
+#~ msgstr ""
+#~ "可以设置当发布新日志的时候自动同步至Twitter。默认情况下，日志将会自动被发"
+#~ "送至Twitter。检查这个是否设置为'否'。"
+
+#~ msgid "Update Twitter when a post is published using QuickPress"
+#~ msgstr "当使用QuickPress功能发布新日志时，同步至Twitter"
+
+#~ msgid "Special Fields"
+#~ msgstr "特殊的域"
+
+#~ msgid ""
+#~ "You can track the response from Twitter using Google Analytics by "
+#~ "defining a campaign identifier here."
+#~ msgstr "你可以给Google Analytics定义Campaign标识符来追踪Twitter上的响应。"
+
+#~ msgid ""
+#~ "Each author can set their own Twitter username and password in their user "
+#~ "profile. Their posts will be sent to their own Twitter accounts."
+#~ msgstr ""
+#~ "每一个作者可以设置自己独立的Twitter账户信息。他们的日志将会同步至到他们自"
+#~ "己的Twitter帐号中。"
+
+#~ msgid "Set your preferred URL Shortener"
+#~ msgstr "设置你喜欢的URL缩短服务商"
+
+#~ msgid "Your Twitter account details"
+#~ msgstr "你Twitter账户的细节"
+
+#~ msgid "Save Twitter Login Info"
+#~ msgstr "保存Twitter登录信息"
+
+#~ msgid ""
+#~ "&raquo; <small>Don't have a Twitter account? <a href='http://www.twitter."
+#~ "com'>Get one for free here</a>"
+#~ msgstr ""
+#~ "&raquo; <small>还没有Twitter账户？ 快来<a href='http://www.twitter.com'>这"
+#~ "里</a>免费获取一个吧。"
+
+#~ msgid ""
+#~ "Check whether your server supports WP to Twitter's queries to the Twitter "
+#~ "and URL shortening APIs."
+#~ msgstr "检查你的服务器是否支持WP to Twitter请求Twitter和短URL功能的API。"
+
+#~ msgid "Need help?"
+#~ msgstr "需要帮助？"
+
+#~ msgid ""
+#~ "Visit the <a href='http://www.joedolson.com/articles/wp-to-twitter/'>WP "
+#~ "to Twitter plugin page</a>."
+#~ msgstr ""
+#~ "访问<a href='http://www.joedolson.com/articles/wp-to-twitter/'>WP to "
+#~ "Twitter 插件的主页</a>."
+
+#~ msgid ""
+#~ " characters.<br />Twitter posts are a maximum of 140 characters; if your "
+#~ "Cli.gs URL is appended to the end of your document, you have 119 "
+#~ "characters available. You can use <code>#url#</code>, <code>#title#</"
+#~ "code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code>, "
+#~ "or <code>#blog#</code> to insert the shortened URL, post title, the first "
+#~ "category selected, the post date, or a post excerpt or blog name into the "
+#~ "Tweet."
+#~ msgstr ""
+#~ " 字符。<br />推不能超过140个字符；当Cli.gs的短URL在最后时，你还剩119个字。"
+#~ "你可以在推中使用<code>#url#</code>，<code>#title#</code>，<code>#post#</"
+#~ "code>，<code>#date#</code>或者<code>#blog#</code>来插入一个短URL，日志标"
+#~ "题，第一个分类，发布日期，日志摘要或者Blog名称。"
+
+#~ msgid "Use My Twitter Account"
+#~ msgstr "使用我的Twitter账户"
+
+#~ msgid ""
+#~ "Select this option if you would like your posts to be Tweeted into your "
+#~ "own Twitter account with no @ references."
+#~ msgstr ""
+#~ "如果你想同步日志到Twitter，但不使用@通知任何人，那快来选中这个选项吧。"
+
+#~ msgid ""
+#~ "Tweet my posts into the main site Twitter account with an @ reference to "
+#~ "my username. (Password not required with this option.)"
+#~ msgstr ""
+#~ "同步日志使用Blog的主Twitter账户，并且使用@通知我自己的账户（不需要提供密"
+#~ "码）。"
+
+#~ msgid "Your Twitter Password"
+#~ msgstr "你的Twitter密码"
+
+#~ msgid "Enter your own Twitter password."
+#~ msgstr "输入你的Twitter密码。"
+
+#~ msgid ""
+#~ "Updates Twitter when you create a new blog post or add to your blogroll "
+#~ "using Cli.gs. With a Cli.gs API key, creates a clig in your Cli.gs "
+#~ "account with the name of your post as the title."
+#~ msgstr ""
+#~ "当你发布新日志或者添加新链接的时候，使用Cli.gs缩短链接，并且同步至"
+#~ "Twitter。使用一个Cli.gs API Key，可以使用日志名作为标题来创建一个Cli.gs短"
+#~ "链接。"
+
+#~ msgid ""
+#~ "The query to the URL shortener API failed, and your URL was not shrunk. "
+#~ "The full post URL was attached to your Tweet."
+#~ msgstr ""
+#~ "Die Verbindung zum URL Kürzer API schlug fehl und deine URL wurde nicht "
+#~ "verkürzt. Es wurde die normale URL wurde im Tweet veröffentlicht."
+
+#~ msgid "Add_new_tag"
+#~ msgstr "Tag_hinzufügen"
+
+#~ msgid "This plugin may not work in your server environment."
+#~ msgstr ""
+#~ "Dieses Plugin funktioniert vielleicht nicht in deiner Server Umgebung."
+
+#~ msgid "Wordpress to Twitter Publishing Options"
+#~ msgstr "Wordpress to Twitter Veröffentlichungs-Optionen"
+
+#~ msgid "Provide link to blog?"
+#~ msgstr "Link zum Blog hinzufügen?"
+
+#~ msgid "Use <strong>link title</strong> for Twitter updates"
+#~ msgstr ""
+#~ "Verwende den <strong>Link Namen</strong> für Twitter Aktualisierungen"
+
+#~ msgid "Use <strong>link description</strong> for Twitter updates"
+#~ msgstr ""
+#~ "Verwende die <strong>Link Beschreibung</strong> für Twitter "
+#~ "Aktualisierungen"
+
+#~ msgid ""
+#~ "Text for new link updates (used if title/description isn't available.):"
+#~ msgstr ""
+#~ "Text für neuen Link (wenn kein Namen oder Beschreibung vorhanden sind.):"
+
+#~ msgid "Custom text prepended to Tweets:"
+#~ msgstr "Eigener Text zu Beginn des Tweets:"
+
+#~ msgid ""
+#~ "Your server appears to support the required PHP functions and classes for "
+#~ "WP to Twitter to function."
+#~ msgstr ""
+#~ "Es scheint als würde dein Server die benötigten PHP Funktion und Klassen "
+#~ "für WP to Twitter bereitstellen."

@@ -29,10 +29,10 @@ if(trim($handle)!='') {
 if($tokenObj!=null) {
 	if ( $tokenObj->successful ) {
 		$changePasswordLink = $changePasswordPage;
-		$msg = "Sit tight we have emailed you a confirmation code";
+		$msg = "Sit tight! A confirmation code is on its way to your email.";
 		$redirect = true;		
 	} elseif( isset($tokenObj->socialProvider) ) {
-		$msg = "You have registered using social login. Please login using ".$takenObj->socialProvider." service";
+		$msg = "It looks like you have a social account associated with your profile. Please login using your social provider.";
 	}
 }
 /**
@@ -86,6 +86,8 @@ if($tokenObj!=null) {
 										<input type="button" class="btnSubmit" value="Submit" />
 									</div>
 								</form>
+                <br />
+                <p>Or <a href="/reset-password">click here</a> if you already have a confirmation code.</p>
 							<?php else : ?>
 								<h3><?php echo $msg;?></h3>
 							<?php endif; ?>							

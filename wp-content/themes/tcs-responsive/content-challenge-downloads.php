@@ -1,7 +1,7 @@
 <h3>Downloads:</h3>
 <div class="inner">
   <?php
-  echo '<ul>';
+  echo '<ul class="downloadDocumentList">';
   if (!empty($documents)) {
     foreach ($documents as $document) {
       echo '<li><a href="' . $document->url . '">' . $document->documentName . '</a></li>';

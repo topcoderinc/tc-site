@@ -2343,7 +2343,7 @@
 			width: 11px;
 		}
 			#promo-banner .bx-pager-item a {
-				background: url(i/slider-dot.png) no-repeat;
+				background: url(../i/slider-dot.png) no-repeat;
 				display: block;
 				height: 11px;
 				overflow: hidden;

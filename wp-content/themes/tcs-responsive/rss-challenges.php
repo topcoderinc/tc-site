@@ -42,30 +42,30 @@ if ($contestType == 'all') {
      xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
     <?php do_action('rss2_ns'); ?>>
     <channel>
-        <title><?php bloginfo_rss('name'); ?> - Challenges</title>
-        <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml"/>
-        <link><?php bloginfo_rss('url') ?></link>
-        <description><?php bloginfo_rss('description') ?></description>
-        <sy:updatePeriod><?php echo apply_filters('rss_update_period', 'hourly'); ?></sy:updatePeriod>
-        <sy:updateFrequency><?php echo apply_filters('rss_update_frequency', '1'); ?></sy:updateFrequency>
-        <?php
-            do_action('rss2_head');
+      <title><?php bloginfo_rss('name'); ?> - Challenges</title>
+      <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml"/>
+      <link><?php bloginfo_rss('url') ?></link>
+      <description><?php bloginfo_rss('description') ?></description>
+      <sy:updatePeriod><?php echo apply_filters('rss_update_period', 'hourly'); ?></sy:updatePeriod>
+      <sy:updateFrequency><?php echo apply_filters('rss_update_frequency', '1'); ?></sy:updateFrequency>
+      <?php
+      do_action('rss2_head');
 
-            $base_url = get_bloginfo('siteurl') . '/challenge-details';
-            foreach ($contests as $contest) {
-                $content = force_balance_tags($contest->detailedRequirements);
-                //$content = apply_filters('the_content', $content);
-                $content = str_replace(']]>', ']]&gt;', $content);
-                //$content = apply_filters('the_content_feed', $content, 'rss2');
-                ?>
-                <item>
-                <title><?php echo $contest->challengeName ?></title>
-                <link><?php echo "{$base_url}/{$contest->challengeId}?type={$contest->challengeType}" ?></link>;
-                <description><![CDATA[<?php echo $content ?>]]></description>
-                <content:encoded><![CDATA[<?php echo $content ?>]]></content:encoded>
-                <?php rss_enclosure(); ?>
-                <?php do_action('rss2_item'); ?>
-                </item>
-            <?php } ?>
+      $base_url = get_bloginfo('siteurl') . '/challenge-details';
+      foreach ($contests as $contest) {
+        $content = force_balance_tags($contest->detailedRequirements);
+        //$content = apply_filters('the_content', $content);
+        $content = str_replace(']]>', ']]&gt;', $content);
+        //$content = apply_filters('the_content_feed', $content, 'rss2');
+        ?>
+        <item>
+          <title><?php echo $contest->challengeName ?></title>
+          <link><?php echo "{$base_url}/{$contest->challengeId}?type={$contest->challengeType}" ?></link>;
+          <description><![CDATA[<?php echo $content ?>]]></description>
+          <content:encoded><![CDATA[<?php echo $content ?>]]></content:encoded>
+          <?php rss_enclosure(); ?>
+          <?php do_action('rss2_item'); ?>
+        </item>
+      <?php } ?>
     </channel>
 </rss>

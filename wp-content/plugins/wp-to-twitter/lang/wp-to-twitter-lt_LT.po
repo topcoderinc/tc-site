@@ -1,0 +1,548 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Joseph Dolson
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP to Twitter in russian\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-to-twitter\n"
+"POT-Creation-Date: 2009-12-22 20:09+0300\n"
+"PO-Revision-Date: 2011-07-30 22:46+0200\n"
+"Last-Translator: Natalija Strazdauskienė <ciuvir@mail.ru>\n"
+"Language-Team: Nata Strazda <nata@epastas.lt>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Lithuanian\n"
+"X-Poedit-Country: LITHUANIA\n"
+
+#: functions.php:127
+msgid "Twitter Password Saved"
+msgstr "Twitter slaptažodis išsaugotas"
+
+#: functions.php:129
+msgid "Twitter Password Not Saved"
+msgstr "Twitter slaptažodis neišsaugotas"
+
+#: functions.php:132
+msgid "Bit.ly API Saved"
+msgstr "Bit.ly API išsaugotas"
+
+#: functions.php:134
+msgid "Bit.ly API Not Saved"
+msgstr "Bit.ly API neišsaugotas"
+
+#: functions.php:140
+msgid "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Hide</a>] If you're experiencing trouble, please copy these settings into any request for support."
+msgstr "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Paslėpti</a>] Jeigu kilo problemų, prašome nukopijuoti šiuos nustatymus ir kreiptis į palaikymą."
+
+#: wp-to-twitter-manager.php:63
+msgid "Set your Twitter login information and URL shortener API information to use this plugin!"
+msgstr "Nustatykite savo Twitter prisijungimo informaciją ir URL trumpintojo API informaciją, naudojant šį įskiepį!"
+
+#: wp-to-twitter-manager.php:69
+msgid "Please add your Twitter password. "
+msgstr "Prašome pridėti savo Twitter slaptažodį."
+
+#: wp-to-twitter-manager.php:75
+msgid "WP to Twitter Errors Cleared"
+msgstr "WP į Twitter Klaidos pašalintos"
+
+#: wp-to-twitter-manager.php:82
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your new blog post. Your tweet has been stored in a custom field attached to the post, so you can Tweet it manually if you wish! "
+msgstr "Atsiprašome! Negaliu prisijungti prie Twitter serverio naujų blogo žinučių talpinimui. Jūsų tvitai buvo saugomi pasirinktiniame lauke, prisegtame prie žinutės, todėl jūs galite tvitinti rankiniu būdu, jei norite!"
+
+#: wp-to-twitter-manager.php:84
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your <strong>new link</strong>! You'll have to post it manually, I'm afraid. "
+msgstr "Atsiprašome! Negaliu susijungti su serveriu Twitter jūsų <strong>naujai nuorodai</strong> patalpinti! Bijau, kad teks tai atlikti rankiniu būdu."
+
+#: wp-to-twitter-manager.php:149
+msgid "You must add your Bit.ly login and API key in order to shorten URLs with Bit.ly."
+msgstr "Jūs turite pridėti savo Bit.ly prisijungimą ir API raktą siekiant sutrumpinti URL Bit.ly."
+
+#: wp-to-twitter-manager.php:158
+msgid "WP to Twitter Options Updated"
+msgstr "WP į Twitter parinktys atnaujintos"
+
+#: wp-to-twitter-manager.php:168
+msgid "Twitter login and password updated. "
+msgstr "Twitter login ir slaptažodis atnaujinti. "
+
+#: wp-to-twitter-manager.php:170
+msgid "You need to provide your twitter login and password! "
+msgstr "Jūs turite nurodyti login ir slaptažodį į Twitter!"
+
+#: wp-to-twitter-manager.php:177
+msgid "Cligs API Key Updated"
+msgstr "Cligs API Raktas atnaujintas"
+
+#: wp-to-twitter-manager.php:180
+msgid "Cli.gs API Key deleted. Cli.gs created by WP to Twitter will no longer be associated with your account. "
+msgstr "Cli.gs API Raktas pašalintas. Cli.gs sukurtas WP į Twitter, daugiau nebus sujungtas su jūsų paskyra. "
+
+#: wp-to-twitter-manager.php:182
+msgid "Cli.gs API Key not added - <a href='http://cli.gs/user/api/'>get one here</a>! "
+msgstr "Cli.gs API raktas nepridėtas - <a href='http://cli.gs/user/api/'>gauti čia</a>! "
+
+#: wp-to-twitter-manager.php:188
+msgid "Bit.ly API Key Updated."
+msgstr "Bit.ly API Raktas atnaujintas."
+
+#: wp-to-twitter-manager.php:191
+msgid "Bit.ly API Key deleted. You cannot use the Bit.ly API without an API key. "
+msgstr "Bit.ly API Raktas pašalintas. Jūs negalite naudoti Bit.ly API be API rakto. "
+
+#: wp-to-twitter-manager.php:193
+msgid "Bit.ly API Key not added - <a href='http://bit.ly/account/'>get one here</a>! An API key is required to use the Bit.ly URL shortening service."
+msgstr "Bit.ly API Raktas nepridėtas - <a href='http://bit.ly/account/'>gauti čia</a>! API raktas turi naudoti trumpinimo servisą URL Bit.ly."
+
+#: wp-to-twitter-manager.php:197
+msgid " Bit.ly User Login Updated."
+msgstr " Bit.ly vartotojo login atnaujintas."
+
+#: wp-to-twitter-manager.php:200
+msgid "Bit.ly User Login deleted. You cannot use the Bit.ly API without providing your username. "
+msgstr "Bit.ly vartotojo login pašalintas. Jūs negalite naudoti Bit.ly API be jūsų login. "
+
+#: wp-to-twitter-manager.php:202
+msgid "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! "
+msgstr "Bit.ly login nepridėtas - <a href='http://bit.ly/account/'>gauti čia</a>! "
+
+#: wp-to-twitter-manager.php:236
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy, but the URL creation failed.</li>"
+msgstr "<li>Sujungta su API Cli.gs per Snoopy, bet sukūrti URL nepavyko.</li>"
+
+#: wp-to-twitter-manager.php:238
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy, but a Cli.gs server error prevented the URL from being shrotened.</li>"
+msgstr "<li>Sunungta su API Cli.gs per Snoopy, bet serverio Cli.gs klaida neleido sutrumpinti URL. </li>"
+
+#: wp-to-twitter-manager.php:240
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy и создана сокращенная ссылка.</li>"
+msgstr "<li>Sujungta su API Cli.gs per Snoopy ir sukūrta trumpa nuoroda.</li>"
+
+#: wp-to-twitter-manager.php:249
+#: wp-to-twitter-manager.php:274
+msgid "<li>Successfully contacted the Bit.ly API via Snoopy.</li>"
+msgstr "<li>Sujungta su Bit.ly API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:251
+#: wp-to-twitter-manager.php:276
+msgid "<li>Failed to contact the Bit.ly API via Snoopy.</li>"
+msgstr "<li>Nesujungta su Bit.ly API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:254
+msgid "<li>Cannot check the Bit.ly API without a valid API key.</li>"
+msgstr "<li>Negalima patikrinti Bit.ly API, reikalingas teisingas API raktas.</li>"
+
+#: wp-to-twitter-manager.php:258
+msgid "<li>Successfully contacted the Twitter API via Snoopy.</li>"
+msgstr "<li>Sujungta su Twitter API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:260
+msgid "<li>Failed to contact the Twitter API via Snoopy.</li>"
+msgstr "<li>Nesujungtas su Twitter API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:266
+msgid "<li>Successfully contacted the Twitter API via cURL.</li>"
+msgstr "<li>Sujungta su Twitter API per cURL.</li>"
+
+#: wp-to-twitter-manager.php:268
+msgid "<li>Failed to contact the Twitter API via cURL.</li>"
+msgstr "<li>Nesujungtas su Twitter API per cURL.</li>"
+
+#: wp-to-twitter-manager.php:280
+msgid "<li>Successfully contacted the Cli.gs API via Snoopy.</li>"
+msgstr "<li>Sujungta su Cli.gs API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:283
+msgid "<li>Failed to contact the Cli.gs API via Snoopy.</li>"
+msgstr "<li>Nesujungta su Cli.gs API per Snoopy.</li>"
+
+#: wp-to-twitter-manager.php:288
+msgid "<li><strong>Your server should run WP to Twitter successfully.</strong></li>"
+msgstr "<li><strong>Jūsų serveris turi sėkmingai dirbti su WP į Twitter.</strong></li>"
+
+#: wp-to-twitter-manager.php:293
+msgid "<li>Your server does not support <code>fputs</code>.</li>"
+msgstr "<li>Jūsų serveris nepalaiko <code>fputs</code>.</li>"
+
+#: wp-to-twitter-manager.php:297
+msgid "<li>Your server does not support <code>file_get_contents</code> or <code>cURL</code> functions.</li>"
+msgstr "<li>Jūsų serveris nepalaiko  <code>file_get_contents</code> arba <code>cURL</code> funkcijas.</li>"
+
+#: wp-to-twitter-manager.php:301
+msgid "<li>Your server does not support <code>Snoopy</code>.</li>"
+msgstr "<li>Jūsų serveris nepalaiko <code>Snoopy</code>.</li>"
+
+#: wp-to-twitter-manager.php:304
+msgid "<li><strong>Your server does not appear to support the required PHP functions and classes for WP to Twitter to function.</strong> You can try it anyway - these tests aren't perfect - but no guarantees.</li>"
+msgstr "<li><strong>Jūsų serveris nepalaiko būtinas PHP funkcijas ir klases korektiškam įskiepio WP to Twitter darbui.</strong> Jūs galite pabandyti, tačiau garantijų nėra.</li>"
+
+#: wp-to-twitter-manager.php:313
+msgid "This plugin may not fully work in your server environment. The plugin failed to contact both a URL shortener API and the Twitter service API."
+msgstr "Šis įskiepis gali nekorektiškai dirbti su serveriu. Įskiepiui nepavyksta susisiekti su sutrumpinimo URL API ir Twitter API serveriu."
+
+#: wp-to-twitter-manager.php:328
+msgid "WP to Twitter Options"
+msgstr "WP to Twitter parinktys"
+
+#: wp-to-twitter-manager.php:332
+#: wp-to-twitter.php:811
+msgid "Get Support"
+msgstr "Gauti palaikymą"
+
+#: wp-to-twitter-manager.php:333
+msgid "Export Settings"
+msgstr "Eksporto nustatymai"
+
+#: wp-to-twitter-manager.php:347
+msgid "For any post update field, you can use the codes <code>#title#</code> for the title of your blog post, <code>#blog#</code> for the title of your blog, <code>#post#</code> for a short excerpt of the post content, <code>#category#</code> for the first selected category for the post, <code>#date#</code> for the post date, or <code>#url#</code> for the post URL (shortened or not, depending on your preferences.) You can also create custom shortcodes to access WordPress custom fields. Use doubled square brackets surrounding the name of your custom field to add the value of that custom field to your status update. Example: <code>[[custom_field]]</code>"
+msgstr "Norint atnaujinti žinutes, naudokite kodus antraštei <code>#title#</code>, blogo pavadinimui <code>#blog#</code>, žinutės trumpam aprašymui <code>#post#</code>, pirmos žinutės kategorijos pasirinkimui <code>#category#</code>, žinutės datai <code>#date#</code>, žinutės nuorodai <code>#url#</code> (trumpintai arba ne, priklausant nuo jūsų nustatymų.) Jūs taip pat galite sukūrti vartotojiškus prieigos kodus nustatomiems laukeliams WordPress. Naudokite dvigubus kvadratinius skliaustus, apsupant nustatomo laukelio vardą. Pvz.: <code>[[custom_field]]</code>"
+
+#: wp-to-twitter-manager.php:353
+msgid "<p>One or more of your last posts has failed to send it's status update to Twitter. Your Tweet has been saved in your post custom fields, and you can re-Tweet it at your leisure.</p>"
+msgstr "<p>Nepavyko perduoti informaciją apie vieno ar kelių žinučių statuso atnaujinimą Twitter. Jūsų žinutė išsaugota jūsų žinutės vartotojų laukeliuose ir jūs galite išsiųsti vėliau.</p>"
+
+#: wp-to-twitter-manager.php:356
+msgid "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+msgstr "<p>Nepavyko prisijungti prie trumpinimo URL serverio API ir jūsų URL nebuvo patrumpintas. Pilnas žinutės URL prikabintas prie jūsų žinutės. Prisijunkite prie trumpinto URL serverio, kad sužinoti apie galimas problemas. [<a href=\"http://blog.cli.gs\">Cli.gs Blogas</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blogas</a>]</p>"
+
+#: wp-to-twitter-manager.php:363
+msgid "Clear 'WP to Twitter' Error Messages"
+msgstr "Išvalyti 'WP to Twitter' žinutes nuo klaidų"
+
+#: wp-to-twitter-manager.php:371
+msgid "Set what should be in a Tweet"
+msgstr "Nustatyti, kas turi būti žinutėje"
+
+#: wp-to-twitter-manager.php:374
+msgid "Update when a post is published"
+msgstr "Atnaujinti, kada žinutė bus paskelbta"
+
+#: wp-to-twitter-manager.php:374
+msgid "Text for new post updates:"
+msgstr "Naujų žinučių teksto atnaujinimai:"
+
+#: wp-to-twitter-manager.php:379
+msgid "Update when a post is edited"
+msgstr "Atnaujinti, kai žinutės bus atredaguota"
+
+#: wp-to-twitter-manager.php:379
+msgid "Text for editing updates:"
+msgstr "Redaguojamų atnaujinimų tekstas:"
+
+#: wp-to-twitter-manager.php:383
+msgid "Update Twitter when new Wordpress Pages are published"
+msgstr "Atnaujinti Twitter, kai nauji puslapiai Wordpress bus apublikuoti"
+
+#: wp-to-twitter-manager.php:383
+msgid "Text for new page updates:"
+msgstr "Atnaujinimų tekstas naujam puslapiui"
+
+#: wp-to-twitter-manager.php:387
+msgid "Update Twitter when WordPress Pages are edited"
+msgstr "Atnaujinti Twitter, kai nauji Wordpress puslapiai atredaguoti"
+
+#: wp-to-twitter-manager.php:387
+msgid "Text for page edit updates:"
+msgstr "Atnaujinimo tekstas atredaguotiems puslapiams:"
+
+#: wp-to-twitter-manager.php:391
+msgid "Add tags as hashtags on Tweets"
+msgstr "Pridėti tegus kaip hashtags į žinutę"
+
+#: wp-to-twitter-manager.php:391
+msgid "Spaces replaced with:"
+msgstr "Tarpus pakeisti į:"
+
+#: wp-to-twitter-manager.php:392
+msgid "Default replacement is an underscore (<code>_</code>). Use <code>[ ]</code> to remove spaces entirely."
+msgstr "Nurodytas pagal nutylėjimą pakeitimas - pabraukimo simbolis (<code>_</code>). Naudoti <code>[ ]</code>, kad pilani pašalinti tarpus."
+
+#: wp-to-twitter-manager.php:394
+msgid "Maximum number of tags to include:"
+msgstr "Maksimalus žymų skaičius įtraukimui:"
+
+#: wp-to-twitter-manager.php:395
+msgid "Maximum length in characters for included tags:"
+msgstr "Maksimalus ilgis simboliuose iterptuose teguose:"
+
+#: wp-to-twitter-manager.php:396
+msgid "These options allow you to restrict the length and number of WordPress tags sent to Twitter as hashtags. Set to <code>0</code> or leave blank to allow any and all tags."
+msgstr "Šie parametrai apriboja ilgį ir tegų skaičių WordPress, nukreptus į Twitter, kaip hashtags. Nustatykite <code>0</code> arba palikite lauką tūščiu, kad leisti visus tegus. "
+
+#: wp-to-twitter-manager.php:400
+msgid "Update Twitter when you post a Blogroll link"
+msgstr "Atnaujinti Twitter, kai patalpinsite Blogroll nuorodą"
+
+#: wp-to-twitter-manager.php:401
+msgid "Text for new link updates:"
+msgstr "Atnaujinimo tekstas naujai nuorodai:"
+
+#: wp-to-twitter-manager.php:401
+msgid "Available shortcodes: <code>#url#</code>, <code>#title#</code>, and <code>#description#</code>."
+msgstr "Prieinami kodai: <code>#url#</code>, <code>#title#</code>, и <code>#description#</code>."
+
+#: wp-to-twitter-manager.php:404
+msgid "Length of post excerpt (in characters):"
+msgstr "Žinutės ištraukos ilgis (simboliais):"
+
+#: wp-to-twitter-manager.php:404
+msgid "By default, extracted from the post itself. If you use the 'Excerpt' field, that will be used instead."
+msgstr "Pagal nutylėjimą, ištrauktas tiesiogiai iš žinutės. Jeigu jūs naudojate lauką 'Ištrauka', tai bus naudojama vietoj jos."
+
+#: wp-to-twitter-manager.php:407
+msgid "WP to Twitter Date Formatting:"
+msgstr "WP to Twitter datos formavimas:"
+
+#: wp-to-twitter-manager.php:407
+msgid "Default is from your general settings. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+msgstr "Pagal nutylėjimą iš bendrų nustatymų. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Formavimo datos dokumentacija</a>."
+
+#: wp-to-twitter-manager.php:411
+msgid "Custom text before Tweets:"
+msgstr "Vartotojiškas tekstas prieš žinutes:"
+
+#: wp-to-twitter-manager.php:412
+msgid "Custom text after Tweets:"
+msgstr "Vartotojo tekstas po žinutės:"
+
+#: wp-to-twitter-manager.php:415
+msgid "Custom field for an alternate URL to be shortened and Tweeted:"
+msgstr "Vartotojo laukas alternatyviems URL, kad sutrumpinti ir paskelbti:"
+
+#: wp-to-twitter-manager.php:416
+msgid "You can use a custom field to send Cli.gs and Twitter an alternate URL from the permalink provided by WordPress. The value is the name of the custom field you're using to add an external URL."
+msgstr "Jūs galite naudoti pasirinktinį lauką, kad išsiųsti Cli.gs ir Twitter alternatyvų URL su nuolatine nuoroda WordPress. Reikšmė - pasirinktinio lauko pavadinimas, kurį jūs naudojate, kad pridėti išorinį URL."
+
+#: wp-to-twitter-manager.php:420
+msgid "Special Cases when WordPress should send a Tweet"
+msgstr "Kai kuriais atvėjais, kai WordPress turi išsiųsti žinutę"
+
+#: wp-to-twitter-manager.php:423
+msgid "Set default Tweet status to 'No.'"
+msgstr "Nustatyti pagal nutylėjimą žinutės statusą į  'Ne.'"
+
+#: wp-to-twitter-manager.php:424
+msgid "Twitter updates can be set on a post by post basis. By default, posts WILL be posted to Twitter. Check this to change the default to NO."
+msgstr "Twitter atnaujinimai gali būti nustatyti ant kiekvienos žinutės. Pagal nutylėjimą, žinutės BUS patalpintos į Twitter. Patikrinkite, kad galima būtų pakeisti reikšmę pagal nutylėjimą į NE."
+
+#: wp-to-twitter-manager.php:428
+msgid "Send Twitter Updates on remote publication (Post by Email or XMLRPC Client)"
+msgstr "Išsiųsti atnaujinimus Twitter per nuotolinę publikaciją (Žinutė per email arba XMLRPC klientą)"
+
+#: wp-to-twitter-manager.php:432
+msgid "Update Twitter when a post is published using QuickPress"
+msgstr "Atnaujinti Twitter, kai žinutė atnaujinta naudojant QuickPress"
+
+#: wp-to-twitter-manager.php:436
+msgid "Special Fields"
+msgstr "Specialūs laukai"
+
+#: wp-to-twitter-manager.php:439
+msgid "Use Google Analytics with WP-to-Twitter"
+msgstr "Naudoti Google Analytics su WP-to-Twitter"
+
+#: wp-to-twitter-manager.php:440
+msgid "Campaign identifier for Google Analytics:"
+msgstr "Google Analytics identifikatorius:"
+
+#: wp-to-twitter-manager.php:441
+msgid "You can track the response from Twitter using Google Analytics by defining a campaign identifier here."
+msgstr "Jūs galite stebėti atsakymus Twitter'e, naudojant Google Analytics kompanijos identifikatoriaus apibrėžimą čia."
+
+#: wp-to-twitter-manager.php:446
+msgid "Authors have individual Twitter accounts"
+msgstr "Autoriai turi individualias Twitter paskyras"
+
+#: wp-to-twitter-manager.php:446
+msgid "Each author can set their own Twitter username and password in their user profile. Their posts will be sent to their own Twitter accounts."
+msgstr "Kiekvienas autorius gali nustatyti nuosavą Twitter vardą ir slaptažodį vartotojo paskyroje. Jų žinutės bus nusiųstos į jūsų paskyras Twitter."
+
+#: wp-to-twitter-manager.php:450
+msgid "Set your preferred URL Shortener"
+msgstr "Nustatyti jums patinkantį URL sutrumpinimo serverį"
+
+#: wp-to-twitter-manager.php:453
+msgid "Use <strong>Cli.gs</strong> for my URL shortener."
+msgstr "Naudoti <strong>Cli.gs</strong> kaip mano URL trumpinimo serverį."
+
+#: wp-to-twitter-manager.php:454
+msgid "Use <strong>Bit.ly</strong> for my URL shortener."
+msgstr "Naudoti <strong>Bit.ly</strong> kaip mano URL trumpinimo serverį."
+
+#: wp-to-twitter-manager.php:455
+msgid "Use <strong>WordPress</strong> as a URL shortener."
+msgstr "Naudoti <strong>WordPress</strong> URL trumpinimui."
+
+#: wp-to-twitter-manager.php:456
+msgid "Don't shorten URLs."
+msgstr "Netrumpinti URL."
+
+#: wp-to-twitter-manager.php:457
+msgid "Using WordPress as a URL shortener will send URLs to Twitter in the default URL format for WordPress: <code>http://domain.com/subdir/?p=123</code>. Google Analytics is not available when using WordPress shortened URLs."
+msgstr "Naudoti WordPress kaip URL trumpintoją ir siųs URLs į Twitter pagrindiniu URL WordPress formatu: <code>http://domain.com/subdir/?p=123</code>. Google Analytics nepasiekiamas, kai naudojamas WordPress trumpintojas URLs."
+
+#: wp-to-twitter-manager.php:462
+msgid "Save WP->Twitter Options"
+msgstr "Išsaugoti WP->Twitter parinktys"
+
+#: wp-to-twitter-manager.php:468
+msgid "Your Twitter account details"
+msgstr "Jūsų Twitter paskyros detalės"
+
+#: wp-to-twitter-manager.php:475
+msgid "Your Twitter username:"
+msgstr "Jūsų Twitter prisijungimo vardas:"
+
+#: wp-to-twitter-manager.php:479
+msgid "Your Twitter password:"
+msgstr "Jūsų Twitter slaptažodis: "
+
+#: wp-to-twitter-manager.php:479
+msgid "(<em>Saved</em>)"
+msgstr "(<em>Išsaugota</em>)"
+
+#: wp-to-twitter-manager.php:483
+msgid "Save Twitter Login Info"
+msgstr "Išsaugoti Twitter login informaciją"
+
+#: wp-to-twitter-manager.php:483
+msgid "&raquo; <small>Don't have a Twitter account? <a href='http://www.twitter.com'>Get one for free here</a>"
+msgstr "&raquo; <small>Nėra Twitter paskyros? <a href='http://www.twitter.com'>Gaukite ją nemokamai čia</a>"
+
+#: wp-to-twitter-manager.php:487
+msgid "Your Cli.gs account details"
+msgstr "Jūsų Cli.gs paskyros detalės"
+
+#: wp-to-twitter-manager.php:494
+msgid "Your Cli.gs <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Jūsų Cli.gs <abbr title='application programming interface'>API</abbr> Raktas:"
+
+#: wp-to-twitter-manager.php:500
+msgid "Don't have a Cli.gs account or Cligs API key? <a href='http://cli.gs/user/api/'>Get one free here</a>!<br />You'll need an API key in order to associate the Cligs you create with your Cligs account."
+msgstr "Nėra Cli.gs paskyros arba Cligs API Rakto? <a href='http://cli.gs/user/api/'>Gaukite nemokamai čia</a>!<br />Jums reikalingas API Raktas, kad sujungti Cligs, sukūrtus jūsų Cligs paskyros pagalba."
+
+#: wp-to-twitter-manager.php:505
+msgid "Your Bit.ly account details"
+msgstr "Jūsų Bit.ly paskyros detalės"
+
+#: wp-to-twitter-manager.php:510
+msgid "Your Bit.ly username:"
+msgstr "Jūsų Bit.ly prisijungimo vardas:"
+
+#: wp-to-twitter-manager.php:514
+msgid "Your Bit.ly <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Jūsų Bit.ly <abbr title='application programming interface'>API</abbr> Raktas:"
+
+#: wp-to-twitter-manager.php:521
+msgid "Save Bit.ly API Key"
+msgstr "Išsaugoti Bit.ly API Raktą"
+
+#: wp-to-twitter-manager.php:521
+msgid "Clear Bit.ly API Key"
+msgstr "Išvalyti Bit.ly API Raktą"
+
+#: wp-to-twitter-manager.php:521
+msgid "A Bit.ly API key and username is required to shorten URLs via the Bit.ly API and WP to Twitter."
+msgstr "Bit.ly API raktas ir prisijungimo vardas reikalingas URL trumpinimui per Bit.ly API ir WP į Twitter."
+
+#: wp-to-twitter-manager.php:530
+msgid "Check Support"
+msgstr "Patikrinti palaikymą"
+
+#: wp-to-twitter-manager.php:530
+msgid "Check whether your server supports WP to Twitter's queries to the Twitter and URL shortening APIs."
+msgstr "Patikrinti, ar jūsų serveris palaiko WP to Twitter užklausas į Twitter ir URL trumpinimo serverius."
+
+#: wp-to-twitter-manager.php:538
+msgid "Need help?"
+msgstr "Reikalinga pagalba?"
+
+#: wp-to-twitter-manager.php:539
+msgid "Visit the <a href='http://www.joedolson.com/articles/wp-to-twitter/'>WP to Twitter plugin page</a>."
+msgstr "Apsilankykite <a href='http://www.joedolson.com/articles/wp-to-twitter/'>WP to Twitter įskiepio puslapyje</a>."
+
+#. #-#-#-#-#  plugin.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Plugin Name of an extension
+#: wp-to-twitter.php:761
+msgid "WP to Twitter"
+msgstr "WP to Twitter"
+
+#: wp-to-twitter.php:806
+msgid "Twitter Post"
+msgstr "Twitter žinutė"
+
+#: wp-to-twitter.php:811
+msgid " characters.<br />Twitter posts are a maximum of 140 characters; if your Cli.gs URL is appended to the end of your document, you have 119 characters available. You can use <code>#url#</code>, <code>#title#</code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code>, or <code>#blog#</code> to insert the shortened URL, post title, the first category selected, the post date, or a post excerpt or blog name into the Tweet."
+msgstr " simboliai.<br />Twitter žinutės neturi viršyti 140 simbolių; Jūsų Cli.gs nuoroda talpinama į dokumento pabaigą, jūs turite 119 simbolių. Jūs galite naudoti <code>#url#</code>, <code>#title#</code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code> arba <code>#blog#</code>, kad įdėti sutrumpintą URL, žinutės pavadinimą, pirmą pasirinktą kategoriją, žinutės datą, žinutės ištrauką arba blogo pavadinimą į žinutę."
+
+#: wp-to-twitter.php:811
+msgid "Make a Donation"
+msgstr "Paremti"
+
+#: wp-to-twitter.php:814
+msgid "Don't Tweet this post."
+msgstr "Netalpinti šios žinutės."
+
+#: wp-to-twitter.php:863
+msgid "WP to Twitter User Settings"
+msgstr "WP to Twitter vartotojo nustatymai"
+
+#: wp-to-twitter.php:867
+msgid "Use My Twitter Account"
+msgstr "Naudoti mano Twitter paskyrą"
+
+#: wp-to-twitter.php:868
+msgid "Select this option if you would like your posts to be Tweeted into your own Twitter account with no @ references."
+msgstr "Pasirinkite šį parametrą, jei norite, kad jūsų žinutės būtų nusiųstos į jūsų Twitter paskyrą be @ nuorodų."
+
+#: wp-to-twitter.php:869
+msgid "Tweet my posts into my Twitter account with an @ reference to the site's main Twitter account."
+msgstr "Rašyti mano žinutes į mano Twitter paskyrą su @ nuoroda į pagrindinį Twitter puslapį."
+
+#: wp-to-twitter.php:870
+msgid "Tweet my posts into the main site Twitter account with an @ reference to my username. (Password not required with this option.)"
+msgstr "Rašyti mano žinutes mano paskyros pradiniame Twitter puslapyje su @ nuoroda į mano vartotojo vardą. (Šiam parametrui slaptažodis nėra reikalingas.)"
+
+#: wp-to-twitter.php:873
+msgid "Your Twitter Username"
+msgstr "JūsųTwitter prisijungimo vardas"
+
+#: wp-to-twitter.php:874
+msgid "Enter your own Twitter username."
+msgstr "Įveskite savo Twitter prisijungimo vardą."
+
+#: wp-to-twitter.php:877
+msgid "Your Twitter Password"
+msgstr "Jūsų Twitter slaptažodis"
+
+#: wp-to-twitter.php:878
+msgid "Enter your own Twitter password."
+msgstr "Įveskite savo Twitter slaptažodį."
+
+#: wp-to-twitter.php:997
+msgid "<p>Couldn't locate the settings page.</p>"
+msgstr "<p>Nerastas nustatymų puslapis.</p>"
+
+#: wp-to-twitter.php:1002
+msgid "Settings"
+msgstr "Nustatymai"
+
+#. Plugin URI of an extension
+msgid "http://www.joedolson.com/articles/wp-to-twitter/"
+msgstr "http://www.joedolson.com/articles/wp-to-twitter/"
+
+#. Description of an extension
+msgid "Updates Twitter when you create a new blog post or add to your blogroll using Cli.gs. With a Cli.gs API key, creates a clig in your Cli.gs account with the name of your post as the title."
+msgstr "Atnaujinti Twitter, kai jūs parašysite naują žinutę bloge arba pridėsite į jūsų blogroll Cli.gs naudojimą. Cli.gs API rakto pagalba, sukūrkite clig jūsų Cli.gs paskyroje su jūsų žinutės pavadinimu kaip antrašte."
+
+#. Author of an extension
+msgid "Joseph Dolson"
+msgstr "Joseph Dolson"
+
+#. Author URI of an extension
+msgid "http://www.joedolson.com/"
+msgstr "http://www.joedolson.com/"
+

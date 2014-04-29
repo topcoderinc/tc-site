@@ -1,0 +1,35 @@
+#wp2t .jtw{ position: relative; padding-bottom: 1.4em;}
+#wp2t .jtw textarea {font-size: 1.2em;}
+#wp2t .counter{
+	position:absolute;right:4%;bottom:0;
+	font-size:1.3em;font-weight:700;color:#666;
+}
+#wp2t .warning{color:#700;}
+#wp2t .exceeded{color:#e00;}
+#wp2t code span { border-bottom: 1px dashed!important; cursor: pointer; }
+#wp2t .jtw { margin-right: 33%; width: 66.666666%; }
+#wp2t .disabled { font-weight: 700; background: #ffc; padding: 5px; font-size: 1.2em; }
+#side-sortables #wp2t .jtw {margin: 0;width: 100%; }
+#side-sortables #wp2t .jtw textarea { height: 120px; }
+#wp2t .wpt_auth_users { margin: 0; padding: 0; }
+#wp2t .wpt_auth_users select { width: 100%; max-height: 21em; }
+#side-sortables #wp2t .wpt_auth_users select { width: 98%; max-height: 120px; }
+.wpt-options { -moz-column-count: 3; -webkit-column-count: 3; column-count: 3; }
+.free .wpt-options {  -moz-column-count: 2; -webkit-column-count: 2; column-count: 2; }
+#side-sortables .wpt-options { -moz-column-count: 1; -webkit-column-count: 1; column-count: 1; }
+.wptab { border-radius: 0 0 4px 4px; border: 1px solid #ddd; background: #fdfdfd; padding: 10px; margin: 0 2px; -moz-column-break-inside: avoid; -webkit-column-break-inside: avoid; column-break-inside: avoid; }
+.wptab { min-height: 22em; }
+.free .wptab { min-height: 11em; }
+#wp2t .tabs { display: none; }
+#wp2t .disabled { color: #888; border: 1px solid #ddd; background: #eee; border-bottom: none; padding: 2px; border-radius: 4px 4px 0 0; }
+#side-sortables #wp2t .tabs { display: block; }
+#side-sortables .wptab { min-height: 16em; padding: 5px; margin: 2px 0; }
+#side-sortables .free .wptab { min-height: 9em; }
+#notes p { font-size: 1.3em; line-height: 1.5; }
+#side-sortables .free #notes p { font-size: 1em; }
+
+.wpt-support { clear: both; }
+.wpt-options .tabs { margin: 0; padding: 0 2px; position: relative; top: 3px; }
+.wpt-options .tabs li { display: inline; margin: 0 auto; line-height: 1; }
+.wpt-options .tabs a { display: inline-block; padding: 4px; border-radius: 4px 4px 0 0; border: 1px solid #ccc; background: #f3f3f3; }
+.wpt-options .tabs a.active { border-bottom: 1px solid #fefefe; background: #fefefe; }

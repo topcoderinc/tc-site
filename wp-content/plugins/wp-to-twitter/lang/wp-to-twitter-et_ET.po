@@ -1,0 +1,759 @@
+# Translation of the WordPress plugin WP to Twitter 2.1.1 by Joseph Dolson.
+# Copyright (C) 2010 Joseph Dolson
+# This file is distributed under the same license as the WP to Twitter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP to Twitter 2.1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-to-twitter\n"
+"POT-Creation-Date: 2010-05-13 21:26+0000\n"
+"PO-Revision-Date: 2010-07-06 21:01-0600\n"
+"Last-Translator: Raivo Ratsep\n"
+"Language-Team: Raivo Ratsep <raivo.ratsep@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Estonian\n"
+"X-Poedit-Country: ESTONIA\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: functions.php:248
+msgid "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Hide</a>] If you're experiencing trouble, please copy these settings into any request for support."
+msgstr "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Peida</a>] Kui sul on probleeme, kopeeri need seaded tehnilise toe abipalvesse."
+
+#: wp-to-twitter-manager.php:76
+msgid "Please <a href='#twitterpw'>add your Twitter password</a>. "
+msgstr "Palun <a href='#twitterpw'>lisa oma Twitter'i salasõna</a>. "
+
+#: wp-to-twitter-manager.php:82
+msgid "WP to Twitter Errors Cleared"
+msgstr "WP to Twitter Parandatud Vead"
+
+#: wp-to-twitter-manager.php:93
+msgid "Twitter API settings reset. You may need to change your username and password settings, if they are not the same as the alternate service previously in use."
+msgstr "Twitter API seaded nullida. Teil võib tekkida vajadus muuta oma kasutajanime ja parooli seadeid, kui nad ei ole samad, mis varem kasutusel olnud asendusteenuses ."
+
+#: wp-to-twitter-manager.php:103
+msgid "Twitter-compatible API settings updated. "
+msgstr "Twitteriga ühilduva API seaded uuendatud."
+
+#: wp-to-twitter-manager.php:105
+msgid "You have configured WP to Twitter to use both Twitter and your selected service. Remember to add your username and login information for both services."
+msgstr "Sa oled konfigureerinud WP to Twitter kasutama nii Twitter'it kui sinu valitud teenust. Ära unusta lisamast oma kasutajanime ja sisselogimise informatsiooni mõlema teenuse jaoks."
+
+#: wp-to-twitter-manager.php:114
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your new blog post. Your tweet has been stored in a custom field attached to the post, so you can Tweet it manually if you wish! "
+msgstr "Vabanda! Ma ei saanud ühendust Twitter serveriga, et postitada su uut blogi sissekannet. Su Säuts (tweet) on salvestatud postituse juures asuvasse kohandatud välja nii, et saad seda säutsu käsitsi säutsuda (Tweetida), kui soovid!"
+
+#: wp-to-twitter-manager.php:116
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your <strong>new link</strong>! You'll have to post it manually, I'm afraid. "
+msgstr "Vabandust! Ei saanud postitada su <strong>uut linki</strong>, sest ei saanud ühendust Twitteri serveritega. Pead selle vist kahjuks käsitsi postitama."
+
+#: wp-to-twitter-manager.php:145
+msgid "WP to Twitter Advanced Options Updated"
+msgstr "WP to Twitter Täiendavad võimalused uuendatud."
+
+#: wp-to-twitter-manager.php:162
+msgid "You must add your Bit.ly login and API key in order to shorten URLs with Bit.ly."
+msgstr "Peate lisama oma Bit.ly login'i ja API salasõna, et lühendada URL'e Bit.ly.'ga."
+
+#: wp-to-twitter-manager.php:166
+msgid "You must add your YOURLS remote URL, login, and password in order to shorten URLs with a remote installation of YOURLS."
+msgstr "Peate lisama oma YOURLS'i  serveri URL'i, kasutajatunnuse ja salasõna, et URL'e lühendada YOURLS'i kauginstallatsiooniga."
+
+#: wp-to-twitter-manager.php:170
+msgid "You must add your YOURLS server path in order to shorten URLs with a remote installation of YOURLS."
+msgstr "Peate lisama oma YOURLS serveriaadressi, et URL'e lühendada YOURLS'i kauginstallatsiooniga / et lühendada YOURLS'i kauginstallatsiooniga URL'e."
+
+#: wp-to-twitter-manager.php:174
+msgid "WP to Twitter Options Updated"
+msgstr "WP to Twitter valikud uuendatud"
+
+#: wp-to-twitter-manager.php:184
+msgid "Category limits updated."
+msgstr "Kategooriapiirangud uuendatud."
+
+#: wp-to-twitter-manager.php:188
+msgid "Category limits unset."
+msgstr "Kategooriapiirangud pole määratud."
+
+#: wp-to-twitter-manager.php:209
+msgid "Twitter login and password updated. "
+msgstr "Twitteri kasutajanimi ja salasõna uuendatud."
+
+#: wp-to-twitter-manager.php:211
+msgid "You need to provide your Twitter login and password! "
+msgstr "Pead kasutama oma Twitteri kasutajanime ja salasõna!"
+
+#: wp-to-twitter-manager.php:218
+msgid "YOURLS password updated. "
+msgstr "YOURLS salasõna uuendatud."
+
+#: wp-to-twitter-manager.php:221
+msgid "YOURLS password deleted. You will be unable to use your remote YOURLS account to create short URLS."
+msgstr "YOURLS kasutajatunnus kustutatud. Sa ei saa kasutada Bit.ly API't ilma oma kasutajatunnuseta."
+
+#: wp-to-twitter-manager.php:223
+msgid "Failed to save your YOURLS password! "
+msgstr "Ei õnnestunud salvestada sinu YOURLS salasõna!"
+
+#: wp-to-twitter-manager.php:227
+msgid "YOURLS username added. "
+msgstr "YOURLS kasutajanimi lisatud."
+
+#: wp-to-twitter-manager.php:231
+msgid "YOURLS API url added. "
+msgstr "YOURLS API URL lisatud."
+
+#: wp-to-twitter-manager.php:236
+msgid "YOURLS local server path added. "
+msgstr "YOURLS kohaliku serveri viide lisatud."
+
+#: wp-to-twitter-manager.php:238
+msgid "The path to your YOURLS installation is not correct. "
+msgstr "viide sy YOURLS installatsioonifailidele pole korrektne."
+
+#: wp-to-twitter-manager.php:243
+msgid "YOURLS will use Post ID for short URL slug."
+msgstr "YOURLS kasutab postituse ID'd lühikese URL'i juhuslikult genereeritud märgendi (URL slug) jaoks. "
+
+#: wp-to-twitter-manager.php:246
+msgid "YOURLS will not use Post ID for the short URL slug."
+msgstr "YOURLS ei kasuta postituse ID'd lühikese URL'i juhuslikult genereeritud märgendi (URL slug) jaoks. "
+
+#: wp-to-twitter-manager.php:253
+msgid "Cligs API Key Updated"
+msgstr "Cligs API kood uuendatud"
+
+#: wp-to-twitter-manager.php:256
+msgid "Cli.gs API Key deleted. Cli.gs created by WP to Twitter will no longer be associated with your account. "
+msgstr "Cligs API kood kustutatud. WP to Twitter'i poolt loodud Cli.gs ei ole enam sinu kontoga seotud. "
+
+#: wp-to-twitter-manager.php:258
+msgid "Cli.gs API Key not added - <a href='http://cli.gs/user/api/'>get one here</a>! "
+msgstr "Cligs API koodi pole lisatud - <a href='http://cli.gs/user/api/'> saad selle siit</a>! "
+
+#: wp-to-twitter-manager.php:264
+msgid "Bit.ly API Key Updated."
+msgstr "Bit.ly API kood uuendatud."
+
+#: wp-to-twitter-manager.php:267
+msgid "Bit.ly API Key deleted. You cannot use the Bit.ly API without an API key. "
+msgstr "Bit.ly API kood  kustutatud. Sa ei saa Bit.ly API't kasutada ilma API koodita."
+
+#: wp-to-twitter-manager.php:269
+msgid "Bit.ly API Key not added - <a href='http://bit.ly/account/'>get one here</a>! An API key is required to use the Bit.ly URL shortening service."
+msgstr "Bit.ly API koodi pole lisatud - <a href='http://bit.ly/account/'> saad selle siit </a>!  Bit.ly URL'i lühendamise teenuseks on vaja API koodi."
+
+#: wp-to-twitter-manager.php:273
+msgid " Bit.ly User Login Updated."
+msgstr "Bit.ly kasutajatunnus uuendatud."
+
+#: wp-to-twitter-manager.php:276
+msgid "Bit.ly User Login deleted. You cannot use the Bit.ly API without providing your username. "
+msgstr "Bit.ly kasutajatunnus kustutatud. Sa ei saa kasutada Bit.ly API't ilma oma kasutajatunnuseta."
+
+#: wp-to-twitter-manager.php:278
+msgid "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! "
+msgstr "Bit.ly kasutajatunnust pole lisatud - <a href='http://bit.ly/account/'> saad selle siit</a>! "
+
+#: wp-to-twitter-manager.php:372
+msgid "<li><strong>Your selected URL shortener does not require testing.</strong></li>"
+msgstr "<li><strong>Sinu poolt valitud URL lühendaja ei vaja testimist.</strong></li>"
+
+#: wp-to-twitter-manager.php:375
+msgid "<li class=\"error\"><strong>WP to Twitter was unable to contact your selected URL shortening service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter ei saavutanud ühenduslt sinu poolt valitud URL lühendusteenusega.</strong></li>"
+
+#: wp-to-twitter-manager.php:379
+msgid "<li><strong>WP to Twitter successfully contacted your selected URL shortening service.</strong>  The following link should point to your blog homepage:"
+msgstr "<li><strong>WP to Twitter saavutas edukalt ühenduse sinu poolt valitud URL lühendusteenusega.</strong> Järgnev link peaks viitama sinu blogi kodulehele:"
+
+#: wp-to-twitter-manager.php:390
+msgid "<li><strong>WP to Twitter successfully submitted a status update to your primary update service.</strong></li>"
+msgstr "<li><strong> WP to Twitter saatis edukalt staatuse värskenduse su peamisele uuendusteenusele.</strong></li>"
+
+#: wp-to-twitter-manager.php:393
+msgid "<li class=\"error\"><strong>WP to Twitter failed to submit an update to your primary update service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter WP to Twitter ei suutnud saata värskendust su peamisele uuendusteenusele.</strong></li>"
+
+#: wp-to-twitter-manager.php:394
+msgid "Twitter returned this error:"
+msgstr "Twitter saatis sellise veateate:"
+
+#: wp-to-twitter-manager.php:398
+msgid "<li class=\"error\"><strong>WP to Twitter failed to contact your primary update service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter WP to Twitter ei suutnud saada ühendust su peamise uuendusteenusega.</strong></li>"
+
+#: wp-to-twitter-manager.php:399
+msgid "No error was returned."
+msgstr "Veateateid ei edastatud."
+
+#: wp-to-twitter-manager.php:406
+msgid "<li><strong>WP to Twitter successfully submitted a status update to your secondary update service.</strong></li>"
+msgstr "<li><strong>WP to Twitter saatis staatuse värskenduse edukalt  su sekundaarsele uuendusteenusele.</strong></li>"
+
+#: wp-to-twitter-manager.php:409
+msgid "<li class=\"error\"><strong>WP to Twitter failed to submit an update to your secondary update service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter ei suutnud saata värskendust su sekundaarsele uuendusteenusele.</strong></li>"
+
+#: wp-to-twitter-manager.php:410
+msgid "The service returned this error:"
+msgstr "Teenus edastas järgmise veateate:"
+
+#: wp-to-twitter-manager.php:417
+msgid "<li><strong>Your server should run WP to Twitter successfully.</strong></li>"
+msgstr "<li><strong>Sinu server peaks WP to Twitter'it edukalt jooksutama.</strong></li>"
+
+#: wp-to-twitter-manager.php:420
+msgid "<li class=\"error\"><strong>Your server does not appear to support the required methods for WP to Twitter to function.</strong> You can try it anyway - these tests aren't perfect.</li>"
+msgstr "<li class=\"error\"><strong>Tundub, et sinu server ei toeta meetodeid, mis on vajalikud WP to Twitteri töötamiseks .</strong> Võid seda siiski proovida - kasutusele olevad testid ei ole täiuslikud.</li>"
+
+#: wp-to-twitter-manager.php:430
+msgid "This plugin may not fully work in your server environment. The plugin failed to contact both a URL shortener API and the Twitter service API."
+msgstr "See plugin ei pruugi sinu serveri keskkonnas täielikult töötada. Plugin ei saanud ühendust URL'i lühendava API'ga ega Twitteri API teenusega."
+
+#: wp-to-twitter-manager.php:444
+msgid "WP to Twitter Options"
+msgstr "WP to Twitter Valikud"
+
+#: wp-to-twitter-manager.php:452
+#: wp-to-twitter.php:925
+msgid "Get Support"
+msgstr "Abi"
+
+#: wp-to-twitter-manager.php:453
+msgid "Export Settings"
+msgstr "Ekspordi seaded"
+
+#: wp-to-twitter-manager.php:454
+#: wp-to-twitter.php:925
+msgid "Make a Donation"
+msgstr "Tee annetus"
+
+#: wp-to-twitter-manager.php:469
+msgid "Shortcodes available in post update templates:"
+msgstr "Lühendkoodid on saadaval uuendusjärgsetes mallides"
+
+#: wp-to-twitter-manager.php:471
+msgid "<code>#title#</code>: the title of your blog post"
+msgstr "<code>#title#</code>: Blogipostituse pealkiri"
+
+#: wp-to-twitter-manager.php:472
+msgid "<code>#blog#</code>: the title of your blog"
+msgstr "<code>#blog#</code>: Blogi nimi või pealkiri"
+
+#: wp-to-twitter-manager.php:473
+msgid "<code>#post#</code>: a short excerpt of the post content"
+msgstr "<code>#post#</code>: lühike väljavõte postituse sisust"
+
+#: wp-to-twitter-manager.php:474
+msgid "<code>#category#</code>: the first selected category for the post"
+msgstr "<code>#category#</code>: postituse sisu esimene valitud kategooria"
+
+#: wp-to-twitter-manager.php:475
+msgid "<code>#date#</code>: the post date"
+msgstr "<code>#date#</code>: postituse kuupäev"
+
+#: wp-to-twitter-manager.php:476
+msgid "<code>#url#</code>: the post URL"
+msgstr "<code>#url#</code>: postituse URL"
+
+#: wp-to-twitter-manager.php:477
+msgid "<code>#author#</code>: the post author'"
+msgstr "<code>#author#</code>: postituse autor'"
+
+#: wp-to-twitter-manager.php:479
+msgid "You can also create custom shortcodes to access WordPress custom fields. Use doubled square brackets surrounding the name of your custom field to add the value of that custom field to your status update. Example: <code>[[custom_field]]</code></p>"
+msgstr "Võite luua ka kohandatud lühendkoode, et kasutada WordPressi kohandatud välju. Oma staatuse värskendusele kohandatud välja väärtuse lisamiseks kasuta oma kohandatud välja ümber kahekordseid kandilisi sulge. Näide: <code>[[custom_field]]</code></p>"
+
+#: wp-to-twitter-manager.php:484
+msgid "<p>One or more of your last posts has failed to send it's status update to Twitter. Your Tweet has been saved in your post custom fields, and you can re-Tweet it at your leisure.</p>"
+msgstr "<p> Üks või rohkem sinu viimastest postitustest ei suutnud staatuse värskendamist Twitterile saata. Sinu Säuts on salvestatud postituse kohandatud väljadele ning võite seda soovi korral uuesti Säutsuda. </p>"
+
+#: wp-to-twitter-manager.php:487
+msgid "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+msgstr "<p> Päring URL'i lühendava API suhtes ebaõnnestus ning sinu URL'i ei lühendatud. Sinu Säutsule lisati täispikkuses URL. Kontrolli, kas sinu URL'ide lühendamisteenuse pakkujal esineb levinud probleeme. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+
+#: wp-to-twitter-manager.php:494
+msgid "Clear 'WP to Twitter' Error Messages"
+msgstr "Puhasta 'WP to Twitter' veateated"
+
+#: wp-to-twitter-manager.php:507
+msgid "Basic Settings"
+msgstr "Põhiseaded"
+
+#: wp-to-twitter-manager.php:513
+msgid "Tweet Templates"
+msgstr "Säutsumallid"
+
+#: wp-to-twitter-manager.php:516
+msgid "Update when a post is published"
+msgstr "Uuenda, kui tehakse uus postitus"
+
+#: wp-to-twitter-manager.php:516
+msgid "Text for new post updates:"
+msgstr "Tekst uute postituste jaoks:"
+
+#: wp-to-twitter-manager.php:521
+msgid "Update when a post is edited"
+msgstr "Uuenda, kui postitust muudetakse"
+
+#: wp-to-twitter-manager.php:521
+msgid "Text for editing updates:"
+msgstr "Tekst postituste muutmise jaoks:"
+
+#: wp-to-twitter-manager.php:525
+msgid "Update Twitter when new Wordpress Pages are published"
+msgstr "Värskenda Twitterit pärast uute Wordpressi lehekülgede avaldamist"
+
+#: wp-to-twitter-manager.php:525
+msgid "Text for new page updates:"
+msgstr "Värske lehe uuenduse tekst:"
+
+#: wp-to-twitter-manager.php:529
+msgid "Update Twitter when WordPress Pages are edited"
+msgstr "Värskenda Twitterit, kui muudetakse WordPressi lehekülgi"
+
+#: wp-to-twitter-manager.php:529
+msgid "Text for page edit updates:"
+msgstr "Lehekülje muudatuste tekst:"
+
+#: wp-to-twitter-manager.php:533
+msgid "Update Twitter when you post a Blogroll link"
+msgstr "Värskenda Twitterit, kui postitad Blogrolli lingi"
+
+#: wp-to-twitter-manager.php:534
+msgid "Text for new link updates:"
+msgstr "Tekst uute lingivärskenduste jaoks:"
+
+#: wp-to-twitter-manager.php:534
+msgid "Available shortcodes: <code>#url#</code>, <code>#title#</code>, and <code>#description#</code>."
+msgstr "Olemasolevad lühikoodid: <code>#url#</code>, <code>#title#</code>, ja <code>#description#</code>."
+
+#: wp-to-twitter-manager.php:538
+msgid "Choose your short URL service (account settings below)"
+msgstr "Vali oma lühikese URL'i teenus (kontoseaded all)"
+
+#: wp-to-twitter-manager.php:541
+msgid "Use Cli.gs for my URL shortener."
+msgstr "Kasuta Cli.gs'i oma URL'ide lühendajana."
+
+#: wp-to-twitter-manager.php:542
+msgid "Use Bit.ly for my URL shortener."
+msgstr "Kasuta Bit.ly'd oma URL'ide lühendajana."
+
+#: wp-to-twitter-manager.php:543
+msgid "YOURLS (installed on this server)"
+msgstr "YOURLS (installeeritud sellesse serverisse)"
+
+#: wp-to-twitter-manager.php:544
+msgid "YOURLS (installed on a remote server)"
+msgstr "YOURLS (installeeritud kaugserverisse)"
+
+#: wp-to-twitter-manager.php:545
+msgid "Use WordPress as a URL shortener."
+msgstr "Kasuta WordPressi URL'ide lühendajana."
+
+#: wp-to-twitter-manager.php:546
+msgid "Don't shorten URLs."
+msgstr "Ära lühenda URL'e."
+
+#: wp-to-twitter-manager.php:548
+msgid "Using WordPress as a URL shortener will send URLs to Twitter in the default URL format for WordPress: <code>http://domain.com/wpdir/?p=123</code>. Google Analytics is not available when using WordPress shortened URLs."
+msgstr "Kasutades URL'ide lühendamiseks WordPressi saadad URL'i Twitterisse, kasutades Wordpressi vaikevalikuga määratud URL formaati: <code>http://domain.com/wpdir/?p=123</code>. Google Analytics'it ei saa kasutada, kui kasutate WordPressi poolt lühendatud URL'e."
+
+#: wp-to-twitter-manager.php:554
+msgid "Save WP->Twitter Options"
+msgstr "Salvesta WP->Twitter seaded"
+
+#: wp-to-twitter-manager.php:580
+#: wp-to-twitter-manager.php:599
+msgid "(<em>Saved</em>)"
+msgstr "(<em>Salvestatud</em>)"
+
+#: wp-to-twitter-manager.php:584
+#: wp-to-twitter-manager.php:603
+msgid "&raquo; <small>Don't have a Twitter account? <a href='http://www.twitter.com'>Get one for free here</a>"
+msgstr "&raquo; <small> Sul puudubTwitter'i konto? <a href='http://www.twitter.com'> Siit saad selle tasuta</a>"
+
+#: wp-to-twitter-manager.php:590
+msgid "Your Twitter account details"
+msgstr "Sinu Twitteri konto detailid"
+
+#: wp-to-twitter-manager.php:591
+msgid "These are your settings for Twitter as a second update service."
+msgstr "Need on sinu seaded Twitterile kui sekundaarsele uuendusteenusele."
+
+#: wp-to-twitter-manager.php:595
+msgid "Your Twitter username:"
+msgstr "Sinu Twitteri kasutajanimi:"
+
+#: wp-to-twitter-manager.php:599
+msgid "Your Twitter password:"
+msgstr "Sinu Twitteri salasõna:"
+
+#: wp-to-twitter-manager.php:603
+msgid "Save Twitter Login Info"
+msgstr "Salvesta Twitteri login-info"
+
+#: wp-to-twitter-manager.php:609
+msgid "Your Cli.gs account details"
+msgstr "Sinu Cli.gs konto detailid"
+
+#: wp-to-twitter-manager.php:614
+msgid "Your Cli.gs <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Sinu Cli.gs <abbr title='application programming interface'>API</abbr> kood:"
+
+#: wp-to-twitter-manager.php:620
+msgid "Don't have a Cli.gs account or Cligs API key? <a href='http://cli.gs/user/api/'>Get one free here</a>!<br />You'll need an API key in order to associate the Cligs you create with your Cligs account."
+msgstr "Sul puudub Cli.gs konto või Cligs API kood? <a href='http://cli.gs/user/api/'>Siit saad selle tasuta! </a>!<br /> Vajate API koodi, et seostada oma Cligs postitusi oma Cligs kontoga."
+
+#: wp-to-twitter-manager.php:626
+msgid "Your Bit.ly account details"
+msgstr "Teie Bit.ly konto detailid:"
+
+#: wp-to-twitter-manager.php:631
+msgid "Your Bit.ly username:"
+msgstr "Sinu Bit.ly kasutajanimi:"
+
+#: wp-to-twitter-manager.php:635
+msgid "Your Bit.ly <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Sinu Bit.ly <abbr title='application programming interface'>API</abbr> kood:"
+
+#: wp-to-twitter-manager.php:642
+msgid "Save Bit.ly API Key"
+msgstr "Salvesta Bit.ly API kood"
+
+#: wp-to-twitter-manager.php:642
+msgid "Clear Bit.ly API Key"
+msgstr "Puhasta Bit.ly API kood"
+
+#: wp-to-twitter-manager.php:642
+msgid "A Bit.ly API key and username is required to shorten URLs via the Bit.ly API and WP to Twitter."
+msgstr " Bit.ly API ja  WP to Twitter abil URL'ide lühendamiseks on vaja Bit.ly API koodi ja kasutajanime."
+
+#: wp-to-twitter-manager.php:647
+msgid "Your YOURLS account details"
+msgstr "Sinu YOURLS konto detailid"
+
+#: wp-to-twitter-manager.php:651
+msgid "Path to the YOURLS config file (Local installations)"
+msgstr "Viide YOURLS konfiguratsioonifailile (kohalikud installatsioonid)"
+
+#: wp-to-twitter-manager.php:652
+#: wp-to-twitter-manager.php:656
+msgid "Example:"
+msgstr "Näide:"
+
+#: wp-to-twitter-manager.php:655
+msgid "URI to the YOURLS API (Remote installations)"
+msgstr "YOURLS API (kauginstallatsioon) URI"
+
+#: wp-to-twitter-manager.php:659
+msgid "Your YOURLS username:"
+msgstr "Sinu YOURLS kasutajanimi:"
+
+#: wp-to-twitter-manager.php:663
+msgid "Your YOURLS password:"
+msgstr "Sinu YOURLS salasõna:"
+
+#: wp-to-twitter-manager.php:663
+msgid "<em>Saved</em>"
+msgstr "<em>Salvestatud</em>"
+
+#: wp-to-twitter-manager.php:667
+msgid "Use Post ID for YOURLS url slug."
+msgstr "Kasuta postituse ID'd YOURLS URL'i juhuslikult genereeritud märgendite (URL slug) jaoks. "
+
+#: wp-to-twitter-manager.php:672
+msgid "Save YOURLS Account Info"
+msgstr "Salvesta YOURLS kontoinfo"
+
+#: wp-to-twitter-manager.php:672
+msgid "Clear YOURLS password"
+msgstr "Nulli YOURLS salasõna"
+
+#: wp-to-twitter-manager.php:672
+msgid "A YOURLS password and username is required to shorten URLs via the remote YOURLS API and WP to Twitter."
+msgstr "URL'ide lühendaimseks kaug-YOURLS API ja WP to Twitter'i abil on vaja YOURLS salasõna ja kasutajanime."
+
+#: wp-to-twitter-manager.php:677
+msgid "Change Twitter-compatible Service"
+msgstr "Muuda Twitteriga ühilduvat teenust"
+
+#: wp-to-twitter-manager.php:681
+msgid "URI for Twitter-compatible Post Status API"
+msgstr "Twitteriga ühilduva postituse staatuse API URI "
+
+#: wp-to-twitter-manager.php:685
+msgid "Service Name"
+msgstr "Teenuse nimi"
+
+#: wp-to-twitter-manager.php:689
+msgid "Status Update Character Limit"
+msgstr "Staatuse värskenduse tähemärkide limiit"
+
+#: wp-to-twitter-manager.php:693
+msgid "Post status updates to both services."
+msgstr "Postita staatusevärskendus mõlemasse teenusesse."
+
+#: wp-to-twitter-manager.php:696
+msgid "Reset to normal Twitter settings"
+msgstr "Taasta Twitteri algseaded"
+
+#: wp-to-twitter-manager.php:699
+msgid "Update Twitter Compatible Service"
+msgstr "Uuenda Twitteriga ühilduvat teenust:"
+
+#: wp-to-twitter-manager.php:699
+msgid "&raquo; <small>You can use any service using the Twitter-compatible REST API returning data in JSON format with this plugin. Twitter-compatible services include <a href='http://identi.ca'>Identi.ca</a>, <a href='http://shoutem.com'>Shoutem.com</a> and <a href='http://chirup.com'>Chirup.com</a>. <strong>No support will be provided for services other than Twitter.</strong>"
+msgstr "&raquo; <small>Selle pluginiga võite kasutada ükskõik millist teenust, mis kasutab Twitteriga ühilduvat REST API't, mis tagastab andmeid JSON formaadis. Twitteriga ühilduvate teeunste hulka kuuluvad <a href='http://identi.ca'>Identi.ca</a>, <a href='http://shoutem.com'>Shoutem.com</a> ja <a href='http://chirup.com'>Chirup.com</a>. <strong> Tuge pakutakse ainult Twitteri teenustele.</strong>"
+
+#: wp-to-twitter-manager.php:716
+msgid "Advanced Settings"
+msgstr "Täpsemad seaded"
+
+#: wp-to-twitter-manager.php:723
+msgid "Advanced Tweet settings"
+msgstr "Täpsemad Säutsuseaded"
+
+#: wp-to-twitter-manager.php:726
+msgid "Add tags as hashtags on Tweets"
+msgstr "Lisa Säutsudele märgendeid räsidena (hashtag)."
+
+#: wp-to-twitter-manager.php:727
+msgid "Spaces replaced with:"
+msgstr "Tühikud asendatatakse sellega:"
+
+#: wp-to-twitter-manager.php:728
+msgid "Default replacement is an underscore (<code>_</code>). Use <code>[ ]</code> to remove spaces entirely."
+msgstr "Asendamiseks on vaikevalikuna kasutusel alakriips (<code>_</code>). Kasuta <code>[ ]</code> tühikute täielikuks eemaldamiseks."
+
+#: wp-to-twitter-manager.php:731
+msgid "Maximum number of tags to include:"
+msgstr "Maksimaalne kaasatavate märgendite arv:"
+
+#: wp-to-twitter-manager.php:732
+msgid "Maximum length in characters for included tags:"
+msgstr "Kaasatavate märgendite maksimumpikkus tähemärkides:"
+
+#: wp-to-twitter-manager.php:733
+msgid "These options allow you to restrict the length and number of WordPress tags sent to Twitter as hashtags. Set to <code>0</code> or leave blank to allow any and all tags."
+msgstr "Need valikud võimaldavad sul piirata  pikkust ja arvu WordPressi märgenditel, mis on Twitterisse saadetud räsidena (hashtag). Määra  <code>0</code> või jäta tühjaks, et lubada kõiki ja igasuguseid märgendeid."
+
+#: wp-to-twitter-manager.php:736
+msgid "Length of post excerpt (in characters):"
+msgstr "Postituse väljavõtte pikkus tähemärkides:"
+
+#: wp-to-twitter-manager.php:736
+msgid "By default, extracted from the post itself. If you use the 'Excerpt' field, that will be used instead."
+msgstr "Vaikeseadete järgi postitusest välja võetud. Seda kasutatakse siis, kui kasutate 'Excerpt'-välja."
+
+#: wp-to-twitter-manager.php:739
+msgid "WP to Twitter Date Formatting:"
+msgstr "WP to Twitter vormindamine:"
+
+#: wp-to-twitter-manager.php:740
+msgid "Default is from your general settings. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+msgstr "Vaikeseaded lähtuvad sinu üldseadetest. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+
+#: wp-to-twitter-manager.php:744
+msgid "Custom text before all Tweets:"
+msgstr "Kohandatud tekst enne kõiki Säutse:"
+
+#: wp-to-twitter-manager.php:745
+msgid "Custom text after all Tweets:"
+msgstr "Kohandatud tekst kõigile Säutsudele:"
+
+#: wp-to-twitter-manager.php:748
+msgid "Custom field for an alternate URL to be shortened and Tweeted:"
+msgstr "Kohandatud väli lühendatavale ja Säutsutavale alternatiivsele URL'ile:"
+
+#: wp-to-twitter-manager.php:749
+msgid "You can use a custom field to send an alternate URL for your post. The value is the name of a custom field containing your external URL."
+msgstr "Võite kasutada kohandatud välja, et oma postitusse saata alternatiivne URL. Väärtuseks on kohandatud välja nimi, mis sisaldab serveri URL'i."
+
+#: wp-to-twitter-manager.php:753
+msgid "Special Cases when WordPress should send a Tweet"
+msgstr "Erijuhtumid, mille puhul Wordpress peaks saatma Säutsu."
+
+#: wp-to-twitter-manager.php:756
+msgid "Do not post status updates by default"
+msgstr "Staatuse värskenduste postitamine on vaikseaseadena väljalülitatud."
+
+#: wp-to-twitter-manager.php:757
+msgid "By default, all posts meeting other requirements will be posted to Twitter. Check this to change your setting."
+msgstr "Vaikeseadena postitatakse Twitterisse kõik postitused, mis vastavad teistele nõuetele. Märgi see valik oma seadistuse muutmiseks."
+
+#: wp-to-twitter-manager.php:761
+msgid "Send Twitter Updates on remote publication (Post by Email or XMLRPC Client)"
+msgstr "Saada Twitteri värskendused kaug-avaldamisega (postita e-mailiga või XMLRPC kliendiga)"
+
+#: wp-to-twitter-manager.php:765
+msgid "Update Twitter when a post is published using QuickPress"
+msgstr "Värskenda Twitterit, kui tehakse postitus kasutades QuickPress'i"
+
+#: wp-to-twitter-manager.php:769
+msgid "Google Analytics Settings"
+msgstr "Google Analytics'i seaded"
+
+#: wp-to-twitter-manager.php:770
+msgid "You can track the response from Twitter using Google Analytics by defining a campaign identifier here. You can either define a static identifier or a dynamic identifier. Static identifiers don't change from post to post; dynamic identifiers are derived from information relevant to the specific post. Dynamic identifiers will allow you to break down your statistics by an additional variable."
+msgstr "Saate järgida Twitteri vastukaja, kasutades Google Analytics'it, ning defineerides siin kampaania  identifikaatori. Võite kasutada staatilist või dünaamilist identifikaatorit. Staatilised identifikaatorid ei muutu erinevate postituste puhul kuid dünaamilised identifikaatorid tuletatakse iga posti suhtes relevantsest informatsioonist. Dünaamilised identifikaatorid võimaldavad sul statistikat lisamuutujate abil täpsustada."
+
+#: wp-to-twitter-manager.php:774
+msgid "Use a Static Identifier with WP-to-Twitter"
+msgstr "Kasuta staatilist identifikaatorit koos WP-to-Twitter'iga."
+
+#: wp-to-twitter-manager.php:775
+msgid "Static Campaign identifier for Google Analytics:"
+msgstr "Staatiline kampaania identifikaator Google Analytics'i jaoks"
+
+#: wp-to-twitter-manager.php:779
+msgid "Use a dynamic identifier with Google Analytics and WP-to-Twitter"
+msgstr "Kasuta Google Analytics'i ja WP-to-Twitter'iga dünaamilist identifikaatorit. "
+
+#: wp-to-twitter-manager.php:780
+msgid "What dynamic identifier would you like to use?"
+msgstr "Millist dünaamilist identifikaatorit soovid kasutada?"
+
+#: wp-to-twitter-manager.php:782
+msgid "Category"
+msgstr "Kategooria"
+
+#: wp-to-twitter-manager.php:783
+msgid "Post ID"
+msgstr "Postituse ID"
+
+#: wp-to-twitter-manager.php:784
+msgid "Post Title"
+msgstr "Postituse pealkiri"
+
+#: wp-to-twitter-manager.php:785
+msgid "Author"
+msgstr "Autor"
+
+#: wp-to-twitter-manager.php:790
+msgid "Individual Authors"
+msgstr "Autorid"
+
+#: wp-to-twitter-manager.php:793
+msgid "Authors have individual Twitter accounts"
+msgstr "Autoritel on oma Twitteri kontod"
+
+#: wp-to-twitter-manager.php:793
+msgid "Authors can set their own Twitter username and password in their user profile."
+msgstr "Autorid saavad oma Twitteri kasutajanime ja salasõna oma kasutajaprofiilist ise määrata."
+
+#: wp-to-twitter-manager.php:797
+msgid "Disable Error Messages"
+msgstr "Keela veateated"
+
+#: wp-to-twitter-manager.php:800
+msgid "Disable global URL shortener error messages."
+msgstr "Lülita välja globaalse URL lühendaja veateated."
+
+#: wp-to-twitter-manager.php:804
+msgid "Disable global Twitter API error messages."
+msgstr "Lülita välja globaalsed Twitter API veateated."
+
+#: wp-to-twitter-manager.php:810
+msgid "Save Advanced WP->Twitter Options"
+msgstr "Salvesta täiendavad WP->Twitter seaded"
+
+#: wp-to-twitter-manager.php:824
+msgid "Limit Updating Categories"
+msgstr "Piira Värskendamise Kategooriaid"
+
+#: wp-to-twitter-manager.php:828
+msgid "Select which blog categories will be Tweeted. "
+msgstr "Määra, milliseid blogikategooriaid tahad Säutsuda."
+
+#: wp-to-twitter-manager.php:831
+msgid "<em>Category limits are disabled.</em>"
+msgstr "<em>Kategooriapiirangud on välja lülitatud.</em>"
+
+#: wp-to-twitter-manager.php:845
+msgid "Check Support"
+msgstr "Kontrolli toe olemasolu"
+
+#: wp-to-twitter-manager.php:845
+msgid "Check whether your server supports <a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter's</a> queries to the Twitter and URL shortening APIs. This test will send a status update to Twitter and shorten a URL using your selected methods."
+msgstr "Kontrolli, kas server toetab <a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter'i</a> päringuid Twitterile ja URL'e lühendavaid API'sid. See test saadab staatuse värskenduse Twitterile ja lühendab URL'e, kasutades sinu valitud meetodeid."
+
+#. #-#-#-#-#  plugin.pot (WP to Twitter 2.1.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: wp-to-twitter.php:853
+msgid "WP to Twitter"
+msgstr "WP to Twitter"
+
+#: wp-to-twitter.php:928
+msgid "Don't Tweet this post."
+msgstr "Ära Säutsu seda postitust"
+
+#: wp-to-twitter.php:938
+msgid "This URL is direct and has not been shortened: "
+msgstr "See URL on otsene ning seda pole lühendatud:"
+
+#: wp-to-twitter.php:990
+#: wp-to-twitter.php:1009
+msgid "WP to Twitter User Settings"
+msgstr "WP to Twitter kasutajaseaded"
+
+#: wp-to-twitter.php:1001
+#: wp-to-twitter.php:1014
+msgid "Enter your own Twitter username."
+msgstr "Sisestage oma Twitteri kasutajanimi"
+
+#: wp-to-twitter.php:1005
+#: wp-to-twitter.php:1018
+msgid "Enter your own Twitter password."
+msgstr "Sisestage oma Twitteri salasõna"
+
+#: wp-to-twitter.php:1005
+#: wp-to-twitter.php:1018
+msgid "<em>Password saved</em>"
+msgstr "<em>Salasõna salvestatud</em>"
+
+#: wp-to-twitter.php:1013
+msgid "Your Twitter Username"
+msgstr "Sinu Twitteri kasutajanimi"
+
+#: wp-to-twitter.php:1017
+msgid "Your Twitter Password"
+msgstr "Sinu Twitteri salasõna"
+
+#: wp-to-twitter.php:1061
+msgid "Check the categories you want to tweet:"
+msgstr "Märgi ära kategooriad, mille teemal tahad Säutsuda:"
+
+#: wp-to-twitter.php:1078
+msgid "Set Categories"
+msgstr "Määra kategooriad"
+
+#: wp-to-twitter.php:1147
+msgid "<p>Couldn't locate the settings page.</p>"
+msgstr "<p> Ei leidnud sätete lehekülge </p>"
+
+#: wp-to-twitter.php:1152
+msgid "Settings"
+msgstr "Seaded"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.joedolson.com/articles/wp-to-twitter/"
+msgstr "http://www.joedolson.com/articles/wp-to-twitter/"
+
+#. Description of the plugin/theme
+msgid "Updates Twitter when you create a new blog post or add to your blogroll using Cli.gs. With a Cli.gs API key, creates a clig in your Cli.gs account with the name of your post as the title."
+msgstr "Värskendab Twitterit, kui teete uue blogipostituse või lisate midagi oma blogrollile, kasutades Cli.gs.'i. CLi.gs API koodiga saate luua clig'i oma Cli.gs kontole nii, et selle pealkirjaks on teie postituse pealkiri."
+
+#. Author of the plugin/theme
+msgid "Joseph Dolson"
+msgstr "Joseph Dolson"
+
+#. Author URI of the plugin/theme
+msgid "http://www.joedolson.com/"
+msgstr "http://www.joedolson.com/"
+

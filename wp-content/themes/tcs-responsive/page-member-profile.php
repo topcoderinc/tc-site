@@ -5,6 +5,14 @@ $activity = get_activity_summary ();
 
 $handle = get_query_var ( 'handle' );
 
+$coder = get_raw_coder ( $handle, '' );
+
+# if handle not found redirect to 404 - member not found (Dan.V - I-104783)
+if (!isset($coder->handle) ) {
+  wp_redirect(site_url('404.php'));
+  exit;
+}
+
 $tab = get_query_var ( 'tab' );
 $track = "data/srm";
 
@@ -20,7 +28,6 @@ if ($ct == 'marathon') {
 	$track = "data/marathon";
 }
 
-$coder = get_raw_coder ( $handle, '' );
 $userkey = get_option ( 'api_user_key' );
 // rint_r($coder);
 

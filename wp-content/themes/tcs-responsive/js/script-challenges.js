@@ -1,6 +1,7 @@
 var pageSize = 8;
 var sortColumn = "";
 var sortOrder = "";
+var ApiData = {};
 
 /**
  * Challenges function
@@ -48,6 +49,8 @@ appChallenges = {
                 if (contest_type == "design" || contest_type == "develop") {
                     app.getReview($('.tcoTable'), currentPage);
                 }
+            } else if (reviewType == "data") {
+                app.getDataChallenges($('.tcoTable'), currentPage);
             }
         }
     },
@@ -87,6 +90,9 @@ appChallenges = {
             } else {
                 $(this).addClass('isActive');
                 $('.searchFilter').fadeIn();
+
+        // populate technology tags
+        app.getTechnologyTags($('.chosen-select'));
             }
         });
 
@@ -202,7 +208,12 @@ appChallenges = {
                 sortOrder = getSortOrder;
                 if (reviewType == "contest") {
                     if (contest_type == "design" || contest_type == "develop") {
-                        app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
+                        if (postPerPage >= apiData.total) {
+                            apiData = app.apiDataSort(apiData, sortColumn, sortOrder);
+                            app.apiDataView(apiData, $('.tcoTable'), app.callbackAfterSort($(this)));
+                        } else {
+                            app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
+                        }
                     } else if (listType == "AllActive") {
                         app.getDesignContests($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
                     }
@@ -213,6 +224,88 @@ appChallenges = {
             }
 
         });
+    },
+    //sort data from previous api call so we dont have to make a new one, useful for 'view all' datasets
+    apiDataSort: function(data, sortColumn, sortOrder) {
+        switch(sortColumn) {
+            case 'challengeType':
+            case 'challengeName':
+            case 'currentStatus':
+                data.data.sort(function(a, b) {
+                    if (sortOrder === 'asc') {
+                        if (a[sortColumn] > b[sortColumn]) {
+                            return 1;
+                        }
+                        if (a[sortColumn] < b[sortColumn]) {
+                            return -1;
+                        }
+                        // a must be equal to b
+                        return 0;
+                    }
+                    if (a[sortColumn] < b[sortColumn]) {
+                        return 1;
+                    }
+                    if (a[sortColumn] > b[sortColumn]) {
+                        return -1;
+                    }
+                    // a must be equal to b
+                    return 0;
+                });
+                break;
+            case 'postingDate':
+                data.data.sort(function(a, b) {
+                    a = new Date(a[sortColumn]);
+                    b = new Date(b[sortColumn]);
+                    if (sortOrder === 'asc') {
+                        return a<b ? -1 : a>b ? 1 : 0;
+                    }
+                    return a>b ? -1 : a<b ? 1 : 0;
+                });
+                break;
+            case 'challengeId':
+            case 'projectId':
+            case 'forumId':
+            case 'numSubmissions':
+            case 'numRegistrants':
+            case 'numberOfCheckpointsPrizes':
+            case 'digitalRunPoints':
+                if (sortOrder === 'asc') {
+                    data.data.sort(function(a, b) {
+                        return (a[sortColumn] - b[sortColumn]);
+                    });
+                }
+                data.data.sort(function(a, b) {
+                    return (b[sortColumn] - a[sortColumn]);
+                });
+                break;
+            default:
+                break;
+        }
+        return data;
+    },
+    apiDataView: function(data, table, callback) {
+         // If contest type
+        if (!isBugRace) {
+            if (typeof listType !== "undefined" && listType == "Past") {
+                app.getDesignPastContestTable(table, data, null);
+            } else if (typeof listType !== "undefined" && listType == "AllActive") {
+                app.getAllContestTable(table, data, null);
+                app.getAllContestGrid($('#gridView .contestGrid'), data, (null + 1));
+                app.getDataLandingContests($('.tcoTable'), 1);
+            } else if (typeof listType !== "undefined" && listType == "Upcoming") {
+                app.getDesignUpcomingContestTable(table, data, null);
+                app.getDesignUpcomingContestGrid($('#gridView .contestGrid'), data, (null + 1));
+            } else {
+                app.getDesignContestTable(table, data, null);
+                app.getDesignContestGrid($('#gridView .contestGrid'), data, (null + 1));
+            }
+        } else { // If bug race type
+            app.getBugraceTable(table, data, null);
+        }
+        /* call back */
+        if (callback != null && callback != "") {
+            callback();
+        }
     },
     callbackAfterSort: function(ev) {
         var getSortColumn = ev.attr("data-placeholder");
@@ -233,11 +326,18 @@ appChallenges = {
             $('.contestTy', tt).html($('.tipC', $(this)).html());
 
             if ($(this).hasClass('itco')) {
-                var tempTcoTooltipTitle = typeof(tcoTooltipTitle) != "undefined" ? tcoTooltipTitle : "TCO-14";
-                var tempTcoTooltipMessage = typeof(tcoTooltipMessage) != "undefined" ? tcoTooltipMessage : "Egalible for TCO14";
+                var tempTcoTooltipTitle = typeof tcoTooltipTitle !== "undefined" ? tcoTooltipTitle : "TCO-14";
+                var tempTcoTooltipMessage = typeof tcoTooltipMessage !== "undefined" ? tcoTooltipMessage : "Egalible for TCO14";
                 $('header', tt).html(tempTcoTooltipTitle);
                 $('.contestTy', tt).html(tempTcoTooltipMessage);
             }
+
+            var ht = tt.height();
+            var wt = tt.width() - $('.activeLink').width();
+            var activeLinkOffset = $('.activeLink').offset();
+
+            var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            var addedHeight = (isFirefox) ? 40 : 10;
 
             tt.css('z-index', '-1').stop().fadeIn();
 
@@ -334,7 +434,7 @@ appChallenges = {
             buttonImageOnly: true,
             dateFormat: 'yy-mm-dd',
             onSelect: function(selectedDate) {
-                $('.datepicker.to').datepicker("option", "minDate", selectedDate);
+                datePickerFrom.datepicker("option", "minDate", selectedDate);
             }
         });
         datePickerFrom.closest('.row').addClass('isDisabled');
@@ -400,7 +500,7 @@ appChallenges = {
             case "Conceptualization":
                 trackName = "c";
                 break;
-            case "First2Finish":
+            case ("First2Finish" || "Design First2Finish"):
                 trackName = "ff";
                 break;
             default:
@@ -410,20 +510,47 @@ appChallenges = {
         }
         return trackName;
     },
-    isDesignContest: function(contestType) {
-        return contestType == "Web Design" ||
-            contestType == "Widget or Mobile Screen Design" ||
-            contestType == "Wireframes" ||
-            contestType == "Idea Generation" ||
-            contestType == "Print\/Presentation" ||
-            contestType == "Banners\/Icons" ||
-            contestType == "Logo Design" ||
-            contestType == "Studio Other" ||
-            contestType == "Front-End Flash" ||
-            contestType == "Application Front-End Design";
 
+  /* populates technology tags drop down */
+  getTechnologyTags: function(list, callback) {
+      var param = {};
+        param.action = 'get_all_platforms_and_technologies';
+
+        $.ajax({
+            url: ajaxUrl,
+            data: param,
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+              if (typeof data['platforms'] !== 'undefined' && data['platforms'].length > 0) {
+                var $pOptGroup = $('<optgroup label="Platforms">');
+                $.each(data['platforms'], function(key, val) {
+                  $pOptGroup.append('<option value="' + val + '">' + val + '</option>');
+                });
+                $(list).append($pOptGroup);
+              }
+
+              if (typeof data['technologies'] !== 'undefined' && data['technologies'].length > 0) {
+                var $tOptGroup = $('<optgroup label="Technologies">');
+                $.each(data['technologies'], function(key, val) {
+                  $tOptGroup.append('<option value="' + val + '">' + val + '</option>');
+                });
+                $(list).append($tOptGroup);
+              }
+
+              $(list).trigger("chosen:updated");
+
+                /* call back */
+              if (callback != null && callback != "") {
+                callback();
+              }
+            },
+
+            fail: function(data) {
+              $('.tags').hide();
+            }
+        });
     },
-
 
     getDataChallenges: function(table, pageIndex, callback) {
 
@@ -474,34 +601,32 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-
-        if (data.data && data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabData).clone();
-
-                var startDate = app.formatDate2(rec.startDate);
-                var remainingTime = app.formatTimeLeft(rec.timeRemaining);
-                var endDate = app.formatDate2(rec.endDate);
-                var contestLinkUrl = 'http://community.topcoder.com/longcontest/?module=ViewStandings&rd=' + rec.roundId;
-
-                row.addClass('track-data');
-                $('.contestName', row).html(rec.fullName);
-                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
-                $('.vStartDate', row).html(startDate);
-                $('.vEndDate', row).html(endDate);
-
-                $('.colTLeft', row).html(remainingTime);
-
-                $('.colReg', row).html('<a href="http://community.topcoder.com/longcontest/?module=ViewRegistrants&rd=' + rec.roundId + '">' + rec.numberOfRegistrants + '</a>');
-
-                $('.colSub', row).html(rec.numberOfSubmissions);
+                /*
+                 * generate table row for design past contest type
+                 */
+                if (typeof rec.totalCompetitors !== "undefined") {
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
+                    $('.colType', row).html("SRM");
+                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
+                    $('.colReg', row).html('<a href="javascript:;">' + rec.totalCompetitors + '</a>');
+                } else {
+                    //$('.contestName', row).html(rec.fullName);
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
+                    $('.colType', row).html("Marathon");
+                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
+                    $('.colReg', row).html(rec.numberOfRegistrants);
+                }
 
                 $('tbody', table).append(row);
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table);
+            app.addEmptyResult(table, 'active');
         }
 
         $('.loading').hide();
@@ -577,7 +702,8 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabReivew).clone();
@@ -615,7 +741,8 @@ appChallenges = {
         }
 
         var count = 0;
-        if (data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabDevReivew).clone();
@@ -690,6 +817,31 @@ appChallenges = {
             param.challengeType = challengesRadio
         }
 
+        // get all chosen technology tags if any
+        if (contest_type == 'develop') {
+          var platforms = [];
+          var technologies = [];
+
+          $('.chosen-select :selected').each(function (i, selected) {
+              // categorize each selected value into platforms or technologies
+            var categoryLabel = $(selected).closest('optgroup').prop('label').toLowerCase();
+            var selectedVal = $(selected).val();
+            if (categoryLabel === 'platforms') {
+                platforms.push(selectedVal);
+            } else if (categoryLabel === 'technologies') {
+                technologies.push(selectedVal);
+            }
+          });
+
+          if (platforms.length > 0) {
+              param.platforms = platforms.join();
+          }
+
+          if (technologies.length > 0) {
+              param.technologies = technologies.join();
+          }
+        }
+
         $.ajax({
             url: ajaxUrl,
             data: param,
@@ -698,6 +850,7 @@ appChallenges = {
             success: function(data) {
                 /* show hide navigation */
                 currentPage = pageIndex;
+                apiData = data;
                 if (postPerPage != -1) {
                     var latestRecords = currentPage * postPerPage; // Latest record read by user
 
@@ -709,7 +862,7 @@ appChallenges = {
                         $("#challengeNav .prevLink").show();
                     }
 
-                    if (data.total <= postPerPage) {
+                    if (typeof data.total === 'undefined' || data.total <= postPerPage) {
                         $(".viewAll").hide();
                     } else {
                         $(".viewAll").show();
@@ -726,6 +879,9 @@ appChallenges = {
                         app.getAllContestTable(table, data, null);
                         app.getAllContestGrid($('#gridView .contestGrid'), data, (null + 1));
                         app.getDataLandingContests($('.tcoTable'), 1);
+                    } else if (typeof listType !== "undefined" && listType == "Upcoming") {
+                        app.getDesignUpcomingContestTable(table, data, null);
+                        app.getDesignUpcomingContestGrid($('#gridView .contestGrid'), data, (null + 1));
                     } else {
                         app.getDesignContestTable(table, data, null);
                         app.getDesignContestGrid($('#gridView .contestGrid'), data, (null + 1));
@@ -742,9 +898,11 @@ appChallenges = {
             fail: function(data) {
                 $('.loading').hide();
                 //    $('tbody', table).html(null);
+                $(".viewAll").hide();
                 alert("Data not found!");
             }
         });
+
     },
 
     getDataLandingContests: function(table, pageIndex, callback) {
@@ -778,14 +936,15 @@ appChallenges = {
 
     /* table draw function */
     getAllContestTable: function(table, data, records2Disp, isAppend, isDataScience) {
-        isAppend = typeof isAppend == 'undefined' ? false : isAppend;
-        isDataScience = typeof isDataScience == 'undefined' ? false : isDataScience;
+        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
+        isDataScience = typeof isDataScience === 'undefined' ? false : isDataScience;
 
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
                 if (isDataScience) {
                     var row = $(challengesBP.tabAllData).clone();
@@ -822,21 +981,19 @@ appChallenges = {
                     var purse = 0;
                     for (var i = 0; i < rec.prize.length; i++)
                         purse += rec.prize[i];
-                    var icoTrack = "ico-track-design.png";
-                    var tcoFlag = "tco-flag-design.png";
-                    var contestType = "design";
 
-                    if (!app.isDesignContest(rec.challengeType)) {
-                        icoTrack = "ico-track-develop.png";
-                        tcoFlag = "tco-flag-develop.png";
+                    if (rec.challengeCommunity == "design") {
+                      var icoTrack = "ico-track-design.png";
+                      var tcoFlag = "tco-flag-design.png";
+                    } else {
+                        var icoTrack = "ico-track-develop.png";
+                        var tcoFlag = "tco-flag-develop.png";
                         row = $(challengesBP.tabAllDev).clone();
                         if (rec.registrationEndDate) {
                             checkPointDate = app.formatDate2(rec.registrationEndDate);
                         }
-
-                        contestType = "develop";
                     }
-                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
+                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
 
                     row.addClass('track-' + trackName);
                     /*
@@ -883,15 +1040,16 @@ appChallenges = {
 
     // getGridview Blocks
     getAllContestGrid: function(gridEl, data, records2Disp, isAppend, isDataScience) {
-        isAppend = typeof isAppend == 'undefined' ? false : isAppend;
-        isDataScience = typeof isDataScience == 'undefined' ? false : isDataScience;
+        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
+        isDataScience = typeof isDataScience === 'undefined' ? false : isDataScience;
 
         if (isAppend != true) {
             gridEl.html(null);
         }
 
         var count = 0;
-        if (data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
                 if (isDataScience) {
                     var con = $(challengesBP.grDataAll).clone();
@@ -916,7 +1074,7 @@ appChallenges = {
                     trackName += " trackSD";
 
                     var startDate = app.formatDate2(rec.postingDate);
-                    var checkPointDate
+                    var checkPointDate;
                     if (rec.checkpointSubmissionEndDate) {
                         checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                     }
@@ -926,27 +1084,28 @@ appChallenges = {
                     var purse = 0;
                     for (var i = 0; i < rec.prize.length; i++)
                         purse += rec.prize[i];
-                    var icoTrack = "ico-track-design.png";
-                    var tcoFlag = "tco-flag-design.png";
-                    var contestType = "design";
 
-                    /* for develop type contest */
-                    if (!app.isDesignContest(rec.challengeType)) {
-                        icoTrack = "ico-track-develop.png";
-                        tcoFlag = "tco-flag-develop.png";
-                        con = $(challengesBP.grDevOpen).clone();
+                    var icoTrack;
+                    var tcoFlag;
 
-                        if (rec.submissionEndDate) {
-                            checkPointDate = app.formatDate2(rec.submissionEndDate);
-                        }
-                        contestType = "develop";
+                    if (rec.challengeCommunity == "design") {
+                      icoTrack = "ico-track-design.png";
+                      tcoFlag = "tco-flag-design.png";
+                    } else {
+                      icoTrack = "ico-track-develop.png";
+                      tcoFlag = "tco-flag-develop.png";
+                      row = $(challengesBP.tabAllDev).clone();
+                      if (rec.registrationEndDate) {
+                          checkPointDate = app.formatDate2(rec.registrationEndDate);
+                      }
                     }
+
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
                     var contestName = rec.challengeName.length > 60 ? rec.challengeName.substr(0, 61) + '...' : rec.challengeName;
 
 
                     con.addClass('track-' + trackName);
-                    con.addClass('type-' + contestType);
+                    con.addClass('type-' + rec.challengeCommunity);
 
                     $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + contestName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                     $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
@@ -979,7 +1138,7 @@ appChallenges = {
                             title: 'Time Left'
                         },
                         style: {
-                            classes: 'qtip-' + contestType + ' qtip-rounded qtip-shadow'
+                            classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                         },
                         position: {
                             my: 'bottom center',
@@ -992,7 +1151,7 @@ appChallenges = {
                             title: 'Prize Purse'
                         },
                         style: {
-                            classes: 'qtip-' + contestType + ' qtip-rounded qtip-shadow'
+                            classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                         },
                         position: {
                             my: 'bottom center',
@@ -1005,7 +1164,7 @@ appChallenges = {
                             title: 'Registrants'
                         },
                         style: {
-                            classes: 'qtip-' + contestType + ' qtip-rounded qtip-shadow'
+                            classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                         },
                         position: {
                             my: 'bottom center',
@@ -1018,7 +1177,7 @@ appChallenges = {
                             title: 'Submissions'
                         },
                         style: {
-                            classes: 'qtip-' + contestType + ' qtip-rounded qtip-shadow'
+                            classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                         },
                         position: {
                             my: 'bottom center',
@@ -1043,7 +1202,8 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data && data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.gdOpen).clone();
@@ -1061,7 +1221,7 @@ appChallenges = {
                 }
 
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime);
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
 
                 var purse = 0;
                 for (var i = 0; i < rec.prize.length; i++)
@@ -1080,13 +1240,26 @@ appChallenges = {
                  */
                 var icoTrack = "ico-track-design.png";
                 var tcoFlag = "tco-flag-design.png";
-                if (!app.isDesignContest(rec.challengeType)) {
-                    icoTrack = "ico-track-develop.png";
-                    tcoFlag = "tco-flag-develop.png";
+                if (rec.challengeCommunity == "develop") {
+                  icoTrack = "ico-track-develop.png";
+                  tcoFlag = "tco-flag-develop.png";
                 }
+
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
+
+                if (contest_type == "develop" && !app.isEmptyArray(rec.technologies)) {
+                  var $div = $('<div>');
+                  $div.prop("id", rec.challengeId).addClass("technologyTags");
+                  var $ul =$('<ul>')
+                  $.each(rec.technologies, function(_, sp){
+                    $ul.append('<li><span>' + sp + '</span></li>');
+                  });
+
+                  $div.append($ul);
+                  $('.colCh', row).append($div);
+                }
 
                 $('.tipC', row).html(rec.challengeType);
 
@@ -1098,11 +1271,7 @@ appChallenges = {
                     $('.vEndRound', row).parent().empty();
                 }
 
-                if (endDate) {
-                    $('.vEndDate', row).html(endDate);
-                } else {
-                    $('.vEndDate', row).parent().empty();
-                }
+                $('.vEndDate', row).html(endDate);
 
                 $('.colTLeft', row).html(remainingTime);
 
@@ -1122,7 +1291,7 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table);
+            app.addEmptyResult(table, 'active');
             $('.loading').hide();
         }
     },
@@ -1132,7 +1301,8 @@ appChallenges = {
         gridEl.html(null);
 
         var count = 0;
-        if (data.data && data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var con = $(challengesBP.grDOpen).clone();
@@ -1147,31 +1317,32 @@ appChallenges = {
                 }
                 var endDate = app.formatDate2(rec.submissionEndDate);
                 var remainingTime = app.formatTimeLeft(rec.currentPhaseRemainingTime, true);
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
+
                 var purse = 0;
                 for (var i = 0; i < rec.prize.length; i++)
                     purse += rec.prize[i];
 
                 /* for develop type contest */
-                if (contest_type == "develop") {
+                var icoTrack = "ico-track-design.png";
+                var tcoFlag = "tco-flag-design.png";
+                if (rec.challengeCommunity == "develop") {
                     con = $(challengesBP.grDevOpen).clone();
                     if (rec.registrationEndDate) {
                         checkPointDate = app.formatDate2(rec.registrationEndDate);
                     }
-                }
-
-
-
-                con.addClass('track-' + trackName);
-                con.addClass('type-' + contest_type);
-                var icoTrack = "ico-track-design.png";
-                var tcoFlag = "tco-flag-design.png";
-                if (!app.isDesignContest(rec.challengeType)) {
                     icoTrack = "ico-track-develop.png";
                     tcoFlag = "tco-flag-develop.png";
                 }
 
-                $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                con.addClass('track-' + trackName);
+                con.addClass('type-' + rec.challengeCommunity);
+
+                if (rec.challengeName.length < 61) {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                } else {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                }
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
@@ -1184,8 +1355,26 @@ appChallenges = {
                     $('.vEndRound', con).parent().empty();
                 }
 
-                $('.vEndDate', con).html(endDate);
+                if (endDate) {
+                  $('.vEndDate', con).html(endDate);
+                } else {
+                  $('.vEndDate', con).parent().empty();
+                }
+
                 $('.vPhase', con).html(rec.currentPhaseName);
+
+                if (contest_type == "develop" && !app.isEmptyArray(rec.technologies)) {
+                  var $div = $('<div>');
+                  $div.prop("id", rec.challengeId).addClass("technologyTags");
+                  var $ul =$('<ul>');
+                  $.each(rec.technologies, function(_, sp){
+                    $ul.append('<li><span>' + sp + '</span></li>');
+                  });
+
+                  $div.append($ul);
+                  $div.append('<div class="clear"></div>');
+                  $('.cgTime', con).after($div);
+                }
 
                 $('.cgTLeft', con).html('<i></i>' + remainingTime);
                 if (rec.isEnding === "true") {
@@ -1201,7 +1390,7 @@ appChallenges = {
                         title: 'Time Left'
                     },
                     style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                     },
                     position: {
                         my: 'bottom center',
@@ -1214,7 +1403,7 @@ appChallenges = {
                         title: 'Prize Purse'
                     },
                     style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                     },
                     position: {
                         my: 'bottom center',
@@ -1227,7 +1416,7 @@ appChallenges = {
                         title: 'Registrants'
                     },
                     style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                     },
                     position: {
                         my: 'bottom center',
@@ -1240,7 +1429,7 @@ appChallenges = {
                         title: 'Submissions'
                     },
                     style: {
-                        classes: 'qtip-' + contest_type + ' qtip-rounded qtip-shadow'
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
                     },
                     position: {
                         my: 'bottom center',
@@ -1257,7 +1446,7 @@ appChallenges = {
                 }, 5);
             });
         } else {
-            app.addEmptyResult(gridEl);
+            app.addEmptyResult(gridEl, 'active');
         }
     },
 
@@ -1267,42 +1456,56 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data.length > 0) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabPC).clone();
 
                 var trackName = app.getTrackSymbol(rec.challengeType);
                 var startDate = app.formatDate2(rec.postingDate);
+
                 var checkPointDate;
                 if (rec.checkpointSubmissionEndDate) {
-                  checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
-                }
-                var endDate;
-                if (rec.submissionEndDate) {
-                   endDate = app.formatDate2(rec.submissionEndDate);
+                checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
                 }
 
-                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
+                var endDate;
+                if (rec.submissionEndDate) {
+                  endDate = app.formatDate2(rec.submissionEndDate);
+                }
+
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
                 var purse = 0;
                 for (var i = 0; i < rec.prize.length; i++)
                     purse += rec.prize[i];
 
 
                 row.addClass('track-' + trackName);
-                /*
-                 * generate table row for design past contest type
-                 */
 
                 var icoTrack = "ico-track-design.png";
                 var tcoFlag = "tco-flag-design.png";
-                if (!app.isDesignContest(rec.challengeType)) {
+                if (rec.challengeCommunity == "develop") {
                     icoTrack = "ico-track-develop.png";
                     tcoFlag = "tco-flag-develop.png";
                 }
+
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
+
+                if (contest_type == "develop" && !app.isEmptyArray(rec.technologies)) {
+                  var $div = $('<div>');
+                  $div.prop("id", rec.challengeId).addClass("technologyTags");
+                  var $ul =$('<ul>')
+                  $.each(rec.technologies, function(_, sp){
+                    $ul.append('<li><span>' + sp + '</span></li>');
+                  });
+
+                  $div.append($ul);
+                  $('.colCh', row).append($div);
+                }
+
                 $('.colType .tipC', row).html(rec.challengeType);
 
                 $('.vStartDate', row).html(startDate);
@@ -1311,6 +1514,7 @@ appChallenges = {
                   $('.vEndRound', row).html(checkPointDate);
                 } else {
                   $('.vEndRound', row).parent().empty();
+                  $('.colTime', row).append('<div class="row">&nbsp;</div>');
                 }
 
                 if (endDate) {
@@ -1324,7 +1528,7 @@ appChallenges = {
                 $('.colPhase', row).html('Completed');
 
                 $('.winBages', row).html('<a href="' + siteurl+ '/challenge-details/' +rec.challengeId+'?type='+ rec.challengeCommunity +'#winner">View Winners</a>');
-                
+
                 $('.moreWin', row).hide();
 
                 $('.colReg', row).html('<a href="' + contestLinkUrl + '#viewRegistrant">' + rec.numRegistrants + '</a>');
@@ -1336,19 +1540,218 @@ appChallenges = {
                     $('.colAccessLevel', row).removeClass('public').addClass('private');
                 }
 
+                $('tbody', table).append(row);
+            });
+            app.initZebra(table);
+        } else {
+            app.addEmptyResult(table, 'past');
+        }
 
+        $('.loading').hide();
+    },
+    getDesignUpcomingContestTable: function(table, data, records2Disp, isAppend) {
+        if (isAppend != true) {
+            $('tbody', table).html(null);
+        }
+        var count = 0;
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+            $.each(data.data, function(key, rec) {
+
+                var row = $(challengesBP.gdUpcoming).clone();
+
+                var trackName = app.getTrackSymbol(rec.challengeType);
+                var startDate = app.formatDate2(rec.postingDate);
+                var checkPointDate;
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
+
+                var endDate;
+                if (rec.submissionEndDate) {
+                  endDate = app.formatDate2(rec.submissionEndDate);
+                }
+
+                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
+                var contestTechnologies = rec.technologies.join(', ');
+                if (!contestTechnologies) {
+                    contestTechnologies = "N/A";
+                }
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
+
+                var purse = 0;
+                for (var i = 0; i < rec.prize.length; i++)
+                    purse += rec.prize[i];
+
+                var icoTrack = "ico-track-design.png";
+                var tcoFlag = "tco-flag-design.png";
+                if (rec.challengeCommunity == "develop") {
+                    row = $(challengesBP.gdDevUpcoming).clone();
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
+                    icoTrack = "ico-track-develop.png";
+                    tcoFlag = "tco-flag-develop.png";
+                }
+
+                row.addClass('track-' + trackName);
+
+                $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
+
+                $('.tipC', row).html(rec.challengeType);
+
+                $('.vStartDate', row).html(startDate);
+
+                if (checkPointDate) {
+                    $('.vEndRound', row).html(checkPointDate);
+                } else {
+                    $('.vEndRound', row).parent().empty();
+                }
+
+                if (endDate) {
+                  $('.vEndDate', row).html(endDate);
+                } else {
+                  $('.vEndDate', row).parent().empty();
+                }
+
+                $('.colDur', row).html(contestDuration);
+
+                $('.colTech', row).html(contestTechnologies);
+
+                if (rec.isEnding === "true") {
+                    $('.colTLeft', row).addClass('imp');
+                }
+
+                $('.colPur', row).html("$" + app.formatCur(purse));
+
+                $('.colStat', row).html(rec.currentStatus);
 
 
                 $('tbody', table).append(row);
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table);
+            app.addEmptyResult(table, 'upcoming');
+            $('.loading').hide();
         }
-
-        $('.loading').hide();
     },
+    getDesignUpcomingContestGrid: function(gridEl, data, records2Disp) {
+        gridEl.html(null);
 
+        var count = 0;
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
+            $.each(data.data, function(key, rec) {
+
+                var con = $(challengesBP.grDUpcoming).clone();
+
+                var trackName = app.getTrackSymbol(rec.challengeType);
+                trackName += " trackSD";
+
+                var startDate = app.formatDate2(rec.postingDate);
+                var checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                if (rec.checkpointSubmissionEndDate) {
+                    checkPointDate = app.formatDate2(rec.checkpointSubmissionEndDate);
+                }
+
+                var endDate;
+                if (rec.submissionEndDate) {
+                  endDate = app.formatDate2(rec.submissionEndDate);
+                }
+
+                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
+                var contestTechnologies = rec.technologies.join(', ');
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
+
+                var purse = 0;
+                for (var i = 0; i < rec.prize.length; i++)
+                    purse += rec.prize[i];
+
+                con.addClass('track-' + trackName);
+                con.addClass('type-' + rec.challengeCommunity);
+                var icoTrack = "ico-track-design.png";
+                var tcoFlag = "tco-flag-design.png";
+                if (rec.challengeCommunity == "develop") {
+                    con = $(challengesBP.grDevUpcoming).clone();
+                    if (rec.registrationEndDate) {
+                        checkPointDate = app.formatDate2(rec.registrationEndDate);
+                    }
+                    icoTrack = "ico-track-develop.png";
+                    tcoFlag = "tco-flag-develop.png";
+                }
+
+                if (rec.challengeName.length < 61) {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                } else {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                }
+                $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
+                $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
+
+                $('.tipC', con).html(rec.challengeType);
+                $('.vStartDate', con).html(startDate);
+
+                if (checkPointDate) {
+                    $('.vEndRound', con).html(checkPointDate);
+                } else {
+                    $('.vEndRound', con).parent().empty();
+                }
+
+                $('.vEndDate', con).html(endDate);
+                $('.vStatus', con).html(rec.currentStatus);
+
+                if (!contestTechnologies) {
+                    contestTechnologies = "N/A";
+                }
+                $('.vTech', con).html(contestTechnologies);
+
+                $('.cgTLeft', con).html('<i></i>' + contestDuration);
+                if (rec.isEnding === "true") {
+                    $('.cgTLeft', con).addClass('imp');
+                }
+                $('.cgPur', con).html('<i></i> $' + purse);
+
+                $('.cgTLeft', con).qtip({
+                    content: {
+                        text: contestDuration + " days",
+                        title: 'Duration'
+                    },
+                    style: {
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
+                    },
+                    position: {
+                        my: 'bottom center',
+                        at: 'top center '
+                    }
+                });
+                $('.cgPur', con).qtip({
+                    content: {
+                        text: '$' + purse,
+                        title: 'Prize Purse'
+                    },
+                    style: {
+                        classes: 'qtip-' + rec.challengeCommunity + ' qtip-rounded qtip-shadow'
+                    },
+                    position: {
+                        my: 'bottom center',
+                        at: 'top center '
+                    }
+                });
+
+
+                gridEl.append(con);
+                window.setTimeout(function() {
+                    window.setTimeout(function() {
+                        $('.loading').hide();
+                    }, 2000);
+                }, 5);
+            });
+        } else {
+            app.addEmptyResult(gridEl, 'upcoming');
+        }
+    },
     /* table draw function */
     getBugraceTable: function(table, data, records2Disp, isAppend) {
 
@@ -1356,7 +1759,8 @@ appChallenges = {
             $('tbody', table).html(null);
         }
         var count = 0;
-        if (data.data.length) {
+        //JS uncaught typeError when no data available, so adding defined check
+        if (typeof data.data !== 'undefined' && data.data.length > 0) {
             $.each(data.data, function(key, rec) {
 
                 var row = $(challengesBP.tabF2F).clone();
@@ -1381,10 +1785,21 @@ appChallenges = {
             });
             app.initZebra(table);
         } else {
-            app.addEmptyResult(table);
+            app.addEmptyResult(table, 'active');
         }
 
         $('.loading').hide();
+    },
+
+    // check if array is empty
+    isEmptyArray: function(arr) {
+      if (typeof arr !== 'undefined' && arr != null && arr.length > 0) {
+        if (arr.length == 1 && $.trim(arr[0]).length == 0) {
+            return true;
+        }
+        return false;
+      }
+      return true;
     },
 
     //format currency
@@ -1398,6 +1813,10 @@ appChallenges = {
     },
 
     formatDate2: function(date) {
+        //some function is passing in undefined timezone_string variable causing js errors, so check if undefined and set default:
+        if (typeof timezone_string === 'undefined') {
+        var timezone_string = "America/Toronto"; // lets set to TC timezone
+        }
         return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
         // var d = new Date(date);
         // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
@@ -1407,6 +1826,13 @@ appChallenges = {
         // var newdate = new Date(utcd + localOffset);
 
         // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
+    },
+
+    getContestDuration: function(dateStart, dateEnd) {
+      var start = moment(dateStart.slice(0, -5));
+      var end = moment(dateEnd.slice(0, -5));
+      var days = end.diff(start, 'days');
+      return days;
     },
 
     //format date review
@@ -1420,8 +1846,7 @@ appChallenges = {
         var year = temp.getFullYear();
         var hour = temp.getHours() < 10 ? "0" + temp.getHours() : temp.getHours();
         var minutes = temp.getMinutes() < 10 ? "0" + temp.getMinutes() : temp.getMinutes();
-        var dateStr = month + "." + day + "." + year + " " + hour + ":" + minutes + " " + timezone;
-        return dateStr;
+        return month + "." + day + "." + year + " " + hour + ":" + minutes + " " + timezone;
     },
 
     /**
@@ -1592,6 +2017,62 @@ var challengesBP = {
                 <td class="colReg"></td>\
                 <td class="colSub"></td>\
             </tr>',
+     gdUpcoming: '<tr class="inTCO">\
+                <td class="colCh"><div>\
+                        <a href="javascript:;" class="contestName"></a>\
+                    </div></td>\
+                <td class="colType"><i class="ico"> <span class="tooltipData"> \
+                <span class="tipT">Contest Type</span> \
+                <span class="tipC">Web Design</span>\
+                    </span>\
+                </i></td>\
+                <td class="colTime"><div>\
+                        <div class="row">\
+                            <label class="lbl">Start Date</label>\
+                            <div class="val vStartDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl ">Round 1 End</label>\
+                            <div class="val vEndRound"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">End Date</label>\
+                            <div class="val vEndDate"></div>\
+                        </div>\
+                    </div></td>\
+                <td class="colDur"></td>\
+                <td class="colPur"></td>\
+                <td class="colTech"></td>\
+                <td class="colStat"></td>\
+            </tr>',
+    gdDevUpcoming: '<tr class="inTCO">\
+                <td class="colCh"><div>\
+                        <a href="javascript:;" class="contestName"></a>\
+                    </div></td>\
+                <td class="colType"><i class="ico"> <span class="tooltipData"> \
+                <span class="tipT">Contest Type</span> \
+                <span class="tipC">Web Design</span>\
+                    </span>\
+                </i></td>\
+                <td class="colTime"><div>\
+                        <div class="row">\
+                            <label class="lbl">Start Date</label>\
+                            <div class="val vStartDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl ">Register by</label>\
+                            <div class="val vEndRound"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Submit by</label>\
+                            <div class="val vEndDate"></div>\
+                        </div>\
+                    </div></td>\
+                <td class="colDur"></td>\
+                <td class="colPur"></td>\
+                <td class="colTech"></td>\
+                <td class="colStat"></td>\
+            </tr>',
     grDOpen: '<div class="contest">\
                 <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
                 <div class="cgTime">\
@@ -1625,6 +2106,41 @@ var challengesBP = {
                         <i></i>\
                     </p>\
                     <p class="cgSub">\
+                        <i></i>\
+                    </p>\
+                </div>\
+            <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">Web Design</span></span></i></div>',
+    grDUpcoming: '<div class="contest">\
+                <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
+                <div class="cgTime">\
+                    <div>\
+                        <div class="row">\
+                            <label class="lbl">Start Date</label>\
+                            <div class="val vStartDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Round 1 End</label>\
+                            <div class="val vEndRound"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">End Date</label>\
+                            <div class="val vEndDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Current Status</label>\
+                            <div class="val vStatus"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Technologies</label>\
+                            <div class="val vTech"></div>\
+                        </div>\
+                    </div>\
+                </div>\
+                <div class="genInfo gdUpcoming">\
+                    <p class="cgTLeft">\
+                        <i></i>\
+                    </p>\
+                    <p class="cgPur">\
                         <i></i>\
                     </p>\
                 </div>\
@@ -1696,6 +2212,42 @@ var challengesBP = {
                         <i></i>\
                     </p>\
                     <p class="cgSub">\
+                        <i></i>\
+                    </p>\
+                </div>\
+            <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">Web Design</span></span></i></div>',
+    //upcoming challenges grid
+    grDevUpcoming: '<div class="contest">\
+                <div class="cgCh"><a href="javascript:;" class="contestName"></a></div>\
+                <div class="cgTime">\
+                    <div>\
+                        <div class="row">\
+                            <label class="lbl">Start Date</label>\
+                            <div class="val vStartDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Register by</label>\
+                            <div class="val vEndRound"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Submit by</label>\
+                            <div class="val vEndDate"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Current Status</label>\
+                            <div class="val vStatus"></div>\
+                        </div>\
+                        <div class="row">\
+                            <label class="lbl">Technologies</label>\
+                            <div class="val vTech"></div>\
+                        </div>\
+                    </div>\
+                </div>\
+                <div class="genInfo gdUpcoming">\
+                    <p class="cgTLeft">\
+                        <i></i>\
+                    </p>\
+                    <p class="cgPur">\
                         <i></i>\
                     </p>\
                 </div>\
@@ -1853,10 +2405,56 @@ $.getJSON = function(url, success) {
         success: success,
         cache: false
     });
-}
+};
 
 // everythings begins from here
 $(document).ready(function() {
     $("#challengeNav a").hide();
 
 });
+
+
+/* fancy drop down platform on advanced search form */
+$(document).ready(function() {
+
+    //multiple select configurations
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+        '.chosen-select-width': { width: "95%" }
+    };
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+    //set equal height to row contestGrid boxes
+    var index = 0, minWidth = 1019, cols = $(window).width() > minWidth ? 3 : 1, rows = 0;
+    $(".contestGrid .contest").each(function() {
+        rows = Math.floor(index / cols) + 1;
+        $(this).addClass("row" + Math.floor(index / cols));
+        index++;
+    });
+    $('.tabviews a').off().on(ev, function(e) {
+        if ($(this).hasClass('isActive')) {
+            return false;
+        }
+        $('.viewTab').hide();
+        id = $(this).attr('href');
+        $(id).fadeIn('fast');
+        $('.isActive', $(this).parent()).removeClass('isActive');
+        $(this).addClass('isActive');
+
+        if ($(this).hasClass('gridView') && $(window).width() > minWidth) {
+            for (var i = 0; i < rows; i++) {
+                var maxHeight = Math.max.apply(null, $(".contestGrid .contest.row" + i).map(function() {
+                    return $(this).height();
+                }).get());
+                $(".contestGrid .contest.row" + i).height(maxHeight);
+            }
+        }
+    });
+});
+
+

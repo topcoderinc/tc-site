@@ -1,0 +1,837 @@
+# Translation of the WordPress plugin WP to Twitter 2.2.4 by Joseph Dolson.
+# Copyright (C) 2010 Joseph Dolson
+# This file is distributed under the same license as the WP to Twitter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP to Twitter 2.2.6\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-to-twitter\n"
+"POT-Creation-Date: 2010-12-11 03:14+0000\n"
+"PO-Revision-Date: 2011-02-04 15:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: http://www.jibo.ro <contact@jibo.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: functions.php:211
+msgid "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Hide</a>] If you're experiencing trouble, please copy these settings into any request for support."
+msgstr "[<a href='options-general.php?page=wp-to-twitter/wp-to-twitter.php'>Ascunde</a>] Daca intampini probleme, te rog sa copiezi aceste setari in orice cerere pentru suport."
+
+#: wp-to-twitter-manager.php:74
+msgid "WP to Twitter is now connected with Twitter."
+msgstr "WP to Twitter este conectat acum la Twitter."
+
+#: wp-to-twitter-manager.php:82
+msgid "OAuth Authentication Failed. Check your credentials and verify that <a href=\"http://www.twitter.com/\">Twitter</a> is running."
+msgstr "Autentificarea OAuth a esuat. Verifica cheile si asigura-te ca ai acces la <a href=\"http://www.twitter.com/\">Twitter</a>"
+
+#: wp-to-twitter-manager.php:89
+msgid "OAuth Authentication Data Cleared."
+msgstr "Datele de autentificare OAuth au fost sterse."
+
+#: wp-to-twitter-manager.php:96
+msgid "OAuth Authentication response not understood."
+msgstr "Raspuns de autentificare de la OAuth necunoscut."
+
+#: wp-to-twitter-manager.php:105
+msgid "WP to Twitter Errors Cleared"
+msgstr "Erorile WP to Twitter au fost sterse"
+
+#: wp-to-twitter-manager.php:112
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your new blog post. Your tweet has been stored in a custom field attached to the post, so you can Tweet it manually if you wish! "
+msgstr "Imi pare rau! Nu am putut contacta serverele Twitter pentru a publica noul tau articol. Tweet-ul tau a fost stocat intr-un camp personalizat atasat la articol prin urmare poti publica Tweet-ul manual daca doresti!"
+
+#: wp-to-twitter-manager.php:114
+msgid "Sorry! I couldn't get in touch with the Twitter servers to post your <strong>new link</strong>! You'll have to post it manually, I'm afraid. "
+msgstr "Ne pare rău! Nu am putut lua legătura cu serverele Twitter pentru a publica<strong> noul link </ strong>! Va trebui să-l publicati manual!"
+
+#: wp-to-twitter-manager.php:149
+msgid "WP to Twitter Advanced Options Updated"
+msgstr "Optiuni avansate WP to Twitter actualizate"
+
+#: wp-to-twitter-manager.php:166
+msgid "You must add your Bit.ly login and API key in order to shorten URLs with Bit.ly."
+msgstr "Trebuie sa adaugati datele de conectare si cheia API Bit.ly pentru a prescurta URL-uri cu Bit.ly."
+
+#: wp-to-twitter-manager.php:170
+msgid "You must add your YOURLS remote URL, login, and password in order to shorten URLs with a remote installation of YOURLS."
+msgstr "Trebuie sa adaugati URL-ul dvs. YOURLS la distanţă, utilizatorul şi parola pentru a scurta URL-uri cu o instalare de la distanţă de YOURLS."
+
+#: wp-to-twitter-manager.php:174
+msgid "You must add your YOURLS server path in order to shorten URLs with a remote installation of YOURLS."
+msgstr "Trebuie sa adaugi calea ta YOURLS de pe server, cu scopul de a scurta URL-uri cu o instalare de la distantă de YOURLS."
+
+#: wp-to-twitter-manager.php:178
+msgid "WP to Twitter Options Updated"
+msgstr "Optiuni WP to Twitter actualizate"
+
+#: wp-to-twitter-manager.php:188
+msgid "Category limits updated."
+msgstr "Limite categorii actualizate."
+
+#: wp-to-twitter-manager.php:192
+msgid "Category limits unset."
+msgstr "Limite categori dezactivate"
+
+#: wp-to-twitter-manager.php:200
+msgid "YOURLS password updated. "
+msgstr "Parola YOURLS actualizata."
+
+#: wp-to-twitter-manager.php:203
+msgid "YOURLS password deleted. You will be unable to use your remote YOURLS account to create short URLS."
+msgstr "Parola YOURLS stearsa. Nu vei putea folosi contul YOURLS pentru a creea URL-uri scurte."
+
+#: wp-to-twitter-manager.php:205
+msgid "Failed to save your YOURLS password! "
+msgstr "Nu am reusit sa salvez parola YOURLS!"
+
+#: wp-to-twitter-manager.php:209
+msgid "YOURLS username added. "
+msgstr "Username-ul YOURLS a fost adaugat."
+
+#: wp-to-twitter-manager.php:213
+msgid "YOURLS API url added. "
+msgstr "URL-ul API pentru YOURLS adaugat."
+
+#: wp-to-twitter-manager.php:216
+msgid "YOURLS API url removed. "
+msgstr "URL-ul API pentru YOURLS sters."
+
+#: wp-to-twitter-manager.php:221
+msgid "YOURLS local server path added. "
+msgstr "Calea locala YOURLS de pe server a fost adaugata"
+
+#: wp-to-twitter-manager.php:223
+msgid "The path to your YOURLS installation is not correct. "
+msgstr "Calea catre instalarea YOURLS nu este corecta."
+
+#: wp-to-twitter-manager.php:227
+msgid "YOURLS local server path removed. "
+msgstr "Calea locala YOURLS de pe server a fost stearsa."
+
+#: wp-to-twitter-manager.php:231
+msgid "YOURLS will use Post ID for short URL slug."
+msgstr "YOURLS va folosi ID-ul articolului pentru slug-ul URL-ului scurt"
+
+#: wp-to-twitter-manager.php:234
+msgid "YOURLS will not use Post ID for the short URL slug."
+msgstr "YOURLS nu va folosi ID-ul articolului pentru slug-urile URL-urilor scurte."
+
+#: wp-to-twitter-manager.php:241
+msgid "Cligs API Key Updated"
+msgstr "Cheia API Cligs actualizata"
+
+#: wp-to-twitter-manager.php:244
+msgid "Cli.gs API Key deleted. Cli.gs created by WP to Twitter will no longer be associated with your account. "
+msgstr "Cheia API Cli.gs stearsa. Cli.gs creata de WP to Twitter nu va mai fi asociată cu contul dvs.."
+
+#: wp-to-twitter-manager.php:246
+msgid "Cli.gs API Key not added - <a href='http://cli.gs/user/api/'>get one here</a>! "
+msgstr "Cheia API Cli.gs nu a fost adaugata - <a href='http://cli.gs/user/api/'>obtine una de aici</a>! "
+
+#: wp-to-twitter-manager.php:252
+msgid "Bit.ly API Key Updated."
+msgstr "Cheia API Bit.ly  actualizata."
+
+#: wp-to-twitter-manager.php:255
+msgid "Bit.ly API Key deleted. You cannot use the Bit.ly API without an API key. "
+msgstr "Cheia API Bit.ly a fost stearsa. Nu poti folosi API-ul Bit.ly fara o cheie API."
+
+#: wp-to-twitter-manager.php:257
+msgid "Bit.ly API Key not added - <a href='http://bit.ly/account/'>get one here</a>! An API key is required to use the Bit.ly URL shortening service."
+msgstr "Cheia API Bit.ly nu a fost adaugata - <a href='http://bit.ly/account/'>obtine una de aici</a>! O cheie API este necesara pentru a folosi serviciul de prescurtare URL Bit.ly."
+
+#: wp-to-twitter-manager.php:261
+msgid " Bit.ly User Login Updated."
+msgstr "Autentificare utilizator Bit.ly actualizata."
+
+#: wp-to-twitter-manager.php:264
+msgid "Bit.ly User Login deleted. You cannot use the Bit.ly API without providing your username. "
+msgstr "Datele de autentificare la Bit.ly au fost sterse. Nu poti folosi API-ul Bit.ly fara sa furnizezi un username."
+
+#: wp-to-twitter-manager.php:266
+msgid "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! "
+msgstr "Datele de autentificare Bit.ly nu au fost adaugate - <a href='http://bit.ly/account/'>obtine-le de aici</a>! "
+
+#: wp-to-twitter-manager.php:295
+msgid "No error information is available for your shortener."
+msgstr "Nu exista informatii despre erori pentru prescurtarea URL-urilor."
+
+#: wp-to-twitter-manager.php:297
+msgid "<li class=\"error\"><strong>WP to Twitter was unable to contact your selected URL shortening service.</strong></li>"
+msgstr "<li class=\"error\"><strong>WP to Twitter nu a putut contacta serviciul de prescurtare URL-uri.</strong></li>"
+
+#: wp-to-twitter-manager.php:300
+msgid "<li><strong>WP to Twitter successfully contacted your selected URL shortening service.</strong>  The following link should point to your blog homepage:"
+msgstr "<strong> WP to Twitter a contactat cu succes serviciul de prescurtare URL-uri </ strong> link-ul urmator ar trebui sa trimita la pagina dvs. de blog:"
+
+#: wp-to-twitter-manager.php:309
+msgid "<li><strong>WP to Twitter successfully submitted a status update to Twitter.</strong></li>"
+msgstr "<strong> WP to Twitter a prezentat cu succes o actualizare a statutului Twitter. </ strong> </ li>"
+
+#: wp-to-twitter-manager.php:311
+msgid "<li class=\"error\"><strong>WP to Twitter failed to submit an update to Twitter.</strong></li>"
+msgstr "<li class=\"error\"> <strong> WP to Twitter nu a reusit sa trimita o actualizare la Twitter. </ strong> </ li>"
+
+#: wp-to-twitter-manager.php:314
+msgid "You have not connected WordPress to Twitter."
+msgstr "Nu ai conectat WordPress la Twitter."
+
+#: wp-to-twitter-manager.php:318
+msgid "<li class=\"error\"><strong>Your server does not appear to support the required methods for WP to Twitter to function.</strong> You can try it anyway - these tests aren't perfect.</li>"
+msgstr "<li class=\"error\"> <strong> Serverul tau nu pare să sprijine metodele necesare functionarii WP to Twitter </ strong> Puteti incerca oricum -. aceste teste nu sunt perfecte </ li. >"
+
+#: wp-to-twitter-manager.php:322
+msgid "<li><strong>Your server should run WP to Twitter successfully.</strong></li>"
+msgstr "<strong> Serverul ar trebui să ruleze WP to Twitter cu succes. </ strong> </ li>"
+
+#: wp-to-twitter-manager.php:339
+msgid "WP to Twitter Options"
+msgstr "Optiuni WP to Twitter"
+
+#: wp-to-twitter-manager.php:349
+#: wp-to-twitter.php:819
+msgid "Get Support"
+msgstr "Solicita suport"
+
+#: wp-to-twitter-manager.php:350
+msgid "Export Settings"
+msgstr "Exporta setarile"
+
+#: wp-to-twitter-manager.php:351
+#: wp-to-twitter.php:819
+msgid "Make a Donation"
+msgstr "Fa o donatie"
+
+#: wp-to-twitter-manager.php:366
+msgid "Shortcodes available in post update templates:"
+msgstr "Scurtaturi disponibile in sabloanele de actualizari articole:"
+
+#: wp-to-twitter-manager.php:368
+msgid "<code>#title#</code>: the title of your blog post"
+msgstr "<code>#title#</code>: titlul articolului"
+
+#: wp-to-twitter-manager.php:369
+msgid "<code>#blog#</code>: the title of your blog"
+msgstr "<code>#blog#</code>: titlul site-ului"
+
+#: wp-to-twitter-manager.php:370
+msgid "<code>#post#</code>: a short excerpt of the post content"
+msgstr "<code> #post# </code>: un fragment scurt a continutului articolului"
+
+#: wp-to-twitter-manager.php:371
+msgid "<code>#category#</code>: the first selected category for the post"
+msgstr "<code>#category#</code>: prima categorie selectata pentru articol"
+
+#: wp-to-twitter-manager.php:372
+msgid "<code>#date#</code>: the post date"
+msgstr "<code>#date#</code>: data articolului"
+
+#: wp-to-twitter-manager.php:373
+msgid "<code>#url#</code>: the post URL"
+msgstr "<code>#url#</code>: URL-ul articolului"
+
+#: wp-to-twitter-manager.php:374
+msgid "<code>#author#</code>: the post author"
+msgstr "<code>#author#</code>: autorul articolului"
+
+#: wp-to-twitter-manager.php:375
+msgid "<code>#account#</code>: the twitter @reference for the account (or the author, if author settings are enabled and set.)"
+msgstr "<code>#account#</code>: @referinta twitter pentru cont (sau autor, daca setarile de autor sunt activate si setate.)"
+
+#: wp-to-twitter-manager.php:377
+msgid "You can also create custom shortcodes to access WordPress custom fields. Use doubled square brackets surrounding the name of your custom field to add the value of that custom field to your status update. Example: <code>[[custom_field]]</code></p>"
+msgstr "Puteti crea de asemenea scurtaturi personalizate pentru a accesa campuri personalizate WordPress. Utilizati paranteze drepte duble in jurul numelui campului dumneavoastra particularizat pentru a adauga valoarea campului particularizat la actualizarea starii. Exemplu: <code>[[custom_field]]</code></p>"
+
+#: wp-to-twitter-manager.php:382
+msgid "<p>One or more of your last posts has failed to send it's status update to Twitter. Your Tweet has been saved in your post custom fields, and you can re-Tweet it at your leisure.</p>"
+msgstr "<p> Unul sau mai multe dintre mesajele dumneavoastra nu a reusit sa actualizeze statutul Twitter. Tweet-ul dvs. a fost salvat inntr-un camp personalizat al articolului pentru a-l putea retrimite. </ p>"
+
+#: wp-to-twitter-manager.php:386
+msgid "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+msgstr "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues. [<a href=\"http://blog.cli.gs\">Cli.gs Blog</a>] [<a href=\"http://blog.bit.ly\">Bit.ly Blog</a>]</p>"
+
+#: wp-to-twitter-manager.php:393
+msgid "Clear 'WP to Twitter' Error Messages"
+msgstr "Sterge mesajele de eroare WP to Twitter"
+
+#: wp-to-twitter-manager.php:409
+msgid "Basic Settings"
+msgstr "Setari de baza"
+
+#: wp-to-twitter-manager.php:415
+msgid "Tweet Templates"
+msgstr "Sabloane Twitter"
+
+#: wp-to-twitter-manager.php:418
+msgid "Update when a post is published"
+msgstr "Actualizeaza atunci cand este publicat un articol nou"
+
+#: wp-to-twitter-manager.php:418
+msgid "Text for new post updates:"
+msgstr "Textul pentru actualizarea noilor articole:"
+
+#: wp-to-twitter-manager.php:424
+#: wp-to-twitter-manager.php:427
+msgid "Update when a post is edited"
+msgstr "Actualizeaza atunci cand un articol a fost editat"
+
+#: wp-to-twitter-manager.php:424
+#: wp-to-twitter-manager.php:427
+msgid "Text for editing updates:"
+msgstr "Text pentru actualziarea editarilor:"
+
+#: wp-to-twitter-manager.php:428
+msgid "You can not disable updates on edits when using Postie or similar plugins."
+msgstr "Nu puteti dezactiva actualizarile dupa editare daca folosesti plugin-uri gen Postie."
+
+#: wp-to-twitter-manager.php:432
+msgid "Update Twitter when new Wordpress Pages are published"
+msgstr "Actualizeaza Twitter atunci cand sunt publicate pagini noi WordPress"
+
+#: wp-to-twitter-manager.php:432
+msgid "Text for new page updates:"
+msgstr "Textul pentru actualizarea noilor pagini:"
+
+#: wp-to-twitter-manager.php:436
+msgid "Update Twitter when WordPress Pages are edited"
+msgstr "Actualizeaza Twitter atunci cand sunt editate paginile WordPress"
+
+#: wp-to-twitter-manager.php:436
+msgid "Text for page edit updates:"
+msgstr "Text pentru actualizarea paginilor editate:"
+
+#: wp-to-twitter-manager.php:440
+msgid "Update Twitter when you post a Blogroll link"
+msgstr "Actualizeaza Twitter cand postezi un nou link pe BlogRoll"
+
+#: wp-to-twitter-manager.php:441
+msgid "Text for new link updates:"
+msgstr "Textul pentru actualizarea link-urilor noi:"
+
+#: wp-to-twitter-manager.php:441
+msgid "Available shortcodes: <code>#url#</code>, <code>#title#</code>, and <code>#description#</code>."
+msgstr "Scurtaturi disponibile: <code>#url#</code>, <code>#title#</code>, si <code>#description#</code>."
+
+#: wp-to-twitter-manager.php:445
+msgid "Choose your short URL service (account settings below)"
+msgstr "Alege serviciul de prescurtare URL (setarile contului, mai jos)"
+
+#: wp-to-twitter-manager.php:448
+msgid "Use Cli.gs for my URL shortener."
+msgstr "Foloseste Cli.gs pentru scurtarea URL-urilor"
+
+#: wp-to-twitter-manager.php:449
+msgid "Use Bit.ly for my URL shortener."
+msgstr "Use Bit.ly pentru prescurtarea URL-ului"
+
+#: wp-to-twitter-manager.php:450
+msgid "YOURLS (installed on this server)"
+msgstr "YOURLS (instalat pe acest server)"
+
+#: wp-to-twitter-manager.php:451
+msgid "YOURLS (installed on a remote server)"
+msgstr "YOURLS (instalat pe un server remote)"
+
+#: wp-to-twitter-manager.php:452
+msgid "Use WordPress as a URL shortener."
+msgstr "Foloseste WordPress pentru a prescurta URL-urile."
+
+#: wp-to-twitter-manager.php:453
+msgid "Don't shorten URLs."
+msgstr "Nu prescurta URL-urile."
+
+#: wp-to-twitter-manager.php:455
+msgid "Using WordPress as a URL shortener will send URLs to Twitter in the default URL format for WordPress: <code>http://domain.com/wpdir/?p=123</code>. Google Analytics is not available when using WordPress shortened URLs."
+msgstr "Folosind wordpress pentru prescurtarea URL-urilor va trimite URL-urile catre Twitter in formatul implicit pentru Wordpress: <code>http://domain.com/wpdir/?p=123</code>. Google Analytics nu este disponibil atunci cand folosesti prescurtarile WordPress."
+
+#: wp-to-twitter-manager.php:461
+msgid "Save WP->Twitter Options"
+msgstr "Salveaza WP->Optiuni Twitter"
+
+#: wp-to-twitter-manager.php:473
+msgid "<abbr title=\"Uniform Resource Locator\">URL</abbr> Shortener Account Settings"
+msgstr "<abbr title=\"Uniform Resource Locator\">URL</abbr> Setari cont prescurtari"
+
+#: wp-to-twitter-manager.php:477
+msgid "Your Cli.gs account details"
+msgstr "Detaliile contului tau Cli.gs"
+
+#: wp-to-twitter-manager.php:482
+msgid "Your Cli.gs <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Cheia Cli.gs <abbr title='application programming interface'>API</abbr> :"
+
+#: wp-to-twitter-manager.php:488
+msgid "Don't have a Cli.gs account or Cligs API key? <a href='http://cli.gs/user/api/'>Get one free here</a>!<br />You'll need an API key in order to associate the Cligs you create with your Cligs account."
+msgstr "Nu ai un cont Cli.gs sau cheie API Cligs? <a href='http://cli.gs/user/api/'>Obtine una gratuit de aici</a>!<br />Vei avea nevoie de o cheie API."
+
+#: wp-to-twitter-manager.php:494
+msgid "Your Bit.ly account details"
+msgstr "Detaliile contului tau Bit.ly"
+
+#: wp-to-twitter-manager.php:499
+msgid "Your Bit.ly username:"
+msgstr "Username-ul Bit.ty:"
+
+#: wp-to-twitter-manager.php:503
+msgid "Your Bit.ly <abbr title='application programming interface'>API</abbr> Key:"
+msgstr "Cheia Bit.ly <abbr title='application programming interface'>API</abbr> :"
+
+#: wp-to-twitter-manager.php:510
+msgid "Save Bit.ly API Key"
+msgstr "Salveaza cheia API Bit.ly"
+
+#: wp-to-twitter-manager.php:510
+msgid "Clear Bit.ly API Key"
+msgstr "Sterge cheia API Bit.ly"
+
+#: wp-to-twitter-manager.php:510
+msgid "A Bit.ly API key and username is required to shorten URLs via the Bit.ly API and WP to Twitter."
+msgstr "O cheie API Bit.ly si un nume de utilizator sunt necesare pentru a scurta URL-uri prin intermediul API Bit.ly si WP to Twitter."
+
+#: wp-to-twitter-manager.php:515
+msgid "Your YOURLS account details"
+msgstr "Detaliile contului tau YOURLS"
+
+#: wp-to-twitter-manager.php:519
+msgid "Path to the YOURLS config file (Local installations)"
+msgstr "Calea catre fisierul de configurare YOURLS (Instalare locala)"
+
+#: wp-to-twitter-manager.php:520
+#: wp-to-twitter-manager.php:524
+msgid "Example:"
+msgstr "Exemplu:"
+
+#: wp-to-twitter-manager.php:523
+msgid "URI to the YOURLS API (Remote installations)"
+msgstr "URI catre API-ul YOURLS (Instalari la distanta)"
+
+#: wp-to-twitter-manager.php:527
+msgid "Your YOURLS username:"
+msgstr "Username-ul tau YOURLS:"
+
+#: wp-to-twitter-manager.php:531
+msgid "Your YOURLS password:"
+msgstr "Parola ta YOURLS:"
+
+#: wp-to-twitter-manager.php:531
+msgid "<em>Saved</em>"
+msgstr "<em>Salvate</em>"
+
+#: wp-to-twitter-manager.php:535
+msgid "Use Post ID for YOURLS url slug."
+msgstr "Foloseste ID articol pentru slug-ul URL al YOURLS"
+
+#: wp-to-twitter-manager.php:540
+msgid "Save YOURLS Account Info"
+msgstr "Salveaza informatiile despre contul YOURLS"
+
+#: wp-to-twitter-manager.php:540
+msgid "Clear YOURLS password"
+msgstr "Sterge parola YOURLS"
+
+#: wp-to-twitter-manager.php:540
+msgid "A YOURLS password and username is required to shorten URLs via the remote YOURLS API and WP to Twitter."
+msgstr "Un nume de utilizator si o parola YOURLS sunt necesare pentru a scurta URL-uri de la distanta prin intermediul YOURLS API si WP to Twitter."
+
+#: wp-to-twitter-manager.php:557
+msgid "Advanced Settings"
+msgstr "Setari Avansate"
+
+#: wp-to-twitter-manager.php:564
+msgid "Advanced Tweet settings"
+msgstr "Setari avansate Twitter"
+
+#: wp-to-twitter-manager.php:567
+msgid "Add tags as hashtags on Tweets"
+msgstr "Adauga etichete la Tweet-uri"
+
+#: wp-to-twitter-manager.php:568
+msgid "Spaces replaced with:"
+msgstr "Spatiile inlocuite cu:"
+
+#: wp-to-twitter-manager.php:569
+msgid "Default replacement is an underscore (<code>_</code>). Use <code>[ ]</code> to remove spaces entirely."
+msgstr "Inlocuirea implicita este underscore (<code>_</code>). Foloseste <code>[ ]</code> pentru a inlatura spatiile in intregime."
+
+#: wp-to-twitter-manager.php:572
+msgid "Maximum number of tags to include:"
+msgstr "Numarul maxim de etichete pentru a fi incluse:"
+
+#: wp-to-twitter-manager.php:573
+msgid "Maximum length in characters for included tags:"
+msgstr "Numarul maxim de caractere pentru etichetele incluse:"
+
+#: wp-to-twitter-manager.php:574
+msgid "These options allow you to restrict the length and number of WordPress tags sent to Twitter as hashtags. Set to <code>0</code> or leave blank to allow any and all tags."
+msgstr "Aceste optiuni va permit sa limitati durata si numarul de etichete WordPress trimise la Twitter ca hashtags. Setati la <code> 0 </ code> sau lasati necompletat pentru a permite orice sau toate etichetele."
+
+#: wp-to-twitter-manager.php:577
+msgid "Length of post excerpt (in characters):"
+msgstr "Marime rezumat articol (in caractere):"
+
+#: wp-to-twitter-manager.php:577
+msgid "By default, extracted from the post itself. If you use the 'Excerpt' field, that will be used instead."
+msgstr "In mod implicit, extrase din articole. Daca utilizati campul \"Extras\", care va fi folosit in schimb."
+
+#: wp-to-twitter-manager.php:580
+msgid "WP to Twitter Date Formatting:"
+msgstr "Formatare data WP to Twitter:"
+
+#: wp-to-twitter-manager.php:581
+msgid "Default is from your general settings. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Date Formatting Documentation</a>."
+msgstr "Implicit este din setarile generale. <a href='http://codex.wordpress.org/Formatting_Date_and_Time'>Documentatie formatare data</a>."
+
+#: wp-to-twitter-manager.php:585
+msgid "Custom text before all Tweets:"
+msgstr "Text personalizat inainte de toate Tweet-urile:"
+
+#: wp-to-twitter-manager.php:586
+msgid "Custom text after all Tweets:"
+msgstr "Text personalizat dupa fiecare Tweet:"
+
+#: wp-to-twitter-manager.php:589
+msgid "Custom field for an alternate URL to be shortened and Tweeted:"
+msgstr "Camp personalizat pentru un URL alternativ ce urmeaza a fi prescurtat si trimis la Twitter:"
+
+#: wp-to-twitter-manager.php:590
+msgid "You can use a custom field to send an alternate URL for your post. The value is the name of a custom field containing your external URL."
+msgstr "Aveti posibilitatea sa utilizati un camp particularizat pentru a trimite un URL alternativ pentru articolul tau. Valoarea este numele unui camp particularizat care contine URL-ul extern."
+
+#: wp-to-twitter-manager.php:594
+msgid "Special Cases when WordPress should send a Tweet"
+msgstr "Cazuri speciale cand WordPress ar trebui sa trimita un Tweet"
+
+#: wp-to-twitter-manager.php:597
+msgid "Do not post status updates by default"
+msgstr "Nu publica actualizarea starii ca implicit"
+
+#: wp-to-twitter-manager.php:598
+msgid "By default, all posts meeting other requirements will be posted to Twitter. Check this to change your setting."
+msgstr "In mod implicit, toate mesajele ce indeplinesc alte cerinte vor fi postate pe Twitter. Verificati acest lucru pentru a schimba setarea."
+
+#: wp-to-twitter-manager.php:602
+msgid "Send Twitter Updates on remote publication (Post by Email or XMLRPC Client)"
+msgstr "Trimite actualizarile Twitter prin publicare de la distanta (Publicare prin Email sau client XMLRPC)"
+
+#: wp-to-twitter-manager.php:604
+msgid "I'm using a plugin to post by email, such as Postie. Only check this if your updates do not work."
+msgstr "Folosesc un plugin pentru a publica prin email cum ar fi Postie. Bifeaza doar daca actualizarile nu functioneaza."
+
+#: wp-to-twitter-manager.php:608
+msgid "Update Twitter when a post is published using QuickPress"
+msgstr "Actualizeaza Twitter cand este publicat un articol folosind QuickPress"
+
+#: wp-to-twitter-manager.php:612
+msgid "Google Analytics Settings"
+msgstr "Setari Google Analytics"
+
+#: wp-to-twitter-manager.php:613
+msgid "You can track the response from Twitter using Google Analytics by defining a campaign identifier here. You can either define a static identifier or a dynamic identifier. Static identifiers don't change from post to post; dynamic identifiers are derived from information relevant to the specific post. Dynamic identifiers will allow you to break down your statistics by an additional variable."
+msgstr "Puteti urmari raspunsurile de la Twitter folosind Google Analytics, prin definirea unei campanii de identificare. Puteti defini fie un identificator static sau unul dinamic. Identificatorii statici nu se schimba de la articol la articol; identificatorii dinamici sunt derivati din informatiile relevante pentru articole specifice. Identificatorii dinamici va permit sa descompuneti statisticile dvs. printr-o variabila suplimentara."
+
+#: wp-to-twitter-manager.php:617
+msgid "Use a Static Identifier with WP-to-Twitter"
+msgstr "Foloseste un identificator static cu WP to Twitter"
+
+#: wp-to-twitter-manager.php:618
+msgid "Static Campaign identifier for Google Analytics:"
+msgstr "Campanie identificator static pentru Google Analytics:"
+
+#: wp-to-twitter-manager.php:622
+msgid "Use a dynamic identifier with Google Analytics and WP-to-Twitter"
+msgstr "Folositi un identificator dinamic cu Google Analytics si WP to Twitter"
+
+#: wp-to-twitter-manager.php:623
+msgid "What dynamic identifier would you like to use?"
+msgstr "Ce identificator dinamic doresti sa folosesti?"
+
+#: wp-to-twitter-manager.php:625
+msgid "Category"
+msgstr "Categorie"
+
+#: wp-to-twitter-manager.php:626
+msgid "Post ID"
+msgstr "ID articol"
+
+#: wp-to-twitter-manager.php:627
+msgid "Post Title"
+msgstr "Titlu articol"
+
+#: wp-to-twitter-manager.php:628
+msgid "Author"
+msgstr "Autor"
+
+#: wp-to-twitter-manager.php:633
+msgid "Individual Authors"
+msgstr "Autori individuali"
+
+#: wp-to-twitter-manager.php:636
+msgid "Authors have individual Twitter accounts"
+msgstr "Autorii au conturi de Twitter individuale"
+
+#: wp-to-twitter-manager.php:636
+msgid "Authors can set their username in their user profile. As of version 2.2.0, this feature no longer allows authors to post to their own Twitter accounts. It can only add an @reference to the author. This @reference is placed using the <code>#account#</code> shortcode. (It will pick up the main account if user accounts are not enabled.)"
+msgstr "Autorii pot seta numele de utilizator in profilul lor de utilizator. Incepand cu versiunea 2.2.0, aceasta caracteristica nu mai permite autorilor de a publica in propriile conturi Twitter. Se poate adauga doar o referinta @ la autor. Aceasta referinta @ este plasata folosind scurtatura <code>#account#</code> . (Acesta va apare in contul principal in cazul in care conturile de utilizator nu sunt activate.)"
+
+#: wp-to-twitter-manager.php:640
+msgid "Disable Error Messages"
+msgstr "Dezactiveaza mesajele de eroare"
+
+#: wp-to-twitter-manager.php:643
+msgid "Disable global URL shortener error messages."
+msgstr "Dezactiveaza "
+
+#: wp-to-twitter-manager.php:647
+msgid "Disable global Twitter API error messages."
+msgstr "Dezactiveaza mesajele globale de eroare API ale Twitter."
+
+#: wp-to-twitter-manager.php:651
+msgid "Disable notification to implement OAuth"
+msgstr "Dezactiveaza notificarile pentru a implementa OAuth"
+
+#: wp-to-twitter-manager.php:655
+msgid "Get Debugging Data for OAuth Connection"
+msgstr "Obtine date de depanare pentru conexiunea OAuth"
+
+#: wp-to-twitter-manager.php:661
+msgid "Save Advanced WP->Twitter Options"
+msgstr "Salveaza WP avansat -> Optiuni Twitter"
+
+#: wp-to-twitter-manager.php:675
+msgid "Limit Updating Categories"
+msgstr "Limiteaza actualizarea categoriilor"
+
+#: wp-to-twitter-manager.php:679
+msgid "Select which blog categories will be Tweeted. "
+msgstr "Selecteaza categoriile blog-ului ce vor fi trimise la Twitter."
+
+#: wp-to-twitter-manager.php:682
+msgid "<em>Category limits are disabled.</em>"
+msgstr "<em>Limitarea categoriilor este dezactivata.</em>"
+
+#: wp-to-twitter-manager.php:696
+msgid "Check Support"
+msgstr "Verifica suportul"
+
+#: wp-to-twitter-manager.php:696
+msgid "Check whether your server supports <a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter's</a> queries to the Twitter and URL shortening APIs. This test will send a status update to Twitter and shorten a URL using your selected methods."
+msgstr "Verifica daca serverul tau suporta interogarile <a href=\"http://www.joedolson.com/articles/wp-to-twitter/\">WP to Twitter</a> catre URL-ul Twitter si API-urile de scurtare URL. Acest test va trimite o actualizare de stare catre Twitter si va scurta URL-ul folosind metoda selectata."
+
+#: wp-to-twitter-oauth.php:105
+#: wp-to-twitter-oauth.php:143
+msgid "Connect to Twitter"
+msgstr "Conecteaza la Twitter"
+
+#: wp-to-twitter-oauth.php:108
+msgid "The process to set up OAuth authentication for your web site is needlessly laborious. It is also confusing. However, this is the only method available from Twitter at this time. Note that you will not, at any time, enter you Twitter username or password into WP to Twitter; they are not used in OAuth authentication."
+msgstr "Procesul pentru a configura autentificarea OAuth pentru site-ul dvs. este inutil de laborios. Este de asemenea confuz. Cu toate acestea, este singura metodă disponibilă de la Twitter in acest moment. Retineti ca nu veti introduce niciodata numele de utilizator sau parola in WP to Twitter, ele nu sunt utilizate în autentificarea OAuth."
+
+#: wp-to-twitter-oauth.php:111
+msgid "1. Register this site as an application on "
+msgstr "1. Inregistreaza acest site ca aplicatie pe "
+
+#: wp-to-twitter-oauth.php:111
+msgid "Twitter's application registration page"
+msgstr "Pagina de inregistrare a aplicatiei Twitter"
+
+#: wp-to-twitter-oauth.php:113
+msgid "If you're not currently logged in, use the Twitter username and password which you want associated with this site"
+msgstr "Daca nu sunteti conectat in prezent, folositi numele de utilizator si parola Twitter pe care doriti sa le asociati cu acest site"
+
+#: wp-to-twitter-oauth.php:114
+msgid "Your Application's Name will be what shows up after \"via\" in your twitter stream; previously, \"WP to Twitter.\" Your application name cannot include the word \"Twitter.\" I suggest using the name of your web site."
+msgstr "Numele aplicatiei dvs. va apare dupa \"via\"  in fluxul Twitter; anterior, \"WP to Twitter.\" Numele aplicatiei nu poate include cuvantul \"Twitter.\" Iti sugeram sa utilizati numele site-ului dvs."
+
+#: wp-to-twitter-oauth.php:115
+msgid "Your Application Description can be whatever you want."
+msgstr "Descrierea aplicatiei poate fi oricare"
+
+#: wp-to-twitter-oauth.php:116
+msgid "Application Type should be set on "
+msgstr "Tipul aplicatiei trebuie setat la"
+
+#: wp-to-twitter-oauth.php:116
+msgid "Browser"
+msgstr "Browser"
+
+#: wp-to-twitter-oauth.php:117
+msgid "The Callback URL should be "
+msgstr "URL-ul pentru raspuns ar trebui sa fie"
+
+#: wp-to-twitter-oauth.php:118
+msgid "Default Access type must be set to "
+msgstr "Tipul de acces implicit trebuie sa fie setat la"
+
+#: wp-to-twitter-oauth.php:118
+msgid "Read &amp; Write"
+msgstr "Citire &amp; Scriere"
+
+#: wp-to-twitter-oauth.php:118
+msgid "(this is NOT the default)"
+msgstr "(acesta nu este implicit)"
+
+#: wp-to-twitter-oauth.php:120
+msgid "Once you have registered your site as an application, you will be provided with a consumer key and a consumer secret."
+msgstr "Odata inregistrat site-ul ca aplicatie, vei primi o cheie de utilizare si o cheie secreta."
+
+#: wp-to-twitter-oauth.php:121
+msgid "2. Copy and paste your consumer key and consumer secret into the fields below"
+msgstr "2. Copiaza si lipeste cheie de utlilizator si cheia secreta in campurile de mai jos"
+
+#: wp-to-twitter-oauth.php:124
+msgid "Twitter Consumer Key"
+msgstr "Cheie utilizator Twitter"
+
+#: wp-to-twitter-oauth.php:128
+msgid "Twitter Consumer Secret"
+msgstr "Secret utilizator Twitter"
+
+#: wp-to-twitter-oauth.php:131
+msgid "3. Copy and paste your Access Token and Access Token Secret into the fields below"
+msgstr "3. Copiaza si lipeste codul de acces si codul de acces secret in campurile de mai jos"
+
+#: wp-to-twitter-oauth.php:132
+msgid "On the right hand side of your new application page at Twitter, click on 'My Access Token'."
+msgstr "In bara lateral dreapta din pagina aplicatiei Twitter, apasa pe My access Token."
+
+#: wp-to-twitter-oauth.php:134
+msgid "Access Token"
+msgstr "Cod de acces"
+
+#: wp-to-twitter-oauth.php:138
+msgid "Access Token Secret"
+msgstr "Cod de acces secret"
+
+#: wp-to-twitter-oauth.php:153
+msgid "Disconnect from Twitter"
+msgstr "Deconecteaza de la Twitter"
+
+#: wp-to-twitter-oauth.php:160
+msgid "Twitter Username "
+msgstr "Username Twitter"
+
+#: wp-to-twitter-oauth.php:161
+msgid "Consumer Key "
+msgstr "Cheie utilizator"
+
+#: wp-to-twitter-oauth.php:162
+msgid "Consumer Secret "
+msgstr "Secret utilizator"
+
+#: wp-to-twitter-oauth.php:163
+msgid "Access Token "
+msgstr "Cod de acces"
+
+#: wp-to-twitter-oauth.php:164
+msgid "Access Token Secret "
+msgstr "Cod de acces secret"
+
+#: wp-to-twitter-oauth.php:167
+msgid "Disconnect Your WordPress and Twitter Account"
+msgstr "Deconecteaza conturile Wordpress si Twitter"
+
+#: wp-to-twitter.php:53
+#, php-format
+msgid "Twitter now requires authentication by OAuth. You will need you to update your <a href=\"%s\">settings</a> in order to continue to use WP to Twitter."
+msgstr "Twiter solicita autentificarea prin OAuth. Va trebui sa-ti actualizezi <a href=\"%s\">setarile</a> pentru a continua sa utilizezi WP to Twitter."
+
+#: wp-to-twitter.php:147
+msgid "200 OK: Success!"
+msgstr "200 OK: Succes!"
+
+#: wp-to-twitter.php:150
+msgid "400 Bad Request: The request was invalid. This is the status code returned during rate limiting."
+msgstr "400 Bad request: Cererea a fost invalida. Acest mesaj de eroare este returnat in timpul limitarii ratei."
+
+#: wp-to-twitter.php:153
+msgid "401 Unauthorized: Authentication credentials were missing or incorrect."
+msgstr "401 Unauthorized: Datele de autentificare lipsesc sau sunt incorecte."
+
+#: wp-to-twitter.php:156
+msgid "403 Forbidden: The request is understood, but it has been refused. This code is used when requests are being denied due to status update character limits."
+msgstr "403 Forbidden: Cererea este inteleasa insa este refuzata. Acest cod este folosit atunci cand cererile sunt refuzate din cauza actualizarii starii limitelor de caractere."
+
+#: wp-to-twitter.php:158
+msgid "500 Internal Server Error: Something is broken at Twitter."
+msgstr "500 Internal Server Error: Ceva este in neregula la Twitter."
+
+#: wp-to-twitter.php:161
+msgid "503 Service Unavailable: The Twitter servers are up, but overloaded with requests Please try again later."
+msgstr "503 Service Unavailable: Serverele Twitter sunt accesibile insa sunt supraincarcate cu cereri. Te rog sa incerci mai tarziu."
+
+#: wp-to-twitter.php:164
+msgid "502 Bad Gateway: Twitter is down or being upgraded."
+msgstr "502 Bad Gateway: Twitter este cazut sau este in curs de actualizare."
+
+#. #-#-#-#-#  plugin.pot (WP to Twitter 2.2.4)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: wp-to-twitter.php:746
+msgid "WP to Twitter"
+msgstr "WP to Twitter"
+
+#: wp-to-twitter.php:822
+msgid "Don't Tweet this post."
+msgstr "Nu trimite acest articol la Twitter"
+
+#: wp-to-twitter.php:832
+msgid "This URL is direct and has not been shortened: "
+msgstr "Acesta este un URL direct, nu a fost scurtat:"
+
+#: wp-to-twitter.php:888
+msgid "WP to Twitter User Settings"
+msgstr "Setari utilizatori pentru WP to Twitter"
+
+#: wp-to-twitter.php:892
+msgid "Use My Twitter Username"
+msgstr "Foloseste username-ul meu Twitter"
+
+#: wp-to-twitter.php:893
+msgid "Tweet my posts with an @ reference to my username."
+msgstr "Trimite articolele cu un @ in username."
+
+#: wp-to-twitter.php:894
+msgid "Tweet my posts with an @ reference to both my username and to the main site username."
+msgstr "Trimite articolele cu un @ atat in fata username-ului cat si in fata username-ului site-ului principal."
+
+#: wp-to-twitter.php:899
+msgid "Enter your own Twitter username."
+msgstr "Introdu username-ul Twitter personal."
+
+#: wp-to-twitter.php:935
+msgid "Check the categories you want to tweet:"
+msgstr "Bifeaza categoriile pe care vrei sa le trimiti la Twitter:"
+
+#: wp-to-twitter.php:952
+msgid "Set Categories"
+msgstr "Seteaza categoriile"
+
+#: wp-to-twitter.php:1026
+msgid "<p>Couldn't locate the settings page.</p>"
+msgstr "<p>Nu am putut localiza pagina de setari.</p>"
+
+#: wp-to-twitter.php:1031
+msgid "Settings"
+msgstr "Setari"
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.joedolson.com/articles/wp-to-twitter/"
+msgstr "http://www.joedolson.com/articles/wp-to-twitter/"
+
+#. Description of the plugin/theme
+msgid "Updates Twitter when you create a new blog post or add to your blogroll using Cli.gs. With a Cli.gs API key, creates a clig in your Cli.gs account with the name of your post as the title."
+msgstr "Actualizeaza Twitter atunci cand creezi un articol nou sau adaugi legaturi noi folosind Cli.gs. Cu o cheie API Cli.gs, creeaza un Clig in contul tau Cli.gs cu numele articolului ca titlu."
+
+#. Author of the plugin/theme
+msgid "Joseph Dolson"
+msgstr "Joseph Dolson"
+
+#. Author URI of the plugin/theme
+msgid "http://www.joedolson.com/"
+msgstr "http://www.joedolson.com/"
+
