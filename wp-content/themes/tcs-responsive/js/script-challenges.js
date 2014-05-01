@@ -521,6 +521,19 @@ appChallenges = {
         }
         return trackName;
     },
+				isDesignContest: function(contestType) {
+        return contestType == "Web Design" ||
+            contestType == "Widget or Mobile Screen Design" ||
+            contestType == "Wireframes" ||
+            contestType == "Idea Generation" ||
+            contestType == "Print\/Presentation" ||
+            contestType == "Banners\/Icons" ||
+            contestType == "Logo Design" ||
+            contestType == "Studio Other" ||
+            contestType == "Front-End Flash" ||
+            contestType == "Application Front-End Design";
+
+    },
 
   /* populates technology tags drop down */
   getTechnologyTags: function(list, callback) {
