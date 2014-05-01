@@ -22,7 +22,7 @@ $token = $auth0->getAccessToken();
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><?php bloginfo('name'); ?><?php wp_title(' - ', true, 'left'); ?></title>
+<title><?php wp_title(' - ', true, 'right'); ?></title>
 <meta name="description" content="">
 <meta name="author" content="">
 

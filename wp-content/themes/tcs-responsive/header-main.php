@@ -38,7 +38,7 @@ if (isset($_GET['auth']) && $_GET['auth'] == 'logout') {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title><?php bloginfo('name'); ?><?php wp_title(' - ', TRUE, 'left'); ?></title>
+  <title><?php wp_title(' - ', TRUE, 'right'); ?></title>
   <meta name="description" content="">
   <meta name="author" content="" >
 
