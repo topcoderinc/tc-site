@@ -93,13 +93,10 @@ if( $updatePassword=="true" ) {
 										<span class="err1 error" style="display: none;">Required field</span>
 										<span class="err2 error" style="display: none;">Password confirmation different from above field</span>
 									</div>
-									<?php if(trim($unlockCode)!="") : ?><input type="hidden" name="unlockCode" class="unlockCode" value="<?php echo $unlockCode;?>" /><?php endif; ?>
-									<?php if(trim($unlockCode)=="") : ?>
 									<div class="row">
 										<input class="unlockCode" type="text" maxlength="40" name="unlockCode" placeholder="Unlock Code:" size="50" />
 										<span class="err1 error" style="display: none;">Required field</span>
 									</div>
-									<?php endif;?>
 									<div class="row">
 										<input type="button" class="btnSubmit" value="Submit" />
 									</div>

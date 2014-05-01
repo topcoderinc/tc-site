@@ -7,7 +7,7 @@ get_header ();
 $values 	= get_post_custom ( $post->ID );
 $userkey 	= get_option ( 'api_user_key' );
 
-$changePasswordPage = get_page_link_by_slug("reset-password");
+$changePasswordPage = get_page_link_by_slug("password-reset");
 $redirectDelay 		= get_option("tcPasswordRecoveryRedirectDelay")==null ? 3000 : get_option("tcPasswordRecoveryRedirectDelay");
 
 $handle 	= $_POST["handle"];
@@ -87,7 +87,7 @@ if($tokenObj!=null) {
 									</div>
 								</form>
                 <br />
-                <p>Or <a href="/reset-password">click here</a> if you already have a confirmation code.</p>
+                <p>Or <a href="/password-reset">click here</a> if you already have a confirmation code.</p>
 							<?php else : ?>
 								<h3><?php echo $msg;?></h3>
 							<?php endif; ?>							

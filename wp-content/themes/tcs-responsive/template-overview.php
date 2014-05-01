@@ -115,7 +115,7 @@ $siteURL = site_url ();
 								$recentDesign = $recentDesign->data[0];
 								$recentDev= get_active_contests_ajax('','develop',1,1);
 								$recentDev = $recentDev->data[0];
-								$recentData= get_active_contests_ajax('','data/srm');
+								$recentData= get_active_contests_ajax('','data/marathan');
 								$recentData = $recentData->data[0];
 								$chLink =  get_page_link_by_slug('challenge-details');
 							?>

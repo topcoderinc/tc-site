@@ -511,8 +511,14 @@ appChallenges = {
             case "Conceptualization":
                 trackName = "c";
                 break;
-            case ("First2Finish" || "Design First2Finish"):
+            case "First2Finish":
                 trackName = "ff";
+                break;
+            case "Design First2Finish":
+                trackName = "df2f";
+                break;
+            case "Application Front-End Design":
+                trackName = "af";
                 break;
             default:
                 trackName = "o";
@@ -633,17 +639,23 @@ appChallenges = {
                 /*
                  * generate table row for design past contest type
                  */
-                if (typeof rec.totalCompetitors !== "undefined") {
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
+                if (typeof rec.numberOfRegistrants !== "undefined") {
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("SRM");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
-                    $('.colReg', row).html('<a href="javascript:;">' + rec.totalCompetitors + '</a>');
+                    $('.vStartDate', row).html(app.formatDate2(rec.startDate));
+                    $('.vEndDate', row).html(app.formatDate2(rec.endDate));
+                    $('.colTLeft', row).html(app.formatTimeLeft(rec.timeRemaining));
+                    $('.colReg', row).html('<a href=" http://community.topcoder.com/longcontest/?module=ViewStandings&rd=' + rec.roundId + '">' + rec.numberOfRegistrants + '</a>');
+                    $('.colSub', row).html(rec.numberOfSubmissions);
                 } else {
                     //$('.contestName', row).html(rec.fullName);
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("Marathon");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
+                    $('.vStartDate', row).html(app.formatDate2(rec.startDate));
+                    $('.vEndDate', row).html(app.formatDate2(rec.endDate));
+                    $('.colTLeft', row).html(app.formatTimeLeft(rec.timeRemaining));
                     $('.colReg', row).html(rec.numberOfRegistrants);
+                    $('.colSub', row).html(rec.numberOfSubmissions);
                 }
 
                 $('tbody', table).append(row);
@@ -986,7 +998,7 @@ appChallenges = {
 
 
                     $('.vEndRound', row).html(startDate);
-                    $('.colReg', row).html('<a href="javascript:;">' + rec.numberOfRegistrants + '</a>');
+                    $('.colReg', row).html('<a href=" http://community.topcoder.com/longcontest/?module=ViewStandings&rd=' + rec.roundId + '">' + rec.numberOfRegistrants + '</a>');
                     $('.colSub', row).html(numSubmissions);
 
                     $('tbody', table).append(row);
@@ -1124,7 +1136,7 @@ appChallenges = {
                       }
                     }
 
-                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
+                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
                     var contestName = rec.challengeName.length > 60 ? rec.challengeName.substr(0, 61) + '...' : rec.challengeName;
 
 
@@ -2441,7 +2453,7 @@ $(document).ready(function() {
 /* fancy drop down platform on advanced search form */
 $(document).ready(function() {
 
-    //multiple select configurations
+    /*multiple select configurations
     var config = {
         '.chosen-select': {},
         '.chosen-select-deselect': { allow_single_deselect: true },
@@ -2451,7 +2463,7 @@ $(document).ready(function() {
     };
     for (var selector in config) {
         $(selector).chosen(config[selector]);
-    }
+    }*/
 
     //set equal height to row contestGrid boxes
     var index = 0, minWidth = 1019, cols = $(window).width() > minWidth ? 3 : 1, rows = 0;

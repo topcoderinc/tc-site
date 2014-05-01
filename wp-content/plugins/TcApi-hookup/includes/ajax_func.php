@@ -448,6 +448,19 @@ function get_contest_info( $contestID = '' )
  * End of load data functioning
  */
 
+/**
+ * For backwards compatility
+ *
+ * @param string $userKey
+ * @param string $contestType
+ * @param int $page
+ * @param int $post_per_page
+ * @param string $sortColumn
+ * @param string $sortOrder
+ */
+function get_active_contests_ajax($userKey = '', $contestType = 'design', $page = 1, $post_per_page = 30, $sortColumn = '', $sortOrder = '') {
+  return get_challenges_ajax('Active', $contestType, $page, $post_per_page, $sortOrder, $sortColumn);
+}
 
 /**
  * Challenges changes from "TopCoder Website - Challenges Pages - Wordpress Theme Build" Contest

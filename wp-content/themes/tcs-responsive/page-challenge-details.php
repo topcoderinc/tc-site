@@ -221,7 +221,7 @@ include locate_template('header-challenge-landing.php');
 
 ?>
 
-<div class="content challenge-detail view-challenge-result <?php if ($contestType != 'design') {
+<div class="content challenge-detail <?php if ($contestType != 'design') {
   echo 'develop';
 } ?>">
 <div id="main">
