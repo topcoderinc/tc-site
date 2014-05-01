@@ -321,9 +321,20 @@ appChallenges = {
         $('.dataTable, .contestGrid').on('mouseenter', '.colType .ico, .coleSub .subs, .ico.trackType, a .itco', function() {
             var tt = $('#typeTooltip');
             tt.addClass('isShowing');
+												
+												// I-107026: Add class devTooltip if the contest is not design contest.
+            var contestType = $('.tipC', $(this)).html();
+            if (!app.isDesignContest(contestType)) {
+                tt.addClass('devTooltip');
+            } else if (tt.hasClass('devTooltip')) {
+                tt.removeClass('devTooltip');
+            }
+												
             $(this).addClass('activeLink');
             $('header', tt).html($('.tipT', $(this)).html());
-            $('.contestTy', tt).html($('.tipC', $(this)).html());
+												
+            // I-107026: reuse the contestType variable
+            $('.contestTy', tt).html(contestType);
 
             if ($(this).hasClass('itco')) {
                 var tempTcoTooltipTitle = typeof tcoTooltipTitle !== "undefined" ? tcoTooltipTitle : "TCO-14";
