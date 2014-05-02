@@ -72,7 +72,8 @@
         "moment-timezone.min.js",
         "moment-data.js",
         "chosen.jquery.min.js",
-        "script-challenges.js"
+        "script-challenges.js",
+								"jquery.cookie.js"
       ],
       "css": [
         "base.css",
@@ -109,7 +110,8 @@
         "jquery.qtip.min.js",
         "moment.min.js",
         "moment-timezone.min.js",
-        "moment-data.js"
+        "moment-data.js",
+								"jquery.cookie.js"
       ],
       "css": [
         "base.css",

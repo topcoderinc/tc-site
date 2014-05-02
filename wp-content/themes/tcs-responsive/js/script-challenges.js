@@ -3,6 +3,9 @@ var sortColumn = "";
 var sortOrder = "";
 var ApiData = {};
 
+// I-104467 I-107029: default view for challenges
+var default_view = "#tableView";
+
 /**
  * Challenges function
 challenge
@@ -32,6 +35,24 @@ appChallenges = {
         app.initAjaxData();
         app.calendar();
         app.bindEvents();
+								
+								// I-104467 I-107029: check if there is already stored view
+        if ($.cookie('viewMode') == null) {
+            // I-104467 I-107029: if not, save the the default view to the cookie
+            $.cookie('viewMode', default_view, { expires: 7, path: '/' });
+        }
+								
+								// I-104467 I-107029: update the view mode (grid or table) according to the cookie value
+        var viewHref = $.cookie('viewMode');
+        var switchViewLink = $('.views a[href="' + viewHref + '"]');
+
+        if (typeof(listType) != "undefined" && listType !== "Past" && !switchViewLink.hasClass('isActive')) {
+            $('.viewTab').hide();
+            $(viewHref).fadeIn('fast');
+            $('.isActive', switchViewLink.parent()).removeClass('isActive');
+            switchViewLink.addClass('isActive');
+            app.ie7Fix();
+        }
     },
     initAjaxData: function() {
         if ($('.dataChanges .viewAll').length <= 0 || !$('.dataChanges .viewAll').is(':visible')) {
@@ -74,6 +95,10 @@ appChallenges = {
 
             $('.viewTab').hide();
             id = $(this).attr('href');
+												
+												// I-104467 I-107029: store the view to the cookie
+												$.cookie('viewMode', id, { expires: 7, path: '/' });
+			
             $(id).fadeIn('fast');
             $('.isActive', $(this).parent()).removeClass('isActive');
             $(this).addClass('isActive');
