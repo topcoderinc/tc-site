@@ -896,14 +896,18 @@ function get_challenge_documents_controller()
     $jwtToken    = filter_input( INPUT_GET, "jwtToken", FILTER_SANITIZE_STRING );
     $challengeId = filter_input( INPUT_GET, "challengeId", FILTER_SANITIZE_STRING );
     $challengeType = filter_input( INPUT_GET, "challengeType", FILTER_SANITIZE_STRING );
-    $userkey = get_option( 'api_user_key' );
+    $resetCache = filter_input(INPUT_GET, 'nocache', FILTER_SANITIZE_STRING);
 
-    $docs = get_challenge_documents_ajax($userKey, $challengeId, $challengeType, FALSE, $jwtToken);
+    $docs = get_challenge_documents_ajax($challengeId, $challengeType, $resetCache, $jwtToken);
 
-    wp_send_json( $docs );
+    if ($docs !== "Error in processing request") {
+      wp_send_json( $docs );
+    } else {
+      wp_send_json_error();
+    }
 }
 
-function get_challenge_documents_ajax($userKey = '', $contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
+function get_challenge_documents_ajax($contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
 
   // This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
   #echo "	contest type ".$contestType;
@@ -914,7 +918,6 @@ function get_challenge_documents_ajax($userKey = '', $contestID = '', $contestTy
   }
 
   $args     = array(
-    'body'        => $body,
     'headers'     => array(
       'Authorization' => 'Bearer ' . $jwtToken
     ),
