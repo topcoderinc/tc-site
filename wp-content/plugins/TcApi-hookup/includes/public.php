@@ -554,6 +554,43 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     }
     return "Error in processing request";
   }
+
+  // track statistics
+  function tcapi_get_track_statistics($atts, $key = "") {
+      $url = "http://api.topcoder.com/v2/platform/statistics/";
+	  //$url = "http://tcapi.apiary-mock.com/v2/reports/";
+      $args = array(
+          'httpversion' => get_option('httpversion'),
+          'timeout'=> get_option('request_timeout')
+      );
+
+
+      if (!$atts['track']) {
+          return "Track attribute is required";
+      }
+      $url .= $atts['track'] . '?';
+      if ($atts['start_date']) {
+          $url .= "&startDate=" . $atts['start_date'];
+      }
+      if ($atts['end_date']) {
+          $url .= "&endDate=" . $atts['end_date'];
+      }
+
+      $response = wp_remote_get($url, $args);
+      
+      if (is_wp_error($response) || !isset ( $response ['body'] )) {
+          return "Error in processing";
+      }
+      if ($response ['response'] ['code'] == 200) {
+          $statistics = json_decode($response ['body']);
+          $key = clean_pre($key);
+          if ($key != NULL && $key != "") {
+              return number_format($statistics->$key);
+          }
+          return $statistics;
+      }
+      return "Error in processing request";
+  }
 }
 
 add_shortcode(
@@ -571,6 +608,13 @@ add_shortcode(
   )
 );
 
+add_shortcode(
+    'trackStatistics',
+    array(
+        'TCHOOK_Public',
+        'tcapi_get_track_statistics'
+    )
+);
 
 add_shortcode(
   'membercount',
