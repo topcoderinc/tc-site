@@ -38,7 +38,7 @@ $(document).ready(function() {
         }
       }
     }).fail(function() {
-      alert('Could not load all data. Please reload the page or contact support@topcoder.com');
+      console.log('Could not load all data. Please reload the page or contact support@topcoder.com');
     });
   }
 
