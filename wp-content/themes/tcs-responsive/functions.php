@@ -279,3 +279,20 @@ function empty_search_filter($query) {
     return $query;
 }
 add_filter('pre_get_posts','empty_search_filter');
+
+/**
+ * Get current member handle.
+ *
+ * @return the handle
+ */
+function get_member_handle() {
+    // Get the TopCoder SSO Cookie
+    $cookie = $_COOKIE["tcsso"];
+    $cookie_parts = explode( "|", $cookie);
+    $user_id = $cookie_parts[0];
+
+    $url = "http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" . $user_id . "&json=true";
+    $response = get_json_from_url($url);
+
+    return json_decode($response) -> data[0] -> handle;
+}
