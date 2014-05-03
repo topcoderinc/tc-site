@@ -31,7 +31,7 @@ $img_locked = get_bloginfo( 'stylesheet_directory' )."/i/img-locked.png";
 					<h4>Recent Winning Submission</h4>
 				</header>
 				<div class="winInfo">
-					<a href="#" class="contestTitle">
+					<a href="<?php echo get_bloginfo('siteurl') . "/challenge-details/" . $recentWins[0]->challengeId . "/?type=design" ; ?>" class="contestTitle">
 						<i></i><?php echo $recentWins[0]->contestName;?>
 					</a>
 					<div id="badgeImg" class="badgeImg rank<?php echo $recentWins[0]->rank;?>"></div>
