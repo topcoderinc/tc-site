@@ -45,25 +45,72 @@ $contest        = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants    = empty( $contest->registrants ) ? array() : $contest->registrants;
 $checkpointData = get_checkpoint_details($contestID, $contestType);
 
-$registerDisable = FALSE;
-$submitDisabled  = FALSE;
-/*
-$curDate = new DateTime();
-$registerDisable = true;
-if ($contest->registrationEndDate) {
-  $regDate = new DateTime($contest->registrationEndDate);
-  if ($regDate > $curDate) {
-    $registerDisable = false;
+$handle = get_member_handle();
+$registerDisable = challenge_register_disabled($contest);
+$submitDisabled  = challenge_submit_disabled($contest);
+
+/**
+ * Should the registration button active
+ *
+ * Registration button should be disabled:
+ *  - When the date is after the registration end date
+ *  - If the user is already registered
+ *
+ * @param $contest
+ *
+ * @return bool
+ */
+function challenge_register_disabled($contest) {
+  global $handle;
+
+  $registerDisable = TRUE;
+
+  if ($contest->registrationEndDate) {
+    $curDate = new DateTime();
+    $regDate = new DateTime($contest->registrationEndDate);
+    if ($regDate > $curDate) {
+      $registerDisable = FALSE;
+    }
   }
+
+  if (is_user_register_for_challenge($handle, $contest)) {
+    $registerDisable = TRUE;
+  }
+
+  return $registerDisable;
 }
 
-$submitDisabled = true;
-if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
-  $submitDate = new DateTime($contest->submissionEndDate);
-  if ($submitDate > $curDate) {
-    $submitDisabled = false;
+
+/**
+ * Should the submit button be active
+ *
+ * Submit button should be disabled:
+ *  - If submission date is not passed and challenge is not complete
+ *  - If there is a user and the user is registered
+ *
+ * @param $contest
+ *
+ * @return bool
+ */
+function challenge_submit_disabled($contest) {
+  global $handle;
+  $submitDisabled = TRUE;
+
+  if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
+    $curDate    = new DateTime();
+    $submitDate = new DateTime($contest->submissionEndDate);
+    if ($submitDate > $curDate) {
+      $submitDisabled = FALSE;
+    }
   }
-}*/
+
+  if (!is_user_register_for_challenge($handle, $contest)) {
+    $submitDisabled = TRUE;
+  }
+
+  return $submitDisabled;
+}
+
 
 // Ad submission dates to registrants
 // @TODO move this to a class
