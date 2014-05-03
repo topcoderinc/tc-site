@@ -45,25 +45,9 @@ $contest        = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants    = empty( $contest->registrants ) ? array() : $contest->registrants;
 $checkpointData = get_checkpoint_details($contestID, $contestType);
 
-$registerDisable = FALSE;
-$submitDisabled  = FALSE;
-/*
-$curDate = new DateTime();
-$registerDisable = true;
-if ($contest->registrationEndDate) {
-  $regDate = new DateTime($contest->registrationEndDate);
-  if ($regDate > $curDate) {
-    $registerDisable = false;
-  }
-}
-
-$submitDisabled = true;
-if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
-  $submitDate = new DateTime($contest->submissionEndDate);
-  if ($submitDate > $curDate) {
-    $submitDisabled = false;
-  }
-}*/
+$handle = get_member_handle();
+$registerDisable = challenge_register_disabled($contest);
+$submitDisabled  = challenge_submit_disabled($contest);
 
 // Ad submission dates to registrants
 // @TODO move this to a class
