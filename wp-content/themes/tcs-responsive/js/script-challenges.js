@@ -655,6 +655,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1095,8 +1096,10 @@ appChallenges = {
         }
     },
 
-    addEmptyResult: function(table) {
-        $(table).html('<table><tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr></table>');
+    addEmptyResult: function(table) {        
+								$('thead', table).hide();
+        var toUpdate = $('tbody', table).length > 0 ? $('tbody', table) : $(table);
+        toUpdate.html('<tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr>');
     },
 
     // getGridview Blocks
@@ -1262,6 +1265,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1516,6 +1520,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1819,6 +1824,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
