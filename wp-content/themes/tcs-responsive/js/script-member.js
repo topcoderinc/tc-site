@@ -244,8 +244,10 @@ var coder = {
 
                     var desc = $('.comptetionData', this.defs.currentSlide);
                     $('.winInfo .contestTitle').html('<i></i>' + $('.name', desc).val());
+                    $('.winInfo .contestTitle').attr('href', $('.challengeLink', desc).val());
                     $('.winInfo .prizeAmount .val').html('<i></i>' + $('.prize', desc).val());
                     $('.winInfo .submittedOn .time').html($('.submiissionDate', desc).val());
+
                 }
             });
             window.setTimeout(function() {
