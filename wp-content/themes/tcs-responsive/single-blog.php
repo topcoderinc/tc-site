@@ -12,7 +12,7 @@ $values = get_post_custom ( $post->ID );
 $userkey = get_option ( 'api_user_key' );
 $siteURL = site_url ();
 
-$blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder Blog" : get_option("blog_page_title");
+$blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder blog" : get_option("blog_page_title");
 ?>
 
 <script type="text/javascript">
