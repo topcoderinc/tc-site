@@ -410,6 +410,10 @@ $blog_posts = get_posts($blog_posts_args);
     <?php
     $urlFromDiscourse = $_REQUEST["url"];
 	$stateLogin = "none";
+	// if has referer and contain topcoder.com
+	if (   preg_match ('/topcoder.com/',$_SERVER['HTTP_REFERER'], $matches) ){
+		$stateLogin = $_SERVER['HTTP_REFERER'];	
+	}
 	if ($_REQUEST['sso'] != ''  and $_REQUEST['sig'] != '' ) {
 		// if ( preg_match('/sso=(.*)&sig=(.*)/', $urlFromDiscourse, $matches) ){
 		//$sso = str_replace("=","%3D%0A",$matches[1]);
