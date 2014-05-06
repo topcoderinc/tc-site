@@ -508,12 +508,12 @@ $blog_posts = get_posts($blog_posts_args);
 </p>
 
 <p class="row info lSpace">
-					<span class="strength">
-						<span class="field"></span>
-						<span class="field"></span>
-						<span class="field"></span>
-						<span class="field"></span>
-					</span>
+  <span class="strength">
+      <span class="field"></span>
+      <span class="field"></span>
+      <span class="field"></span>
+      <span class="field"></span>
+  </span>
   7 characters with letters, numbers, &amp; symbols
 </p>
 
@@ -584,11 +584,11 @@ $blog_posts = get_posts($blog_posts_args);
 
       <p class="row lSpace btns">
         <a href="javascript:;" class="signin-db btn btnSubmit">Login</a>
-		<?php
-			$fp_page = get_page_by_path( 'password-recovery' );
-			$fp_link = get_permalink($fp_page->ID);
-      $fp_link = str_replace('http:', 'https:', $fp_link);
-		?>
+        <?php
+          $fp_page = get_page_by_path( 'password-recovery' );
+          $fp_link = get_permalink($fp_page->ID);
+          $fp_link = str_replace('http:', 'https:', $fp_link);
+        ?>
         <a href="<?php echo $fp_link; //http://community.topcoder.com/tc?module=FindUser ?>" target="_blank" class="forgotPwd">Forgot
           password?</a>
       </p>
@@ -653,15 +653,21 @@ $blog_posts = get_posts($blog_posts_args);
     var githubProvider = "github";
     <?php
     $urlFromDiscourse = $_REQUEST["url"];
-	$stateLogin = "none";
-	if ($_REQUEST['sso'] != ''  and $_REQUEST['sig'] != '' ) {
-		// if ( preg_match('/sso=(.*)&sig=(.*)/', $urlFromDiscourse, $matches) ){
-		//$sso = str_replace("=","%3D%0A",$matches[1]);
-		//$sig = $matches[2];
-		$sso = urlencode($_REQUEST['sso']);
-		$sig = $_REQUEST['sig'];
-		$stateLogin = "http://talk.topcoder.com/session/sso_login?sso=$sso&sig=$sig";
-	}
+    $stateLogin = "none";
+
+    // if has referer and contain topcoder.com
+    if (preg_match ('/topcoder.com/',$_SERVER['HTTP_REFERER'], $matches)){
+      $stateLogin = $_SERVER['HTTP_REFERER'];
+    }
+
+    if ($_REQUEST['sso'] != ''  and $_REQUEST['sig'] != '' ) {
+        // if ( preg_match('/sso=(.*)&sig=(.*)/', $urlFromDiscourse, $matches) ){
+        //$sso = str_replace("=","%3D%0A",$matches[1]);
+        //$sig = $matches[2];
+        $sso = urlencode($_REQUEST['sso']);
+        $sig = $_REQUEST['sig'];
+        $stateLogin = "http://talk.topcoder.com/session/sso_login?sso=$sso&sig=$sig";
+    }
 
     ?>
 
