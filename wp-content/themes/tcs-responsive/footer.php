@@ -654,10 +654,6 @@ $blog_posts = get_posts($blog_posts_args);
     <?php
     $urlFromDiscourse = $_REQUEST["url"];
 	$stateLogin = "none";
-	// if has referer and contain topcoder.com
-	if (   preg_match ('/topcoder.com/',$_SERVER['HTTP_REFERER'], $matches) ){
-		$stateLogin = $_SERVER['HTTP_REFERER'];	
-	}
 	if ($_REQUEST['sso'] != ''  and $_REQUEST['sig'] != '' ) {
 		// if ( preg_match('/sso=(.*)&sig=(.*)/', $urlFromDiscourse, $matches) ){
 		//$sso = str_replace("=","%3D%0A",$matches[1]);
@@ -668,11 +664,19 @@ $blog_posts = get_posts($blog_posts_args);
 	}
 
     ?>
-
     loginState = "<?php echo $stateLogin; ?>";
-
+	var referer =  document.referrer;	
+	
     if (loginState == 'none') {
-      loginState = window.location.href;
+		loginState = 'http://www.topcoder.com';
+		if ( /topcoder/i.test( referer ) ) { // send back to referer e.g /tc site 
+			loginState = referer;
+		}
+		if ( /action=showlogin/i.test( referer ) ){
+			// few user tested to access directly "?action=showlogin", by this by, loginState would be its own self (contain 'showlogin')
+			// avoid loop if 1st login try was failed. failed login will still redirect user to action=showlogin 
+			loginState = 'http://www.topcoder.com'; 
+		}
     }
     var auth0Login = new Auth0({
       domain: 'topcoder.auth0.com',
