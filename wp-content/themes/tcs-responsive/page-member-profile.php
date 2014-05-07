@@ -73,7 +73,7 @@ $quote = ($coder->quote == '') ? "Member of the world's largest global competiti
 									echo date ( "M d, Y", strtotime ( $memSince ) );
 									?></div>
 								</div>
-								<?php if($coder->overallEarning!=null) :?>
+								<?php if (isset($coder->overallEarning)) :?>
 								<div class="memberSince">
 									<label>Total Earnings :</label>
 									<div class="val"><?php echo '$'.$coder->overallEarning;?></div>

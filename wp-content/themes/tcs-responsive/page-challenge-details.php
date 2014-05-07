@@ -3,10 +3,14 @@
 $activeTab = $tab;
 add_action('wp_head', 'tc_challenge_details_js');
 function tc_challenge_details_js() {
-  global $contest, $contestType, $contestID, $registrants, $activeTab;
+  global $contest, $contestType, $contestID, $activeTab;
 
-  $regEnd = strtotime("$contest->registrationEndDate") || 1;
-  $submissionEnd = strtotime("$contest->submissionEndDate") || 1
+  if (!isset($contest->registrationEndDate)) {
+    $contest = get_contest_detail('', $contestID, $contestType);
+  }
+
+  $regEnd = strtotime($contest->registrationEndDate) | 1;
+  $submissionEnd = strtotime($contest->submissionEndDate) | 1;
 
   ?>
   <script type="text/javascript">
@@ -16,15 +20,6 @@ function tc_challenge_details_js() {
     var challengeId = "<?php echo $contestID;?>";
     var challengeType = "<?php echo $contestType;?>";
     var autoRegister = "<?php echo get_query_var('autoRegister');?>";
-
-    var registrants = ["anonymous"
-      <?php
-        for ($i = 0; $i < count($registrants); $i++) :
-          $registrant = $registrants[$i];
-          echo ',"'.$registrant->handle.'"';
-        endfor;
-      ?>
-    ];
   </script>
 <?php
 }
@@ -69,72 +64,6 @@ if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
     $submitDisabled = false;
   }
 }*/
-
-// @TODO need to fix loading of hanlde before these will work
-//$registerDisable = challenge_register_disabled($contest);
-//$submitDisabled = challenge_submit_disabled($contest);
-
-/**
- * Should the registration button active
- *
- * Registration button should be disabled:
- *  - When the date is after the registration end date
- *  - If the user is already registered
- *
- * @param $contest
- *
- * @return bool
- */
-function challenge_register_disabled($contest) {
-  global $handle;
-
-  $registerDisable = TRUE;
-
-  if ($contest->registrationEndDate) {
-    $curDate = new DateTime();
-    $regDate = new DateTime($contest->registrationEndDate);
-    if ($regDate > $curDate) {
-      $registerDisable = FALSE;
-    }
-  }
-
-  if (is_user_register_for_challenge($handle, $contest)) {
-    $registerDisable = TRUE;
-  }
-
-  return $registerDisable;
-}
-
-
-/**
- * Should the submit button be active
- *
- * Submit button should be disabled:
- *  - If submission date is not passed and challenge is not complete
- *  - If there is a user and the user is registered
- *
- * @param $contest
- *
- * @return bool
- */
-function challenge_submit_disabled($contest) {
-  global $handle;
-  $submitDisabled = TRUE;
-
-  if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
-    $curDate    = new DateTime();
-    $submitDate = new DateTime($contest->submissionEndDate);
-    if ($submitDate > $curDate) {
-      $submitDisabled = FALSE;
-    }
-  }
-
-  if (!is_user_register_for_challenge($handle, $contest)) {
-    $submitDisabled = TRUE;
-  }
-
-  return $submitDisabled;
-}
 
 // Ad submission dates to registrants
 // @TODO move this to a class
@@ -221,7 +150,7 @@ include locate_template('header-challenge-landing.php');
 
 ?>
 
-<div class="content challenge-detail view-challenge-result <?php if ($contestType != 'design') {
+<div class="content challenge-detail <?php if ($contestType != 'design') {
   echo 'develop';
 } ?>">
 <div id="main">

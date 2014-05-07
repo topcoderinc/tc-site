@@ -82,7 +82,7 @@ function customize_amt_schemaorg_metadata_content( $metatags ) {
 }
 add_filter( 'amt_schemaorg_metadata_content', 'customize_amt_schemaorg_metadata_content', 10, 1 );
 
-function tc_wp_title( $title, $sep ) {
+function tc_wp_title( $title ) {
   $contestID = get_query_var('contestID');
   $contestType = $_GET['type'];
   if (isset($contestID) && isset($contestType)) {
@@ -92,6 +92,6 @@ function tc_wp_title( $title, $sep ) {
     }
   }
 
-  return $sep . $title;
+  return $title . get_bloginfo('name');
 }
 add_filter( 'wp_title', 'tc_wp_title', 10, 2 );

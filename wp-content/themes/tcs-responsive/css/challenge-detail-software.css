@@ -639,6 +639,10 @@
     background: #0096ff !important;
 }
 
+.challenge-detail.develop .btnAction, .challenge-detail.design .btnAction {
+    opacity: 1.0 !important;
+}
+
 .challenge-detail.develop .btnAction {
     background: #64c51c !important;
     border-bottom: 4px solid #46b314 !important;
