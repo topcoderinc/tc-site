@@ -157,6 +157,12 @@
         "terms.css"
       ]
     },
+	"404": {
+      "name": "404",
+      "css": [       
+        "404.css"
+      ]
+    },
     "challengesubmit": {
       "name": "challengesubmit",
       "js": [
@@ -198,6 +204,7 @@
     "page-terms-list.php": "challengeterms",
     "page-terms-details.php": "challengeterms",
     "page-challenge-submit.php": "challengesubmit",
+    "404.php": "404",
     "default": "default"
   }
 }

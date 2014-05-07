@@ -1,0 +1,353 @@
+.not-found .logo-tc {
+	background: url('../i/logo-tc.png') no-repeat;
+	width: 287px;
+	height: 37px;
+	margin-top: 18px;
+	margin-bottom: 18px;
+}
+.not-found .logo-tc img,
+.not-found .error-info img,
+.not-found .origami img.origami-image {
+	display: none;
+	position: absolute;
+}
+.not-found .error-info {
+	text-align: center;
+	background: url('../i/error-info-bg.png') repeat-x;
+	width: 100%;
+}
+.not-found .error-info .wrap{
+	height: 160px;
+	width: 675px;
+	margin: 0 auto;
+}
+.not-found .error-info h1{
+	color: #ff0000;
+	font-size: 32px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.not-found .error-info p{
+	color: #636363;
+	font-size: 16px;
+}
+
+.not-found .origami {
+	background: url('../i/origami-pc.png') no-repeat;
+	width: 788px;
+	height: 1000px;
+	margin-top: 43px;
+}
+
+.not-found .origami .step-1, 
+.not-found .origami .step-2, 
+.not-found .origami .step-3, 
+.not-found .origami .step-4, 
+.not-found .origami .step-5, 
+.not-found .origami .step-6, 
+.not-found .origami .step-7, 
+.not-found .origami .step-8, 
+.not-found .origami .step-9, 
+.not-found .origami .step-10, 
+.not-found .origami .step-11, 
+.not-found .origami .step-12, 
+.not-found .origami .step-13 {
+	position: absolute;
+	text-align: center;
+	width: 150px;
+	font-size: 13px;
+	line-height: 14px;
+}
+.not-found .origami .step-1 {
+	margin-left: 630px;
+	margin-top: 910px;
+}
+.not-found .origami .step-2 {
+	margin-left: 398px;
+	margin-top: 865px;
+}
+.not-found .origami .step-3 {
+	margin-left: 163px;
+	margin-top: 865px;
+}
+.not-found .origami .step-4 {
+	margin-left: 25px;
+	margin-top: 715px;
+}
+.not-found .origami .step-5 {
+	margin-left: 20px;
+	margin-top: 535px;
+}
+.not-found .origami .step-6 {
+	margin-left: 20px;
+	margin-top: 325px;
+}
+.not-found .origami .step-7 {
+	margin-left: 30px;
+	margin-top: 130px;
+}
+.not-found .origami .step-8 {
+	margin-left: 230px;
+	margin-top: 130px;
+}
+.not-found .origami .step-9 {
+	margin-left: 410px;
+	margin-top: 130px;
+}
+.not-found .origami .step-10 {
+	margin-left: 575px;
+	margin-top: 130px;
+}
+.not-found .origami .step-11 {
+	margin-left: 560px;
+	margin-top: 320px;
+}
+.not-found .origami .step-12 {
+	margin-left: 565px;
+	margin-top: 500px;
+}
+.not-found .origami .step-13 {
+	margin-left: 270px;
+	margin-top: 500px;
+	width: 170px;
+}
+.not-found .wrap {
+	width: 788px;
+	margin: 0 auto;
+}
+.not-found .button {
+	width: 106px;
+	height: 28px;
+	padding-top: 8px;
+	background: url('../i/button-print.png') no-repeat;
+	margin: 0 auto;
+	margin-bottom: 25px;
+	margin-top: 20px;
+	text-align: center;
+}
+.not-found .button a {
+	color: #ffffff;
+}
+.not-found .footer {
+	border-top: 1px solid #cccccc;
+	text-align: center;
+	color: #cccccc;
+	font-size: 13px;
+	padding-bottom: 30px;
+	padding-top: 10px;
+}
+.not-found .footer a{
+	color: #cccccc;
+	text-decoration: underline;
+}
+@media (max-width: 600px) {
+	
+	.not-found .logo-tc {
+		background: url('../i/logo-tc.png');
+		width: 287px;
+		height: 37px;
+		margin: 0 auto;
+		margin-top: 18px;
+		margin-bottom: 18px;
+	}
+	.not-found .error-info {
+		text-align: center;
+		background: url('../i/error-info-bg.png') repeat-x;
+		width: 100%;
+	}
+	.not-found .error-info .wrap{
+		width: 310px;
+		height: 160px;
+		margin: 0 auto;
+	}
+	.not-found .error-info h1{
+		color: #ff0000;
+		font-size: 20px;
+		font-weight: bold;
+		padding-top: 20px;
+		padding-bottom: 5px;
+	}
+	.not-found .error-info p{
+		color: #636363;
+		font-size: 12px;
+		font-weight: bold;
+	}
+
+	.not-found .origami {
+		background: url('../i/origami-mobile.png') no-repeat;
+		width: 295px;
+		height: 1270px;
+		margin-top: 15px;
+	}
+	.not-found .origami .step-1 {
+		margin-left: 160px;
+		margin-top: 150px;
+	}
+	.not-found .origami .step-2 {
+		margin-left: -3px;
+		margin-top: 120px;
+	}
+	.not-found .origami .step-3 {
+		margin-left: 160px;
+		margin-top: 300px;
+	}
+	.not-found .origami .step-4 {
+		margin-left: 0px;
+		margin-top: 300px;
+	}
+	.not-found .origami .step-5 {
+		margin-left: 165px;
+		margin-top: 495px;
+	}
+	.not-found .origami .step-6 {
+		margin-left: -20px;
+		margin-top: 500px;
+	}
+	.not-found .origami .step-7 {
+		margin-left: 170px;
+		margin-top: 685px;
+	}
+	.not-found .origami .step-8 {
+		margin-left: -10px;
+		margin-top: 700px;
+	}
+	.not-found .origami .step-9 {
+		margin-left: 165px;
+		margin-top: 880px;
+	}
+	.not-found .origami .step-10 {
+		margin-left: 0px;
+		margin-top: 880px;
+	}
+	.not-found .origami .step-11 {
+		margin-left: 160px;
+		margin-top: 1030px;
+	}
+	.not-found .origami .step-12 {
+		margin-left: 0px;
+		margin-top: 1030px;
+	}
+	.not-found .origami .step-13 {
+		margin-left: 70px;
+		margin-top: 1180px;
+	}
+	.not-found .wrap {
+		width: 310px;
+		margin: 0 auto;
+	}
+}
+
+@media print {
+	.not-found .logo-tc img,
+	.not-found .error-info img,
+	.not-found .origami img.origami-image {
+		display: block;
+		position: absolute;
+	}
+	.not-found .error-info .wrap,
+	.not-found .button {
+		display: none;
+	}
+
+	.not-found .logo-tc {
+		width: 287px;
+		height: 37px;
+		margin-top: 18px;
+		margin-bottom: 18px;
+		margin-left: 100px;
+	}
+	.not-found .error-info img{
+		margin-left: 70px;
+		margin-bottom: 30px;
+	}
+
+	.not-found .origami {
+		width: 610px;
+		height: 640px;
+		margin-top: 45px;
+		margin-left: 80px;
+	}
+	.not-found .origami .step-1, 
+	.not-found .origami .step-2, 
+	.not-found .origami .step-3, 
+	.not-found .origami .step-4, 
+	.not-found .origami .step-5, 
+	.not-found .origami .step-6, 
+	.not-found .origami .step-7, 
+	.not-found .origami .step-8, 
+	.not-found .origami .step-9, 
+	.not-found .origami .step-10, 
+	.not-found .origami .step-11, 
+	.not-found .origami .step-12, 
+	.not-found .origami .step-13 {
+		position: absolute;
+		text-align: center;
+		width: 130px;
+		font-size: 11px;
+		line-height: 12px;
+	}
+	.not-found .origami .step-1 {
+		margin-left: 380px;
+		margin-top: 575px;
+	}
+	.not-found .origami .step-2 {
+		margin-left: 236px;
+		margin-top: 545px;
+	}
+	.not-found .origami .step-3 {
+		margin-left: 90px;
+		margin-top: 545px;
+	}
+	.not-found .origami .step-4 {
+		margin-left: 0px;
+		margin-top: 450px;
+	}
+	.not-found .origami .step-5 {
+		margin-left: -10px;
+		margin-top: 340px;
+	}
+	.not-found .origami .step-6 {
+		margin-left: -5px;
+		margin-top: 205px;
+	}
+	.not-found .origami .step-7 {
+		margin-left: 0px;
+		margin-top: 85px;
+	}
+	.not-found .origami .step-8 {
+		margin-left: 125px;
+		margin-top: 85px;
+	}
+	.not-found .origami .step-9 {
+		margin-left: 240px;
+		margin-top: 85px;
+	}
+	.not-found .origami .step-10 {
+		margin-left: 345px;
+		margin-top: 85px;
+	}
+	.not-found .origami .step-11 {
+		margin-left: 340px;
+		margin-top: 205px;
+	}
+	.not-found .origami .step-12 {
+		margin-left: 340px;
+		margin-top: 320px;
+	}
+	.not-found .origami .step-13 {
+		margin-left: 155px;
+		margin-top: 320px;
+		width: 150px;
+	}
+	.not-found .wrap {
+		width: 610px;
+		margin: 0 auto;
+	}
+	.not-found .footer {
+		font-size: 11px;
+	}
+}
+.clear {
+	clear: both;
+}
