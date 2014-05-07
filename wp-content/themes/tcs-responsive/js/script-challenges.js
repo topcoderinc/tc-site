@@ -5,7 +5,7 @@ var ApiData = {};
 
 // I-104467 I-107029: default view for challenges
 var default_view = "#tableView";
-
+var isSearch = false;
 /**
  * Challenges function
 challenge
@@ -149,6 +149,7 @@ appChallenges = {
             $('.advSearch').removeClass('isActive');
         });
         $('.searchFilter .btnApply').on(ev, function() {
+            isSearch = true;
             app.initAjaxData();
             $(this).closest('.searchFilter').fadeOut('fast');
             $('.advSearch').removeClass('isActive');
@@ -592,6 +593,30 @@ appChallenges = {
         param.pageSize = postPerPage;
         param.contest_type = "data/marathon";
         param.listType = listType;
+
+        var challengesUrlEndFrom = app.getParameterByName('submission_end_date_from');
+        if (challengesUrlEndFrom  != null){
+            param.submissionEndFrom = challengesUrlEndFrom;
+            if (!isSearch){
+                $('#fSDate').prop('checked',true);
+                $("#startDate").val(param.submissionEndFrom);
+            }
+        }
+        console.log(param.submissionEndFrom+"$");
+        var challengesUrlEndTo = app.getParameterByName('submission_end_date_to');
+        if (challengesUrlEndTo  != null){
+            param.submissionEndTo = challengesUrlEndTo;
+            if (!isSearch){
+                $('#fEDate').prop('checked',true);
+                $("#endDate").val(param.submissionEndTo);
+            }
+        }
+        var challengesUrlType = app.getParameterByName('type');
+        if (challengesUrlType  != null){
+            param.challengeType = challengesUrlType;
+            if (!isSearch) $("input[name='radioFilterChallenge'][value='"+param.challengeType+"']").attr("checked",true);
+        }
+
         $.ajax({
             url: ajaxUrl,
             data: param,
@@ -829,6 +854,24 @@ appChallenges = {
             param.sortColumn = 'submissionEndDate';
             param.sortOrder = 'desc';
         }
+
+        var challengesUrlEndFrom = app.getParameterByName('submission_end_date_from');
+        if (challengesUrlEndFrom  != null){
+            param.submissionEndFrom = challengesUrlEndFrom;
+            if (!isSearch){
+                $('#fSDate').prop('checked',true);
+                $("#startDate").val(param.submissionEndFrom);
+            }
+        }
+        var challengesUrlEndTo = app.getParameterByName('submission_end_date_to');
+        if (challengesUrlEndTo  != null){
+            param.submissionEndTo = challengesUrlEndTo;
+            if (!isSearch){
+                $('#fEDate').prop('checked',true);
+                $("#endDate").val(param.submissionEndTo);
+            }
+        }
+
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
         if ($.trim(startDate) != "" && $('#fSDate').prop('checked')) {
@@ -850,9 +893,15 @@ appChallenges = {
             param.submissionEndTo = app.formatDateApi(new Date(curDate + futureDate));
         }
 
+        var challengesUrlType = app.getParameterByName('type');
+        if (challengesUrlType  != null){
+            param.challengeType = challengesUrlType;
+            if (!isSearch) $("input[name='radioFilterChallenge'][value='"+param.challengeType+"']").attr("checked",true);
+        }
+
         var challengesRadio = $("input:radio[name ='radioFilterChallenge']:checked").val();
         if (challengesRadio != null && challengesRadio != "all") {
-            param.challengeType = challengesRadio
+            param.challengeType = challengesRadio;
         }
 
         // get all chosen technology tags if any
@@ -1929,6 +1978,14 @@ appChallenges = {
     //get contest link url
     getContestLinkUrl: function(projectId, contestType) {
         return siteurl + "/challenge-details/" + projectId + "/?type=" + contestType;
+    },
+
+    //get contest param from url
+    getParameterByName: function(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 };
 
