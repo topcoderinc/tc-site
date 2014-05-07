@@ -71,7 +71,7 @@ var coder = {
         // switch tabs 
         $('.subTrackTabs .tabNav a').off().on(ev, function(e) {
             //if($(this).hasClass('isActive')){
-            //		return false;
+            //      return false;
             //}
             if ($(this).hasClass('link')) {
                 window.location = $(this).attr('href');
@@ -122,32 +122,32 @@ var coder = {
                 })
             }
             /*activeTrack = $(this).attr('title');
-			var trackData = buildRequestChartData(activeTrack);
-			var alias = $('.alias',$(this).parent()).val();
-			var trackDetailsData = statData.Tracks[alias];
-			var rows = "";
-			$.each(trackDetailsData, function(key, rec){
-				rows += '<tr><td class="colDetails">'+key+'</td><td class="colTotal">'+rec+'</td></tr>';
-			});
-			$('.mainTabStream .ratingTable tbody').html($(rows).fadeIn());
-			app.initZebra($('.mainTabStream .ratingTable'));
-			
-			$('.isActive',$(this).closest('nav')).removeClass('isActive');
-			$(this).addClass('isActive');
-			
-			$('.subTrackTabs .head .trackName').html(alias);
-			$('.subTrackTabs .head .rating').html(trackDetailsData.rating);
-			
-			$('.subTrackTabs .detailedRating .val').html(trackDetailsData.percentile);
-			$('.subTrackTabs .fieldVolatility .val').html(trackDetailsData.volatility);
-			$('.subTrackTabs .fieldRank .val').html(trackDetailsData.rank);
-			$('.subTrackTabs .fieldCtryRank .val').html(trackDetailsData.countryRank);
-			$('.subTrackTabs .fieldScRank .val').html(trackDetailsData.schoolRank);
-			$('.subTrackTabs .fieldCompetitions .val').html(trackDetailsData.competitions);
-			$('.subTrackTabs .fieldMaxRating .val').html(trackDetailsData.maximumRating);
-			$('.subTrackTabs .fieldMinRating .val').html(trackDetailsData.minimumRating);
-			$('.subTrackTabs .fieldRevRating .val').html(trackDetailsData.reviewerRating);
-			*/
+            var trackData = buildRequestChartData(activeTrack);
+            var alias = $('.alias',$(this).parent()).val();
+            var trackDetailsData = statData.Tracks[alias];
+            var rows = "";
+            $.each(trackDetailsData, function(key, rec){
+                rows += '<tr><td class="colDetails">'+key+'</td><td class="colTotal">'+rec+'</td></tr>';
+            });
+            $('.mainTabStream .ratingTable tbody').html($(rows).fadeIn());
+            app.initZebra($('.mainTabStream .ratingTable'));
+            
+            $('.isActive',$(this).closest('nav')).removeClass('isActive');
+            $(this).addClass('isActive');
+            
+            $('.subTrackTabs .head .trackName').html(alias);
+            $('.subTrackTabs .head .rating').html(trackDetailsData.rating);
+            
+            $('.subTrackTabs .detailedRating .val').html(trackDetailsData.percentile);
+            $('.subTrackTabs .fieldVolatility .val').html(trackDetailsData.volatility);
+            $('.subTrackTabs .fieldRank .val').html(trackDetailsData.rank);
+            $('.subTrackTabs .fieldCtryRank .val').html(trackDetailsData.countryRank);
+            $('.subTrackTabs .fieldScRank .val').html(trackDetailsData.schoolRank);
+            $('.subTrackTabs .fieldCompetitions .val').html(trackDetailsData.competitions);
+            $('.subTrackTabs .fieldMaxRating .val').html(trackDetailsData.maximumRating);
+            $('.subTrackTabs .fieldMinRating .val').html(trackDetailsData.minimumRating);
+            $('.subTrackTabs .fieldRevRating .val').html(trackDetailsData.reviewerRating);
+            */
             e.preventDefault();
         });
 
@@ -176,22 +176,22 @@ var coder = {
             }
         });
         /*$('.pager .pageLink').on(ev,function(e){
-			var pager = $(this).closest('.pager');
-			$('.prevLink',pager).show();
-			$('.nextLink',pager).show();
-			var page = $(this).attr('href').replace(/#/g,'');
-			var newUrl = url+ '?pageSize='+postPerPage+'&page='+page;
-			app.forum.populate(newUrl);
-			$('.isActive',$(this).closest('.pager')).removeClass('isActive');			
-			$(this).addClass('isActive');
-			if($('.pageLink:last',pager).hasClass('isActive')){
-				$('.nextLink',pager).hide();
-			}
-			if($('.pageLink:first',pager).hasClass('isActive')){
-				$('.prevLink',pager).hide();
-			}
-			e.preventDefault();
-		});*/
+            var pager = $(this).closest('.pager');
+            $('.prevLink',pager).show();
+            $('.nextLink',pager).show();
+            var page = $(this).attr('href').replace(/#/g,'');
+            var newUrl = url+ '?pageSize='+postPerPage+'&page='+page;
+            app.forum.populate(newUrl);
+            $('.isActive',$(this).closest('.pager')).removeClass('isActive');           
+            $(this).addClass('isActive');
+            if($('.pageLink:last',pager).hasClass('isActive')){
+                $('.nextLink',pager).hide();
+            }
+            if($('.pageLink:first',pager).hasClass('isActive')){
+                $('.prevLink',pager).hide();
+            }
+            e.preventDefault();
+        });*/
         $('.pager .pageLink').on(ev, function(e) {
             var pager = $(this).closest('.pager');
             $('.prevLink', pager).show();
@@ -310,22 +310,22 @@ var coder = {
 // htmldata
 var memBluprints = {
     forum: "<div class='post'>\
-				<a href='#' class='thumb'></a>\
-				<div class='head'>\
-					<a href='#' class='postTitle'></a>\
-					<span class='postedBy'>Last Post by: <a href='#' class='postAuthor'></a></span>\
-				</div>\
-				<div class='postBody'></div>\
-				<div class='postInfo'>\
-					<div class='row'>\
-						<a href='#' class='postCat'></a>\
-						<span class='sep'></span><span class='postedAt'></span>\
-					</div>\
-					<div class='row'>\
-						<span class='info nThread'><em>8</em> Threads</span><span class='sep'></span><span class='info nMsg'><em>24</em> Messages</span>\
-					</div>\
-				</div>\
-			</div>"
+                <a href='#' class='thumb'></a>\
+                <div class='head'>\
+                    <a href='#' class='postTitle'></a>\
+                    <span class='postedBy'>Last Post by: <a href='#' class='postAuthor'></a></span>\
+                </div>\
+                <div class='postBody'></div>\
+                <div class='postInfo'>\
+                    <div class='row'>\
+                        <a href='#' class='postCat'></a>\
+                        <span class='sep'></span><span class='postedAt'></span>\
+                    </div>\
+                    <div class='row'>\
+                        <span class='info nThread'><em>8</em> Threads</span><span class='sep'></span><span class='info nMsg'><em>24</em> Messages</span>\
+                    </div>\
+                </div>\
+            </div>"
 };
 
 app.getColor = function(score) {

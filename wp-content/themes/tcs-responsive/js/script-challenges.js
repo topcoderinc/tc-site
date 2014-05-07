@@ -671,7 +671,7 @@ appChallenges = {
                  */
                 if (typeof rec.numberOfRegistrants !== "undefined") {
                     $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
-                    $('.colType', row).html("SRM");
+                    $('.colType', row).html("Marathon");
                     $('.vStartDate', row).html(app.formatDate2(rec.startDate));
                     $('.vEndDate', row).html(app.formatDate2(rec.endDate));
                     $('.colTLeft', row).html(app.formatTimeLeft(rec.timeRemaining));

@@ -773,47 +773,6 @@ function get_social_validity_ajax(
     return $social_validity;
 }
 
-/*
- * Get countries for country dropdown
- */
-add_action( 'wp_ajax_get_countries', 'get_countries_controller' );
-add_action( 'wp_ajax_nopriv_get_countries', 'get_countries_controller' );
-
-function get_countries_controller()
-{
-    $userkey = get_option( 'api_user_key' );
-
-    $countries = get_countries_ajax();
-
-    wp_send_json( $countries );
-}
-
-function get_countries_ajax()
-{
-
-    $url = 'http://api.topcoder.com/v2/data/countries';
-
-    $args     = array(
-        'httpversion' => get_option( 'httpversion' ),
-        'timeout'     => get_option( 'request_timeout' )
-    );
-    $response = wp_remote_get( $url, $args );
-
-    if (is_wp_error( $response ) || ! isset ( $response ['body'] )) {
-        $countries = json_decode( $response['body'] );
-        return $countries;
-    }
-    if ($response ['response'] ['code'] == 200) {
-
-//print $response ['body'];
-        $countries = json_decode( $response['body'] );
-        return $countries;
-    }
-
-    $countries = json_decode( $response['body'] );
-    return $countries;
-}
-
 /**
  * Get challenges to be used in rss
  *

@@ -15,34 +15,6 @@ $(document).ready(function() {
       modal.css('margin', '0');
     }
   }
-
-  function loadCountries() {
-    $.ajax({
-      type: 'GET',
-      data: {
-        action: 'get_countries'
-      },
-      dataType: 'json',
-      url: ajaxUrl,
-      success: function(data) {
-        if (data.error) {
-          alert(data.error);
-        } else {
-          data = data.map(function(x) {return x.countryName});
-          data.sort();
-          for (var i = 0; i < data.length; i++) {
-            var name = data[i];
-            var node = $('<option value="'+name+'">'+name+'</option>')
-            $('#selCountry').append(node);
-          }
-        }
-      }
-    }).fail(function() {
-      console.log('Could not load all data. Please reload the page or contact support@topcoder.com');
-    });
-  }
-
-
   
   // Initialize member details
   $(window).bind('pageshow', function(event) {
@@ -111,7 +83,6 @@ $(document).ready(function() {
           }
         });
       } else if (!tcsso && $('.actionLogout').length > 1) {
-        loadCountries();
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log In").removeClass("actionLogout").addClass("actionLogin");
         $('.actionLogin').on('click', function() {
@@ -125,12 +96,10 @@ $(document).ready(function() {
         $('.logoutLink, .linkLogout, .userDetailsWrapper').removeClass('show').hide();
 
       } else {
-        loadCountries();
         $('.headerTopRightMenu .actionLogin').show();
       }
 
     } else {
-      loadCountries();
       $('.headerTopRightMenu .actionLogin').show();
     }
   });
