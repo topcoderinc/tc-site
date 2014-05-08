@@ -56,8 +56,9 @@ global $activity;
 							
 				?>
 				<li class="<?php echo strtolower ($post->post_title);?>">
-					<a href="<?php the_permalink(); ?>" class="hideOnMobile"><img src="<?php echo get_post_meta( $post->ID, '_pm_leaderboard', true ); ?>" alt="<?php echo $alt; ?>" /></a>
-					<a href="<?php the_permalink(); ?>" class="onMobi"><img src="<?php echo get_post_meta( $post->ID, '_pm_rectangle', true ); ?>" alt="<?php echo $alt; ?>" /></a>
+    	<?php $url_link = get_post_meta( $post->ID, '_pm_link', true ); ?>
+					<a href="<?php echo $url_link; ?>" class="hideOnMobile"><img src="<?php echo get_post_meta( $post->ID, '_pm_leaderboard', true ); ?>" alt="<?php echo $alt; ?>" /></a>
+					<a href="<?php echo $url_link; ?>" class="onMobi"><img src="<?php echo get_post_meta( $post->ID, '_pm_rectangle', true ); ?>" alt="<?php echo $alt; ?>" /></a>
 				</li>
 				<?php endwhile; endif; wp_reset_query();?>
 			</ul>

@@ -111,7 +111,12 @@ function promo_module_metaboxes($meta_boxes) {
 								'name' => 'Medium Rectangle Banner',
 								'id' => $prefix . 'rectangle',
 								'type' => 'file'
-						)
+						),
+      array (
+        'name' => 'URL Link',
+        'id' => $prefix . 'link',
+        'type' => 'text'
+      )
 				) 
 		);
 	
