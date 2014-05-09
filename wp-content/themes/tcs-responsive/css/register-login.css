@@ -435,6 +435,11 @@ Register modal
     background: #ffedee;
     border: 1px solid #c00;
 }
+#register form p.row input[type="text"][disabled],
+#register form p.row input[type="password"][disabled],
+#register form p.row select[disabled] {
+	color: silver;
+}
 
 #register form p.row span.err1,
 #register form p.row span.err2,
