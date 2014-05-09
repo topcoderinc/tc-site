@@ -2346,7 +2346,21 @@
     }
 }
 
+/* submission status icons */
 
+.successIcon {
+  background: url(../i/ico-okay-check.png) no-repeat;
+  background-position: 0 0;
+  background-size: 40%;
+  padding-left: 30px;
+}
+
+.failureIcon {
+  background: url(../i/ico-failed-x.png) no-repeat;
+  background-position: 0 0;
+  background-size: 40%;
+  padding-left: 30px;
+}
 
 
 

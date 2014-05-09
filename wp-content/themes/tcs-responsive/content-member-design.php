@@ -49,7 +49,7 @@ $img_locked = get_bloginfo( 'stylesheet_directory' )."/i/img-locked.png";
 					<div class="slider">
 						<?php
 						$fullImages = "";
-						foreach ( $recentWins as $r ):
+						foreach ( (array) $recentWins as $r ):
 						// define full image source by replacing small to full
 						$fullImages .= '<img alt="" src="'.str_replace("small","full",( $r->viewable == false ? $img_locked: $r->preview)).'" />';
 								
