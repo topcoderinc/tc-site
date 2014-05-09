@@ -52,7 +52,7 @@ include locate_template('header-challenge-landing.php');
 									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
 									<th class="colTime desc" data-placeholder="postingDate">Timeline<i></i></th>
 									<th class="colDur noSort" data-placeholder="contestDuration">Duration (days)<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">First Prize<i></i></th>
+									<th class="colPur" data-placeholder="prize1">First Prize<i></i></th>
 									<th class="colTech noSort" data-placeholder="technologies">Technologies<i></i></th>
 									<th class="colStat noSort" data-placeholder="status">Status<i></i></th>
 								</tr>

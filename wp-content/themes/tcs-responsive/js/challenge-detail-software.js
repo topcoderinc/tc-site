@@ -90,6 +90,70 @@ $(document).ready(function () {
 
   // init tab nav
   app.tabNavinit();
+
+  var tcsso = getCookie('tcsso');
+  var tcjwt = getCookie('tcjwt');
+
+
+  getChallenge(tcjwt, function(challenge) {
+    updateRegSubButtons(challenge);
+    addDocuments(challenge);
+  });
+
+  function updateRegSubButtons(challenge) {
+    // if there was an error getting the challenge then enable the buttons
+    if (challenge.status == false) {
+      $('.challengeRegisterBtn').removeClass('disabled');
+      $('.challengeSubmissionBtn').removeClass('disabled');
+      $('.challengeSubmissionsBtn').removeClass('disabled');
+    } else {
+      if(tcsso) {
+        var tcssoValues = tcsso.split("|");
+        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
+          var now = new Date();
+          var handle = data['data'][0]['handle'];
+
+          var registrants = [];
+          $.each(challenge.registrants, function(x, registrant) {
+            registrants.push(registrant.handle)
+          });
+
+          if (registrationUntil && now.getTime() < registrationUntil.getTime() && registrants && registrants.indexOf(handle) == -1) {
+            $('.challengeRegisterBtn').removeClass('disabled');
+          }
+          if (submissionUntil && now.getTime() < submissionUntil.getTime() && registrants && registrants.indexOf(handle) > -1) {
+            $('.challengeSubmissionBtn').removeClass('disabled');
+            $('.challengeSubmissionsBtn').removeClass('disabled');
+          }
+        });
+      }
+    }
+  }
+
+  function addDocuments(challenge) {
+    if (challenge.Documents && $('.downloadDocumentList')) {
+      $('.downloadDocumentList').children().remove();
+      challenge.Documents.map(function(x) {
+        $('.downloadDocumentList').append($(
+          '<li><a href="'+x.url+'">'+x.documentName+'</a></li>'
+        ));
+      });
+    }
+  }
+
+  function getChallenge(tcjwt, callback) {
+    if (tcjwt && (typeof challengeId != 'undefined')) {
+      $.getJSON(ajaxUrl, {
+        "action": "get_challenge_documents",
+        "challengeId": challengeId,
+        "challengeType": challengeType,
+        "nocache": true,
+        "jwtToken": tcjwt.replace(/["]/g, "")
+      }, function (data) {
+        callback(data);
+      });
+    }
+  }
 });
 
 //create/destroy slider based on width
@@ -282,6 +346,7 @@ $(function () {
   });
 
   $(".challengeRegisterBtn").click(function () {
+    if ($(this).hasClass("disabled")) { return false; }
     var tcjwt = getCookie('tcjwt');
     if (tcjwt) {
       if ($('.loading').length <= 0) {

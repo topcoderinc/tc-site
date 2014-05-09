@@ -448,6 +448,19 @@ function get_contest_info( $contestID = '' )
  * End of load data functioning
  */
 
+/**
+ * For backwards compatility
+ *
+ * @param string $userKey
+ * @param string $contestType
+ * @param int $page
+ * @param int $post_per_page
+ * @param string $sortColumn
+ * @param string $sortOrder
+ */
+function get_active_contests_ajax($userKey = '', $contestType = 'design', $page = 1, $post_per_page = 30, $sortColumn = '', $sortOrder = '') {
+  return get_challenges_ajax('Active', $contestType, $page, $post_per_page, $sortOrder, $sortColumn);
+}
 
 /**
  * Challenges changes from "TopCoder Website - Challenges Pages - Wordpress Theme Build" Contest
@@ -760,47 +773,6 @@ function get_social_validity_ajax(
     return $social_validity;
 }
 
-/*
- * Get countries for country dropdown
- */
-add_action( 'wp_ajax_get_countries', 'get_countries_controller' );
-add_action( 'wp_ajax_nopriv_get_countries', 'get_countries_controller' );
-
-function get_countries_controller()
-{
-    $userkey = get_option( 'api_user_key' );
-
-    $countries = get_countries_ajax();
-
-    wp_send_json( $countries );
-}
-
-function get_countries_ajax()
-{
-
-    $url = 'http://api.topcoder.com/v2/data/countries';
-
-    $args     = array(
-        'httpversion' => get_option( 'httpversion' ),
-        'timeout'     => get_option( 'request_timeout' )
-    );
-    $response = wp_remote_get( $url, $args );
-
-    if (is_wp_error( $response ) || ! isset ( $response ['body'] )) {
-        $countries = json_decode( $response['body'] );
-        return $countries;
-    }
-    if ($response ['response'] ['code'] == 200) {
-
-//print $response ['body'];
-        $countries = json_decode( $response['body'] );
-        return $countries;
-    }
-
-    $countries = json_decode( $response['body'] );
-    return $countries;
-}
-
 /**
  * Get challenges to be used in rss
  *
@@ -883,14 +855,18 @@ function get_challenge_documents_controller()
     $jwtToken    = filter_input( INPUT_GET, "jwtToken", FILTER_SANITIZE_STRING );
     $challengeId = filter_input( INPUT_GET, "challengeId", FILTER_SANITIZE_STRING );
     $challengeType = filter_input( INPUT_GET, "challengeType", FILTER_SANITIZE_STRING );
-    $userkey = get_option( 'api_user_key' );
+    $resetCache = filter_input(INPUT_GET, 'nocache', FILTER_SANITIZE_STRING);
 
-    $docs = get_challenge_documents_ajax($userKey, $challengeId, $challengeType, FALSE, $jwtToken);
+    $docs = get_challenge_documents_ajax($challengeId, $challengeType, $resetCache, $jwtToken);
 
-    wp_send_json( $docs );
+    if ($docs !== "Error in processing request") {
+      wp_send_json( $docs );
+    } else {
+      wp_send_json_error();
+    }
 }
 
-function get_challenge_documents_ajax($userKey = '', $contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
+function get_challenge_documents_ajax($contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
 
   // This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
   #echo "	contest type ".$contestType;
@@ -901,7 +877,6 @@ function get_challenge_documents_ajax($userKey = '', $contestID = '', $contestTy
   }
 
   $args     = array(
-    'body'        => $body,
     'headers'     => array(
       'Authorization' => 'Bearer ' . $jwtToken
     ),

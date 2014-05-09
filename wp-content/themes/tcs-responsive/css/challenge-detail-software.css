@@ -639,6 +639,10 @@
     background: #0096ff !important;
 }
 
+.challenge-detail.develop .btnAction, .challenge-detail.design .btnAction {
+    opacity: 1.0 !important;
+}
+
 .challenge-detail.develop .btnAction {
     background: #64c51c !important;
     border-bottom: 4px solid #46b314 !important;
@@ -2342,7 +2346,21 @@
     }
 }
 
+/* submission status icons */
 
+.successIcon {
+  background: url(../i/ico-okay-check.png) no-repeat;
+  background-position: 0 0;
+  background-size: 40%;
+  padding-left: 30px;
+}
+
+.failureIcon {
+  background: url(../i/ico-failed-x.png) no-repeat;
+  background-position: 0 0;
+  background-size: 40%;
+  padding-left: 30px;
+}
 
 
 

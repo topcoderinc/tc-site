@@ -50,6 +50,7 @@ function initvars() {
 	add_option ( 'httpversion', "1.1" );
 	add_option ( 'request_timeout', "10" );
 	add_option ( 'som', "July 2013" );
+        add_option ( 'tc_api_url', 'https://api.topcoder.com' );
 }
 initvars ();
 add_action ( 'admin_menu', 'tcapi_settings' );
@@ -73,6 +74,10 @@ function tcapi_display_settings() {
 	                <label for="request_timeout"><strong>Request Timeout :</strong> (Specify how long to wait for server response)  </label><br />
 	                <input type="text" name="request_timeout" id="request_timeout" size="80" value="' . get_option ( 'request_timeout' ) . '"/>   
 	            </p>
+	                		 <p>
+	                <label for="tc_api_url"><strong>API Server URL :</strong> (Enter base URL for API server - e.g., https://api.topcoder.com)  </label><br />
+	                <input type="text" name="tc_api_url" id="tc_api_url" size="80" value="' . get_option ( 'tc_api_url' ) . '"/>   
+	            </p>
 	                <br/> 		
 						<h3>Other options</h3>
 	                		 <p>
@@ -92,6 +97,7 @@ function tcapi_settings_update() {
 	update_option ( 'request_timeout', $_POST ['request_timeout'] );
 	update_option ( 'httpversion', $_POST ['httpversion'] );
 	update_option ( 'som', $_POST ['som'] );
+	update_option ( 'tc_api_url', $_POST ['tc_api_url'] );
 }
 
 

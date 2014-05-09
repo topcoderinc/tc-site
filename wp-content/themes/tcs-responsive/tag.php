@@ -32,6 +32,32 @@ $categories = $activeMenuObj!=null ? $activeMenuObj->cat_name : "Categories";
       <h2 class="blogPageTitle"><?php echo $blogPageTitle;?></h2>
       <span class="blogIcon"></span>
     </div>
+    <div class="blogCategoryWrapper">
+      <div class="container">
+        <div class="innerWrapper">
+          <div class="blogCategoryMenu">
+            <?php
+            $items = wp_get_nav_menu_items( BLOG );
+            if($items!=null)
+              foreach($items as $menu) :
+                $active = $catId == $menu->object_id ? "active" : "";
+                ?>
+                <a href="<?php echo $menu->url;?>" class="<?php echo $active;?>"><?php echo $menu->title;?></a>
+              <?php endforeach; ?>
+          </div>
+          <ul class="blogMenuMobile">
+            <div class="default">Categories<span class="arrow"></span></div>
+            <div class="current"><?php echo $categories;?><span class="arrow"></span></div>
+            <?php
+            if($items!=null)
+              foreach($items as $menu) :
+                ?>
+                <li><a href="<?php echo $menu->url;?>"><?php echo $menu->title;?></a></li>
+              <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- page title end -->
 

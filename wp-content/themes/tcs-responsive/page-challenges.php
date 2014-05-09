@@ -71,9 +71,9 @@ get_header('challenge-landing');
 									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
 									<th class="colTime" data-placeholder="submissionEndDate">Timeline<i></i></th>
 									<th class="colTLeft noSort" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">Prize<i></i></th>
-									<th class="colReg noSort" data-placeholder="numRegistrants">Registrants<i></i></th>
-									<th class="colSub noSort" data-placeholder="numSubmissions">Submissions<i></i></th>
+									<th class="colPur" data-placeholder="prize1">Prize<i></i></th>
+									<th class="colReg" data-placeholder="numRegistrants">Registrants<i></i></th>
+									<th class="colSub" data-placeholder="numSubmissions">Submissions<i></i></th>
 								</tr>
 							</thead>
 							<tbody>

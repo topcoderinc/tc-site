@@ -50,11 +50,11 @@ include locate_template('header-challenge-landing.php');
 									<th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>
 									<th class="colType" data-placeholder="challengeType">Type<i></i></th>
 									<th class="colTime desc" data-placeholder="postingDate">Timeline<i></i></th>
-									<th class="colTLeft noSort" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
-									<th class="colPur noSort" data-placeholder="prize">Prizes<i></i></th>
-									<th class="colPhase noSort" data-placeholder="currentPhase">Current Phase<i></i></th>
-									<th class="colReg noSort" data-placeholder="numRegistrants">Registrants<i></i></th>
-									<th class="colSub noSort" data-placeholder="numSubmissions">Submissions<i></i></th>
+									<th class="colTLeft" data-placeholder="currentPhaseRemainingTime">Time Left<i></i></th>
+									<th class="colPur" data-placeholder="prize1">Prizes<i></i></th>
+									<th class="colPhase" data-placeholder="currentPhaseName">Current Phase<i></i></th>
+									<th class="colReg" data-placeholder="numRegistrants">Registrants<i></i></th>
+									<th class="colSub" data-placeholder="numSubmissions">Submissions<i></i></th>
 								</tr>
 							</thead>
 							<tbody>

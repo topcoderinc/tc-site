@@ -85,6 +85,47 @@ theme's config directory.  I recommend added the following lines for local devel
     force_ssl_login(false);
     ?>
 
+## Development Guidelines ##
+
+### Code Style ###
+
+These are the formating rules our code should follow.
+
+* Javascript
+    * 2 spaces for indention
+    * Otherwise follow the google standard:  http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
+
+### AngularJS ###
+
+* There is a sample AngularJS integration with Wordpress on the [angular_service branch](https://github.com/topcoderinc/tc-site/tree/angular_service).
+    * Look at the page template page_angular_example (https://github.com/topcoderinc/tc-site/blob/angular_service/wp-content/themes/tcs-responsive/page-angular-example.php) for integration into Wordpress page template.
+
+Here are some general rules to follow
+* General AngularJS development guidelines can be found on the [AngularJS website](https://docs.angularjs.org/guide)
+* root angular directory at tcs-responsive/js/app (https://github.com/topcoderinc/tc-site/tree/angular_service/wp-content/themes/tcs-responsive/js/app)
+Main application file: app.js (https://github.com/topcoderinc/tc-site/blob/angular_service/wp-content/themes/tcs-responsive/js/app/app.js)
+    * Global level configuration
+    * Setup main tc application
+* Organize code into logical directories
+    * All challenge related code should be under the challenges folder
+    * Create new folders as needed (i.e members)
+* Separate code into correct folders by type (controllers, services, filters, directives)
+* Use directives or templates to hold all html, preferable templates.
+* Controllers should be implemented by using the controller function on the main app object (the tc variable).  (https://github.com/topcoderinc/tc-site/blob/angular_service/wp-content/themes/tcs-responsive/js/app/challenges/controllers/challengeListingCtrl.js#L3)
+* Services, filters and directives should all be their own modules (https://github.com/topcoderinc/tc-site/blob/angular_service/wp-content/themes/tcs-responsive/js/app/challenges/services/challengeService.js#L3)
+* Services should use Restangular (https://github.com/mgonto/restangular)
+* Tables should use ngGrid: http://angular-ui.github.io/ng-grid/
+* DO NOT MANIPULATE THE DOM WITH JQUERY.  See the [Development Guide](https://docs.angularjs.org/guide/directive) for an example directive which manipulates the DOM.
+* The use of external libraries is encourged but they must be approved before use.
+* Use the Angular Loading Bar while the page is being loaded (http://chieffancypants.github.io/angular-loading-bar/)
+
+## Approved AngularJS libraries
+
+* ui-router for Routing: https://github.com/angular-ui/ui-router
+* ng-grid for talbes: http://angular-ui.github.io/ng-grid/
+* Restangular: https://github.com/mgonto/restangular
+* Angular Loading Bar: http://chieffancypants.github.io/angular-loading-bar/
+
 ## GIT Information ##
 
 ### Branch Model ###
@@ -120,7 +161,7 @@ __Final Submissions should be in the form of a pull request.  See the section on
 These are some workflows to help you get starting with Git.  Once you become more familiar, you can modify the workflow
 to fit your style.
 
-**Working on a challenget**
+**Working on a challenge**
 
 1. Clone the repository. `git clone https://github.com/topcoderinc/tc-site.git dev`
     * If you already have a repository setup, be sure to pull down the latest changes: `git pull origin dev`

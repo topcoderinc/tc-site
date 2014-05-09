@@ -3,6 +3,9 @@ var sortColumn = "";
 var sortOrder = "";
 var ApiData = {};
 
+// I-104467 I-107029: default view for challenges
+var default_view = "#tableView";
+
 /**
  * Challenges function
 challenge
@@ -32,6 +35,24 @@ appChallenges = {
         app.initAjaxData();
         app.calendar();
         app.bindEvents();
+
+        // I-104467 I-107029: check if there is already stored view
+        if ($.cookie('viewMode') == null) {
+            // I-104467 I-107029: if not, save the the default view to the cookie
+            $.cookie('viewMode', default_view, { expires: 7, path: '/' });
+        }
+
+        // I-104467 I-107029: update the view mode (grid or table) according to the cookie value
+        var viewHref = $.cookie('viewMode');
+        var switchViewLink = $('.views a[href="' + viewHref + '"]');
+
+        if (typeof(listType) != "undefined" && listType !== "Past" && !switchViewLink.hasClass('isActive')) {
+            $('.viewTab').hide();
+            $(viewHref).fadeIn('fast');
+            $('.isActive', switchViewLink.parent()).removeClass('isActive');
+            switchViewLink.addClass('isActive');
+            app.ie7Fix();
+        }
     },
     initAjaxData: function() {
         if ($('.dataChanges .viewAll').length <= 0 || !$('.dataChanges .viewAll').is(':visible')) {
@@ -74,6 +95,10 @@ appChallenges = {
 
             $('.viewTab').hide();
             id = $(this).attr('href');
+
+            // I-104467 I-107029: store the view to the cookie
+            $.cookie('viewMode', id, { expires: 7, path: '/' });
+
             $(id).fadeIn('fast');
             $('.isActive', $(this).parent()).removeClass('isActive');
             $(this).addClass('isActive');
@@ -321,9 +346,24 @@ appChallenges = {
         $('.dataTable, .contestGrid').on('mouseenter', '.colType .ico, .coleSub .subs, .ico.trackType, a .itco', function() {
             var tt = $('#typeTooltip');
             tt.addClass('isShowing');
+
+            // I-107026: Add class devTooltip if the contest is not design contest.
+            var contestType = $('.tipC', $(this)).html();
+            if (!app.isDesignContest(contestType)) {
+                tt.addClass('devTooltip');
+            } else if (tt.hasClass('devTooltip')) {
+                tt.removeClass('devTooltip');
+            }
+
             $(this).addClass('activeLink');
             $('header', tt).html($('.tipT', $(this)).html());
-            $('.contestTy', tt).html($('.tipC', $(this)).html());
+            var $contestType = $('.tipC', $(this));
+            $('.contestTy', tt).html($contestType.html());
+            if ($contestType.data('contest_type') == 'develop') {
+                tt.addClass('devTooltip');
+            } else if (tt.hasClass('devTooltip')) {
+                tt.removeClass('devTooltip');
+            }
 
             if ($(this).hasClass('itco')) {
                 var tempTcoTooltipTitle = typeof tcoTooltipTitle !== "undefined" ? tcoTooltipTitle : "TCO-14";
@@ -503,6 +543,12 @@ appChallenges = {
             case ("First2Finish" || "Design First2Finish"):
                 trackName = "ff";
                 break;
+            case "Design First2Finish":
+                trackName = "df2f";
+                break;
+            case "Application Front-End Design":
+                trackName = "af";
+                break;
             default:
                 trackName = "o";
                 break;
@@ -600,6 +646,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -609,17 +656,23 @@ appChallenges = {
                 /*
                  * generate table row for design past contest type
                  */
-                if (typeof rec.totalCompetitors !== "undefined") {
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
-                    $('.colType', row).html("SRM");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
-                    $('.colReg', row).html('<a href="javascript:;">' + rec.totalCompetitors + '</a>');
+                if (typeof rec.numberOfRegistrants !== "undefined") {
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
+                    $('.colType', row).html("Marathon");
+                    $('.vStartDate', row).html(app.formatDate2(rec.startDate));
+                    $('.vEndDate', row).html(app.formatDate2(rec.endDate));
+                    $('.colTLeft', row).html(app.formatTimeLeft(rec.timeRemaining));
+                    $('.colReg', row).html('<a href=" http://community.topcoder.com/longcontest/?module=ViewStandings&rd=' + rec.roundId + '">' + rec.numberOfRegistrants + '</a>');
+                    $('.colSub', row).html(rec.numberOfSubmissions);
                 } else {
                     //$('.contestName', row).html(rec.fullName);
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.name + '</a>');
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("Marathon");
-                    $('.colR1start', row).html(app.formatDate2(rec.startDate));
+                    $('.vStartDate', row).html(app.formatDate2(rec.startDate));
+                    $('.vEndDate', row).html(app.formatDate2(rec.endDate));
+                    $('.colTLeft', row).html(app.formatTimeLeft(rec.timeRemaining));
                     $('.colReg', row).html(rec.numberOfRegistrants);
+                    $('.colSub', row).html(rec.numberOfSubmissions);
                 }
 
                 $('tbody', table).append(row);
@@ -962,7 +1015,7 @@ appChallenges = {
 
 
                     $('.vEndRound', row).html(startDate);
-                    $('.colReg', row).html('<a href="javascript:;">' + rec.numberOfRegistrants + '</a>');
+                    $('.colReg', row).html('<a href=" http://community.topcoder.com/longcontest/?module=ViewStandings&rd=' + rec.roundId + '">' + rec.numberOfRegistrants + '</a>');
                     $('.colSub', row).html(numSubmissions);
 
                     $('tbody', table).append(row);
@@ -1004,6 +1057,7 @@ appChallenges = {
                     $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                     $('.tipC', row).html(rec.challengeType);
+					$('.tipC', row).data('contest_type', rec.challengeCommunity);
 
                     $('.vStartDate', row).html(startDate);
 
@@ -1034,8 +1088,10 @@ appChallenges = {
         }
     },
 
-    addEmptyResult: function(table) {
-        $(table).html('<table><tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr></table>');
+    addEmptyResult: function(table) {        
+								$('thead', table).hide();
+        var toUpdate = $('tbody', table).length > 0 ? $('tbody', table) : $(table);
+        toUpdate.html('<tr><td style="font-size:20px;">There are no active challenges under this category. Please check back later</td></tr>');
     },
 
     // getGridview Blocks
@@ -1100,7 +1156,7 @@ appChallenges = {
                       }
                     }
 
-                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contestType);
+                    var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
                     var contestName = rec.challengeName.length > 60 ? rec.challengeName.substr(0, 61) + '...' : rec.challengeName;
 
 
@@ -1114,6 +1170,7 @@ appChallenges = {
 
                     $('.type', con).html(rec.challengeType);
                     $('.tipC', con).html(rec.challengeType);
+					$('.tipC', con).data('contest_type', rec.challengeCommunity);
                     $('.vStartDate', con).html(startDate);
                     if (checkPointDate) {
                         $('.vEndRound', con).html(checkPointDate);
@@ -1201,6 +1258,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1262,7 +1320,8 @@ appChallenges = {
                 }
 
                 $('.tipC', row).html(rec.challengeType);
-
+                $('.tipC', row).data('contest_type', rec.challengeCommunity);
+				
                 $('.vStartDate', row).html(startDate);
 
                 if (checkPointDate) {
@@ -1347,6 +1406,8 @@ appChallenges = {
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
                 $('.tipC', con).html(rec.challengeType);
+				$('.tipC', con).data('contest_type', rec.challengeCommunity);
+
                 $('.vStartDate', con).html(startDate);
 
                 if (checkPointDate) {
@@ -1455,6 +1516,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1507,6 +1569,7 @@ appChallenges = {
                 }
 
                 $('.colType .tipC', row).html(rec.challengeType);
+				$('.colType .tipC', row).data('contest_type', rec.challengeCommunity);
 
                 $('.vStartDate', row).html(startDate);
 
@@ -1601,6 +1664,7 @@ appChallenges = {
                 $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
 
                 $('.tipC', row).html(rec.challengeType);
+				$('.tipC', row).data('contest_type', rec.challengeCommunity);
 
                 $('.vStartDate', row).html(startDate);
 
@@ -1691,6 +1755,8 @@ appChallenges = {
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
 
                 $('.tipC', con).html(rec.challengeType);
+				$('.tipC', con).data('contest_type', rec.challengeCommunity);
+
                 $('.vStartDate', con).html(startDate);
 
                 if (checkPointDate) {
@@ -1758,6 +1824,7 @@ appChallenges = {
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
+								$('thead', table).show();
         var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
@@ -1776,6 +1843,7 @@ appChallenges = {
                 $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-develop.png" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/tco-flag-develop.png" />');
                 $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
                 $('.tipC', row).html(rec.challengeType);
+				$('.tipC', row).data('contest_type', rec.challengeCommunity);
                 $('.colPay', row).html("$" + app.formatCur(purse));
                 $('.colTP', row).html(20);
                 $('.colReg', row).html('<a href="javascript:;">' + rec.numRegistrants + '</a>');
@@ -2417,7 +2485,7 @@ $(document).ready(function() {
 /* fancy drop down platform on advanced search form */
 $(document).ready(function() {
 
-    //multiple select configurations
+    /*multiple select configurations
     var config = {
         '.chosen-select': {},
         '.chosen-select-deselect': { allow_single_deselect: true },
@@ -2427,7 +2495,7 @@ $(document).ready(function() {
     };
     for (var selector in config) {
         $(selector).chosen(config[selector]);
-    }
+    }*/
 
     //set equal height to row contestGrid boxes
     var index = 0, minWidth = 1019, cols = $(window).width() > minWidth ? 3 : 1, rows = 0;
