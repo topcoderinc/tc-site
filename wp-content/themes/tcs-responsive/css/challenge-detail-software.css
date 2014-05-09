@@ -348,6 +348,27 @@
     color: #797979;
 }
 
+/* Issue ID: I-114272 - Add style for ol and li */
+.challenge-detail .tableWrap ol {
+    margin-left: 16px;
+    padding: 0px;
+    margin-bottom: 20px;
+    width: auto;
+    color: #797979;
+}
+
+.challenge-detail .tableWrap ol li {
+    float: none;
+	list-style-type: decimal;
+    list-style-position: outside;
+    font-size: 13px;
+    line-height: 18px;
+    border: none;
+    height: auto;
+    padding-left: 0px;
+    color: #797979;
+}
+
 .challenge-detail .tableWrap p a {
     word-wrap: break-word;
 }
