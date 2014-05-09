@@ -153,8 +153,8 @@ if($tokenObj!=null) {
 						</div>
 						<!-- /.sideQuote -->
 						<?php endif;?>
-						
-						<?php get_template_part("content", "recent-challenges"); ?>
+												
+						<?php get_template_part('content', 'recent-challenges');?>
 						<!-- /.sideMostRecentChallenges -->						
 					</aside>
 					<!-- /.sideStream -->
