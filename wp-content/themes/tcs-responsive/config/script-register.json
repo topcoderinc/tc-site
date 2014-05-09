@@ -73,7 +73,9 @@
         "moment-data.js",
         "chosen.jquery.min.js",
         "script-challenges.js",
-								"jquery.cookie.js"
+		"jquery.cookie.js",
+		"jquery.inputmask.js",
+		"jquery.inputmask.date.extensions.js"
       ],
       "css": [
         "base.css",

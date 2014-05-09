@@ -2580,6 +2580,9 @@ $(document).ready(function() {
             }
         }
     });
+	
+	// Issue ID: I-111387 - Add date input masking to both startDate and endDate inputs
+	$('input[type=text].datepicker', '.otherOpts').inputmask('yyyy-mm-dd');
 });
 
 
