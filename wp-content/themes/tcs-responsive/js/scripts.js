@@ -7,7 +7,7 @@ var ie7 = false;
 var ajax = {
   data: '',
   postPerPage: '100' // temp setting until we have paging on the challenges page.
-}
+};
 
 var xhr = "";
 
@@ -56,7 +56,7 @@ var app = {
       auto: true,
       pause: 5000,
       slideMargin: 2,
-	    adaptiveHeight: true
+      adaptiveHeight: true
     });
 
 

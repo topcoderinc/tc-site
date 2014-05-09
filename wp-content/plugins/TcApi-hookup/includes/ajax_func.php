@@ -933,3 +933,67 @@ function get_all_platforms_and_technologies_ajax() {
     }
     return "Error in processing request";
 }
+
+/**
+ * Legacy code only for backward compatibility
+ */
+
+
+function get_active_contest_ajax_controller()
+{
+  $userkey       = get_option( 'api_user_key' );
+  $contest_type  = $_GET ['contest_type'];
+  $page          = get_query_var( 'pages' );
+  $post_per_page = $_GET['pageSize'];
+  $page          = $_GET ['pageIndex'];
+  $sortColumn    = $_GET ['sortColumn'];
+  $sortOrder     = $_GET ['sortOrder'];
+
+  $contest_list = get_active_contests_ajax( $userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder );
+  if (isset( $contest_list->data )) {
+    wp_send_json( $contest_list->data );
+  } else {
+    wp_send_json_error();
+  }
+}
+add_action('wp_ajax_get_upcoming_contest', 'get_upcoming_contest_ajax_controller');
+add_action('wp_ajax_nopriv_get_upcoming_contest', 'get_upcoming_contest_ajax_controller');
+function get_upcoming_contest_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $contest_type = $_GET ['contest_type'];
+  $page = get_query_var('pages');
+  $post_per_page = $_GET['pageSize'];
+  $page = $_GET ['pageIndex'];
+  $sortColumn = $_GET ['sortColumn'];
+  $sortOrder = $_GET ['sortOrder'];
+
+  $contest_list = get_upcoming_contests_ajax($userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder);
+  if (isset($contest_list->data)) {
+    wp_send_json($contest_list->data);
+  }
+  else {
+    wp_send_json_error();
+  }
+}
+
+add_action('wp_ajax_get_active_contest', 'get_active_contest_ajax_controller');
+add_action('wp_ajax_nopriv_get_active_contest', 'get_active_contest_ajax_controller');
+function get_past_contest_ajax_controller() {
+  $userkey = get_option('api_user_key');
+  $contest_type = $_GET ['contest_type'];
+  $page = get_query_var('pages');
+  $post_per_page = $_GET ['pageSize'];
+  $sortColumn = $_GET ['sortColumn'];
+  $sortOrder = $_GET ['sortOrder'];
+
+  $contest_list = get_past_contests_ajax($userkey, $contest_type, $page, $post_per_page, $sortColumn, $sortOrder);
+  if (isset($contest_list->data)) {
+    wp_send_json($contest_list->data);
+  }
+  else {
+    wp_send_json_error();
+  }
+}
+
+add_action( 'wp_ajax_get_past_contest', 'get_past_contest_ajax_controller' );
+add_action( 'wp_ajax_nopriv_get_past_contest', 'get_past_contest_ajax_controller' );
