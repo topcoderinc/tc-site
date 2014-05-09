@@ -111,7 +111,7 @@ hover style icons
 /*
 backgorund modal
 */
-#bgModal {
+#bgModal,#bgOverlapModal,#bgLoadingModal {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -120,6 +120,15 @@ backgorund modal
     background: transparent url(../i/bg-modal.png) repeat;
     display: none;
     z-index: 999;
+}
+#bgLoadingModal span {
+	display:block;
+	position: fixed;
+	width: 100px;
+    height: 100px;
+	top:50%;
+	left:50%;
+	background: transparent url(../i/ajax_loader_gray_256.gif) no-repeat;
 }
 /*
 common

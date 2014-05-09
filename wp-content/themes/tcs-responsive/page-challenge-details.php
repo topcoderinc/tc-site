@@ -96,12 +96,12 @@ function createDesignSubmissionMap($contest) {
     if ($submission_map[ $submission->submitter ]) {
       $sub_date = new DateTime($submission->submissionDate);
       if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->submitter ] = $submission;
+        $submission_map[$submission->submitter] = $submission;
         $cur_date                                 = new DateTime($submission->submissionDate);
       }
     }
     else {
-      $submission_map[ $submission->submitter ] = $submission;
+      $submission_map[$submission->submitter] = $submission;
       $cur_date                                 = new DateTime($submission->submissionDate);
     }
   }
@@ -128,12 +128,12 @@ function createDevelopSubmissionMap($contest) {
     if ($submission_map[ $submission->handle ]) {
       $sub_date = new DateTime($submission->submissionDate);
       if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->handle ] = $submission;
+        $submission_map[$submission->handle] = $submission;
         $cur_date                              = new DateTime($submission->submissionDate);
       }
     }
     else {
-      $submission_map[ $submission->handle ] = $submission;
+      $submission_map[$submission->handle] = $submission;
       $cur_date                              = new DateTime($submission->submissionDate);
     }
   }
@@ -155,90 +155,12 @@ include locate_template('header-challenge-landing.php');
 } ?>">
 <div id="main">
 
-<?php include( locate_template('content-basic-challenge-details.php') ); ?>
+<?php include(locate_template('page-challenge-details-header.php'));?>
 
-
-<article id="mainContent" class="splitLayout <?php if (!empty( $activeTab )) {echo 'currentTab-' . $activeTab;} ?>">
-<div class="container">
-<div class="rightSplit  grid-3-3">
-<div class="mainStream partialList">
-
-<section class="tabsWrap">
-<nav class="tabNav">
-  <div class="topRightTitle topRightTitleAlt">
-    <?php if ($contestType != 'design'): ?>
-      <a href="http://apps.topcoder.com/forums/?module=Category&categoryID=<?php echo $contest->forumId; ?>"
-         class="contestForumIcon" target="_blank">Challenge Discussion</a>
-    <?php else: ?>
-      <a href="http://studio.topcoder.com/forums?module=ThreadList&forumID=<?php echo $contest->forumId; ?>"
-         class="contestForumIcon" target="_blank">Challenge Discussion</a>
-    <?php endif; ?>
-  </div>
-  <ul>
-    <?php if ($contestType != 'design'): ?>
-      <li><a href="#contest-overview" class="<?php if ($tab !== "checkpoints") { echo "active"; } ?> link">Details</a></li>
-      <li><a href="#viewRegistrant" class="link">Registrants</a></li>
-      <?php if (( !empty( $checkpointData ) && $checkpointData != "Error in processing request" ) || ( $tab === "checkpoints" )): ?>
-        <li><a href="#checkpoints" class="link <?php if ($tab === "checkpoints") { echo "active"; } ?>">Checkpoints</a></li>
-      <?php endif; ?>
-      <li><a href="#winner" class="link">Results</a></li>
-
-    <?php else: ?>
-      <li><a href="#contest-overview" class="<?php if ($tab !== "checkpoints") { echo "active"; } ?> link">Details</a></li>
-      <li><a href="#viewRegistrant" class="link">Registrants</a></li>
-      <?php if (( !empty( $checkpointData ) && $checkpointData != "Error in processing request" ) || ( $tab === "checkpoints" )): ?>
-        <li><a href="#checkpoints" class="link <?php if ($tab === "checkpoints") { echo "active"; } ?>">Checkpoints</a></li>
-      <?php endif; ?>
-      <?php if (strpos($contest->currentPhaseName, 'Submission') !== FALSE): ?>
-        <li><span class="inactive">Submissions</span></li>
-      <?php else: ?>
-        <li><a href="#submissions" class="link">Submissions</a></li>
-      <?php endif; ?>
-      <?php if (strpos($contest->currentPhaseName, 'Submission') !== FALSE ||
-          strpos($contest->currentPhaseName, 'Screening') !== FALSE ||
-          strpos($contest->currentPhaseName, 'Review') !== FALSE): ?>
-        <li><span class="inactive">Results</span></li>
-      <?php else: ?>
-        <li><a href="#winner" class="link">Results</a></li>
-      <?php endif; ?>
-    <?php endif; ?>
-  </ul>
-</nav>
-<nav class="tabNav firstTabNav designFirstTabNav mobile hide">
-  <ul>
-    <li><a href="#contest-overview" class="active link">Details</a></li>
-    <li><a href="#viewRegistrant" class="link">Registrants</a></li>
-  </ul>
-</nav>
-<nav class="tabNav firstTabNav designSecondTabNav mobile hide">
-  <ul>
-    <?php if (strpos($contest->currentPhaseName, 'Submission') !== FALSE): ?>
-      <li><span class="inactive">Checkpoints</span></li>
-    <?php else: ?>
-      <?php if (!empty( $checkpointData ) && empty( $checkpointData->error )): ?>
-      <li><a href="<?php echo CURRENT_FULL_URL; ?>&tab=checkpoints" class="link">Checkpoints</a></li>
-    <?php endif; ?>
-    <?php endif; ?>
-    <?php if (strpos($contest->currentPhaseName, 'Submission') !== FALSE): ?>
-      <li><span class="inactive">Submissions</span></li>
-    <?php else: ?>
-      <li><a href="#submissions" class="link">Submissions</a></li>
-    <?php endif; ?>
-    </li>
-    <li>
-      <?php if (strpos($contest->currentPhaseName, 'Submission') !== FALSE ||
-                strpos($contest->currentPhaseName, 'Screening') !== FALSE ||
-                strpos($contest->currentPhaseName, 'Review') !== FALSE): ?>
-    <li><span class="inactive">Results</span></li>
-  <?php else: ?>
-    <li><a href="#winner" class="link">Results</a></li>
-  <?php endif; ?>
-    </li>
-  </ul>
-</nav>
-
-<div id="contest-overview" class="tableWrap <?php echo ( $activeTab == 'checkpoints' ) ? 'hide' : ''; ?> tab">
-  <?php if ($contestType != 'design'): ?>
+<div id="contest-overview" class="tableWrap tab<?php if($_GET['tab']=='submission') echo ' hide';?>">
+  <?php
+  if ($contestType != 'design'):
+  ?>
   <article id="contestOverview">
     <h1>Challenge Overview</h1>
 
@@ -632,10 +554,12 @@ include locate_template('header-challenge-landing.php');
 </div>
 <div id="submissions" class="tableWrap hide tab">
 
-
-  <article>
-    Coming Soon...
-  </article>
+	<?php
+		/**
+		 * Get submission part
+		 */
+		include(locate_template('page-challenge-details-submission-tab.php'));
+	?>
 
 </div>
 </section>
@@ -709,6 +633,75 @@ include locate_template('header-challenge-landing.php');
 
   <li class="slide">
     <div class="forumFeed slideBox">&nbsp;<br/>
+      <!--
+
+<h3>Forums Feed:</h3>
+<div class="inner">
+ <div class="scroll-pane jspScrollable" style="overflow: hidden; padding: 0px; width: 263px;" tabindex="0">
+
+
+
+ <div class="jspContainer" style="width: 263px; height: 400px;"><div class="jspPane" style="padding: 0px; width: 256px; top: 0px;"><div class="forumItemWrapper">
+ <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+    </div>
+    <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+    </div>
+    <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     </div>
+     <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     <div class="forumItem">
+     </div>
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     </div>
+     <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     </div>
+     <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     </div>
+     <div class="forumItem">
+         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
+         <p class="forumInfo">
+         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
+         </p>
+     </div>
+     </div></div><div class="jspVerticalBar"><div class="jspCap jspCapTop"></div><div class="jspTrack" style="height: 400px;"><div class="jspDrag" style="height: 214px;"><div class="jspDragTop"></div><div class="jspDragBottom"></div></div></div><div class="jspCap jspCapBottom"></div></div></div></div>
+</div>
+-->
+
     </div>
   </li>
 <?php else: ?>
