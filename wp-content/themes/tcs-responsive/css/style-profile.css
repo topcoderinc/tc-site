@@ -289,9 +289,13 @@ a{
         width: 240px;
         float: left;
     
+        /*
+		Issue ID: I-108002 - don't cut the overflow
+		
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+		*/
 }
     .algoLayout .row label{
         font-weight: bold;
@@ -305,9 +309,13 @@ a{
         float: left;
         max-width: 96px;
         height: 22px;
+        /*
+		Issue ID: I-108002 - don't cut the overflow
+		
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+		*/
 }
     .algoLayout .badges .head{
         text-align: center;

@@ -65,7 +65,8 @@ if($rating>0){
 				</div>
 				<div class="row">
 					<label>Most Recent Event: </label>
-					<div title="<?php echo $coder->mostRecentEventName;?> - <?php echo $coder->mostRecentEventDate;?>" class="val"><?php echo $coder->mostRecentEventName;?> - <?php echo $coder->mostRecentEventDate;?></div>
+					<!-- Issue ID: I-108002 - Format the mostRecentEventDate -->
+					<div title="<?php echo $coder->mostRecentEventName;?> - <?php echo $coder->mostRecentEventDate;?>" class="val"><?php echo $coder->mostRecentEventName;?> <?php echo date('m.d.y', strtotime($coder->mostRecentEventDate));?></div>
 				</div>
 				<div class="row">
 					<label>Minimum Rating: </label>
