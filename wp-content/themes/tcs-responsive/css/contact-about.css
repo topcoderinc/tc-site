@@ -355,3 +355,27 @@
 
 }
 
+/* Issue ID: I-104523 - style for validation message in contact-us page */
+form span.err1,
+form span.err2 {
+    margin-left: 14px;
+    color: #c00;
+}
+
+textarea[name="description"].invalid,
+#first_name.invalid,
+#last_name.invalid,
+#email.invalid {
+	background: #ffedee;
+	border: 1px solid #c00;
+}
+
+form span.valid {
+	background: transparent url(../i/validation-tick.png) no-repeat left center;	
+	min-width: 18px;
+	height: 18px;
+	padding-left: 27px;
+	margin-left: 14px;
+	vertical-align: middle;
+	color: #7abd00;
+}
