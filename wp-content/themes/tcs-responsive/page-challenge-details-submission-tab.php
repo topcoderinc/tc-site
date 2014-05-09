@@ -68,12 +68,12 @@
                         
                         <p>
                             <span class="subNum">#<?php echo $submissionObj->submissionId;?></span>
-                            <a href="javascript:;" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
+                            <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $secondPlacedSubmission->handle; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
                         <p class="submissionInfo">
                             <span class="metaDate"><?php echo $dateFormatted;?></span>
                             
                             <span class="viewSubmission jsViewSubmission"><a href="http://studio.topcoder.com/?module=DownloadSubmission&sbmid=<?php echo $submissionObj->submissionId;?>&sbt=small"></a><!-- <?php echo $mockSubmissionData->viewCount;?>--></span>
-                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><?php echo $mockSubmissionData->downloadCount;?></a></span>
+                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><!--<?php echo $mockSubmissionData->downloadCount;?></a>--></span>
                         </p>
                     </div>
                 </li>
