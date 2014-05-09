@@ -115,6 +115,12 @@ appChallenges = {
             } else {
                 $(this).addClass('isActive');
                 $('.searchFilter').fadeIn();
+				
+				// Issue ID: I-111128 - enable/disable datepicker based on the status of the related checkbox
+				$('.otherOpts .row').each(function() {
+                    var cbDate = $(this).find('input:checkbox');
+					$('.datepicker', $(this)).datepicker(cbDate.is(':checked') ? 'enable' : 'disable');
+				});
 
         // populate technology tags
         app.getTechnologyTags($('.chosen-select'));
@@ -131,12 +137,14 @@ appChallenges = {
                 row = row.parent();
             }
             if ($(this).is(':checked')) {
-                $('.datepicker', row).datepicker("option", "disabled", false);
+                // Issue ID: I-111128 - enable the datepicker
+                $('.datepicker', row).datepicker("enable");
                 $('img', row).css('opacity', 1).css('filter', 'alpha(opacity=100)');
                 $('img', row).closest('.row').removeClass('isDisabled');
                 $('input:text, select', row).removeAttr('disabled');
             } else {
-                $('.datepicker', row).datepicker("option", "disabled", true);
+                // Issue ID: I-111128 - enable the datepicker
+                $('.datepicker', row).datepicker("disable");
                 $('img', row).css('opacity', 1).css('opacity', 0.5).css('filter', 'alpha(opacity=50)');
                 $('img', row).closest('.row').addClass('isDisabled');
                 $('input:text, select', row).attr('disabled', 'disabled');
