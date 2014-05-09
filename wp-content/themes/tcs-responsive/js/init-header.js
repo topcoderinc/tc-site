@@ -15,7 +15,7 @@ $(document).ready(function() {
       modal.css('margin', '0');
     }
   }
-  
+
   // Initialize member details
   $(window).bind('pageshow', function(event) {
 
