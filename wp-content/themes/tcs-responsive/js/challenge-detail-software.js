@@ -4,6 +4,27 @@ var slider;
 var prizeSlider;
 var sliderClone;
 
+var tcjwt = getCookie('tcjwt');
+if (tcjwt && (typeof challengeId != 'undefined')) {
+  $.getJSON(ajaxUrl, {
+    "action": "get_challenge_documents",
+    "challengeId": challengeId,
+    "challengeType": challengeType,
+    "jwtToken": tcjwt.replace(/["]/g, "")
+  }, function (data) {
+    if (data.Documents && $('.downloadDocumentList')) {
+      $('.downloadDocumentList').children().remove();
+      data.Documents.map(function(x) {
+        $('.downloadDocumentList').append($(
+          '<li><a href="'+x.url+'">'+x.documentName+'</a></li>'
+        ));
+      });
+    }
+  });
+}
+
+
+
 function createSlider() {
   sliderClone = $('.columnSideBar .slider > ul:first-child').clone();
   slider = jQuery('.columnSideBar .slider > ul:first-child').bxSlider({
