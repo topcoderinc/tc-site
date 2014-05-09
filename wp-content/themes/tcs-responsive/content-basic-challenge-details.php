@@ -520,12 +520,16 @@ if (sizeof($contest->prize) > 5) {
          </span>
         </p>
 
-        <p class="last"><label>Submit By:</label>
-          <span><?php echo date(
-              "M d, Y H:i T",
-              strtotime("$contest->submissionEndDate"));?>
-          </span>
+        <!-- Issue ID: I-107591 - add Final Submission in all deadline if finalFixEndDate field is set -->
+        <p <?php echo (isset($contest->finalFixEndDate)) ? '' : 'class="last"';?>><label>Submit By:</label>
+          <span><?php echo date("M d, Y H:i T", strtotime("$contest->submissionEndDate"));?></span>
         </p>
+
+		<?php if (isset($contest->finalFixEndDate)): ?>
+		<p class="last"><label>Final Submission:</label>
+          <span><?php echo date("M d, Y H:i T", strtotime("$contest->finalFixEndDate"));?></span>
+        </p>
+        <?php endif; ?>
 
       </div>
       <!--End nextBoxContent-->

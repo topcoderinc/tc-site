@@ -158,7 +158,7 @@
     float: left;
     font-weight: bold;
     text-align: left;
-    width: 155px;
+    width: 150px; /* Issue ID: I-107591 - adjust the value so all the deadlines are displayed correctly. Previous value: 155px */
 }
 
 #stepBox .rightColumn .nextBox .nextDTitle {
@@ -724,7 +724,7 @@
 }
 
 #stepBox .rightColumn .nextBox .allDeadlineNextBoxContent.studio label {
-    width: 155px;
+    width: 150px; /* Issue ID: I-107591 - adjust the value so all the deadlines are displayed correctly. Previous value: 155px */
 }
 
 .challenge-detail .tabNav span.inactive {
