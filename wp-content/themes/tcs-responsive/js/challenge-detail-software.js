@@ -1,8 +1,15 @@
 var sliderActive = false;
 var prizeSliderActive = false;
+var submissionSliderActive = false;
+var submissionSingleSliderActive = false;
+var informationViewSliderActive = false;
 var slider;
 var prizeSlider;
+var submissionSlider;
+var submissionSingleSlider;
+var informationViewSlider;
 var sliderClone;
+var submissionCurrPage=1;
 
 var tcjwt = getCookie('tcjwt');
 if (tcjwt && (typeof challengeId != 'undefined')) {
@@ -49,6 +56,39 @@ function createPrizeSlider() {
     controls: false
   });
   return true;
+}
+function createSubmissionSlider(){
+
+    submissionSlider = $('.submissionSlider > ul:first-child').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        responsive: !ie7,
+        adaptiveHeight: false,
+        swipeThreshold: 40,
+        controls: false ,
+        infiniteLoop: false 
+      });
+      return true;
+}
+function createSubmissionSingleSlider(){
+    submissionSingleSlider = $('.submissionSingleSlider > ul:first-child').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        responsive: !ie7,
+        adaptiveHeight: false,
+        swipeThreshold: 40,
+        controls: false ,
+        infiniteLoop: false 
+      });
+      return true;
+}
+function createInformationViewSlider(){
+    var informationViewSlider = $('.informationViewSlider ul').bxSlider({
+        adaptiveHeight: false,
+        controls: false,
+        infiniteLoop: false 
+      });
+      return true;
 }
 
 function getAnchor(url) {
@@ -197,6 +237,338 @@ $(window).resize(function () {
     $('.registrantsTable').not('.mobile').removeClass('hide');
     $('.registrantsTable.mobile').addClass('hide');
   }
+$('.tabNav a').on(ev, function() {
+    if($(this).attr('href')=='#submissions'){
+        //$('.submissionAllView').hide();
+            //$('.submissionSingleView').show();
+
+            $('.submissionShowcase').css('display','none');
+            $('.submissionSingleSlider').css('display','block');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false ,
+                infiniteLoop: false 
+              });
+
+
+
+            $('.submissionList').css('display','none');
+            $('.submissionSlider').css('display','block');
+            $('.submissionSlider .bx-viewport').height(340);
+            $('.submissionSlider .bx-viewport').width("300").css('margin','0 auto');
+            $('.submissionSlider .bx-viewport li').css('width','300px');
+            $('.submissionSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false ,
+                infiniteLoop: false 
+              });
+
+            
+
+            $('.informationView').css('display','none');
+            $('.informationViewSlider').css('display','block');
+            //createInformationViewSlider();
+    }
+});
+        $('#submissions .jsViewSubmission').on(ev, function() {
+			
+			var handle = $(this).parent().parent().find(".handle").html();
+			var date = $(this).parent().parent().find(".metaDate").html();
+			var submissionId = $(this).parent().parent().find(".subNum").html();
+			var submissionId1 = submissionId.replace("#","");
+			var downloadLink = "http://studio.topcoder.com/?module=DownloadSubmission&sbmid="+submissionId1;
+
+			$('.submissionSingleView .handle').html(handle);
+			$('.submissionSingleView .metaDate').html(date);
+			$('.submissionSingleView .subNum').html(submissionId);
+			$('.submissionSingleView .download').attr('href',downloadLink);
+			
+            $('.submissionAllView').hide();
+            $('.submissionSingleView').show();
+
+            $('.submissionShowcase').css('display','none');
+            $('.submissionSingleSlider').css('display','block');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false ,
+                infiniteLoop: false 
+              });
+
+            $('.informationView').css('display','none');
+            $('.informationViewSlider').css('display','block');
+            createInformationViewSlider();
+        });
+
+
+		
+		$(".design .rightColumn").insertAfter('.leftColumn');
+		$('.grid-1-3').insertBefore('#contest-overview');
+		$('.scroll-pane').jScrollPane({ autoReinitialise: true }); 
+        $('.scrollPane').jScrollPane({ autoReinitialise: true }); 
+		 
+		sliderActive = createSlider(); 
+
+		
+		$('#stepBox .rightColumn .nextBox .allDeadlineNextBoxContent p:nth-child(3)').addClass('moveRight');
+		if($('.studio').length > 0){
+				updateDesignContestMobile();
+			}
+			// Hide deadline boxes on mobile view
+			updateDeadlineBoxMobile();
+			
+			$('.registrantsTable').not('.mobile').addClass('hide');
+			$('.registrantsTable.mobile').removeClass('hide');
+    } else {
+
+
+
+        $('#submissions .jsViewSubmission').on(ev, function() {
+			var handle = $(this).parent().parent().find(".handle").html();
+			var date = $(this).parent().parent().find(".metaDate").html();
+			var submissionId = $(this).parent().parent().find(".subNum").html();
+			var submissionId1 = submissionId.replace("#","");
+			var downloadLink = "http://studio.topcoder.com/?module=DownloadSubmission&sbmid="+submissionId1;
+
+			$('.submissionSingleView .handle').html(handle);
+			$('.submissionSingleView .metaDate').html(date);
+			$('.submissionSingleView .subNum').html(submissionId);
+			$('.submissionSingleView .download').attr('href',downloadLink);
+			
+            $('.submissionAllView').hide();
+            $('.submissionSingleView').show();
+
+            $('.submissionShowcase').css('display','block');
+            $('.submissionSingleSlider').css('display','none');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false  ,
+                infiniteLoop: false 
+              });
+
+
+            $('.informationView').css('display','block');
+            $('.informationViewSlider').css('display','none');
+            
+        });
+
+	    if($('.studio').length > 0){
+	    		updateDesignContest();
+	    	}
+	    	// Show deadline boxes
+	    	updateDeadlineBox();
+	    	
+	    	$('.registrantsTable').not('.mobile').removeClass('hide');
+				$('.registrantsTable.mobile').addClass('hide');
+    }
+			$('a[href="' + getAnchor(location.href) + '"]').click();
+
+    $('.showMore .fiveMore').click(function(){
+        $(this).parent().siblings('.winnerRow').removeClass('hide');
+    });
+});
+
+//create/destroy slider based on width
+$(window).resize(function () {
+ 
+
+    if (window.innerWidth < 1019) { 
+        $('.tabNav a').on(ev, function() {
+            if($(this).attr('href')=='#submissions'){
+                $('.submissionSingleSlider').css('display','block');
+                $('.submissionSingleSlider .bx-viewport').height(493);
+                $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+                $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+                $('.submissionSingleSlider > ul:first-child').bxSlider({
+                    minSlides: 1,
+                    maxSlides: 1,
+                    responsive: !ie7,
+                    adaptiveHeight: false,
+                    swipeThreshold: 40,
+                    controls: false ,
+                    infiniteLoop: false 
+                  });
+
+
+                $('.submissionList').css('display','none');
+                $('.submissionSlider').css('display','block');
+                $('.submissionSlider .bx-viewport').height(340);
+                $('.submissionSlider .bx-viewport').width("300").css('margin','0 auto');
+                $('.submissionSlider .bx-viewport li').css('width','300px');
+                $('.submissionSlider > ul:first-child').bxSlider({
+                    minSlides: 1,
+                    maxSlides: 1,
+                    responsive: !ie7,
+                    adaptiveHeight: false,
+                    swipeThreshold: 40,
+                    controls: false ,
+                    infiniteLoop: false 
+                  });
+                
+                createInformationViewSlider();
+            }
+        });
+
+        $('.submissionShowcase').css('display','none');
+            $('.submissionSingleSlider').css('display','block');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false  ,
+                infiniteLoop: false 
+              });
+
+
+            $('.informationView').css('display','none');
+            $('.informationViewSlider').css('display','block');
+            
+            createInformationViewSlider();
+
+        $('#submissions .jsViewSubmission').on(ev, function() {
+            $('.submissionAllView').hide();
+            $('.submissionSingleView').show();
+            
+            $('.submissionShowcase').css('display','none');
+            $('.submissionSingleSlider').css('display','block');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false  ,
+                infiniteLoop: false 
+              });
+
+
+            
+        });
+
+        if (submissionSingleSliderActive == false) {
+            $('.scrollPane').jScrollPane({ autoReinitialise: true }); 
+                
+        }
+			if (sliderActive == false) {
+        		$(".design .rightColumn").insertAfter('.leftColumn');
+        		$('.grid-1-3').insertBefore('#contest-overview');
+        		$('.scroll-pane').jScrollPane({ autoReinitialise: true }); 
+				sliderActive = createSlider();
+			}
+			if($('.studio').length > 0){
+					updateDesignContestMobile();
+			}
+			// Hide deadline boxes on mobile view
+			updateDeadlineBoxMobile();
+        
+			$('.registrantsTable').not('.mobile').addClass('hide');
+			$('.registrantsTable.mobile').removeClass('hide');
+    }
+ 
+    if (window.innerWidth > 1019){
+        $('.submissionShowcase').css('display','block');
+            $('.submissionSingleSlider').css('display','none');
+
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false  ,
+                infiniteLoop: false 
+              });
+
+            $('.informationView').css('display','block');
+            $('.informationViewSlider').css('display','none');
+            
+        $('#submissions .jsViewSubmission').on(ev, function() {
+            $('.submissionAllView').hide();
+            $('.submissionSingleView').show();
+            
+            $('.submissionShowcase').css('display','block');
+            $('.submissionSingleSlider').css('display','none');
+
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false  ,
+                infiniteLoop: false 
+              });
+
+            $('.informationView').css('display','block');
+            $('.informationViewSlider').css('display','none');
+            
+        });
+
+
+        if (submissionSingleSliderActive == true) {
+            $('.scrollPane').jScrollPane({ autoReinitialise: true }); 
+            
+        }
+    	if (sliderActive == true) {
+    		$(".design .rightColumn").insertAfter('.middleColumn');
+    		$('.grid-1-3').insertAfter('.rightSplit');
+    		$('.scroll-pane').jScrollPane({ autoReinitialise: true }); 
+
+            if(slider.length > 0){
+		        slider.destroySlider();
+            }
+        sliderActive = false;
+				// Replace the destroyed slider with a previously cloned one 
+	    // Hack for a known bxslider bug: http://stackoverflow.com/questions/16283955/window-resize-with-bxslider-destroyed-breaks-style
+	    $('.slider > ul:first-child').replaceWith(sliderClone);
+			} 
+			 if($('.studio').length > 0){
+	    		updateDesignContest();
+	    	}
+	    	// Show deadline boxes
+	    	updateDeadlineBox();
+		
+	    	$('.registrantsTable').not('.mobile').removeClass('hide');
+				$('.registrantsTable.mobile').addClass('hide');
+    } 
 });
 
 $(window).bind('orientationchange', function (event) {
@@ -579,3 +951,370 @@ app.tabNavinit = function () {
     }
   })
 }
+    if(submissionSliderActive == false){
+        $('.submissionList').addClass("hide");
+        $('.submissionSlider').removeClass("hide");
+        submissionSliderActive = createSubmissionSlider();
+    }
+    if(submissionSingleSliderActive == false){
+        $('.submissionShowcase').addClass("hide");
+        $('.submissionSingleSlider').removeClass("hide");
+        submissionSingleSliderActive = createSubmissionSingleSlider();
+    }
+
+
+    
+	$('.tabsWrap .tabNav').not('.mobile').addClass('hide');
+	$('.tabsWrap .tabNav.mobile').removeClass('hide');
+
+}
+
+function updateDesignContest(){
+	if(prizeSliderActive == true){
+		$('.prizeTable').removeClass("hide");
+       $('.prizeSlider').addClass("hide");
+       prizeSlider.destroySlider(); 
+       prizeSliderActive = false;
+	}
+
+    if(submissionSliderActive == true){
+        $('.submissionList').removeClass("hide");
+       $('.submissionSlider').addClass("hide");
+       //submissionSlider.destroySlider(); 
+       submissionSliderActive = false;
+    }
+    if(submissionSingleSliderActive == true){
+        $('.submissionShowcase').removeClass("hide");
+      $('.submissionSingleSlider').addClass("hide");
+      // submissionSingleSlider.destroySlider(); 
+       submissionSingleSliderActive = false;
+    }
+
+    
+	$('.tabsWrap .tabNav').not('.mobile').removeClass('hide');
+	$('.tabsWrap .tabNav.mobile').addClass('hide');
+
+} 
+  
+   
+$(function(){ 
+	$('.scroll-pane').jScrollPane();
+        $('.scrollPane').jScrollPane(); 
+	//switch the view all deadline and view next deadline
+	$(".viewAllDeadLineBtn").click(function(){
+        $(this).parent().addClass('hide').siblings().removeClass('hide');
+//		$(".nextDeadlinedeadlineBoxContent").addClass("hide");
+		$(".allDeadlinedeadlineBoxContent").removeClass("hide");
+		$(".nextDeadlineNextBoxContent").addClass("hide");
+		$(".allDeadlineNextBoxContent").removeClass("hide");
+		$(".contestEndedBox").addClass("hide");
+		
+	});
+	//switch the view all deadline and view next deadline
+	$(".viewNextDeadLineBtn").click(function(){
+        $(this).parent().addClass('hide').siblings().removeClass('hide');
+		$(".contestEndedBox").addClass("hide");
+//		$(".allDeadlinedeadlineBoxContent").addClass("hide");
+		$(".nextDeadlinedeadlineBoxContent").removeClass("hide");
+		$(".allDeadlineNextBoxContent").addClass("hide");
+		$(".nextDeadlineNextBoxContent").removeClass("hide");
+	}); 
+	
+	$(".morePayments.active").click(function(){
+		if($(this).hasClass("closed")){
+			$(".morePayments.active").removeClass("closed");
+			$(".morePayments.active").addClass("open");
+			$(".additionalPrizes").removeClass("hide");
+		} else {
+			$(".morePayments.active").removeClass("open");
+			$(".morePayments.active").addClass("closed");
+			$(".additionalPrizes").addClass("hide");
+		}
+	});
+
+    /*new functions*/
+    var QueryString = function () {
+        // This function is anonymous, is executed immediately and
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = pair[1];
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [ query_string[pair[0]], pair[1] ];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(pair[1]);
+            }
+
+        }
+        return query_string;
+    } ();
+
+    function showModal(selector) {
+        var modal = $(selector);
+        $('#bgOverlapModal').show();
+        modal.show();
+        centerModal();
+    }
+    function centerModal(selector){
+        var modal = $('.modal:visible');
+        if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8'))
+            modal.css('margin', -modal.height() / 2 + 'px 0 0 ' + (-modal.width() / 2) + 'px');
+        else {
+            modal.css('margin', '0');
+        }
+    }
+	$('.closePopupModal,#bgOverlapModal').on('click', function () {
+		closePopupModal();
+	});
+    function closePopupModal() {
+        $('.modal,#bgOverlapModal').hide();
+    }
+    if(QueryString.registered === 'success'){
+        showModal('#registerSuccess');
+        setTimeout(function(){
+            $('#Registrants').click();
+            $('#Registrants1').click();
+        },200)
+    }
+
+    $('.jsFullScreenBtn').on(ev, function() {
+		var loading = $('#bgLoadingModal span');
+		loading.css({
+            'margin-top'  : '-' + Math.round(loading.height() / 2) + 'px',   
+            'margin-left' : '-' + Math.round(loading.width() / 2) + 'px',       
+        });
+		$('#bgLoadingModal').show();
+		window.setTimeout(
+			function(){
+				if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8')){
+					showModal('#showSubmission');
+					var showSubmission = $('#showSubmission:visible');
+					showSubmission.css({
+						'width' : '940px'
+					});
+					showSubmission.css('margin', -showSubmission.height() / 2 + 'px 0 0 ' +  '-485px');
+				}else {
+					
+					showModal('#showSubmission');
+					
+					var modalHeightC = $('#showSubmission .content').height();
+					var showSubmission = $('#showSubmission:visible');
+					//showSubmission.css('margin', '0').css('top',0).css('left',0).css('width','97%').css('height',"auto");
+				    showSubmission.css({
+						'width' : ($(window).width()-20)+'px'
+					});
+					showSubmission.css({
+						'left' : 'auto',
+						'margin-top'  : '-' + Math.round(showSubmission.height() / 2) + 'px',   
+						'margin-left' : '0px',       
+					});
+				}
+				$('#bgLoadingModal').hide();
+			},
+			3000
+		);
+    });
+	
+	/**
+	 * Paging Navigation 
+	 */
+	$(".nextLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage<submissionPageCount) {
+			submissionCurrPage++;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage<=submissionPageCount) {
+			parentDiv.find(".nextLink").hide();
+		}
+	});
+
+	$(".prevLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage>1) {
+			submissionCurrPage--;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage==1) {
+			parentDiv.find(".prevLink").hide();
+		}
+	});	
+	
+	$(".viewAll").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		parentDiv.find(".nextLink").hide();
+		parentDiv.find(".prevLink").hide();
+		parentDiv.find(".submissionPage").show();
+		parentDiv.find(".viewAll").hide();
+	});
+	
+}); 
+
+$(function(){
+	$('.expandCollaspeList li a').each(function(){
+        var _this = $(this).parents('li')
+		if(!$(this).hasClass('collapseIcon')){
+			_this.children('.bar').css('border-bottom','1px solid #e7e7e7');
+		}else{
+            _this.children('.bar').css('border-bottom','none');
+		}
+	});
+    $('.expandCollaspeList li a').on(ev, function() {
+        var _this = $(this).parents('li')
+        if(!$(this).hasClass('collapseIcon')){
+            $(this).addClass('collapseIcon');
+            _this.children('.feedBackContent').hide();
+            _this.children('.bar').css('border-bottom','none');
+        }else{
+            $(this).removeClass('collapseIcon')
+            _this.children('.feedBackContent').show();
+            _this.children('.bar').css('border-bottom','1px solid #e7e7e7');
+        }
+    });
+
+    $('#submissions .jsViewSubmission').on(ev, function() {
+    	$('.submissionAllView').hide();
+    	$('.submissionSingleView').show();
+    });
+
+
+    /* view next */
+    $('#submissions .pager').on(ev, '.nextLink', function(e) {
+        $('#submissions .prevLink').show();
+        return false;
+    });
+    $('#submissions .pager').on(ev, '.prevLink', function(e) {
+        $('#submissions .nextLink').show();
+		
+        return false;
+    });
+
+    $('.jsSeeMore').on(ev, function() {
+    	$(this).hide();
+    	$(this).parents('.stockArtInfo').find('.seeMoreInfo').show();
+    });
+    if($('.scrollPane').length>0){
+    	$('.scrollPane').jScrollPane({autoReinitialise: true});
+    }
+
+    $('.challenge-detail #submissions .submissionShowcaseList li a').click(function(){
+    	$('.submissionBig').hide();
+    	$('.submissionBigMock').hide();
+    	if(!$(this).hasClass('mock')){
+    		$('.submissionBig').show();
+    		$('.submissionBigMock').hide();
+    	}else{
+
+    		$('.submissionBig').hide();
+    		$('.submissionBigMock').show();
+    	}
+    	$('.challenge-detail #submissions .submissionShowcaseList li a').removeClass('active');
+    	$(this).addClass('active');
+    });
+
+    var userAgent = navigator.userAgent.toLowerCase();
+	jQuery.browser = { 
+		version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
+		safari: /webkit/.test( userAgent ), 
+		opera: /opera/.test( userAgent ), 
+		msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+		mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
+	}; 
+	if($.browser.msie && $.browser.version == 10){
+			if (window.innerWidth < 1019) {
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			}else{
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-6px');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','73px');
+			}
+		$(window).resize(function () {
+			if (window.innerWidth < 1019) {
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			}else{
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-6px');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','73px');
+			}
+		});
+	}
+	if($.browser.mozilla) {
+
+		if (window.innerWidth < 1019) {
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+		}else{
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-6px');
+			$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','75px');
+		}
+
+		$(window).resize(function () {
+			if (window.innerWidth < 1019) {
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			}else{
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-6px');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','75px');
+			}
+		});
+	}
+    if($.browser.safari) 
+	{ 
+		if (window.innerWidth < 1019) {
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+		}else{
+			$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','74px');
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-5px');
+		}
+		$(window).resize(function () {
+
+			if (window.innerWidth < 1019) {
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			}
+			if (window.innerWidth > 1019) {
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','74px');
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','-5px');
+			}
+		});
+	} 
+
+	var Sys = {};
+    var ua = navigator.userAgent.toLowerCase(); 
+	if(ua.match(/version\/([\d.]+).*safari/)!=null && ua.match(/version\/([\d.]+).*safari/)[1].split('.')[0]>3){ 
+     	if (window.innerWidth < 1019) {
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			//$('.winnerListAlt li .boxName').css('width','50%');
+		}else{
+			$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','74px');
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0px');
+		}
+
+		$(window).resize(function () {
+			if (window.innerWidth < 1019) {
+			$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0');
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','auto');
+			//$('.winnerListAlt li .boxName').css('width','50%');
+			}else{
+				$('.challenge-detail #checkpoints .winnerListEndAlt').css('height','74px');
+				$('.winnerList li .boxName,.winnerListAlt li .boxName').css('top','0px');
+			}
+		});
+	 
+    } 
+
+});
