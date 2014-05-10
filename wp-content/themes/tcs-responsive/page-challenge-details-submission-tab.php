@@ -68,12 +68,12 @@
                         
                         <p>
                             <span class="subNum">#<?php echo $submissionObj->submissionId;?></span>
-                            <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $secondPlacedSubmission->handle; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
+                            <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $submissionObj->handle; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
                         <p class="submissionInfo">
                             <span class="metaDate"><?php echo $dateFormatted;?></span>
                             
-                            <span class="viewSubmission jsViewSubmission"><a href="http://studio.topcoder.com/?module=DownloadSubmission&sbmid=<?php echo $submissionObj->submissionId;?>&sbt=small"></a><!-- <?php echo $mockSubmissionData->viewCount;?>--></span>
-                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><!--<?php echo $mockSubmissionData->downloadCount;?></a>--></span>
+                            <span class="viewSubmission jsViewSubmission"><a href="http://studio.topcoder.com/?module=DownloadSubmission&sbmid=<?php echo $submissionObj->submissionId;?>&sbt=full"></a></span>
+                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><?php echo $mockSubmissionData->downloadCount;?></a></span>
                         </p>
                     </div>
                 </li>
@@ -113,7 +113,7 @@
                             
                             <p>
                                 <span class="subNum">#<?php echo $submissionObj->submissionId; ?></span>
-                                <a href="javascript:;" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
+                                <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $submissionObj->handle; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
                             <p class="submissionInfo">
                                 <span class="metaDate"><?php echo $dateFormatted;?></span>
                                 
@@ -156,136 +156,6 @@
 </div>
 <!-- Submission Section End -->
 
-<!-- CheckPoint Section -->
-<div class="checkpointMainWrapper">
-<?php
-	// Checkpoint Section
-	if ($contest->currentStatus!='Completed'):
-?>	
-        <article>
-            <div class="notView2">
-                <p><strong>Submissions are not viewable for this challenge</strong></p>
-            </div>
-        </article>
-<?php 
-	elseif($mockSubmissionData->isPrivate):
-?>
-        <article>
-            <div class="notView">
-                Private Challenge
-                <p>Submissions are not viewable for this challenge</p>
-            </div>
-        </article>
-<?php else: ?>
-		<div class="submissionAllView">
-            <h1>ROUND 1 (CHEKCPOINT) SUBMISSIONS</h1>
-            <ul class="submissionList">
-			<?php
-				$pageCounter = 1;
-				if( $contestResults!=null ) 
-				foreach( $contestResults as $key=>$submissionObj ) :
-					$submissionGridViewImg = "http://studio.topcoder.com/studio.jpg?module=DownloadSubmission&sbmid=".$submissionObj->submissionId."&sbt=small&sfi=1";
-					$submissionDownloadUrl = "http://studio.topcoder.com/?module=DownloadSubmission&sbmid=".$submissionObj->submissionId;
-					$dateStr = substr($submissionObj->submissionTime, 0, 10)." ".substr($submissionObj->submissionTime, 11, 5);
-					//dateStr format : 2014-04-02 07:10
-					$dateObj = DateTime::createFromFormat('Y-m-d H:i', $dateStr);
-					$dateFormatted = $dateObj!=null ? $dateObj->format('d.m.Y , H:i')." EST" : "";
-			?>
-		<?php if($key==0) : ?>
-			<span class="submissionPage page1">
-		<?php endif;?>
-                <li>
-                    <div>
-                        <a href="javascript:;"><img src="<?php echo $submissionGridViewImg; ?>" alt="" width="225" height="226"></a>
-                        
-                        <p>
-                            <span class="subNum">#<?php echo $submissionObj->submissionId;?></span>
-                            <a href="javascript:;" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
-                        <p class="submissionInfo">
-                            <span class="metaDate"><?php echo $dateFormatted;?></span>
-                            
-                            <span class="viewSubmission jsViewSubmission"><a href="javascript:;"></a><?php echo $mockSubmissionData->viewCount;?></span>
-                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><?php echo $mockSubmissionData->downloadCount;?></a></span>
-                        </p>
-                    </div>
-                </li>
-			<?php 
-				if(($key+1)%12==0 && $key>0 ) {
-					echo "</span>";
-					$pageCounter++;
-					if(($key+1)<count($contestResults))
-						echo '<span class="submissionPage hide page'.$pageCounter.'">';
-				}
-			?>						
-			<?php endforeach; ?>
-			
-			<?php 
-				if(count($contestResults)%12!=0) echo "</span>";
-				echo "<input type='hidden' class='submissionPageCount' value='$pageCounter' />";
-			?>
-            </ul>
-
-            <div class="submissionSlider hide">
-                <ul>
-				<?php
-					if( $contestResults!=null ) 
-					foreach( $contestResults as $key=>$submissionObj ) :
-						$dateStr = substr($submissionObj->submissionDate, 0, 10)." ".substr($submissionObj->submissionDate, 11, 5);
-						//dateStr format : 2014-04-02 07:10
-						$dateObj = DateTime::createFromFormat('Y-m-d H:i', $dateStr);
-						$dateFormatted = $dateObj!=null ? $dateObj->format('d.m.Y , H:i') : "";
-						$submissionGridViewImg = "http://studio.topcoder.com/studio.jpg?module=DownloadSubmission&sbmid=".$submissionObj->submissionId."&sbt=small&sfi=1";
-						$submissionDownloadUrl = "http://studio.topcoder.com/?module=DownloadSubmission&sbmid=".$submissionObj->submissionId;
-				?>
-				<?php if($key==0) : ?>
-                    <li class="slide">
-				<?php endif;?>
-                        <div>
-                            <a href="javascript:;"><img src="<?php echo $submissionGridViewImg; ?>" alt=""></a>
-                            
-                            <p>
-                                <span class="subNum">#<?php echo $submissionObj->submissionId; ?></span>
-                                <a href="javascript:;" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
-                            <p class="submissionInfo">
-                                <span class="metaDate"><?php echo $dateFormatted;?></span>
-                                
-                                <span class="viewSubmission jsViewSubmission"><a href="javascript:;"></a><?php echo $mockSubmissionData->viewCount;?></span>
-                                <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><?php echo $mockSubmissionData->downloadCount;?></a></span>
-                            </p>
-                        </div>
-				<?php 
-					if(($key+1)%3==0 && $key>0 ) {
-						echo "</li>";
-						if(($key+1)<count($contestResults))
-							echo '<li class="slide">';
-					}
-				?>
-				<?php endforeach; ?>
-				<?php 
-					if(count($contestResults)%3!=0) echo "</li>";
-				?>				
-                </ul>
-            </div>
-            <div class="clear"></div>
-		<?php if($pageCounter>1) : ?>
-            <div id="submissionPaging" class="pager">
-                <div class="lt">
-                    <a href="javascript:;" class="viewAll">View All</a>
-                </div>
-                <div class="rt">
-                    <a href="javascript:;" class="prevLink hide">
-                        <i></i> Prev
-                    </a>
-                    <a href="javascript:;" class="nextLink">
-                        Next <i></i>
-                    </a>
-                </div>
-            </div>
-		<?php endif; ?>
-		
-        </div>
-</div>
-<!-- CheckPoint Section End -->
 		
         <div class="submissionSingleView hide studio">
             <div class="informationViewSlider hide">
