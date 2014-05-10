@@ -1,5 +1,5 @@
 	<?php
-		$contestResults = $contest->submissions;
+		$contestResults = $contest->submissions; 
 		$mockSubmissionData = new stdClass();
 		$mockSubmissionData->isPrivate = false;
 		$mockSubmissionData->viewCount = 290;
@@ -46,7 +46,7 @@
         </article>
 <?php else: ?>
 		<div class="submissionAllView">
-            <h1>ROUND 2 (FINAL) SUBMISSIONS</h1>
+            <h1>SUBMISSIONS</h1>
             <ul class="submissionList"><!--id="submissionList"-->
 			<?php
 				$pageCounter = 1;
@@ -64,16 +64,16 @@
 		<?php endif;?>
                 <li>
                     <div>
-                        <a href="javascript:;"><img src="<?php echo $submissionGridViewImg; ?>" alt="" width="225" height="226"></a>
+                        <img src="<?php echo $submissionGridViewImg; ?>" alt="" width="225" height="226">
                         
                         <p>
                             <span class="subNum">#<?php echo $submissionObj->submissionId;?></span>
-                            <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $submissionObj->handle; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
+                            <a href="<?php bloginfo('wpurl'); ?>/member-profile/<?php echo $submissionObj->submitter; ?>/?tab=design" class="handle coderTextOrange"><?php echo $submissionObj->submitter;?></a></p>
                         <p class="submissionInfo">
                             <span class="metaDate"><?php echo $dateFormatted;?></span>
                             
                             <span class="viewSubmission jsViewSubmission"><a href="http://studio.topcoder.com/?module=DownloadSubmission&sbmid=<?php echo $submissionObj->submissionId;?>&sbt=full"></a></span>
-                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"><?php echo $mockSubmissionData->downloadCount;?></a></span>
+                            <span class="download"><a href="<?php echo $submissionDownloadUrl;?>"></a></span>
                         </p>
                     </div>
                 </li>
@@ -338,7 +338,7 @@
             <!-- /.submissionShowcase -->
         </div>
         <!-- /.submissionSingleView -->
-<?php endif; ?>
+
 
 <?php if($_GET["tab"] == "submission") : ?>
 <script>
