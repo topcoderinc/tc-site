@@ -1,8 +1,15 @@
 var sliderActive = false;
 var prizeSliderActive = false;
+var submissionSliderActive = false;
+var submissionSingleSliderActive = false;
+var informationViewSliderActive = false;
 var slider;
 var prizeSlider;
+var submissionSlider;
+var submissionSingleSlider;
+var informationViewSlider;
 var sliderClone;
+var submissionCurrPage=1;
 
 function createSlider() {
   sliderClone = $('.columnSideBar .slider > ul:first-child').clone();
@@ -391,68 +398,162 @@ $(function () {
     $(".nextDeadlineNextBoxContent").addClass("hide");
     $(".allDeadlineNextBoxContent").removeClass("hide");
     $(".contestEndedBox").addClass("hide");
+		$(".allDeadlineNextBoxContent").removeClass("hide");
+		$(".contestEndedBox").addClass("hide");
+		
+	});
+	//switch the view all deadline and view next deadline
+	$(".viewNextDeadLineBtn").click(function(){
+        $(this).parent().addClass('hide').siblings().removeClass('hide');
+		$(".contestEndedBox").addClass("hide");
+//		$(".allDeadlinedeadlineBoxContent").addClass("hide");
+		$(".nextDeadlinedeadlineBoxContent").removeClass("hide");
+		$(".allDeadlineNextBoxContent").addClass("hide");
+		$(".nextDeadlineNextBoxContent").removeClass("hide");
+	}); 
+	
+	$(".morePayments.active").click(function(){
+		if($(this).hasClass("closed")){
+			$(".morePayments.active").removeClass("closed");
+			$(".morePayments.active").addClass("open");
+			$(".additionalPrizes").removeClass("hide");
+		} else {
+			$(".morePayments.active").removeClass("open");
+			$(".morePayments.active").addClass("closed");
+			$(".additionalPrizes").addClass("hide");
+		}
+	});
 
-  });
-  //switch the view all deadline and view next deadline
-  $(".viewNextDeadLineBtn").click(function () {
-    $(".contestEndedBox").addClass("hide");
-    $(".allDeadlinedeadlineBoxContent").addClass("hide");
-    $(".nextDeadlinedeadlineBoxContent").removeClass("hide");
-    $(".allDeadlineNextBoxContent").addClass("hide");
-    $(".nextDeadlineNextBoxContent").removeClass("hide");
-  });
+    /*new functions*/
+    var QueryString = function () {
+        // This function is anonymous, is executed immediately and
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = pair[1];
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [ query_string[pair[0]], pair[1] ];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(pair[1]);
+            }
 
-  $(".morePayments.active").click(function () {
-    if ($(this).hasClass("closed")) {
-      $(".morePayments.active").removeClass("closed");
-      $(".morePayments.active").addClass("open");
-      $(".additionalPrizes").removeClass("hide");
-    } else {
-      $(".morePayments.active").removeClass("open");
-      $(".morePayments.active").addClass("closed");
-      $(".additionalPrizes").addClass("hide");
-    }
-  });
-
-  $(".challengeRegisterBtn").click(function () {
-    if ($(this).hasClass("disabled")) { return false; }
-    var tcjwt = getCookie('tcjwt');
-    if (tcjwt) {
-      if ($('.loading').length <= 0) {
-        $('body').append('<div class="loading">Loading...</div>');
-      } else {
-        $('.loading').show();
-      }
-      $.getJSON(ajaxUrl, {
-        "action": "register_to_challenge",
-        "challengeId": challengeId,
-        "jwtToken": tcjwt.replace(/["]/g, "")
-      }, function (data) {
-        $('.loading').hide();
-        if (data["message"] === "ok") {
-          showModal("#registerSuccess");
-        } else if (data["error"]["details"] === "You should agree with all terms of use.") {
-          window.location = siteURL + "/challenge-details/terms/" + challengeId + "?challenge-type=" + challengeType;
-        } else if (data["error"]["details"]) {
-          $("#registerFailed .failedMessage").text(data["error"]["details"]);
-          showModal("#registerFailed");
         }
-      });
-    } else {
-      $('.actionLogin').click();
+        return query_string;
+    } ();
+
+    function showModal(selector) {
+        var modal = $(selector);
+        $('#bgOverlapModal').show();
+        modal.show();
+        centerModal();
     }
-  });
+    function centerModal(selector){
+        var modal = $('.modal:visible');
+        if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8'))
+            modal.css('margin', -modal.height() / 2 + 'px 0 0 ' + (-modal.width() / 2) + 'px');
+        else {
+            modal.css('margin', '0');
+        }
+    }
+	$('.closePopupModal,#bgOverlapModal').on('click', function () {
+		closePopupModal();
+	});
+    function closePopupModal() {
+        $('.modal,#bgOverlapModal').hide();
+    }
+    if(QueryString.registered === 'success'){
+        showModal('#registerSuccess');
+        setTimeout(function(){
+            $('#Registrants').click();
+            $('#Registrants1').click();
+        },200)
+    }
 
-  if (autoRegister) {
-    $(".challengeRegisterBtn").click();
-  }
+    $('.jsFullScreenBtn').on(ev, function() {
+		var loading = $('#bgLoadingModal span');
+		loading.css({
+            'margin-top'  : '-' + Math.round(loading.height() / 2) + 'px',   
+            'margin-left' : '-' + Math.round(loading.width() / 2) + 'px',       
+        });
+		$('#bgLoadingModal').show();
+		window.setTimeout(
+			function(){
+				if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8')){
+					showModal('#showSubmission');
+					var showSubmission = $('#showSubmission:visible');
+					showSubmission.css({
+						'width' : '940px'
+					});
+					showSubmission.css('margin', -showSubmission.height() / 2 + 'px 0 0 ' +  '-485px');
+				}else {
+					
+					showModal('#showSubmission');
+					
+					var modalHeightC = $('#showSubmission .content').height();
+					var showSubmission = $('#showSubmission:visible');
+					//showSubmission.css('margin', '0').css('top',0).css('left',0).css('width','97%').css('height',"auto");
+				    showSubmission.css({
+						'width' : ($(window).width()-20)+'px'
+					});
+					showSubmission.css({
+						'left' : 'auto',
+						'margin-top'  : '-' + Math.round(showSubmission.height() / 2) + 'px',   
+						'margin-left' : '0px',       
+					});
+				}
+				$('#bgLoadingModal').hide();
+			},
+			3000
+		);
+    });
+	
+	/**
+	 * Paging Navigation 
+	 */
+	$(".nextLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage<submissionPageCount) {
+			submissionCurrPage++;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage<=submissionPageCount) {
+			parentDiv.find(".nextLink").hide();
+		}
+	});
 
-  $("#registerSuccess .closeModal").click(function () {
-    closeModal();
-    window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
-  });
+	$(".prevLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage>1) {
+			submissionCurrPage--;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage==1) {
+			parentDiv.find(".prevLink").hide();
+		}
+	});	
+	
+	$(".viewAll").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		parentDiv.find(".nextLink").hide();
+		parentDiv.find(".prevLink").hide();
+		parentDiv.find(".submissionPage").show();
+		parentDiv.find(".viewAll").hide();
+	});
+	
+}); 
 
-});
 
 /* checkpoint contest css*/
 $(function () {
