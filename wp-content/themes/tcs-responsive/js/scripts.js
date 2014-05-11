@@ -47,6 +47,19 @@ var app = {
       createBannerSlider();
     });
 
+    // new promo module banner slider
+    $('#promo-banner .slider').bxSlider({
+      minSlides: 1,
+      maxSlides: 1,
+      controls: false,
+      responsive: true,
+      auto: true,
+      pause: 5000,
+      slideMargin: 2,
+	    adaptiveHeight: true
+    });
+
+
     $('.dataTable.challenges tbody, .layChallenges .dataTable tbody').html(null);
     $('#gridView .contestGrid').html(null);
     // challenges list init
@@ -188,40 +201,15 @@ var app = {
       return false;
     });
 
-		// tab navs
-		$('.tabNav a').on(ev, function() {
-			if($(this).hasClass('disabled')){
-				return false
-			}else{
-				var id = $(this).attr('href');
-				$('.tab', $(this).closest('.tabsWrap')).hide();
-				$(id).fadeIn();
-				$('.active', $(this).closest('nav')).removeClass('active');
-				$(this).addClass('active');
-
-
-			$('.submissionAllView').show();
-			$('.submissionSingleView').hide();
-				/**
-				 * Submission remove right tab
-				 */
-				if($(this).attr('href')=="#submissions") {
-					$("#mainContent .rightSplit").removeClass("grid-3-3");
-					$("#mainContent .rightSplit").addClass("fullWidth");
-					$(".sideStream").hide();
-					if ($(window).width() > 1019) {
-						$("#rightTitleOnFull").show();
-					}
-				}
-				else {
-					$("#mainContent .rightSplit").addClass("grid-3-3");
-					$("#mainContent .rightSplit").removeClass("fullWidth");
-					$(".sideStream").show();
-					$("#rightTitleOnFull").hide();
-				}
-				return false;
-			}
-		});
+    // tab navs
+    $('.tabNav a').on(ev, function() {
+      var id = $(this).attr('href');
+      $('.tab', $(this).closest('.tabsWrap')).hide();
+      $(id).fadeIn();
+      $('.active', $(this).closest('nav')).removeClass('active');
+      $(this).addClass('active');
+      return false;
+    });
   },
 
   setLoading: function() {
