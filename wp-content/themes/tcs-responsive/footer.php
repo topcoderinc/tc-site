@@ -503,6 +503,7 @@ $blog_posts = get_posts($blog_posts_args);
   <input type="text" class="email" placeholder="Email"/>
   <span class="err1">Required field</span>
   <span class="err2">Invalid email address</span>
+  <span class="err3">Email already in use</span>
   <span class="valid"></span>
 </p>
 
@@ -642,6 +643,7 @@ $blog_posts = get_posts($blog_posts_args);
 <script>
   var socialProviderId = "", socialUserName = "", socialEmail = "", socialProvider = "";
   var utmSource = '', utmMedium = '', utmCampaign = '';
+  var loginState = '';
   $(function () {
     function getParameterByName(name) {
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
