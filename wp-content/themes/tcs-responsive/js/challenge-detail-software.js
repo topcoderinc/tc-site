@@ -11,6 +11,9 @@ var informationViewSlider;
 var sliderClone;
 var submissionCurrPage=1;
 
+var tcjwt = getCookie('tcjwt');
+
+
 function createSlider() {
   sliderClone = $('.columnSideBar .slider > ul:first-child').clone();
   slider = jQuery('.columnSideBar .slider > ul:first-child').bxSlider({
@@ -137,6 +140,7 @@ $(document).ready(function () {
 
   function updateRegSubButtons(challenge) {
     // if there was an error getting the challenge then enable the buttons
+	alert(challenge.status);
     if (challenge.status == false) {
       $('.challengeRegisterBtn').removeClass('disabled');
       $('.challengeSubmissionBtn').removeClass('disabled');
@@ -398,33 +402,67 @@ $(function () {
     $(".nextDeadlineNextBoxContent").addClass("hide");
     $(".allDeadlineNextBoxContent").removeClass("hide");
     $(".contestEndedBox").addClass("hide");
-		$(".allDeadlineNextBoxContent").removeClass("hide");
-		$(".contestEndedBox").addClass("hide");
-		
-	});
-	//switch the view all deadline and view next deadline
-	$(".viewNextDeadLineBtn").click(function(){
-        $(this).parent().addClass('hide').siblings().removeClass('hide');
-		$(".contestEndedBox").addClass("hide");
-//		$(".allDeadlinedeadlineBoxContent").addClass("hide");
-		$(".nextDeadlinedeadlineBoxContent").removeClass("hide");
-		$(".allDeadlineNextBoxContent").addClass("hide");
-		$(".nextDeadlineNextBoxContent").removeClass("hide");
-	}); 
-	
-	$(".morePayments.active").click(function(){
-		if($(this).hasClass("closed")){
-			$(".morePayments.active").removeClass("closed");
-			$(".morePayments.active").addClass("open");
-			$(".additionalPrizes").removeClass("hide");
-		} else {
-			$(".morePayments.active").removeClass("open");
-			$(".morePayments.active").addClass("closed");
-			$(".additionalPrizes").addClass("hide");
-		}
-	});
 
-    /*new functions*/
+  });
+  //switch the view all deadline and view next deadline
+  $(".viewNextDeadLineBtn").click(function () {
+    $(".contestEndedBox").addClass("hide");
+    $(".allDeadlinedeadlineBoxContent").addClass("hide");
+    $(".nextDeadlinedeadlineBoxContent").removeClass("hide");
+    $(".allDeadlineNextBoxContent").addClass("hide");
+    $(".nextDeadlineNextBoxContent").removeClass("hide");
+  });
+
+  $(".morePayments.active").click(function () {
+    if ($(this).hasClass("closed")) {
+      $(".morePayments.active").removeClass("closed");
+      $(".morePayments.active").addClass("open");
+      $(".additionalPrizes").removeClass("hide");
+    } else {
+      $(".morePayments.active").removeClass("open");
+      $(".morePayments.active").addClass("closed");
+      $(".additionalPrizes").addClass("hide");
+    }
+  });
+
+  $(".challengeRegisterBtn").click(function () {
+    if ($(this).hasClass("disabled")) { return false; }
+    var tcjwt = getCookie('tcjwt');
+    if (tcjwt) {
+      if ($('.loading').length <= 0) {
+        $('body').append('<div class="loading">Loading...</div>');
+      } else {
+        $('.loading').show();
+      }
+      $.getJSON(ajaxUrl, {
+        "action": "register_to_challenge",
+        "challengeId": challengeId,
+        "jwtToken": tcjwt.replace(/["]/g, "")
+      }, function (data) {
+        $('.loading').hide();
+        if (data["message"] === "ok") {
+          showModal("#registerSuccess");
+        } else if (data["error"]["details"] === "You should agree with all terms of use.") {
+          window.location = siteURL + "/challenge-details/terms/" + challengeId + "?challenge-type=" + challengeType;
+        } else if (data["error"]["details"]) {
+          $("#registerFailed .failedMessage").text(data["error"]["details"]);
+          showModal("#registerFailed");
+        }
+      });
+    } else {
+      $('.actionLogin').click();
+    }
+  });
+
+  if (autoRegister) {
+    $(".challengeRegisterBtn").click();
+  }
+
+  $("#registerSuccess .closeModal").click(function () {
+    closeModal();
+    window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
+  });
+
     var QueryString = function () {
         // This function is anonymous, is executed immediately and
         // the return value is assigned to QueryString!
