@@ -128,12 +128,12 @@ function createDevelopSubmissionMap($contest) {
     if ($submission_map[ $submission->handle ]) {
       $sub_date = new DateTime($submission->submissionDate);
       if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[$submission->handle] = $submission;
+        $submission_map[ $submission->handle ] = $submission;
         $cur_date                              = new DateTime($submission->submissionDate);
       }
     }
     else {
-      $submission_map[$submission->handle] = $submission;
+      $submission_map[ $submission->handle ] = $submission;
       $cur_date                              = new DateTime($submission->submissionDate);
     }
   }
@@ -155,7 +155,7 @@ include locate_template('header-challenge-landing.php');
 } ?>">
 <div id="main">
 
-<?php include(locate_template('page-challenge-details-header.php'));?>
+<?php include( locate_template('content-basic-challenge-details.php') ); ?>
 
 <div id="contest-overview" class="tableWrap tab<?php if($_GET['tab']=='submission') echo ' hide';?>">
   <?php
@@ -633,75 +633,6 @@ include locate_template('header-challenge-landing.php');
 
   <li class="slide">
     <div class="forumFeed slideBox">&nbsp;<br/>
-      <!--
-
-<h3>Forums Feed:</h3>
-<div class="inner">
- <div class="scroll-pane jspScrollable" style="overflow: hidden; padding: 0px; width: 263px;" tabindex="0">
-
-
-
- <div class="jspContainer" style="width: 263px; height: 400px;"><div class="jspPane" style="padding: 0px; width: 256px; top: 0px;"><div class="forumItemWrapper">
- <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-    </div>
-    <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-    </div>
-    <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     </div>
-     <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     <div class="forumItem">
-     </div>
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     </div>
-     <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     </div>
-     <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     </div>
-     <div class="forumItem">
-         <p class="forumTitle"><a href="#">Forum title lorem ipsum</a></p>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu eros id nunc</p>
-         <p class="forumInfo">
-         Post by <a href="#">Someone</a> |  12/13/13  07:00 ET
-         </p>
-     </div>
-     </div></div><div class="jspVerticalBar"><div class="jspCap jspCapTop"></div><div class="jspTrack" style="height: 400px;"><div class="jspDrag" style="height: 214px;"><div class="jspDragTop"></div><div class="jspDragBottom"></div></div></div><div class="jspCap jspCapBottom"></div></div></div></div>
-</div>
--->
-
     </div>
   </li>
 <?php else: ?>
