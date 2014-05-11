@@ -393,6 +393,14 @@
     padding-left: 32px;
     background: url("../i/ico-contest-forum.png") no-repeat 0 0;
 }
+
+.challenge-detail .columnSideBar {
+    display: block;
+    clear: both;
+    width: 100%;
+    background: #f7f7f7;
+    border: 1px solid #e1e1e1;
+}
 #rightTitleOnFull {
 	display:none;
 	position:absolute;
@@ -410,34 +418,23 @@
 	background: url("../i/ico-contest-forum.png") no-repeat 0 0;
 }
 
-.challenge-detail .columnSideBar{
-	display:block;
-	clear:both;
-	width: 100%;
-	background: #f7f7f7;
-	border: 1px solid #e1e1e1;
+.challenge-detail .columnSideBar .inner {
+    padding: 10px 10px 0 10px;
 }
 
-.challenge-detail .columnSideBar .sidebar{
-	display:block;
-	overflow:hidden;
+.challenge-detail .columnSideBar h3 {
+    color: #00aeff;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 11px 10px;
+    text-transform: uppercase;
 }
 
-.challenge-detail .columnSideBar .inner{
-	padding: 10px 10px 0 10px;
+.challenge-detail.develop .columnSideBar h3 {
+    color: #228400;
 }
 
-.challenge-detail .columnSideBar h3{
-        color: #00aeff;
-		font-size:16px; 
-		font-weight: bold;
-		border-bottom: 1px solid #e7e7e7; 
-		padding: 11px 10px;
-		text-transform: uppercase;
-    }
-.challenge-detail.develop .columnSideBar h3{
-        color: #228400;
-    }
 /*.challenge-detail .columnSideBar ul{
 	transform:none!important;
 	transition:none!important;
@@ -456,12 +453,14 @@
     display: block;
     width: 100% !important;
 }
+
+.reviewStyle p a.tooltip {
     display: inline-block;
     background: #ff8a00 url("../i/question.png") no-repeat 3px 2px;
     border: 1px solid #b56200;
-    height: 12px; 
+    height: 12px;
     width: 12px;
-    text-align: center; 
+    text-align: center;
     border-radius: 3px;
     behavior: url(./css/PIE.htc);
     position: relative;
@@ -489,32 +488,37 @@
     width: 210px;
     z-index: 100;
 }
+
 .tip .tipHeader {
     background: #F7F7F7;
     border: 1px solid #E1E1E1;
     clear: both;
     display: block;
-	border-bottom:none;
+    border-bottom: none;
 }
+
 .tip .tipHeader h2 {
-    color: #333333; 
+    color: #333333;
     font-size: 12px;
     font-weight: bold;
     line-height: 30px;
     margin: 0 0 0 10px;
     text-align: left;
 }
+
 .tip .tipBody {
-	font-size: 12px;
+    font-size: 12px;
     margin: 0;
     padding: 5px 10px;
-	background: #fff;
+    background: #fff;
     border: 1px solid #E1E1E1;
 }
+
 .tip .tipBody ul {
     margin: 5px 0;
     padding: 0;
 }
+
 .tip .tipBody ul li {
     line-height: 18px;
     list-style: none outside none;
@@ -522,13 +526,16 @@
     padding: 5px 18px 5px 10px;
     text-align: left;
 }
+
 .tip .tipBody ul li a, .tip .tipBody ul li a.reviewerName {
     font-size: 12px;
     text-decoration: none;
 }
+
 .tip .tipBody ul li a:hover, .tip .tipBody ul li a.reviewerName:hover {
     text-decoration: underline;
 }
+
 .tip .tipBody ul li a.reviewerName {
     background-position: 0 center;
     background-repeat: no-repeat;
@@ -647,6 +654,10 @@
 
 .challenge-detail .btnAction:hover {
     background: #0096ff !important;
+}
+
+.challenge-detail.develop .btnAction, .challenge-detail.design .btnAction {
+    opacity: 1.0 !important;
 }
 
 .challenge-detail.develop .btnAction {
@@ -1282,424 +1293,435 @@
     padding-right: 29px;
     color: #333;
 }
+
 #submissions .informationView .meataAction .download,
-#submissions .informationView .meataAction .download:visited{
-	background: url(../i/winner-actions.png) no-repeat 0 bottom;
-	padding-left: 29px;
-	height: 23px;
-	font-size: 14px;
-	display: inline-block;
-	color: #ff8a00;
-	line-height: 23px;
+#submissions .informationView .meataAction .download:visited {
+    background: url(../i/winner-actions.png) no-repeat 0 bottom;
+    padding-left: 29px;
+    height: 23px;
+    font-size: 14px;
+    display: inline-block;
+    color: #ff8a00;
+    line-height: 23px;
 }
+
 #submissions .informationView .meataAction .viewSubmission,
-#submissions .informationView .meataAction .viewSubmission:visited{
-	background: url(../i/winner-actions.png) no-repeat 0 0;
-	width: 23px;
-	height: 23px;
-	margin-right: 8px;
-	position: relative;
-	top: 6px;
-	display: inline-block;
+#submissions .informationView .meataAction .viewSubmission:visited {
+    background: url(../i/winner-actions.png) no-repeat 0 0;
+    width: 23px;
+    height: 23px;
+    margin-right: 8px;
+    position: relative;
+    top: 6px;
+    display: inline-block;
 }
-.informationView .meataAction .download:hover{
+
+.informationView .meataAction .download:hover {
     opacity: .6;
     color: #FF8A00;
 }
-.informationView .meataAction .viewSubmission:hover{
+
+.informationView .meataAction .viewSubmission:hover {
     opacity: .6;
 }
 
-.furtherInfo{
-	padding: 14px 20px;
-	font-size: 13px;
+.furtherInfo {
+    padding: 14px 20px;
+    font-size: 13px;
 }
 
-.challenge-detail #submissions .furtherInfo p{
-	padding-bottom: 0;
-	margin-bottom: 0;
-	color: #333;
-	line-height: normal;
+.challenge-detail #submissions .furtherInfo p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    color: #333;
+    line-height: normal;
 }
-	.informationView h6{
-		font-size: 15px;
-		font-weight: bold;
-		padding-bottom: 10px;
-		color: #00aeff;
-	}
-	.informationView .commentInfo{
-		float: left;
-		color: #333;
-		width: 505px;
-		padding-right: 45px;
-	}
-	.submissionsR .informationView .commentInfo{
-		padding-bottom: 10px;
-		width: 100%;
-	}
-	.informationView label{
-		color: #333;
-		font-weight: bold;
-	}
-	.informationView .fontInfo{
-		float: left;
-		width: 150px;
-	}
-	.informationView .stockArtInfo{
-		float: left;
-		width: 260px;
-	}
+
+.informationView h6 {
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: #00aeff;
+}
+
+.informationView .commentInfo {
+    float: left;
+    color: #333;
+    width: 505px;
+    padding-right: 45px;
+}
+
+.submissionsR .informationView .commentInfo {
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.informationView label {
+    color: #333;
+    font-weight: bold;
+}
+
+.informationView .fontInfo {
+    float: left;
+    width: 150px;
+}
+
+.informationView .stockArtInfo {
+    float: left;
+    width: 260px;
+}
+
 /*design submission*/
-.submissionShowcase{
-	border: 1px solid #e7e7e7;
-}
-.submissionsR .submissionShowcase{
-	padding-bottom: 15px;
-}
-.submissionShowcaseAlt{
-	border-top: none;
+.submissionShowcase {
+    border: 1px solid #e7e7e7;
 }
 
-	
-
-.submissionShowcase .scrollPane
-{
-	border: none;
-	width: 227px;
-	float: left;
-	height: 680px;
-	padding-top: 18px;
-	overflow: scroll;
-	overflow-x: hidden;
-}
-.submissionsR .submissionShowcase .scrollPane{
-	height: 510px;
-}
-.jspContainer
-{
-	overflow: hidden;
-	position: relative;
+.submissionsR .submissionShowcase {
+    padding-bottom: 15px;
 }
 
-.jspPane
-{
-	position: absolute;
+.submissionShowcaseAlt {
+    border-top: none;
 }
 
-.jspVerticalBar
-{
-	position: absolute;
-	top: 20px;
-	overflow: hidden;
-	right: 0;
-	width: 5px;
-	height: 640px;
-}
-.submissionsR .jspVerticalBar{
-	height: 470px;
+.submissionShowcase .scrollPane {
+    border: none;
+    width: 227px;
+    float: left;
+    height: 680px;
+    padding-top: 18px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-.jspCap
-{
-	display: none;
+.submissionsR .submissionShowcase .scrollPane {
+    height: 510px;
 }
 
-
-
-.jspTrack
-{
-	background: #fff;
-	position: relative;
+.jspContainer {
+    overflow: hidden;
+    position: relative;
 }
 
-.jspDrag
-{
-	background: #e1e1e1;
-	border-radius: 5px;
-	position: relative;
-	bottom: 20px;
-	left: 0;
-	cursor: pointer;
+.jspPane {
+    position: absolute;
 }
+
+.jspVerticalBar {
+    position: absolute;
+    top: 20px;
+    overflow: hidden;
+    right: 0;
+    width: 5px;
+    height: 640px;
+}
+
+.submissionsR .jspVerticalBar {
+    height: 470px;
+}
+
+.jspCap {
+    display: none;
+}
+
+.jspTrack {
+    background: #fff;
+    position: relative;
+}
+
+.jspDrag {
+    background: #e1e1e1;
+    border-radius: 5px;
+    position: relative;
+    bottom: 20px;
+    left: 0;
+    cursor: pointer;
+}
+
 #showSubmission {
-	position: absolute;
-	width:auto;
-	height:auto;	
+    position: absolute;
 }
-#showSubmission img{
-	display: block;
-	width:auto;
-	height:auto;
-	max-width: 100%;
+
+#showSubmission img {
+    display: block;
+    max-width: auto;
 }
-#showSubmission .content{
-	text-align: center;
-	padding-top: 37px;
+
+#showSubmission .content {
+    text-align: center;
+    padding-top: 37px;
 }
-#showSubmission .btnClose{
-	top: 9px;
+
+#showSubmission .btnClose {
+    top: 9px;
 }
-	.challenge-detail #submissions .submissionSingleView {
-		margin-top:-10px;
-	}
-	.challenge-detail #submissions .submissionShowcaseList{
-		padding-left: 19px;
-	}
-	.challenge-detail #submissions .submissionShowcaseList li{
-		padding: 0;
-		margin: 0;
-		margin: 5px 0;
-	}
-	.challenge-detail #submissions .submissionShowcaseList li a,
-	.challenge-detail #submissions .submissionShowcaseList li a:visited{
-		width: 201px;
-		padding-top:2px;
-		padding-left: 3px; 
-		display: block;
-		margin: 5px 0;
-		height: 157px;
-	}
-	.challenge-detail #submissions .submissionShowcaseList li a:hover{
-		background:url(../i/thumb-hover.png) no-repeat 0 0;
-	}
-	.challenge-detail #submissions .submissionShowcaseList li a.active,
-	.challenge-detail #submissions .submissionShowcaseList li a.active:visited,
-	.challenge-detail #submissions .submissionShowcaseList li a.active:hover{
-		background:url(../i/thumb-current.png) no-repeat 0 0;
-	}
 
-	.submissionBig,
-	.submissionBigMock{
-		width: 740px;
-		float: left;
-		padding: 22px 20px 10px 20px;
-	}
-	.submissionsR .submissionBig,
-	.submissionsR .submissionBigMock{
+.challenge-detail #submissions .submissionShowcaseList {
+    padding-left: 19px;
+}
 
-		width: 435px;
-	}
-	.challenge-detail #submissions .fullScreenBtn{
-		width: auto;
-		background-image: url(../i/fullViewIcon.png);
-		background-repeat: no-repeat;
-		background-position: 10px center;
-		padding-right: 20px;
-		padding-left: 40px;
-	}
-	.submissionBig p,
-	.submissionBigMock p{
-		padding-top: 12px;
-		text-align: center;
-	}
+.challenge-detail #submissions .submissionShowcaseList li {
+    padding: 0;
+    margin: 0;
+    margin: 5px 0;
+}
 
+.challenge-detail #submissions .submissionShowcaseList li a,
+.challenge-detail #submissions .submissionShowcaseList li a:visited {
+    width: 201px;
+    padding-top: 2px;
+    padding-left: 3px;
+    display: block;
+    margin: 5px 0;
+    height: 157px;
+}
 
+.challenge-detail #submissions .submissionShowcaseList li a:hover {
+    background: url(../i/thumb-hover.png) no-repeat 0 0;
+}
+
+.challenge-detail #submissions .submissionShowcaseList li a.active,
+.challenge-detail #submissions .submissionShowcaseList li a.active:visited,
+.challenge-detail #submissions .submissionShowcaseList li a.active:hover {
+    background: url(../i/thumb-current.png) no-repeat 0 0;
+}
+
+.submissionBig,
+.submissionBigMock {
+    width: 740px;
+    float: left;
+    padding: 22px 20px 10px 20px;
+}
+
+.submissionsR .submissionBig,
+.submissionsR .submissionBigMock {
+
+    width: 435px;
+}
+
+.challenge-detail #submissions .fullScreenBtn {
+    width: auto;
+    background-image: url(../i/fullViewIcon.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-right: 20px;
+    padding-left: 40px;
+}
+
+.submissionBig p,
+.submissionBigMock p {
+    padding-top: 12px;
+    text-align: center;
+}
 
 /*design submission not viewable*/
-.notView{
-	color: #006cff;
-	font-size: 30px;
-	padding-top: 160px;
-	margin-bottom: 160px;
-	margin-top: 160px;
-	text-align: center;
-	background: url(../i/notViewIcon.png) no-repeat center 0;
+.notView {
+    color: #006cff;
+    font-size: 30px;
+    padding-top: 160px;
+    margin-bottom: 160px;
+    margin-top: 160px;
+    text-align: center;
+    background: url(../i/notViewIcon.png) no-repeat center 0;
 }
-.challenge-detail #submissions .notView p{
-	font-size: 14px;
-	color: #666666;
-	padding-top: 15px;
+
+.challenge-detail #submissions .notView p {
+    font-size: 14px;
+    color: #666666;
+    padding-top: 15px;
 }
-.notView2{
-	color: #006cff;
-	font-size: 30px;
-	padding-top: 160px;
-	margin-bottom: 160px;
-	text-align: center;
+
+.challenge-detail #submissions ul.submissionList {
+    margin-top: 5px;
+    float: left;
+    margin-bottom: 0;
+    display: inline;
 }
-.challenge-detail #submissions .notView2 p{
-	font-size: 14px;
-	color: #000000;
-	padding-top: 15px;
+
+.challenge-detail #submissions .submissionList li {
+    border: 1px solid #dfe1e1;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    width: 225px;
+    background: #f7f7f7;
+    padding-bottom: 5px;
+    height: 280px;
+    float: left;
+    margin-right: 34px;
+    margin-bottom: 25px;
 }
-.challenge-detail #submissions ul.submissionList{
-	margin-top: 5px;
-	float: left;
-	margin-bottom: 0;
-	display: inline;
+
+.challenge-detail #submissions.submissionsR .submissionList li {
+    margin-right: 9px;
 }
-.challenge-detail #submissions .submissionList li{
-	border:1px solid #dfe1e1;
-	display: inline;
-	margin: 0;
-	padding: 0;
-	width: 225px;
-	background: #f7f7f7;
-	padding-bottom: 5px;
-	height: 280px;
-	float: left;
-	margin-right: 34px;
-	margin-bottom: 25px;
+
+.challenge-detail #submissions .submissionList li.lastItem {
+    margin-right: 0;
 }
- .challenge-detail #submissions.submissionsR .submissionList li{
-	margin-right: 9px;
+
+.challenge-detail #submissions li p {
+    text-align: left;
+    color: #666666;
+    font-size: 12px;
+    margin: 0;
+    font-weight: bold;
 }
-.challenge-detail #submissions .submissionList li.lastItem{
-	
+
+.challenge-detail #submissions li p {
+    width: 45%;
+    float: left;
+    display: inline-block;
+    padding: 3px 6px;
+    padding-right: 0;
 }
-.challenge-detail #submissions .submissionList li:nth-child(4n+4){
-	margin-right: 0;
-}
-.challenge-detail #submissions li p{
-	text-align: left;
-	color: #666666;
-	font-size: 12px;
-	margin: 0;
-	font-weight: bold;
-}
-.challenge-detail #submissions li p{
-	width: 45%;
-	float: left;
-	display: inline-block;
-	padding: 3px 6px;
-	padding-right: 0;
-}
-.challenge-detail #submissions li p.submissionInfo{
-	width: 50%;
-	float: left;
-	text-align: right;
-	padding-left: 0;
-	padding-right: 3px;
+
+.challenge-detail #submissions li p.submissionInfo {
+    width: 50%;
+    float: left;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 3px;
 
 }
-.challenge-detail #submissions li p .metaDate{
-	font-weight: normal;
-	font-size: 12px;
-	padding-bottom: 5px;
-	display: block;
+
+.challenge-detail #submissions li p .metaDate {
+    font-weight: normal;
+    font-size: 12px;
+    padding-bottom: 5px;
+    display: block;
 }
-.challenge-detail #submissions li p .subNum{
-	display: block;
-	padding-bottom: 5px;
+
+.challenge-detail #submissions li p .subNum {
+    display: block;
+    padding-bottom: 5px;
 }
-.challenge-detail #submissions li p .handle{
-	font-size: 12px;
-	font-weight: normal;
+
+.challenge-detail #submissions li p .handle {
+    font-size: 12px;
+    font-weight: normal;
 }
-.challenge-detail #submissions .submissionList li img{
-	width: 225px;
-	height: 226px;
-	display: block;
+
+.challenge-detail #submissions .submissionList li img {
+    width: 227px;
+    height: 226px;
+    display: block;
 }
-#submissions .viewSubmission{
-	display: inline-block;
-	margin-right: 10px;
-	font-size: 11px;
-	color: #333333;
-	height: 23px;
-	line-height: 23px;
+
+#submissions .viewSubmission {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 11px;
+    color: #333333;
+    height: 23px;
+    line-height: 23px;
 
 }
+
 #submissions .viewSubmission a,
-#submissions .viewSubmission a:visited{
-	float: left;
-	background: url(../i/winner-actions.png) no-repeat 0 0;
-	width: 23px;
-	height: 23px;
-	margin-right: 6px;
-	display: inline-block;
+#submissions .viewSubmission a:visited {
+    float: left;
+    background: url(../i/winner-actions.png) no-repeat 0 0;
+    width: 23px;
+    height: 23px;
+    margin-right: 6px;
+    display: inline-block;
 }
-#submissions .download{
-	font-size: 11px;
-	display: inline-block;
+
+#submissions .download {
+    font-size: 11px;
+    display: inline-block;
 }
+
 #submissions .download a,
-#submissions .download a:visited{
-	background: url(../i/winner-actions.png) no-repeat 0 bottom;
-	padding-left: 29px;
-	height: 23px;
-	display: inline-block;
-	line-height: 23px;
+#submissions .download a:visited {
+    background: url(../i/winner-actions.png) no-repeat 0 bottom;
+    padding-left: 29px;
+    height: 23px;
+    display: inline-block;
+    line-height: 23px;
 }
-#submissions .download a:hover{
+
+#submissions .download a:hover {
     opacity: .6;
     color: #FF8A00;
 }
-#submissions .viewSubmission a:hover{
-    opacity: .6;
-}
 
-.checkpointMainWrapper {
-	border-top:1px #E7E7E7 solid;
-	padding-top:10px;
+#submissions .viewSubmission a:hover {
+    opacity: .6;
 }
 
 /*design alt checkpoint*/
-.challenge-detail #checkpoints .winnerListAlt{
-	border: 1px solid #e7e7e7;
-	float: left;
-	background: #f7f7f7;
-	height: 45px;
+.challenge-detail #checkpoints .winnerListAlt {
+    border: 1px solid #e7e7e7;
+    float: left;
+    background: #f7f7f7;
+    height: 45px;
 }
-.challenge-detail #checkpoints .winnerListEndAlt{
-	height: 73px;
+
+.challenge-detail #checkpoints .winnerListEndAlt {
+    height: 73px;
 }
-	.challenge-detail #checkpoints .winnerListAlt li{
-			float: left;
-			font-size: 16px;
-			padding: 0;
-			line-height: normal;
-			margin-left: 0;
-			margin-bottom: 10px;
-	}
-	.challenge-detail #checkpoints .winnerListAlt li .box{
 
-		background: #f7f7f7;
-	}
-	.challenge-detail #checkpoints .winnerListAlt li.last{
-			margin-right: 0;
-		}
+.challenge-detail #checkpoints .winnerListAlt li {
+    float: left;
+    font-size: 16px;
+    padding: 0;
+    line-height: normal;
+    margin-left: 0;
+    margin-bottom: 10px;
+}
 
-		.winnerListAlt li .box{
-			height: 45px;
-			text-align: center;
-			width: 201px;
-			font-weight: bold;
-			overflow: hidden;
-			line-height: 45px;
-			display: inline-block;
-			font-size: 18px;
-			color: #00aeff;
+.challenge-detail #checkpoints .winnerListAlt li .box {
 
-		}
-		.winnerListAlt li .boxName{
-			text-align: center;
-			width: 201px;
-			display: block;
-			border-top: none;
-			height: 28px;
-			position: relative;
-			border-top: 1px solid #e7e7e7;
-			background: #fff;
-			top: -1px;
-			line-height: 32px;
-		}
-		.winnerListAlt li .boxName span{
-			background: url(../i/boxArrow.png) no-repeat 0 0;
-			width: 15px;
-			height: 8px;
-			display: block;
-			position: absolute;
-			top: -1px;
-			left: 50%;
-			margin-left: -8px;
+    background: #f7f7f7;
+}
 
-		}
-		.winnerList li .box span a{
-			font-size: 13px;
-		}
+.challenge-detail #checkpoints .winnerListAlt li.last {
+    margin-right: 0;
+}
 
+.winnerListAlt li .box {
+    height: 45px;
+    text-align: center;
+    width: 201px;
+    font-weight: bold;
+    overflow: hidden;
+    line-height: 45px;
+    display: inline-block;
+    font-size: 18px;
+    color: #00aeff;
 
+}
+
+.winnerListAlt li .boxName {
+    text-align: center;
+    width: 201px;
+    display: block;
+    border-top: none;
+    height: 28px;
+    position: relative;
+    border-top: 1px solid #e7e7e7;
+    background: #fff;
+    top: -1px;
+    line-height: 32px;
+}
+
+.winnerListAlt li .boxName span {
+    background: url(../i/boxArrow.png) no-repeat 0 0;
+    width: 15px;
+    height: 8px;
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    margin-left: -8px;
+
+}
+
+.winnerList li .box span a {
+    font-size: 13px;
+}
 
 /*design normal checkpoint*/
 .challenge-detail #checkpoints .winnerList li {
@@ -1711,549 +1733,637 @@
     margin-left: 0;
     margin-bottom: 10px;
 }
-		.develop #checkpoints .winnerList li{
-			margin-right: 23px;
-		}
-		.challenge-detail #checkpoints .winnerList li a{
-			font-size: 13px;
-		}
-		.challenge-detail #checkpoints .winnerList li.last{
-			margin-right: 0;
-		}
-		.winnerList li .box{
-			height: 45px;
-			text-align: center;
-			width: 188px;
-			font-weight: bold;
-			overflow: hidden;
-			line-height: 45px;
-			display: inline-block;
-			font-size: 18px;
-			color: #00aeff;
-			border: 1px solid #e7e7e7;
-			background: #f7f7f7;
-			cursor:pointer;
 
-		}
-		.checkpointsR .winnerList li .box{
-			width: 127px;
-		}
-		.winnerList li .boxName{
-			text-align: center;
-			width: 188px;
-			display: block;
-			border: 1px solid #e7e7e7;
-			border-top: none;
-			height: 28px;
-			position: relative;
-			top: -1px;
-			line-height: 32px;
-		}
-		.checkpointsR .winnerList li .boxName{
-			width: 127px;
-		}
-		.winnerList li .boxName span{
-			background: url(../i/boxArrow.png) no-repeat 0 0;
-			width: 15px;
-			height: 8px;
-			display: block;
-			position: absolute;
-			top: -1px;
-			left: 50%;
-			margin-left: -8px;
+.develop #checkpoints .winnerList li {
+    margin-right: 23px;
+}
 
-		}
-		.winnerList li .box span a{
-			font-size: 13px;
-		}
-		.challenge-detail #checkpoints .winnerListAlt li a{
-			font-size: 13px;
-		}
-		
-	.challenge-detail #checkpoints h1{
-		text-transform: uppercase;
-	}
+.challenge-detail #checkpoints .winnerList li a {
+    font-size: 13px;
+}
 
-	.challenge-detail #checkpoints h1.noBorder{
-		border-bottom: none;
-		padding-bottom: 0;
-		padding-top: 0;
-	}
-	.expandCollaspeList{
-		border: 1px solid #e7e7e7;
-		border-top: none;
-	}	
-	.challenge-detail #checkpoints ul li{
-		padding: 0;
+.challenge-detail #checkpoints .winnerList li.last {
+    margin-right: 0;
+}
 
-	}
-		.expandCollaspeList li .bar{
-			padding: 0 10px;
-			font-size: 16px;
-			line-height: 42px;
-			border-bottom: 1px solid #e7e7e7;
-			border-top: 1px solid #e7e7e7;
-			height: 42px;
-			font-weight: bold;
-			background: #eee;
-			color: #666;
-		}
-			.expandCollaspeList li a,
-			.expandCollaspeList li a:visited{
-				float: right;
-				width: 18px;
-				height: 17px;
-				background-repeat: no-repeat;
-				background-image: url(../i/ecIcon.png);
-				position: relative;
-				top: 12px;
-				background-position: 0 0;
+.winnerList li .box {
+    height: 45px;
+    text-align: center;
+    width: 188px;
+    font-weight: bold;
+    overflow: hidden;
+    line-height: 45px;
+    display: inline-block;
+    font-size: 18px;
+    color: #00aeff;
+    border: 1px solid #e7e7e7;
+    background: #f7f7f7;
 
-			}
-			.expandCollaspeList li a:hover{
-				background-position: 0 -17px;
+    cursor: pointer;
+}
 
-			}
-			.expandCollaspeList li .collapseIcon,
-			.expandCollaspeList li .collapseIcon:visited{
-				background-position: 0 -34px;
-			}
-			.expandCollaspeList li .collapseIcon:hover{
-				background-position: 0 -51px;
-			}
-		.expandCollaspeList li .feedBackContent{
-			color: #666;
-			padding: 9px 9px 0 9px;
-		}
-		.challenge-detail #checkpoints p{
-			padding-bottom: 23px;
-			line-height: 23px;
-			color: #666;
-			font-size: 15px;
-			margin-bottom: 0;
-		}
-		.challenge-detail #checkpoints p.singleLine{
-			padding-bottom: 10px;
-		}
-		.challenge-detail #checkpoints p.info{
-			padding-bottom: 0;
-			padding: 0 0 20px 0;
-			line-height: normal;
-		}
+.checkpointsR .winnerList li .box {
+    width: 127px;
+}
+
+.winnerList li .boxName {
+    text-align: center;
+    width: 188px;
+    display: block;
+    border: 1px solid #e7e7e7;
+    border-top: none;
+    height: 28px;
+    position: relative;
+    top: -1px;
+    line-height: 32px;
+}
+
+.checkpointsR .winnerList li .boxName {
+    width: 127px;
+}
+
+.winnerList li .boxName span {
+    background: url(../i/boxArrow.png) no-repeat 0 0;
+    width: 15px;
+    height: 8px;
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    margin-left: -8px;
+
+}
+
+.winnerList li .box span a {
+    font-size: 13px;
+}
+
+.challenge-detail #checkpoints .winnerListAlt li a {
+    font-size: 13px;
+}
+
+.challenge-detail #checkpoints h1 {
+    text-transform: uppercase;
+}
+
+.challenge-detail #checkpoints h1.noBorder {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.expandCollaspeList {
+    border: 1px solid #e7e7e7;
+    border-top: none;
+}
+
+.challenge-detail #checkpoints ul li {
+    padding: 0;
+
+}
+
+.expandCollaspeList li .bar {
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 42px;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
+    height: 42px;
+    font-weight: bold;
+    background: #f7f7f7;
+    color: #666;
+
+    cursor: pointer;
+}
+
+.expandCollaspeList li .bar:hover {
+    color: #a5a5a5;
+    background: #fbfbfb;
+}
+
+.expandCollaspeList li a,
+.expandCollaspeList li a:visited {
+    float: right;
+    width: 18px;
+    height: 17px;
+    background-repeat: no-repeat;
+    background-image: url(../i/ecIcon.png);
+    position: relative;
+    top: 12px;
+    background-position: 0 0;
+
+    -webkit-transition-duration: 0s;
+    -moz-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+.expandCollaspeList li .bar:hover a {
+    background-position: 0 -17px;
+
+}
+
+.expandCollaspeList li .collapseIcon,
+.expandCollaspeList li .collapseIcon:visited {
+    background-position: 0 -34px;
+}
+
+.expandCollaspeList li .bar:hover .collapseIcon {
+    background-position: 0 -51px;
+}
+
+.expandCollaspeList li .feedBackContent {
+    color: #666;
+    padding: 9px 9px 0 9px;
+}
+
+.challenge-detail #checkpoints p {
+    padding-bottom: 23px;
+    line-height: 23px;
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 0;
+
+    white-space: pre-line;
+}
+
+.challenge-detail #checkpoints p.singleLine {
+    padding-bottom: 10px;
+}
+
+.challenge-detail #checkpoints p.info {
+    padding-bottom: 0;
+    padding: 0 0 20px 0;
+    line-height: normal;
+}
 
 /*dev checkpoint*/
-.develop .winnerList li{
-	position: relative;
-	margin-right: 20px;
+.develop .winnerList li {
+    position: relative;
+    margin-right: 20px;
 }
-.develop .winnerList li .box{
-	color: #228400;
-	width: 490px;
+
+.develop .winnerList li .box {
+    color: #228400;
+    width: 490px;
 }
-.develop .winnerList li .boxName{
-	width: 490px;
+
+.develop .winnerList li .boxName {
+    width: 490px;
 }
 
 .develop .checkpointsR .winnerList li .box,
-.develop .checkpointsR .winnerList li .boxName{
-	width: 340px;
-}
-.develop .prizeIcon{
-	position: absolute;
-	width: 21px;
-	height: 30px;
-	display: block;
-	top: 0;
-	left: 5px;
-	background-position: 0 0;
-	background-repeat: no-repeat;
-}
-.develop .firstPrizeIcon{
-	background-image: url(../i/firstPrizeIcon.png);
-}
-.develop .secondPrizeIcon{
-	background-image: url(../i/secondPrizeIcon.png);
+.develop .checkpointsR .winnerList li .boxName {
+    width: 340px;
 }
 
-.seeMoreLink{
-	font-weight: bold;
+.develop .prizeIcon {
+    position: absolute;
+    width: 21px;
+    height: 30px;
+    display: block;
+    top: 0;
+    left: 5px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
 }
 
-
-
-
-
-	
-@media (max-width: 1019px){
-	/*design alt checkpoint*/
-.challenge-detail #checkpoints .winnerListAlt{
-	height: auto;
-	width: 100%
+.develop .firstPrizeIcon {
+    background-image: url(../i/firstPrizeIcon.png);
 }
-.challenge-detail #checkpoints .winnerListAlt li{
-			float: none;
-			margin-right: 0;
-			font-size: 18px;
-			padding: 0;
-			line-height: normal;
-			border-bottom: 1px solid #e7e7e7;
-			margin-left: 0;
-			margin-bottom: 0;
-			width: 100%;
-		}
-.challenge-detail #checkpoints .winnerListAlt li.last{
-	border-bottom: none
+
+.develop .secondPrizeIcon {
+    background-image: url(../i/secondPrizeIcon.png);
 }
-		.winnerListAlt li .box{
-			width: 100%;
-			overflow: hidden;
-			height: 45px;
-			line-height: 45px;
-			display: block;
-		}
 
-		.winnerListEndAlt li .box{
-			width: 50%;
-			float: left;
-		}
-		.winnerListAlt li .boxName{
-			top: 0;
-			width: 49%;
-			float: left;
-			height: 45px;
-			line-height: 45px;
-			border-top: none;
-			border-left: 1px solid #e7e7e7;
-		}
-		.winnerListAlt li .boxName span{
-			background: url(../i/boxArrow-m.png) no-repeat 0 0;
-			width: 9px;
-			height: 13px;
-			top: 50%;
-			margin-top: -6px;
-			left: 7px;
-		}
+.seeMoreLink {
+    font-weight: bold;
+}
 
+@media (max-width: 1019px) {
+    /*design alt checkpoint*/
+    .challenge-detail #checkpoints .winnerListAlt {
+        height: auto;
+        width: 100%
+    }
 
-	/*design normal checkpoint*/
-    .challenge-detail #checkpoints .winnerList li{
-			float: none;
-			margin-right: 0;
-			font-size: 16px;
-			padding: 0;
-			line-height: normal;
-			margin-left: 0;
-			margin-bottom: 10px;
-			width: 100%;
-		}
-		.challenge-detail #checkpoints .winnerList li a{
-			font-size: 13px;
-		}
-		.winnerList li .box{
-			width: 100%;
-			overflow: hidden;
-			height: 45px;
-			line-height: 45px;
-			display: block;
-		}
+    .challenge-detail #checkpoints .winnerListAlt li {
+        float: none;
+        margin-right: 0;
+        font-size: 18px;
+        padding: 0;
+        line-height: normal;
+        border-bottom: 1px solid #e7e7e7;
+        margin-left: 0;
+        margin-bottom: 0;
+        width: 100%;
+    }
 
-		.checkpointsR .winnerList li .box{
-			width: 100%;
-		}
+    .challenge-detail #checkpoints .winnerListAlt li.last {
+        border-bottom: none
+    }
 
-		.challenge-detail #checkpoints .winnerListEnd li{
-			margin-bottom: 5px;
-		}
-		.winnerListEnd li .box{
-			width: 50%;
-			float: left;
-		}
-		.winnerList li .boxName{
-			top: 0;
-			width: 49%;
-			float: left;
-			font-size: 13px;
-			height: 45px;
-			line-height: 45px;
-			border-top: 1px solid #e7e7e7;
-			border-left: none;
-		}
-		.winnerList li .boxName span{
-			background: url(../i/boxArrow-m.png) no-repeat 0 0;
-			width: 9px;
-			height: 13px;
-			top: 50%;
-			margin-top: -6px;
-			left: 7px;
-		}
-		.develop .winnerList li .box,
-		.develop .checkpointsR .winnerList li .box{
-			width: 100%
-		}
+    .winnerListAlt li .box {
+        width: 100%;
+        overflow: hidden;
+        height: 45px;
+        line-height: 45px;
+        display: block;
+    }
 
+    .winnerListEndAlt li .box {
+        width: 50%;
+        float: left;
+    }
 
-		    	.challenge-detail #submissions li p{
-					display: inline-block;
-					padding: 3px 6px;
-					padding-right: 0;
-					padding-bottom: 0;
-					padding-left: 0;
-				}
-				.challenge-detail #submissions li p.submissionInfo{
-					text-align: left;
-					padding-left: 0;
-					padding-top: 0;
-					padding-right: 3px;
+    .winnerListAlt li .boxName {
+        top: 0;
+        width: 49%;
+        float: left;
+        height: 45px;
+        line-height: 45px;
+        border-top: none;
+        border-left: 1px solid #e7e7e7;
+    }
 
-				}
-				.challenge-detail #submissions li p .subNum{
-					padding-bottom: 3px;
-				}
-				.challenge-detail #submissions li p .viewSubmission {
-					
-					margin-right: 10px;
-				}
-				.challenge-detail #submissions li p .download{
-					
-					margin-right: 10px;
-				}
+    .winnerListAlt li .boxName span {
+        background: url(../i/boxArrow-m.png) no-repeat 0 0;
+        width: 9px;
+        height: 13px;
+        top: 50%;
+        margin-top: -6px;
+        left: 7px;
+    }
 
+    /*design normal checkpoint*/
+    .challenge-detail #checkpoints .winnerList li {
+        float: none;
+        margin-right: 0;
+        font-size: 16px;
+        padding: 0;
+        line-height: normal;
+        margin-left: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
 
-		/*dev checkpoint*/
-		.develop .winnerList li{
-			margin-right: 13px;
-		}
+    .challenge-detail #checkpoints .winnerList li a {
+        font-size: 13px;
+    }
 
-		.develop .winnerListEnd li .box{
-			width: 50%;
-		}
-		.develop .winnerListEnd li .boxName{
-			width: 49%;
-		}
+    .winnerList li .box {
+        width: 100%;
+        overflow: hidden;
+        height: 45px;
+        line-height: 45px;
+        display: block;
+    }
 
-		/*submission*/
-		.challenge-detail #submissions ul.submissionList{
-			display: none;
-		}
+    .checkpointsR .winnerList li .box {
+        width: 100%;
+    }
 
-		#submissions .bx-controls {
-			margin: 10px 0 10px 0;
-			text-align: center;
-		}
-		#submissions .bx-controls .bx-pager-item{
-	        display: inline;
-	        text-align: center;
-	        overflow: hidden;
-	    
-	        max-width: 21px;
-	        vertical-align: top;
-	        height: 11px;
-		}
-        #submissions .bx-controls .bx-pager-item a{
-            display: inline-block;
-            background: url(../i/orange-dots.png) no-repeat;
-            text-indent: -100px;
-            background-position: 0 0;
-            width: 11px;
-            height: 11px;
-            margin: 0 5px;
-            -moz-transition-duration: 0s; 
-			-webkit-transition-duration: 0s; 
-			transition-duration: 0s; 
-            overflow: hidden;
-	}
+    .challenge-detail #checkpoints .winnerListEnd li {
+        margin-bottom: 5px;
+    }
+
+    .winnerListEnd li .box {
+        width: 50%;
+        float: left;
+    }
+
+    .winnerList li .boxName {
+        top: 0;
+        width: 49%;
+        float: left;
+        font-size: 13px;
+        height: 45px;
+        line-height: 45px;
+        border-top: 1px solid #e7e7e7;
+        border-left: none;
+    }
+
+    .winnerList li .boxName span {
+        background: url(../i/boxArrow-m.png) no-repeat 0 0;
+        width: 9px;
+        height: 13px;
+        top: 50%;
+        margin-top: -6px;
+        left: 7px;
+    }
+
+    .develop .winnerList li .box,
+    .develop .checkpointsR .winnerList li .box {
+        width: 100%
+    }
+
+    .challenge-detail #submissions li p {
+        display: inline-block;
+        padding: 3px 6px;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+    }
+
+    .challenge-detail #submissions li p.submissionInfo {
+        text-align: left;
+        padding-left: 0;
+        padding-top: 0;
+        padding-right: 3px;
+
+    }
+
+    .challenge-detail #submissions li p .subNum {
+        padding-bottom: 3px;
+    }
+
+    .challenge-detail #submissions li p .viewSubmission {
+
+        margin-right: 10px;
+    }
+
+    .challenge-detail #submissions li p .download {
+
+        margin-right: 10px;
+    }
+
+    /*dev checkpoint*/
+    .develop .winnerList li {
+        margin-right: 13px;
+    }
+
+    .develop .winnerListEnd li .box {
+        width: 50%;
+    }
+
+    .develop .winnerListEnd li .boxName {
+        width: 49%;
+    }
+
+    /*submission*/
+    .challenge-detail #submissions ul.submissionList {
+        display: none;
+    }
+
+    #submissions .bx-controls {
+        margin: 10px 0 10px 0;
+        text-align: center;
+    }
+
+    #submissions .bx-controls .bx-pager-item {
+        display: inline;
+        text-align: center;
+        overflow: hidden;
+
+        max-width: 21px;
+        vertical-align: top;
+        height: 11px;
+    }
+
+    #submissions .bx-controls .bx-pager-item a {
+        display: inline-block;
+        background: url(../i/orange-dots.png) no-repeat;
+        text-indent: -100px;
+        background-position: 0 0;
+        width: 11px;
+        height: 11px;
+        margin: 0 5px;
+        -moz-transition-duration: 0s;
+        -webkit-transition-duration: 0s;
+        transition-duration: 0s;
+        overflow: hidden;
+    }
+
     #submissions .bx-controls .bx-pager-item a.active,
-    #submissions .bx-controls .bx-pager-item a:hover{
-        background-position: 0 -20px;        
-    	}
-	.challenge-detail #submissions .submissionSlider li{
-    	padding-left: 0;
-    	width: 100%;
-    	}
+    #submissions .bx-controls .bx-pager-item a:hover {
+        background-position: 0 -20px;
+    }
 
-	    .submissionSlider li div{
-	    	margin-bottom: 10px;
-	    	height: 100px;
-	    	border: 1px solid #e7e7e7;
-	    	}
-		    .submissionSlider li div img{
-		    	width: 100px;
-		    	height: 100px;
-		    	margin-right: 15px;
-		    	float: left;
-		    	display: block;
-		    	}
-				#submissions .pager{
-					display: none;
-				}
+    .challenge-detail #submissions .submissionSlider li {
+        padding-left: 0;
+        width: 100%;
+    }
 
+    .submissionSlider li div {
+        margin-bottom: 10px;
+        height: 100px;
+        border: 1px solid #e7e7e7;
+    }
 
-	.challenge-detail #submissions .submissionSingleSlider li{
-    	padding-left: 0;
-    	width: 100%;
-    	}
+    .submissionSlider li div img {
+        width: 100px;
+        height: 100px;
+        margin-right: 15px;
+        float: left;
+        display: block;
+    }
 
-	    .submissionSingleSlider li div{
-	    	margin-bottom: 10px;
-	    	height: 239px;
-	    	}
-		    .submissionSingleSlider li div img{
-		    	width: 298px;
-		    	height: 239px;
-		    	margin: 0 auto;
-		    	display: block;
-		    }
+    #submissions .pager {
+        display: none;
+    }
 
-	.informationViewSlider{
-		border: 1px solid #e1e1e1;
-		border-top: none;
-		margin-bottom: 12px;
-		background: #f7f7f7;
-	}
-	.informationViewSliderAlt{
-		border-top: 1px solid #e1e1e1;
-	}
-	.informationViewSlider .basicInfo{
-		padding: 0;
-		border-bottom: 1px solid #e1e1e1;
-		height: auto;
-	}
-	.basicInfoT{
-		border-bottom: 1px solid #e1e1e1;
-		height: 37px;
-		line-height: 37px;
-		padding: 0 15px;
-	}
-	.basicInfoB{
-		padding: 10px 18px;
-	}
-	.basicInfoB img{
-		margin-right: 11px;
-		border-radius: 50px;
-		width: 61px;
-		height: 61px;
-		float: left;
-		display: inline-block;
-	}
-	.basicInfoB .country{
-		display: block;
-		line-height: normal;
-		color: #666;
-		font-size: 12px;
-	}
-	.informationViewSlider .subNum{
-			font-size: 14px;
-			color: #00aeff;
-			display: inline-block;
+    .challenge-detail #submissions .submissionSingleSlider li {
+        padding-left: 0;
+        width: 100%;
+    }
 
-		}
-		.informationViewSlider .meataAction{
-			float: right;
-			font-size: 14px;
-			color: #666666;
-		}
-		.informationViewSlider .meataAction .metaDate{
-			display: inline-block;
-		}
-		.informationViewSlider .meataAction .viewSubmission{
-			color: #333333;
-		}
-		.informationViewSlider .meataAction .download{
-			color: #333333;
-		}
-		.viewNum{
-			display: inline-block;
-			padding-right: 29px;
-			color: #333;
-		}
+    .submissionSingleSlider li div {
+        margin-bottom: 10px;
+        height: 239px;
+    }
 
-	.informationViewSlider .basicInfo .meataAction{
-		float: right;
-	}
-	.informationViewSlider li{padding: 13px 20px}
-	#submissions .basicInfoAction .download,
-	#submissions .basicInfoAction .download:visited{
-		background: url(../i/winner-actions.png) no-repeat 0 bottom;
-		padding-left: 36px;
-		height: 23px;
-		font-size: 15px;
-		margin-top: 13px;
-		display: block;
-		color: #ff8a00;
-		line-height: 23px;
-	}
-	#submissions .basicInfoAction .viewNum{
-		font-size: 15px;
+    .submissionSingleSlider li div img {
+        width: 298px;
+        height: 239px;
+        margin: 0 auto;
+        display: block;
+    }
 
-	}
-	#submissions .basicInfoAction .viewSubmission,
-	#submissions .basicInfoAction .viewSubmission:visited{
-		background: url(../i/winner-actions.png) no-repeat 0 0;
-		width: 23px;
-		height: 23px;
-		font-size: 15px;
-		margin-right: 15px;
-		position: relative;
-		top: 6px;
-		display: inline-block;
-	}
-	.basicInfoAction .download:hover{
-	    opacity: .6;
-	    color: #FF8A00;
-	}
-	.basicInfoAction .viewSubmission:hover{
-	    opacity: .6;
-	}
-	.informationViewSlider h6{
-		font-size: 14px;
-		padding-bottom: 10px;
-		color: #00aeff;
-	}
-	.informationViewSlider .commentInfo{
-		color: #333;
-	}
-	.informationViewSlider label{
-		color: #333;
-		display: block;
-		font-weight: bold;
-	}
-	.informationViewSlider .fontInfo{ 
-		float: left;
-		width: 50%;
-	}
-	.informationViewSlider .stockArtInfo{
-		float: left;
-		width: 50%;
-	}
-	.challenge-detail #submissions .informationViewSlider li p{
-		width: 100%;
-	}
-	.challenge-detail #submissions h1{
-		word-spacing: -2px;
-	}
-	.submissionSingleSliderAlt{
-		margin-top: 20px;
-	}
-	.challenge-detail #submissions li p{
-		padding: 0;
-		line-height: normal;
-	}
-	#submissions .bx-controls{
-		margin-top: 0;
-	}
-	.challenge-detail #submissions li p a{
-		font-weight: normal;
-	}
+    .informationViewSlider {
+        border: 1px solid #e1e1e1;
+        border-top: none;
+        margin-bottom: 12px;
+        background: #f7f7f7;
+    }
 
-	.challenge-detail #checkpoints .winnerListAlt li{
-		background: #fff;
-	}
-	.challenge-detail #checkpoints .winnerListAlt{
-		float: none;
-	}
-	#showSubmission .content{
-		padding-top: 20px;
-	}
+    .informationViewSliderAlt {
+        border-top: 1px solid #e1e1e1;
+    }
+
+    .informationViewSlider .basicInfo {
+        padding: 0;
+        border-bottom: 1px solid #e1e1e1;
+        height: auto;
+    }
+
+    .basicInfoT {
+        border-bottom: 1px solid #e1e1e1;
+        height: 37px;
+        line-height: 37px;
+        padding: 0 15px;
+    }
+
+    .basicInfoB {
+        padding: 10px 18px;
+    }
+
+    .basicInfoB img {
+        margin-right: 11px;
+        border-radius: 50px;
+        width: 61px;
+        height: 61px;
+        float: left;
+        display: inline-block;
+    }
+
+    .basicInfoB .country {
+        display: block;
+        line-height: normal;
+        color: #666;
+        font-size: 12px;
+    }
+
+    .informationViewSlider .subNum {
+        font-size: 14px;
+        color: #00aeff;
+        display: inline-block;
+
+    }
+
+    .informationViewSlider .meataAction {
+        float: right;
+        font-size: 14px;
+        color: #666666;
+    }
+
+    .informationViewSlider .meataAction .metaDate {
+        display: inline-block;
+    }
+
+    .informationViewSlider .meataAction .viewSubmission {
+        color: #333333;
+    }
+
+    .informationViewSlider .meataAction .download {
+        color: #333333;
+    }
+
+    .viewNum {
+        display: inline-block;
+        padding-right: 29px;
+        color: #333;
+    }
+
+    .informationViewSlider .basicInfo .meataAction {
+        float: right;
+    }
+
+    .informationViewSlider li {
+        padding: 13px 20px
+    }
+
+    #submissions .basicInfoAction .download,
+    #submissions .basicInfoAction .download:visited {
+        background: url(../i/winner-actions.png) no-repeat 0 bottom;
+        padding-left: 36px;
+        height: 23px;
+        font-size: 15px;
+        margin-top: 13px;
+        display: block;
+        color: #ff8a00;
+        line-height: 23px;
+    }
+
+    #submissions .basicInfoAction .viewNum {
+        font-size: 15px;
+
+    }
+
+    #submissions .basicInfoAction .viewSubmission,
+    #submissions .basicInfoAction .viewSubmission:visited {
+        background: url(../i/winner-actions.png) no-repeat 0 0;
+        width: 23px;
+        height: 23px;
+        font-size: 15px;
+        margin-right: 15px;
+        position: relative;
+        top: 6px;
+        display: inline-block;
+    }
+
+    .basicInfoAction .download:hover {
+        opacity: .6;
+        color: #FF8A00;
+    }
+
+    .basicInfoAction .viewSubmission:hover {
+        opacity: .6;
+    }
+
+    .informationViewSlider h6 {
+        font-size: 14px;
+        padding-bottom: 10px;
+        color: #00aeff;
+    }
+
+    .informationViewSlider .commentInfo {
+        color: #333;
+    }
+
+    .informationViewSlider label {
+        color: #333;
+        display: block;
+        font-weight: bold;
+    }
+
+    .informationViewSlider .fontInfo {
+        float: left;
+        width: 50%;
+    }
+
+    .informationViewSlider .stockArtInfo {
+        float: left;
+        width: 50%;
+    }
+
+    .challenge-detail #submissions .informationViewSlider li p {
+        width: 100%;
+    }
+
+    .challenge-detail #submissions h1 {
+        word-spacing: -2px;
+    }
+
+    .submissionSingleSliderAlt {
+        margin-top: 20px;
+    }
+
+    .challenge-detail #submissions li p {
+        padding: 0;
+        line-height: normal;
+    }
+
+    #submissions .bx-controls {
+        margin-top: 0;
+    }
+
+    .challenge-detail #submissions li p a {
+        font-weight: normal;
+    }
+
+    .challenge-detail #checkpoints .winnerListAlt li {
+        background: #fff;
+    }
+
+    .challenge-detail #checkpoints .winnerListAlt {
+        float: none;
+    }
+
+    #showSubmission .content {
+        padding-top: 20px;
+    }
 }
+
+
+
 
 
