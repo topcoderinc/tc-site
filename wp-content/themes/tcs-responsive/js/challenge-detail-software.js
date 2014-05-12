@@ -140,8 +140,7 @@ $(document).ready(function () {
 
   function updateRegSubButtons(challenge) {
     // if there was an error getting the challenge then enable the buttons
-	alert(challenge.status);
-    if (challenge.status == false) {
+	if (challenge.status == false) {
       $('.challengeRegisterBtn').removeClass('disabled');
       $('.challengeSubmissionBtn').removeClass('disabled');
       $('.challengeSubmissionsBtn').removeClass('disabled');
