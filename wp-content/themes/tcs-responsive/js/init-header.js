@@ -83,7 +83,6 @@ $(document).ready(function() {
           }
         });
       } else if (!tcsso && $('.actionLogout').length > 1) {
-        loadCountries();
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log In").removeClass("actionLogout").addClass("actionLogin");
         $('.actionLogin').on('click', function() {
@@ -97,12 +96,10 @@ $(document).ready(function() {
         $('.logoutLink, .linkLogout, .userDetailsWrapper').removeClass('show').hide();
 
       } else {
-        loadCountries();
         $('.headerTopRightMenu .actionLogin').show();
       }
 
     } else {
-      loadCountries();
       $('.headerTopRightMenu .actionLogin').show();
     }
   });

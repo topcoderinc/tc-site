@@ -695,7 +695,7 @@ $blog_posts = get_posts($blog_posts_args);
     var auth0Register = new Auth0({
       domain: 'topcoder.auth0.com',
       clientID: '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P',
-      callbackURL: 'http://www.topcoder.com/?action=callback',
+      callbackURL: utmSource && utmCampaign && utmMedium ? 'http://www.topcoder.com/?action=callback?utmSource=' + utmSource + '&utmCampaign=' + utmCampaign + '&utmMedium=' + utmMedium : 'http://www.topcoder.com/?action=callback',
       state: loginState,
       redirect_uri: window.location.href
     });
