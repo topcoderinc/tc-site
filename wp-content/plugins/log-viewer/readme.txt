@@ -2,10 +2,10 @@
 Tags: debug, log, advanced, admin, development
 Contributors: mfisc
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CDNHTJWQEP5S2
-Tested up to: 3.8
+Tested up to: 3.9
 Requires at least: 3.4
-Stable Tag: 13.12.22
-Latest Version: 13.12.22-1329
+Stable Tag: 14.05.04
+Latest Version: 14.05.04-1559
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,7 @@ This plugin provides an easy way to view *.log files directly in the admin panel
 == Description ==
 
 ** FULLY COMPATIBLE WITH MULTISITE INSTALLATIONS **
+
 ** The plugin is recommended to use only in development. **
 
 This plugin provides an easy way to view any *.log files directly in admin panel. Also you can perform simple actions like empty the file or deleting it.
@@ -21,6 +22,8 @@ This plugin provides an easy way to view any *.log files directly in admin panel
 To activate Wordpress logging to file you have to set `define( 'WP_DEBUG_LOG', true );` in your wp-config.php file.
 In Multisite installations you have to be Super Admin for using this plugin.
 Additionally in Singlesite installations you have to have the 'edit_plugins' capability which is by default only granted to admins.
+
+There is an first integration for a panel to the [Debug Bar Plugin](https://wordpress.org/plugins/debug-bar/ "Debug Bar"). The integration could be deactivated by setting ENABLE_DEBUGBAR_INTEGRATION to false in log-viewer.php.
 
 If you're experiencing problems please report through support forum or check FAQ section. If you have suggestions feel free to submit your view.
 Log-Viewer is also listed on the excellent [Developer Plugin](http://wordpress.org/extend/plugins/developer/ "WordPress Developer Plugin") which comes directly by the awesome guys at Automattic!
@@ -37,8 +40,18 @@ Log-Viewer is also listed on the excellent [Developer Plugin](http://wordpress.o
 * Adding Dashboard functionality ( and/or File View in Dashboard menu (WP_NETWORK_ADMIN) )
 * Translations ( DE )
 * Cleanup on uninstalling
+* Message if WP_DEBUG not set ( on activation? )
 
 == Changelog ==
+
+= 14.05.04 =
+* Fixed : error calling method static
+
+= 14.04.22 =
+* Added first Debug Bar integration
+
+= 14.04.21 =
+* nothing changed ( tag for Debug-Bar functionality )
 
 = 13.12.22 =
 * rewrite branch merged to trunk
@@ -125,3 +138,4 @@ The options are only displayed if the file is writeable. Check your permissions.
 
 1. Screenshot shows the file view screen ( with MP6 / WordPress > 3.8 )
 2. Screenshot shows the file view screen
+3. Screenshot shows Debug Bar integration

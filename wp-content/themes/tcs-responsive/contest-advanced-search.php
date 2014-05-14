@@ -1,3 +1,7 @@
+<?php
+ global $datepicker_label;
+ $datepicker_label = isset( $datepicker_label ) ? $datepicker_label:"Submission End ";
+?>
 <div class="searchFilter hide">
   <div class="filterOpts">
     <section class="types">
@@ -45,7 +49,7 @@
       <ul>
         <li class="date row"><div class="lbl">
             <input type="checkbox" id="fSDate" />
-            <label for="fSDate"><strong>Submission End From:</strong></label>
+            <label for="fSDate"><strong><?php echo $datepicker_label;?> From:</strong></label>
           </div>
           <div class="val">
             <span class="datePickerWrap"><input id="startDate" type="text" class="datepicker from" /></span>
@@ -54,7 +58,7 @@
         <li class="date row">
           <div class="lbl">
             <input type="checkbox" id="fEDate" />
-            <label for="fEDate"><strong>Submission End To:</strong></label>
+            <label for="fEDate"><strong><?php echo $datepicker_label;?> To:</strong></label>
           </div>
 
           <div class="val">

@@ -368,7 +368,7 @@ select {
 }
 
 /* tco table */
-.tcoTable th {
+.tcoTable th, .reviewTable th {
     font-size: 12px;
     font-weight: bold;
     height: 36px;
@@ -385,25 +385,25 @@ select {
     height: 110px;
 }
 
-.tcoTable th:hover {
+.tcoTable th:hover, .reviewTable th:hover {
     color: #333;
 }
 
-.tcoTable th.noSort:hover {
+.tcoTable th.noSort:hover, .reviewTable th.noSort:hover {
     color: #666;
 }
 
-.tcoTable th.asc {
+.tcoTable th.asc, .reviewTable th.asc {
     background-position: 50% -52px;
 }
 
-.tcoTable th.noSort {
+.tcoTable th.noSort, .reviewTable th.noSort {
     cursor: default;
     background-image: none;
 }
 
 /* sort icons */
-.tcoTable th i {
+.tcoTable th i, .reviewTable th i {
     position: absolute;
     left: 50%;
     margin-left: -5px;
@@ -422,11 +422,11 @@ select {
     right: 3px;
 }
 
-.tcoTable th.asc i {
+.tcoTable th.asc i, .reviewTable th.asc i {
     background-position: 0 -30px;
 }
 
-.tcoTable th.noSort i {
+.tcoTable th.noSort i, .reviewTable th.noSort i {
     display: none;
 }
 
@@ -515,6 +515,9 @@ select {
     margin-left: 80px;
 }
 
+.layChallenges .tcoTable td.colCh.reviewOpp {
+    vertical-align: middle;
+}
 .tcoTable .colCh a {
     color: #FF8A00;
 
@@ -617,9 +620,66 @@ select {
     margin-right: 4px;
 }
 
+.reviewTimelineTable {
+   margin-bottom: 100px;
+}
+.reviewTimelineTable .colPhase, .reviewTimelineTable .colRstart, .reviewTimelineTable .colRend, .reviewTimelineTable .colDur, .reviewTimelineTable .colStatus {
+    text-align: center;
+}
+#reviewOpenPositions {
+    margin-bottom: 100px;
+}
+.reviewOpenTable {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.reviewOpenTable .colRevRole, .reviewOpenTable .colRevPos, .reviewOpenTable .colRevPay, .reviewOpenTable .colRevReg {
+    text-align: center;
+}
+.reviewAppTable {
+    margin-bottom: 100px;
+}
+.reviewAppTable .colAppHandle, .reviewAppTable .colAppRole, .reviewAppTable .colAppRating, .reviewAppTable .colAppStatus, .reviewAppTable .colAppDate {
+    text-align: center;
+}
+caption.reviewDetail {
+    background-color: #d0d0d0;
+    font-weight: bold;
+    color: #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.reviewTitle {
+    position: relative;
+    float: left;
+}
+.reviewOppTitle {
+    font-size: 20px;
+    line-height: 2em;
+    margin-bottom: 40px;
+}
+.reviewOppType {
+    position: relative;
+    float: right;
+    line-height: 2.5em;
+}
+.layChallenges header.reviewDetailHeader {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
 #tableView > div > table > caption {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.reviewTimelineTable th, .reviewOpenTable th, .reviewAppTable th {
+    font-size: 12px;
+    font-weight: bold;
+    height: 36px;
+    padding-bottom: 6px;
+    cursor: pointer;
+    margin-top: -30px;
+    background-color: #f1f1f1;
+    color: #666;
 }
 .dataTable .colStandings .tooltipData {
     display: none;

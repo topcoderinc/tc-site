@@ -73,7 +73,7 @@ class User_Options
 	 * @var array
 	 */
 	private static $_defaultOptions = array(
-		self::KEYS_AUTOREFRESH => 1, self::KEYS_AUTOREFRESHINTERVALL => 15, self::KEYS_LINEOUTPUTORDER => self::LINEOUTPUTORDER_FIFO, self::KEYS_OPTIONSVERSION => '13.12.22-1329',
+		self::KEYS_AUTOREFRESH => 1, self::KEYS_AUTOREFRESHINTERVALL => 15, self::KEYS_LINEOUTPUTORDER => self::LINEOUTPUTORDER_FIFO, self::KEYS_OPTIONSVERSION => '14.05.04-1559',
 	);
 
 	/**

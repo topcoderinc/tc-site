@@ -71,7 +71,7 @@ class Files_View_Page
 	 *
 	 * @var string
 	 */
-	protected $_hook_name = null;
+	public $_hook_name = null;
 
 	/**
 	 * @var WP_Screen
@@ -85,7 +85,7 @@ class Files_View_Page
 	 *
 	 * @var string
 	 */
-	private $_parent_slug = 'tools.php';
+	private static $_parent_slug = 'tools.php';
 
 	/**
 	 * The text to be displayed in the title tags of the page when the menu is selected
@@ -115,7 +115,7 @@ class Files_View_Page
 	 *
 	 * @var string
 	 */
-	private $_menu_slug = 'log_viewer_files_view';
+	private static  $_menu_slug = 'log_viewer_files_view';
 
 	/**
 	 * Filename for the view template. Prefixed with view_path of class constructor.
@@ -147,10 +147,10 @@ class Files_View_Page
 	 *
 	 * @return string|void
 	 */
-	public function getPageUrl()
+	public static function getPageUrl()
 	{
-		$url = admin_url( $this->_parent_slug, 'admin' );
-		$url .= "?page=" . $this->_menu_slug;
+		$url = admin_url( self::$_parent_slug, 'admin' );
+		$url .= "?page=" . self::$_menu_slug;
 
 		return $url;
 	}
@@ -162,7 +162,7 @@ class Files_View_Page
 	 */
 	public function __construct( $view_path = '' )
 	{
-		$this->_hook_name = add_submenu_page( $this->_parent_slug, $this->_page_title, $this->_menu_title, $this->_capability, $this->_menu_slug, array( $this, 'view_page' ) );
+		$this->_hook_name = add_submenu_page( self::$_parent_slug, $this->_page_title, $this->_menu_title, $this->_capability, self::$_menu_slug, array( $this, 'view_page' ) );
 
 		$this->_view_file = realpath( $view_path . DIRECTORY_SEPARATOR . $this->_view_file );
 

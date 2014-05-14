@@ -74,7 +74,7 @@
 }
 
 .dataTable.tcoTable tr.inTCO.hasTCOIco td {
-    height: auto;
+    height: 110px;
 }
 
 .tcoTable tr.inTCO.hasTCOIco .colCh a {

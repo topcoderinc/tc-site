@@ -631,6 +631,112 @@ function get_review_opportunities_ajax(
 }
 
 /*
+* Review Opportunities Detail API
+*/
+add_action( 'wp_ajax_get_review_detail', 'get_review_detail_controller' );
+add_action( 'wp_ajax_nopriv_get_review_detail', 'get_review_detail_controller' );
+
+function get_review_detail_controller()
+{
+    $jwtToken    = filter_input( INPUT_GET, "jwtToken", FILTER_SANITIZE_STRING );
+    $challengeId = filter_input( INPUT_GET, "challengeId", FILTER_SANITIZE_STRING );
+    $challengeType = filter_input( INPUT_GET, "challengeType", FILTER_SANITIZE_STRING );
+    $userkey = get_option( 'api_user_key' );
+
+    $review_detail = get_review_detail_ajax($userKey, $challengeId, $challengeType, FALSE, $jwtToken);
+
+    if (isset( $review_detail->Phases ) || isset( $review_detail->phases )) {
+        wp_send_json_success( $review_detail );
+    } else {
+        wp_send_json_error();
+    }
+}
+
+function get_review_detail_ajax($userKey = '', $contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
+
+    $url = "http://api.topcoder.com/v2/$contestType/reviewOpportunities/$contestID";
+
+    if ($resetCache) {
+        $url .= "?refresh=t";
+    }
+    $args     = array(
+        'headers'     => array(
+        'Authorization' => 'Bearer ' . $jwtToken
+    ),
+        'httpversion' => get_option( 'httpversion'  ),
+        'timeout'     => get_option('request_timeout')
+    );
+    $response = wp_remote_get($url, $args);
+    if (is_wp_error($response) || !isset ( $response ['body'] )) {
+        return "Error in processing request";
+    }
+    if ($response ['response'] ['code'] == 200) {
+        $review_result = json_decode($response ['body']);
+        return $review_result;
+    }
+    return "Error in processing request";
+}
+/**
+ * Get user id from handle
+ */
+
+add_action( 'wp_ajax_get_member_id', 'get_member_id_ajax_controller' );
+add_action( 'wp_ajax_nopriv_get_member_id', 'get_member_id_ajax_controller' );
+function get_member_id_ajax_controller()
+{
+
+    $handle  = $_GET ['handle'];
+    $page          = $_GET['pageIndex'];
+    $post_per_page = $_GET ['pageSize'];
+    $case_sensitive    = $_GET ['case'];
+
+    $id_list = get_member_id_ajax(
+        $handle,
+        $page,
+        $post_per_page,
+        $case_sensitive
+    );
+    if (isset( $id_list->users )) {
+        wp_send_json_success( $id_list );
+    } else {
+        wp_send_json_error($id_list);
+    }
+}
+
+function get_member_id_ajax(
+    $handle,
+    $page = '',
+    $post_per_page = '',
+    $case_sensitive = 'true'
+) {
+
+    $url = "http://api.topcoder.com/v2/users/search?handle=" . $handle;
+
+    if (!empty($page)) {
+        $url .= "&pageIndex=$page";
+    }
+    if (!empty($post_per_page)) {
+        $url .= "&pageSize=$post_per_page";
+    }
+        $url .= "&caseSensitive=$case_sensitive";
+
+    $args     = array(
+        'httpversion' => get_option( 'httpversion' ),
+        'timeout'     => get_option( 'request_timeout' )
+    );
+    $response = wp_remote_get( $url, $args );
+
+    if (is_wp_error( $response ) || ! isset ( $response ['body'] )) {
+        return "Error in processing request";
+    }
+    if ($response ['response'] ['code'] == 200) {
+        $user_id_list = json_decode($response['body']);
+        return $user_id_list;
+  }
+  return "Error in processing request";
+}
+
+/*
  * Check handle availability and validity
  */
 add_action( 'wp_ajax_get_handle_validity', 'get_handle_validity_controller' );

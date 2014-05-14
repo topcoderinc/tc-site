@@ -33,14 +33,30 @@ switch ($contest_type) {
 }
 
 function tc_header_challenge_landing_js() {
-  global $tcoTooltipTitle, $tcoTooltipMessage, $postPerPage, $contest_type, $listType;
+  global $tcoTooltipTitle, $tcoTooltipMessage, $postPerPage, $contest_type, $listType, $contestID;
+  if ($listType === 'Review') {
+    $ajaxAction = 'get_review_opportunities';
+    $reviewType = 'review';
+  } elseif ($listType === 'Review Details') {
+    $ajaxAction = 'get_review_detail';
+    $reviewType = 'review detail';
+  } else {
+    $ajaxAction = 'get_challenges';
+    $reviewType = 'contest';
+  }
   ?>
   <script type="text/javascript" >
     var siteurl = "<?php bloginfo('siteurl');?>";
-
-    var reviewType = "contest";
+    <?php
+        if (!empty($contestID)) {
+    ?>
+    var challenge_id = "<?php echo $contestID; ?>";
+    <?php
+        }
+    ?>
+    var reviewType = "<?php echo $reviewType; ?>";
     var isBugRace = false;
-    var ajaxAction = "get_challenges";
+    var ajaxAction = "<?php echo $ajaxAction; ?>";
     var stylesheet_dir = "<?php bloginfo('stylesheet_directory');?>";
     var currentPage = 1;
     var postPerPage = <?php echo $postPerPage;?>;

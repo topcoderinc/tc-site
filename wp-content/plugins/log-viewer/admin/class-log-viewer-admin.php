@@ -24,7 +24,7 @@ class Log_Viewer_Admin
 	 *
 	 * @var     string
 	 */
-	const VERSION = '13.12.22-1329';
+	const VERSION = '14.05.04-1559';
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -33,7 +33,7 @@ class Log_Viewer_Admin
 	 *
 	 * @var     string
 	 */
-	const VERSION_SHORT = '13.12.22';
+	const VERSION_SHORT = '14.05.04';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -65,6 +65,15 @@ class Log_Viewer_Admin
 	 * @var      string
 	 */
 	protected $plugin_screen_hook_suffix = null;
+
+	/**
+	 *
+	 *
+	 * @since    13.11.10
+	 *
+	 * @var Files_View_Page
+	 */
+	private $_files_view_page = null;
 
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
@@ -101,6 +110,55 @@ class Log_Viewer_Admin
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Make sure that the file that was requested to edit, is allowed to be edited
+	 *
+	 * Function will die if if you are not allowed to edit the file
+	 *
+	 * ToDo: pasted from wordpress core. other solution?
+	 *
+	 * @since 14.04.21
+	 *
+	 * @param        $file
+	 * @param string $allowed_files
+	 *
+	 * @return mixed
+	 */
+	public static function validate_file_to_edit( $file, $allowed_files = '' ) {
+		$code = validate_file( $file, $allowed_files );
+
+		if (!$code )
+			return $file;
+
+		switch ( $code ) {
+			case 1 :
+				wp_die( __('Sorry, can&#8217;t edit files with &#8220;..&#8221; in the name. If you are trying to edit a file in your WordPress home directory, you can just type the name of the file in.' ));
+
+			case 3 :
+				wp_die( __('Sorry, that file cannot be edited.' ));
+		}
+	}
+
+	/**
+	 * Wrapper for getting Files View Page
+	 *
+	 * @since 14.04.21
+	 *
+	 * @return Files_View_Page
+	 */
+	public function get_Files_View_Page() {
+		if( $this->_files_view_page === null ) {
+			/**
+			 * Add a tools page for viewing the log files
+			 */
+			require_once 'includes/class-user-options.php';
+			require_once 'includes/class-files-view-page.php';
+			$this->_files_view_page = new Files_View_Page( realpath( __DIR__ . DIRECTORY_SEPARATOR . 'views' ) );
+		}
+
+		return $this->_files_view_page;
 	}
 
 	/**
@@ -143,10 +201,7 @@ class Log_Viewer_Admin
 
 	}
 
-	/**
-	 * @var Files_View_Page
-	 */
-	protected $_files_view_page = null;
+
 
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
@@ -155,12 +210,7 @@ class Log_Viewer_Admin
 	 */
 	public function add_plugin_admin_menu()
 	{
-		/**
-		 * Add a tools page for viewing the log files
-		 */
-		require_once 'includes/class-user-options.php';
-		require_once 'includes/class-files-view-page.php';
-		$this->_files_view_page = new Files_View_Page( realpath( __DIR__ . DIRECTORY_SEPARATOR . 'views' ) );
+		$this->get_Files_View_Page();
 	}
 
 	/**

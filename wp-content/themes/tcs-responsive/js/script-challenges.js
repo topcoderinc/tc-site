@@ -2,7 +2,11 @@ var pageSize = 8;
 var sortColumn = "";
 var sortOrder = "";
 var ApiData = {};
-
+var apiData = {};
+var apiDataTimeline = {};
+var apiDataPositions = {};
+var apiDataApplicants = {};
+var tableHasLoaded = false;
 // I-104467 I-107029: default view for challenges
 var default_view = "#tableView";
 var isSearch = false;
@@ -70,6 +74,8 @@ appChallenges = {
                 if (contest_type == "design" || contest_type == "develop") {
                     app.getReview($('.tcoTable'), currentPage);
                 }
+            } else if (reviewType == "review detail") {
+                app.getReviewDetail($('.reviewTimelineTable'), $('.reviewAppTable'), $('.reviewOpenTable'));
             } else if (reviewType == "data") {
                 app.getDataChallenges($('.tcoTable'), currentPage);
             }
@@ -233,10 +239,9 @@ appChallenges = {
         });
 
         //table sorting function
-        $('.tcoTable th').on(ev, function() {
+        $('.tcoTable').on('click', 'th', function() {
             var getSortColumn = $(this).attr("data-placeholder");
             var getSortOrder = $(this).hasClass("asc") ? "desc" : "asc";
-
             if (!$(this).hasClass("noSort")) {
                 sortColumn = getSortColumn;
                 sortOrder = getSortOrder;
@@ -254,14 +259,83 @@ appChallenges = {
                 } else if (reviewType == "review") {
                     app.getReview($('.tcoTable'), currentPage, app.callbackAfterSort($(this)));
                 }
+            }
+
+        });
+
+        //review tables sorting function
+        $('.reviewTimelineTable').on('click', 'th', function() {
+            var getSortColumn = $(this).attr("data-placeholder");
+            var getSortOrder = $(this).hasClass("asc") ? "desc" : "asc";
+            if (!$(this).hasClass("noSort")) {
+                sortColumn = getSortColumn;
+                sortOrder = getSortOrder;
+                if (reviewType == "review detail") {
+                    apiDataTimeline = app.apiDataSort(apiDataTimeline, sortColumn, sortOrder);
+                    app.apiDataView(apiDataTimeline, $('.reviewTimelineTable'), app.callbackAfterSort($(this)));
+                }
+
+            }
+
+        });
+        //review tables sorting function
+        $('.reviewOpenTable').on('click', 'th', function() {
+            var getSortColumn = $(this).attr("data-placeholder");
+            var getSortOrder = $(this).hasClass("asc") ? "desc" : "asc";
+            if (!$(this).hasClass("noSort")) {
+                sortColumn = getSortColumn;
+                sortOrder = getSortOrder;
+                if (reviewType == "review detail") {
+                    apiDataPositions = app.apiDataSort(apiDataPositions, sortColumn, sortOrder);
+                    app.apiDataView(apiDataPositions, $('.reviewOpenTable'), app.callbackAfterSort($(this)));
+                }
+
+            }
+
+        });
+        //review tables sorting function
+        $('.reviewAppTable').on('click', 'th', function() {
+            var getSortColumn = $(this).attr("data-placeholder");
+            var getSortOrder = $(this).hasClass("asc") ? "desc" : "asc";
+            if (!$(this).hasClass("noSort")) {
+                sortColumn = getSortColumn;
+                sortOrder = getSortOrder;
+                if (reviewType == "review detail") {
+                    apiDataApplicants = app.apiDataSort(apiDataApplicants, sortColumn, sortOrder);
+                    app.apiDataView(apiDataApplicants, $('.reviewAppTable'), app.callbackAfterSort($(this)));
+                }
 
             }
 
         });
     },
+    //push object dataset into another object variable
+    apiDataSwitch: function(source, target) {
+        for(var key in source) {
+            if (source.hasOwnProperty(key)) {
+                target[key] = source[key];
+            }
+        }
+
+    },
+    //renames an object key, used in data sorting
+    apiDataRename: function (data, newKey, oldKey) {
+        data[newKey] = data[oldKey];
+        return data;
+    },
     //sort data from previous api call so we dont have to make a new one, useful for 'view all' datasets
     apiDataSort: function(data, sortColumn, sortOrder) {
         switch(sortColumn) {
+            //sort strings
+            case 'type':
+                //review Detail phase name, inconsistent API naming means we have to check if design or develop API, and change sortColumn name accordingly
+                if (contest_type == 'design') {
+                    sortColumn = 'name';
+                }
+            case 'positions':
+            case 'role':
+            case 'handle':
+            case 'status':
             case 'challengeType':
             case 'challengeName':
             case 'currentStatus':
@@ -286,6 +360,18 @@ appChallenges = {
                     return 0;
                 });
                 break;
+            //sort dates
+            case 'scheduledStartTime':
+                //review Detail phase start time, inconsistent API naming means we have to check if design or develop API, and change sortColumn name accordingly
+                if (contest_type == 'design') {
+                    sortColumn = 'start';
+                }
+            case 'scheduledEndTime':
+                //review Detail phase end time, inconsistent API naming means we have to check if design or develop API, and change sortColumn name accordingly
+                if (contest_type == 'design') {
+                    sortColumn = 'end';
+                }
+            case 'applicationDate':
             case 'postingDate':
                 data.data.sort(function(a, b) {
                     a = new Date(a[sortColumn]);
@@ -296,6 +382,10 @@ appChallenges = {
                     return a>b ? -1 : a<b ? 1 : 0;
                 });
                 break;
+            //sort numbers
+            case 'duration':
+            case 'payment':
+            case 'reviewerRating':
             case 'challengeId':
             case 'projectId':
             case 'forumId':
@@ -303,13 +393,17 @@ appChallenges = {
             case 'numRegistrants':
             case 'numberOfCheckpointsPrizes':
             case 'digitalRunPoints':
-                if (sortOrder === 'asc') {
-                    data.data.sort(function(a, b) {
-                        return (a[sortColumn] - b[sortColumn]);
-                    });
-                }
                 data.data.sort(function(a, b) {
-                    return (b[sortColumn] - a[sortColumn]);
+                    var columnA = a[sortColumn];
+                    var columnB = b[sortColumn];
+                    //must set n/a values to 0 to allow proper sorting
+                    if (columnA == 'n/a' || columnA == 'N/A') {
+                        columnA = 0;
+                    }
+                    if (sortOrder === 'asc') {
+                        return (columnA - columnB);
+                    }
+                        return (columnB - columnA);
                 });
                 break;
             default:
@@ -329,6 +423,31 @@ appChallenges = {
             } else if (typeof listType !== "undefined" && listType == "Upcoming") {
                 app.getDesignUpcomingContestTable(table, data, null);
                 app.getDesignUpcomingContestGrid($('#gridView .contestGrid'), data, (null + 1));
+            } else if (typeof listType !== "undefined" && listType == "Review Details") {
+                if (table.hasClass('reviewTimelineTable')) {
+                    //we need to rename data object key so we can reuse table layout functions with sorted data
+                    if (contest_type == 'design') {
+                        data = app.apiDataRename(data, 'Phases', 'data');
+                    } else {
+                        data = app.apiDataRename(data, 'phases', 'data');
+                    }
+                    //we set unused table parameters to null
+                    app.getReviewDetailTables(table, null, null, data);
+                } else if (table.hasClass('reviewOpenTable')) {
+                    if (contest_type == 'design') {
+                        data = app.apiDataRename(data, 'Positions', 'data');
+                    } else {
+                        data = app.apiDataRename(data, 'positions', 'data');
+                    }
+                    app.getReviewDetailTables(null, null, table, data);
+                } else if (table.hasClass('reviewAppTable')) {
+                    if (contest_type == 'design') {
+                        data = app.apiDataRename(data, 'Applications', 'data');
+                    } else {
+                        data = app.apiDataRename(data, 'applications', 'data');
+                    }
+                    app.getReviewDetailTables(null, table, null, data);
+                }
             } else {
                 app.getDesignContestTable(table, data, null);
                 app.getDesignContestGrid($('#gridView .contestGrid'), data, (null + 1));
@@ -733,8 +852,43 @@ appChallenges = {
             param.sortColumn = sortColumn;
             param.sortOrder = sortOrder;
         } else {
-            param.sortColumn = 'registrationOpen';
-            param.sortOrder = 'desc';
+            if (contest_type === 'develop') {
+                param.sortColumn = 'reviewStart';
+                param.sortOrder = 'desc';
+            } else {
+                param.sortColumn = 'round1ScheduledStartDate';
+                param.sortOrder = 'desc';
+            }
+        }
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        if ($.trim(startDate) != "" && $('#fSDate').prop('checked')) {
+            param['reviewStartDateFirstDate'] = startDate;
+        }
+        if ($.trim(endDate) != "" && $('#fEDate').prop('checked')) {
+            param['reviewStartDateSecondDate'] = endDate;
+        }
+
+        // if submission from date is blank form to date isn't
+        if (!param['reviewStartDateFirstDate'] && param['reviewStartDateSecondDate']) {
+            param['reviewStartDateFirstDate'] = app.formatDateApi(new Date(1));
+        }
+
+        if (!param['reviewStartDateSecondDate'] && param['reviewStartDateFirstDate']) {
+            // 60 days from today
+            var futureDate = 60 * 24 * 60 * 60 * 1000;
+            var curDate = Date.now();
+            param['reviewStartDateSecondDate'] = app.formatDateApi(new Date(curDate + futureDate));
+        }
+        //need to specify BETWEEN_DATES param if datepicker used
+        if (param['reviewStartDateSecondDate'] && param['reviewStartDateFirstDate']) {
+            param['reviewStartDateType'] = "BETWEEN_DATES";
+        }
+        //select challenge type to display
+        var challengesRadio = $("input:radio[name ='radioFilterChallenge']:checked").val();
+        if (challengesRadio != null && challengesRadio != "all") {
+            param.challengeType = challengesRadio
         }
 
         $.ajax({
@@ -749,23 +903,31 @@ appChallenges = {
                     var latestRecords = currentPage * postPerPage; // Latest record read by user
 
                     $("#challengeNav a").hide();
-                    if (latestRecords < data.total) {
-                        $("#challengeNav .nextLink").show();
+                    //so many datas returned from API, must add extra to find total
+                    //first check if data.data exists, if API returns error for some reason we don't want to try to access undefined variables
+                    if (typeof data.data !== 'undefined') {
+                        if (latestRecords < data.data.total) {
+                            $("#challengeNav .nextLink").show();
+                        }
+                        if (data.data.total <= postPerPage) {
+                            $(".viewAll").hide();
+                        }
                     }
+
                     if (currentPage > 1) {
                         $("#challengeNav .prevLink").show();
                     }
-                    if (data.total <= postPerPage) {
-                        $(".viewAll").hide();
-                    }
+
                 } else {
                     $("#challengeNav a").hide();
                 }
 
                 if (contest_type == "develop") {
-                    app.getDevReviewTable(table, data, null);
+                    //need to add extra data here, so data.data because extra dataception in review API
+                    app.getDevReviewTable(table, data.data, null);
                 } else {
-                    app.getDesignReviewTable(table, data, null);
+                    //so many datas, go extra level deep
+                    app.getDesignReviewTable(table, data.data, null);
                 }
 
                 /* call back */
@@ -780,38 +942,267 @@ appChallenges = {
             }
         });
     },
+    getReviewDetail: function(tableTime, tableApp, tableOpen, callback) {
 
+        app.setLoading();
+        var param = {};
+        param.action = ajaxAction;
+        param.challengeType = contest_type;
+        param.challengeId = challenge_id;
+        param.jwtToken = $.cookie('tcjwt');
+        if (param.jwtToken !== null && param.jwtToken.length > 0) {
+
+            $.ajax({
+                url: ajaxUrl,
+                data: param,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                    app.getReviewDetailTables(tableTime, tableApp, tableOpen, data.data);
+
+                    //shift individual table data into own object for sorting capability
+                    apiDataTimeline.data = [];
+                    apiDataPositions.data = [];
+                    apiDataApplicants.data = [];
+                    //have to test if Phases exists in data because of inconsistent API naming scheme between design and develop
+                    if (typeof data.data.Phases !== 'undefined') {
+                        //design API has uppercase object names
+                        app.apiDataSwitch(data.data.Phases, apiDataTimeline.data);
+                        app.apiDataSwitch(data.data.Positions, apiDataPositions.data);
+                        app.apiDataSwitch(data.data.Applications, apiDataApplicants.data);
+                    } else {
+                        //develop API has lowercase object names
+                        app.apiDataSwitch(data.data.phases, apiDataTimeline.data);
+                        app.apiDataSwitch(data.data.positions, apiDataPositions.data);
+                        app.apiDataSwitch(data.data.applications, apiDataApplicants.data);
+                    }
+
+                    /* call back */
+                    if (callback != null && callback != "") {
+                        callback();
+                    }
+                },
+                fail: function(data) {
+                    $('.loading').hide();
+                    //$('tbody', table).html(null);
+                    alert("Data not found!");
+                }
+            });
+        } else {
+            $(tableTime).html('<tr><td style="font-size:20px;">You must be logged in to view this page.</td></tr>');
+            $(tableApp).html(null);
+            $('.loading').hide();
+        }
+    },
+    /* table draw function */
+    getReviewDetailTables: function(tableTime, tableApp, tableOpen, data) {
+        var screenDate = false;
+        //we must test if each table is null in order to enable function reuse with table sorting, untargeted table parameters in function are set to null in function call from table sort
+        if (tableTime !== null) {
+            //output phases table
+            //JS uncaught typeError when no data available, so adding defined check
+            //screenDate var will hold screening start date so we can calculate reviewer assignment date (24 hours prior)
+            if (typeof data.phases !== 'undefined' && data.phases.length > 0) {
+                //reset table body
+                $('tbody', tableTime).html(null);
+                //set challenge title header
+                $('h1.reviewOppTitle').html(data.challengeName);
+                //set challenge type header
+                $('h3.reviewOppType').html(data.challengeType);
+
+                $.each(data.phases, function(key, rec) {
+                    var rowTime = $(challengesBP.tabReviewDetailTimeline).clone();
+
+                    var scheduledStartDate = app.formatDate2(rec.scheduledStartTime);
+                    var scheduledEndDate = app.formatDate2(rec.scheduledEndTime);
+                    //duration key is missing in develop API data, so we must calculate and add it in
+                    rec.duration = app.getContestDuration(rec.scheduledStartTime, rec.scheduledEndTime, 'hours');
+
+                    $('.colPhase', rowTime).html(rec.type);
+                    $('.colRstart', rowTime).html(scheduledStartDate);
+                    $('.colRend', rowTime).html(scheduledEndDate);
+                    $('.colDur', rowTime).html(rec.duration);
+                    $('.colStatus', rowTime).html(rec.status);
+
+                    $('tbody', tableTime).append(rowTime);
+
+                    if (rec.type == "Screening") {
+                        screenDate = app.formatDate2(rec.start);
+                    }
+                });
+
+                //design API uses different key name here
+            } else if (typeof data.Phases !== 'undefined' && data.Phases.length > 0) {
+                //reset table body
+                $('tbody', tableTime).html(null);
+                //set challenge title header
+                $('h1.reviewOppTitle').html(data.name);
+                // cannot set challenge type header because data does not exist in design API
+                //$('h3.reviewOppType').html(data.challengeType);
+                //need to hide status column because data does not exist in design API
+                $('.colStatus', tableTime).hide();
+
+                $.each(data.Phases, function(key, rec) {
+
+                    var rowTime = $(challengesBP.tabReviewDetailTimeline).clone();
+                    //all design API object key are different from develop
+                    var scheduledStartDate = app.formatDate2(rec.start);
+                    var scheduledEndDate = app.formatDate2(rec.end);
+                    rec.duration = parseFloat(rec.duration).toFixed(2);
+
+                    $('.colPhase', rowTime).html(rec.name);
+                    $('.colRstart', rowTime).html(scheduledStartDate);
+                    $('.colRend', rowTime).html(scheduledEndDate);
+                    $('.colDur', rowTime).html(rec.duration);
+                    //no status available in design API
+                    //$('.colStatus', rowTime).html(rec.status);
+                    $('.colStatus', rowTime).hide();
+                    $('tbody', tableTime).append(rowTime);
+
+                    if (rec.name == "Screening") {
+                        screenDate = app.formatDate2(rec.start);
+                    }
+                });
+
+            }
+            app.initZebra(tableTime);
+        } //end TableTime
+
+        if (tableOpen !== null) {
+            //output Open Positions table
+            //currently positions data is not present in API, so this will never show unless we mock data
+            if (typeof data.positions !== 'undefined' && data.positions.length > 0) {
+                $('#reviewOpenPositions').show();
+                //reset table body
+                $('tbody', tableOpen).html(null);
+                if (screenDate !== false) {
+                    var assignDate = moment(screenDate).subtract('days', 1);
+                    var today = new Date();
+                    var dateDiff = assignDate.diff(today, 'hours');
+                    if (dateDiff > 0) {
+                        $('#reviewDetailDateAssign').html('Reviewers will be assigned on ' + assignDate);
+                    } else {
+                        $('#reviewDetailDateAssign').html('Reviewers will be assigned immediately on signup.');
+                    }
+                }
+                $.each(data.positions, function(key, rec) {
+
+                    var rowOpen = $(challengesBP.tabReviewDetailOpen).clone();
+                    var registerLink = siteurl + "/challenge-details/" + data.challengeId + "/?type=" + contest_type;
+                    $('.colRevRole', rowOpen).html(rec.role);
+                    $('.colRevPos', rowOpen).html(rec.positions);
+                    $('.colRevPay', rowOpen).html('$' + rec.payment + ' *');
+                    //no register API yet, need to mock so direct user to challenge-details page for contest
+                    //cannot send to old review opportunity detail page, bacause it uses different contestid type not present in new APIs
+                    $('.colRevReg', rowOpen).html('<a href="' + registerLink + '">Register</a>');
+
+                    $('tbody', tableOpen).append(rowOpen);
+                });
+                app.initZebra(tableOpen);
+            //design API uses different keys, have to check here
+            } else if (typeof data.Positions !== 'undefined' && data.Positions.length > 0) {
+
+                $('#reviewOpenPositions').show();
+                //reset table body
+                $('tbody', tableOpen).html(null);
+                if (screenDate !== false) {
+                    var assignDate = moment(screenDate).subtract('days', 1);
+                    var today = new Date();
+                    var dateDiff = assignDate.diff(today, 'hours');
+                    if (dateDiff > 0) {
+                        $('#reviewDetailDateAssign').html('Reviewers will be assigned on ' + app.formatDate2(assignDate));
+                    } else {
+                        $('#reviewDetailDateAssign').html('Reviewers will be assigned immediately on signup.');
+                    }
+                }
+                $.each(data.Positions, function(key, rec) {
+
+                    var rowOpen = $(challengesBP.tabReviewDetailOpen).clone();
+                    //no challengeId in design API either, need to rely on global variable
+                    var registerLink = siteurl + "/challenge-details/" + challenge_id + "/?type=" + contest_type;
+                    $('.colRevRole', rowOpen).html(rec.role);
+                    $('.colRevPos', rowOpen).html(rec.positions);
+                    $('.colRevPay', rowOpen).html('$' + rec.payment + ' *');
+                    //no register API yet, need to mock so direct user to challenge-details page for contest
+                    //cannot send to old review opportunity detail page, bacause it uses different contestid type not present in new APIs
+                    $('.colRevReg', rowOpen).html('<a href="' + registerLink + '">Register</a>');
+
+                    $('tbody', tableOpen).append(rowOpen);
+                });
+                app.initZebra(tableOpen);
+            }
+        }//end tableOpen
+
+        if (tableApp !== null) {
+            //output applications table, currently no applications data is available in design API
+            if (typeof data.applications !== 'undefined' && data.applications.length > 0) {
+                //reset table body
+                $('tbody', tableApp).html(null);
+                $.each(data.applications, function(key, rec) {
+                    var rowApp = $(challengesBP.tabReviewDetailApplications).clone();
+                    var appDate = app.formatDate2(rec.applicationDate);
+                    if (rec.reviewerRating != "n/a") {
+                        var reviewerRating = parseFloat(rec.reviewerRating).toFixed(2);
+                    } else {
+                        var reviewerRating = rec.reviewerRating;
+                    }
+                    $('.colAppHandle', rowApp).html('<a href="' + siteurl + '/member-profile/' + rec.handle + '">' + rec.handle);
+                    $('.colAppRole', rowApp).html(rec.role);
+                    $('.colAppRating', rowApp).html(reviewerRating);
+                    $('.colAppStatus', rowApp).html(rec.status);
+                    $('.colAppDate', rowApp).html(appDate);
+
+                    $('tbody', tableApp).append(rowApp);
+                });
+                app.initZebra(tableApp);
+            } else {
+                //hide so we do not see empty table with only headers, which would happen on any design challenge because no API data here
+                $('.reviewAppTable').hide();
+            }
+        }//end tableApp
+        $('.loading').hide();
+    },
     /* table draw function */
     getDesignReviewTable: function(table, data, records2Disp, isAppend) {
-
+        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
-        var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
+            //tableHasSort is set to true after header inserted, so that it does not get replaced with sort function AJAX calls
+            if (tableHasLoaded === false) {
+                //output table header
+                $('thead', table).html(challengesBP.tabReviewHead);
+                tableHasLoaded = true;
+            }
             $.each(data.data, function(key, rec) {
 
-                var row = $(challengesBP.tabReivew).clone();
-
-                var trackName = app.getTrackSymbol(rec.challengeType);
+                var row = $(challengesBP.tabReview).clone();
+                //Challenge Type for track symbol does not exist in API yet, so mocking everything as web design
+                var trackName = app.getTrackSymbol('Web Design');
                 var round1ScheduledStartDate = app.formatDate2(rec.round1ScheduledStartDate);
                 var round2ScheduledStartDate = app.formatDate2(rec.round2ScheduledStartDate);
-                var contestLinkUrl = siteurl + "/review-opportunity/design/" + "30036202";
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
+                var reviewDetailsLinkUrl = siteurl + "/review-opportunity/design/" + rec.challengeId;
 
                 row.addClass('track-' + trackName);
                 /*
-                 * generate table row for design past contest type
+                 * generate table row for design contest type
                  */
+                var icoTrack = "ico-track-design.png";
+                var tcoFlag = "tco-flag-design.png";
 
-                $('.colCh a', row).attr("href", contestLinkUrl);
-                $('.contestName', row).html(rec.challengeName);
-                $('.contestName', row).closest('td').addClass('nonTCO');
-                $('.colType', row).html(rec.type);
+                $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
+                $('.tipC', row).html(rec.challengeType);
+
                 $('.colR1start', row).html(round1ScheduledStartDate);
                 $('.colR2start', row).html(round2ScheduledStartDate);
                 $('.colPay', row).html("$" + app.formatCur(rec.reviewerPayment));
-                $('.colStatus', row).html('<a href="' + contestLinkUrl + '">' + rec.type + '</a>');
+                $('.colStatus', row).html('<a href="' + reviewDetailsLinkUrl + '">' + rec.reviewType + '</a>');
 
                 $('tbody', table).append(row);
             });
@@ -822,33 +1213,42 @@ appChallenges = {
 
     /* table draw function */
     getDevReviewTable: function(table, data, records2Disp, isAppend) {
+        isAppend = typeof isAppend === 'undefined' ? false : isAppend;
         if (isAppend != true) {
             $('tbody', table).html(null);
         }
-
-        var count = 0;
         //JS uncaught typeError when no data available, so adding defined check
         if (typeof data.data !== 'undefined' && data.data.length > 0) {
+            if (tableHasLoaded === false) {
+                //output table header
+                $('thead', table).html(challengesBP.tabDevReviewHead);
+                    tableHasLoaded = true;
+            }
+
             $.each(data.data, function(key, rec) {
 
-                var row = $(challengesBP.tabDevReivew).clone();
+                var row = $(challengesBP.tabDevReview).clone();
 
-                var trackName = app.getTrackSymbol(rec.challengeType);
-                var reviewStart = rec.reviewStart;
-                var contestLinkUrl = siteurl + "/review-opportunity/develop/" + "30039083";
-
-                row.addClass('track-' + trackName);
+                var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, contest_type);
+                var reviewDetailsLinkUrl = siteurl + "/review-opportunity/develop/" + rec.challengeId;
+                var reviewStart = app.formatDate2(rec.reviewStart);
                 /*
-                 * generate table row for design contest type
+                 * generate table row for develop contest type
                  */
-                $('.colCh a', row).attr("href", contestLinkUrl);
-                $('.contestName', row).html(rec.contestName);
-                //$('.contestName', row).closest('td').addClass('nonTCO');
+
+                icoTrack = "ico-track-develop.png";
+                tcoFlag = "tco-flag-develop.png";
+
+                $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                $('.contestName', row).parents(".inTCO").addClass("hasTCOIco");
+                $('.colCh a, .cgCh a', row).attr("href", contestLinkUrl);
+                $('.tipC', row).html(rec.challengeType);
+
                 $('.colRPay', row).html("$" + app.formatCur(rec.primaryReviewerPayment));
-                $('.colRstart', row).html(rec.reviewStart.replace(/ /g, '&nbsp;'));
-                $('.colSub', row).html(rec.submissionsNumber);
+                $('.colRstart', row).html(reviewStart);
+                $('.colSub', row).html(rec.numberOfSubmissions);
                 $('.colOPos', row).html(rec.numberOfReviewPositionsAvailable);
-                $('.colStatus', row).html('<a href="' + contestLinkUrl + '">details</a>');
+                $('.colStatus', row).html('<a href="' + reviewDetailsLinkUrl + '">details</a>');
 
                 $('tbody', table).append(row);
             });
@@ -1692,7 +2092,7 @@ appChallenges = {
                   endDate = app.formatDate2(rec.submissionEndDate);
                 }
 
-                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
+                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate, 'days');
                 var contestTechnologies = rec.technologies.join(', ');
                 if (!contestTechnologies) {
                     contestTechnologies = "N/A";
@@ -1782,7 +2182,7 @@ appChallenges = {
                   endDate = app.formatDate2(rec.submissionEndDate);
                 }
 
-                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate);
+                var contestDuration = app.getContestDuration(rec.postingDate, rec.submissionEndDate, 'days');
                 var contestTechnologies = rec.technologies.join(', ');
                 var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
 
@@ -1953,13 +2353,12 @@ appChallenges = {
         // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
     },
 
-    getContestDuration: function(dateStart, dateEnd) {
+    getContestDuration: function(dateStart, dateEnd, time) {
       var start = moment(dateStart.slice(0, -5));
       var end = moment(dateEnd.slice(0, -5));
-      var days = end.diff(start, 'days');
-      return days;
+      var duration = end.diff(start, time);
+      return duration;
     },
-
     //format date review
     formatDateReview: function(date) {
         if (date == "") return "";
@@ -1981,9 +2380,10 @@ appChallenges = {
      * @return string
      */
     formatDateApi: function(date) {
+        //fixed bug from improper use of getMonth() and getDate, resulting in incorrect date string returned
         return date.getFullYear() + "-" +
-            date.getMonth() + "-" +
-            date.getDate();
+            ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2);
     },
 
     //format time left
@@ -2462,20 +2862,40 @@ var challengesBP = {
                 </td>\
                 <td class="colAccessLevel public"><i></i></td>\
             </tr>',
-    /* reivew table */
-    tabReivew: '<tr class="inTCO">\
+    /* review table */
+    tabReviewHead: '<tr>\
+    <th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>\
+    <th class="colType noSort">Type<i></i></th>\
+    <th class="colR1start desc" data-placeholder="round1ScheduledStartDate">R1 Start Date<i></i></th>\
+    <th class="colR2start" data-placeholder="round2ScheduledStartDate">R2 Start Date<i></i></th>\
+    <th class="colPay noSort">Reviewer Payment*<i></i></th>\
+    <th class="colStatus" data-placeholder="reviewType">Review Status<i></i></th>\
+    </tr>',
+    tabReview: '<tr class="inTCO">\
             <td class="colCh"><div>\
                     <a href="javascript:;" class="contestName"></a>\
                 </div></td>\
-            <td class="colType"></td>\
+            <td class="colType"><i class="ico"> <span class="tooltipData"> \
+            <span class="tipT">Contest Type</span> \
+            <span class="tipC">Web Design</span>\
+            </span>\
+            </i></td>\
             <td class="colR1start"></td>\
             <td class="colR2start"></td>\
             <td class="colPay"></td>\
             <td class="colStatus"></td>\
         </tr>',
-    /* reivew table */
-    tabDevReivew: '<tr class="inTCO">\
-            <td class="colCh nonTCO"><div>\
+    /* review table */
+    tabDevReviewHead: '<tr>\
+    <th class="colCh" data-placeholder="challengeName">Challenges<i></i></th>\
+    <th class="colRPay noSort">Reviewer Payment*<i></i></th>\
+    <th class="colSub" data-placeholder="numberOfSubmissions">Submissions<i></i></th>\
+    <th class="colRstart desc" data-placeholder="reviewStart">Review Start<i></i></th>\
+    <th class="colOPos" data-placeholder="numberOfReviewPositionsAvailable">Open Positions<i></i></th>\
+    <th class="colStatus noSort">Details<i></i></th>\
+    </tr>',
+    tabDevReview: '<tr class="inTCO">\
+            <td class="colCh"><div>\
                     <a href="javascript:;" class="contestName"></a>\
                 </div></td>\
             <td class="colRPay"></td>\
@@ -2483,6 +2903,26 @@ var challengesBP = {
             <td class="colRstart"></td>\
             <td class="colOPos"></td>\
             <td class="colStatus"></td>\
+        </tr>',
+    tabReviewDetailTimeline: '<tr>\
+        <td class="colPhase"></td>\
+        <td class="colRstart"></td>\
+        <td class="colRend"></td>\
+        <td class="colDur"></td>\
+        <td class="colStatus"></td>\
+        </tr>',
+    tabReviewDetailOpen: '<tr>\
+        <td class="colRevRole"></td>\
+        <td class="colRevPos"></td>\
+        <td class="colRevPay"></td>\
+        <td class="colRevReg"></td>\
+        </tr>',
+    tabReviewDetailApplications: '<tr>\
+        <td class="colAppHandle"></td>\
+        <td class="colAppRole"></td>\
+        <td class="colAppRating"></td>\
+        <td class="colAppStatus"></td>\
+        <td class="colAppDate"></td>\
         </tr>',
     /* first 2 finish table */
     tabF2F: '<tr class="inTCO">\
@@ -2592,5 +3032,3 @@ $(document).ready(function() {
 	// Issue ID: I-111387 - Add date input masking to both startDate and endDate inputs
 	$('input[type=text].datepicker', '.otherOpts').inputmask('yyyy-mm-dd');
 });
-
-
