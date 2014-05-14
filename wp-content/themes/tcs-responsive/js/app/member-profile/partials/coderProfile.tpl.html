@@ -1,0 +1,30 @@
+<div id="hero">
+  <div class="inner">
+    <div class="container">
+      <article class="aboutCoder">
+        <div class="details">
+          <figure class="coderPicWrap">
+            <img alt="{{coder.handle}}" src="{{getPhotoLink(coder)}}">
+          </figure>
+          <div class="info">
+            <div class="handle">
+              <a href="#">{{coder.handle}}</a>
+            </div>
+            <div class="country">{{coder.country}}</div>
+            <div class="memberSince">
+              <label>Member Since:</label>
+              <div class="val">{{coder.memberSince | date: mediumDate}}</div>
+            </div>
+            <div class="memberSince" ng-if="coder.overallEarning">
+              <label>Total Earnings :</label>
+              <div class="val">{{coder.overallEarning}}</div>
+            </div>
+          </div>
+        </div>
+        <blockquote class="coderQuote" ng-if="coder.quote !== ''">{{coder.quote}}</blockquote>
+        <blockquote class="coderQuote" ng-if="coder.quote === ''">Member of the world's largest global competitive community. </blockquote>
+      </article>
+      <!-- /.aboutCoder -->
+    </div>
+  </div>
+</div>
