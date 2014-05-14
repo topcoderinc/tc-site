@@ -50,8 +50,10 @@
             <ul class="submissionList"><!--id="submissionList"-->
 			<?php
 				$pageCounter = 1;
+				$idx = 0;
 				if( $contestResults!=null ) 
 				foreach( $contestResults as $key=>$submissionObj ) :
+					$idx++ ;
 					$submissionGridViewImg = "http://studio.topcoder.com/studio.jpg?module=DownloadSubmission&sbmid=".$submissionObj->submissionId."&sbt=small&sfi=1";
 					$submissionDownloadUrl = "http://studio.topcoder.com/?module=DownloadSubmission&sbmid=".$submissionObj->submissionId;
 					$dateStr = substr($submissionObj->submissionTime, 0, 10)." ".substr($submissionObj->submissionTime, 11, 5);
@@ -62,7 +64,7 @@
 		<?php if($key==0) : ?>
 			<span class="submissionPage page1">
 		<?php endif;?>
-                <li>
+                <li class="<?php echo ( $idx%4 == 0 ?"lastItem":"" );?>">
                     <div>
                         <img src="<?php echo $submissionGridViewImg; ?>" alt="" width="225" height="226">
                         
