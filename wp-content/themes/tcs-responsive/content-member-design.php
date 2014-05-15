@@ -9,6 +9,8 @@ if ($tab == "algo") {
 	$track = "design";
 }
 global $coder;
+$handle = $_POST['handle'];
+$track = $_POST['track'];
 $coder = get_member_statistics ( $handle, $track );
 $WebDesign = $coder->Tracks->WebDesign;
 $recentWins = get_stat_design_recentwins($handle)->recentWinningSubmissions;
@@ -84,12 +86,16 @@ $img_locked = get_bloginfo( 'stylesheet_directory' )."/i/img-locked.png";
 
 	</div>
 	<!-- /.ratingInfo -->
-	<aside class="badges">
-		<header class="head">
-			<h4>Badges</h4>
-		</header>
-		<?php get_template_part('content', 'badges');?>		
-	</aside>
-	<!-- /.badges -->
+	<?php if($_POST['renderBadges']==="true"):?>
+		<aside class="badges">
+			<header class="head">
+				<h4>Badges</h4>
+			</header>
+			<?php 
+				get_template_part('content', 'badges');			
+			?>
+		</aside>
+		<!-- /.badges -->
+	<?php endif;?>
 </div>
 <!-- /.algoLayout -->

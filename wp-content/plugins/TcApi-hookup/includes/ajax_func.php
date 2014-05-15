@@ -1103,3 +1103,5 @@ function get_past_contest_ajax_controller() {
 
 add_action( 'wp_ajax_get_past_contest', 'get_past_contest_ajax_controller' );
 add_action( 'wp_ajax_nopriv_get_past_contest', 'get_past_contest_ajax_controller' );
+
+

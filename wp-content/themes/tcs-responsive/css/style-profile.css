@@ -903,3 +903,9 @@ a{
         text-align: center;
         line-height: 30px;
     }
+    
+.loadingPlaceholder{
+    background: #ff8a00 url(../i/loading.gif) 50% 50% no-repeat;
+    height: 250px;
+    border-radius: 5px;
+}

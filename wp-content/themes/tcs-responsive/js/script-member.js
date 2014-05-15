@@ -36,10 +36,9 @@ tc_rating_dev_chart.drawChart = function(challengetype) {
 var coder = {
     // binding member module events
     initMemberEvents: function() {
-
-
+    	
         // chart switch
-        $('.chartTypeSwitcher .btnHistory').on('click', function(e) {
+    	$('#profileInfo').on('click', '.chartTypeSwitcher .btnHistory', function(e) {
             e.preventDefault();
             $('.isActive', $(this).closest('.chartTypeSwitcher')).removeClass('isActive');
             $(this).addClass('isActive');
@@ -53,7 +52,7 @@ var coder = {
                 currentDistChart.reflow();
             }
         })
-        $('.chartTypeSwitcher .btnDist').on('click', function(e) {
+        $('#profileInfo').on('click', '.chartTypeSwitcher .btnDist', function(e) {
             e.preventDefault();
             $('.isActive', $(this).closest('.chartTypeSwitcher')).removeClass('isActive');
             $(this).addClass('isActive');
@@ -69,10 +68,10 @@ var coder = {
         })
 
         // switch tabs 
-        $('.subTrackTabs .tabNav a').off().on(ev, function(e) {
-            //if($(this).hasClass('isActive')){
-            //      return false;
-            //}
+        $('#profileInfo').on('click','.subTrackTabs .tabNav a', function(e) {
+            if($(this).closest('tabNav').hasClass('alt')){
+            	return;
+            }
             if ($(this).hasClass('link')) {
                 window.location = $(this).attr('href');
                 return;
@@ -121,43 +120,18 @@ var coder = {
                     $('span', $(this).closest('td')).text(currentInfo[valId]);
                 })
             }
-            /*activeTrack = $(this).attr('title');
-            var trackData = buildRequestChartData(activeTrack);
-            var alias = $('.alias',$(this).parent()).val();
-            var trackDetailsData = statData.Tracks[alias];
-            var rows = "";
-            $.each(trackDetailsData, function(key, rec){
-                rows += '<tr><td class="colDetails">'+key+'</td><td class="colTotal">'+rec+'</td></tr>';
-            });
-            $('.mainTabStream .ratingTable tbody').html($(rows).fadeIn());
-            app.initZebra($('.mainTabStream .ratingTable'));
             
-            $('.isActive',$(this).closest('nav')).removeClass('isActive');
+            //style active tab
+            $('.isActive',$(this).closest('ul')).removeClass('isActive');
             $(this).addClass('isActive');
             
-            $('.subTrackTabs .head .trackName').html(alias);
-            $('.subTrackTabs .head .rating').html(trackDetailsData.rating);
-            
-            $('.subTrackTabs .detailedRating .val').html(trackDetailsData.percentile);
-            $('.subTrackTabs .fieldVolatility .val').html(trackDetailsData.volatility);
-            $('.subTrackTabs .fieldRank .val').html(trackDetailsData.rank);
-            $('.subTrackTabs .fieldCtryRank .val').html(trackDetailsData.countryRank);
-            $('.subTrackTabs .fieldScRank .val').html(trackDetailsData.schoolRank);
-            $('.subTrackTabs .fieldCompetitions .val').html(trackDetailsData.competitions);
-            $('.subTrackTabs .fieldMaxRating .val').html(trackDetailsData.maximumRating);
-            $('.subTrackTabs .fieldMinRating .val').html(trackDetailsData.minimumRating);
-            $('.subTrackTabs .fieldRevRating .val').html(trackDetailsData.reviewerRating);
-            */
             e.preventDefault();
         });
 
         // tab navs
 
 
-        $('.subTrackTabs .tabNav a').on(ev, function() {
-            $('.isActive', $(this).closest('.tabNav')).removeClass('isActive');
-            $(this).addClass('isActive');
-        });
+       
 
         //pager
         $('.pager .nextLink').on(ev, function() {
@@ -175,23 +149,7 @@ var coder = {
                 prevLink.trigger('click');
             }
         });
-        /*$('.pager .pageLink').on(ev,function(e){
-            var pager = $(this).closest('.pager');
-            $('.prevLink',pager).show();
-            $('.nextLink',pager).show();
-            var page = $(this).attr('href').replace(/#/g,'');
-            var newUrl = url+ '?pageSize='+postPerPage+'&page='+page;
-            app.forum.populate(newUrl);
-            $('.isActive',$(this).closest('.pager')).removeClass('isActive');           
-            $(this).addClass('isActive');
-            if($('.pageLink:last',pager).hasClass('isActive')){
-                $('.nextLink',pager).hide();
-            }
-            if($('.pageLink:first',pager).hasClass('isActive')){
-                $('.prevLink',pager).hide();
-            }
-            e.preventDefault();
-        });*/
+
         $('.pager .pageLink').on(ev, function(e) {
             var pager = $(this).closest('.pager');
             $('.prevLink', pager).show();
@@ -271,6 +229,41 @@ var coder = {
             $('.submissionCarousel .slider').trigger('iCarousel:goSlide', [idx]);
             return false;
         });
+        
+
+    	// track swith using ajax
+    	$('.trackSwitch a').on('click',function(e){
+    		if($(this).hasClass('isActive')){
+    			return false;
+    		}
+    		var href = $(this).attr('href');
+    		updateRequestData(href);
+    		
+    		if(reqProfileData.tab==="design"){
+    			$(this).closest('.actions').addClass('trackdesign');
+    		}else{
+    			$(this).closest('.actions').removeClass('trackdesign');
+    		}
+
+			$('.viewSwitch  .isActive').removeClass('isActive');
+			$('.viewSwitch  #graphButton').addClass('isActive');
+    		
+    		$('.isActive',$(this).closest('.trackSwitch')).removeClass('isActive');
+    		$(this).addClass('isActive');
+    		e.preventDefault();
+    	});
+    	$('#profileInfo').on('click','#algorithm .subTrackTabs a, #marathon .subTrackTabs a',function(e){
+    		if($(this).hasClass('isActive')){
+    			return false;
+    		}
+    		var href = $(this).attr('href');
+    		updateRequestData(href);
+    		
+    		
+    		$('.isActive',$(this).closest('.tabNav')).removeClass('isActive');
+    		$(this).addClass('isActive');
+    		e.preventDefault();
+    	});
     },
     // forum function
     forum: {
@@ -334,6 +327,86 @@ app.getColor = function(score) {
     else if (score < 1500) return "coderTextBlue";
     else if (score < 2200) return "coderTextYellow";
     else if (score >= 2200) return "coderTextRed";
+}
+var updateRequestData = function(url){
+	var seachStr = url.substr(url.indexOf('?')+1);
+	seachStr =  seachStr.split('&');
+	
+	var searchList = {};
+	for(i=0;i<seachStr.length;i++){
+		var en = seachStr[i];
+		en=en.split('=');
+		searchList[en[0]]=en[1];
+	}
+	
+	var currTrack = "data/srm";
+
+	if (searchList.tab == "algo") {
+		currTrack = "data/srm";
+	} else if (searchList.tab == "develop") {
+		currTrack = "develop";
+	} else if (searchList.tab == "design") {
+		currTrack = "design";
+	}
+	
+	reqProfileData.track = currTrack;
+	reqProfileData.activeTrack = searchList.activeTrack
+	reqProfileData.tab = searchList.tab;
+	reqProfileData.ct = searchList.ct;
+	reqProfileData.renderBadges = "false";
+	reqProfileData.href=url;
+	app.ajaxProfileRequest();
+}
+
+// ajax profile request options
+var reqProfileData = {
+        "action": "get_template_part_by_ajax",
+		"dataRequest":"false",
+		"handle": basicCoderData.handle,
+		"track": activeTrack,
+		"tab": tab,
+		"ct": currTab,
+		"renderBadges": "true",
+		"href":""
+}
+
+app.ajaxProfileRequest =function(){
+	if(reqProfileData.href === ""){
+		reqProfileData.href = window.location.href;
+	}
+	if (xhr != "") {
+	    xhr.abort();
+	}
+	if(reqProfileData.renderBadges!=="true"){
+		app.setLoading();
+	}
+	
+	xhr = $.ajax({
+        type: "POST",
+        url: ajaxUrl,
+        data: reqProfileData,
+        success: function(data){
+        		$('.loading').hide();
+        		if(reqProfileData.renderBadges==="true"){
+        			$('#profileInfo').html(unescape(data));
+        		}else{
+        			$('#profileInfo .ratingInfo').html($('.ratingInfo',unescape(data)).html());
+        		}
+        		
+        		// update style
+        		if(reqProfileData.tab==="design"){
+        			$('.dataTabs').addClass('designLayout');
+        		}else{
+        			$('.dataTabs').removeClass('designLayout');
+        		}
+        		
+        		//window.location.href = reqProfileData.href;
+        	},
+    	complete: function(){
+    		$('.loading').hide();
+    	}
+    });
+        
 }
 // extending base prototype
 $.extend(app, coder);

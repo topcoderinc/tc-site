@@ -354,7 +354,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     }
   }
 
-  // handle shortcode
+  // handle shortcode raw coder data
   function tcapi_get_raw_coder($handle = "", $data) {
     $handle = clean_pre($handle);
     return get_member_profile($handle, $data);

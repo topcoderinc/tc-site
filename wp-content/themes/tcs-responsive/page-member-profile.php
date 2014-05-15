@@ -14,6 +14,7 @@ if (!isset($coder->handle) ) {
 }
 
 $tab = get_query_var ( 'tab' );
+
 $track = "data/srm";
 
 if ($tab == "algo") {
@@ -28,12 +29,19 @@ if ($ct == 'marathon') {
 	$track = "data/marathon";
 }
 
+echo "<script>
+		var basicCoderData=".json_encode($coder).";
+		var tab='".$tab."';
+		var currTab='".$ct."';
+	</script>";
+
 $userkey = get_option ( 'api_user_key' );
 // rint_r($coder);
 
 ?>
 <script type="text/javascript">
 <!--
+var activeTrack = "<?php echo $track;?>";
  $(document).ready(function(){
 	coder.initMemberEvents();
 });
@@ -88,9 +96,6 @@ $quote = ($coder->quote == '') ? "Member of the world's largest global competiti
 			</div>
 		</div>
 		<!-- /#hero -->
-<?php
-// $coder = get_member_statistics ( $handle, $track );
-?>
 
 		<article id="mainContent" class="noShadow">
 			<article class="coderRatings">
@@ -108,18 +113,16 @@ $quote = ($coder->quote == '') ? "Member of the world's largest global competiti
 						</ul>
 					</div>
 					<!-- /.actions -->
-					<div class="dataTabs">
-						<?php
-						if ($tab == "design") {
-							get_template_part ( 'content', 'member-design' );
-						} else if ($tab == "develop") {
-							get_template_part ( 'content', 'member-develop' );
-						} else if ($ct == "marathon") {
-							get_template_part ( 'content', 'member-marathon' );
-						} else {
-							get_template_part ( 'content', 'member-algo' );
-						}
-						?>
+					<div class="dataTabs" id="profileInfo">
+						<script type="text/javascript">
+							<!--
+							var activeTrack = "<?php echo $track;?>";
+							 $(document).ready(function(){
+								app.ajaxProfileRequest();
+							});
+							//-->
+						</script>
+						<div class="loadingPlaceholder"></div>
 					</div>
 					<!-- /.dataTabs -->
 				</div>

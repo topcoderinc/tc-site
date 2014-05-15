@@ -23,6 +23,7 @@ locate_template("lib/rss.php", TRUE);
 locate_template("lib/post_types.php", TRUE);
 locate_template("lib/ajax.php", TRUE);
 locate_template("lib/images.php", TRUE);
+locate_template("lib/member-profile/config.php", TRUE);
 
 if (!empty($skipAdminSSL)) {
   force_ssl_admin(false);

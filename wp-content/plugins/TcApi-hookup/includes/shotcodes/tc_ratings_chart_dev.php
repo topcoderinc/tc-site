@@ -26,7 +26,8 @@ function tc_ratings_chart_dev_function($atts, $content = null) {
 			'marginRight' => 15,
 			'marginLeft' => 30,
 			'marginBottom' => 20,
-			'marginTop' => 20
+			'marginTop' => 20,
+			'width'=>768 
 	);
 	$ratingsChart->credits = array (
 			'enabled' => false 
@@ -108,7 +109,8 @@ function tc_ratings_chart_dev_function($atts, $content = null) {
 			'renderTo' => 'chart_d_' . $handle,
 			'type' => 'column',
 			'marginRight' => 20,
-			'marginBottom' => 70
+			'marginBottom' => 70,
+			'width'=>768 
 	);
 	$distChart->credits = array (
 			'enabled' => false
@@ -182,7 +184,9 @@ function tc_ratings_chart_dev_function($atts, $content = null) {
 				var chart_d_$handle;
 				var currentDistChart;
 				var currentChart;
+				var ct = $.trim($('.tabNavHead .isActive').text());
 				
+			$(document).ready(function(){
 				" . $ratingsChart->render ( 'chart_' . $handle ) . ";  
 				currentChart = chart_$handle;
 						
@@ -191,9 +195,7 @@ function tc_ratings_chart_dev_function($atts, $content = null) {
 				
 						
 		
-				var ct = $.trim($('.tabNavHead .isActive').text());
 						
-				$(document).ready(function(){
 						currentDistChart.xAxis[0].addPlotLine({
 		                value: ".$dev->rating.",
 		                color: '".get_point_color ( $dev->rating )."',
@@ -310,11 +312,12 @@ function get_data_dev($url) {
 		'dseries'=>$dseries
 	);
 
-	if (! empty ( $_POST ['handle'] )) {
-		echo json_encode ( $cdata );
-		die ();
+	if ($_POST ["dataRequest"] === "false") {
+		return $cdata;
 	}
-	return $cdata;
+	
+	echo json_encode ( $cdata );
+	die ();	
 }
 ;
 

@@ -1,9 +1,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
-   coder.initMemberBadges();
+  // coder.initMemberBadges();
 });
 </script>
 <?php
+$handle = $_POST['handle'];
+
 $achievements_map = array(
 	"First Forum Post" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-1"),
 	"One Hundred Forum Posts" => array(id => 1, active => false, groupClass => "Forum-Posts", specificClass => "Forum-Posts-100"),
@@ -73,9 +75,10 @@ $single_achievements_map = array(
 	"Two Hundred Successful Challenges" => array(id => 1, active => false, groupClass => "Successful-Challenges-200"),
 	"CoECI Client Badge" => array(id => 129, active => false, groupClass => "CoECI-Client-Badge")
 );
+
 $coder_achievements = get_member_achievements ($handle)->Achievements;
 $coder_achievements = is_array($coder_achievements) ? $coder_achievements : array();
-$searchResult = search_users($handle);
+$searchResult = search_coder($handle);
 foreach($coder_achievements as $achievement){
   if(isset($achievements_map[$achievement->description])){
     $achievements_map[$achievement->description]["active"] = true;
