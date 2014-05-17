@@ -595,13 +595,11 @@ function get_review_opportunities_ajax(
     $sortOrder = '',
     $challengeType = ''
 ) {
+    //http://tcqa1.topcoder.com/wp-admin/admin-ajax.php?action=get_review_opportunities&contest_type=develop&pageIndex=1&pageSize=10&sortColumn=reviewStart&sortOrder=desc
 
-    $url = "http://api.topcoder.com/v2/" . $contestType . "/reviewOpportunities?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+    $url = "http://api.topcoder.com/v2/" . $contestType . "/reviewOpportunities";
 
-    if ($contestType == "") {
-        $url = "http://api.topcoder.com/v2/" . $contestType . "/reviewOpportunities?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
-    }
-    //echo $url;
+    /*echo $url;
     if ($sortOrder) {
         $url .= "&sortOrder=$sortOrder";
     }
@@ -610,7 +608,7 @@ function get_review_opportunities_ajax(
     }
     if ($challengeType) {
         $url .= "&challengeType=$challengeType";
-    }
+    }*/
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
         'timeout'     => get_option( 'request_timeout' )

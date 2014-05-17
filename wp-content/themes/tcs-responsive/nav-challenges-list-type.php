@@ -36,6 +36,6 @@
 		<li><a href="<?php echo $activeChallenges;?>" class="<?php echo $activeClass;?>link">Open Challenges</a></li>
 		<li><a href="<?php echo $pastChallenges;?>" class="<?php echo $pastClass;?>link">Past Challenges</a></li>
 		<li><a href="<?php echo $upcomingChallenges;?>" class="<?php echo $upcomingClass;?>link">Upcoming Challenges</a></li>
-		<li><a href="<?php echo $reviewOpportunities;?>" class="<?php echo $reviewClass;?>link">Review Opportunities</a></li>
+		<!-- Coming soon!  <li><a href="<?php echo $reviewOpportunities;?>" class="<?php echo $reviewClass;?>link">Review Opportunities</a></li> -->
 	</ul>
 </div>

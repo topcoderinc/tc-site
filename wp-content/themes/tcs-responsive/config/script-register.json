@@ -33,6 +33,7 @@
         "blog-responsive.css",
         "base.css",
         "style.css",
+        "style-404page.css",
         "style-profile.css",
         "base-responsive.css",
         "style-responsive.css",
@@ -113,7 +114,9 @@
         "moment.min.js",
         "moment-timezone.min.js",
         "moment-data.js",
-								"jquery.cookie.js"
+		"jquery.cookie.js",
+        "jquery.inputmask.js",
+        "jquery.inputmask.date.extensions.js"
       ],
       "css": [
         "base.css",

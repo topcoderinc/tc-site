@@ -475,14 +475,6 @@ appChallenges = {
             var tt = $('#typeTooltip');
             tt.addClass('isShowing');
 
-            // I-107026: Add class devTooltip if the contest is not design contest.
-            var contestType = $('.tipC', $(this)).html();
-            if (!app.isDesignContest(contestType)) {
-                tt.addClass('devTooltip');
-            } else if (tt.hasClass('devTooltip')) {
-                tt.removeClass('devTooltip');
-            }
-
             $(this).addClass('activeLink');
             $('header', tt).html($('.tipT', $(this)).html());
             var $contestType = $('.tipC', $(this));
@@ -950,7 +942,7 @@ appChallenges = {
         param.challengeType = contest_type;
         param.challengeId = challenge_id;
         param.jwtToken = $.cookie('tcjwt');
-        if (param.jwtToken !== null && param.jwtToken.length > 0) {
+        if (typeof param.jwtToken !== 'undefined' && param.jwtToken.length > 0) {
 
             $.ajax({
                 url: ajaxUrl,

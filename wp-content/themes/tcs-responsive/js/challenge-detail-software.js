@@ -400,7 +400,7 @@ $(function () {
   }
 
   $("#registerSuccess .closeModal").click(function (event) {
-    closeModal();
+    $('.modal,#bgModal').hide();
     window.location.href = loginState = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
     event.preventDefault();
   });
@@ -600,4 +600,4 @@ app.tabNavinit = function () {
       $(this).addClass('active');
     }
   })
-}
+};
