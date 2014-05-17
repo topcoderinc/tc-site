@@ -111,8 +111,31 @@ var app = {
 
     $('.userWidget').on(ev, function(e) {
       e.stopPropagation();
-    })
-
+    });
+				
+				// URL Referral Generator
+				if ( $('#referralText').length>0 ) {
+						var tcsso = getCookie('tcsso');
+						if (tcsso) {
+								var tcssoValues = tcsso.split("|");
+								var handle = '';
+													
+								$.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
+										handle = data['data'][0]['handle'];
+									
+										if ( handle!='' ) {
+												$ref_url = 'http://www.topcoder.com/?action=callback&utmSource='+handle+'&utmCampaign=ReferralProgram';
+												$('#referralText').val($ref_url);
+										} else {
+												$('#loginFirst').show();
+												$('#referralText').remove();
+										}
+								});						
+					} else {							
+							$('#loginFirst').show();
+							$('#referralText').remove();
+					}
+			}
   },
   // event bindings
   initEvents: function() {

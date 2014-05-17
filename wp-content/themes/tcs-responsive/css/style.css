@@ -2475,3 +2475,14 @@ hr.light {
 .larger { font-size: larger; }
 .text-center { text-align: center; }
 /* End of New Home Page styles */
+
+/* URL Referral Generator */
+#referralText {
+	color: #fff;
+	margin:	20px 0;
+	width: 100%;
+}
+#loginFirst {
+	display: none;
+}
+
