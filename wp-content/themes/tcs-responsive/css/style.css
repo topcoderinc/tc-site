@@ -2479,10 +2479,11 @@ hr.light {
 /* URL Referral Generator */
 #referralText {
 	color: #fff;
-	margin:	20px 0;
+	margin:	20px 0 600px;
 	width: 100%;
 }
 #loginFirst {
 	display: none;
+	margin-bottom: 600px;
 }
 
