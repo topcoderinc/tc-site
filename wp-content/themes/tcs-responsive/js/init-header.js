@@ -20,15 +20,15 @@ $(document).ready(function() {
   $(window).bind('pageshow', function(event) {
 
     if ($('.tcssoUsingJS').length > 0) {
-      var tcsso = getCookie('tcsso');
-      if (tcsso && !event.originalEvent.persisted) {
+      var regCookie = app.isLoggedIn();
+      if (regCookie && !event.originalEvent.persisted) {
         $('.actionLogout').attr('href', 'javascript:;');
         $('.loginLink, .linkLogin, .btnRegister').addClass('hide').hide();
         $('.logoutLink, .linkLogout, .userDetailsWrapper').removeClass('hide').show();
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log Out").removeClass("actionLogin").addClass("actionLogout");
-        var tcssoValues = tcsso.split("|");
-        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
+        var regValues = regCookie.sub.split("|");
+        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + regValues[1] + "&json=true", function(data) {
           var handle = data['data'][0]['handle'];
           $('.userDetails .coder').text(handle);
           $.get(ajaxUrl, {
@@ -82,7 +82,7 @@ $(document).ready(function() {
             location.reload();
           }
         });
-      } else if (!tcsso && $('.actionLogout').length > 1) {
+      } else if (!app.isLoggedIn() && $('.actionLogout').length > 1) {
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log In").removeClass("actionLogout").addClass("actionLogin");
         $('.actionLogin').on('click', function() {

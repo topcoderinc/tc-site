@@ -236,3 +236,29 @@ function tsc_jquery_local_fallback($src, $handle = null) {
 }
 
 add_action('wp_head', 'tsc_jquery_local_fallback');
+
+function tc_setup_angular() {
+  // Core Angular
+  wp_register_script('angularjs', '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js', array('jquery'), null, true);
+  wp_enqueue_script('angularjs');
+
+  // Angular Route
+  wp_register_script('angularjs-route', '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular-route.min.js', array('angularjs'), null, true);
+  wp_enqueue_script('angularjs-route');
+
+  // Add underscore, requirement for restangular
+  wp_register_script('underscore', '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js', array('angularjs'), null, true);
+  wp_enqueue_script('underscore');
+
+  // restangular
+  wp_register_script('angularjs-restangular', '//cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.min.js', array('angularjs-route', 'underscore'), null, true);
+  wp_enqueue_script('angularjs-restangular');
+
+  // ng-grid
+  wp_register_script('ng-grid', '//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.10/ng-grid.min.js', array('angularjs'), null, true);
+  wp_enqueue_script('ng-grid');
+
+  wp_register_style('ng-grid', '//cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.10/ng-grid.css');
+  wp_enqueue_style('ng-grid');
+
+}

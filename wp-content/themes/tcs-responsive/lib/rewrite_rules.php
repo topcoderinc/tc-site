@@ -14,6 +14,13 @@ function tc_add_custom_rewrite_rules() {
     'top'
   );
 
+    // Angular Contest Details
+    add_rewrite_rule(
+        '^' . CONTEST_DETAILS_PERMALINK . '/([^/]*)/?$',
+        'index.php?pagename=angular-challenge-details&contestID=$matches[1]',
+        'top'
+    );
+
   // Member Profile
   //add_rewrite_rule ( '^'.MEMBER_PROFILE_PERMALINK.'/([^/]*)/?$', 'index.php?pagename=member-profile&handle=$matches[1]', 'top' );
   add_rewrite_rule(

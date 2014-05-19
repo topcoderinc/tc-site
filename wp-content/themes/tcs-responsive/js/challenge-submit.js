@@ -48,7 +48,7 @@ appChallengeSubmit = {
             $("#submission").closest('dd').removeClass('empty');
         }
         if(!empty){
-            if(tcjwt){
+            if(app.isLoggedIn()){
               $('.container').addClass('uploading');
               ajaxFileUpload();
               var submission = document.getElementById('submission').files[0];
@@ -79,7 +79,7 @@ appChallengeSubmit = {
                   $( ".uploadBar .loader" ).stop();
                   $('.container').removeClass('uploading');
                 });
-              }
+              };
               fileReader.readAsDataURL(submission);
             } else {
               $('.actionLogin').click();

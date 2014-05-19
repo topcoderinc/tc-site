@@ -4,27 +4,6 @@ var slider;
 var prizeSlider;
 var sliderClone;
 
-var tcjwt = getCookie('tcjwt');
-if (tcjwt && (typeof challengeId != 'undefined')) {
-  $.getJSON(ajaxUrl, {
-    "action": "get_challenge_documents",
-    "challengeId": challengeId,
-    "challengeType": challengeType,
-    "jwtToken": tcjwt.replace(/["]/g, "")
-  }, function (data) {
-    if (data.Documents && $('.downloadDocumentList')) {
-      $('.downloadDocumentList').children().remove();
-      data.Documents.map(function(x) {
-        $('.downloadDocumentList').append($(
-          '<li><a href="'+x.url+'">'+x.documentName+'</a></li>'
-        ));
-      });
-    }
-  });
-}
-
-
-
 function createSlider() {
   sliderClone = $('.columnSideBar .slider > ul:first-child').clone();
   slider = jQuery('.columnSideBar .slider > ul:first-child').bxSlider({
@@ -86,36 +65,19 @@ $(document).ready(function () {
     $('.registrantsTable').not('.mobile').removeClass('hide');
     $('.registrantsTable.mobile').addClass('hide');
   }
-
   $('a[href="' + getAnchor(location.href) + '"]').click();
-
-  var loggedIn = app.isLoggedIn();
 
   // init tab nav
   app.tabNavinit();
 
-  if (typeof challengeId != 'undefined') {
-    if ($('.loading').length <= 0) {
-      $('body').append('<div class="loading">Loading...</div>');
-    } else {
-      $('.loading').show();
-    }
+  var tcsso = getCookie('tcsso');
+  var tcjwt = getCookie('tcjwt');
 
-    if (loggedIn) {
-      getChallenge($.cookie('tcjwt'), function(challenge) {
-        updateRegSubButtons(challenge);
-        addDocuments(challenge);
-        $('.loading').hide();
-      });
-    } else {
-        var now = new Date();
-        if (registrationUntil && now.getTime() < registrationUntil.getTime()) {
-          $('.challengeRegisterBtn').removeClass('disabled');
-        }
-        $('.loading').hide();
-    }
-  }
 
+  getChallenge(tcjwt, function(challenge) {
+    updateRegSubButtons(challenge);
+    addDocuments(challenge);
+  });
 
   function updateRegSubButtons(challenge) {
     // if there was an error getting the challenge then enable the buttons
@@ -124,9 +86,9 @@ $(document).ready(function () {
       $('.challengeSubmissionBtn').removeClass('disabled');
       $('.challengeSubmissionsBtn').removeClass('disabled');
     } else {
-      if(loggedIn) {
-        var uid = loggedIn.sub.split("|")[1];
-        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + uid + "&json=true", function(data) {
+      if(tcsso) {
+        var tcssoValues = tcsso.split("|");
+        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
           var now = new Date();
           var handle = data['data'][0]['handle'];
 
@@ -169,8 +131,6 @@ $(document).ready(function () {
       }, function (data) {
         callback(data);
       });
-    } else {
-      $('.loading').hide();
     }
   }
 });
@@ -364,11 +324,10 @@ $(function () {
     }
   });
 
-  $(".challengeRegisterBtn").click(function (event) {
+  $(".challengeRegisterBtn").click(function () {
     if ($(this).hasClass("disabled")) { return false; }
-
-    var loggedInCookie = app.isLoggedIn();
-    if (loggedInCookie) {
+    var tcjwt = getCookie('tcjwt');
+    if (tcjwt) {
       if ($('.loading').length <= 0) {
         $('body').append('<div class="loading">Loading...</div>');
       } else {
@@ -377,7 +336,7 @@ $(function () {
       $.getJSON(ajaxUrl, {
         "action": "register_to_challenge",
         "challengeId": challengeId,
-        "jwtToken": $.cookie('tcjwt').replace(/["]/g, "")
+        "jwtToken": tcjwt.replace(/["]/g, "")
       }, function (data) {
         $('.loading').hide();
         if (data["message"] === "ok") {
@@ -392,17 +351,15 @@ $(function () {
     } else {
       $('.actionLogin').click();
     }
-    event.preventDefault();
   });
 
   if (autoRegister) {
     $(".challengeRegisterBtn").click();
   }
 
-  $("#registerSuccess .closeModal").click(function (event) {
-    $('.modal,#bgModal').hide();
-    window.location.href = loginState = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
-    event.preventDefault();
+  $("#registerSuccess .closeModal").click(function () {
+    closeModal();
+    window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
   });
 
 });
@@ -583,7 +540,8 @@ app.tabNavinit = function () {
     if (tabIdx > 0) {
       id = "#" + id.substr(tabIdx + 4);
     }
-    $('.tab', $(this).closest('.tabsWrap')).hide();
+    var old = $('a.active').attr('href');
+    $(old).hide();
     $(id).fadeIn();
     $('.active', $(this).closest('nav')).removeClass('active');
     $(this).addClass('active');
@@ -600,4 +558,4 @@ app.tabNavinit = function () {
       $(this).addClass('active');
     }
   })
-};
+}
