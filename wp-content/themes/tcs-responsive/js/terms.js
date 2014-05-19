@@ -1,5 +1,10 @@
 /**
  * Terms functions
+ *
+ * Changelog:
+ *
+ * Release Assembly - topcoder Wordpress Bug Fixes 4 Challenge:
+ * - Added "break;" to prevent race condition, causing text on terms page to disappear.
  */
 appChallengeTerms = {
   init: function () {
@@ -9,6 +14,7 @@ appChallengeTerms = {
       switch (termType) {
         case "list":
           app.initList(tcjwt);
+          break;
         case "detail":
           app.initDetail(tcjwt);
       }
