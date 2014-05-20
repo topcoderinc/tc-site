@@ -17,7 +17,7 @@ appChallengeTerms = {
   },
 
   initDetail: function (tcjwt) {
-    if (tcjwt) {
+    if (app.isLoggedIn()) {
       app.setLoading();
       $.getJSON(ajaxUrl, {
         "action": "get_challenge_term_details",
@@ -71,7 +71,7 @@ appChallengeTerms = {
   },
 
   initList: function (tcjwt) {
-    if (tcjwt) {
+    if (app.isLoggedIn()) {
       app.setLoading();
       $.getJSON(ajaxUrl, {
         "action": "get_challenge_terms",

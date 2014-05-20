@@ -1,0 +1,135 @@
+#wrapper #navigation {
+	height: 94px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+	behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
+}
+#wrapper #navigation .container {
+	height: 94px;
+}
+#wrapper #navigation .container h1.logo {
+	background: url(../i/logo.png) 0 0 no-repeat;
+	top: 27px;
+	width: 330px;
+	height: 58px;
+	position: absolute;
+	left: 0;
+}
+#wrapper .logo {
+	margin-left: 20px;
+}
+#wrapper .page404 {
+	background-image: none;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #fcfcfc;
+	
+}	
+	#wrapper .page404 .container {
+		width: auto;
+	}
+	#wrapper .page404 h1 {
+		color: #ff0000;
+		text-align: center;
+		font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+	}
+
+	#wrapper .page404 .text404 {
+		margin: 10px auto;
+		font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+		text-align: center;
+		color: #636363;
+	}
+	@media (min-width:800px){
+		#wrapper .page404 h1 {
+			font-size: 37px;
+		}
+		#wrapper .page404 .text404 {
+			width: 700px;
+			font-size: 16px;
+		}
+	}
+	@media (max-width:800px){
+		#wrapper .page404 h1 {
+			font-size: 28px;
+		}
+		#wrapper .page404 .text404 {
+			width: 320px;
+			font-size: 14px;
+		}
+	}
+
+#wrapper .step404 {
+	background-color: #ffffff;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+	behavior: url(./wp-content/themes/tcs-responsive/css/PIE.htc);
+}
+	@media (min-width:800px){
+	    #wrapper .step404 #step-img {
+			width: 792px;
+			height: 982px;
+			margin: 10px auto;
+			background-image: url('../i/404-PC.png');
+		}
+	}
+	@media (max-width: 800px){
+	    #wrapper .step404 #step-img {
+			width: 320px;
+			height: 1229px;
+			margin: 10px auto;
+			background-image: url('../i/404-Mobile.png');
+		}
+	}
+	
+	#wrapper .step404 #print_btn{
+		margin: 0 auto;
+		padding-top: 20px;
+		padding-bottom: 30px;
+		width: 130px;
+	}
+#wrapper .copyright {
+	color: #959595;
+	width: 250px;
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+	#wrapper .copyright a {
+		color: #959595;
+		text-decoration: underline;
+	}
+
+#print_area h1{
+	font-size: 30px;
+}
+#print_area .one-page {
+	page-break-after: always;
+}
+#print_area .page1 {
+	width: 612px;
+	height: 792px;
+}
+#print_area .page2-front {
+	width: 612px;
+	height: 792px;
+}
+#print_area .page2-back {
+	width: 612px;
+	height: 792px;
+}
+@media screen {
+	#wrapper {
+		display: block;
+	}
+	#print_area {
+		display: none;
+	}
+}
+@media print {
+	#wrapper {
+		display: none;
+	}
+	#print_area {
+		display: block;
+	}
+}	
