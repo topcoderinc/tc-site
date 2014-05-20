@@ -440,63 +440,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     }
     return "Error in processing request";
   }
-
-  /* member chart statistics  */
-  function tcapi_get_member_chart_stats($handle, $track, $contestType) {
-    $url      = get_option('tc_api_url') . "/v2/$track/statistics/$handle/$contestType";
-    $args     = array(
-      'httpversion' => get_option('httpversion'),
-      'timeout'     => 20
-    );
-    $response = wp_remote_get($url, $args);
-
-    if (is_wp_error($response) || !isset ( $response ['body'] )) {
-      return "Error in processing request";
-    }
-    if ($response ['response'] ['code'] == 200) {
-      return json_decode($response ['body']);
-    }
-    return "Error in processing request";
-  }
-
-  /* member achievements  */
-  function tcapi_get_member_achievements($handle = '') {
-    $url      = get_option('tc_api_url') . "/v2/users/" . $handle . "?data=achievements";
-    $args     = array(
-      'httpversion' => get_option('httpversion'),
-      'timeout'     => 30
-    );
-    $response = wp_remote_get($url, $args);
-
-    if (is_wp_error($response) || !isset ( $response ['body'] )) {
-      return "Error in processing request or Member dosen't exist";
-    }
-    if ($response ['response'] ['code'] == 200) {
-      $coder_achievements = json_decode($response ['body']);
-      return $coder_achievements;
-    }
-    return "Error in processing request";
-  }
-
-  /* get member profile design recent Wins */
-  function tcapi_get_stat_design_recentwins($handle = '') {
-    $url      = get_option('tc_api_url') . "/v2/users/$handle/statistics/design/recentWins";
-    $args     = array(
-      'httpversion' => get_option('httpversion'),
-      'timeout'     => 30
-    );
-    $response = wp_remote_get($url, $args);
-
-    if (is_wp_error($response) || !isset ( $response ['body'] )) {
-      return "Error in processing request or Member dosen't exist";
-    }
-    if ($response ['response'] ['code'] == 200) {
-      $coder_achievements = json_decode($response ['body']);
-      return $coder_achievements;
-    }
-
-    return "Error in processing request";
-  }
+ 
 
   /* forum posts  */
   function tcapi_get_forum_posts() {
@@ -517,24 +461,6 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     return "Error in processing request";
   }
 
-  /* member achievements current  */
-  function tcapi_get_member_achievements_current($userId = '', $badgeId = '') {
-    $url      = "http://community.topcoder.com/tc?module=MemberAchievementCurrent&cr=" . $userId . "&ruleId=" . $badgeId;
-    $args     = array(
-      'httpversion' => get_option('httpversion'),
-      'timeout'     => 30
-    );
-    $response = wp_remote_get($url, $args);
-
-    if (is_wp_error($response) || !isset ( $response ['body'] )) {
-      return "Error in processing request";
-    }
-    if ($response ['response'] ['code'] == 200) {
-      $coder_achievements_current = json_decode($response ['body']);
-      return $coder_achievements_current;
-    }
-    return "Error in processing request";
-  }
 
   /* search users  */
   function tcapi_search_users($handle = '') {
