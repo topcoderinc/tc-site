@@ -161,31 +161,11 @@ a{
         background-color: #ffae00;
         color: #fff;
     }
-    .switchBtns a.disabled:hover{
-        background-color: transparent;
-        color: #00AEFF;
-        cursor: default;
-    }
-    .switchBtns a.isActive.disabled:hover{
-        background-color: #ffae00;
-        color: #fff;
-    }
     .trackdesign .switchBtns a:hover,
     .trackdesign  .switchBtns a.isActive{
         background-color: #00aeff;
         color: #fff;
     }
-    
-	.trackdesign .switchBtns a.disabled:hover{
-		background-color: transparent;
-        color: #FFAE00;
-        cursor: default;
-	}
-	.trackdesign  .switchBtns a.isActive.disabled:hover{
-        background-color: #00aeff;
-        color: #fff;
-    }
-    
     .switchBtns .first a{
         border: 1px solid #ffae00;
         margin-left: 0;

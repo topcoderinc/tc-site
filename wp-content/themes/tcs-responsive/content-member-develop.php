@@ -13,6 +13,9 @@ $handle = $_POST['handle'];
 $track = $_POST['track'];
 $coder = get_member_statistics ( $handle, $track);
 
+echo "<script>
+		var coderData=".json_encode($coder).";
+		</script>";
 
 $tracks = $coder->Tracks;
 
@@ -42,9 +45,6 @@ array_push ( $challengetypes, 'UI Prototypes' );
 	<div class="ratingInfo">
 
 		<div class="subTrackTabs">
-		<?php echo "<script>
-		var coderData=".json_encode($coder).";
-		</script>";?>
 			<nav class="tabNav">
 				<ul>
 						<?php

@@ -56,7 +56,15 @@ function get_member_statistics0($handle, $track) {
   return $TCHOOK_plugin->tcapi_get_member_stats($handle, $track);
 }
 
+function get_member_chart_statistics_0($handle, $track, $contestType) {
+  global $TCHOOK_plugin;
+  return $TCHOOK_plugin->tcapi_get_member_chart_stats($handle, $track, $contestType);
+}
 
+function get_member_achievements_0($handle) {
+  global $TCHOOK_plugin;
+  return $TCHOOK_plugin->tcapi_get_member_achievements($handle);
+}
 
 function get_forum_posts() {
   global $TCHOOK_plugin;
@@ -68,10 +76,19 @@ function get_json_from_url($url) {
   return $TCHOOK_plugin->get_json_from_url($url);
 }
 
+function get_stat_design_recentwins_0($url) {
+  global $TCHOOK_plugin;
+  return $TCHOOK_plugin->tcapi_get_stat_design_recentwins($url);
+}
 
 function get_checkpoint_details($contestId, $challengeType) {
   global $TCHOOK_plugin;
   return $TCHOOK_plugin->get_checkpoint_details_fn($contestId, $challengeType);
+}
+
+function get_member_achievements_current_0($userId, $badgeId) {
+  global $TCHOOK_plugin;
+  return $TCHOOK_plugin->tcapi_get_member_achievements_current($userId, $badgeId);
 }
 
 function search_users($handle) {
