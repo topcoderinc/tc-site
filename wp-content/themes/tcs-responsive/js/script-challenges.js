@@ -11,8 +11,13 @@ var tableHasLoaded = false;
 var default_view = "#tableView";
 var isSearch = false;
 /**
- * Challenges function
-challenge
+ * Challenges function challenge
+ *
+ * Changelog:
+ *
+ * Release Assembly - topcoder Wordpress Bug Fixes 4 Challenge:
+ * - Added handling logic for url hash parameters for design and develop challenges. Effectively creating
+ *    linkable search pages.
  */
 appChallenges = {
     init: function() {
@@ -81,6 +86,23 @@ appChallenges = {
             }
         }
     },
+    toggleDatePicker: function(checkBox) {
+        var row = checkBox.closest('.row');
+        if (row.hasClass('subRow1')) {
+            row = row.parent();
+        }
+        if (checkBox.is(':checked')) {
+            $('.datepicker', row).datepicker("option", "disabled", false);
+            $('img', row).css('opacity', 1).css('filter', 'alpha(opacity=100)');
+            $('img', row).closest('.row').removeClass('isDisabled');
+            $('input:text, select', row).removeAttr('disabled');
+        } else {
+            $('.datepicker', row).datepicker("option", "disabled", true);
+            $('img', row).css('opacity', 1).css('opacity', 0.5).css('filter', 'alpha(opacity=50)');
+            $('img', row).closest('.row').addClass('isDisabled');
+            $('input:text, select', row).attr('disabled', 'disabled');
+        }
+    },
     bindEvents: function() {
 
         // filter check/ uncheck
@@ -138,23 +160,7 @@ appChallenges = {
         });
 
         $('.otherOpts input:checkbox').on('change', function() {
-            var row = $(this).closest('.row');
-            if (row.hasClass('subRow1')) {
-                row = row.parent();
-            }
-            if ($(this).is(':checked')) {
-                // Issue ID: I-111128 - enable the datepicker
-                $('.datepicker', row).datepicker("enable");
-                $('img', row).css('opacity', 1).css('filter', 'alpha(opacity=100)');
-                $('img', row).closest('.row').removeClass('isDisabled');
-                $('input:text, select', row).removeAttr('disabled');
-            } else {
-                // Issue ID: I-111128 - enable the datepicker
-                $('.datepicker', row).datepicker("disable");
-                $('img', row).css('opacity', 1).css('opacity', 0.5).css('filter', 'alpha(opacity=50)');
-                $('img', row).closest('.row').addClass('isDisabled');
-                $('input:text, select', row).attr('disabled', 'disabled');
-            }
+            app.toggleDatePicker($(this));
         });
 
         //searchFilter
@@ -163,7 +169,11 @@ appChallenges = {
             $('.advSearch').removeClass('isActive');
         });
         $('.searchFilter .btnApply').on(ev, function() {
+            // Clear url hashes, because we want a fresh search!
+            window.location.hash = "";
+
             isSearch = true;
+
             app.initAjaxData();
             $(this).closest('.searchFilter').fadeOut('fast');
             $('.advSearch').removeClass('isActive');
@@ -1270,6 +1280,76 @@ appChallenges = {
             param.sortOrder = 'desc';
         }
 
+        var urlHashes = window.location.hash;
+        // If the hash is empty, we want to get the parameters from the search form and populate the url hash
+        if(!urlHashes || $.trim(urlHashes) === "") {
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            if ($.trim(startDate) != "" && $('#fSDate').prop('checked')) {
+                param.submissionEndFrom = startDate;
+                urlHashes += "subEndFrom=" + param.submissionEndFrom + "&";
+            }
+            if ($.trim(endDate) != "" && $('#fEDate').prop('checked')) {
+                param.submissionEndTo = endDate;
+                urlHashes += "subEndTo=" + param.submissionEndTo + "&";
+            }
+
+            var challengesRadio = $("input:radio[name ='radioFilterChallenge']:checked").val();
+            if (challengesRadio != null && challengesRadio != "all") {
+                param.challengeType = challengesRadio;
+                urlHashes += "challengeType=" + encodeURIComponent(param.challengeType) + "&";
+            }
+
+            if(urlHashes && $.trim(urlHashes) != "") {
+                urlHashes = urlHashes.slice(0, -1);
+                window.location.hash = urlHashes;
+            }
+        } else {
+            // Otherwise populate the form with the parameters from the url hash
+            var hashes = urlHashes.substring(1, urlHashes.length).split('&');
+            // Sort hashes, so we are independent from order.
+            hashes.sort();
+            console.log(hashes);
+            var currentIndex = 0;
+            var hashesSize = hashes.length;
+
+            if(currentIndex < hashesSize && hashes[currentIndex].indexOf("challengeType=") != -1) {
+                // We may have spaces
+                var challengeType = decodeURIComponent(hashes[currentIndex].split("=")[1]);
+                if($.trim(challengeType) != "") {
+                    console.log(challengeType);
+                    param.challengeType = challengeType;
+                    $("input:radio[name ='radioFilterChallenge'][value='" + challengeType + "']").prop('checked', true);
+                }
+
+                currentIndex++;
+            }
+
+            if(currentIndex < hashesSize && hashes[currentIndex].indexOf("subEndFrom=") != -1) {
+                var subEndFrom = hashes[currentIndex].split("=")[1];
+                if($.trim(subEndFrom) != "") {
+                    param.submissionEndFrom = subEndFrom;
+                    var fSDate = $('#fSDate');
+                    fSDate.prop('checked', true);
+                    app.toggleDatePicker(fSDate);
+                    $("#startDate").val(subEndFrom);
+                }
+
+                currentIndex++;
+            }
+
+            if(currentIndex < hashesSize && hashes[currentIndex].indexOf("subEndTo=") != -1) {
+                var subEndTo = hashes[currentIndex].split("=")[1];
+                if($.trim(subEndTo) != "") {
+                    param.submissionEndTo = subEndTo;
+                    var fEDate = $('#fEDate');
+                    fEDate.prop('checked', true);
+                    app.toggleDatePicker(fEDate);
+                    $("#endDate").val(subEndTo);
+                }
+            }
+        }
+
         var challengesUrlEndFrom = app.getParameterByName('submission_end_date_from');
         if (challengesUrlEndFrom  != null){
             param.submissionEndFrom = challengesUrlEndFrom;
@@ -1294,6 +1374,7 @@ appChallenges = {
         }
         if ($.trim(endDate) != "" && $('#fEDate').prop('checked')) {
             param.submissionEndTo = endDate;
+
         }
 
         // if submission from date is blank form to date isn't
