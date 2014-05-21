@@ -66,6 +66,8 @@ if (isset($_GET['auth']) && $_GET['auth'] == 'logout') {
     } else {
       ajaxUrl = "<?php bloginfo('wpurl')?>" + "/wp-admin/admin-ajax.php";
     }
+
+    var tcApiRUL = '<?php echo TC_API_URL; ?>';
     var siteURL = '<?php bloginfo('siteurl');?>';
     var base_url = '<?php bloginfo( 'stylesheet_directory' ); ?>';
     var stylesheet_dir = '<?php echo THEME_URL . '/css'; ?>';

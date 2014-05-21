@@ -1,6 +1,6 @@
-var cdapp = angular.module('challengeDetails', ['restangular', 'ngCookies'])
+var cdapp = angular.module('tc.challengeDetails', ['restangular', 'ngCookies'])
 
-.constant("API_URL", "https://api.topcoder.com/v2")
+.constant("API_URL", tcApiRUL)
 
 .config(['$httpProvider', 'RestangularProvider', 'API_URL', function($httpProvider, RestangularProvider, API_URL) {
   /*

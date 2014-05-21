@@ -2,7 +2,7 @@
 
 function post_register_controller() {
   global $_POST;
-  $url = "https://api.topcoder.com/v2/users";
+  $url =  TC_API_URL . "/users";
   $params = array(
     'method' => 'POST',
     'timeout' => 45,
@@ -61,7 +61,7 @@ add_action( 'wp_ajax_nopriv_post_register', 'post_register_controller' );
 function post_login_controller()
 {
     global $_POST;
-    $url      = "https://api.topcoder.com/v2/users/";
+    $url      = TC_API_URL . "/users/";
     $arg      = array(
         'method'  => 'POST',
         'headers' => array( "Content-Type: application/json" ),
@@ -229,7 +229,7 @@ add_action( 'wp_ajax_nopriv_submit_to_dev_challenge', 'submit_to_dev_challenge_a
 // returns member profile
 function get_member_profile( $handle = '' )
 {
-    $url      = "http://api.topcoder.com/v2/users/" . $handle;
+    $url      = TC_API_URL . "/users/" . $handle;
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
         'timeout'     => get_option( 'request_timeout' )
@@ -250,7 +250,7 @@ function get_member_profile( $handle = '' )
 // returns achievements data
 function get_user_achievements( $userKey = '', $handle = '' )
 {
-    $url      = "https://api.topcoder.com/rest/statistics/$handle/achievements?user_key=" . $userKey;
+    $url      = TC_API_URL . "/rest/statistics/$handle/achievements?user_key=" . $userKey;
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
         'timeout'     => get_option( 'request_timeout' )
@@ -270,7 +270,7 @@ function get_user_achievements( $userKey = '', $handle = '' )
 // returns copilot stats
 function get_copilot_stats( $userKey = '', $handle = '' )
 {
-    $url      = "https://api.topcoder.com/rest/statistics/copilots/$handle/contests?user_key=" . $userKey;
+    $url      = TC_API_URL . "/rest/statistics/copilots/$handle/contests?user_key=" . $userKey;
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
         'timeout'     => get_option( 'request_timeout' )
@@ -294,10 +294,10 @@ function get_top_rank( $userKey = '', $contestType = 'Algorithm' )
 
     switch ($contestType) {
         case "develop":
-            $url = "https://api.topcoder.com/v2/develop/statistics/tops/development?rankType=rank";
+            $url = TC_API_URL . "/develop/statistics/tops/development?rankType=rank";
             break;
         case "data":
-            $url = "https://api.topcoder.com/v2/data/srm/statistics/tops";
+            $url = TC_API_URL . "/data/srm/statistics/tops";
             break;
 
     }
@@ -321,7 +321,7 @@ function get_top_rank( $userKey = '', $contestType = 'Algorithm' )
 /* challenge terms  */
 function get_challenge_terms( $challengeId, $role, $jwtToken )
 {
-    $url      = "https://api.topcoder.com/v2/terms/$challengeId?role=" . $role;
+    $url      = TC_API_URL . "/terms/$challengeId?role=" . $role;
     $args     = array(
         'headers'     => array(
             'Authorization' => 'Bearer ' . $jwtToken
@@ -340,7 +340,7 @@ function get_challenge_terms( $challengeId, $role, $jwtToken )
 /* challenge term details  */
 function get_challenge_term_details( $termId, $jwtToken )
 {
-    $url      = "https://api.topcoder.com/v2/terms/detail/" . $termId;
+    $url      = TC_API_URL . "/terms/detail/" . $termId;
     $args     = array(
         'headers'     => array(
             'Authorization' => 'Bearer ' . $jwtToken
@@ -359,7 +359,7 @@ function get_challenge_term_details( $termId, $jwtToken )
 /* register to challenge */
 function register_to_challenge( $challengeId, $jwtToken )
 {
-    $url      = "https://api.topcoder.com/v2/challenges/$challengeId/register";
+    $url      = TC_API_URL . "/challenges/$challengeId/register";
     $args     = array(
         'headers'     => array(
             'Authorization' => 'Bearer ' . $jwtToken
@@ -378,7 +378,7 @@ function register_to_challenge( $challengeId, $jwtToken )
 /* submit to development challenge */
 function submit_to_dev_challenge( $challengeId, $fileName, $fileData, $jwtToken )
 {
-    $url      = "https://api.topcoder.com/v2/develop/challenges/$challengeId/submit";
+    $url      = TC_API_URL . "/develop/challenges/$challengeId/submit";
     $body     = array(
         'fileName' => $fileName,
         'fileData' => $fileData
@@ -402,7 +402,7 @@ function submit_to_dev_challenge( $challengeId, $fileName, $fileData, $jwtToken 
 /* agree challenge terms  */
 function agree_challenge_terms( $termId, $jwtToken )
 {
-    $url      = "https://api.topcoder.com/v2/terms/" . $termId . "/agree";
+    $url      = TC_API_URL . "/terms/" . $termId . "/agree";
     $args     = array(
         'headers'     => array(
             'Authorization' => 'Bearer ' . $jwtToken
@@ -428,7 +428,7 @@ function agree_challenge_terms( $termId, $jwtToken )
  */
 function get_contest_info( $contestID = '' )
 {
-    $url      = "https://api.topcoder.com/v2/software/contests/$contestID";
+    $url      = TC_API_URL . "/software/contests/$contestID";
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
         'timeout'     => get_option( 'request_timeout' )
@@ -509,7 +509,7 @@ function get_challenges_ajax(
   $endDate = ''
 ) {
 
-  $url = "https://api.topcoder.com/v2/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
+  $url = TC_API_URL . "/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
 
   // set default value since failed using params;
   // @TODO update to be a little better
@@ -597,7 +597,7 @@ function get_review_opportunities_ajax(
 ) {
     //http://tcqa1.topcoder.com/wp-admin/admin-ajax.php?action=get_review_opportunities&contest_type=develop&pageIndex=1&pageSize=10&sortColumn=reviewStart&sortOrder=desc
 
-    $url = "http://api.topcoder.com/v2/" . $contestType . "/reviewOpportunities";
+    $url = TC_API_URL . "/" . $contestType . "/reviewOpportunities";
 
     /*echo $url;
     if ($sortOrder) {
@@ -652,7 +652,7 @@ function get_review_detail_controller()
 
 function get_review_detail_ajax($userKey = '', $contestID = '', $contestType = '', $resetCache = FALSE, $jwtToken = '') {
 
-    $url = "http://api.topcoder.com/v2/$contestType/reviewOpportunities/$contestID";
+    $url = TC_API_URL . "/$contestType/reviewOpportunities/$contestID";
 
     if ($resetCache) {
         $url .= "?refresh=t";
@@ -708,7 +708,7 @@ function get_member_id_ajax(
     $case_sensitive = 'true'
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/search?handle=" . $handle;
+    $url = TC_API_URL . "/users/search?handle=" . $handle;
 
     if (!empty($page)) {
         $url .= "&pageIndex=$page";
@@ -758,7 +758,7 @@ function get_handle_validity_ajax(
     $handle = ''
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/validate/" . $handle;
+    $url = TC_API_URL . "/users/validate/" . $handle;
 
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
@@ -805,7 +805,7 @@ function get_email_validity_ajax(
     $email = ''
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/validateEmail?email=" . $email;
+    $url = TC_API_URL . "/users/validateEmail?email=" . $email;
 
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
@@ -854,7 +854,7 @@ function get_social_validity_ajax(
     $user = ''
 ) {
 
-    $url = "http://api.topcoder.com/v2/users/validateSocial?socialProviderId=" . $provider . "&socialUserId=" . $user;
+    $url = TC_API_URL . "/users/validateSocial?socialProviderId=" . $provider . "&socialUserId=" . $user;
 
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
@@ -887,7 +887,7 @@ function get_social_validity_ajax(
  */
 function get_contests_rss($listType, $challengeType)
 {
-    $url = "http://api.topcoder.com/v2/challenges/rss?listType={$listType}&challengeType={$challengeType}";
+    $url = TC_API_URL . "/challenges/rss?listType={$listType}&challengeType={$challengeType}";
 
     $args     = array(
         'httpversion' => get_option( 'httpversion' ),
@@ -909,7 +909,7 @@ function get_contests_rss($listType, $challengeType)
 }
 // Forgot Password
 function generateResetToken($handle = '') {
-    $url = "http://api.topcoder.com/v2/users/resetToken/";
+    $url = TC_API_URL . "/users/resetToken/";
 
     if(filter_var($handle, FILTER_VALIDATE_EMAIL)) {
         //input handle is email
@@ -935,7 +935,7 @@ function generateResetToken($handle = '') {
 
 function changePassword($handle = '', $password = '' , $unlockCode = '') {
 
-    $url = "http://api.topcoder.com/v2/users/resetPassword/" . $handle;
+    $url = TC_API_URL . "/v2/users/resetPassword/" . $handle;
 
     $arrParam = array('handle' => $handle, 'password' => $password, 'token' => $unlockCode );
     $args = array(
@@ -974,7 +974,7 @@ function get_challenge_documents_ajax($contestID = '', $contestType = '', $reset
 
   // This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
   #echo "	contest type ".$contestType;
-  $url = "https://api.topcoder.com/v2/$contestType/challenges/$contestID";
+  $url = TC_API_URL . "/$contestType/challenges/$contestID";
 
   if ($resetCache) {
     $url .= "?refresh=t";
@@ -1014,8 +1014,8 @@ add_action( 'wp_ajax_get_all_platforms_and_technologies', 'get_all_platforms_and
 add_action( 'wp_ajax_nopriv_get_all_platforms_and_technologies', 'get_all_platforms_and_technologies_ajax_controller' );
 
 function get_all_platforms_and_technologies_ajax() {
-    $pUrl = "http://api.topcoder.com/v2/data/platforms";
-    $tUrl = "http://api.topcoder.com/v2/data/technologies";
+    $pUrl = TC_API_URL . "/data/platforms";
+    $tUrl = TC_API_URL . "/data/technologies";
     $args = array (
         'httpversion' => get_option ( 'httpversion' ),
         'timeout' => get_option ( 'request_timeout' )
