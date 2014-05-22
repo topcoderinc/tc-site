@@ -80,5 +80,4 @@ function tc_add_custom_rewrite_rules() {
 
   // Search results
   add_rewrite_rule('^search/?$', 'index.php?', 'top');
- 
 }
