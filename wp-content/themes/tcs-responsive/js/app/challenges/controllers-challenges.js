@@ -31,6 +31,8 @@
         radioFilterChallenge: 'all',
         show: false
       };
+      $scope.pageSize = 10;
+      $scope.page = 1;
       
       $scope.setPagingData = function (data, page, pageSize) {
         var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
@@ -41,10 +43,7 @@
         return pagedData;
       };
       
-      //$http.get($window.wordpressConfig.stylesheetDirectoryUri + '/js/app/challenges/data/design.json').success(function (data) {
-      //  $scope.challenges = data.data;
-      //});
-      // @TODO make type dynamic by using $routeparams
+      
       function getChallenges(contest) {
         var params = {};
         if (contest.contestType && contest.contestType !== '') {
@@ -62,8 +61,7 @@
       }
 
       $scope.submit = function () {
-        console.log('submit');
-        $scope.challenges = $scope.allChallenges = $scope.allChallenges.filter(function (contest) {
+        $scope.challenges = $scope.allChallenges.filter(function (contest) {
           if ($scope.search.radioFilterChallenge !== 'all' && $scope.search.radioFilterChallenge !== contest.challengeType) {
             return false;
           }
@@ -76,9 +74,6 @@
           return true;
         });
       };
-
-      $scope.pageSize = 10;
-      $scope.page = 1;
 
       
 
