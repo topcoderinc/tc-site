@@ -1,12 +1,21 @@
 'use strict';
 
+// There's an error while initializing content-member-algo.php. It creates a 'not defined' error on the coder object. Problem exists in other pages as well.
+// Solving this is out of scope. So, just stopping that error instead
+var coder = {
+  initMemberBadges : function(){}
+}
+
 window.tc = angular.module('tc', [
   'restangular',
   'tc.challengeService',
+  'tc.memberProfileService',
   'ngGrid'
 ])
 
 .constant("API_URL", "https://api.topcoder.com/v2")
+.constant("PHOTO_LINK_LOCATION", "http://community.topcoder.com")
+.constant("MEMBER_PROFILE_TEMPLATE_URL", "/js/app/member-profile/partials/memberProfile.tpl.html")
 
 .config(['$httpProvider', 'RestangularProvider', 'API_URL', function($httpProvider, RestangularProvider, API_URL) {
   /*
@@ -34,7 +43,7 @@ window.tc = angular.module('tc', [
         pageSize: data.pageSize
       };
     } else {
-      extractedData = data.data;
+      extractedData = data;
     }
     return extractedData;
   });
