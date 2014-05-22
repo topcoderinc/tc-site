@@ -3,6 +3,7 @@
 /*
  * tc_ratings_chart_ds
  */
+$chartWidth=768;
 function tc_ratings_chart_ds_function($atts, $content = null) {
 	extract ( shortcode_atts ( array (
 			"contest" => "",
@@ -96,7 +97,8 @@ function tc_ratings_chart_ds_function($atts, $content = null) {
 			'renderTo' => 'chart_' . $handle,
 			'type' => 'line',
 			'marginRight' => 20,
-			'marginBottom' => 20 
+			'marginBottom' => 20,
+			'width'=>768
 	);
 	$ratingsChart->credits = array (
 			'enabled' => false 
@@ -177,7 +179,8 @@ function tc_ratings_chart_ds_function($atts, $content = null) {
 			'renderTo' => 'chart_d_' . $handle,
 			'type' => 'column',
 			'marginRight' => 20,
-			'marginBottom' => 70 
+			'marginBottom' => 70,
+			'width'=>768
 	);
 	$distChart->credits = array (
 			'enabled' => false 
@@ -251,11 +254,11 @@ function tc_ratings_chart_ds_function($atts, $content = null) {
 				var chart_$handle;
 				var chart_d_$handle;
 				
+
+				$(document).ready(function(){
 				" . $ratingsChart->render ( 'chart_' . $handle ) . ";  var currentChart = chart_" . $handle . ";
 				" . $distChart->render ( 'chart_d_' . $handle ) . ";  var currentDistChart = chart_d_" . $handle . ";
 						
-						
-				$(document).ready(function(){
 						currentDistChart.xAxis[0].addPlotLine({
 		                value: " . $coder->rating . ",
 		                color: '" . get_point_color ( $coder->rating ) . "',

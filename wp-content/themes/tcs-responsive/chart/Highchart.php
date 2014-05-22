@@ -123,7 +123,7 @@ class Highchart implements ArrayAccess
         $scripts = array();
         switch ($this->_jsEngine) {
             case self::ENGINE_JQUERY:
-               // $scripts[] = $jsFiles['jQuery']['path'] . $jsFiles['jQuery']['name'];
+                $scripts[] = $jsFiles['jQuery']['path'] . $jsFiles['jQuery']['name'];
                 break;
 
             case self::ENGINE_MOOTOOLS:

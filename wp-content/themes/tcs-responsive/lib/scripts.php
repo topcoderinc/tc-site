@@ -128,6 +128,9 @@ function tsc_build_asset_path($asset_name, $type, $min = false, $useCDN = false)
  *  template => array('js' => array(), 'css' => array())
  */
 function tsc_get_asset_map() {
+ /* only for testing
+  * delete_transient( __FUNCTION__ );
+  */
   $template_map = get_transient(__FUNCTION__);
 
   if (!$template_map) {

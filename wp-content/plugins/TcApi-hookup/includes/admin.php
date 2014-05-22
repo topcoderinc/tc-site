@@ -48,7 +48,7 @@ class TCHOOK_Admin extends TCHOOK_Plugin {
 function initvars() {
 	add_option ( 'contest_per_page', "30" );
 	add_option ( 'httpversion', "1.1" );
-	add_option ( 'request_timeout', "10" );
+	add_option ( 'request_timeout', "30" );
 	add_option ( 'som', "July 2013" );
         add_option ( 'tc_api_url', 'https://api.topcoder.com' );
 }

@@ -2,6 +2,8 @@
 // coder info
 global $track;
 global $coder;
+$handle = $_POST['handle'];
+$track = $_POST['track'];
 $coder = get_member_statistics ( $handle, $track );
 
 $rating = $coder->rating;
@@ -20,7 +22,6 @@ if ($rating > 0) {
 
 	// add chart script chart
 	$chart = new Highchart ();
-	$chart->printScripts ();
 
 	// donut chart
 	$srmD1Chart = new Highchart ();
@@ -148,10 +149,10 @@ if ($rating > 0) {
 <div id="algorithm" class="tab algoLayout">
 	<div class="ratingInfo">
 		<div class="subTrackTabs">
-			<nav class="tabNav">
+			<nav class="tabNav alt">
 				<ul>
-					<li><a href="?tab=algo" class="isActive link">Algorithm</a></li>
-					<li><a href="?tab=algo&ct=marathon" class="link">Marathon</a></li>
+					<li><a href="?tab=algo" class="isActive">Algorithm</a></li>
+					<li><a href="?tab=algo&ct=marathon" class="">Marathon</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -404,12 +405,17 @@ if ($rating > 0) {
 		<?php endif;?>
 	</div>
 	<!-- /.ratingInfo -->
-	<aside class="badges">
-		<header class="head">
-			<h4>Badges</h4>
-		</header>
-		<?php get_template_part('content', 'badges');?>
-	</aside>
-	<!-- /.badges -->
+
+	<?php if($_POST['renderBadges']==="true"):?>
+		<aside class="badges">
+			<header class="head">
+				<h4>Badges</h4>
+			</header>
+			<?php
+				get_template_part('content', 'badges');
+			?>
+		</aside>
+		<!-- /.badges -->
+	<?php endif;?>
 </div>
 <!-- /.algoLayout -->

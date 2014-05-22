@@ -28,7 +28,9 @@
         "moment-data.js",
         "jquery.qtip.min.js",
         "jquery.jqtransform.js",
-        "reset-password.js"
+        "reset-password.js",
+        "highcharts.js"
+
       ],
       "css": [
         "blog.css",

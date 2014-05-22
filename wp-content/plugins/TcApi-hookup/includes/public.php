@@ -354,7 +354,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     }
   }
 
-  // handle shortcode
+  // handle shortcode raw coder data
   function tcapi_get_raw_coder($handle = "", $data) {
     $handle = clean_pre($handle);
     return get_member_profile($handle, $data);
@@ -517,24 +517,6 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     return "Error in processing request";
   }
 
-  /* member achievements current  */
-  function tcapi_get_member_achievements_current($userId = '', $badgeId = '') {
-    $url      = "http://community.topcoder.com/tc?module=MemberAchievementCurrent&cr=" . $userId . "&ruleId=" . $badgeId;
-    $args     = array(
-      'httpversion' => get_option('httpversion'),
-      'timeout'     => 30
-    );
-    $response = wp_remote_get($url, $args);
-
-    if (is_wp_error($response) || !isset ( $response ['body'] )) {
-      return "Error in processing request";
-    }
-    if ($response ['response'] ['code'] == 200) {
-      $coder_achievements_current = json_decode($response ['body']);
-      return $coder_achievements_current;
-    }
-    return "Error in processing request";
-  }
 
   /* search users  */
   function tcapi_search_users($handle = '') {

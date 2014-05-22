@@ -577,6 +577,7 @@ $(function () {
 app.tabNavinit = function () {
 
   // tab navs
+if($('#main.coderProfile').lenght<=0){
   $('.tabNav a').off().on(ev, function () {
     var id = $(this).attr('href');
     var tabIdx = id.lastIndexOf('tab=');
@@ -592,6 +593,7 @@ app.tabNavinit = function () {
     $('#mainContent').attr('class', '').addClass('splitLayout').addClass('currentTab-' + id);
     return false;
   });
+}
 
   $('.challenge-detail .tabsWrap .tabNav a').each(function () {
     var value = $.trim($(this).text()).toLocaleLowerCase();
