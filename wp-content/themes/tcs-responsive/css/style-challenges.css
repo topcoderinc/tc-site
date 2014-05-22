@@ -578,7 +578,9 @@ select {
     text-align: center;
 }
 
-.tcoTable th.colTLeft {
+.tcoTable th.colTLeft,
+.tcoTable th.colReg,
+.tcoTable th.colSub {
     width: 80px;
 }
 
