@@ -93,11 +93,13 @@ appChallenges = {
         }
         if (checkBox.is(':checked')) {
             $('.datepicker', row).datepicker("option", "disabled", false);
+            $('.datepicker', row).datepicker('enable');
             $('img', row).css('opacity', 1).css('filter', 'alpha(opacity=100)');
             $('img', row).closest('.row').removeClass('isDisabled');
             $('input:text, select', row).removeAttr('disabled');
         } else {
             $('.datepicker', row).datepicker("option", "disabled", true);
+            $('.datepicker', row).datepicker('disable');
             $('img', row).css('opacity', 1).css('opacity', 0.5).css('filter', 'alpha(opacity=50)');
             $('img', row).closest('.row').addClass('isDisabled');
             $('input:text, select', row).attr('disabled', 'disabled');
