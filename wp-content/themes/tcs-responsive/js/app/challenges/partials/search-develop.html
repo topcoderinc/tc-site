@@ -1,0 +1,524 @@
+<div>
+    <div class="filterOpts">
+        <section class="types">
+            <h5>Contest types:</h5>
+            <div class="data">
+                <ul class="list">
+                    <li>
+                        <input type="radio" id="fAll" name="radioFilterChallenge" class="all" value="all" ng-model="search.radioFilterChallenge">
+                        <label for="fAll"><strong>All</strong>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fDev" name="radioFilterChallenge" value="Development" ng-model="search.radioFilterChallenge">
+                        <label for="fDev">Component Development</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fArc" name="radioFilterChallenge" value="Architecture" ng-model="search.radioFilterChallenge">
+                        <label for="fArc">Architecture</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="f2f" name="radioFilterChallenge" value="First2Finish" ng-model="search.radioFilterChallenge">
+                        <label for="f2f">First2Finish</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fAC" name="radioFilterChallenge" value="Assembly Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fAC">Assembly Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fRep" name="radioFilterChallenge" value="Reporting" ng-model="search.radioFilterChallenge">
+                        <label for="fRep">Reporting</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fBH" name="radioFilterChallenge" value="Bug Hunt" ng-model="search.radioFilterChallenge">
+                        <label for="fBH">Bug Hunt</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fRia" name="radioFilterChallenge" value="RIA Build Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fRia">RIA Build Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCode" name="radioFilterChallenge" value="Code" ng-model="search.radioFilterChallenge">
+                        <label for="fCode">Code</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fSpec" name="radioFilterChallenge" value="Specification" ng-model="search.radioFilterChallenge">
+                        <label for="fSpec">Specification</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCoP" name="radioFilterChallenge" value="Copilot Posting" ng-model="search.radioFilterChallenge">
+                        <label for="fCoP">Copilot Posting</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTS" name="radioFilterChallenge" value="Test Scenarios" ng-model="search.radioFilterChallenge">
+                        <label for="fTS">Test Scenarios</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCon" name="radioFilterChallenge" value="Conceptualization" ng-model="search.radioFilterChallenge">
+                        <label for="fCon">Conceptualization</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTeS" name="radioFilterChallenge" value="Test Suites" ng-model="search.radioFilterChallenge">
+                        <label for="fTeS">Test Suites</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCC" name="radioFilterChallenge" value="Content Creation" ng-model="search.radioFilterChallenge">
+                        <label for="fCC">Content Creation</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTC" name="radioFilterChallenge" value="Testing Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fTC">Testing Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fDe" name="radioFilterChallenge" value="Design" ng-model="search.radioFilterChallenge">
+                        <label for="fDe">Component Design</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fUI" name="radioFilterChallenge" value="UI Prototype Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fUI">UI Prototype Competition</label>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="otherOpts">
+            <ul>
+                <li class="date row isDisabled">
+                    <div class="lbl">
+                        <input type="checkbox" id="fSDate">
+                        <label for="fSDate"><strong>Submission End  From:</strong>
+                        </label>
+                    </div>
+                    <div class="val">
+                        <span class="datePickerWrap"><input id="startDate" type="text" class="datepicker from hasDatepicker" disabled="disabled" ng-model="search.fSDate"><img class="ui-datepicker-trigger" ng-src="{{images}}/ico-cal.png" alt="..." title="..." style="opacity: 0.5; cursor: default;"></span>
+                    </div>
+                </li>
+                <li class="date row isDisabled">
+                    <div class="lbl">
+                        <input type="checkbox" id="fEDate">
+                        <label for="fEDate"><strong>Submission End  To:</strong>
+                        </label>
+                    </div>
+
+                    <div class="val">
+                        <span class="datePickerWrap"><input id="endDate" type="text" class="datepicker to hasDatepicker" disabled="" ng-model="search.fEDate"><img class="ui-datepicker-trigger" ng-src="{{images}}ico-cal.png" alt="" title="" style="opacity: 0.5; cursor: default;"></span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="tags">
+            <h5>Technology Tags:</h5>
+            <div class="data">
+                <select data-placeholder=" " class="chosen-select hasCustomSelect" multiple="" tabindex="4" style="-webkit-appearance: menulist-button; width: 473px; position: absolute; opacity: 0; height: 28px; font-size: 14px;" ng-model="search.technologies">
+                    <option value=" "></option>
+                    <optgroup label="Platforms">
+                        <option value="AWS">AWS</option>
+                        <option value="Android">Android</option>
+                        <option value="Beanstalk">Beanstalk</option>
+                        <option value="Box">Box</option>
+                        <option value="Brivo Labs">Brivo Labs</option>
+                        <option value="Cloud Foundry">Cloud Foundry</option>
+                        <option value="CloudFactor">CloudFactor</option>
+                        <option value="DocuSign">DocuSign</option>
+                        <option value="EC2">EC2</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="FinancialForce">FinancialForce</option>
+                        <option value="Force.com">Force.com</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Google">Google</option>
+                        <option value="HP IDOL OnDemand">HP IDOL OnDemand</option>
+                        <option value="HTML">HTML</option>
+                        <option value="Heroku">Heroku</option>
+                        <option value="MESH01">MESH01</option>
+                        <option value="Microsoft Azure">Microsoft Azure</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="NodeJS">NodeJS</option>
+                        <option value="Other">Other</option>
+                        <option value="Salesforce.com">Salesforce.com</option>
+                        <option value="Smartsheet">Smartsheet</option>
+                        <option value="Twilio">Twilio</option>
+                        <option value="Wordpress">Wordpress</option>
+                        <option value="iOS">iOS</option>
+                    </optgroup>
+                    <optgroup label="Technologies">
+                        <option value=".NET">.NET</option>
+                        <option value=".NET 2.0">.NET 2.0</option>
+                        <option value=".NET 3.0">.NET 3.0</option>
+                        <option value=".NET 3.5">.NET 3.5</option>
+                        <option value=".NET 4.0">.NET 4.0</option>
+                        <option value=".NET System.Addins">.NET System.Addins</option>
+                        <option value="ADO.NET">ADO.NET</option>
+                        <option value="AJAX">AJAX</option>
+                        <option value="API">API</option>
+                        <option value="ASP.NET">ASP.NET</option>
+                        <option value="ASP.NET AJAX">ASP.NET AJAX</option>
+                        <option value="ASP.NET Web Parts">ASP.NET Web Parts</option>
+                        <option value="ActionScript">ActionScript</option>
+                        <option value="Active Directory">Active Directory</option>
+                        <option value="Activity Diagrams (TCUML)">Activity Diagrams (TCUML)</option>
+                        <option value="Android">Android</option>
+                        <option value="Android 2.0">Android 2.0</option>
+                        <option value="Android 2.1">Android 2.1</option>
+                        <option value="Android 2.2">Android 2.2</option>
+                        <option value="Angular.js">Angular.js</option>
+                        <option value="Apache Derby">Apache Derby</option>
+                        <option value="Apex">Apex</option>
+                        <option value="Applet">Applet</option>
+                        <option value="Backbone.js">Backbone.js</option>
+                        <option value="BizTalk">BizTalk</option>
+                        <option value="Blackberry SDK">Blackberry SDK</option>
+                        <option value="Bootstrap">Bootstrap</option>
+                        <option value="C">C</option>
+                        <option value="C#">C#</option>
+                        <option value="C++">C++</option>
+                        <option value="COBOL">COBOL</option>
+                        <option value="COM">COM</option>
+                        <option value="COM+">COM+</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Castor">Castor</option>
+                        <option value="Chatter">Chatter</option>
+                        <option value="ClickOnce">ClickOnce</option>
+                        <option value="CoffeeScript">CoffeeScript</option>
+                        <option value="Commerce Server 2009">Commerce Server 2009</option>
+                        <option value="Custom Tag">Custom Tag</option>
+                        <option value="Databasedotcom">Databasedotcom</option>
+                        <option value="Dojo">Dojo</option>
+                        <option value="Drools">Drools</option>
+                        <option value="EJB">EJB</option>
+                        <option value="EJB 3">EJB 3</option>
+                        <option value="Eclipse Plugin">Eclipse Plugin</option>
+                        <option value="Elasticsearch">Elasticsearch</option>
+                        <option value="Express">Express</option>
+                        <option value="Flash">Flash</option>
+                        <option value="Flex">Flex</option>
+                        <option value="Force.com Sites">Force.com Sites</option>
+                        <option value="Fortran">Fortran</option>
+                        <option value="Go">Go</option>
+                        <option value="Google API">Google API</option>
+                        <option value="Google App Engine">Google App Engine</option>
+                        <option value="Groovy">Groovy</option>
+                        <option value="HTML">HTML</option>
+                        <option value="HTML5">HTML5</option>
+                        <option value="HTTP">HTTP</option>
+                        <option value="Hibernate">Hibernate</option>
+                        <option value="IBM AIX">IBM AIX</option>
+                        <option value="IBM COGNOS">IBM COGNOS</option>
+                        <option value="IBM Content Manager">IBM Content Manager</option>
+                        <option value="IBM DB2">IBM DB2</option>
+                        <option value="IBM Lotus Domino">IBM Lotus Domino</option>
+                        <option value="IBM Lotus Notes">IBM Lotus Notes</option>
+                        <option value="IBM PL/1">IBM PL/1</option>
+                        <option value="IBM REXX">IBM REXX</option>
+                        <option value="IBM Rational Application Developer">IBM Rational Application Developer</option>
+                        <option value="IBM Rational Data Architect">IBM Rational Data Architect</option>
+                        <option value="IBM Rational Data Studio">IBM Rational Data Studio</option>
+                        <option value="IBM Rational Software Architect">IBM Rational Software Architect</option>
+                        <option value="IBM Rational Team Concert">IBM Rational Team Concert</option>
+                        <option value="IBM WebSphere Application Server">IBM WebSphere Application Server</option>
+                        <option value="IBM WebSphere DataPower">IBM WebSphere DataPower</option>
+                        <option value="IBM WebSphere DataStage">IBM WebSphere DataStage</option>
+                        <option value="IBM WebSphere MQ">IBM WebSphere MQ</option>
+                        <option value="IBM WebSphere Message Broker">IBM WebSphere Message Broker</option>
+                        <option value="IBM WebSphere Portal">IBM WebSphere Portal</option>
+                        <option value="IDOL OnDemand">IDOL OnDemand</option>
+                        <option value="IIS">IIS</option>
+                        <option value="Illustrator">Illustrator</option>
+                        <option value="J2EE">J2EE</option>
+                        <option value="J2ME">J2ME</option>
+                        <option value="JBoss Seam">JBoss Seam</option>
+                        <option value="JDBC">JDBC</option>
+                        <option value="JFace">JFace</option>
+                        <option value="JMS">JMS</option>
+                        <option value="JPA">JPA</option>
+                        <option value="JQuery">JQuery</option>
+                        <option value="JSF">JSF</option>
+                        <option value="JSON">JSON</option>
+                        <option value="JSP">JSP</option>
+                        <option value="JUnit">JUnit</option>
+                        <option value="Java">Java</option>
+                        <option value="Java Application">Java Application</option>
+                        <option value="JavaBean">JavaBean</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="LDAP">LDAP</option>
+                        <option value="MIDP 2.0">MIDP 2.0</option>
+                        <option value="MSMQ">MSMQ</option>
+                        <option value="Microsoft SilverLight">Microsoft SilverLight</option>
+                        <option value="MongoDB">MongoDB</option>
+                        <option value="MySQL">MySQL</option>
+                        <option value="NoSQL">NoSQL</option>
+                        <option value="Node.js">Node.js</option>
+                        <option value="OSX">OSX</option>
+                        <option value="Objective C">Objective C</option>
+                        <option value="Oracle 10g">Oracle 10g</option>
+                        <option value="Oracle 9i">Oracle 9i</option>
+                        <option value="Other">Other</option>
+                        <option value="Other">Other</option>
+                        <option value="PHP">PHP</option>
+                        <option value="PL/SQL">PL/SQL</option>
+                        <option value="Perl">Perl</option>
+                        <option value="PhoneGap">PhoneGap</option>
+                        <option value="Photoshop">Photoshop</option>
+                        <option value="Play! Framework">Play! Framework</option>
+                        <option value="PostgreSQL">PostgreSQL</option>
+                        <option value="Python">Python</option>
+                        <option value="REST">REST</option>
+                        <option value="RMI">RMI</option>
+                        <option value="Redis">Redis</option>
+                        <option value="Remoting">Remoting</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Ruby on Rails">Ruby on Rails</option>
+                        <option value="SAP">SAP</option>
+                        <option value="SFDC Mobile">SFDC Mobile</option>
+                        <option value="SQL">SQL</option>
+                        <option value="SQL Server">SQL Server</option>
+                        <option value="SQL Server 2000">SQL Server 2000</option>
+                        <option value="SQL Server 2008">SQL Server 2008</option>
+                        <option value="SSIS">SSIS</option>
+                        <option value="SWT">SWT</option>
+                        <option value="Salesforce">Salesforce</option>
+                        <option value="Sencha Touch 2">Sencha Touch 2</option>
+                        <option value="Servlet">Servlet</option>
+                        <option value="Sharepoint 3.0">Sharepoint 3.0</option>
+                        <option value="Siebel">Siebel</option>
+                        <option value="Spring">Spring</option>
+                        <option value="Struts">Struts</option>
+                        <option value="Swing">Swing</option>
+                        <option value="Titanium">Titanium</option>
+                        <option value="Twitter Bootstrap">Twitter Bootstrap</option>
+                        <option value="UML">UML</option>
+                        <option value="Use Case Diagrams (TCUML)">Use Case Diagrams (TCUML)</option>
+                        <option value="VB">VB</option>
+                        <option value="VB.NET">VB.NET</option>
+                        <option value="Visualforce">Visualforce</option>
+                        <option value="WPF">WPF</option>
+                        <option value="Web Services">Web Services</option>
+                        <option value="WinForms Controls">WinForms Controls</option>
+                        <option value="Windows Communication Foundation">Windows Communication Foundation</option>
+                        <option value="Windows Server">Windows Server</option>
+                        <option value="Windows Server 2003">Windows Server 2003</option>
+                        <option value="Windows Workflow Foundation">Windows Workflow Foundation</option>
+                        <option value="Word/Rich Text">Word/Rich Text</option>
+                        <option value="XAML">XAML</option>
+                        <option value="XML">XML</option>
+                        <option value="XSL">XSL</option>
+                        <option value="XUL">XUL</option>
+                        <option value="iBATIS/MyBatis">iBATIS/MyBatis</option>
+                        <option value="iOS">iOS</option>
+                        <option value="iOS 4.0">iOS 4.0</option>
+                        <option value="iOS 5.0">iOS 5.0</option>
+                        <option value="iOS 6.0">iOS 6.0</option>
+                        <option value="jQuery">jQuery</option>
+                        <option value="jQuery Mobile">jQuery Mobile</option>
+                        <option value="xCode">xCode</option>
+                    </optgroup>
+                </select><span class="customSelect chosen-select" style="display: inline-block;"><span class="customSelectInner" style="display: inline-block;">&nbsp;</span>
+                <optgroup label="Platforms">
+                    <option value="AWS">AWS</option>
+                    <option value="Android">Android</option>
+                    <option value="Beanstalk">Beanstalk</option>
+                    <option value="Box">Box</option>
+                    <option value="Brivo Labs">Brivo Labs</option>
+                    <option value="Cloud Foundry">Cloud Foundry</option>
+                    <option value="CloudFactor">CloudFactor</option>
+                    <option value="DocuSign">DocuSign</option>
+                    <option value="EC2">EC2</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="FinancialForce">FinancialForce</option>
+                    <option value="Force.com">Force.com</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Google">Google</option>
+                    <option value="HP IDOL OnDemand">HP IDOL OnDemand</option>
+                    <option value="HTML">HTML</option>
+                    <option value="Heroku">Heroku</option>
+                    <option value="MESH01">MESH01</option>
+                    <option value="Microsoft Azure">Microsoft Azure</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="NodeJS">NodeJS</option>
+                    <option value="Other">Other</option>
+                    <option value="Salesforce.com">Salesforce.com</option>
+                    <option value="Smartsheet">Smartsheet</option>
+                    <option value="Twilio">Twilio</option>
+                    <option value="Wordpress">Wordpress</option>
+                    <option value="iOS">iOS</option>
+                </optgroup>
+                <optgroup label="Technologies">
+                    <option value=".NET">.NET</option>
+                    <option value=".NET 2.0">.NET 2.0</option>
+                    <option value=".NET 3.0">.NET 3.0</option>
+                    <option value=".NET 3.5">.NET 3.5</option>
+                    <option value=".NET 4.0">.NET 4.0</option>
+                    <option value=".NET System.Addins">.NET System.Addins</option>
+                    <option value="ADO.NET">ADO.NET</option>
+                    <option value="AJAX">AJAX</option>
+                    <option value="API">API</option>
+                    <option value="ASP.NET">ASP.NET</option>
+                    <option value="ASP.NET AJAX">ASP.NET AJAX</option>
+                    <option value="ASP.NET Web Parts">ASP.NET Web Parts</option>
+                    <option value="ActionScript">ActionScript</option>
+                    <option value="Active Directory">Active Directory</option>
+                    <option value="Activity Diagrams (TCUML)">Activity Diagrams (TCUML)</option>
+                    <option value="Android">Android</option>
+                    <option value="Android 2.0">Android 2.0</option>
+                    <option value="Android 2.1">Android 2.1</option>
+                    <option value="Android 2.2">Android 2.2</option>
+                    <option value="Angular.js">Angular.js</option>
+                    <option value="Apache Derby">Apache Derby</option>
+                    <option value="Apex">Apex</option>
+                    <option value="Applet">Applet</option>
+                    <option value="Backbone.js">Backbone.js</option>
+                    <option value="BizTalk">BizTalk</option>
+                    <option value="Blackberry SDK">Blackberry SDK</option>
+                    <option value="Bootstrap">Bootstrap</option>
+                    <option value="C">C</option>
+                    <option value="C#">C#</option>
+                    <option value="C++">C++</option>
+                    <option value="COBOL">COBOL</option>
+                    <option value="COM">COM</option>
+                    <option value="COM+">COM+</option>
+                    <option value="CSS">CSS</option>
+                    <option value="Castor">Castor</option>
+                    <option value="Chatter">Chatter</option>
+                    <option value="ClickOnce">ClickOnce</option>
+                    <option value="CoffeeScript">CoffeeScript</option>
+                    <option value="Commerce Server 2009">Commerce Server 2009</option>
+                    <option value="Custom Tag">Custom Tag</option>
+                    <option value="Databasedotcom">Databasedotcom</option>
+                    <option value="Dojo">Dojo</option>
+                    <option value="Drools">Drools</option>
+                    <option value="EJB">EJB</option>
+                    <option value="EJB 3">EJB 3</option>
+                    <option value="Eclipse Plugin">Eclipse Plugin</option>
+                    <option value="Elasticsearch">Elasticsearch</option>
+                    <option value="Express">Express</option>
+                    <option value="Flash">Flash</option>
+                    <option value="Flex">Flex</option>
+                    <option value="Force.com Sites">Force.com Sites</option>
+                    <option value="Fortran">Fortran</option>
+                    <option value="Go">Go</option>
+                    <option value="Google API">Google API</option>
+                    <option value="Google App Engine">Google App Engine</option>
+                    <option value="Groovy">Groovy</option>
+                    <option value="HTML">HTML</option>
+                    <option value="HTML5">HTML5</option>
+                    <option value="HTTP">HTTP</option>
+                    <option value="Hibernate">Hibernate</option>
+                    <option value="IBM AIX">IBM AIX</option>
+                    <option value="IBM COGNOS">IBM COGNOS</option>
+                    <option value="IBM Content Manager">IBM Content Manager</option>
+                    <option value="IBM DB2">IBM DB2</option>
+                    <option value="IBM Lotus Domino">IBM Lotus Domino</option>
+                    <option value="IBM Lotus Notes">IBM Lotus Notes</option>
+                    <option value="IBM PL/1">IBM PL/1</option>
+                    <option value="IBM REXX">IBM REXX</option>
+                    <option value="IBM Rational Application Developer">IBM Rational Application Developer</option>
+                    <option value="IBM Rational Data Architect">IBM Rational Data Architect</option>
+                    <option value="IBM Rational Data Studio">IBM Rational Data Studio</option>
+                    <option value="IBM Rational Software Architect">IBM Rational Software Architect</option>
+                    <option value="IBM Rational Team Concert">IBM Rational Team Concert</option>
+                    <option value="IBM WebSphere Application Server">IBM WebSphere Application Server</option>
+                    <option value="IBM WebSphere DataPower">IBM WebSphere DataPower</option>
+                    <option value="IBM WebSphere DataStage">IBM WebSphere DataStage</option>
+                    <option value="IBM WebSphere MQ">IBM WebSphere MQ</option>
+                    <option value="IBM WebSphere Message Broker">IBM WebSphere Message Broker</option>
+                    <option value="IBM WebSphere Portal">IBM WebSphere Portal</option>
+                    <option value="IDOL OnDemand">IDOL OnDemand</option>
+                    <option value="IIS">IIS</option>
+                    <option value="Illustrator">Illustrator</option>
+                    <option value="J2EE">J2EE</option>
+                    <option value="J2ME">J2ME</option>
+                    <option value="JBoss Seam">JBoss Seam</option>
+                    <option value="JDBC">JDBC</option>
+                    <option value="JFace">JFace</option>
+                    <option value="JMS">JMS</option>
+                    <option value="JPA">JPA</option>
+                    <option value="JQuery">JQuery</option>
+                    <option value="JSF">JSF</option>
+                    <option value="JSON">JSON</option>
+                    <option value="JSP">JSP</option>
+                    <option value="JUnit">JUnit</option>
+                    <option value="Java">Java</option>
+                    <option value="Java Application">Java Application</option>
+                    <option value="JavaBean">JavaBean</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="LDAP">LDAP</option>
+                    <option value="MIDP 2.0">MIDP 2.0</option>
+                    <option value="MSMQ">MSMQ</option>
+                    <option value="Microsoft SilverLight">Microsoft SilverLight</option>
+                    <option value="MongoDB">MongoDB</option>
+                    <option value="MySQL">MySQL</option>
+                    <option value="NoSQL">NoSQL</option>
+                    <option value="Node.js">Node.js</option>
+                    <option value="OSX">OSX</option>
+                    <option value="Objective C">Objective C</option>
+                    <option value="Oracle 10g">Oracle 10g</option>
+                    <option value="Oracle 9i">Oracle 9i</option>
+                    <option value="Other">Other</option>
+                    <option value="Other">Other</option>
+                    <option value="PHP">PHP</option>
+                    <option value="PL/SQL">PL/SQL</option>
+                    <option value="Perl">Perl</option>
+                    <option value="PhoneGap">PhoneGap</option>
+                    <option value="Photoshop">Photoshop</option>
+                    <option value="Play! Framework">Play! Framework</option>
+                    <option value="PostgreSQL">PostgreSQL</option>
+                    <option value="Python">Python</option>
+                    <option value="REST">REST</option>
+                    <option value="RMI">RMI</option>
+                    <option value="Redis">Redis</option>
+                    <option value="Remoting">Remoting</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Ruby on Rails">Ruby on Rails</option>
+                    <option value="SAP">SAP</option>
+                    <option value="SFDC Mobile">SFDC Mobile</option>
+                    <option value="SQL">SQL</option>
+                    <option value="SQL Server">SQL Server</option>
+                    <option value="SQL Server 2000">SQL Server 2000</option>
+                    <option value="SQL Server 2008">SQL Server 2008</option>
+                    <option value="SSIS">SSIS</option>
+                    <option value="SWT">SWT</option>
+                    <option value="Salesforce">Salesforce</option>
+                    <option value="Sencha Touch 2">Sencha Touch 2</option>
+                    <option value="Servlet">Servlet</option>
+                    <option value="Sharepoint 3.0">Sharepoint 3.0</option>
+                    <option value="Siebel">Siebel</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Struts">Struts</option>
+                    <option value="Swing">Swing</option>
+                    <option value="Titanium">Titanium</option>
+                    <option value="Twitter Bootstrap">Twitter Bootstrap</option>
+                    <option value="UML">UML</option>
+                    <option value="Use Case Diagrams (TCUML)">Use Case Diagrams (TCUML)</option>
+                    <option value="VB">VB</option>
+                    <option value="VB.NET">VB.NET</option>
+                    <option value="Visualforce">Visualforce</option>
+                    <option value="WPF">WPF</option>
+                    <option value="Web Services">Web Services</option>
+                    <option value="WinForms Controls">WinForms Controls</option>
+                    <option value="Windows Communication Foundation">Windows Communication Foundation</option>
+                    <option value="Windows Server">Windows Server</option>
+                    <option value="Windows Server 2003">Windows Server 2003</option>
+                    <option value="Windows Workflow Foundation">Windows Workflow Foundation</option>
+                    <option value="Word/Rich Text">Word/Rich Text</option>
+                    <option value="XAML">XAML</option>
+                    <option value="XML">XML</option>
+                    <option value="XSL">XSL</option>
+                    <option value="XUL">XUL</option>
+                    <option value="iBATIS/MyBatis">iBATIS/MyBatis</option>
+                    <option value="iOS">iOS</option>
+                    <option value="iOS 4.0">iOS 4.0</option>
+                    <option value="iOS 5.0">iOS 5.0</option>
+                    <option value="iOS 6.0">iOS 6.0</option>
+                    <option value="jQuery">jQuery</option>
+                    <option value="jQuery Mobile">jQuery Mobile</option>
+                    <option value="xCode">xCode</option>
+                </optgroup>
+                </span>
+            </div>
+        </section>
+        <div class="clear"></div>
+    </div>
+    <!-- /.filterOpts -->
+    <div class="actions">
+        <a href="javascript:;" class="btn btnSecondary btnClose" ng-click="search.show = false">Close</a>
+        <a href="javascript:;" class="btn btnApply" ng-click="submit()">Apply</a>
+    </div>
+</div>

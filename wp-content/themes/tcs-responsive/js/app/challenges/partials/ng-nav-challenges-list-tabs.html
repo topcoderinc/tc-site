@@ -1,0 +1,18 @@
+<div id="hero">
+	<div class="container grid grid-float">
+		<div class="grid-3-1 track trackUX" data-ng-class="{isActive: isActive('design')}" >
+			<a href="/challenges/design/{{contest.listType}}/" ng-click="setContestType('design')"><i></i>Graphic Design Challenges
+			</a><span class="arrow"></span>
+		</div>
+		<div class="grid-3-1 track trackSD" data-ng-class="{isActive: isActive('develop')}">
+			<a href="/challenges/develop/{{contest.listType}}/" ng-click="setContestType('develop')"><i></i>Software Development Challenges
+			</a><span class="arrow"></span>
+		</div>
+		<div class="grid-3-1 track trackAn" data-ng-class="{isActive: isActive('data')}">
+			<a href="/challenges/data/{{contest.listType}}/" ng-click="setContestType('data')">
+				<i></i>Data Science Challenges
+			</a><span class="arrow"></span>
+		</div>
+	</div>
+</div>
+<!-- /#hero -->

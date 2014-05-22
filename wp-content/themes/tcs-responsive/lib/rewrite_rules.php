@@ -80,4 +80,6 @@ function tc_add_custom_rewrite_rules() {
 
   // Search results
   add_rewrite_rule('^search/?$', 'index.php?', 'top');
+ 
+  add_rewrite_rule('^/challenges/([^/]*)/?$', 'index.php?pagename=challenges&contest_type=$matches[1]', 'top');
 }

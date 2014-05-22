@@ -1,0 +1,39 @@
+<div class="contest">
+  <div class="cgCh">
+    <a href="/challenge-details/{{challenge.challengeId}}/?type={{challenge.challengeCommunity}" class="contestName">
+      <img alt="" class="allContestIco" ng-src="{{images}}/ico-track-design.png">
+      <span class="gridChallengName">{{challenge.challengeName}}</span>
+      <img alt="" class="allContestTCOIco" ng-src="{{images}}/tco-flag-design.png">
+    </a>
+  </div>
+  <div class="cgTime">
+    <div>
+      <div class="row">
+        <label class="lbl">Start Date</label>
+        <div class="val vStartDate">{{challenge.registrationStartDate | date: dateFormat}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">Register by</label>
+        <div class="val vStartDate">{{challenge.registrationEndDate | date: dateFormat}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">Submit by</label>
+        <div class="val vStartDate">{{challenge.submissionEndDate | date: dateFormat}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">Current Status</label>
+        <div class="val vStatus">{{challenge.status}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">Technologies</label>
+        <div class="val vTech" ng-show="challenge.technologies.length == 0 || challenge.technologies[0] == ''">N/A</div>
+        <div class="val vTech" ng-hide="challenge.technologies.length == 0 || challenge.technologies[0] == ''">{{challenge.technologies.join(', ')}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="genInfo gdUpcoming">
+    <p class="cgTLeft" data-hasqtip="0" aria-describedby="qtip-0"><i></i>{{getContestDuration(challenge.registrationStartDate, challenge.submissionEndDate)}}</p>
+    <p class="cgPur" data-hasqtip="1" aria-describedby="qtip-1"><i></i> {{challenge.totalPrize | currency}}</p>
+  </div>
+  <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">{{challenge.challengeType}}</span></span></i>
+</div>

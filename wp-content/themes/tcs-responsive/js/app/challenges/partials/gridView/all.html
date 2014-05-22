@@ -1,0 +1,38 @@
+<div class="contest track-ff trackSD type-{{challenge.challengeCommunity}}">
+  <div class="cgCh">
+    <a href="/challenge-details/{{challenge.challengeId}}/?type={{challenge.challengeCommunity}}" class="contestName">
+      <img alt="" class="allContestIco" ng-src="{{images}}/ico-track-{{challenge.challengeCommunity}}.png">
+      <span class="gridChallengName">{{challenge.challengeName}}</span>
+      <img alt="" class="allContestTCOIco" src="{{images}}/tco-flag-{{challenge.challengeCommunity}}.png">
+    </a>
+  </div>
+  <div class="cgTime">
+    <div>
+      <div class="row">
+        <label class="lbl">Start Date</label>
+        <div class="val vStartDate">{{challenge.registrationStartDate | date: dateFormat}}</div>
+      </div>
+      <div class="row" ng-show="challenge.checkpointSubmissionEndDate">
+        <label class="lbl">Round 1 End</label>
+        <div class="val vEndRound">{{challenge.checkpointSubmissionEndDate | date: dateFormat}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">End Date</label>
+        <div class="val vEndDate">{{challenge.submissionEndDate | date: dateFormat}}</div>
+      </div>
+      <div class="row">
+        <label class="lbl">Current Phase</label>
+        <div class="val vPhase">{{challenge.currentPhaseName}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="genInfo">
+    <p class="cgTLeft" data-hasqtip="0" aria-describedby="qtip-0"><i></i><span ng-bind-html="formatTimeLeft(challenge.currentPhaseRemainingTime, true)"></span>
+    </p>
+    <p class="cgPur" data-hasqtip="1" aria-describedby="qtip-1"><i></i> {{challenge.totalPrize | currency}}</p>
+    <p class="cgReg" data-hasqtip="2" aria-describedby="qtip-2"><i></i><a href="/challenge-details/{{challenge.challengeId}}/?type={{challenge.challengeCommunity}}#viewRegistrant">{{challenge.numRegistrants}}</a>
+    </p>
+    <p class="cgSub" data-hasqtip="3" aria-describedby="qtip-3"><i></i>{{challenge.numSubmissions}}</p>
+  </div>
+  <i class="ico trackType"> <span class="tooltipData"><span class="tipT">Contest Type</span><span class="tipC">{{challenge.challengeType}}</span></span></i>
+</div>

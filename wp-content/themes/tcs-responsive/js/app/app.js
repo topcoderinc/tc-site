@@ -2,11 +2,14 @@
 
 window.tc = angular.module('tc', [
   'restangular',
-  'tc.challengeService',
+  'tc.challenges',
+  'tc.challenges.services',
+  'tc.challenges.directives',
+  'angular-loading-bar',
   'ngGrid'
 ])
 
-.constant("API_URL", "https://api.topcoder.com/v2")
+.constant("API_URL", "http://api.topcoder.com/v2")
 
 .config(['$httpProvider', 'RestangularProvider', 'API_URL', function($httpProvider, RestangularProvider, API_URL) {
   /*
@@ -18,6 +21,10 @@ window.tc = angular.module('tc', [
 
   // Base API url
   RestangularProvider.setBaseUrl(API_URL);
+  
+  RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
+    //loadingBar.start();
+  });
 
   // Format restangular response
 
@@ -36,6 +43,7 @@ window.tc = angular.module('tc', [
     } else {
       extractedData = data.data;
     }
+    //loadingBar.complete();
     return extractedData;
   });
 }]);
