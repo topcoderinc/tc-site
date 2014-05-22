@@ -9,7 +9,7 @@ window.tc = angular.module('tc', [
   'ngGrid'
 ])
 
-.constant("API_URL", "http://api.topcoder.com/v2")
+.constant("API_URL", "https://api.topcoder.com/v2")
 
 .config(['$httpProvider', 'RestangularProvider', 'API_URL', function($httpProvider, RestangularProvider, API_URL) {
   /*
