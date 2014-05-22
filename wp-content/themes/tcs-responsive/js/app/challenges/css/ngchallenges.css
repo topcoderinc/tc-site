@@ -1,0 +1,137 @@
+/*style.css*/
+.challengesGrid {
+    width: 1012px;
+    max-height: 1454px;
+    margin: auto;
+    font-size: 12px;
+    font-weight: 400;
+    font-family:'Source Sans Pro', Arial, Helvetica, sans-serif;
+}
+
+.challengesGrid .ngHeaderContainer {
+    background-color: #f1f1f1;
+}
+
+.challengesGrid .ngHeaderCell {
+  background-color: #f1f1f1;
+  color: #666;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  word-wrap: ;
+}
+
+.challengesGrid .ngHeaderCell .ngHeaderText {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.challengesGrid .ngHeaderCell:hover {
+   border-color: #333;
+}
+
+.challengesGrid .ngHeaderCell .ngSortButtonDown, .challengesGrid .ngHeaderCell .ngSortButtonUp {
+    top: 30px;
+    border-color: #ff7000 transparent;
+}
+
+.challengesGrid .challengeHeader {
+    height: 100%;
+    border-bottom: 1px solid white;
+}
+.challengesGrid .challengeRow {
+    height: 100%;
+    border: solid #e7e7e7;
+    border-width: 1px 0;
+}
+
+.challengesGrid .ngRow.odd {
+    background-color: #f7f7f7;
+}
+.challengesGrid .ngRow.even {
+    background-color: #ffffff;
+}
+
+.challengesGrid .challengeCell {
+   text-align: center;
+   line-height: 110px;
+   vertical-align: middle;
+}
+
+.challengesGrid .challengeCell > div, .challengesGrid .challengeCell > span {
+    /*height: 110px;*/
+    line-height: normal;
+}
+
+.challengesGrid .challengeCell .colCh {
+    vertical-align: top;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: left;
+}
+
+.challengesGrid .challengeCell .colCh .technologyTags {
+    font-size: 10px;
+    line-height: 1.4em;
+}
+
+.challengesGrid .challengeCell .colDur {
+    line-height: 110px;
+    vertical-align: middle;
+}
+
+.challengesGrid .challengeCell .colType {
+    line-height: 140px;
+    vertical-align: middle;
+}
+.challengesGrid .challengeCell .colTech {
+    display: inline-block;
+    padding-top: 15px;
+}
+
+.challengesGrid .colTime {
+    vertical-align: top;
+    padding-top: 15px;
+    padding-bottom: 15px;   
+    text-align: left;
+}
+
+.challengesGrid .colTime .row {
+    overflow: hidden;
+    line-height: 24px;
+    font-size: 11px;
+}
+
+.challengesGrid .colTime .row .lbl {
+    float: left;
+    width: 85px;
+}
+
+.challengesGrid .colTime .row .val {
+    margin-left: 80px;
+    white-space: nowrap;
+}
+
+.challengesGrid .colAccessLevel i {
+    height: 20px;
+    width: 20px;
+    background: url(../../../../i/ico-access-lvl.png) no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+}
+
+.challengesGrid .colPhase {
+    display: inline-block;
+    padding-top: 40px;
+}
+
+.upcomingCaption {
+    text-align: center;
+}
+
+.gridChallengName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    height: 100%;
+}

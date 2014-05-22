@@ -1,0 +1,24 @@
+<div class="colTime">
+    <div>
+        <div class="row">
+            <label class="lbl">Start Date</label>
+            <div class="val vStartDate">{{row.getProperty('registrationStartDate') | date: dateFormat}}</div>
+        </div>
+        <div class="row" ng-show="contest.listType == 'upcoming' && row.getProperty('checkpointSubmissionEndDate')">
+            <label class="lbl ">Round 1 End</label>
+            <div class="val vEndRound">{{row.getProperty('checkpointSubmissionEndDate') | date: dateFormat}}</div>
+        </div>
+        <div class="row" ng-show="contest.listType != 'active'">
+            <label class="lbl">End Date</label>
+            <div class="val vEndDate">{{row.getProperty('submissionEndDate') | date: dateFormat}}</div>
+        </div>
+        <div class="row" ng-show="contest.listType == 'active'">
+            <label class="lbl ">Register by</label>
+            <div class="val vEndRound">{{row.getProperty('registrationEndDate') | date: dateFormat}}</div>
+        </div>
+        <div class="row" ng-show="contest.listType == 'active'">
+            <label class="lbl">Submit by</label>
+            <div class="val vEndDate">{{row.getProperty('submissionEndDate') | date: dateFormat}}</div>
+        </div>
+    </div>
+</div>

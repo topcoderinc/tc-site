@@ -4,7 +4,7 @@ tc.controller('ChallengeListingCtrl', ['$scope', 'Challenge',
   function($scope, Challenge) {
 
   $scope.challenges = [];
-
+ 
   // @TODO this should be dynamic per type
   $scope.gridOptions = {
     data: 'challenges',

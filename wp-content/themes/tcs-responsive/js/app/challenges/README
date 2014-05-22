@@ -1,0 +1,5 @@
+Steps to activate the new Challenge Listing angular template
+ - Log in into wordpress backend
+ - Edit the current challenges Page
+ - Set its template to 'Challenges Active Contest List Page - Responsive' correponding to ng-page-challenges.php file
+ - You may clear your cache if some problems appears
