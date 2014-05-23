@@ -22,6 +22,7 @@ if ($rating > 0) {
 
 	// add chart script chart
 	$chart = new Highchart ();
+	$chart->printScripts ();
 
 	// donut chart
 	$srmD1Chart = new Highchart ();
@@ -149,10 +150,10 @@ if ($rating > 0) {
 <div id="algorithm" class="tab algoLayout">
 	<div class="ratingInfo">
 		<div class="subTrackTabs">
-			<nav class="tabNav alt">
+			<nav class="tabNav">
 				<ul>
-					<li><a href="?tab=algo" class="isActive">Algorithm</a></li>
-					<li><a href="?tab=algo&ct=marathon" class="">Marathon</a></li>
+					<li><a href="?tab=algo" class="isActive link">Algorithm</a></li>
+					<li><a href="?tab=algo&ct=marathon" class="link">Marathon</a></li>
 				</ul>
 			</nav>
 		</div>

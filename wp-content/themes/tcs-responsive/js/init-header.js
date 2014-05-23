@@ -60,6 +60,7 @@ $(document).ready(function() {
             $('.userDetails').prepend('<a class="tc_coder coder" href="' + userPofileUrl + '" style="color:' + color + '">' + handle + '</a>');
             $('.myProfileLink, .profileLink').attr('href', userPofileUrl);
             $('.userDetails .country').text(data['country']);
+            data['memberSince'] = data['memberSince'].replace(/-/g,'/');
             $('.userDetails .memberSince').text(dateformat(data['memberSince'].substring(0, 10)));
 
             if (data['overallEarning'])

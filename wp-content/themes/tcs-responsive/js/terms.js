@@ -24,14 +24,14 @@ appChallengeTerms = {
         "termId": termsOfUseID,
         "jwtToken": tcjwt.replace(/["]/g, "")
       }, function (data) {
-        if (data.title) {
+        if (data.title != null && data.title != 'undefined') {
           $(".formContent .terms").show();
           $(".formContent .warning").hide();
           $(".overviewPageTitle").text(data["title"]);
           $(".termsText").html(data["text"]);
         } else {
           $(".formContent .terms").hide();
-          $(".formContent .warning").text(data["error"]["details"]);
+          $(".formContent .warning").text(data["error"]);
           $(".formContent .warning").show();
         }
         $('#agree').change(function () {

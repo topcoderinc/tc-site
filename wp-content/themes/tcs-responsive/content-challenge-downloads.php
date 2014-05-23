@@ -8,7 +8,7 @@
     }
   }
   else {
-    echo '<li><strong>None</li></strong>';
+    echo '<li><strong>Register</strong> to download files.</li>';
   }
   echo '</ul>';
   ?>

@@ -5,7 +5,7 @@
 
 $termType = 'detail';
 get_header('terms');
-
+$a=4;
 ?>
 
 <div class="content">
@@ -20,7 +20,7 @@ get_header('terms');
         <div class="formContent">
           <p class="terms termsText hide"></p>
 
-          <p class="terms warning hide"></p>
+          <div class="terms warning hide"></div>
 
           <form id="submitForm">
             <section class="agreement notAgreed">
