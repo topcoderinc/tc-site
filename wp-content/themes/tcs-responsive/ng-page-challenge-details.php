@@ -7,6 +7,9 @@
  * @file
  * This template displays the details of a particular challenge.
  */
+ 
+//remove canonical link for challenge details pages because it does not point to challenge url and causes error for facebook share scraper
+remove_action('wp_head', 'rel_canonical');
 
 tc_setup_angular();
 
@@ -30,7 +33,36 @@ function tc_challenge_details_js() {
   </script>
 <?php
 }
-
+//Bugfix I-107579: Fix facebook share details
+//need to use og meta tags to relay information to facebook
+add_action('wp_head', 'facebook_share_tags');
+function facebook_share_tags() {
+global $contest;
+remove_action('wp_head', 'rel_canonical');
+if (!isset($contest->registrationEndDate)) {
+    $contest = get_contest_detail('', $contestID, $contestType);
+}
+$postingDate = strtotime($contest->postingDate) | 1;
+$postingDate = date('M d, Y', $postingDate);
+$summary = $contest->detailedRequirements;
+//strip out new lines and whitespace from API data
+$summary = str_replace("\n", " ", $summary);
+$summary = str_replace("\t", " ", $summary);
+//strip out HTML tags
+$summary = strip_tags($summary);
+//max length for description = 300 characters
+$summary = substr( $summary, 0, strrpos( substr( $summary, 0, 297), ' ' ) ) . '...';
+$summary = str_replace("&nbsp;", ' ', $summary);
+$summary = str_replace("&#39;", "'", $summary);
+$summary = str_replace("&quot;", "'", $summary);
+//output facebook og properties
+?>
+<meta property="og:url" content="<?php echo site_url() . "/challenge-details/" . $contest->challengeId . "/?type=" . $contest->challengeCommunity; ?>"/>
+<meta property="og:title" content="<?php echo $contest->challengeType . ' - ' . $contest->challengeName; ?>"/>
+<meta property="og:description" content="<?php echo $postingDate . ' - ' . $summary; ?>"/>
+<meta property="og:image" content="<?php echo site_url(); ?>/wp-content/themes/tcs-responsive/i/logo.png"/>
+<?php
+}
 /**
  * Template Name: Challenge details
  */
