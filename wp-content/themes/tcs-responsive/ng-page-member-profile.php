@@ -48,6 +48,14 @@ $userkey = get_option ( 'api_user_key' );
 
 <script>var user="<?php echo $handle;?>";var THEME_URL="<?php echo THEME_URL;?>";</script>
 
+<script type="text/javascript">
+<!--
+ $(document).ready(function(){
+	coder.initMemberEvents();
+});
+//-->
+</script>
+
 <div class="content" ng-app="tc" ng-controller="MemberProfileCtrl">
 	<div id="main" class="coderProfile">
     <ng-include src="templateUrl"></ng-include>
