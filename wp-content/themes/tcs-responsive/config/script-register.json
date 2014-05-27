@@ -213,7 +213,9 @@
         "reset-password.js",
         "app/app.js",
         "app/challenges/services/challengeService.js",
-        "app/challenges/controllers/challengeListingCtrl.js"
+        "app/challenges/controllers/challengeListingCtrl.js",
+        "app/member-profile/js/services/services-member-profile.js",
+        "app/member-profile/js/controllers/controllers-member-profile.js"
       ],
       "css": [
         "blog.css",
@@ -249,6 +251,7 @@
     "page-terms-details.php": "challengeterms",
     "page-challenge-submit.php": "challengesubmit",
     "page-angular-example.php": "angular",
+    "ng-page-member-profile.php": "angular",
     "default": "default"
   }
 }
