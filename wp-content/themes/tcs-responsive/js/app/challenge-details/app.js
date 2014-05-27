@@ -1,4 +1,4 @@
-var cdapp = angular.module('tc.challengeDetails', ['restangular', 'ngCookies'])
+var cdapp = angular.module('challengeDetails', ['restangular', 'ngCookies'])
 
 .constant("API_URL", tcApiRUL)
 
