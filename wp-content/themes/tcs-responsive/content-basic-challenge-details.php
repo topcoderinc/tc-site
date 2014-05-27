@@ -488,11 +488,14 @@ if (sizeof($contest->prize) > 5) {
       <div class="icoTime">
         <span class="nextDTitle">Current Phase</span>
         <span
-          class="CEDate"><?php echo ($contest->currentStatus == 'Completed') ? "Completed" : $contest->currentPhaseName; ?></span>
+          class="CEDate"><?php 
+          //Bugfix I-106745: if current status of contest is not Active, output current contest status, else output current contest phase if active.
+          echo (strpos($contest->currentStatus, 'Active') === FALSE) ? $contest->currentStatus : $contest->currentPhaseName; ?></span>
       </div>
       <span class="timeLeft">
       <?php
-      if ($contest->currentStatus !== 'Completed' && $contest->currentStatus !== 'Deleted' && $contest->currentPhaseRemainingTime > 0) {
+      //Bugfix I-106745: Added check for cancelled contest before display of current phase remaining time
+      if ($contest->currentStatus !== 'Completed' && $contest->currentStatus !== 'Deleted' && strpos($contest->currentStatus, 'Cancelled') === FALSE && $contest->currentPhaseRemainingTime > 0) {
         $dtF = new DateTime("@0");
         $dtT = new DateTime("@{$contest->currentPhaseRemainingTime}");
         echo $dtF->diff($dtT)->format('%a <small>Days</small> %h <small>Hours</small> %i <small>Mins</small>');

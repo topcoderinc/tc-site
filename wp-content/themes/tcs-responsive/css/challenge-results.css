@@ -148,7 +148,7 @@
 
     #winner .winnerRow .actions{
         padding: 98px 0 0 60px;
-        width: 130px;
+        width: 100px;
     }
     .TC #winner .winnerRow .actions{
         padding: 98px 0 0;
@@ -197,6 +197,9 @@
 #winner .competitionDetails{
     padding: 20px 0 30px;
     border-bottom: 1px solid #e7e7e7;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
     #winner .competitionDetails > div{
         float: left;
@@ -271,7 +274,7 @@
         width: 90px;
     }
     #winner .competitionDetails div.round{
-        width: 415px;
+        width: 250px;
     }
     .TC #winner .competitionDetails div.round{
         width: 300px;

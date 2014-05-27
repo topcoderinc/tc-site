@@ -71,8 +71,8 @@
         min-height: 377px;
     }
     .develop .formSection.browseFile .leftCol{
-        height: 150px;
-        min-height: 150px;
+        height: 124px;
+        min-height: 124px;
     }
     .formSection.declaration .leftCol{
         min-height: 480px;
@@ -129,8 +129,7 @@
             padding: 22px 0 0;
         }
         .develop .formSection .leftCol dl{
-            /*padding: 44px 0 27px;*/
-            padding-top: 30px;
+            padding: 44px 0 27px;
         }
         .formSection .leftCol dl.group:after {
             clear: both;

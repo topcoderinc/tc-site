@@ -112,4 +112,6 @@ $nav = array(
       <!-- /.userWidget -->
     </div>
   </header>
+<!-- Bugfix: I-108496 hidden element needed for non-firefox browsers to detect cache-persist status of page, used for above code to display member details -->
+<input type='hidden' id='cache-persist'>
   <!-- /#header -->

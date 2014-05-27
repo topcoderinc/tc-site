@@ -1,3 +1,5 @@
+//Opera hack to run .ready() on each page load including on history navigation
+history.navigationMode = 'compatible';
 $(document).ready(function() {
 
   function showModal(selector) {
@@ -17,19 +19,49 @@ $(document).ready(function() {
   }
 
   // Initialize member details
-  $(window).bind('pageshow', function(event) {
+    /* 
+          Bugfix I-108496: Unable to login using IE10 browser
+          pageshow does not work in IE, and will always trigger in Chrome with event.persisted=false, pageshow & event.persisted is a Firefox only feature
+          So we must check the browser userAgent for firefox to avoid inconsistent behaviour between browsers
+    */
+if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+    $(window).bind('pageshow', function(event) {
+    //originalEvent.persisted is always FALSE in Chrome, so we need extra variable check
+        if (!event.originalEvent.persisted) {
+            initMemberDetails(false);
+        } else {
+            initMemberDetails(true);
+        }
+    });
+} else {
+    //if not Firefox, we check for value of a hidden input, if there is none page is not cached, we then set a value and on history navigation that value is retained and we know page is cached
+    //this part also has to be hidden from firefox, because once you set value on input with js that value is retained even with page refresh, hence the reason we still need to use pageshow method above for firefox
+    if ($('#cache-persist').val()) {
+        initMemberDetails(true);
+    } else {
+        initMemberDetails(false);
+    //set hidden input value, when page is re-navigated via history buttons, this value will be saved and we can know page is cached
+        $('#cache-persist').val('1');
+    }
+}
+              
+$('#login input').keyup(function(e) {
+if (e.keyCode == 13) {
+    $('#login a.btnSubmit').click();
+}
+});
+});
 
+function initMemberDetails(pagePersisted){
     if ($('.tcssoUsingJS').length > 0) {
       var regCookie = app.isLoggedIn();
-      if (regCookie && !event.originalEvent.persisted) {
+        if (regCookie && pagePersisted === false) {
         $('.actionLogout').attr('href', 'javascript:;');
         $('.loginLink, .linkLogin, .btnRegister').addClass('hide').hide();
         $('.logoutLink, .linkLogout, .userDetailsWrapper').removeClass('hide').show();
         $('.headerTopRightMenuLink.logIn a').unbind('click');
         $('.headerTopRightMenuLink.logIn a').text("Log Out").removeClass("actionLogin").addClass("actionLogout");
-        var regValues = regCookie.sub.split("|");
-        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + regValues[1] + "&json=true", function(data) {
-          var handle = data['data'][0]['handle'];
+        app.getHandle(function(handle) {
           $('.userDetails .coder').text(handle);
           $.get(ajaxUrl, {
             "action": "get_member_profile",
@@ -102,13 +134,7 @@ $(document).ready(function() {
     } else {
       $('.headerTopRightMenu .actionLogin').show();
     }
-  });
-  $('#login input').keyup(function(e) {
-    if (e.keyCode == 13) {
-      $('#login a.btnSubmit').click();
-    }
-  });
-});
+}
 
 function getCookie(cname) {
   var name = cname + "=";

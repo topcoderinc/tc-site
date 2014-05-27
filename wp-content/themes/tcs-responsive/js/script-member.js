@@ -153,7 +153,7 @@ var coder = {
             $('.isActive', $(this).closest('.pager')).removeClass('isActive');
             $(this).addClass('isActive');
             $('.page').hide();
-            $('.page' + parseInt($(this).text().trim())).show();
+            $('.page' + parseInt($.trim($(this).text()))).show();
             if ($('.pageLink:last', pager).hasClass('isActive')) {
                 $('.nextLink', pager).hide();
             }
@@ -372,6 +372,21 @@ var updateRequestData = function(url) {
 };
 
 // ajax profile request options
+//Below code causes JS error because vars are not defined, causing all other JS in site not to run and break functionality
+//temp fix declare to empty value if undefined
+if (typeof basicCoderData === 'undefined') {
+    var basicCoderData = {};
+    basicCoderData.handle = '';
+}
+if (typeof activeTrack === 'undefined') {
+    var activeTrack = '';
+}
+if (typeof tab === 'undefined') {
+    var tab = '';
+}
+if (typeof currTab === 'undefined') {
+    var currTab = '';
+}
 var reqProfileData = {
     "action": "get_template_part_by_ajax",
     "dataRequest": "false",

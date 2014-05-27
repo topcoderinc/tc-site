@@ -71,8 +71,6 @@ When working on the site locally there are a few setup steps.
 * Your local webserver must be using port 80.
 * Add a env.php file to the wpcontent/themes/tc-responsive/config directory.  See below for what to put in this file.
 * The data export is kept at https://github.com/topcoderinc/tc-site-data.  These are updated weekly upon releases to production.
-* Update the setting at http://local.topcoder.com/wp-admin/admin.php?page=tcapi_settings change the settings "API Server URL" to "https://api.topcoder.com"
-
 ## Environmental Variables ##
 
 There is the ability to set variables or settings per environment.  Just add a file called "env.php" in the
@@ -81,6 +79,8 @@ theme's config directory.  I recommend added the following lines for local devel
     <?php
     define("WP_SITEURL", "http://local.topcoder.com");
     define("WP_HOME", "http://local.topcoder.com");
+    // if you want to change the api url
+    define('TC_API_URL', 'https://api.topcoder.com/v2');
     
     force_ssl_admin(false);
     force_ssl_login(false);

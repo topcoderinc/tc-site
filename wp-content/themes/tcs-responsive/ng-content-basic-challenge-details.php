@@ -37,9 +37,7 @@
     <td ng-if="!isDesign && challenge.challengeType != 'Code'" class="fifty">
       <h2>2nd PLACE</h2>
       <h3>
-        <small>$</small>
-        <span ng-bind="challenge.prize ? (challenge.prize[1] ? challenge.prize[1] : '0') : ''">
-        </span>
+        <small>$</small><span ng-bind="challenge.prize ? (challenge.prize[1] ? challenge.prize[1] : '0') : ''"></span>
       </h3>
     </td>
       <td ng-if="(designOrCode = isDesign || challenge.challengeType == 'Code') && (challenge.prize && challenge.prize[0])" class="twenty">
@@ -266,10 +264,12 @@
     <div class="nextBoxContent nextDeadlineNextBoxContent">
       <div class="icoTime">
         <span class="nextDTitle">Current Phase</span>
+        <!-- Bugfix I-106745: if current status of contest is not Active, output current contest status, else output current contest phase if active. -->
         <span
-          class="CEDate" ng-bind="challenge.currentStatus == 'Completed' ? 'Completed' : challenge.currentPhaseName"></span>
+          class="CEDate" ng-bind="challenge.currentStatus.indexOf('Active') < 0 ? challenge.currentStatus : challenge.currentPhaseName"></span>
       </div>
-      <span ng-if="challenge.currentStatus != 'Completed' && challenge.currentStatus != 'Deleted' && challenge.currentPhaseRemainingTime > 0" class="timeLeft">
+      <!-- Bugfix I-106745: Added check for cancelled contest before display of current phase remaining time -->
+      <span ng-if="challenge.currentStatus != 'Completed' && challenge.currentStatus != 'Deleted' && challenge.currentStatus.indexOf('Cancelled') < 0 && challenge.currentPhaseRemainingTime > 0" class="timeLeft">
         <span ng-bind="daysLeft(challenge.currentPhaseRemainingTime)"></span> <small>Days</small>
         <span ng-bind="hoursLeft(challenge.currentPhaseRemainingTime)"></span> <small>Hours</small>
         <span ng-bind="minsLeft(challenge.currentPhaseRemainingTime)"></span> <small>Mins</small>
@@ -279,20 +279,20 @@
       <div ng-if="!isDesign" class="nextBoxContent allDeadlineNextBoxContent hide">
         <p><label>Posted On:</label>
           <span>
-            {{formatDate(challenge.postingDate)}}
+            {{formatDate(challenge.postingDate, 2)}}
           </span>
         </p>
 
 
         <p><label>Register By:</label>
          <span>
-           {{formatDate(challenge.registrationEndDate)}}
+           {{formatDate(challenge.registrationEndDate, 2)}}
          </span>
         </p>
 
         <p class="last"><label>Submit By:</label>
           <span>
-            {{formatDate(challenge.submissionEndDate)}}
+            {{formatDate(challenge.submissionEndDate, 2)}}
           </span>
         </p>
 
@@ -301,24 +301,24 @@
       <div ng-if="isDesign" class="nextBoxContent allDeadlineNextBoxContent studio hide">
         <p><label>Start Date:</label>
           <span>
-            {{formatDate(challenge.postingDate)}}
+            {{formatDate(challenge.postingDate, 2)}}
           </span>
         </p>
           <p ng-if="challenge.checkpointSubmissionEndDate != ''"><label>Checkpoint:</label>
           <span>
-            {{formatDate(challenge.checkpointSubmissionEndDate)}}
+            {{formatDate(challenge.checkpointSubmissionEndDate, 2)}}
           </span>
           </p>
 
         <p><label>End Date:</label>
           <span>
-            {{formatDate(challenge.submissionEndDate)}}
+            {{formatDate(challenge.submissionEndDate, 2)}}
           </span>
         </p>
 
         <p class="last"><label>Winners Announced:</label>
           <span>
-            {{formatDate(challenge.appealsEndDate)}}
+            {{formatDate(challenge.appealsEndDate, 2)}}
           </span>
         </p>
       </div>

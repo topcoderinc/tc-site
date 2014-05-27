@@ -48,7 +48,7 @@ $(function () {
   function pwdStrength(pwd) {
 
     var result = 0;
-    if (pwd.trim()=='') return 0;
+    if ($.trim(pwd) == '') return 0;
     if (pwd.length < 7) return -2;
     if (pwd.length > 30) return -3;
     if (pwd.match("'")) return -4;
@@ -138,36 +138,134 @@ $(function () {
 
   $('#register form.register input.name.lastName:text').on('keyup', function () {
     var text = $(this).val();
+    //clear all error messages
+    $(this).closest('.row').find('span.err1').hide();
+    $(this).closest('.row').find('span.err2').hide();
+    $(this).closest('.row').find('span.err3').hide();
+    $(this).closest('.row').find('span.err4').hide();
+    $(this).closest('.row').find('span.err5').hide();
+    $(this).closest('.row').find('input:text').removeClass('invalid');
     if (text.length > 64) {
       $(this).parents(".row").find("span.valid").hide();
       $(this).addClass('invalid');
       $(this).parents(".row").find("span.err2").show();
 
+    } else if (text != '' && !text.match(/^[a-zA-Z0-9. \-_]+$/)) {
+        //Bugfix I-107905: show error on entry of invalid characters
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).closest('.row').find('span.err3').show();
+    } else if (text.match(/^[. \-_]+$/g)) {
+        //show error if name consists of only valid punctuation
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).parents(".row").find("span.err4").show();
+    } else if (text.match(/(\s|\.|_|\-)\1{1,}/)) {
+        //show error if name contains 2 or more of same valid special char in a row
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).parents(".row").find("span.err5").show();
+    }  else if (text.length == 0) {
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).closest('.row').find('span.err1').show();
     } else if (text != '') {
       $(this).parents(".row").find("span.valid").css("display", "inline-block");
       $(this).closest('.row').find('input:text').removeClass('invalid');
       $(this).closest('.row').find('span.err1').hide();
       $(this).closest('.row').find('span.err2').hide();
+      $(this).closest('.row').find('span.err3').hide();
+      $(this).closest('.row').find('span.err4').hide();
+      $(this).closest('.row').find('span.err5').hide();
     } else {
       $(this).parents(".row").find("span.valid").hide();
     }
   });
 
+  $('#register form.register input.name.lastName:text').on('blur', function () {
+      var text = $(this).val();
+      //remove leading and trailing spaces from name if any exist
+      if (text.match(/^\s+|\s+$/g)) {
+          $(this).val($.trim(text));
+          text = $(this).val();
+      }
+      //remove instances of multiple spaces and other whitespace characters inside name string
+      $(this).val(text.replace(/\s{2,}/g, ' '));
+      //check if input is empty, display error if so
+      if ($(this).val().length === 0) {
+          $(this).parents(".row").find("span.valid").hide();
+          $(this).addClass('invalid');
+          $(this).closest('.row').find('span.err2').hide();
+          $(this).closest('.row').find('span.err3').hide();
+          $(this).closest('.row').find('span.err4').hide();
+          $(this).closest('.row').find('span.err5').hide();
+          $(this).closest('.row').find('span.err1').show();
+      }
+  });
   $('#register form.register input.name.firstName:text').on('keyup', function () {
     var text = $(this).val();
+    //clear all error messages
+    $(this).closest('.row').find('span.err1').hide();
+    $(this).closest('.row').find('span.err2').hide();
+    $(this).closest('.row').find('span.err3').hide();
+    $(this).closest('.row').find('span.err4').hide();
+    $(this).closest('.row').find('span.err5').hide();
+    $(this).closest('.row').find('input:text').removeClass('invalid');
     if (text.length > 64) {
       $(this).parents(".row").find("span.valid").hide();
       $(this).addClass('invalid');
       $(this).parents(".row").find("span.err2").show();
 
+    } else if (text != '' && !text.match(/^[a-zA-Z0-9. \-_]+$/)) {
+        //Bugfix I-107905: show error on entry of invalid characters
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).closest('.row').find('span.err3').show();
+    } else if (text.match(/^[. \-_]+$/g)) {
+        //show error if name consists of only valid punctuation
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).parents(".row").find("span.err4").show();
+    } else if (text.match(/(\s|\.|_|\-)\1{1,}/)) {
+        //show error if name contains 2 or more of same valid special char in a row
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).parents(".row").find("span.err5").show();
+    } else if (text.length == 0) {
+        $(this).parents(".row").find("span.valid").hide();
+        $(this).addClass('invalid');
+        $(this).closest('.row').find('span.err1').show();
     } else if (text != '') {
       $(this).parents(".row").find("span.valid").css("display", "inline-block");
       $(this).closest('.row').find('input:text').removeClass('invalid');
       $(this).closest('.row').find('span.err1').hide();
       $(this).closest('.row').find('span.err2').hide();
+      $(this).closest('.row').find('span.err3').hide();
+      $(this).closest('.row').find('span.err4').hide();
+      $(this).closest('.row').find('span.err5').hide();
     } else {
       $(this).parents(".row").find("span.valid").hide();
     }
+  });
+  $('#register form.register input.name.firstName:text').on('blur', function () {
+      var text = $(this).val();
+      //remove leading and trailing spaces from name if any exist
+      if (text.match(/^\s+|\s+$/g)) {
+          $(this).val($.trim(text));
+          text = $(this).val();
+      }
+      //remove instances of multiple spaces and other whitespace characters inside name string
+      $(this).val(text.replace(/\s{2,}/g, ' '));
+      //check if input is empty, display error if so
+      if ($(this).val().length === 0) {
+          $(this).parents(".row").find("span.valid").hide();
+          $(this).addClass('invalid');
+          $(this).closest('.row').find('span.err2').hide();
+          $(this).closest('.row').find('span.err3').hide();
+          $(this).closest('.row').find('span.err4').hide();
+          $(this).closest('.row').find('span.err5').hide();
+          $(this).closest('.row').find('span.err1').show();
+      }
   });
 
   $('#register form.register input.handle:text').on('keyup', function () {
@@ -366,7 +464,15 @@ $(function () {
         $(this).closest('.row').find('.err2').show();
       }
     });
-
+    //stop submit if errors shown on first name/last name
+    if ($('input.firstName').closest('.row').find('.err1,.err2,.err3,.err4,.err5,.err6').is(':visible')) {
+        isValid = false;
+        $('input.firstName').addClass('invalid');
+    }
+    if ($('input.lastName').closest('.row').find('.err1,.err2,.err3,.err4,.err5,.err6').is(':visible')) {
+        isValid = false;
+        $('input.lastName').addClass('invalid');
+    }
     $('select', frm).each(function () {
       if ($.trim($(this).val()) == "") {
         $(this).closest('.row').find('.err1').show();
@@ -641,7 +747,7 @@ function resetRegisterFields() {
   $(".pwd, .confirm, .strength").parents(".row").show();
   $("#registerForm a.btnSubmit").removeClass("socialRegister");
   $('#registerForm .invalid').removeClass('invalid');
-  $('#registerForm .err1,.err2,.err3,.err4,.err4,.err6,.err7,.err8').hide();
+  $('#registerForm .err1,.err2,.err3,.err4,.err5,.err6,.err7,.err8').hide();
   $('#registerForm span.strength span.field').removeClass('red').removeClass('green');
   $('#registerForm span.valid').hide();
 }

@@ -439,6 +439,11 @@ select {
     width: 305px;
 }
 
+/* F2F 30042914 - adjust contest name width as technologies column is removed in upcoming table */
+.layChallenges .devUpcomingTable .colCh {
+    width: 400px;
+}
+
 .layChallenges .f2fTable td.colCh {
     text-align: left;
 }
@@ -535,6 +540,11 @@ select {
     width: 270px;
     padding-left: 66px;
     color: #666;
+}
+
+/* F2F 30042914 - adjust contest name width as technologies column is removed in upcoming table */
+.devUpcomingTable .colCh a {
+    width: 400px;
 }
 
 #tcoTableAllContest .colReg, #tcoTableAllContest .colSub {
@@ -689,9 +699,10 @@ caption.reviewDetail {
 
 .dataTable .colStandings .winBages {
     overflow: hidden;
-
     padding-bottom: 7px;
     margin: 0 -4px;
+    /*Bugfix I-106745: center text alignment on "View Winners" links and "N/A" output in Winners column*/
+    text-align: center;
 }
 
 .dataTable .colStandings .winner {

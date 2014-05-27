@@ -44,7 +44,7 @@ include locate_template('header-challenge-landing.php');
 
 				<div id="tableView" class=" viewTab">
 					<div class="tableWrap tcoTableWrap">
-						<table class="dataTable tcoTable">
+						<table class="dataTable tcoTable <?php echo ($contest_type !== "develop") ? '' : 'devUpcomingTable';?>">
 						<caption>All upcoming challenges may change</caption>
 							<thead>
 								<tr>
@@ -53,7 +53,9 @@ include locate_template('header-challenge-landing.php');
 									<th class="colTime desc" data-placeholder="postingDate">Timeline<i></i></th>
 									<th class="colDur noSort" data-placeholder="contestDuration">Duration (days)<i></i></th>
 									<th class="colPur" data-placeholder="prize1">First Prize<i></i></th>
+									<?php if ($contest_type !== "develop") : ?>
 									<th class="colTech noSort" data-placeholder="technologies">Technologies<i></i></th>
+									<?php endif; ?>
 									<th class="colStat noSort" data-placeholder="status">Status<i></i></th>
 								</tr>
 							</thead>

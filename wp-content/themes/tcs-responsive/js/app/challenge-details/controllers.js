@@ -29,15 +29,15 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
 
   // @TODO Move to filter
   $scope.max = function(x, y) { return x > y ? x : y; };
-
   // @TODO Move to filter
-  $scope.formatDate = function(date) {
+  $scope.formatDate = function(date, opt) {
     function pad0(x) {
       return (x+'').length == 1 ? '0' + x : x;
     }
     if (!date) return '--';
     if (typeof date == 'string') date = new Date(date);
     var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
+    if (opt == 2) month = month.substring(0, 3);
     var day = date.getDate();
     var year = date.getFullYear();
     var time = pad0((date.getUTCHours() + 20) % 24) + ':' + pad0(date.getUTCMinutes());
@@ -76,7 +76,7 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
     $scope.hasFiletypes = (challenge.filetypes != undefined) && challenge.filetypes.length > 0;
     globby = $scope;
 
-    if (challenge.currentPhaseEndDate == '') {
+    if (challenge.currentStatus == 'Completed' || challenge.currentPhaseEndDate == '') {
       ChallengeService.getResults(challengeId).then(function(results) {
         $scope.results = results;
         $scope.firstPlaceSubmission = results.firstPlaceSubmission;

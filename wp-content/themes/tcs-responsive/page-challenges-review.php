@@ -30,14 +30,14 @@ include locate_template('header-challenge-landing.php');
                             </div>
                         </div>
                         
-						<?php 
-						$datepicker_label = 'Review Start';	
-						if ($contest_type == 'design') {
-							$datepicker_label = "R1 Start Date ";
-						}
-						
-						get_template_part("contest-advanced-search"); ?>
-						
+                        <?php
+                        $datepicker_label = 'Review Start';
+                        if ($contest_type == 'design') {
+                            $datepicker_label = "R1 Start Date ";
+                        }
+
+                        get_template_part("contest-advanced-search"); ?>
+
 
                                 <div id="tableView" class=" viewTab">
                                         <div class="tableWrap tcoTableWrap">
@@ -83,8 +83,8 @@ include locate_template('header-challenge-landing.php');
                                 <!-- /.dataChanges -->
                                 <div class="note">
                                  <?php if(have_posts()) : the_post();?>
-										<?php the_content();?>
-								<?php endif; wp_reset_query();?>
+                                  <?php the_content();?>
+                                <?php endif; wp_reset_query();?>
                                 </div>
                         </div>
                 </article>

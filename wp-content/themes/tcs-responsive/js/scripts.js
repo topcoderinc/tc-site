@@ -949,15 +949,11 @@ var app = {
   },
 
   formatDate2: function(date) {
+    //some function is passing in undefined timezone_string variable causing js errors, so check if undefined and set default:
+    if (typeof timezone_string === 'undefined') {
+      var timezone_string = "America/New_York"; // lets set to TC timezone
+    }
     return moment(date).tz(timezone_string).format("D MMM YYYY HH:mm z");
-    // var d = new Date(date);
-    // var utcd = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
-
-    // // obtain local UTC offset and convert to msec
-    // localOffset = d.getTimezoneOffset() * 60000;
-    // var newdate = new Date(utcd + localOffset);
-
-    // return newdate.toDateString() + ' ' + ((newdate.getUTCHours() < 10 ? '0' : '') + newdate.getUTCHours()) + ':' + ((newdate.getUTCMinutes() < 10 ? '0' : '') + newdate.getUTCMinutes());
   },
 
 
@@ -1683,6 +1679,22 @@ var app = {
     }
 
     return decoded;
+  },
+
+  getHandle: function(callback) {
+    var tcsso = $.cookie('tcsso');
+
+    var handle = '';
+    if (typeof tcsso === 'undefined') {
+      callback(handle);
+    } else {
+      var uid = tcsso.split('|')[0];
+      if (uid) {
+        $.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + uid + "&json=true", function(data) {
+          callback(data['data'][0]['handle']);
+        });
+      }
+    }
   }
 
 };

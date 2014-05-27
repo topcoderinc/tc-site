@@ -31,9 +31,9 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   public function get_checkpoint_details_fn($contestId = '', $challengeType = '') {
 
-    $url = TC_API_URL . '/v2/design/challenges/checkpoint/' . $contestId;
+    $url = TC_API_URL . '/design/challenges/checkpoint/' . $contestId;
     if (strtolower($challengeType) == 'develop') {
-      $url = TC_API_URL . '/v2/develop/challenges/checkpoint/' . $contestId;
+      $url = TC_API_URL . '/develop/challenges/checkpoint/' . $contestId;
     }
     $response = wp_remote_get($url);
 
@@ -77,13 +77,13 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     $userKey = ''
   ) {
     $contestType = str_replace("%20", "+", $contestType);
-    $url         = TC_API_URL . "/v2/$contestType/challenges/$contestID";
+    $url         = TC_API_URL . "/$contestType/challenges/$contestID";
     $args        = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => get_option('request_timeout')
     );
     if ($contestType == "") {
-      $url = TC_API_URL . "/v2/develop/challenges/30036134";
+      $url = TC_API_URL . "/develop/challenges/30036134";
     }
     $response = wp_remote_get($url, $args);
 
@@ -119,7 +119,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   // returns member profile details
   public function get_member_profile($handle = '', $data) {
-    $url = TC_API_URL . "/v2/users/" . $handle;
+    $url = TC_API_URL . "/users/" . $handle;
     if (isset( $data )) {
       $url = $url . "?data=" . $data;
     }
@@ -165,10 +165,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
     // This IF isn't working. It's not getting the contestType var. We need to call the design vs. develop api based on the contest type.
     #echo "	contest type ".$contestType;
     if ($contestType == "design") {
-      $url = TC_API_URL . "/v2/design/challenges/$contestID";
+      $url = TC_API_URL . "/design/challenges/$contestID";
     }
     else {
-      $url = TC_API_URL . "/v2/develop/challenges/$contestID";
+      $url = TC_API_URL . "/develop/challenges/$contestID";
     }
 
     if ($resetCache) {
@@ -194,10 +194,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
   public function get_contest_results($contestID = '', $contestType = '') {
 
     if ($contestType == "design") {
-      $url = TC_API_URL . "/v2/design/challenges/result/$contestID";
+      $url = TC_API_URL . "/design/challenges/result/$contestID";
     }
     else {
-      $url = TC_API_URL . "/v2/develop/challenges/result/$contestID";
+      $url = TC_API_URL . "/develop/challenges/result/$contestID";
     }
 
     $args     = array(
@@ -216,10 +216,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
   public function get_contest_checkpoint_detail($contestID = '', $contestType = '') {
 
     if ($contestType == "design") {
-      $url = TC_API_URL . "/v2/design/challenges/checkpoint/$contestID";
+      $url = TC_API_URL . "/design/challenges/checkpoint/$contestID";
     }
     else {
-      $url = TC_API_URL . "/v2/develop/challenges/checkpoint/$contestID";
+      $url = TC_API_URL . "/develop/challenges/checkpoint/$contestID";
     }
 
     $args     = array(
@@ -391,10 +391,10 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   // Activity Summary
   function tcapi_get_activitySummary($atts, $key = "") {
-    #$url = "http://tcapi.apiary.io/v2/platform/activitySummary";
+    #$url = "http://tcapi.apiary.io/platform/activitySummary";
     #$url = "http://community.topcoder.com/tc?module=BasicData&c=tc_direct_facts&dsid=28&json=true";
     #leaving old urls commented - just in case...
-    $url      = TC_API_URL . "/v2/platform/statistics";
+    $url      = TC_API_URL . "/platform/statistics";
     $args     = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => get_option('request_timeout')
@@ -424,7 +424,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   /* member stastics  */
   function tcapi_get_member_stats($handle, $track) {
-    $url      = TC_API_URL . "/v2/users/$handle/statistics/$track";
+    $url      = TC_API_URL . "/users/$handle/statistics/$track";
     $args     = array(
       'httpversion' => get_option('httpversion'),
       //'timeout' => get_option ( 'request_timeout' )
@@ -443,7 +443,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   /* member chart statistics  */
   function tcapi_get_member_chart_stats($handle, $track, $contestType) {
-    $url      = TC_API_URL . "/v2/$track/statistics/$handle/$contestType";
+    $url      = TC_API_URL . "/$track/statistics/$handle/$contestType";
     $args     = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => 20
@@ -461,7 +461,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   /* member achievements  */
   function tcapi_get_member_achievements($handle = '') {
-    $url      = TC_API_URL . "/v2/users/" . $handle . "?data=achievements";
+    $url      = TC_API_URL . "/users/" . $handle . "?data=achievements";
     $args     = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => 30
@@ -480,7 +480,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   /* get member profile design recent Wins */
   function tcapi_get_stat_design_recentwins($handle = '') {
-    $url      = TC_API_URL . "/v2/users/$handle/statistics/design/recentWins";
+    $url      = TC_API_URL . "/users/$handle/statistics/design/recentWins";
     $args     = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => 30
@@ -520,7 +520,7 @@ class TCHOOK_Public extends TCHOOK_Plugin {
 
   /* search users  */
   function tcapi_search_users($handle = '') {
-    $url      = TC_API_URL . "/v2/users/search/?handle=" . $handle;
+    $url      = TC_API_URL . "/users/search/?handle=" . $handle;
     $args     = array(
       'httpversion' => get_option('httpversion'),
       'timeout'     => 30

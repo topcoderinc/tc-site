@@ -13,8 +13,7 @@ var cdapp = angular.module('tc.challengeDetails', ['restangular', 'ngCookies'])
   // Base API url
   RestangularProvider.setBaseUrl(API_URL);
 
-  // tcjwt cookie
-  //RestangularProvicer.setDefaultRequestParams({tcjwt: $cookies.tcjwt});
+  //RestangularProvider.setDefaultHttpFields({'withCredentials': true});
 
   // Format restangular response
 

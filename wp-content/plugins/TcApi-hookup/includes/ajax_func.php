@@ -477,6 +477,8 @@ function get_challenges_ajax_controller() {
   $challengeType = urlencode($_GET ['challengeType']);
   $startDate = $_GET ['submissionEndFrom'];
   $endDate = $_GET ['submissionEndTo'];
+  $platforms = $_GET['platforms'];
+  $technologies = $_GET['technologies'];
 
     $contest_list = get_challenges_ajax(
         $listType,
@@ -487,7 +489,9 @@ function get_challenges_ajax_controller() {
         $sortOrder,
         $challengeType,
         $startDate,
-        $endDate
+        $endDate,
+        $platforms,
+        $technologies
     );
 
     if (isset( $contest_list->data )) {
@@ -506,7 +510,9 @@ function get_challenges_ajax(
   $sortOrder = '',
   $challengeType = '',
   $startDate = '',
-  $endDate = ''
+  $endDate = '',
+  $platforms = '',
+  $technologies = ''
 ) {
 
   $url = TC_API_URL . "/" . $contestType . "/challenges?listType=" . $listType . "&pageIndex=" . $page . "&pageSize=" . $post_per_page;
@@ -532,6 +538,14 @@ function get_challenges_ajax(
   }
   if ($endDate) {
     $url .= "&submissionEndTo=$endDate";
+  }
+
+  if ($platforms) {
+    $url .= '&platforms=' . $platforms;
+  }
+
+  if ($technologies) {
+    $url .= '&technologies=' . $technologies;
   }
 
     $args     = array(

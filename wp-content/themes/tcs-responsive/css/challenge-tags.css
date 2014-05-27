@@ -61,7 +61,7 @@
 /* --- contest grid --- */
 .contestGrid .contest {
     height: auto;
-    min-height: 175px;
+    min-height: 200px;
     padding-bottom: 83px;
 }
 
@@ -130,9 +130,3 @@
     -webkit-border-radius: 2px;
     background-color: #e7e7e7;
 }
-
-/* Remove when platform API is complete */
-.tags {
-    display: none !important;
-}
-

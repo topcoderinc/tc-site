@@ -45,32 +45,38 @@ $contest        = get_contest_detail('', $contestID, $contestType, $noCache);
 $registrants    = empty( $contest->registrants ) ? array() : $contest->registrants;
 $checkpointData = get_checkpoint_details($contestID, $contestType);
 
-$handle = get_member_handle();
-$registerDisable = challenge_register_disabled($contest);
-$submitDisabled  = challenge_submit_disabled($contest);
+$registerDisable = FALSE;
+$submitDisabled  = FALSE;
+
 
 /**
- * Should the registration button active
+ * Format Date Strings
  *
- * Registration button should be disabled:
- *  - When the date is after the registration end date
- *  - If the user is already registered
- *
- * @param $contest
- *
- * @return bool
+ * @todo Tom add this to angular
  */
-function challenge_register_disabled($contest) {
-  global $handle;
 
-  $registerDisable = TRUE;
+if ($contest) {
+  tc_remove_end_of_date($contest->postingDate);
+  tc_remove_end_of_date($contest->registrationEndDate);
+  tc_remove_end_of_date($contest->checkpointSubmissionEndDate);
+  tc_remove_end_of_date($contest->submissionEndDate);
+  tc_remove_end_of_date($contest->appealsEndDate);
+  tc_remove_end_of_date($contest->currentPhaseEndDate);
+}
 
-  if ($contest->registrationEndDate) {
-    $curDate = new DateTime();
-    $regDate = new DateTime($contest->registrationEndDate);
-    if ($regDate > $curDate) {
-      $registerDisable = FALSE;
-    }
+
+function tc_remove_end_of_date(&$date) {
+  $date = reset(explode('.', $date));
+}
+
+
+/*
+$curDate = new DateTime();
+$registerDisable = true;
+if ($contest->registrationEndDate) {
+  $regDate = new DateTime($contest->registrationEndDate);
+  if ($regDate > $curDate) {
+    $registerDisable = false;
   }
 
   if (is_user_register_for_challenge($handle, $contest)) {
@@ -840,7 +846,14 @@ include locate_template('header-challenge-landing.php');
       <h3>Submission Limit:</h3>
 
       <div class="inner">
-        <p><strong><?php echo $contest->submissionLimit; ?></strong></p>
+        <p><strong><?php
+        //Bugfix I-107615: Added check if SubmissionLimit is empty, if so, display "Unlimited" instead of empty value
+        if (!empty($contest->submissionLimit)) {
+            echo $contest->submissionLimit;
+        } else {
+            echo "Unlimited";
+        }
+        ?></strong></p>
       </div>
     </div>
   </li>
