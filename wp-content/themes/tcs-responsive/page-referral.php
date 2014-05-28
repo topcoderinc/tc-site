@@ -54,7 +54,7 @@ $siteURL = site_url ();
 					<!-- /.mainStream -->
 					<aside class="sideStream  grid-1-3">
        <div class="slideBox">
-         <h3>Share:</h3>
+         <h3>Share My URL</h3>
      
          <div class="inner">
            <!-- AddThis Button BEGIN -->
