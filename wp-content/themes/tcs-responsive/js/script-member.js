@@ -34,6 +34,8 @@ tc_rating_dev_chart.drawChart = function(challengetype) {
 
 
 var coder = {
+    initMemberBadges: function(){
+    },
     // binding member module events
     initMemberEvents: function() {
 
