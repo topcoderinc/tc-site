@@ -1,0 +1,128 @@
+<div>
+    <div class="filterOpts">
+        <section class="types">
+            <h5>Contest types:</h5>
+            <div class="data">
+                <ul class="list">
+                    <li>
+                        <input type="radio" id="fAll" name="radioFilterChallenge" class="all" value="all" ng-model="search.radioFilterChallenge">
+                        <label for="fAll"><strong>All</strong>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fDev" name="radioFilterChallenge" value="Development" ng-model="search.radioFilterChallenge">
+                        <label for="fDev">Component Development</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fArc" name="radioFilterChallenge" value="Architecture" ng-model="search.radioFilterChallenge">
+                        <label for="fArc">Architecture</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="f2f" name="radioFilterChallenge" value="First2Finish" ng-model="search.radioFilterChallenge">
+                        <label for="f2f">First2Finish</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fAC" name="radioFilterChallenge" value="Assembly Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fAC">Assembly Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fRep" name="radioFilterChallenge" value="Reporting" ng-model="search.radioFilterChallenge">
+                        <label for="fRep">Reporting</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fBH" name="radioFilterChallenge" value="Bug Hunt" ng-model="search.radioFilterChallenge">
+                        <label for="fBH">Bug Hunt</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fRia" name="radioFilterChallenge" value="RIA Build Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fRia">RIA Build Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCode" name="radioFilterChallenge" value="Code" ng-model="search.radioFilterChallenge">
+                        <label for="fCode">Code</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fSpec" name="radioFilterChallenge" value="Specification" ng-model="search.radioFilterChallenge">
+                        <label for="fSpec">Specification</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCoP" name="radioFilterChallenge" value="Copilot Posting" ng-model="search.radioFilterChallenge">
+                        <label for="fCoP">Copilot Posting</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTS" name="radioFilterChallenge" value="Test Scenarios" ng-model="search.radioFilterChallenge">
+                        <label for="fTS">Test Scenarios</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCon" name="radioFilterChallenge" value="Conceptualization" ng-model="search.radioFilterChallenge">
+                        <label for="fCon">Conceptualization</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTeS" name="radioFilterChallenge" value="Test Suites" ng-model="search.radioFilterChallenge">
+                        <label for="fTeS">Test Suites</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fCC" name="radioFilterChallenge" value="Content Creation" ng-model="search.radioFilterChallenge">
+                        <label for="fCC">Content Creation</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fTC" name="radioFilterChallenge" value="Testing Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fTC">Testing Competition</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fDe" name="radioFilterChallenge" value="Design" ng-model="search.radioFilterChallenge">
+                        <label for="fDe">Component Design</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="fUI" name="radioFilterChallenge" value="UI Prototype Competition" ng-model="search.radioFilterChallenge">
+                        <label for="fUI">UI Prototype Competition</label>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="otherOpts">
+            <ul>
+                <li class="date row isDisabled">
+                    <div class="lbl">
+                        <input type="checkbox" id="fSDate">
+                        <label for="fSDate"><strong>Submission End  From:</strong>
+                        </label>
+                    </div>
+                    <div class="val">
+                        <span class="datePickerWrap"><input id="startDate" type="text" class="datepicker from hasDatepicker" disabled="disabled" ng-model="search.fSDate"><img class="ui-datepicker-trigger" ng-src="{{images}}/ico-cal.png" alt="..." title="..." style="opacity: 0.5; cursor: default;"></span>
+                    </div>
+                </li>
+                <li class="date row isDisabled">
+                    <div class="lbl">
+                        <input type="checkbox" id="fEDate">
+                        <label for="fEDate"><strong>Submission End  To:</strong>
+                        </label>
+                    </div>
+
+                    <div class="val">
+                        <span class="datePickerWrap"><input id="endDate" type="text" class="datepicker to hasDatepicker" disabled="" ng-model="search.fEDate"><img class="ui-datepicker-trigger" ng-src="{{images}}ico-cal.png" alt="" title="" style="opacity: 0.5; cursor: default;"></span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="tags">
+            <h5>Technology Tags:</h5>
+            <div class="data">
+                <select ui-select2="{ allowClear:true, multiple: true }" data-placeholder=" " class="chosen-select hasCustomSelect" multiple ng-model="search.technologies">
+                    <optgroup label="Platforms">
+                        <option ng-repeat="plat in search.allPlatforms track by $index" value="{{ plat }}">{{ plat }}</option>
+                    </optgroup>
+                    <optgroup label="Technologies">
+                        <option ng-repeat="tech in search.allTechnologies track by $index" value="{{ tech }}">{{ tech }}</option>
+                    </optgroup>
+                </select>
+            </div>
+        </section>
+        <div class="clear"></div>
+    </div>
+    <!-- /.filterOpts -->
+    <div class="actions">
+        <a href="javascript:;" class="btn btnSecondary btnClose" ng-click="search.show = false">Close</a>
+        <a href="javascript:;" class="btn btnApply" ng-click="submit()">Apply</a>
+    </div>
+</div>
