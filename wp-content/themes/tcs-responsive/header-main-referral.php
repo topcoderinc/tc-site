@@ -42,14 +42,13 @@ if (isset($_GET['auth']) && $_GET['auth'] == 'logout') {
   <meta name="description" content="">
   <meta name="author" content="" >
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
-		<meta property="og:title" content="Your title here" />
-		<meta property="og:description" content="your description here" />
+  <meta property="og:title" content="topcoder Referral Program" />
+  <meta property="og:description" content="" />
   <meta property="og:image" content="" />
-  <meta property="og:url" content="http://www.addthis.com/blog/2013/09/17/performance-optimizing-for-smart-layers/" />
+  <meta property="og:url" content="" />
   <meta property="og:site_name" content="topcoder" />
   
   <!-- Favicons -->
