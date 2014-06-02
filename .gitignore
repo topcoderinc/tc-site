@@ -64,6 +64,5 @@ wp-content/mysql.sql
 *.avi
 
 # ignore custom config files
-wp-content/themes/tcs-responsive/config/env.php
 node_modules/
 wp-content/themes/tcs-responsive/dist/
