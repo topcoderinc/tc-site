@@ -5,7 +5,7 @@
 ?>
 <?php
 
-get_header();
+get_header('referral');
 
 $values = get_post_custom ( $post->ID );
 
@@ -55,6 +55,8 @@ $siteURL = site_url ();
 					<aside class="sideStream  grid-1-3">
        <div class="slideBox">
          <h3>Share My URL</h3>
+         
+         <hr />
      
          <div class="inner">
            <!-- AddThis Button BEGIN -->
@@ -84,8 +86,7 @@ $siteURL = site_url ();
 																							$('#referralText').val($ref_url).focus();
 																							
 																							$('.addthis_toolbox a').attr('addthis:url', $ref_url);
-																							$('.addthis_toolbox a').attr('addthis:title', '[topcoder] Referral');
-																							$('.addthis_toolbox a').attr('addthis:description', '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
+																							$('.addthis_toolbox a').attr('addthis:title', '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
 																							
 																					} else {
 																							$('#loginFirst').show();
@@ -105,6 +106,7 @@ $siteURL = site_url ();
            </script>
            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52f22306211cecfc"></script>
            <!-- AddThis Button END -->
+           
          </div>
        </div>
 
