@@ -80,6 +80,7 @@ var coder = {
 
             var currentTrack = $.trim($(this).text());
             var currentInfo = coderData.Tracks[currentTrack];
+            var ratingTableInfo = coderData.CompetitionHistory[currentTrack];
             var subtab = $(this).closest('.subTrackTabs');
             if ($('.detailedRating .row').length > 0) {
                 $('.detailedRating .row').each(function() {
@@ -94,6 +95,9 @@ var coder = {
                         var cval = currentInfo[fieldId];
                         if (fieldId == "reviewerRating" && parseFloat(currentInfo[fieldId]) >= 0) {
                             cval = parseFloat(currentInfo[fieldId]).toFixed(2);
+                        }
+                        if (fieldId == "reliability" && parseFloat(currentInfo[fieldId]) >= 0) {
+                            cval = parseFloat(currentInfo[fieldId]).toFixed(2) * 100 + '%';
                         }
                         if ($('.val a', $(this)).length > 0) {
                             $('.val a', $(this)).text(cval);
@@ -117,7 +121,7 @@ var coder = {
             if ($('.ratingTable', subtab).length > 0) {
                 $('.ratingTable .valId', subtab).each(function() {
                     var valId = $(this).val();
-                    $('span', $(this).closest('td')).text(currentInfo[valId]);
+                    $('span', $(this).closest('td')).text(ratingTableInfo[valId]);
                 })
             }
 
