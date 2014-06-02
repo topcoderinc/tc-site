@@ -744,7 +744,13 @@ caption.reviewDetail {
     overflow: visible;
     padding: 0 0 0 69px;
 }
-
+/*Bugfix I-107027: restrict contest name to 2 lines in grid mode*/
+.contestGrid .cgCh a span {
+    display:inline-block;
+    height: 2.4em;
+    width: 100%;
+    overflow: hidden;
+}
 .contestGrid .cgCh a:hover {
     color: #FFB800
 }

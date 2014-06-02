@@ -264,6 +264,8 @@
     },
     "ng-details": {
       "js": [
+        "jquery.cookie.js",
+        "jwt-auth0.js",
         "jquery.bxslider.js",
         "jquery.easing.1.3.js",
         "jquery.mousewheel.js",
@@ -287,9 +289,11 @@
         "jquery.jqtransform.js",
         "reset-password.js",
         "app/challenge-details/ng-challenge-detail-software.js",
+        "app/challenge-details/ng-challenge-result.js",
         "app/challenge-details/app.js",
         "app/challenge-details/controllers.js",
-        "app/challenge-details/services.js"
+        "app/challenge-details/services.js",
+        "app/challenge-details/lib/loading-bar.js"
       ],
       "css": [
         "blog.css",
@@ -310,7 +314,8 @@
         "jqtransform.css",
         "challenge-submit.css",
         "password-recovery.css",
-        "challenge-tags.css"
+        "challenge-tags.css",
+        "../js/app/challenge-details/lib/loading-bar.css"
       ]
     }
   },

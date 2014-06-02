@@ -67,6 +67,7 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
     chglo = challenge;
     $scope.challenge = challenge;
     $scope.activeTab = 'overview';
+    $scope.reliabilityBonus = challenge.reliabilityBonus;
     $scope.siteURL = siteURL;
     $scope.challengeType = getParameterByName('type');
     $scope.isDesign = $scope.challengeType == 'design';
@@ -82,6 +83,16 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
         $scope.firstPlaceSubmission = results.firstPlaceSubmission;
         $scope.secondPlaceSubmission = results.secondPlaceSubmission;
         $scope.submissions = results.submissions;
+        $scope.initialScoreSum = 0;
+        $scope.finalScoreSum = 0;
+        $scope.submissions.map(function(x) {
+          console.log(x);
+          $scope.initialScoreSum += x.initialScore;
+          $scope.finalScoreSum += x.finalScore;
+        });
+        console.log('init and fina');
+        console.log($scope.initialScoreSum);
+        console.log($scope.finalScoreSum);
       });
     } else {
       $scope.submissions = false;

@@ -2,7 +2,7 @@
 
 /* member stastics */
 function get_member_statistics($handle, $track) {
-	$url = get_option ( 'tc_api_url' ) . "/v2/users/$handle/statistics/$track";
+	$url = TC_API_URL . "/users/$handle/statistics/$track";
 	$args = array (
 			'httpversion' => get_option ( 'httpversion' ),
 			'timeout' => get_option ( 'request_timeout' ) 
@@ -20,7 +20,7 @@ function get_member_statistics($handle, $track) {
 
 /* member achievements */
 function get_member_achievements($handle = '') {
-	$url = get_option ( 'tc_api_url' ) . "/v2/users/" . $handle . "?data=achievements";
+	$url = TC_API_URL . "/users/" . $handle . "?data=achievements";
 	$args = array (
 			'httpversion' => get_option ( 'httpversion' ),
 			'timeout' => get_option ( 'request_timeout' ) 
@@ -39,7 +39,7 @@ function get_member_achievements($handle = '') {
 
 /* search coder */
 function search_coder($handle = '') {
-	$url = get_option ( 'tc_api_url' ) . "/v2/users/search/?handle=" . $handle;
+	$url = TC_API_URL . "/users/search/?handle=" . $handle;
 	$args = array (
 			'httpversion' => get_option ( 'httpversion' ),
 			'timeout' => 30 
@@ -77,7 +77,7 @@ function get_member_achievements_current($userId = '', $badgeId = '') {
 
 /* get member profile design recent Wins */
 function get_stat_design_recentwins($handle = '') {
-	$url      = get_option('tc_api_url') . "/v2/users/$handle/statistics/design/recentWins";
+	$url      = TC_API_URL . "/users/$handle/statistics/design/recentWins";
 	$args     = array(
 			'httpversion' => get_option('httpversion'),
 			'timeout'     => 30

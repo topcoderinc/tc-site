@@ -61,7 +61,16 @@ $achievements_map = array(
 	"Twenty Five First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-25"),
 	"Fifty First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-50"),
 	"One Hundred First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-100"),
-	"Two Hundred And Fifty First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-250")
+	"Two Hundred And Fifty First Placement Win" => array(id => 21, active => false, groupClass => "First-Place-Wins", specificClass => "First-Place-Wins-250"),
+	"Getting Started" => array(id => 0, active => false, groupClass => "HP-Badges-Level-1", specificClass => "Getting-Started"),
+	"Novice" => array(id => 0, active => false, groupClass => "HP-Badges-Level-1", specificClass => "Novice"),		
+	"Journeyman" => array(id => 0, active => false, groupClass => "HP-Badges-Level-1", specificClass => "Journeyman"),	
+	"Expert" => array(id => 0, active => false, groupClass => "HP-Badges-Level-1", specificClass => "Expert"),
+	"Master" => array(id => 0, active => false, groupClass => "HP-Badges-Level-2", specificClass => "Master"),
+	"Grand Master" => array(id => 0, active => false, groupClass => "HP-Badges-Level-2", specificClass => "Grand-Master"),
+	"Paragon" => array(id => 0, active => false, groupClass => "HP-Badges-Level-2", specificClass => "Paragon"),
+	"Grand Paragon" => array(id => 0, active => false, groupClass => "HP-Badges-Level-2", specificClass => "Grand-Paragon"),
+	"Social Evangelist" => array(id => 0, active => false, groupClass => "HP-Badges-Level-2", specificClass => "Social-Evangelist")
 );
 $single_achievements_map = array(
 	"Marathon Match Winner" => array(id => 121, active => false, groupClass => "Marathon-Match-Winner"),
@@ -73,7 +82,8 @@ $single_achievements_map = array(
 	"Digital Run Winner" => array(id => 51, active => false, groupClass => "Digital-Run-Winner"),
 	"Digital Run Top Five" => array(id => 52, active => false, groupClass => "Digital-Run-Top-5"),
 	"Two Hundred Successful Challenges" => array(id => 1, active => false, groupClass => "Successful-Challenges-200"),
-	"CoECI Client Badge" => array(id => 129, active => false, groupClass => "CoECI-Client-Badge")
+	"CoECI Client Badge" => array(id => 129, active => false, groupClass => "CoECI-Client-Badge"),
+	"TopCoder Reviewer" => array(id => 0, active => false, groupClass => "TopCoder-Reviewer")
 );
 
 $coder_achievements = get_member_achievements ($handle)->Achievements;
@@ -106,8 +116,11 @@ foreach($coder_achievements as $achievement){
         </div>
       <?php endif; ?>
       <div class="groupBadge <?php echo $achievement['groupClass']; ?> <?php if($active==false){echo 'hide';} ?>">
+      <?php if(substr($achievement['groupClass'], 0, 9 ) == 'HP-Badges'): ?>
+      	<span class="subBadge hpLogo "></span>
+      <?php endif; ?>
    <?php endif; ?>
-    <span data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} else {echo 'Not Earned Yet';} ?>" data-title="<?php echo $key; ?>" class="subBadge <?php echo $achievement['specificClass']; if($active){echo ' selected';} ?>"></span>
+    <span data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} else {echo 'Not Earned Yet';} ?>" title="<?php echo $key; ?>" data-title="<?php echo $achievement['description']; ?>" class="subBadge <?php echo $achievement['specificClass']; if($active){echo ' selected';} ?>"></span>
  <?php $index++; endforeach; ?>
 </div>
 
@@ -123,7 +136,7 @@ foreach($coder_achievements as $achievement){
       }
       $achievement["currentlyEarned"] = isset($achievements_current->count) ? $achievements_current->count : "(retrieving...)" ;
   ?>
-    <div data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} ?>" data-title="<?php echo $key; ?>" class="singleBadge <?php echo $achievement['groupClass']; if($active){echo ' selected';} else {echo ' hide';} ?>"></div>
+    <div data-current="<?php echo $achievement['currentlyEarned']; ?>" data-date="<?php if($active){echo $achievement['date'];} ?>" data-title="<?php echo $key; ?>" title="<?php echo $key; ?>" class="singleBadge <?php echo $achievement['groupClass']; if($active){echo ' selected';} else {echo ' hide';} ?> leftMost" ></div>
   <?php endforeach; ?>
   <div class="clear-float"></div>
 </div>

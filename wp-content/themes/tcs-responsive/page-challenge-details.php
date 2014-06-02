@@ -69,135 +69,6 @@ function tc_remove_end_of_date(&$date) {
   $date = reset(explode('.', $date));
 }
 
-
-/*
-$curDate = new DateTime();
-$registerDisable = true;
-if ($contest->registrationEndDate) {
-  $regDate = new DateTime($contest->registrationEndDate);
-  if ($regDate > $curDate) {
-    $registerDisable = false;
-  }
-
-  if (is_user_register_for_challenge($handle, $contest)) {
-    $registerDisable = TRUE;
-  }
-
-  return $registerDisable;
-}
-
-
-/**
- * Should the submit button be active
- *
- * Submit button should be disabled:
- *  - If submission date is not passed and challenge is not complete
- *  - If there is a user and the user is registered
- *
- * @param $contest
- *
- * @return bool
- */
-function challenge_submit_disabled($contest) {
-  global $handle;
-  $submitDisabled = TRUE;
-
-  if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
-    $curDate    = new DateTime();
-    $submitDate = new DateTime($contest->submissionEndDate);
-    if ($submitDate > $curDate) {
-      $submitDisabled = FALSE;
-    }
-  }
-
-  if (!is_user_register_for_challenge($handle, $contest)) {
-    $submitDisabled = TRUE;
-  }
-
-  return $submitDisabled;
-}
-
-
-// Ad submission dates to registrants
-// @TODO move this to a class
-if (!empty( $contest->submissions )) {
-  $submission_map = array();
-  switch ($contestType) {
-    case "develop":
-      $submission_map = createDevelopSubmissionMap($contest);
-      foreach ($registrants as &$registrant) {
-        if ($submission_map[ $registrant->handle ]) {
-          $registrant->lastSubmissionDate = $submission_map[ $registrant->handle ]->submissionDate;
-          $registrant->submissionStatus = $submission_map[ $registrant->handle  ]->submissionStatus;
-        }
-      }
-      break;
-    case "design":
-      $submission_map = createDesignSubmissionMap($contest);
-      foreach ($registrants as &$registrant) {
-        if ($submission_map[ $registrant->handle ]) {
-          $registrant->lastSubmissionDate = $submission_map[ $registrant->handle ]->submissionTime;
-          $registrant->submissionStatus = $submission_map[ $registrant->handle  ]->submissionStatus;
-        }
-      }
-      break;
-  }
-}
-
-
-function createDesignSubmissionMap($contest) {
-  $submission_map = array();
-  foreach ($contest->submissions as $submission) {
-    if ($submission_map[ $submission->submitter ]) {
-      $sub_date = new DateTime($submission->submissionDate);
-      if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->submitter ] = $submission;
-        $cur_date                                 = new DateTime($submission->submissionDate);
-      }
-    }
-    else {
-      $submission_map[ $submission->submitter ] = $submission;
-      $cur_date                                 = new DateTime($submission->submissionDate);
-    }
-  }
-
-  return $submission_map;
-}
-
-function createDevelopSubmissionMap($contest) {
-  $submissions = array_filter(
-    $contest->submissions,
-    function ($submission) {
-      if ($submission->submissionStatus === "Active") {
-        return TRUE;
-      }
-      else {
-        return FALSE;
-      }
-    }
-  );
-
-  // 'user' => latest submissions
-  $submission_map = array();
-  foreach ($submissions as $submission) {
-    if ($submission_map[ $submission->handle ]) {
-      $sub_date = new DateTime($submission->submissionDate);
-      if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->handle ] = $submission;
-        $cur_date                              = new DateTime($submission->submissionDate);
-      }
-    }
-    else {
-      $submission_map[ $submission->handle ] = $submission;
-      $cur_date                              = new DateTime($submission->submissionDate);
-    }
-  }
-
-  return $submission_map;
-}
-
-$documents = isset($contest->Documents) ? $contest->Documents : array();
-
 // need for header file
 $contest_type = $contestType;
 
@@ -730,7 +601,20 @@ include locate_template('header-challenge-landing.php');
 <ul>
 <?php if ($contestType != 'design'): ?>
   <div class="slideBox">
-    <?php include locate_template('content-challenge-downloads.php'); ?>
+  <?php
+  /*
+  Bugfix I-114581: got rid of separate downloads template, Documents could never be loaded this way
+  because $contest object will never contain Documents since required Authorization header is never sent in PHP API request from get_contest_detail().
+  Left over few lines of HTML do not need own template file.
+  */
+  ?>
+    <h3>Downloads:</h3>
+    <div class="inner">
+        <ul class="downloadDocumentList">
+            <!--Display loading message while JS API request completes-->
+            <li><strong>Loading...</strong></li>
+        </ul>
+    </div>
   </div>
   <li class="slide">
 
@@ -779,7 +663,14 @@ include locate_template('header-challenge-landing.php');
   </li>
 <?php else: ?>
   <li class="slide">
-    <?php include locate_template('content-challenge-downloads.php'); ?>
+  <!-- Bugfix I-114581 -->
+    <h3>Downloads:</h3>
+    <div class="inner">
+        <ul class="downloadDocumentList">
+            <!--Display loading message while JS API request completes-->
+            <li><strong>Loading...</strong></li>
+        </ul>
+    </div>
   </li>
   <li class="slide">
     <div class="slideBox">

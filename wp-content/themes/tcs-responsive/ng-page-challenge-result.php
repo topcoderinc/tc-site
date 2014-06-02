@@ -75,7 +75,7 @@
             </div>
         </div>
         <!--#/end registrant-->
-        <div class="round {{numCheckpointSubmissions == -1 ? 'hide' : ''">
+        <div class="round {{numCheckpointSubmissions == -1 ? 'hide' : ''}}">
             <h2>Round 1 (Checkpoint)</h2>
             <!--<div class="values">
                 <span class="count"><span class="sup">&nbsp;</span></span>
@@ -139,7 +139,7 @@
         <div class="clear"></div>
     </div>
     <!--#/end winnerrow-->
-    <div ng-if="secondPlaceSubmission" class="winnerRow">
+    <div ng-if="secondPlaceSubmission && challenge.prize[1]" class="winnerRow">
         <div class="place second">2<span>nd</span></div>
         <!-- #/end place-->
         <div class="details">
@@ -234,7 +234,7 @@
             </div>
         </div>
         <!--#/end registrant-->
-        <div class="round {{!checkpointData ? 'hide' : ''">
+        <div class="round {{!checkpointData ? 'hide' : ''}}">
             <h2>Checkpoint</h2>
             <!--<div class="values">
                 <span class="count"><span class="sup">&nbsp;</span></span>
@@ -259,7 +259,7 @@
                 <span class="type">&nbsp;</span>
             </div>-->
             <div class="values">
-                <span class="count"></span></span>
+                <span class="count" ng-bind="challenge.numberOfSubmissions"></span>
                 <span class="type">Submissions</span>
             </div>
             <!--<div class="values">
@@ -271,12 +271,12 @@
         <div class="average">
             <h2>AVERAGE SCORE</h2>
             <div class="values">
-                <span class="count">{{round(initialScoreSum * 100 / submissions.length) / 100}}<span class="sup">&nbsp;</span></span>
+                <span class="count">{{round(initialScoreSum * 1.0 / submissions.length)}}<span class="sup">&nbsp;</span></span>
                 <span class="type">Average</span>
                 <span class="type">Initial Score</span>
             </div>
             <div class="values">
-                <span class="count">{{round(finalScoreSum * 100 / submissions.length) / 100}}<span class="sup">&nbsp;</span></span>
+                <span class="count">{{round(finalScoreSum * 1.0 / submissions.length)}}<span class="sup">&nbsp;</span></span>
                 <span class="type">Average</span>
                 <span class="type">Final Score</span>
             </div>

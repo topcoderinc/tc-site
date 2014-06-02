@@ -24,7 +24,9 @@ cdapp.factory('ChallengeService', ['Restangular', 'API_URL', '$q', '$cookies', f
       results = results[0];
       var submissionMap = {};
       results.results.map(function(x) {
-        submissionMap[x.placement] = x;
+        if (x.submissionStatus == 'Active') {
+          submissionMap[x.placement] = x;
+        }
       });
       results.firstPlaceSubmission = submissionMap[1];
       results.secondPlaceSubmission = submissionMap[2];
@@ -80,7 +82,8 @@ cdapp.factory('ChallengeService', ['Restangular', 'API_URL', '$q', '$cookies', f
         challenge.allowStockArt = challenge.allowStockArt == 'true';
       }
 
-      if ((new Date(challenge.registrationEndDate)) > new Date()) {
+      var reglist = challenge.registrants.map(function(x) { return x.handle; });
+      if ((new Date(challenge.registrationEndDate)) > new Date() && reglist.indexOf(handle) == -1) {
         challenge.registrationDisable = false;
       } else {
         challenge.registrationDisable = true;
@@ -89,7 +92,7 @@ cdapp.factory('ChallengeService', ['Restangular', 'API_URL', '$q', '$cookies', f
       challenge.submitDisabled = true;
 
       if (challenge.submissionEndDate && challenge.currentStatus != 'Completed') {
-        if ((new Date(challenge.submissionEndDate)) > new Date()) {
+        if ((new Date(challenge.submissionEndDate)) > new Date() && reglist.indexOf(handle) > -1) {
           challenge.submitDisabled = false;
         }
         var handleMap = {};
