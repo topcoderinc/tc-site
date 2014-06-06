@@ -89,6 +89,8 @@ $nav = array(
             </div>
             <div class="userDetails">
               <p class="country"></p>
+              <!-- Bugfix I-109397: add Member Since title -->
+              <p class="lbl">Member Since :</p>
 
               <p class="val memberSince"></p>
 

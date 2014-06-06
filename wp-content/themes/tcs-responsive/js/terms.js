@@ -6,11 +6,14 @@ appChallengeTerms = {
     var tcjwt = getCookie('tcjwt');
 
     if (termType) {
+        //Bugfix I-109575: missing break statements caused unneccessary API calls and unpredictable element behaviour
       switch (termType) {
         case "list":
           app.initList(tcjwt);
+        break;
         case "detail":
           app.initDetail(tcjwt);
+        break;
       }
     }
 

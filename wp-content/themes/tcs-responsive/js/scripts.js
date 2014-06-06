@@ -111,8 +111,7 @@ var app = {
 
     $('.userWidget').on(ev, function(e) {
       e.stopPropagation();
-    })
-
+    });								
   },
   // event bindings
   initEvents: function() {

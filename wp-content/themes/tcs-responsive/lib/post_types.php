@@ -125,6 +125,40 @@ function promo_module_metaboxes($meta_boxes) {
 add_filter ( 'cmb_meta_boxes', 'promo_module_metaboxes' );
 
 
+/**
+ * Metabox for Referral Page
+ */
+function tc_referral_metaboxes($meta_boxes) {
+  $prefix = '_tc_'; // Prefix for all fields
+
+  /* additional_attr metabox */
+  $meta_boxes ['referral_metabox'] = array (
+    'id' => 'promo_module_metaboxes',
+    'title' => 'Image Banners',
+    'pages' => array ('page'), 
+				'show_on' => array( 'key' => 'page-template', 'value' => 'page-referral.php' ),
+    'context' => 'normal',
+    'priority' => 'high',
+    'show_names' => true, // Show field names on the left
+    'fields' => array (
+      array (
+        'name' => 'Referral Base URL',
+        'id' => $prefix . 'base_url',
+        'type' => 'text'
+      ),
+      array (
+        'name' => 'Text Snippet',
+        'id' => $prefix . 'text_snippet',
+        'type' => 'textarea'
+      )
+    )
+  );
+
+  return $meta_boxes;
+}
+add_filter ( 'cmb_meta_boxes', 'tc_referral_metaboxes' );
+
+
 // Initialize the metabox class
 add_action ( 'init', 'be_initialize_cmb_meta_boxes', 9999 );
 function be_initialize_cmb_meta_boxes() {

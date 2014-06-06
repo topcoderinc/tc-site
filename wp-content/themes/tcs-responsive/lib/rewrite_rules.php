@@ -1,5 +1,6 @@
 <?php
 
+
 add_action('init', 'tc_add_custom_rewrite_rules');
 
 function tc_add_custom_rewrite_rules() {
@@ -26,6 +27,12 @@ function tc_add_custom_rewrite_rules() {
   add_rewrite_rule(
     '^' . MEMBER_PROFILE_PERMALINK . '/([^/]*)/?([^/]*)$',
     'index.php?pagename=member-profile&handle=$matches[1]&tab=$matches[2]',
+    'top'
+  );
+
+  add_rewrite_rule(
+    '^' . MEMBER_PROFILE_ANGULAR_PERMALINK . '/([^/]*)/?([^/]*)$',
+    'index.php?pagename=member-profile-angular&handle=$matches[1]&tab=$matches[2]',
     'top'
   );
 

@@ -949,7 +949,7 @@ function generateResetToken($handle = '') {
 
 function changePassword($handle = '', $password = '' , $unlockCode = '') {
 
-    $url = TC_API_URL . "/v2/users/resetPassword/" . $handle;
+    $url = TC_API_URL . "/users/resetPassword/" . $handle;
 
     $arrParam = array('handle' => $handle, 'password' => $password, 'token' => $unlockCode );
     $args = array(

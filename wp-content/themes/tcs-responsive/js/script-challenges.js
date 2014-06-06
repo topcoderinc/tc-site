@@ -823,7 +823,7 @@ appChallenges = {
                  * generate table row for design past contest type
                  */
                 if (typeof rec.numberOfRegistrants !== "undefined") {
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/longcontest/?module=ViewProblemStatement&rd=' + rec.roundId + '&pm=' + rec.problemId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("Marathon");
                     $('.vStartDate', row).html(app.formatDate2(rec.startDate));
                     $('.vEndDate', row).html(app.formatDate2(rec.endDate));
@@ -832,7 +832,7 @@ appChallenges = {
                     $('.colSub', row).html(rec.numberOfSubmissions);
                 } else {
                     //$('.contestName', row).html(rec.fullName);
-                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/tc?module=MatchDetails&rd=' + rec.roundId + '">' + rec.fullName + '</a>');
+                    $('.contestName', row).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + '<a href="http://community.topcoder.com/longcontest/?module=ViewProblemStatement&rd=' + rec.roundId + '&pm=' + rec.problemId + '">' + rec.fullName + '</a>');
                     $('.colType', row).html("Marathon");
                     $('.vStartDate', row).html(app.formatDate2(rec.startDate));
                     $('.vEndDate', row).html(app.formatDate2(rec.endDate));
@@ -1723,7 +1723,7 @@ appChallenges = {
 
                     var trackName = "trackAn";
                     con.addClass(trackName);
-                    var contestName = rec.name.length > 60 ? rec.name.substr(0, 61) + '...' : rec.name;
+                    var contestName = rec.name.length > 54 ? rec.name.substr(0, rec.name.lastIndexOf(' ', 55)) + '...' : rec.name;
                     $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/ico-track-data.png" />' + contestName);
                     $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
                     $('.vStartDate', con).html(startDate);
@@ -1764,8 +1764,8 @@ appChallenges = {
                     }
 
                     var contestLinkUrl = app.getContestLinkUrl(rec.challengeId, rec.challengeCommunity);
-                    var contestName = rec.challengeName.length > 60 ? rec.challengeName.substr(0, 61) + '...' : rec.challengeName;
-
+                    //Bugfix I-107027: shortened length of contestName to restrict to 2 lines in grid view
+                    var contestName = rec.challengeName.length > 54 ? rec.challengeName.substr(0, rec.challengeName.lastIndexOf(' ', 55)) + '...' : rec.challengeName;
 
                     con.addClass('track-' + trackName);
                     con.addClass('type-' + rec.challengeCommunity);
@@ -2029,11 +2029,11 @@ appChallenges = {
 
                 con.addClass('track-' + trackName);
                 con.addClass('type-' + rec.challengeCommunity);
-
-                if (rec.challengeName.length < 61) {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                //Bugfix I-107027: shortened length of contestName to restrict to 2 lines in grid view
+                if (rec.challengeName.length < 55) {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" /><span>' + rec.challengeName + '</span><img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 } else {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" /><span>' + rec.challengeName.substr(0, rec.challengeName.lastIndexOf(' ', 55)) + '...' + '</span><img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 }
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);
@@ -2417,11 +2417,11 @@ appChallenges = {
                     icoTrack = "ico-track-develop.png";
                     tcoFlag = "tco-flag-develop.png";
                 }
-
-                if (rec.challengeName.length < 61) {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                //Bugfix I-107027: shortened length of contestName to restrict to 2 lines in grid view
+                if (rec.challengeName.length < 55) {
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" /><span>' + rec.challengeName + '</span><img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 } else {
-                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" />' + rec.challengeName.substr(0, 61) + '...' + '<img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
+                    $('.contestName', con).html('<img alt="" class="allContestIco" src="' + stylesheet_dir + '/i/' + icoTrack + '" /><span>' + rec.challengeName.substr(0, rec.challengeName.lastIndexOf(' ', 55)) + '...' + '</span><img alt="" class="allContestTCOIco" src="' + stylesheet_dir + '/i/' + tcoFlag + '" />');
                 }
                 $('.contestName', con).parents(".inTCO").addClass("hasTCOIco");
                 $('.colCh a, .cgCh a', con).attr("href", contestLinkUrl);

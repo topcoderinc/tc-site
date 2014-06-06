@@ -92,13 +92,28 @@ function initMemberDetails(pagePersisted){
             $('.userDetails').prepend('<a class="tc_coder coder" href="' + userPofileUrl + '" style="color:' + color + '">' + handle + '</a>');
             $('.myProfileLink, .profileLink').attr('href', userPofileUrl);
             $('.userDetails .country').text(data['country']);
-            $('.userDetails .memberSince').text(dateformat(data['memberSince'].substring(0, 10)));
+            //additional check that data exists so incorrect member join date does not appear
+            if (typeof data['memberSince'] !== "undefined") {
+                $('.userDetails .memberSince').text(dateformat(data['memberSince'].substring(0, 10)));
+            } else {
+                $('.userDetails .memberSince').prev().hide();
+                $('.userDetails .memberSince').text("");
+            }
 
-            if (data['overallEarning'])
-              $('.userDetails .memberEarning').text("$" + data['overallEarning']);
-            else
+            if (data['overallEarning']) {
+                $('.userDetails .memberEarning').text("$" + data['overallEarning']);
+            } else {
+                //hide Total Earnings title if not displaying any earnings
+                $('.userDetails .memberEarning').prev().hide();
+                $('.userDetails .memberEarning').text("");
+            }
+          }, 'json').fail(function() {
+              //Bugfix: If AJAX call fails, we should hide "Member Since" and "Overall Earnings" fields, since they will be empty
+              $('.userDetails .memberSince').prev().hide();
+              $('.userDetails .memberSince').text("");
+              $('.userDetails .memberEarning').prev().hide();
               $('.userDetails .memberEarning').text("");
-          }, 'json');
+          });
           $('#navigation, .sidebarNav').removeClass('newUser');
         });
 
@@ -147,7 +162,8 @@ function getCookie(cname) {
 }
 
 function dateformat(dt) {
-  var myDate = new Date(dt);
+    //Bugfix I-109397: Safari 5 on Windows does not recognize dates formated with dashes in JS Date() object, so must replace with slashes
+    var myDate = new Date(dt.replace(/-/g, "/"));
   if (isNaN(myDate)) {
     return "";
   }

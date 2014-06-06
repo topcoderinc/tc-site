@@ -2,14 +2,20 @@
 $contestResults = get_contest_results($contestID, $contestType);
 $submissions = $contestResults->results;
 $submission_map = array();
-for ($i = 0; $i < count($submissions); $i++){
-  $submission_map[$submissions[$i]->placement] = $submissions[$i];
+
+if (!empty($submissions)) {
+  foreach ($submissions as $submission) {
+    if ($submission->submissionStatus == 'Active') {
+      $submission_map[$submission->placement] = $submission;
+    }
+  }
 }
 
 $submissionCount = $contestResults->submissions;
 
 $nrOfCheckpointSubmissions = 0;
-$checkpointDetail = get_contest_checkpoint_detail($contestID, $contestType);
+// From page-challenge-details.php
+$checkpointDetail = $checkpointData;
 
 if(isset($checkpointDetail->numberOfSubmissions)){
   $nrOfCheckpointSubmissions = $checkpointDetail->numberOfSubmissions;

@@ -69,105 +69,6 @@ function tc_remove_end_of_date(&$date) {
   $date = reset(explode('.', $date));
 }
 
-
-/*
-$curDate = new DateTime();
-$registerDisable = true;
-if ($contest->registrationEndDate) {
-  $regDate = new DateTime($contest->registrationEndDate);
-  if ($regDate > $curDate) {
-    $registerDisable = false;
-  }
-}
-
-$submitDisabled = true;
-if ($contest->submissionEndDate && $contest->currentStatus !== "Completed") {
-  $submitDate = new DateTime($contest->submissionEndDate);
-  if ($submitDate > $curDate) {
-    $submitDisabled = false;
-  }
-}*/
-
-// Ad submission dates to registrants
-// @TODO move this to a class
-if (!empty( $contest->submissions )) {
-  $submission_map = array();
-  switch ($contestType) {
-    case "develop":
-      $submission_map = createDevelopSubmissionMap($contest);
-      foreach ($registrants as &$registrant) {
-        if ($submission_map[ $registrant->handle ]) {
-          $registrant->lastSubmissionDate = $submission_map[ $registrant->handle ]->submissionDate;
-          $registrant->submissionStatus = $submission_map[ $registrant->handle  ]->submissionStatus;
-        }
-      }
-      break;
-    case "design":
-      $submission_map = createDesignSubmissionMap($contest);
-      foreach ($registrants as &$registrant) {
-        if ($submission_map[ $registrant->handle ]) {
-          $registrant->lastSubmissionDate = $submission_map[ $registrant->handle ]->submissionTime;
-          $registrant->submissionStatus = $submission_map[ $registrant->handle  ]->submissionStatus;
-        }
-      }
-      break;
-  }
-}
-
-
-function createDesignSubmissionMap($contest) {
-  $submission_map = array();
-  foreach ($contest->submissions as $submission) {
-    if ($submission_map[ $submission->submitter ]) {
-      $sub_date = new DateTime($submission->submissionDate);
-      if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->submitter ] = $submission;
-        $cur_date                                 = new DateTime($submission->submissionDate);
-      }
-    }
-    else {
-      $submission_map[ $submission->submitter ] = $submission;
-      $cur_date                                 = new DateTime($submission->submissionDate);
-    }
-  }
-
-  return $submission_map;
-}
-
-function createDevelopSubmissionMap($contest) {
-  $submissions = array_filter(
-    $contest->submissions,
-    function ($submission) {
-      if ($submission->submissionStatus === "Active") {
-        return TRUE;
-      }
-      else {
-        return FALSE;
-      }
-    }
-  );
-
-  // 'user' => latest submissions
-  $submission_map = array();
-  foreach ($submissions as $submission) {
-    if ($submission_map[ $submission->handle ]) {
-      $sub_date = new DateTime($submission->submissionDate);
-      if ($cur_date->diff($sub_date) > 0) {
-        $submission_map[ $submission->handle ] = $submission;
-        $cur_date                              = new DateTime($submission->submissionDate);
-      }
-    }
-    else {
-      $submission_map[ $submission->handle ] = $submission;
-      $cur_date                              = new DateTime($submission->submissionDate);
-    }
-  }
-
-  return $submission_map;
-}
-
-$documents = isset($contest->Documents) ? $contest->Documents : array();
-
 // need for header file
 $contest_type = $contestType;
 
@@ -700,7 +601,20 @@ include locate_template('header-challenge-landing.php');
 <ul>
 <?php if ($contestType != 'design'): ?>
   <div class="slideBox">
-    <?php include locate_template('content-challenge-downloads.php'); ?>
+  <?php
+  /*
+  Bugfix I-114581: got rid of separate downloads template, Documents could never be loaded this way
+  because $contest object will never contain Documents since required Authorization header is never sent in PHP API request from get_contest_detail().
+  Left over few lines of HTML do not need own template file.
+  */
+  ?>
+    <h3>Downloads:</h3>
+    <div class="inner">
+        <ul class="downloadDocumentList">
+            <!--Display loading message while JS API request completes-->
+            <li><strong>Loading...</strong></li>
+        </ul>
+    </div>
   </div>
   <li class="slide">
 
@@ -749,7 +663,14 @@ include locate_template('header-challenge-landing.php');
   </li>
 <?php else: ?>
   <li class="slide">
-    <?php include locate_template('content-challenge-downloads.php'); ?>
+  <!-- Bugfix I-114581 -->
+    <h3>Downloads:</h3>
+    <div class="inner">
+        <ul class="downloadDocumentList">
+            <!--Display loading message while JS API request completes-->
+            <li><strong>Loading...</strong></li>
+        </ul>
+    </div>
   </li>
   <li class="slide">
     <div class="slideBox">
@@ -767,11 +688,9 @@ include locate_template('header-challenge-landing.php');
 
         <p>Trouble formatting your submission or want to learn more?
           <a href="http://topcoder.com/home/studio/the-process/how-to-submit-to-a-contest/">Read this FAQs</a>.</p>
-
-        <p><strong>Fonts:</strong><br> All fonts within your design must be declared when you submit. DO NOT <a
-            style="white-space:nowrap;">include any font files in your submission</a><a style="white-space:nowrap;">
-            <br>or source files. </a><a href="http://topcoder.com/home/studio/the-process/font-policy/"
-                                        style="white-space:nowrap;">Read the font policy here</a>.
+<!-- Bugfix I-111397: removed empty link tags surrounding text -->
+        <p><strong>Fonts:</strong><br> All fonts within your design must be declared when you submit. DO NOT include any font files in your submission or source files.
+        <a href="http://topcoder.com/home/studio/the-process/font-policy/" style="white-space:nowrap;">Read the font policy here</a>.
         </p>
 
         <p><strong>Screening:</strong><br>All submissions are screened for eligibility before the challenge holder picks

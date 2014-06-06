@@ -61,7 +61,7 @@
 /* --- contest grid --- */
 .contestGrid .contest {
     height: auto;
-    min-height: 175px;
+    min-height: 200px;
     padding-bottom: 83px;
 }
 
