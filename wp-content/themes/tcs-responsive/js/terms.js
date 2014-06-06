@@ -32,6 +32,8 @@ appChallengeTerms = {
           $(".formContent .warning").hide();
           $(".overviewPageTitle").text(data["title"]);
           $(".termsText").html(data["text"]);
+          //Bugfix I-116354
+          $('#agreement-section').removeClass('hide');
         } else {
           $(".formContent .terms").hide();
           $(".formContent .warning").text(data["error"]["details"]);

@@ -5,7 +5,7 @@
 ?>
 <?php
 
-get_header();
+get_header('referral');
 
 $values = get_post_custom ( $post->ID );
 
@@ -55,6 +55,8 @@ $siteURL = site_url ();
 					<aside class="sideStream  grid-1-3">
        <div class="slideBox">
          <h3>Share My URL</h3>
+         
+         <hr />
      
          <div class="inner">
            <!-- AddThis Button BEGIN -->
@@ -66,45 +68,49 @@ $siteURL = site_url ();
              <a class="addthis_counter addthis_bubble_style"></a>
            </div>
            <script type="text/javascript">
-													$(document).ready(function(e) {
+							$(document).ready(function(e) {
 
-															// URL Referral Generator
-															if ( $('#referralText').length>0 ) {
-																	var tcsso = getCookie('tcsso');
-																	if (tcsso) {
-																			var tcssoValues = tcsso.split("|");
-																			var handle = '';
-																								
-																			$.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
-																					handle = data['data'][0]['handle'];
-																				
-																					if ( handle!='' ) {
-																							$base_url = '<?php echo get_post_meta( $post->ID, "_tc_base_url", true ); ?>';
-																							$ref_url =  $base_url.replace('{handle}', handle); 
-																							$('#referralText').val($ref_url).focus();
-																							
-																							$('.addthis_toolbox a').attr('addthis:url', $ref_url);
-																							$('.addthis_toolbox a').attr('addthis:title', '[topcoder] Referral');
-																							$('.addthis_toolbox a').attr('addthis:description', '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
-																							
-																					} else {
-																							$('#loginFirst').show();
-																							$('#referralText').remove();
-																					}
-																			});																		
-																} else {							
-																		$('#loginFirst').show();
-																		$('#referralText').remove();
-																}
-																
-																$('#referralText').focus(function(){
-																		$(this).select();
-																});
-														}           
+									// URL Referral Generator
+									if ( $('#referralText').length>0 ) {
+											var tcsso = getCookie('tcsso');
+											if (tcsso) {
+													var tcssoValues = tcsso.split("|");
+													var handle = '';
+																		
+													$.getJSON("http://community.topcoder.com/tc?module=BasicData&c=get_handle_by_id&dsid=30&uid=" + tcssoValues[0] + "&json=true", function(data) {
+															handle = data['data'][0]['handle'];
+														
+															if ( handle!='' ) {
+																	$base_url = '<?php echo get_post_meta( $post->ID, "_tc_base_url", true ); ?>';
+																	$ref_url =  $base_url.replace('{handle}', handle); 
+																	$('#referralText').val($ref_url).focus();
+																	
+																	$('.addthis_toolbox a').attr('addthis:url', $ref_url);
+																	$('.addthis_toolbox a').attr('addthis:title', '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
+																	
+																	$("meta[property='og:description']").attr("content", '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
+																	$("meta[property='og:url']").attr("content", $ref_url);
+																	$("meta[name='description']").attr("content", '<?php echo get_post_meta( $post->ID, "_tc_text_snippet", true ); ?>');
+																	
+															} else {
+																	$('#loginFirst').show();
+																	$('#referralText').remove();
+															}
+													});																		
+										} else {							
+												$('#loginFirst').show();
+												$('#referralText').remove();
+										}
+										
+										$('#referralText').focus(function(){
+												$(this).select();
+										});
+								}           
             });
            </script>
            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52f22306211cecfc"></script>
            <!-- AddThis Button END -->
+           
          </div>
        </div>
 

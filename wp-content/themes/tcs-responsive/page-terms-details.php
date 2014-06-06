@@ -23,7 +23,7 @@ get_header('terms');
           <p class="terms warning hide"></p>
 
           <form id="submitForm">
-            <section class="agreement notAgreed">
+            <section id= "agreement-section" class="agreement notAgreed hide">
               <div class="agree-label">
                 <span><a href="javascript:;"></a><input id="agree" type="checkbox"></span>
                 <label style="cursor: pointer;">I Agree to the Terms and Conditions stated above</label>

@@ -751,7 +751,7 @@ function centerModal(selector) {
 function closeModal() {
   $('.modal,#bgModal').hide();
   resetRegisterFields();
-  if (window.location.hash != '') {
+  if (window.location.hash.match('access_token')) {
     window.history.pushState({}, 'Home', '/');
   }
   loginState = window.location.href;
@@ -771,5 +771,6 @@ function resetRegisterFields() {
   $('#registerForm .err1,.err2,.err3,.err4,.err5,.err6,.err7,.err8').hide();
   $('#registerForm span.strength span.field').removeClass('red').removeClass('green');
   $('#registerForm span.valid').hide();
+  $('.socialUnavailableErrorMessage').hide();
 }
 

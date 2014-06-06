@@ -3,6 +3,10 @@
  * Template Name: Terms List Template
  */
 
+if (!isset($contest->registrationEndDate)) {
+  $contest = get_contest_detail('', $contestID, $contestType);
+}
+
 $termType = 'list';
 get_header('terms');
 
@@ -12,7 +16,7 @@ get_header('terms');
     <div id="main" class="registerForChallenge">
       <article id="mainContent">
         <div class="container">
-          <h2 class="pageTitle"><?php the_title(); ?></h2>
+          <h2 class="pageTitle"><?php echo $contest->challengeName; ?></h2>
           <!-- /#end page title-->
           <div class="formContent">
             <p class="terms"><?php echo $post->post_content; ?></p>

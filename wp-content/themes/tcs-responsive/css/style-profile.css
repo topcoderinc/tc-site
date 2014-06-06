@@ -759,18 +759,26 @@ a{
         background: url(../i/win-badge-big.png) no-repeat;
         background-position: 50% 0;
     }
-	
+
 	.designLayout .winInfo .badgeImg.rank2{
 		background-position:110px -150px;
 	}
-	
+
 	.designLayout .winInfo .badgeImg.rank3{
 		background-position:110px -300px;
 	}
-	
+
 	.designLayout .winInfo .badgeImg.rankM{
 		background-position:110px -450px;
 	}
+
+    .designLayout .winInfo .badgeImg.rank4{
+        background-position:110px -600px;
+    }
+
+    .designLayout .winInfo .badgeImg.rank5{
+        background-position:110px -750px;
+    }
 	
     .designLayout .winInfo .prizeAmount{
         text-align: center;    
