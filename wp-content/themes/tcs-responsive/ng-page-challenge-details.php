@@ -554,17 +554,17 @@ include locate_template('header-challenge-landing.php');
     <!-- End review style section -->
 
   </li>
-  <li ng-hide="isDesign && challenge.screeningScorecardId && challenge.reviewScorecardId" class="slide">
+  <li ng-show="challenge.screeningScorecardId || challenge.reviewScorecardId" class="slide">
 
     <div class="contestLinks slideBox">
       <h3>Contest Links:</h3>
 
       <div class="inner">
-        <p><a
+        <p ng-show="challenge.screeningScorecardId"><a
             href="https://software.topcoder.com/review/actions/ViewScorecard.do?method=viewScorecard&scid={{challenge.screeningScorecardId}}">Screening
             Scorecard</a></p>
 
-        <p><a
+        <p ng-show="challenge.reviewScorecardId"><a
             href="http://software.topcoder.com/review/actions/ViewScorecard.do?method=viewScorecard&scid={{challenge.reviewScorecardId}}">Review
             Scorecard</a></p>
       </div>
