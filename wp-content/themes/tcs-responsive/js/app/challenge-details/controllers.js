@@ -1,3 +1,4 @@
+var challengeName;
 // @TODO Split out the different parts of the page into different contorllers
 cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scope, ChallengeService, $sce) {
   $scope.trust = function(x) {
@@ -55,6 +56,7 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
   $scope.checkpointData = false;
   $scope.checkpointResults = false;
   ChallengeService.getChallenge(challengeId).then(function(challenge) {
+    challengeName = challenge.challengeName;
     $('#cdNgMain').removeClass('hide');
     if (challenge.checkpointSubmissionEndDate && challenge.checkpointSubmissionEndDate != '') {
       ChallengeService.getCheckpointData(challengeId).then(function(data) {
