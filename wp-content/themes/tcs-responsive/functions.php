@@ -284,6 +284,12 @@ function empty_search_filter($query) {
     }
     return $query;
 }
+
+/* function to get auth0 client ID string */
+function auth0_clientID() {
+  return defined('CONFIG_AUTH0_CLIENTID') ? CONFIG_AUTH0_CLIENTID : '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P';
+}
+
 add_filter('pre_get_posts','empty_search_filter');
 
 /*function to format text into twitter post*/
