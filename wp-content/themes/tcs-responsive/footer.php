@@ -642,6 +642,7 @@ $blog_posts = get_posts($blog_posts_args);
 </div><!-- /.tooltip -->
 <?php wp_footer(); ?>
 <script>
+  var clibo = '<?php echo auth0_clientID(); ?>';
   function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -698,7 +699,7 @@ $blog_posts = get_posts($blog_posts_args);
     }
     var auth0Login = new Auth0({
       domain: 'topcoder.auth0.com',
-      clientID: '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P',
+      clientID: '<?php echo auth0_clientID(); ?>',
       callbackURL: 'https://www.topcoder.com/reg2/callback.action',
       state: loginState,
       redirect_uri: window.location.href
@@ -706,7 +707,7 @@ $blog_posts = get_posts($blog_posts_args);
 
     var auth0Register = new Auth0({
       domain: 'topcoder.auth0.com',
-      clientID: '6ZwZEUo2ZK4c50aLPpgupeg5v2Ffxp9P',
+      clientID: '<?php echo auth0_clientID(); ?>',
       callbackURL: utmSource && utmCampaign && utmMedium ? 'http://www.topcoder.com/?action=callback?utmSource=' + utmSource + '&utmCampaign=' + utmCampaign + '&utmMedium=' + utmMedium : 'http://www.topcoder.com/?action=callback',
       state: loginState,
       redirect_uri: window.location.href
