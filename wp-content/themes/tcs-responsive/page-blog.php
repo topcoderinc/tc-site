@@ -106,7 +106,7 @@ $blogPageTitle = get_option("blog_page_title") == "" ? "Welcome to the topcoder 
 									$dateStr = $dateObj->format('M j, Y');
 
 									$title = htmlspecialchars($post->post_title);
-									$subject = htmlspecialchars(get_bloginfo('name')).' : '.$title;
+									$subject = htmlspecialchars(get_bloginfo('name')).' blog: '.$title;
 									$body = htmlspecialchars($post->post_content);
 									$email_article = 'mailto:?subject='.rawurlencode($subject).'&body='.get_permalink($postId);
 									//Bugfix I-109975: Correct format of twitter blog post shares

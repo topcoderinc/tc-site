@@ -304,5 +304,5 @@ add_filter('pre_get_posts','empty_search_filter');
 
 /*function to format text into twitter post*/
 function createTwitterPost($text, $permalink) {
-  return "http://twitter.com/home?status=" . str_replace('%0A','',urlencode(wrap_content_strip_html(wpautop($text), 100, true,'\n\r')) . " via @topcoder " . $permalink);
+  return "http://twitter.com/home?status=Blog:%20" . str_replace('%0A','',urlencode(wrap_content_strip_html(wpautop($text), 100, true,'\n\r')) . " via @topcoder " . $permalink);
 }
