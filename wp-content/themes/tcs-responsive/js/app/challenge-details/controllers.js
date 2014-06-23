@@ -121,6 +121,15 @@ cdapp.controller('CDCtrl', ['$scope', 'ChallengeService', '$sce', function($scop
     });
 
     chglo = challenge;
+    //Bugfix refactored-challenge-details-40: format currency values with comma delimiters
+    if (typeof challenge.reliabilityBonus === 'number') {
+      challenge.reliabilityBonus = challenge.reliabilityBonus.format();
+    }
+    //loop over prizes and format number values
+    for (var i = 0; i < challenge.prize.length; i++) {
+      challenge.prize[i] = challenge.prize[i].format();
+    }
+    
     $scope.challenge = challenge;
     $scope.reliabilityBonus = challenge.reliabilityBonus;
     $scope.siteURL = siteURL;
