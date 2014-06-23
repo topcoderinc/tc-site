@@ -81,8 +81,8 @@
     <h3><small>$</small><span ng-bind="challenge.prize[j]"></span></h3>
   </td>
 </tr>
-<tr>
-    <td ng-if="!isDesign" colspan="{{challenge.challengeType == 'Code' ? '2' : ''}}">
+<tr><!-- Bugfix: Added noPrize class when challenge has no reliability bonus -->
+    <td ng-if="!isDesign" colspan="{{challenge.challengeType == 'Code' ? '2' : ''}}" class="{{!challenge.reliabilityBonus ? 'noPrize' : ''}}">
       <p class="realibilityPara">
         Reliability Bonus
         <span ng-if="reliabilityBonus" ng-bind-template="${{challenge.reliabilityBonus}}">
@@ -91,8 +91,8 @@
           N/A
         </span>
       </p>
-    </td>
-    <td ng-if="!isDesign" colspan="{{challenge.challengeType = 'Code' ? '3' : ''}}">
+    </td><!-- Bugfix: Added noPrize class when challenge has no DR points -->
+    <td ng-if="!isDesign" colspan="{{challenge.challengeType = 'Code' ? '3' : ''}}" class="{{!challenge.digitalRunPoints ? 'noPrize' : ''}}">
       <p class="drPointsPara">DR Points <span ng-bind="challenge.digitalRunPoints ? challenge.digitalRunPoints : 'N/A'"></span></p>
     </td>
     </td>

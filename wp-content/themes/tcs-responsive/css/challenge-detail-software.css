@@ -87,16 +87,22 @@
     color: #00AEFF;
     font-size: 18px;
 }
-
+/*Bugfix refactored-challenge-details-26: font color adjusted to same as noPrize prizes for N/A value*/
+.challenge-detail.develop #stepBox .middleColumn table .noPrize .realibilityPara span {
+  color: #d1d1d1;
+}
 .challenge-detail.develop #stepBox .middleColumn table .realibilityPara span {
     color: #228400;
 }
-
-#stepBox .middleColumn table .drPointsPara span {
-    color: #a1a1a1;
+/*Bugfix refactored-challenge-details-26: font color adjusted to same as noPrize prizes for N/A value*/
+#stepBox .middleColumn table .noPrize .drPointsPara span {
+    color: #d1d1d1;
     font-size: 18px;
 }
-
+#stepBox .middleColumn table .drPointsPara span {
+color: #228400;
+font-size: 18px;
+}
 #stepBox .rightColumn {
     display: inline;
     float: left;
@@ -754,15 +760,11 @@
     cursor: default;
     margin: 0 10px;
 }
-
+/*Bugfix for refactored-challenge-details-26: set min-width to fix cut-off of more-payments element in some challenges*/
 .morePayments {
-    width: 19px;
+    min-width: 19px;
     background: url("../i/more-payments.png") no-repeat;
     background-color: #fafafa;
-}
-
-#stepBox .middleColumn.studio table {
-    table-layout: fixed;
 }
 
 #stepBox .middleColumn.studio table p {
@@ -770,8 +772,9 @@
     padding-top: 2px;
     padding-bottom: 2px;
 }
-
-#stepBox .middleColumn table .noPrize h2, #stepBox .middleColumn table .noPrize h3 {
+/*Bugfix for refactored-challenge-details-26: more specific CSS selector for develop challenges to override previous styles for prizes*/
+#stepBox .middleColumn table .noPrize h2, #stepBox .middleColumn table .noPrize h3,
+.challenge-detail.develop #stepBox .middleColumn table .noPrize h2, .challenge-detail.develop #stepBox .middleColumn table .noPrize h3{
     color: #d1d1d1;
 }
 
