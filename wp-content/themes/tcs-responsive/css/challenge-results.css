@@ -1,4 +1,8 @@
 /*result styles*/
+/*Bugfix refactored-challenge-details-81: closed gap between first place result flag and top horizontal rule*/
+#winner{
+  margin-top:-10px;
+}
 #winner .winnerRow{
     display: block;
     text-align: center;
