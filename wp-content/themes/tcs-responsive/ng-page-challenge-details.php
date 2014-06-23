@@ -612,7 +612,8 @@ include locate_template('header-challenge-landing.php');
       <h2>Final Review</h2>
     </div>
     <div class="tipBody">
-      <a href="javascript:;">Community Review Board</a> performs a thorough review based on scorecards.
+    <!--Bugfix refactored-challenge-details-117: Removed unused hyperlink-->
+    Community Review Board performs a thorough review based on scorecards.
     </div>
     <div class="corner tl"></div>
     <div class="corner tr"></div>
