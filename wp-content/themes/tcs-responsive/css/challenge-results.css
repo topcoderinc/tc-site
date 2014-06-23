@@ -261,32 +261,28 @@
                 color: #666;
                 display: block;
             }
-    #winner .competitionDetails div.registrant{
+    /*Bugfix refactored-challenge-details-80: fixed inconsistent spacing in results between design and develop*/
+    #winner .competitionDetails div.registrant,
+    .develop #winner .competitionDetails div.registrant{
         width: 170px;
     }
     .TC #winner .competitionDetails div.registrant{
         width: 100px;
     }
-    .develop #winner .competitionDetails div.registrant{
-        width: 114px;
-    }
     .TC .develop #winner .competitionDetails div.registrant{
         width: 90px;
     }
-    #winner .competitionDetails div.round{
+    /*Bugfix refactored-challenge-details-80: fixed inconsistent spacing in results between design and develop*/
+    #winner .competitionDetails div.round,
+    .develop #winner .competitionDetails div.round,
+    .develop #winner .competitionDetails div.average{
         width: 250px;
     }
     .TC #winner .competitionDetails div.round{
         width: 300px;
     }
-    .develop #winner .competitionDetails div.round{
-        width: 344px;
-    }
     .TC .develop #winner .competitionDetails div.round{
         width: 230px;
-    }
-    .develop #winner .competitionDetails div.average{
-        width: 200px;
     }
     .TC .develop #winner .competitionDetails div.average{
         width: 155px;
