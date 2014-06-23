@@ -241,12 +241,14 @@ function removeClass(obj, cls) {
 var tooltipTimeout;
 
 function showTooltip(source, num) {
+  //bugfix refactored-challenge-details-14: tooltips moved to correct location near icons 
   getElementsByClassName('tip' + num)[0].style.display = 'block';
-  getElementsByClassName('tip' + num)[0].style.top = source.getBoundingClientRect().top + (document.documentElement.scrollTop || document.body.scrollTop) + 2 + 'px';
-  if (hasClass(getElementsByClassName('tip' + num)[0], 'reviewStyleTip')) {
-    getElementsByClassName('tip' + num)[0].style.left = source.getBoundingClientRect().left + (document.documentElement.scrollLeft || document.body.scrollLeft) - 210 + 'px';
+  getElementsByClassName('tip' + num)[0].style.top = source.getBoundingClientRect().top + (document.documentElement.scrollTop || document.body.scrollTop) - 105 + 'px';
+  if ($(window).width() > 1440) {
+    getElementsByClassName('tip' + num)[0].style.left = source.getBoundingClientRect().left + (document.documentElement.scrollLeft || document.body.scrollLeft) + 14 + 'px';
   } else {
-    getElementsByClassName('tip' + num)[0].style.left = source.getBoundingClientRect().left + (document.documentElement.scrollLeft || document.body.scrollLeft) + 32 + 'px';
+    getElementsByClassName('tip' + num)[0].style.left = source.getBoundingClientRect().left + (document.documentElement.scrollLeft || document.body.scrollLeft) - 210 + 'px';
+
   }
 }
 
