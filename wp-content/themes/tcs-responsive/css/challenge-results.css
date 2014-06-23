@@ -118,7 +118,8 @@
         }
             #winner .winnerRow .details div h3{
                 font-size: 30px;
-                font-weight: 600;
+                /*Bugfix refactored-challenge-details-77: Change font weight to bold for challenge prizes in results tab*/
+                font-weight: bold;
                 color: #00aeff;
                 display: block;
                 line-height: 38px;
