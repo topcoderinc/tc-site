@@ -108,7 +108,8 @@
     width: 728px;
 }
 
-.challenge-detail .currentTab-checkpoints .grid-3-3 {
+.challenge-detail .currentTab-checkpoints .grid-3-3,
+.challenge-detail .currentTab-submissions .grid-3-3 {
     float: none;
     width: auto;
 }
@@ -118,7 +119,8 @@
     width: 282px;
 }
 
-.challenge-detail .currentTab-checkpoints .grid-1-3 {
+.challenge-detail .currentTab-checkpoints .grid-1-3,
+.challenge-detail .currentTab-submissions .grid-1-3{
     display: none;
 }
 
@@ -382,7 +384,8 @@
     padding-right: 20px;
 }
 
-.challenge-detail .currentTab-checkpoints .tableWrap {
+.challenge-detail .currentTab-checkpoints .tableWrap,
+ .challenge-detail .currentTab-submissions .tableWrap{
     padding-right: 0;
 }
 
@@ -397,6 +400,9 @@
 
 .challenge-detail .currentTab-checkpoints .topRightTitleAlt {
     display: block;
+}
+.challenge-detail .tableWrap ul li {
+  background: none;
 }
 
 .challenge-detail .topRightTitle a {
@@ -417,10 +423,21 @@
     border: 1px solid #e1e1e1;
     margin-top: 26px;
 }
-
-.challenge-detail .columnSideBar .sidebar {
-    display: block;
-    overflow: hidden;
+#rightTitleOnFull {
+	display:none;
+	position:absolute;
+	top:-0px;
+	right:0px;
+	width:200px;
+}
+#rightTitleOnFull a{
+	font-size: 16px;
+	height: 26px;
+	line-height:20px;
+	float:right;
+	clear:both;
+	padding-left:32px;
+	background: url("../i/ico-contest-forum.png") no-repeat 0 0;
 }
 
 .challenge-detail .columnSideBar .inner {
@@ -1100,7 +1117,7 @@
         display: inline;
         text-align: center;
         overflow: hidden;
-
+    
         max-width: 21px;
         vertical-align: top;
         height: 11px;
@@ -1178,8 +1195,8 @@
 
 /*new css for topcoder view checkpoints and view submission */
 /*disabled style for tab*/
-/* dataChanges */
-#submissions .pager {
+/* dataChanges */    
+#submissions .pager{
     font-size: 16px;
     border-bottom: 1px solid #e7e7e7;
     padding-bottom: 10px;

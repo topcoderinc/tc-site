@@ -1,8 +1,18 @@
 var sliderActive = false;
 var prizeSliderActive = false;
+var submissionSliderActive = false;
+var submissionSingleSliderActive = false;
+var informationViewSliderActive = false;
 var slider;
 var prizeSlider;
+var submissionSlider;
+var submissionSingleSlider;
+var informationViewSlider;
 var sliderClone;
+var submissionCurrPage=1;
+
+var tcjwt = getCookie('tcjwt');
+
 
 function createSlider() {
   sliderClone = $('.columnSideBar .slider > ul:first-child').clone();
@@ -29,6 +39,55 @@ function createPrizeSlider() {
   });
   return true;
 }
+
+function createSubmissionSlider(){
+
+    submissionSlider = $('.submissionSlider > ul:first-child').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        responsive: !ie7,
+        adaptiveHeight: false,
+        swipeThreshold: 40,
+        controls: false ,
+        infiniteLoop: false 
+      });
+      return true;
+}
+
+function createSubmissionSlider(){
+
+    submissionSlider = $('.submissionSlider > ul:first-child').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        responsive: !ie7,
+        adaptiveHeight: false,
+        swipeThreshold: 40,
+        controls: false ,
+        infiniteLoop: false 
+      });
+      return true;
+}
+function createSubmissionSingleSlider(){
+    submissionSingleSlider = $('.submissionSingleSlider > ul:first-child').bxSlider({
+        minSlides: 1,
+        maxSlides: 1,
+        responsive: !ie7,
+        adaptiveHeight: false,
+        swipeThreshold: 40,
+        controls: false ,
+        infiniteLoop: false 
+      });
+      return true;
+}
+function createInformationViewSlider(){
+    var informationViewSlider = $('.informationViewSlider ul').bxSlider({
+        adaptiveHeight: false,
+        controls: false,
+        infiniteLoop: false 
+      });
+      return true;
+}
+
 
 function getAnchor(url) {
   var index = url.lastIndexOf('#');
@@ -101,7 +160,7 @@ $(document).ready(function () {
 
   function updateRegSubButtons(challenge) {
     // if there was an error getting the challenge then enable the buttons
-    if (challenge.status == false) {
+	if (challenge.status == false) {
       $('.challengeRegisterBtn').removeClass('disabled');
       $('.challengeSubmissionBtn').removeClass('disabled');
       $('.challengeSubmissionsBtn').removeClass('disabled');
@@ -184,6 +243,47 @@ $(window).resize(function () {
 
     $('.registrantsTable').not('.mobile').addClass('hide');
     $('.registrantsTable.mobile').removeClass('hide');
+	
+	
+	 $('.submissionShowcase').css('display','none');
+            $('.submissionSingleSlider').css('display','block');
+            $('.submissionSingleSlider .bx-viewport').height(493);
+            $('.submissionSingleSlider .bx-viewport').width(300).css('margin','0 auto');
+            $('.submissionSingleSlider .bx-viewport li').css('width','300px');
+            $('.submissionSingleSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false ,
+                infiniteLoop: false 
+              });
+
+
+
+            $('.submissionList').css('display','none');
+            $('.submissionSlider').css('display','block');
+            $('.submissionSlider .bx-viewport').height(340);
+            $('.submissionSlider .bx-viewport').width("300").css('margin','0 auto');
+            $('.submissionSlider .bx-viewport li').css('width','300px');
+            $('.submissionSlider > ul:first-child').bxSlider({
+                minSlides: 1,
+                maxSlides: 1,
+                responsive: !ie7,
+                adaptiveHeight: false,
+                swipeThreshold: 40,
+                controls: false ,
+                infiniteLoop: false 
+              });
+
+            
+
+            $('.informationView').css('display','none');
+            $('.informationViewSlider').css('display','block');
+            //createInformationViewSlider();
+
+	
   }
 
   if (window.innerWidth > 1019) {
@@ -394,7 +494,135 @@ $(function () {
     window.location.href = siteURL + "/challenge-details/" + challengeId + "?type=" + challengeType + "&nocache=true";
   });
 
-});
+    var QueryString = function () {
+        // This function is anonymous, is executed immediately and
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = pair[1];
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [ query_string[pair[0]], pair[1] ];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(pair[1]);
+            }
+
+        }
+        return query_string;
+    } ();
+
+    function showModal(selector) {
+        var modal = $(selector);
+        $('#bgOverlapModal').show();
+        modal.show();
+        centerModal();
+    }
+    function centerModal(selector){
+        var modal = $('.modal:visible');
+        if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8'))
+            modal.css('margin', -modal.height() / 2 + 'px 0 0 ' + (-modal.width() / 2) + 'px');
+        else {
+            modal.css('margin', '0');
+        }
+    }
+	$('.closePopupModal,#bgOverlapModal').on('click', function () {
+		closePopupModal();
+	});
+    function closePopupModal() {
+        $('.modal,#bgOverlapModal').hide();
+    }
+    if(QueryString.registered === 'success'){
+        showModal('#registerSuccess');
+        setTimeout(function(){
+            $('#Registrants').click();
+            $('#Registrants1').click();
+        },200)
+    }
+
+    $('.jsFullScreenBtn').on(ev, function() {
+		var loading = $('#bgLoadingModal span');
+		loading.css({
+            'margin-top'  : '-' + Math.round(loading.height() / 2) + 'px',   
+            'margin-left' : '-' + Math.round(loading.width() / 2) + 'px',       
+        });
+		$('#bgLoadingModal').show();
+		window.setTimeout(
+			function(){
+				if($(window).width() >= 1003 || $('html').is('.ie6, .ie7, .ie8')){
+					showModal('#showSubmission');
+					var showSubmission = $('#showSubmission:visible');
+					showSubmission.css({
+						'width' : '940px'
+					});
+					showSubmission.css('margin', -showSubmission.height() / 2 + 'px 0 0 ' +  '-485px');
+				}else {
+					
+					showModal('#showSubmission');
+					
+					var modalHeightC = $('#showSubmission .content').height();
+					var showSubmission = $('#showSubmission:visible');
+					//showSubmission.css('margin', '0').css('top',0).css('left',0).css('width','97%').css('height',"auto");
+				    showSubmission.css({
+						'width' : ($(window).width()-20)+'px'
+					});
+					showSubmission.css({
+						'left' : 'auto',
+						'margin-top'  : '-' + Math.round(showSubmission.height() / 2) + 'px',   
+						'margin-left' : '0px',       
+					});
+				}
+				$('#bgLoadingModal').hide();
+			},
+			3000
+		);
+    });
+	
+	/**
+	 * Paging Navigation 
+	 */
+	$(".nextLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage<submissionPageCount) {
+			submissionCurrPage++;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage<=submissionPageCount) {
+			parentDiv.find(".nextLink").hide();
+		}
+	});
+
+	$(".prevLink").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		var submissionPageCount = parentDiv.find(".submissionPageCount").val();
+		if(submissionCurrPage>1) {
+			submissionCurrPage--;
+			parentDiv.find(".submissionPage").hide();
+			parentDiv.find(".page"+submissionCurrPage).show();
+		}
+		if(submissionCurrPage==1) {
+			parentDiv.find(".prevLink").hide();
+		}
+	});	
+	
+	$(".viewAll").on(ev, function() {
+		var parentDiv = $(this).parent().parent().parent();
+		parentDiv.find(".nextLink").hide();
+		parentDiv.find(".prevLink").hide();
+		parentDiv.find(".submissionPage").show();
+		parentDiv.find(".viewAll").hide();
+	});
+	
+}); 
+
 
 /* checkpoint contest css*/
 $(function () {

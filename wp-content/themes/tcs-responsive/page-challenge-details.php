@@ -569,10 +569,12 @@ include locate_template('header-challenge-landing.php');
 </div>
 <div id="submissions" class="tableWrap hide tab">
 
-
-  <article>
-    Coming Soon...
-  </article>
+	<?php
+		/**
+		 * Get submission part
+		 */
+		include(locate_template('page-challenge-details-submission-tab.php'));
+	?>
 
 </div>
 </section>
