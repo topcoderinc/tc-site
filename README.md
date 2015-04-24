@@ -1,1 +1,1 @@
-# Repo has been moved to https://gitlab.com/topcoderinc/tc-site.
+# Repo has been moved to https://github.com/appirio-tech/tc-site
