@@ -102,8 +102,8 @@ array_push ( $challengetypes, 'UI Prototypes' );
 				<div class="detailedRating">
 					<div class="row fieldPercentile">
 						<label>Percentile:</label>
-						<div class="val"><?php echo $dev->overallPercentile;?></div>
-						<input type="hidden" class="fieldId" value="overallPercentile">
+						<div class="val"><?php echo ($dev->activePercentile == 0) ? "N/A" : $dev->activePercentile;?></div>
+						<input type="hidden" class="fieldId" value="activePercentile">
 					</div>
 					<div class="row fieldVolatility">
 						<label>Volatility:</label>
@@ -128,18 +128,18 @@ array_push ( $challengetypes, 'UI Prototypes' );
 					<div class="row fieldCompetitions">
 						<label>Competitions:</label>
 						<div class="val">
-							<a href="#"><?php echo $dev->competitions;?></a>
+							<a href="#"><?php echo $devHistory->competitions;?></a>
 						</div>
 						<input type="hidden" class="fieldId" value="competitions">
 					</div>
 					<div class="row fieldMaxRating">
 						<label>Maximum Rating: </label>
-						<div class="val"><?php echo $dev->maximumRating;?></div>
+						<div class="val"><?php echo $devHistory->maximumRating;?></div>
 						<input type="hidden" class="fieldId" value="maximumRating">
 					</div>
 					<div class="row fieldMinRating">
 						<label>Minimum Rating: </label>
-						<div class="val"><?php echo $dev->minimumRating;?></div>
+						<div class="val"><?php echo $devHistory->minimumRating;?></div>
 						<input type="hidden" class="fieldId" value="minimumRating">
 					</div>
 					<div class="row fieldRevRating">

@@ -86,13 +86,15 @@ var coder = {
                 $('.detailedRating .row').each(function() {
                     var fieldId = $('.fieldId', $(this)).val();
                     if (typeof(currentInfo[fieldId]) == 'undefined') {
+                        $('.val', $(this)).text("");
                         if ($('.val a', $(this)).length > 0) {
                             $('.val a', $(this)).text("");
                         }
                         if (fieldId == "reviewerRating") {
-                            $('.val a', $(this)).text("Not rated");
-                        } else {
-                            $('.val', $(this)).text("");
+                            $('.val', $(this)).text("Not rated");
+                        }
+                        if ((fieldId == "competitions" || fieldId == "maximumRating" || fieldId == "minimumRating") && ratingTableInfo[fieldId]) {
+                            $('.val', $(this)).text(ratingTableInfo[fieldId]);
                         }
                     } else {
                         var cval = currentInfo[fieldId];
@@ -110,6 +112,9 @@ var coder = {
                         }
                         if (fieldId == "activeSchoolRank" && parseInt(currentInfo[fieldId]) == 0) {
                             cval = 'Not ranked';
+                        }
+                        if (fieldId == "activePercentile" && parseInt(currentInfo[fieldId]) == 0) {
+                            cval = 'N/A';
                         }
                         if ($('.val a', $(this)).length > 0) {
                             $('.val a', $(this)).text(cval);
